@@ -141,7 +141,7 @@ const getRenderedItems = (): Expression => {
  * @param attributeName name of the attribute to be extracted
  * @returns
  */
-const getAttribute = (objectRef: string, attributeName: string): Expression => {
+const getAttribute = (objectRef: Expression, attributeName: string): Expression => {
     return generateExpression('getAttribute', undefined, objectRef, attributeName);
 }
 
@@ -151,7 +151,7 @@ const getAttribute = (objectRef: string, attributeName: string): Expression => {
  * @param index position in the array
  * @returns
  */
-const getArrayItemAtIndex = (arrayRef: string, index: number): Expression => {
+const getArrayItemAtIndex = (arrayRef: Expression, index: number): Expression => {
     return generateExpression('getArrayItemAtIndex', undefined, arrayRef, index);
 }
 
@@ -161,7 +161,7 @@ const getArrayItemAtIndex = (arrayRef: string, index: number): Expression => {
  * @param itemKey key of the target item
  * @returns
  */
-const getArrayItemByKey = (arrayRef: string, itemKey: string): Expression => {
+const getArrayItemByKey = (arrayRef: Expression, itemKey: string): Expression => {
     return generateExpression('getArrayItemByKey', undefined, arrayRef, itemKey);
 }
 
@@ -171,7 +171,7 @@ const getArrayItemByKey = (arrayRef: string, itemKey: string): Expression => {
  * @param itemKey key of the target item
  * @returns
  */
-const getObjByHierarchicalKey = (objectRef: string, itemKey: string): Expression => {
+const getObjByHierarchicalKey = (objectRef: Expression, itemKey: string): Expression => {
     return generateExpression('getObjByHierarchicalKey', undefined, objectRef, itemKey);
 }
 
@@ -181,7 +181,7 @@ const getObjByHierarchicalKey = (objectRef: string, itemKey: string): Expression
  * @param itemKey key of the target item
  * @returns
  */
-const getNestedObjectByKey = (objectRef: string, itemKey: string): Expression => {
+const getNestedObjectByKey = (objectRef: Expression, itemKey: string): Expression => {
     return generateExpression('getNestedObjectByKey', undefined, objectRef, itemKey);
 }
 
@@ -231,7 +231,35 @@ const getLastFromSurveyItemResponses = (responsesRef: Expression): Expression =>
     return generateExpression('getLastFromSurveyItemResponses', undefined, responsesRef);
 }
 
+/**
+ * Calculate time difference between "now" and the reference time in seconds
+ * @param referenceTime expression that should return a time (in POSIX timestamp form)
+ * @returns expression returns undefined if rerefence time is evaluated to undefined
+ */
+const getSecondsSince = (referenceTime: Expression): Expression => {
+    return generateExpression('getSecondsSince', undefined, referenceTime);
+}
 
+
+
+/**
+ * Check participant flags object if contains the specified key value pair
+ * @param key retrieve participant flag's value for this key
+ * @param value string value to be checked for a match
+ * @returns
+ */
+const hasParticipantFlag = (key: string, value: string): Expression => {
+    return eq(
+        getAttribute(
+            getAttribute(
+                getContext(),
+                'participantFlags'
+            ),
+            key,
+        ),
+        value,
+    );
+}
 
 /**
  * Counts the number of selected options in a multiple choice question
@@ -264,8 +292,7 @@ export const NativeSurveyEngineExpressions = {
         filterResponsesByIncludesKeys,
         filterResponsesByValue,
         getLastFromSurveyItemResponses,
-    }
-    getSecondsSince,
+    },
 
     // client side shortcut methods:
     isDefined,
@@ -280,9 +307,6 @@ export const NativeSurveyEngineExpressions = {
     getSurveyItemValidation,
     dateResponseDiffFromNow,
     countResponseItems,
-
-
-    // logical and comparision
     compare: {
         eq,
         lt,
@@ -297,6 +321,7 @@ export const NativeSurveyEngineExpressions = {
     },
 
     // Other
+    getSecondsSince,
     timestampWithOffset,
 }
 
@@ -318,6 +343,6 @@ export const SurveyEngine = {
     },
     datePicker: {
         get: getDatePickerResponseValue,
-    }
+    },
     hasParticipantFlag,
 }
