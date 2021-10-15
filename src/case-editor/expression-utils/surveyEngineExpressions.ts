@@ -240,7 +240,91 @@ const getSecondsSince = (referenceTime: Expression): Expression => {
     return generateExpression('getSecondsSince', undefined, referenceTime);
 }
 
+/**
+ * Get response object for a specific item and slot
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param responseKey full key of the response slot inside the item (e.g. rg.num)
+ * @returns
+ */
+const getResponseItem = (itemKey: string, responseKey: string): Expression => {
+    return generateExpression('getResponseItem', undefined, itemKey, responseKey);
+}
 
+/**
+ * Check if an item has a specific response object (by key)
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param responseKey full key of the response slot inside the item (e.g. rg.num)
+ * @returns
+ */
+const hasResponse = (itemKey: string, responseKey: string): Expression => {
+    return generateExpression('hasResponse', undefined, itemKey, responseKey);
+}
+
+/**
+ * Evaluate if regex expression is fulfilled on the responses value attribute
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param responseKey full key of the response slot inside the item (e.g. rg.input)
+ * @param regexPattern regex pattern to check value against
+ * @returns
+ */
+const checkResponseValueWithRegex = (itemKey: string, responseKey: string, regexPattern: string): Expression => {
+    return generateExpression('checkResponseValueWithRegex', undefined, itemKey, responseKey, regexPattern);
+}
+
+/**
+ * Check if any of the following options is selected
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param responseKey full key of the response slot inside the item (e.g. rg.scg)
+ * @param optionKeys keys of the option that should be selected
+ * @returns
+ */
+const responseHasKeysAny = (itemKey: string, responseKey: string, ...optionKeys: string[]): Expression => {
+    return generateExpression('responseHasKeysAny', undefined, itemKey, responseKey, ...optionKeys);
+}
+
+/**
+ * Check if all of the following options are selected
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param responseKey full key of the response slot inside the item (e.g. rg.scg)
+ * @param optionKeys keys of the option that should be selected
+ * @returns
+ */
+const responseHasKeysAll = (itemKey: string, responseKey: string, ...optionKeys: string[]): Expression => {
+    return generateExpression('responseHasKeysAll', undefined, itemKey, responseKey, ...optionKeys);
+}
+
+/**
+ * Check if only other options were selected
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param responseKey full key of the response slot inside the item (e.g. rg.scg)
+ * @param optionKeys keys of the option that shouldn't be selected
+ * @returns
+ */
+const responseHasOnlyKeysOtherThan = (itemKey: string, responseKey: string, ...optionKeys: string[]): Expression => {
+    return generateExpression('responseHasOnlyKeysOtherThan', undefined, itemKey, responseKey, ...optionKeys);
+}
+
+/**
+ * To use evaluated validations rules, we can reference them with this method.
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param validationKey key of the validation rule
+ * @returns
+ */
+const getSurveyItemValidation = (itemKey: string, validationKey: string): Expression => {
+    return generateExpression('getSurveyItemValidation', undefined, itemKey, validationKey);
+}
+
+/**
+ * Calculate difference of a selected date input and current timestamp with selected unit
+ * @param itemKey full key of the survey item (e.g. SURVEY.GROUP.QUESTIONKEY)
+ * @param responseKey full key of the response slot inside the item (e.g. rg.input)
+ * @param unit in which unit should the difference be returned
+ * @param ignoreSign if set to true, sign (+/-) is ignored and the absolute value of the difference is returned
+ * @returns
+ */
+const dateResponseDiffFromNow = (itemKey: string, responseKey: string, unit: 'years' | 'months' | 'days' | 'hours' | 'minutes' | 'seconds', ignoreSign?: boolean): Expression => {
+    return generateExpression('dateResponseDiffFromNow', undefined, itemKey, responseKey, unit, ignoreSign ? 1 : undefined);
+}
 
 /**
  * Check participant flags object if contains the specified key value pair
@@ -332,6 +416,7 @@ export const SurveyEngine = {
         none: singleChoiceOnlyOtherOptionSelected,
         getDateValue: singleChoiceGetDateOptionValue,
         getNumValue: singleChoiceGetNumOptionValue,
+        regexCheck: singleChoiceTextInputRegexCheck,
     },
     multipleChoice: {
         any: multipleChoiceOptionsSelected,
@@ -340,6 +425,13 @@ export const SurveyEngine = {
         selectionCount: multipleChoiceSelectionCount,
         getDateValue: multipleChoiceGetDateOptionValue,
         getNumValue: multipleChoiceGetNumOptionValue,
+        regexCheck: mulitpleChoiceTextInputRegexCheck,
+    },
+    textInput: {
+        regexCheck: textInputRegexCheck,
+    },
+    multilineTextInput: {
+        regexCheck: multilineTextInputRegexCheck,
     },
     datePicker: {
         get: getDatePickerResponseValue,
