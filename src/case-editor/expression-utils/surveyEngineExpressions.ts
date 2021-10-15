@@ -1,5 +1,5 @@
 import { Expression } from "../types/expression"
-import { multipleChoiceKey, responseGroupKey, singleChoiceKey } from "../constants/key-definitions"
+import { datePickerKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "../constants/key-definitions"
 import { Duration, durationObjectToSeconds } from "./duration"
 import { generateExpression } from "./expressionGen"
 
@@ -353,6 +353,26 @@ const hasParticipantFlag = (key: string, value: string): Expression => {
 const multipleChoiceSelectionCount = (itemKey: string): Expression => {
     return countResponseItems(itemKey, [responseGroupKey, multipleChoiceKey].join('.'));
 }
+
+const getDatePickerResponseValue = (itemKey: string): Expression => {
+    return getResponseValueAsNum(itemKey, [responseGroupKey, datePickerKey].join('.'))
+}
+
+const singleChoiceOptionsSelected = (itemKey: string, ...optionKeys: string[]) =>
+    responseHasKeysAll(itemKey, [responseGroupKey, singleChoiceKey].join('.'), ...optionKeys)
+
+const multipleChoiceOptionsSelected = (itemKey: string, ...optionKeys: string[]) =>
+    responseHasKeysAny(itemKey, [responseGroupKey, multipleChoiceKey].join('.'), ...optionKeys)
+
+const multipleChoiceAllOfTheseSelected = (itemKey: string, ...optionKeys: string[]) =>
+    responseHasKeysAll(itemKey, [responseGroupKey, multipleChoiceKey].join('.'), ...optionKeys)
+
+const multipleChoiceOnlyOtherKeysSelected = (itemKey: string, ...optionKeys: string[]) =>
+    responseHasOnlyKeysOtherThan(itemKey, [responseGroupKey, multipleChoiceKey].join('.'), ...optionKeys)
+
+const singleChoiceOnlyOtherOptionSelected = (itemKey: string, ...optionKeys: string[]) =>
+    responseHasOnlyKeysOtherThan(itemKey, [responseGroupKey, singleChoiceKey].join('.'), ...optionKeys)
+
 
 export const NativeSurveyEngineExpressions = {
     getters: {
