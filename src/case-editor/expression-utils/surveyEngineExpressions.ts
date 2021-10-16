@@ -1,5 +1,5 @@
 import { Expression } from "../types/expression"
-import { datePickerKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "../constants/key-definitions"
+import { datePickerKey, inputKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "../constants/key-definitions"
 import { Duration, durationObjectToSeconds } from "./duration"
 import { generateExpression } from "./expressionGen"
 
@@ -373,6 +373,29 @@ const multipleChoiceOnlyOtherKeysSelected = (itemKey: string, ...optionKeys: str
 const singleChoiceOnlyOtherOptionSelected = (itemKey: string, ...optionKeys: string[]) =>
     responseHasOnlyKeysOtherThan(itemKey, [responseGroupKey, singleChoiceKey].join('.'), ...optionKeys)
 
+const singleChoiceGetNumOptionValue = (itemKey: string, optionKey: string): Expression => {
+    return getResponseValueAsNum(itemKey, [responseGroupKey, singleChoiceKey, optionKey].join('.'))
+}
+
+const multipleChoiceGetNumOptionValue = (itemKey: string, optionKey: string): Expression => {
+    return getResponseValueAsNum(itemKey, [responseGroupKey, multipleChoiceKey, optionKey].join('.'))
+}
+
+const singleChoiceTextInputRegexCheck = (itemKey: string, optionKey: string, pattern: string): Expression => {
+    return checkResponseValueWithRegex(itemKey, [responseGroupKey, singleChoiceKey, optionKey].join('.'), pattern)
+}
+
+const mulitpleChoiceTextInputRegexCheck = (itemKey: string, optionKey: string, pattern: string): Expression => {
+    return checkResponseValueWithRegex(itemKey, [responseGroupKey, multipleChoiceKey, optionKey].join('.'), pattern)
+}
+
+const textInputRegexCheck = (itemKey: string, pattern: string): Expression => {
+    return checkResponseValueWithRegex(itemKey, [responseGroupKey, inputKey].join('.'), pattern)
+}
+
+const multilineTextInputRegexCheck = (itemKey: string, pattern: string): Expression => {
+    return checkResponseValueWithRegex(itemKey, [responseGroupKey, inputKey].join('.'), pattern)
+}
 
 export const NativeSurveyEngineExpressions = {
     getters: {
@@ -434,7 +457,7 @@ export const SurveyEngine = {
     singleChoice: {
         any: singleChoiceOptionsSelected,
         none: singleChoiceOnlyOtherOptionSelected,
-        getDateValue: singleChoiceGetDateOptionValue,
+        getDateValue: singleChoiceGetNumOptionValue,
         getNumValue: singleChoiceGetNumOptionValue,
         regexCheck: singleChoiceTextInputRegexCheck,
     },
@@ -443,7 +466,7 @@ export const SurveyEngine = {
         none: multipleChoiceOnlyOtherKeysSelected,
         all: multipleChoiceAllOfTheseSelected,
         selectionCount: multipleChoiceSelectionCount,
-        getDateValue: multipleChoiceGetDateOptionValue,
+        getDateValue: multipleChoiceGetNumOptionValue,
         getNumValue: multipleChoiceGetNumOptionValue,
         regexCheck: mulitpleChoiceTextInputRegexCheck,
     },
