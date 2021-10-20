@@ -1,13 +1,13 @@
 import { ItemGroupComponent, Expression, ComponentProperties, LocalizedObject, ItemComponent, SurveyItem, ExpressionArg, Validation } from "survey-engine/lib/data_types";
 import { ComponentEditor } from "../survey-editor/component-editor";
 import { ItemEditor } from "../survey-editor/item-editor";
-import { CommonExpressions } from "./commonExpressions";
 import { ComponentGenerators } from "./componentGenerators";
-import { Duration, durationObjectToSeconds } from "./duration";
+import { Duration, durationObjectToSeconds } from "../types/duration";
 import { datePickerKey, dropDownKey, inputKey, likertScaleGroupKey, multipleChoiceKey, numericInputKey, responseGroupKey, responsiveBipolarLikertArrayKey, responsiveSingleChoiceArrayKey, singleChoiceKey } from "../constants/key-definitions";
 import { generateRandomKey } from "./randomKeyGenerator";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "./simple-generators";
 import { SimpleQuestionEditor } from "./simple-question-editor";
+import { SurveyEngine } from "../expression-utils/surveyEngineExpressions";
 
 
 export interface OptionDef {
@@ -643,7 +643,7 @@ const generateDatePickerInput = (props: DatePickerInput): SurveyItem => {
         properties: {
             dateInputMode: { str: props.dateInputMode },
             min: props.minRelativeDate ? {
-                dtype: 'exp', exp: CommonExpressions.timestampWithOffset(
+                dtype: 'exp', exp: SurveyEngine.timestampWithOffset(
                     props.minRelativeDate.delta,
                     props.minRelativeDate.reference
                 )

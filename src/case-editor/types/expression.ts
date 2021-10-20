@@ -1,8 +1,5 @@
-export interface Expression {
-    name: string;
-    returnType?: string;
-    data?: ExpressionArg[];
-}
+import { Expression, ExpressionArg } from "survey-engine/lib/data_types";
+
 
 export const isExpression = (value: Expression | any): value is Expression => {
     return typeof (value) === 'object' && (value as Expression).name !== undefined && (value as Expression).name.length > 0;
@@ -10,12 +7,6 @@ export const isExpression = (value: Expression | any): value is Expression => {
 
 export type ExpressionArgDType = 'exp' | 'num' | 'str';
 
-export interface ExpressionArg {
-    dtype?: ExpressionArgDType; // should default to str;
-    exp?: Expression;
-    str?: string;
-    num?: number;
-}
 
 export const expressionArgParser = (arg: ExpressionArg): any => {
     switch (arg.dtype) {

@@ -1,5 +1,5 @@
-import { ExpressionName } from "survey-engine/lib/data_types"
-import { Expression } from "../types/expression"
+import { Expression, ExpressionName } from "survey-engine/lib/data_types"
+
 
 export const generateExpression = (name: ExpressionName,
     returnType?: 'string' | 'float',

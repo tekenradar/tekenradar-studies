@@ -1,6 +1,6 @@
-import { Expression } from "../types/expression"
+import { Expression } from "survey-engine/lib/data_types"
 import { datePickerKey, inputKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "../constants/key-definitions"
-import { Duration, durationObjectToSeconds } from "./duration"
+import { Duration, durationObjectToSeconds } from "../types/duration"
 import { generateExpression } from "./expressionGen"
 
 /**
@@ -65,7 +65,7 @@ const gte = (val1: Expression | string | number, val2: Expression | string | num
  * @param reference optional - a hard coded number, or an expression that should retrieve a timestamp (e.g., surveys assigned from, or response to a date question)
  * @returns
  */
-const timestampWithOffset = (delta: Duration, reference?: number | Expression) => generateExpression(
+const timestampWithOffset = (delta: Duration, reference?: number | Expression): Expression => generateExpression(
     'timestampWithOffset',
     undefined,
     durationObjectToSeconds(delta),
