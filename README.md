@@ -28,3 +28,7 @@ npm start
 
 The results will be generated inside the `output` folder.
 The output folder is not tracked by git, so if you want to store intermediate results of the generated JSON files, you need to do it outside of this repository.
+
+## License
+
+[Apache License 2.0](LICENSE)
