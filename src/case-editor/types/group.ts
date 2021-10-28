@@ -1,13 +1,15 @@
 import { Expression, SurveyItem } from "survey-engine/lib/data_types";
 import { ItemEditor } from "../survey-editor/item-editor";
-import { generatePageBreak } from "./simple-generators";
+import { generatePageBreak } from "../utils/simple-generators";
 
-export class GroupItemEditor {
+export abstract class Group {
     groupEditor: ItemEditor;
     key: string;
+    private parentKey: string;
 
     constructor(parentKey: string, groupKey: string, selectionMethod?: Expression) {
-        this.key = [parentKey, groupKey].join('.');
+        this.parentKey = parentKey;
+        this.key = [this.parentKey, groupKey].join('.');
         this.groupEditor = new ItemEditor(undefined, {
             itemKey: this.key,
             isGroup: true
@@ -19,18 +21,28 @@ export class GroupItemEditor {
         }
     }
 
-    isPartOfSurvey(surveyKey: string): boolean {
-        return this.key.includes(surveyKey)
+    abstract buildGroup(): void;
+
+    /**
+     * Check if this group is currently part of a path, by checking if the key attribute exists in the path of the group.
+     * @param partialKey Is this key segment included somewhere in the parent key of this item.
+     * @returns
+     */
+    isPartOf(partialKey: string): boolean {
+        return this.parentKey.includes(partialKey)
     }
 
-    getItem() {
+    /**
+     * Use this method to retrieve the generated survey item
+     * @returns
+     */
+    get() {
+        this.buildGroup();
         return this.groupEditor.getItem();
     }
 
     addPageBreak() {
-        if (process.env.REACT_APP_DISABLE_PAGEBREAK !== 'true') {
-            this.groupEditor.addSurveyItem(generatePageBreak(this.key));
-        }
+        this.groupEditor.addSurveyItem(generatePageBreak(this.key));
     }
 
     addItem(item: SurveyItem, pageBreakAfter?: boolean) {

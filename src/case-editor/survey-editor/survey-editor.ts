@@ -84,7 +84,7 @@ export class SurveyEditor implements SurveyEditorInt {
             newItem.itemKey = this.surveyKey + '.' + newItem.itemKey;
 
             if (this.survey.current.surveyDefinition.items.find(it => newItem.itemKey === it.key)) {
-                console.warn('item already exists with key: ', newItem.itemKey);
+                console.error('item already exists with key: ', newItem.itemKey);
                 return undefined;
             }
             const item = (new ItemEditor(undefined, newItem)).getItem();
@@ -104,7 +104,7 @@ export class SurveyEditor implements SurveyEditorInt {
 
         newItem.itemKey = parentKey + '.' + newItem.itemKey;
         if ((obj as SurveyGroupItem).items.find(it => newItem.itemKey === it.key)) {
-            console.warn('item already exists with key: ', newItem.itemKey);
+            console.error('item already exists with key: ', newItem.itemKey);
             return undefined;
         }
         const item = (new ItemEditor(undefined, newItem)).getItem();
@@ -123,7 +123,7 @@ export class SurveyEditor implements SurveyEditorInt {
             return
         }
         if ((parent as SurveyGroupItem).items.find(it => surveyItem.key === it.key)) {
-            console.warn('item already exists with key: ', surveyItem.key);
+            console.error('item already exists with key: ', surveyItem.key);
             return undefined;
         }
         if (atPosition !== undefined) {

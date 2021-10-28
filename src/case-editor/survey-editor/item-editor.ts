@@ -298,7 +298,7 @@ export class ItemEditor implements ItemEditorInt {
         }
 
         if ((obj as ItemGroupComponent).items.find(it => props.key === it.key)) {
-            console.warn('item already exists with key: ', props.key);
+            console.error('item already exists with key: ', props.key);
             return undefined;
         }
 
@@ -362,7 +362,7 @@ export class ItemEditor implements ItemEditorInt {
         }
 
         if ((obj as ItemGroupComponent).items.find(it => newComp.key === it.key)) {
-            console.warn('item already exists with key: ', newComp.key);
+            console.error('item already exists with key: ', newComp.key);
             return undefined;
         }
 
