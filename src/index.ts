@@ -1,9 +1,11 @@
-import fs from 'fs';
 import { Logger } from './case-editor/logger/logger';
 import { Study } from './case-editor/types/study';
+import { InfectieradarStudy } from './studies/infectieradar';
 import { TekenradarStudy } from './studies/tekenradar';
+import { generateFilesForStudy } from './utils';
 
 const studies: Study[] = [
+    InfectieradarStudy,
     TekenradarStudy,
 ];
 
@@ -22,43 +24,16 @@ const readStudyKey = () => {
     return studyKeyArg[0].replace('study=', '');
 }
 
-
-const generateFilesForStudy = (study: Study, pretty?: boolean) => {
-    const outputRoot = `./output/${study.studyKey}`;
-
-    Logger.log(`Start generating files for study ${studyKey}.`);
-
-    if (!fs.existsSync(outputRoot)) {
-        fs.mkdirSync(outputRoot, { recursive: true })
-    }
-
-    /**
-     * Surveys:
-     */
-    if (study.surveys.length > 0) {
-        Logger.log(`\tSurveys:`);
-    } else {
-        Logger.log(`\tNo surveys in the study.`)
-    }
-    study.surveys.forEach(survey => {
-        const fileName = `${outputRoot}/${survey.key}.json`;
-        const outputObject = {
-            studyKey: study.studyKey,
-            survey: survey.getSurvey()
-        }
-        fs.writeFile(fileName, JSON.stringify(outputObject, undefined, pretty ? 2 : undefined), (err) => {
-            // throws an error, you could also catch it here
-            if (err) throw err;
-            Logger.success(`\t\t${survey.key} saved`);
-        });
-    })
-}
-
 const studyKey = readStudyKey();
 
-const currentStudy = studies.filter(study => study.studyKey === studyKey);
+const currentStudy = studies.filter(study => {
+    if (study.outputFolderName && study.outputFolderName === studyKey) {
+        return true;
+    }
+    return study.studyKey === studyKey
+});
 if (!currentStudy || currentStudy.length < 1) {
-    Logger.log(`No study find with key: ${studyKey}.`);
+    Logger.error(`No study find with key: ${studyKey}.`);
     process.exit(1)
 }
 
