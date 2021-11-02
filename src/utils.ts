@@ -15,6 +15,9 @@ export const generateFilesForStudy = (study: Study, pretty?: boolean) => {
     // Surveys:
     generateSurveyFiles(study, outputRoot, pretty);
 
+    // Study rules:
+    generateStudyRuleFile(study, outputRoot, pretty);
+
 
 }
 
@@ -30,10 +33,33 @@ const generateSurveyFiles = (study: Study, outputPath: string, pretty?: boolean)
             studyKey: study.studyKey,
             survey: survey.getSurvey()
         }
-        fs.writeFile(fileName, JSON.stringify(outputObject, undefined, pretty ? 2 : undefined), (err) => {
-            // throws an error, you could also catch it here
-            if (err) throw err;
-            Logger.success(`\t\t${survey.key} saved`);
-        });
+        try {
+            fs.writeFileSync(fileName, JSON.stringify(outputObject, undefined, pretty ? 2 : undefined));
+        } catch (err) {
+            Logger.error(err);
+            return;
+        }
+        Logger.success(`\t\t${survey.key} saved`);
     })
+}
+
+const generateStudyRuleFile = (study: Study, outputPath: string, pretty?: boolean) => {
+    if (!study.studyRules) {
+        Logger.log(`\tNo study rules in the study.`)
+        return;
+    } else {
+        Logger.log(`\tStudy rule:`)
+    }
+
+    const fileName = `${outputPath}/studyRules.json`;
+    const outputObject = study.studyRules.get();
+
+    try {
+        fs.writeFileSync(fileName, JSON.stringify(outputObject, undefined, pretty ? 2 : undefined));
+    } catch (err) {
+        Logger.error(err);
+        return;
+    }
+
+    Logger.success(`\t\tStudy rules saved`);
 }
