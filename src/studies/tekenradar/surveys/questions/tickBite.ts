@@ -15,8 +15,12 @@ export class TickBiteGroup extends Group {
     Q3: PositionTickBite;
     Q4: NumberTickBite;
     Q5: LocationBodyTickBite;
-    Q6: RemoveTickBite1;
-    Q7: RemoveTickBite2;
+    Q6: RemoveTick1;
+    Q7: RemoveTick2;
+    Q8: RemoveTick3;
+    Q9: RemoveTick4;
+
+
 
     constructor(parentKey: string) {
         super(parentKey, 'TBG');
@@ -26,8 +30,14 @@ export class TickBiteGroup extends Group {
         this.Q3 = new PositionTickBite(this.key, false);
         this.Q4 = new NumberTickBite(this.key, false);
         this.Q5 = new LocationBodyTickBite(this.key, false);
-        this.Q6 = new RemoveTickBite1(this.key,false);
-        this.Q7 = new RemoveTickBite2(this.key, false);
+        
+        this.Q6 = new RemoveTick1(this.key,false);
+        //TODO: correct way to implement condition: diplaying Q7-Q9 only if option b of Q6 is selected ??
+        const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, 'b');
+
+        this.Q7 = new RemoveTick2(this.key, false, q6Condition);
+        this.Q8 = new RemoveTick3(this.key,false, q6Condition);
+        this.Q9 = new RemoveTick4(this.key, false, q6Condition);
     }
 
     buildGroup() {
@@ -39,6 +49,7 @@ export class TickBiteGroup extends Group {
         this.addItem(this.Q4.get());
         this.addItem(this.Q5.get());
         this.addItem(this.Q6.get());
+
         this.addItem(this.Q7.get());
         this.addPageBreak();
     }
@@ -310,10 +321,10 @@ class LocationBodyTickBite extends Item {
 }
 
 
-class RemoveTickBite1 extends Item {
+class RemoveTick1 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-        super(parentKey, 'RemTB1');
+        super(parentKey, 'RemT1');
 
         this.isRequired = isRequired;
         this.condition = condition;
@@ -347,10 +358,10 @@ class RemoveTickBite1 extends Item {
 }
 
 
-class RemoveTickBite2 extends Item {
+class RemoveTick2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-        super(parentKey, 'RemTB2');
+        super(parentKey, 'RemT2');
 
         this.isRequired = isRequired;
         this.condition = condition;
@@ -383,3 +394,108 @@ class RemoveTickBite2 extends Item {
     }
 }
 
+
+class RemoveTick3 extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'RemT3');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Wanneer heb je de teek verwijderd?'],
+            ]),
+            //TODO: two number inputs for each option.
+            //TODO: date and two number input in option d
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Vandaag, tussen ... en .... uur"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Gisteren, tussen .... en  .... uur"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Eergisteren, tussen .... en ..... uur"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "Eerder namelijk, ................(dag/maand/jaar) tussen ... en..... uur"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
+
+class RemoveTick4 extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'RemT4');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.multipleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Wie heeft de teek verwijderd? (meerdere antwoorden mogelijk)'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "De teek viel er vanzelf af"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Huisarts"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Uzelf"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'input',
+                    content: new Map([
+                        ["nl", "Iemand anders, namelijk:"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "Onbewust / per ongeluk verwijderd (bijvoorbeeld door te krabben of bij het afdrogen)"],
+                    ])
+                },
+            ]
+        })
+    }
+}
