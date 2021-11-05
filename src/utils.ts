@@ -18,6 +18,9 @@ export const generateFilesForStudy = (study: Study, pretty?: boolean) => {
     // Study rules:
     generateStudyRuleFile(study, outputRoot, pretty);
 
+    // Custom Study rules: (manually triggered rules)
+    generateCustomStudyRules(study, outputRoot, pretty);
+
 
 }
 
@@ -27,8 +30,12 @@ const generateSurveyFiles = (study: Study, outputPath: string, pretty?: boolean)
     } else {
         Logger.log(`\tNo surveys in the study.`)
     }
+    const surveyOutPath = `${outputPath}/surveys`;
+    if (!fs.existsSync(surveyOutPath)) {
+        fs.mkdirSync(surveyOutPath, { recursive: true })
+    }
     study.surveys.forEach(survey => {
-        const fileName = `${outputPath}/${survey.key}.json`;
+        const fileName = `${surveyOutPath}/${survey.key}.json`;
         const outputObject = {
             studyKey: study.studyKey,
             survey: survey.getSurvey()
@@ -62,4 +69,33 @@ const generateStudyRuleFile = (study: Study, outputPath: string, pretty?: boolea
     }
 
     Logger.success(`\t\tStudy rules saved`);
+}
+
+const generateCustomStudyRules = (study: Study, outputPath: string, pretty?: boolean) => {
+    if (!study.customStudyRules || study.customStudyRules.length < 0) {
+        Logger.log(`\tNo custom study rules in the study.`)
+        return;
+    } else {
+        Logger.log(`\tCustom study rules:`)
+    }
+
+    const customRulePath = `${outputPath}/customRules`;
+    if (!fs.existsSync(customRulePath)) {
+        fs.mkdirSync(customRulePath, { recursive: true })
+    }
+
+    study.customStudyRules.forEach(studyRule => {
+        const fileName = `${customRulePath}/${studyRule.name}.json`;
+        const outputObject = studyRule.rules;
+
+        try {
+            fs.writeFileSync(fileName, JSON.stringify(outputObject, undefined, pretty ? 2 : undefined));
+        } catch (err) {
+            Logger.error(err);
+            return;
+        }
+
+        Logger.success(`\t\tRule ${studyRule.name} saved`);
+    })
+
 }
