@@ -20,7 +20,7 @@ export class TickBiteGroup extends Group {
     Q8: RemoveTick3;
     Q9: RemoveTick4;
 
-
+//TODO: correct way to implement condition: diplaying Q7-Q9 only if option b of Q6 is selected ??
 
     constructor(parentKey: string) {
         super(parentKey, 'TBG');
@@ -31,13 +31,15 @@ export class TickBiteGroup extends Group {
         this.Q4 = new NumberTickBite(this.key, false);
         this.Q5 = new LocationBodyTickBite(this.key, false);
         
+
         this.Q6 = new RemoveTick1(this.key,false);
-        //TODO: correct way to implement condition: diplaying Q7-Q9 only if option b of Q6 is selected ??
-        const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, 'b');
+        
+        const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
 
         this.Q7 = new RemoveTick2(this.key, false, q6Condition);
         this.Q8 = new RemoveTick3(this.key,false, q6Condition);
         this.Q9 = new RemoveTick4(this.key, false, q6Condition);
+
     }
 
     buildGroup() {
@@ -51,6 +53,8 @@ export class TickBiteGroup extends Group {
         this.addItem(this.Q6.get());
 
         this.addItem(this.Q7.get());
+        this.addItem(this.Q8.get());
+        this.addItem(this.Q9.get());
         this.addPageBreak();
     }
 }
@@ -323,6 +327,10 @@ class LocationBodyTickBite extends Item {
 
 class RemoveTick1 extends Item {
 
+    optionKeys = {
+        nameOfOption: 'b'
+     }
+
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
         super(parentKey, 'RemT1');
 
@@ -347,7 +355,7 @@ class RemoveTick1 extends Item {
                     ])
                 },
                 {
-                    key: 'b', role: 'option',
+                    key: this.optionKeys.nameOfOption, role: 'option',
                     content: new Map([
                         ["nl", "Nee"],
                     ])
@@ -499,3 +507,182 @@ class RemoveTick4 extends Item {
         })
     }
 }
+
+
+class PreviousTickBites1 extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'PTB1');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 5 jaar opgemerkt?'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Geen tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "1 - 3 tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "4 - 10 tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "11 - 50 tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "Meer dan 50 tekenbeten"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
+
+
+class PreviousTickBites2 extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'PTB2');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 3 maanden opgemerkt?'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Geen tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "1 - 3 tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "4 - 10 tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "11 - 50 tekenbeten"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "Meer dan 50 tekenbeten"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
+
+class ReportedTickBites extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'RepTB');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Hoeveel tekenbeten heb je sinds het begin van dit jaar (dus vanaf 1 januari) op Tekenradar gemeld?'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Ik heb nog nooit een Tekenbeet gemeld op tekenradar"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Geen teken gemeld dit jaar"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "1 teek gemeld"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "2 teken gemeld"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "3-5 teken gemeld"],
+                    ])
+                },
+                {
+                    key: 'f', role: 'option',
+                    content: new Map([
+                        ["nl", "5-10 teken gemeld"],
+                    ])
+                },
+                {
+                    key: 'g', role: 'option',
+                    content: new Map([
+                        ["nl", "Meer dan 10 teken gemeld"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
