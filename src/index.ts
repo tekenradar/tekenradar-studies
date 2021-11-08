@@ -1,11 +1,9 @@
 import { Logger } from './case-editor/logger/logger';
 import { Study } from './case-editor/types/study';
-import { InfectieradarStudy } from './studies/infectieradar';
 import { TekenradarStudy } from './studies/tekenradar';
 import { generateFilesForStudy } from './utils';
 
 const studies: Study[] = [
-    InfectieradarStudy,
     TekenradarStudy,
 ];
 

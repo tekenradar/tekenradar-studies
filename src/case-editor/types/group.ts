@@ -1,4 +1,5 @@
-import { Expression, SurveyItem } from "survey-engine/lib/data_types";
+import { Expression, SurveyGroupItem, SurveyItem } from "survey-engine/lib/data_types";
+import { Logger } from "../logger/logger";
 import { ItemEditor } from "../survey-editor/item-editor";
 import { generatePageBreak } from "../utils/simple-generators";
 
@@ -38,6 +39,7 @@ export abstract class Group {
      */
     get() {
         this.buildGroup();
+        this.checkDuplicateChildKeys();
         return this.groupEditor.getItem();
     }
 
@@ -49,6 +51,23 @@ export abstract class Group {
         this.groupEditor.addSurveyItem(item);
         if (pageBreakAfter) {
             this.addPageBreak();
+        }
+    }
+
+    private checkDuplicateChildKeys() {
+        const group = this.groupEditor.getItem() as SurveyGroupItem;
+        const keys = group.items.map(item => item.key);
+        const hasDuplicates = keys.some((key, index) => {
+            const isDuplicateKey = keys.indexOf(key) !== index;
+            if (isDuplicateKey) {
+                Logger.error('Duplicate key:');
+                Logger.criticalError(`${key} is used twice (at index ${keys.indexOf(key)} and at index ${index})`);
+            }
+            return isDuplicateKey;
+        });
+        if (hasDuplicates) {
+            Logger.error('\nSurvey contains duplicate keys.\nPlease check the lines above for more infos.\nProcess stopped prematurely.')
+            process.exit(1)
         }
     }
 }
