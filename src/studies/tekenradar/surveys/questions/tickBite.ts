@@ -278,7 +278,7 @@ class NumberTickBite extends Item {
         this.isRequired = isRequired;
         this.condition = condition;
     }
-
+    //TODO: select box here
     buildItem() {
         return SurveyItemGenerators.numericInput({
             parentKey: this.parentKey,
@@ -679,6 +679,186 @@ class ReportedTickBites extends Item {
                     key: 'g', role: 'option',
                     content: new Map([
                         ["nl", "Meer dan 10 teken gemeld"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
+
+class DateTickBite extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'DTB');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    //TODO insert time input option here
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Wanneer heb je de tekenbeet (vermoedelijk) opgelopen?'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Vandaag, tussen ... en ...uur"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Gisteren, tussen ... en ... uur"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Eergisteren, tussen ... en ... uur"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "Eerder, op ....... (dag/maand/jaar) tussen... en ...uur"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
+
+class DurationTickBite extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'DurTB');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    //TODO insert time input option here
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Hoe lang heeft de teek in de huid vastgezeten?'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Korter dan 12 uur, namelijk ....... uur"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "12 - 24 uur, namelijk …… uur"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Langer dan 24 uur, namelijk ...... dagen/uur (rond a.u.b. af op hele dagen)"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "Weet ik niet"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
+
+class DoctorTickBite1 extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'DocTB1');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Is er een arts bezocht voor de tekenbeet?'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Ja"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Nee"],
+                    ])
+                },
+            ]
+        })
+    }
+}
+
+
+class DoctorTickBite2 extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+        super(parentKey, 'DocTB2');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItemGenerators.multipleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: new Map([
+                ['nl', 'Welke arts is er bezocht? (meerdere antwoorden mogelijk)'],
+            ]),
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Huisarts"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Bedrijfsarts"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'input',
+                    content: new Map([
+                        ["nl", "Ander soort arts, namelijk:"],
                     ])
                 },
             ]
