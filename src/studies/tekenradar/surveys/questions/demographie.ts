@@ -51,7 +51,7 @@ export class Residence extends Item {
     }
 
     buildItem() {
-        return SurveyItemGenerators.numericInput({
+        return SurveyItemGenerators.multilineTextInput({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -60,25 +60,15 @@ export class Residence extends Item {
                 ['nl', 'Woonplaats van de persoon met de tekenbeet:'],
             ]),
             titleClassName: 'sticky-top',
-            inputMaxWidth: '80px',
-            content: new Map([
-                ['nl', '']
-            ]),
-            contentBehindInput: true,
-            componentProperties: {
-                min: 0,
-                max: 120
-            }
         })
     }
 }
 
 
-
-class Sex extends Item {
+class Gender extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-        super(parentKey, 'Sex');
+        super(parentKey, 'gender');
 
         this.isRequired = isRequired;
         this.condition = condition;
