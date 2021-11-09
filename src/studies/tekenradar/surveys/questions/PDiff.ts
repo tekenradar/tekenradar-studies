@@ -5,7 +5,7 @@ import { Group } from '../../../../case-editor/types/group';
 import { SurveyDefinition } from '../../../../case-editor/types/surveyDefinition';
 import { Item } from '../../../../case-editor/types/item';
 import { ComponentGenerators } from '../../../../case-editor/utils/componentGenerators';
-import {Age} from './Demographie'
+import {Age} from './demographie'
 
 
 
