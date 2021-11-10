@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { Logger } from "./case-editor/logger/logger";
-import { Study } from "./case-editor/types/study";
+import { Logger } from 'case-editor-tools/logger/logger';
+import { Study } from 'case-editor-tools/types/study';
 
 export const generateFilesForStudy = (study: Study, pretty?: boolean) => {
     const outputName = study.outputFolderName ? study.outputFolderName : study.studyKey;
