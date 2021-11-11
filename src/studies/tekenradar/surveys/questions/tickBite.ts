@@ -1,57 +1,63 @@
 import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { PreviousTickBitesGroup } from './prevTickBites';
 
 
 export class TickBiteGroup extends Group {
 
-  Q1: EnvironmentTickBite;
-  Q2: ActivityTickBite;
-  Q3: PositionTickBite;
-  Q4: NumberTickBite;
-  Q5: LocationBodyTickBite;
-  Q6: RemoveTick1;
-  Q7: RemoveTick2;
-  Q8: RemoveTick3;
-  Q9: RemoveTick4;
+    Q1: EnvironmentTickBite;
+    Q2: ActivityTickBite;
+    Q3: PositionTickBite;
+    Q4: NumberTickBite;
+    Q5: LocationBodyTickBite;
+    Q6: RemoveTick1;
+    Q7: RemoveTick2;
+    Q8: RemoveTick3;
+    Q9: RemoveTick4;
+    G10: PreviousTickBitesGroup;
+    Q12: ReportedTickBites;
 
-  //TODO: correct way to implement condition: diplaying Q7-Q9 only if option b of Q6 is selected ??
+    constructor(parentKey: string) {
+        super(parentKey, 'TBG');
 
-  constructor(parentKey: string) {
-    super(parentKey, 'TBG');
+        this.Q1 = new EnvironmentTickBite(this.key, false);
+        this.Q2 = new ActivityTickBite(this.key, false);
+        this.Q3 = new PositionTickBite(this.key, false);
+        this.Q4 = new NumberTickBite(this.key, false);
+        this.Q5 = new LocationBodyTickBite(this.key, false);
+        
+        this.Q6 = new RemoveTick1(this.key,false);
+        const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+        this.Q7 = new RemoveTick2(this.key, false, q6Condition);
+        this.Q8 = new RemoveTick3(this.key,false, q6Condition);
+        this.Q9 = new RemoveTick4(this.key, false, q6Condition);
 
-    this.Q1 = new EnvironmentTickBite(this.key, false);
-    this.Q2 = new ActivityTickBite(this.key, false);
-    this.Q3 = new PositionTickBite(this.key, false);
-    this.Q4 = new NumberTickBite(this.key, false);
-    this.Q5 = new LocationBodyTickBite(this.key, false);
+        this.G10 = new PreviousTickBitesGroup(this.key)
 
+        this.Q12 = new ReportedTickBites(this.key, false);
 
-    this.Q6 = new RemoveTick1(this.key, false);
+    }
 
-    const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+    buildGroup() {
 
-    this.Q7 = new RemoveTick2(this.key, false, q6Condition);
-    this.Q8 = new RemoveTick3(this.key, false, q6Condition);
-    this.Q9 = new RemoveTick4(this.key, false, q6Condition);
+        this.addItem(this.Q1.get());
+        this.addItem(this.Q2.get());
+        this.addItem(this.Q3.get());
+        this.addPageBreak();
+        this.addItem(this.Q4.get());
+        this.addItem(this.Q5.get());
+        this.addItem(this.Q6.get());
 
-  }
+        this.addItem(this.Q7.get());
+        this.addItem(this.Q8.get());
+        this.addItem(this.Q9.get());
+        this.addPageBreak();
 
-  buildGroup() {
-
-    this.addItem(this.Q1.get());
-    this.addItem(this.Q2.get());
-    this.addItem(this.Q3.get());
-    this.addPageBreak();
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
-    this.addItem(this.Q6.get());
-
-    this.addItem(this.Q7.get());
-    this.addItem(this.Q8.get());
-    this.addItem(this.Q9.get());
-    this.addPageBreak();
-  }
+        this.addItem(this.G10.get());
+        
+        this.addPageBreak();
+    }
 }
 
 
@@ -503,116 +509,6 @@ class RemoveTick4 extends Item {
   }
 }
 
-
-class PreviousTickBites1 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PTB1');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 5 jaar opgemerkt?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Geen tekenbeten"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "1 - 3 tekenbeten"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "4 - 10 tekenbeten"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "11 - 50 tekenbeten"],
-          ])
-        },
-        {
-          key: 'e', role: 'option',
-          content: new Map([
-            ["nl", "Meer dan 50 tekenbeten"],
-          ])
-        },
-      ]
-    })
-  }
-}
-
-
-
-class PreviousTickBites2 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PTB2');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 3 maanden opgemerkt?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Geen tekenbeten"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "1 - 3 tekenbeten"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "4 - 10 tekenbeten"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "11 - 50 tekenbeten"],
-          ])
-        },
-        {
-          key: 'e', role: 'option',
-          content: new Map([
-            ["nl", "Meer dan 50 tekenbeten"],
-          ])
-        },
-      ]
-    })
-  }
-}
 
 
 class ReportedTickBites extends Item {
