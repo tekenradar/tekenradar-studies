@@ -2,6 +2,8 @@ import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
+import { Residence, Gender } from './demographie';
+import { FormerLymeDiagnosis, FormerLymeTherapy1, FormerLymeTherapy2, GeneralTherapy } from './diagnosisTherapy';
 
 
 export class TickBiteGroup extends Group {
@@ -17,6 +19,21 @@ export class TickBiteGroup extends Group {
     Q9: RemoveTick4;
     G10: PreviousTickBitesGroup;
     Q12: ReportedTickBites;
+
+    P1: Residence;
+    P2: Gender;
+
+    Q13: DateTickBite;
+    Q14: DurationTickBite;
+    Q15: DoctorTickBite1;
+    Q16: DoctorTickBite2;
+
+    Q17: FormerLymeDiagnosis;
+    Q18: FormerLymeTherapy1;
+    Q19: FormerLymeTherapy2;
+    Q20: GeneralTherapy;
+
+
 
     constructor(parentKey: string) {
         super(parentKey, 'TBG');
@@ -37,6 +54,23 @@ export class TickBiteGroup extends Group {
 
         this.Q12 = new ReportedTickBites(this.key, false);
 
+        //TDOD If the respondent is not logged in ask p1 and p2, 
+        //if he is logged in, skip these two questions here as they 
+        //will be asked lateron in de questionaire (chapter S-A)
+        this.P1 = new Residence(this.key,false);
+        this.P2 = new Gender(this.key, false);
+
+        this.Q13 = new DateTickBite(this.key, false);
+        this.Q14 = new DurationTickBite(this.key, false);
+        this.Q15 = new DoctorTickBite1(this.key, false);
+        const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
+        this.Q16 = new DoctorTickBite2(this.key, false, q15Condition);
+
+        this.Q17 = new FormerLymeDiagnosis(this.key, false);
+        this.Q18 = new FormerLymeTherapy1(this.key, false);
+        this.Q19 = new FormerLymeTherapy2(this.key, false);
+        this.Q20 = new GeneralTherapy(this.key, false);
+
     }
 
     buildGroup() {
@@ -45,18 +79,42 @@ export class TickBiteGroup extends Group {
         this.addItem(this.Q2.get());
         this.addItem(this.Q3.get());
         this.addPageBreak();
+
         this.addItem(this.Q4.get());
         this.addItem(this.Q5.get());
         this.addItem(this.Q6.get());
-
         this.addItem(this.Q7.get());
         this.addItem(this.Q8.get());
         this.addItem(this.Q9.get());
         this.addPageBreak();
 
         this.addItem(this.G10.get());
-        
+        this.addItem(this.Q12.get());
         this.addPageBreak();
+
+
+        this.addItem(this.P1.get());
+        this.addItem(this.P2.get());
+        this.addPageBreak();
+
+        this.addItem(this.Q13.get());
+        this.addItem(this.Q14.get());
+        this.addItem(this.Q15.get());
+        this.addItem(this.Q16.get());
+        this.addPageBreak();
+
+        this.addItem(this.Q14.get());
+        this.addItem(this.Q15.get());
+        this.addItem(this.Q16.get());
+        this.addPageBreak();
+
+        this.addItem(this.Q17.get());
+        this.addItem(this.Q18.get());
+        this.addItem(this.Q19.get());
+        this.addItem(this.Q20.get());
+        this.addPageBreak();
+
+
     }
 }
 
@@ -679,6 +737,10 @@ class DurationTickBite extends Item {
 
 
 class DoctorTickBite1 extends Item {
+
+    optionKeys = {
+        nameOfOption: 'a'
+    }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'DocTB1');
