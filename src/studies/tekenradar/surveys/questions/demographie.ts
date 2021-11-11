@@ -61,7 +61,7 @@ export class Residence extends Item {
 }
 
 
-class Gender extends Item {
+export class Gender extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'gender');
