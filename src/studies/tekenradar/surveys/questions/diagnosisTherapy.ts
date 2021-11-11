@@ -2,7 +2,7 @@ import { Expression } from 'survey-engine/lib/data_types';
 import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
 
-class FormerLymeDiagnosis extends Item {
+export class FormerLymeDiagnosis extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FLD');
@@ -39,7 +39,7 @@ class FormerLymeDiagnosis extends Item {
 }
 
 
-class FormerLymeTherapy1 extends Item {
+export class FormerLymeTherapy1 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FLTher1');
@@ -83,7 +83,7 @@ class FormerLymeTherapy1 extends Item {
 
 
 
-class FormerLymeTherapy2 extends Item {
+export class FormerLymeTherapy2 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FLTher2');
@@ -121,7 +121,7 @@ class FormerLymeTherapy2 extends Item {
 
 
 
-class GeneralTherapy extends Item {
+export class GeneralTherapy extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'GenTher');
