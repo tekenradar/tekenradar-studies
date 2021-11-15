@@ -10,14 +10,14 @@ export class PreviousTickBitesGroup extends Group {
     Q1: PreviousTickBites1;
     Q2: PreviousTickBites2;
 
-    //TODO: add potential boolean isRequired as parameter
-    constructor(parentKey: string,isRequired?: boolean) {
+   
+    constructor(parentKey: string, isRequired?: boolean) {
         super(parentKey, 'PTBG');
 
 
         this.Q1 = new PreviousTickBites1(this.key,isRequired);
-        const q10Condition = SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.nameOfOption);
-        this.Q2 = new PreviousTickBites2(this.key,isRequired,q10Condition);
+        const q1Condition = SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.nameOfOption);
+        this.Q2 = new PreviousTickBites2(this.key,isRequired,q1Condition);
 
     }
 
@@ -49,7 +49,7 @@ class PreviousTickBites1 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new Map([
+            questionText: new Map([//TODO bold text "in de afgelopen 5 jaar" ?
                 ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 5 jaar opgemerkt?'],
             ]),
             responseOptions: [
@@ -105,7 +105,7 @@ class PreviousTickBites2 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new Map([
+            questionText: new Map([ //TODO bold text "in de afgelopen 3 maanden" ?
                 ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 3 maanden opgemerkt?'],
             ]),
             responseOptions: [
