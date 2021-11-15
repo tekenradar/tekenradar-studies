@@ -3,7 +3,7 @@ import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
-import { FormerLymeDiagnosis, FormerLymeTherapy1, FormerLymeTherapy2, GeneralTherapy } from './diagnosisTherapy';
+import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
 
 
 export class TickBiteGroup extends Group {
@@ -17,7 +17,7 @@ export class TickBiteGroup extends Group {
     Q7: RemoveTick2;
     Q8: RemoveTick3;
     Q9: RemoveTick4;
-    G10: PreviousTickBitesGroup;
+    G10_11: PreviousTickBitesGroup;
     Q12: ReportedTickBites;
 
     P1: Residence;
@@ -28,9 +28,8 @@ export class TickBiteGroup extends Group {
     Q15: DoctorTickBite1;
     Q16: DoctorTickBite2;
 
-    Q17: FormerLymeDiagnosis;
-    Q18: FormerLymeTherapy1;
-    Q19: FormerLymeTherapy2;
+    G17_19: FormerLymeGroup;
+    
     Q20: GeneralTherapy;
 
 
@@ -50,7 +49,7 @@ export class TickBiteGroup extends Group {
         this.Q8 = new RemoveTick3(this.key,false, q6Condition);
         this.Q9 = new RemoveTick4(this.key, false, q6Condition);
 
-        this.G10 = new PreviousTickBitesGroup(this.key)
+        this.G10_11 = new PreviousTickBitesGroup(this.key)
 
         this.Q12 = new ReportedTickBites(this.key, false);
 
@@ -66,9 +65,8 @@ export class TickBiteGroup extends Group {
         const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
         this.Q16 = new DoctorTickBite2(this.key, false, q15Condition);
 
-        this.Q17 = new FormerLymeDiagnosis(this.key, false);
-        this.Q18 = new FormerLymeTherapy1(this.key, false);
-        this.Q19 = new FormerLymeTherapy2(this.key, false);
+        this.G17_19 = new FormerLymeGroup(this.key, false);
+        
         this.Q20 = new GeneralTherapy(this.key, false);
 
     }
@@ -88,7 +86,7 @@ export class TickBiteGroup extends Group {
         this.addItem(this.Q9.get());
         this.addPageBreak();
 
-        this.addItem(this.G10.get());
+        this.addItem(this.G10_11.get());
         this.addItem(this.Q12.get());
         this.addPageBreak();
 
@@ -103,14 +101,8 @@ export class TickBiteGroup extends Group {
         this.addItem(this.Q16.get());
         this.addPageBreak();
 
-        this.addItem(this.Q14.get());
-        this.addItem(this.Q15.get());
-        this.addItem(this.Q16.get());
-        this.addPageBreak();
-
-        this.addItem(this.Q17.get());
-        this.addItem(this.Q18.get());
-        this.addItem(this.Q19.get());
+        this.addItem(this.G17_19.get());
+        
         this.addItem(this.Q20.get());
         this.addPageBreak();
 
@@ -119,7 +111,7 @@ export class TickBiteGroup extends Group {
 }
 
 
-class EnvironmentTickBite extends Item {
+export class EnvironmentTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EnvTB');
@@ -198,7 +190,7 @@ class EnvironmentTickBite extends Item {
 }
 
 
-class ActivityTickBite extends Item {
+export class ActivityTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'ActTB');
@@ -277,7 +269,7 @@ class ActivityTickBite extends Item {
 }
 
 
-class PositionTickBite extends Item {
+export class PositionTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'PosTB');
@@ -329,7 +321,7 @@ class PositionTickBite extends Item {
 }
 
 
-class NumberTickBite extends Item {
+export class NumberTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'NumTB');
@@ -361,7 +353,7 @@ class NumberTickBite extends Item {
 }
 
 
-class LocationBodyTickBite extends Item {
+export class LocationBodyTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LocTB');
@@ -425,7 +417,7 @@ class RemoveTick1 extends Item {
 }
 
 
-class RemoveTick2 extends Item {
+export class RemoveTick2 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT2');
@@ -462,7 +454,7 @@ class RemoveTick2 extends Item {
 }
 
 
-class RemoveTick3 extends Item {
+export class RemoveTick3 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT3');
@@ -513,7 +505,7 @@ class RemoveTick3 extends Item {
 }
 
 
-class RemoveTick4 extends Item {
+export class RemoveTick4 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT4');
@@ -686,7 +678,7 @@ class DateTickBite extends Item {
 }
 
 
-class DurationTickBite extends Item {
+export class DurationTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'DurTB');
