@@ -1,9 +1,9 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { TickBiteGroup } from './questions/tickBite';
+import { TickBiteOnlyGroup } from './questions/tickBite';
 
 
 class TB_adultsDef extends SurveyDefinition {
-  G1: TickBiteGroup;
+  G1: TickBiteOnlyGroup;
 
 
   constructor() {
@@ -20,7 +20,7 @@ class TB_adultsDef extends SurveyDefinition {
       ]),
     });
 
-    this.G1 = new TickBiteGroup(this.key);
+    this.G1 = new TickBiteOnlyGroup(this.key);
 
   }
 
