@@ -1,10 +1,70 @@
 import { Expression } from 'survey-engine/lib/data_types';
-import { Item } from 'case-editor-tools/surveys/types';
-import { SurveyItems } from 'case-editor-tools/surveys';
+import { Group, Item } from 'case-editor-tools/surveys/types';
+import { SurveyItems, SurveyEngine } from 'case-editor-tools/surveys';
+import { EnvironmentTickBite, ActivityTickBite, PositionTickBite, NumberTickBite, LocationBodyTickBite, RemoveTick2, RemoveTick3, RemoveTick4, DurationTickBite, TickBiteOtherGroup } from './tickBite';
+import { PreviousTickBitesGroup } from './prevTickBites'
+import { FormerLymeGroup } from './diagnosisTherapy'
+import { LymeDiagnosis1, LymeDiagnosis2 } from './lyme'
 
 
 
-export class ChronicLymeDiagnosis1 extends Item {
+export class ChronicGroup extends Group {
+
+    G1_9: TickBiteOtherGroup
+
+    //chronic questions here
+    Q10: LymeDiagnosis1;
+    Q11: LymeDiagnosis2;
+
+    Q12: ChronicLymeDiagnosis1;
+    Q13: ChronicLymeDiagnosis2;
+    Q14: ChronicLymeTherapy1;
+    Q15: ChronicLymeTherapy2;
+     
+    G16_17: PreviousTickBitesGroup;
+
+
+
+    constructor(parentKey: string) {
+        super(parentKey, 'CLG');
+
+        this.G1_9 = new TickBiteOtherGroup(this.key);
+
+        this.Q10 = new LymeDiagnosis1(this.key,false);
+        const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.nameOfOption);
+        this.Q11 = new LymeDiagnosis2(this.key,false,Q10condition);
+
+        this.Q12 = new ChronicLymeDiagnosis1(this.key,false);
+        this.Q13 = new ChronicLymeDiagnosis2(this.key,false);
+        this.Q14 = new ChronicLymeTherapy1(this.key,false);
+        this.Q15 = new ChronicLymeTherapy2(this.key,false);
+
+        this.G16_17 = new PreviousTickBitesGroup(this.key);
+
+    }
+
+    buildGroup() {
+
+        this.addItem(this.G1_9.get());
+
+        this.addItem(this.Q10.get());
+        this.addItem(this.Q11.get());
+        this.addItem(this.Q12.get());
+        this.addItem(this.Q13.get());
+        this.addItem(this.Q14.get());
+        this.addItem(this.Q15.get());
+        this.addPageBreak();
+
+        this.addItem(this.G16_17.get());
+        this.addPageBreak();
+
+
+    }
+}
+
+
+
+class ChronicLymeDiagnosis1 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLD1');
@@ -27,7 +87,7 @@ export class ChronicLymeDiagnosis1 extends Item {
   }
 
   
-export class ChronicLymeDiagnosis2 extends Item {
+class ChronicLymeDiagnosis2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLD2');
@@ -50,7 +110,7 @@ export class ChronicLymeDiagnosis2 extends Item {
   }
 
  
-  export class ChronicLymeTherapy1 extends Item {
+  class ChronicLymeTherapy1 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLT1');
@@ -73,7 +133,7 @@ export class ChronicLymeDiagnosis2 extends Item {
   }
 
  
-  export class ChronicLymeTherapy2 extends Item {
+  class ChronicLymeTherapy2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLT2');
