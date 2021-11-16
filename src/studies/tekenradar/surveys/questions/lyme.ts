@@ -1,26 +1,14 @@
 import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { EnvironmentTickBite, ActivityTickBite, PositionTickBite, NumberTickBite, LocationBodyTickBite, RemoveTick2, RemoveTick3, RemoveTick4, DurationTickBite } from './tickBite';
+import {  TickBiteOtherGroup } from './tickBite';
 import { PreviousTickBitesGroup } from './prevTickBites'
 import { FormerLymeGroup } from './diagnosisTherapy'
 
 
 export class LymeGroup extends Group {
 
-    //TODO: inital question and inital text
-    Q1: EnvironmentTickBite;
-    Q2: ActivityTickBite;
-    Q3: PositionTickBite;
-    Q4: NumberTickBite;
-    Q5: LocationBodyTickBite;
-
-    Q6: RemoveTick2;
-    Q7: RemoveTick3;
-    Q8: RemoveTick4;
-
-    //other question order than TickBite group starts here
-    Q9: DurationTickBite;
+    G1_9: TickBiteOtherGroup;
 
     //Lyme questions here
     Q10: LymeDiagnosis1;
@@ -44,34 +32,32 @@ export class LymeGroup extends Group {
 
 
     constructor(parentKey: string) {
-        super(parentKey, 'TBG');
+        super(parentKey, 'LymeG');
 
-        this.Q1 = new EnvironmentTickBite(this.key, false);
-        this.Q2 = new ActivityTickBite(this.key, false);
-        this.Q3 = new PositionTickBite(this.key, false);
-        this.Q4 = new NumberTickBite(this.key, false);
-        this.Q5 = new LocationBodyTickBite(this.key, false);
-        
-        this.Q6 = new RemoveTick2(this.key, false);
-        this.Q7 = new RemoveTick3(this.key,false);
-        this.Q8 = new RemoveTick4(this.key, false);
-
-        this.Q9 = new DurationTickBite(this.key,false)
+        this.G1_9 = new TickBiteOtherGroup(this.key);
 
         this.Q10 = new LymeDiagnosis1(this.key,false);
         const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.nameOfOption);
         this.Q11 = new LymeDiagnosis2(this.key,false,Q10condition);
         this.Q12 = new LymeDiagnosis3(this.key,false);
         this.Q13 = new LymeDiagnosis4(this.key,false);
-        this.Q14 = new LymeDiagnosis5(this.key,false);
+        this.Q14 = new LymeDiagnosis5(this.key,false,Q10condition);
+
         this.Q15 = new LymeDiagnosis6(this.key,false);
-        this.Q16 = new LymeDiagnosis7(this.key,false);
+        const Q15condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
+        this.Q16 = new LymeDiagnosis7(this.key,false,Q15condition);
 
         this.Q17 = new LymeTherapy1(this.key,false);
-        this.Q18 = new LymeTherapy2(this.key,false);
-        this.Q19 = new LymeTherapy3(this.key,false);
-        this.Q20 = new LymeTherapy4(this.key,false);
-        this.Q21 = new LymeTherapy5(this.key,false);
+        const Q17conditionTabletten = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten);
+        const Q17conditionInfuus    = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionInfuus);
+        const Q17conditionAnyMed    = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten, this.Q17.optionKeys.nameOfOptionInfuus);
+        this.Q18 = new LymeTherapy2(this.key,false,Q17conditionTabletten);
+        this.Q19 = new LymeTherapy3(this.key,false,Q17conditionInfuus);
+
+
+        this.Q20 = new LymeTherapy4(this.key,false, Q17conditionAnyMed);
+        const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.nameOfOption);
+        this.Q21 = new LymeTherapy5(this.key,false, Q20condition);
 
         this.G22_24 = new FormerLymeGroup(this.key);
         this.G25_26 = new PreviousTickBitesGroup(this.key);
@@ -80,18 +66,7 @@ export class LymeGroup extends Group {
 
     buildGroup() {
 
-        this.addItem(this.Q1.get());
-        this.addItem(this.Q2.get());
-        this.addItem(this.Q3.get());
-        this.addPageBreak();
-
-        this.addItem(this.Q4.get());
-        this.addItem(this.Q5.get());
-        this.addItem(this.Q6.get());
-        this.addItem(this.Q7.get());
-        this.addItem(this.Q8.get());
-        this.addItem(this.Q9.get());
-        this.addPageBreak();
+        this.addItem(this.G1_9.get());
 
         this.addItem(this.Q10.get());
         this.addItem(this.Q11.get());
@@ -245,7 +220,7 @@ export class LymeDiagnosis2 extends Item {
   }
 
 
-  export class LymeDiagnosis3 extends Item {
+  class LymeDiagnosis3 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD3');
@@ -267,7 +242,7 @@ export class LymeDiagnosis2 extends Item {
     }
   }
   
-export class LymeDiagnosis4 extends Item {
+class LymeDiagnosis4 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD4');
@@ -310,7 +285,7 @@ export class LymeDiagnosis4 extends Item {
   }
   
    
-export class LymeDiagnosis5 extends Item {
+class LymeDiagnosis5 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD5');
@@ -347,7 +322,11 @@ export class LymeDiagnosis5 extends Item {
   }
   
    
-export class LymeDiagnosis6 extends Item {
+class LymeDiagnosis6 extends Item {
+
+    optionKeys = {
+        nameOfOption: 'a'
+     }
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD6');
@@ -384,7 +363,7 @@ export class LymeDiagnosis6 extends Item {
   }
   
    
-export class LymeDiagnosis7 extends Item {
+class LymeDiagnosis7 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD7');
@@ -422,7 +401,12 @@ export class LymeDiagnosis7 extends Item {
   
 
 
-  export class LymeTherapy1 extends Item {
+  class LymeTherapy1 extends Item {
+
+    optionKeys = {
+        nameOfOptionTabletten: 'a',
+        nameOfOptionInfuus: 'b'
+     }
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LymeTher1');
@@ -465,7 +449,7 @@ export class LymeDiagnosis7 extends Item {
   }
   
 
-  export class LymeTherapy2 extends Item {
+  class LymeTherapy2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LymeTher2');
@@ -488,7 +472,7 @@ export class LymeDiagnosis7 extends Item {
   }
   
   //TODO: or merge therapy question 2 and 3 to one question with case differentiation
-  export class LymeTherapy3 extends Item {
+ class LymeTherapy3 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LymeTher3');
@@ -510,8 +494,12 @@ export class LymeDiagnosis7 extends Item {
     }
   }
   
+//TODO: transfer to diagnosis and therapy and merge with lyme questions
+  class LymeTherapy4 extends Item {
 
-  export class LymeTherapy4 extends Item {
+    optionKeys = {
+        nameOfOption: 'a'
+     }
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LymeTher4');
@@ -549,7 +537,7 @@ export class LymeDiagnosis7 extends Item {
 
   
 
-  export class LymeTherapy5 extends Item {
+  class LymeTherapy5 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LymeTher5');
