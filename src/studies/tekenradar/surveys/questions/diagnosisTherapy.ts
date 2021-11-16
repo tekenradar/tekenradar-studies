@@ -89,7 +89,7 @@ class FormerLymeTherapy1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Is er een antibiotica kuur verstrekt voor deze erythema migrans of andere uiting van \'de ziekte van Lyme\'?'],
+        ['nl', 'Heb je een antibiotica kuur gekregen voor deze eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
       ]),
       responseOptions: [
         {
