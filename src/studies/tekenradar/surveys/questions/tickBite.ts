@@ -6,7 +6,10 @@ import { Residence, Gender } from './demographie';
 import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
 
 
-export class TickBiteGroup extends Group {
+
+
+
+export class TickBiteOnlyGroup extends Group {
 
     Q1: EnvironmentTickBite;
     Q2: ActivityTickBite;
@@ -35,7 +38,7 @@ export class TickBiteGroup extends Group {
 
 
     constructor(parentKey: string) {
-        super(parentKey, 'TBG');
+        super(parentKey, 'TBOnlyG');
 
         this.Q1 = new EnvironmentTickBite(this.key, false);
         this.Q2 = new ActivityTickBite(this.key, false);
@@ -104,6 +107,62 @@ export class TickBiteGroup extends Group {
         this.addItem(this.G17_19.get());
         
         this.addItem(this.Q20.get());
+        this.addPageBreak();
+
+
+    }
+}
+
+
+
+export class TickBiteOtherGroup extends Group {
+
+     //TODO: inital question and inital text
+     Q1: EnvironmentTickBite;
+     Q2: ActivityTickBite;
+     Q3: PositionTickBite;
+     Q4: NumberTickBite;
+     Q5: LocationBodyTickBite;
+ 
+     //RemoveTick1 is not part of surveys from other groups
+     Q6: RemoveTick2;
+     Q7: RemoveTick3;
+     Q8: RemoveTick4;
+ 
+     Q9: DurationTickBite;
+
+
+
+    constructor(parentKey: string) {
+        super(parentKey, 'TBOtherG');
+
+        this.Q1 = new EnvironmentTickBite(this.key, false);
+        this.Q2 = new ActivityTickBite(this.key, false);
+        this.Q3 = new PositionTickBite(this.key, false);
+        this.Q4 = new NumberTickBite(this.key, false);
+        this.Q5 = new LocationBodyTickBite(this.key, false);
+        
+        this.Q6 = new RemoveTick2(this.key, false);
+        this.Q7 = new RemoveTick3(this.key,false);
+        this.Q8 = new RemoveTick4(this.key, false);
+
+        this.Q9 = new DurationTickBite(this.key,false)
+
+    }
+
+    buildGroup() {
+
+        this.addItem(this.Q1.get());
+        this.addItem(this.Q2.get());
+        this.addItem(this.Q3.get());
+        this.addPageBreak();
+
+        this.addItem(this.Q4.get());
+        this.addItem(this.Q5.get());
+        this.addItem(this.Q6.get());
+        this.addItem(this.Q7.get());
+        this.addItem(this.Q8.get());
+        this.addItem(this.Q9.get());
         this.addPageBreak();
 
 
