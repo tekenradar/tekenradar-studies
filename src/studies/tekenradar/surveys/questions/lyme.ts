@@ -515,7 +515,7 @@ class LymeDiagnosis7 extends Item {
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ['nl', 'Ben je reeds met de antibioticakuur gestart?'],
+          ['nl', 'Ben je al met de antibioticakuur gestart?'],
         ]),
         responseOptions: [
           {
