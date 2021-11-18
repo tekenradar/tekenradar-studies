@@ -1,5 +1,4 @@
 
-//import { SurveyItemGenerators } from '../../../../case-editor/utils/question-type-generator';
 import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
@@ -49,7 +48,8 @@ class PreviousTickBites1 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new Map([//TODO bold text "in de afgelopen 5 jaar" ?
+            //TODO bold text "in de afgelopen 5 jaar" ?
+            questionText: new Map([
                 ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 5 jaar opgemerkt?'],
             ]),
             responseOptions: [
