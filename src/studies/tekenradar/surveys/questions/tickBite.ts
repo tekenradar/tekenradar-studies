@@ -4,6 +4,7 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
 import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { FeverGroup } from './fever';
 
 
 
@@ -37,7 +38,7 @@ export class TickBiteOnlyGroup extends Group {
 
 
 
-    constructor(parentKey: string) {
+    constructor(parentKey: string,isRequired?: boolean) {
         super(parentKey, 'TBOnlyG');
 
         this.Q1 = new EnvironmentTickBite(this.key, false);
@@ -131,9 +132,12 @@ export class TickBiteOtherGroup extends Group {
  
      Q9: DurationTickBite;
 
+     Q10F: DoctorTickBite1;
+     Q11F: DoctorTickBite2;
 
 
-    constructor(parentKey: string) {
+
+    constructor(parentKey: string,isRequired?: boolean) {
         super(parentKey, 'TBOtherG');
 
         this.Q1 = new EnvironmentTickBite(this.key, false);
@@ -146,7 +150,11 @@ export class TickBiteOtherGroup extends Group {
         this.Q7 = new RemoveTick3(this.key,false);
         this.Q8 = new RemoveTick4(this.key, false);
 
-        this.Q9 = new DurationTickBite(this.key,false)
+        this.Q9 = new DurationTickBite(this.key,false);
+
+        this.Q10F = new DoctorTickBite1(this.key, false);
+        this.Q11F = new DoctorTickBite2(this.key, false);
+
 
     }
 
@@ -165,12 +173,18 @@ export class TickBiteOtherGroup extends Group {
         this.addItem(this.Q9.get());
         this.addPageBreak();
 
+        //TDOD: is this the recommended way to add fever group questions in this group?
+        if (this.isPartOf('FeverG')) {
+            this.addItem(this.Q10F.get()),
+            this.addItem(this.Q11F.get()) 
+        }
+
 
     }
 }
 
 
-export class EnvironmentTickBite extends Item {
+class EnvironmentTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EnvTB');
@@ -249,7 +263,7 @@ export class EnvironmentTickBite extends Item {
 }
 
 
-export class ActivityTickBite extends Item {
+class ActivityTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'ActTB');
@@ -328,7 +342,7 @@ export class ActivityTickBite extends Item {
 }
 
 
-export class PositionTickBite extends Item {
+class PositionTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'PosTB');
@@ -380,7 +394,7 @@ export class PositionTickBite extends Item {
 }
 
 
-export class NumberTickBite extends Item {
+class NumberTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'NumTB');
@@ -412,7 +426,7 @@ export class NumberTickBite extends Item {
 }
 
 
-export class LocationBodyTickBite extends Item {
+class LocationBodyTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LocTB');
@@ -476,7 +490,7 @@ class RemoveTick1 extends Item {
 }
 
 
-export class RemoveTick2 extends Item {
+class RemoveTick2 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT2');
@@ -513,7 +527,7 @@ export class RemoveTick2 extends Item {
 }
 
 
-export class RemoveTick3 extends Item {
+class RemoveTick3 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT3');
@@ -564,7 +578,7 @@ export class RemoveTick3 extends Item {
 }
 
 
-export class RemoveTick4 extends Item {
+class RemoveTick4 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT4');
@@ -737,7 +751,7 @@ class DateTickBite extends Item {
 }
 
 
-export class DurationTickBite extends Item {
+class DurationTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'DurTB');
