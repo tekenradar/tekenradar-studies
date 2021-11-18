@@ -1,10 +1,9 @@
 import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems, SurveyEngine } from 'case-editor-tools/surveys';
-import { EnvironmentTickBite, ActivityTickBite, PositionTickBite, NumberTickBite, LocationBodyTickBite, RemoveTick2, RemoveTick3, RemoveTick4, DurationTickBite, TickBiteOtherGroup } from './tickBite';
+import { TickBiteOtherGroup } from './tickBite';
 import { PreviousTickBitesGroup } from './prevTickBites'
-import { FormerLymeGroup } from './diagnosisTherapy'
-import { LymeDiagnosis1, LymeDiagnosis2 } from './lyme'
+import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2 } from './diagnosisTherapy'
 
 
 
@@ -12,7 +11,7 @@ export class ChronicGroup extends Group {
 
     G1_9: TickBiteOtherGroup
 
-    //chronic questions here
+    //TODO: Lyme Questions as group in diagnosisTherpay.ts???
     Q10: LymeDiagnosis1;
     Q11: LymeDiagnosis2;
 
