@@ -7,7 +7,7 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 
 
 
-export class EM1 extends Item {
+class EM1 extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -45,7 +45,7 @@ export class EM1 extends Item {
 }
 
 
-export class EM2 extends Item {
+class EM2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM2');
@@ -83,7 +83,7 @@ export class EM2 extends Item {
   
 
   
-export class EM3 extends Item {
+class EM3 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM3');
@@ -115,7 +115,7 @@ export class EM3 extends Item {
   
   
 
-export class EM4 extends Item {
+class EM4 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM4');
@@ -202,7 +202,7 @@ export class EM4 extends Item {
   }
   
   
-export class EM6 extends Item {
+class EM6 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM6');
