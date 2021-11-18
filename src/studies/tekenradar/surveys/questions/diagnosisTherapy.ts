@@ -154,7 +154,7 @@ class FormerLymeTherapy2 extends Item {
 }
 
 
-
+//TODO: maybe transfer to tickbite file
 export class GeneralTherapy extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -190,3 +190,130 @@ export class GeneralTherapy extends Item {
     })
   }
 }
+
+
+export class LymeDiagnosis1 extends Item {
+
+    optionKeys = {
+        nameOfOption: 'a'
+     }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LD1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Is de ziekte van Lyme vastgesteld door een arts?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+
+export class LymeDiagnosis2 extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'LD2');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.singleChoice({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: new Map([
+          ['nl', 'Welke arts heeft de ziekte van Lyme bij je vastgesteld?'],
+        ]),
+        responseOptions: [
+          {
+            key: 'a', role: 'option',
+            content: new Map([
+              ["nl", "Huisarts"],
+            ])
+          },
+          {
+            key: 'b', role: 'option',
+            content: new Map([
+              ["nl", "Bedrijfsarts"],
+            ])
+          },
+          {
+            key: 'c', role: 'option',
+            content: new Map([
+              ["nl", "Internist"],
+            ])
+          },
+          {
+            key: 'd', role: 'option',
+            content: new Map([
+              ["nl", "Neuroloog"],
+            ])
+          },
+          {
+            key: 'e', role: 'option',
+            content: new Map([
+              ["nl", "Reumatoloog"],
+            ])
+          },
+          {
+            key: 'f', role: 'option',
+            content: new Map([
+              ["nl", "Dermatoloog"],
+            ])
+          },
+          {
+            key: 'g', role: 'option',
+            content: new Map([
+              ["nl", "Cardioloog"],
+            ])
+          },
+          {
+            key: 'h', role: 'option',
+            content: new Map([
+              ["nl", "Oogarts"],
+            ])
+          },
+          {
+            key: 'i', role: 'input',
+            content: new Map([
+              ["nl", "Andere arts namelijk "],
+            ])
+          },
+          {
+            key: 'j', role: 'option',
+            content: new Map([
+              ["nl", "Weet ik niet"],
+            ])
+          },
+        ]
+      })
+    }
+  }
