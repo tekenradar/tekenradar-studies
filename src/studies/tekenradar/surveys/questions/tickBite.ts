@@ -4,8 +4,6 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
 import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
-import { FeverGroup } from './fever';
-
 
 
 
@@ -181,6 +179,56 @@ export class TickBiteOtherGroup extends Group {
 
 
     }
+}
+
+
+
+class RecognisedTickBite extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'RecTB');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de erythema migrans of andere ziekte van Lyme die je nu meldt hebt gekregen, opgemerkt?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+        {//TODO: Pop up only shown if b or c is selected?
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"],
+          ])
+        },
+        {//TODO: correct date format and text after date here
+          key: 'c', role: 'date',
+          content: new Map([
+            ["nl", "Ja, de datum dat ik de tekenbeet heb opgelopen is ..........(dag/maand/jaar) bij benadering?"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Onbekend"],
+          ])
+        }
+      ]
+    })
+  }
 }
 
 
@@ -858,7 +906,7 @@ class DoctorTickBite2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Welke arts is er bezocht? (meerdere antwoorden mogelijk)'],
+        ['nl', 'Bij welke arts ben je toen geweest? (meerdere antwoorden mogelijk)'],
       ]),
       responseOptions: [
         {
@@ -874,7 +922,13 @@ class DoctorTickBite2 extends Item {
           ])
         },
         {
-          key: 'c', role: 'input',
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Specialist"],
+          ])
+        },
+        {
+          key: 'd', role: 'input',
           content: new Map([
             ["nl", "Ander soort arts, namelijk:"],
           ])
