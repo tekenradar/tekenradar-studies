@@ -48,10 +48,14 @@ export class FeverGroup extends Group {
         this.Q17 = new FeverSymptom2(this.key, required, Q16condition);
         this.Q18 = new FeverSymptom3(this.key, required, Q16condition);
         const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.nameOfOption);
-        this.Q19 = new FeverSymptom4(this.key, required, Q18condition); //TODO: also Q16condition here
+        this.Q19 = new FeverSymptom4(this.key, required, Q18condition); 
         const Q19condition = SurveyEngine.singleChoice.any(this.Q19.key, this.Q19.optionKeys.nameOfOption);
-        this.Q20 = new FeverSymptom5(this.key, required, Q19condition); //TODO: also Q16condition and Q18condition here
+        this.Q20 = new FeverSymptom5(this.key, required, Q19condition); 
         const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.nameOfOption);
+
+
+        //SurveyEngine.logic.or(Q15condition,Q15condition);
+
         this.Q21 = new FeverSymptom6(this.key, required, Q20condition); //TODO: also Q16condition and Q19condition here
         this.Q22 = new FeverSymptom7(this.key, required, Q20condition); //TODO: also Q16condition and Q19condition here
 
@@ -429,7 +433,7 @@ class FeverSymptom7 extends Item {
     noResponseLabel: new Map([
         ["nl", "Sleep de knop naar de juiste temperatuur."],
     ]),
-    //TODO: set default value 37.0
+    //TODO: set default value 37.0 --> better no default value to control if input has been made
     min: 35.0,
     max: 42.0,
     stepSize: 0.1,
