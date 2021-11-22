@@ -8,6 +8,9 @@ import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2 } from './diagnosisTher
 
 export class LymeGroup extends Group {
 
+    //TODO: tick bite report intro question and condition
+    //TODO: intro text (different than EM/Lyme groups)
+
     G1_9: TickBiteOtherGroup;
 
     //Lyme questions here
@@ -31,36 +34,38 @@ export class LymeGroup extends Group {
 
 
 
-    constructor(parentKey: string) {
+    constructor(parentKey: string, isRequired?: boolean) {
         super(parentKey, 'LymeG');
 
-        this.G1_9 = new TickBiteOtherGroup(this.key);
+        const required = isRequired !== undefined ? isRequired : false;
 
-        this.Q10 = new LymeDiagnosis1(this.key,false);
+        this.G1_9 = new TickBiteOtherGroup(this.key,isRequired);
+
+        this.Q10 = new LymeDiagnosis1(this.key,required);
         const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.nameOfOption);
-        this.Q11 = new LymeDiagnosis2(this.key,false,Q10condition);
-        this.Q12 = new LymeDiagnosis3(this.key,false);
-        this.Q13 = new LymeDiagnosis4(this.key,false);
-        this.Q14 = new LymeDiagnosis5(this.key,false,Q10condition);
+        this.Q11 = new LymeDiagnosis2(this.key,required,Q10condition);
+        this.Q12 = new LymeDiagnosis3(this.key,required);
+        this.Q13 = new LymeDiagnosis4(this.key,required);
+        this.Q14 = new LymeDiagnosis5(this.key,required,Q10condition);
 
-        this.Q15 = new LymeDiagnosis6(this.key,false);
+        this.Q15 = new LymeDiagnosis6(this.key,required);
         const Q15condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
-        this.Q16 = new LymeDiagnosis7(this.key,false,Q15condition);
+        this.Q16 = new LymeDiagnosis7(this.key,required,Q15condition);
 
-        this.Q17 = new LymeTherapy1(this.key,false);
+        this.Q17 = new LymeTherapy1(this.key,required);
         const Q17conditionTabletten = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten);
         const Q17conditionInfuus    = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionInfuus);
         const Q17conditionAnyMed    = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten, this.Q17.optionKeys.nameOfOptionInfuus);
-        this.Q18 = new LymeTherapy2(this.key,false,Q17conditionTabletten);
-        this.Q19 = new LymeTherapy3(this.key,false,Q17conditionInfuus);
+        this.Q18 = new LymeTherapy2(this.key,required,Q17conditionTabletten);
+        this.Q19 = new LymeTherapy3(this.key,required,Q17conditionInfuus);
 
 
-        this.Q20 = new LymeTherapy4(this.key,false, Q17conditionAnyMed);
+        this.Q20 = new LymeTherapy4(this.key,required, Q17conditionAnyMed);
         const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.nameOfOption);
-        this.Q21 = new LymeTherapy5(this.key,false, Q20condition);
+        this.Q21 = new LymeTherapy5(this.key,required, Q20condition);
 
-        this.G22_24 = new FormerLymeGroup(this.key);
-        this.G25_26 = new PreviousTickBitesGroup(this.key);
+        this.G22_24 = new FormerLymeGroup(this.key,isRequired);
+        this.G25_26 = new PreviousTickBitesGroup(this.key,isRequired);
 
     }
 
@@ -92,7 +97,7 @@ export class LymeGroup extends Group {
     }
 }
 
-//TODO. ther class name?
+
   class LymeDiagnosis3 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -135,16 +140,19 @@ class LymeDiagnosis4 extends Item {
         ]),
         responseOptions: [
           {//TODO: is this correct dutch in the first option?
+            //(bij benadering stands after date input)
             key: 'a', role: 'date',
             content: new Map([
               ["nl", "Datum bij benadering"],
-            ])
+            ]),
+            disabled: SurveyEngine.multipleChoice.any(this.itemKey,'b')
           },
-          {//disable b if a is selected
+          {//disable b if a is selected and disable a if b is selected
             key: 'b', role: 'option',
             content: new Map([
               ["nl", "Weet niet"],
-            ])
+            ]),
+            disabled: SurveyEngine.multipleChoice.any(this.itemKey,'a')
           },
           {
             key: 'c', role: 'input',
@@ -178,6 +186,7 @@ class LymeDiagnosis5 extends Item {
         ]),
         responseOptions: [
           {//TODO: is this correct dutch in the first option?
+            //(bij benadering stands after date input)
             key: 'a', role: 'date',
             content: new Map([
               ["nl", "Datum bij benadering"],
@@ -215,7 +224,7 @@ class LymeDiagnosis6 extends Item {
         isRequired: this.isRequired,
         condition: this.condition,
         questionText: new Map([
-          ['nl', 'Heb je op dit moment nog klachten door  de ziekte van Lyme?'],
+          ['nl', 'Heb je op dit moment nog klachten door de ziekte van Lyme?'],
         ]),
         responseOptions: [
           {
@@ -330,7 +339,8 @@ class LymeDiagnosis7 extends Item {
       this.isRequired = isRequired;
       this.condition = condition;
     }
-    //TODO: multiple line of text here
+    //TODO: multiple items with text here
+    //TODO: maybe multiple slots with text input???
     buildItem() {
       return SurveyItems.multilineTextInput({
         parentKey: this.parentKey,
@@ -353,7 +363,8 @@ class LymeDiagnosis7 extends Item {
       this.isRequired = isRequired;
       this.condition = condition;
     }
-    //TODO: multiple line of text here
+    //TODO: multiple items with text here
+    //TODO: maybe multiple slots with text input???
     buildItem() {
       return SurveyItems.multilineTextInput({
         parentKey: this.parentKey,
@@ -367,7 +378,7 @@ class LymeDiagnosis7 extends Item {
     }
   }
   
-//TODO: transfer to diagnosis and therapy and merge with lyme questions
+//TODO: maybe transfer to diagnosis and therapy and merge with lyme questions??
   class LymeTherapy4 extends Item {
 
     optionKeys = {
@@ -419,7 +430,7 @@ class LymeDiagnosis7 extends Item {
       this.condition = condition;
     }
   
-    //TODO: check date input mode
+    //TODO: insert date and time input
     buildItem() {
       return SurveyItems.dateInput({
         parentKey: this.parentKey,
