@@ -32,6 +32,33 @@ export class FormerLymeGroup extends Group {
 }
 
 
+export class LymeDiagnosisGroup extends Group {
+
+  Q1: LymeDiagnosis1;
+  Q2: LymeDiagnosis2;
+
+  
+  constructor(parentKey: string,isRequired?: boolean) {
+      super(parentKey, 'LymeDiagG');
+
+
+      this.Q1 = new LymeDiagnosis1(this.key, false);
+      const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
+      this.Q2 = new LymeDiagnosis2(this.key, false, q1Condition);
+
+  }
+
+  buildGroup() {
+
+      this.addItem(this.Q1.get());
+      this.addItem(this.Q2.get());
+
+  }
+}
+
+
+
+
 class FormerLymeDiagnosis extends Item {
 
     optionKeys = {
@@ -71,6 +98,7 @@ class FormerLymeDiagnosis extends Item {
     })
   }
 }
+
 
 
 class FormerLymeTherapy1 extends Item {
@@ -190,6 +218,7 @@ export class GeneralTherapy extends Item {
     })
   }
 }
+
 
 
 export class LymeDiagnosis1 extends Item {
