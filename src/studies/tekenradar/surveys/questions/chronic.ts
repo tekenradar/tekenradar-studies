@@ -3,17 +3,18 @@ import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems, SurveyEngine } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
 import { PreviousTickBitesGroup } from './prevTickBites'
-import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2 } from './diagnosisTherapy'
+import { LymeDiagnosisGroup } from './diagnosisTherapy'
 
 
 
 export class ChronicGroup extends Group {
 
+  //TODO: tick bite report intro question and condition
+  //TODO: intro text (different than EM/Lyme groups)
+
     G1_9: TickBiteOtherGroup
 
-    //TODO: Lyme Questions as group in diagnosisTherpay.ts???
-    Q10: LymeDiagnosis1;
-    Q11: LymeDiagnosis2;
+    G10_11: LymeDiagnosisGroup;
 
     Q12: ChronicLymeDiagnosis1;
     Q13: ChronicLymeDiagnosis2;
@@ -24,21 +25,21 @@ export class ChronicGroup extends Group {
 
 
 
-    constructor(parentKey: string) {
+    constructor(parentKey: string,isRequired?: boolean) {
         super(parentKey, 'CLG');
 
-        this.G1_9 = new TickBiteOtherGroup(this.key);
+        const required = isRequired !== undefined ? isRequired : false;
 
-        this.Q10 = new LymeDiagnosis1(this.key,false);
-        const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.nameOfOption);
-        this.Q11 = new LymeDiagnosis2(this.key,false,Q10condition);
+        this.G1_9 = new TickBiteOtherGroup(this.key,isRequired);
 
-        this.Q12 = new ChronicLymeDiagnosis1(this.key,false);
-        this.Q13 = new ChronicLymeDiagnosis2(this.key,false);
-        this.Q14 = new ChronicLymeTherapy1(this.key,false);
-        this.Q15 = new ChronicLymeTherapy2(this.key,false);
+        this.G10_11 = new LymeDiagnosisGroup(this.key,isRequired);
+        
+        this.Q12 = new ChronicLymeDiagnosis1(this.key,required);
+        this.Q13 = new ChronicLymeDiagnosis2(this.key,required);
+        this.Q14 = new ChronicLymeTherapy1(this.key,required);
+        this.Q15 = new ChronicLymeTherapy2(this.key,required);
 
-        this.G16_17 = new PreviousTickBitesGroup(this.key);
+        this.G16_17 = new PreviousTickBitesGroup(this.key,isRequired);
 
     }
 
@@ -46,8 +47,7 @@ export class ChronicGroup extends Group {
 
         this.addItem(this.G1_9.get());
 
-        this.addItem(this.Q10.get());
-        this.addItem(this.Q11.get());
+        this.addItem(this.G10_11.get());
         this.addItem(this.Q12.get());
         this.addItem(this.Q13.get());
         this.addItem(this.Q14.get());
