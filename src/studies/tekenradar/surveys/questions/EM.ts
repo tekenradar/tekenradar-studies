@@ -1,7 +1,35 @@
 import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { TickBiteOtherGroup } from './tickBite';
 
+
+
+export class EMGroup extends Group {
+
+  //TODO: tick bite report intro question and condition
+  //TODO: intro text (different than EM/Lyme groups)
+
+  G1_9: TickBiteOtherGroup;
+
+
+
+  constructor(parentKey: string, isRequired?: boolean) {
+      super(parentKey, 'EMG');
+
+      this.G1_9 = new TickBiteOtherGroup(this.key,isRequired);
+
+      
+  }
+
+  buildGroup() {
+
+    this.addItem(this.G1_9.get());
+
+    
+
+  }
+}
 
 
 
@@ -27,7 +55,8 @@ class EM1 extends Item {
         ['nl', 'Wanneer ontwikkelde zich de huidige erythema migrans die je nu meldt?'],
       ]),
       responseOptions: [
-        {
+        {//TODO1: correct date mode and 'bij benadering?' after date input.
+          //TODO2: exclude patients with date more than 3 months ago?
           key: 'a', role: 'date',
           content: new Map([
             ["nl", "Datum dat de erythema migrans zich ontwikkelde:"],
