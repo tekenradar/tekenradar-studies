@@ -14,11 +14,13 @@ export class FormerLymeGroup extends Group {
     constructor(parentKey: string,isRequired?: boolean) {
         super(parentKey, 'FLG');
 
+        const required = isRequired !== undefined ? isRequired : false;
 
-        this.Q1 = new FormerLymeDiagnosis(this.key, false);
+
+        this.Q1 = new FormerLymeDiagnosis(this.key, required);
         const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
-        this.Q2 = new FormerLymeTherapy1(this.key, false, q1Condition);
-        this.Q3 = new FormerLymeTherapy2(this.key, false, q1Condition);
+        this.Q2 = new FormerLymeTherapy1(this.key, required, q1Condition);
+        this.Q3 = new FormerLymeTherapy2(this.key, required, q1Condition);
 
     }
 
@@ -41,10 +43,11 @@ export class LymeDiagnosisGroup extends Group {
   constructor(parentKey: string,isRequired?: boolean) {
       super(parentKey, 'LymeDiagG');
 
+      const required = isRequired !== undefined ? isRequired : false;
 
-      this.Q1 = new LymeDiagnosis1(this.key, false);
+      this.Q1 = new LymeDiagnosis1(this.key, required);
       const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
-      this.Q2 = new LymeDiagnosis2(this.key, false, q1Condition);
+      this.Q2 = new LymeDiagnosis2(this.key, required, q1Condition);
 
   }
 
@@ -208,7 +211,7 @@ export class GeneralTherapy extends Item {
             ["nl", "Nee"],
           ])
         },
-        {//TODO: insert dropbox
+        {//TODO: insert dropbox and text
           key: 'b', role: 'input',
           content: new Map([
             ["nl", "Ja, namelijk (bijvoorbeeld antibiotica, paracetemol, etc): Medicijn: .............select box with these options: Tegen erythema migrans/ziekte van Lyme ; Tegen iets anders dan de ziekte van Lyme"],
