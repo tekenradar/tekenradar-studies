@@ -36,7 +36,7 @@ export class Age extends Item {
   }
 }
 
-//free text input
+
 export class Residence extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
