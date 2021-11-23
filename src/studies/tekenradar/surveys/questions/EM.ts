@@ -34,7 +34,7 @@ export class EMGroup extends Group {
 
 
 
-
+//TODO: change name of questions
 class EM1 extends Item {
 
 
@@ -121,8 +121,8 @@ class EM3 extends Item {
       this.condition = condition;
     }
   
-    buildItem() {//TODO Syntax dropdown
-      return SurveyItems.dropDown({
+    buildItem() {//NOTE: input instead of dropdown
+      return SurveyItems.numericInput({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
         isRequired: this.isRequired,
@@ -130,14 +130,16 @@ class EM3 extends Item {
         questionText: new Map([
           ['nl', 'Hoe groot is de erythema migrans? Meet hiervoor de doorsnede van de vlek, zie het voorbeeld op de foto. Als de EM niet meer zichtbaar is, maak dan een zo goed mogelijke schatting.'],
         ]),
-        responseOptions: [
-          {
-            key: 'a', role: 'option',
-            content: new Map([
-              ["nl", "1:100 cm"],
-            ])
-          },
-        ]
+        titleClassName: 'sticky-top',
+        inputMaxWidth: '80px',
+        content: new Map([
+          ['nl', 'cm']
+        ]),
+        contentBehindInput: true,
+        componentProperties: {
+         min: 0,
+         max: 100
+        }
       })
     }
   }
