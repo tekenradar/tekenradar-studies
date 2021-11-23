@@ -10,6 +10,7 @@ import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
 
 export class TickBiteOnlyGroup extends Group {
 
+  //TODO: intro text here
     Q1: EnvironmentTickBite;
     Q2: ActivityTickBite;
     Q3: PositionTickBite;
@@ -39,37 +40,39 @@ export class TickBiteOnlyGroup extends Group {
     constructor(parentKey: string,isRequired?: boolean) {
         super(parentKey, 'TBOnlyG');
 
-        this.Q1 = new EnvironmentTickBite(this.key, false);
-        this.Q2 = new ActivityTickBite(this.key, false);
-        this.Q3 = new PositionTickBite(this.key, false);
-        this.Q4 = new NumberTickBite(this.key, false);
-        this.Q5 = new LocationBodyTickBite(this.key, false);
+        const required = isRequired !== undefined ? isRequired : false;
+
+        this.Q1 = new EnvironmentTickBite(this.key, required);
+        this.Q2 = new ActivityTickBite(this.key, required);
+        this.Q3 = new PositionTickBite(this.key, required);
+        this.Q4 = new NumberTickBite(this.key, required);
+        this.Q5 = new LocationBodyTickBite(this.key, required);
         
-        this.Q6 = new RemoveTick1(this.key,false);
+        this.Q6 = new RemoveTick1(this.key,required);
         const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
-        this.Q7 = new RemoveTick2(this.key, false, q6Condition);
-        this.Q8 = new RemoveTick3(this.key,false, q6Condition);
-        this.Q9 = new RemoveTick4(this.key, false, q6Condition);
+        this.Q7 = new RemoveTick2(this.key, required, q6Condition);
+        this.Q8 = new RemoveTick3(this.key,required, q6Condition);
+        this.Q9 = new RemoveTick4(this.key, required, q6Condition);
 
-        this.G10_11 = new PreviousTickBitesGroup(this.key)
+        this.G10_11 = new PreviousTickBitesGroup(this.key, isRequired);
 
-        this.Q12 = new ReportedTickBites(this.key, false);
+        this.Q12 = new ReportedTickBites(this.key, required);
 
         //TDOD If the respondent is not logged in ask p1 and p2, 
         //if he is logged in, skip these two questions here as they 
         //will be asked lateron in de questionaire (chapter S-A)
-        this.P1 = new Residence(this.key,false);
-        this.P2 = new Gender(this.key, false);
+        this.P1 = new Residence(this.key,required);
+        this.P2 = new Gender(this.key, required);
 
-        this.Q13 = new DateTickBite(this.key, false);
-        this.Q14 = new DurationTickBite(this.key, false);
-        this.Q15 = new DoctorTickBite1(this.key, false);
+        this.Q13 = new DateTickBite(this.key, required);
+        this.Q14 = new DurationTickBite(this.key, required);
+        this.Q15 = new DoctorTickBite1(this.key, required);
         const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
-        this.Q16 = new DoctorTickBite2(this.key, false, q15Condition);
+        this.Q16 = new DoctorTickBite2(this.key, required, q15Condition);
 
-        this.G17_19 = new FormerLymeGroup(this.key, false);
+        this.G17_19 = new FormerLymeGroup(this.key, isRequired);
         
-        this.Q20 = new GeneralTherapy(this.key, false);
+        this.Q20 = new GeneralTherapy(this.key, required);
 
     }
 
@@ -116,14 +119,16 @@ export class TickBiteOnlyGroup extends Group {
 
 export class TickBiteOtherGroup extends Group {
 
-     //TODO: inital question and inital text
+    Start: RecognisedTickBite;
+
+     //TODO: inital text (fever has special text)
      Q1: EnvironmentTickBite;
      Q2: ActivityTickBite;
      Q3: PositionTickBite;
      Q4: NumberTickBite;
      Q5: LocationBodyTickBite;
  
-     //RemoveTick1 is not part of surveys from other groups
+     //Note: RemoveTick1 is not part of surveys from other groups than TB
      Q6: RemoveTick2;
      Q7: RemoveTick3;
      Q8: RemoveTick4;
@@ -138,26 +143,30 @@ export class TickBiteOtherGroup extends Group {
     constructor(parentKey: string,isRequired?: boolean) {
         super(parentKey, 'TBOtherG');
 
-        this.Q1 = new EnvironmentTickBite(this.key, false);
-        this.Q2 = new ActivityTickBite(this.key, false);
-        this.Q3 = new PositionTickBite(this.key, false);
-        this.Q4 = new NumberTickBite(this.key, false);
-        this.Q5 = new LocationBodyTickBite(this.key, false);
+        const required = isRequired !== undefined ? isRequired : false;
+
+        this.Start = new RecognisedTickBite(this.key,required);
+        this.Q1 = new EnvironmentTickBite(this.key, required);
+        this.Q2 = new ActivityTickBite(this.key, required);
+        this.Q3 = new PositionTickBite(this.key, required);
+        this.Q4 = new NumberTickBite(this.key, required);
+        this.Q5 = new LocationBodyTickBite(this.key, required);
         
-        this.Q6 = new RemoveTick2(this.key, false);
-        this.Q7 = new RemoveTick3(this.key,false);
-        this.Q8 = new RemoveTick4(this.key, false);
+        this.Q6 = new RemoveTick2(this.key, required);
+        this.Q7 = new RemoveTick3(this.key, required);
+        this.Q8 = new RemoveTick4(this.key, required);
 
-        this.Q9 = new DurationTickBite(this.key,false);
+        this.Q9 = new DurationTickBite(this.key, required);
 
-        this.Q10F = new DoctorTickBite1(this.key, false);
-        this.Q11F = new DoctorTickBite2(this.key, false);
+        this.Q10F = new DoctorTickBite1(this.key, required);
+        this.Q11F = new DoctorTickBite2(this.key, required);
 
 
     }
 
     buildGroup() {
 
+        this.addItem(this.Start.get());
         this.addItem(this.Q1.get());
         this.addItem(this.Q2.get());
         this.addItem(this.Q3.get());
@@ -180,7 +189,6 @@ export class TickBiteOtherGroup extends Group {
 
     }
 }
-
 
 
 class RecognisedTickBite extends Item {
@@ -450,7 +458,7 @@ class NumberTickBite extends Item {
     this.isRequired = isRequired;
     this.condition = condition;
   }
-  //TODO: select box here
+  //TODO: alternative select box here???
   buildItem() {
     return SurveyItems.numericInput({
       parentKey: this.parentKey,
@@ -459,15 +467,15 @@ class NumberTickBite extends Item {
       condition: this.condition,
       questionText: new Map([
         ['nl', 'Door hoeveel teken ben je nu gebeten?'],
-      ]),
+      ]),//TODO: right way for default value?
       content: new Map([
-        ['nl', '']
+        ['nl', '1']
       ]),
       //TODO: default preset to 1
       contentBehindInput: true,
       componentProperties: {
         min: 1,
-        max: 20
+        max: 20,
       }
     })
   }
