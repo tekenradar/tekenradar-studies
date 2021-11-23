@@ -6,9 +6,11 @@ import { Age } from './demographie';
 
 export class PDiffGroup extends Group {
 
-  isRequired: boolean;
+  //TODO: insert intro text
+
   Q1: DetectTickBite;
   Q2: FeverTickBite;
+  //TODO: text here
   Q3: EMTickBite;
   Q4: LymeTickBite1;
   Q5: LymeTickBite2;
@@ -16,21 +18,22 @@ export class PDiffGroup extends Group {
   Q7: Age;
 
 
-  constructor(parentKey: string) {
+  constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'PDiffG');
-    this.isRequired = false;
 
-    this.Q1 = new DetectTickBite(this.key, this.isRequired);
+     const required = isRequired !== undefined ? isRequired : false;
+
+    this.Q1 = new DetectTickBite(this.key, required);
     const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
 
-    this.Q2 = new FeverTickBite(this.key, this.isRequired, q1Condition);
-    this.Q3 = new EMTickBite(this.key, this.isRequired);
-    this.Q4 = new LymeTickBite1(this.key, this.isRequired);
+    this.Q2 = new FeverTickBite(this.key, required, q1Condition);
+    this.Q3 = new EMTickBite(this.key, required);
+    this.Q4 = new LymeTickBite1(this.key, required);
     const q4Condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
 
-    this.Q5 = new LymeTickBite2(this.key, this.isRequired, q4Condition);
-    this.Q6 = new MedicationLyme(this.key, this.isRequired, q4Condition);
-    this.Q7 = new Age(this.key, this.isRequired);
+    this.Q5 = new LymeTickBite2(this.key, required, q4Condition);
+    this.Q6 = new MedicationLyme(this.key, required, q4Condition);
+    this.Q7 = new Age(this.key, required);
 
   }
 
@@ -283,7 +286,7 @@ class MedicationLyme extends Item {
       responseOptions: [
         {
           //TODO: don't make filling in date mandatory to avoid getting stuck due to forgotten date
-          //TODO: date input mode
+          //TODO: date input mode and text after input
           key: 'a', role: 'dateInput',
           content: new Map([
             ["nl", "Ja, ik ben gestart op"],
