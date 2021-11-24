@@ -283,12 +283,48 @@ class LymeDiagnosis7 extends Item {
   
 
 
-  class LymeTherapy1 extends Item {
+  export class LymeTherapy1 extends Item {
 
     optionKeys = {
         nameOfOptionTabletten: 'a',
         nameOfOptionInfuus: 'b'
      }
+
+     responseOptionLyme = [
+      {
+        key: 'a', role: 'option',
+        content:  new Map([
+          ["nl", "Ja, tabletten antibiotica"],
+        ])
+      },
+      {
+        key: 'b', role: 'option',
+        content: new Map([
+          ["nl", "Ja, antibiotica via een infuus"],
+        ])
+      },
+      {
+        key: 'c', role: 'input',
+        content: new Map([
+          ["nl", "Nee, omdat:"],
+        ])
+      },
+    ]
+
+    responseOptionEM = [
+      {
+        key: 'a', role: 'option',
+        content:  new Map([
+          ["nl", "Ja"],
+        ])
+      },
+      {
+        key: 'b', role: 'input',
+        content: new Map([
+          ["nl", "Nee, omdat:"],
+        ])
+      },
+    ] 
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LymeTher1');
@@ -306,26 +342,7 @@ class LymeDiagnosis7 extends Item {
         questionText: new Map([
           ['nl', 'Heb je antibiotica voorgeschreven gekregen van je arts?'],
         ]),
-        responseOptions: [
-          {
-            key: 'a', role: 'option',
-            content: new Map([
-              ["nl", "Ja, tabletten antibiotica"],
-            ])
-          },
-          {
-            key: 'b', role: 'option',
-            content: new Map([
-              ["nl", "Ja, antibiotica via een infuus"],
-            ])
-          },
-          {
-            key: 'c', role: 'input',
-            content: new Map([
-              ["nl", "Nee, omdat:"],
-            ])
-          },
-        ]
+        responseOptions: this.isPartOf('LymeG') ? this.responseOptionLyme : this.responseOptionEM
       })
     }
   }
@@ -378,7 +395,7 @@ class LymeDiagnosis7 extends Item {
     }
   }
   
-//TODO: maybe transfer to diagnosis and therapy and merge with lyme questions??
+//TODO: transfer to diagnosis and therapy and merge with lyme questions??
   class LymeTherapy4 extends Item {
 
     optionKeys = {
@@ -421,7 +438,14 @@ class LymeDiagnosis7 extends Item {
 
   
 
-  class LymeTherapy5 extends Item {
+  export class LymeTherapy5 extends Item {
+
+    qTextLyme = new Map([[
+      'nl', 'Wanneer heb je de eerste tablet antibiotica ingenomen of ben je gestart met het infuus?'
+    ]]);
+    qTextEM = new Map([[
+      'nl', 'Wanneer heb je de eerste pil antibiotica ingenomen?'
+    ]]);
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LymeTher5');
@@ -441,9 +465,7 @@ class LymeDiagnosis7 extends Item {
             placeholderText: new Map([
                 ["nl", "dd-mm-jjjj"],
             ]),
-        questionText: new Map([
-          ['nl', 'Wanneer heb je de eerste tablet antibiotica ingenomen of ben je gestart met het infuus?'],
-        ]),
+        questionText: this.isPartOf('LymeG')? this.qTextLyme : this.qTextEM,
       })
     }
   }
