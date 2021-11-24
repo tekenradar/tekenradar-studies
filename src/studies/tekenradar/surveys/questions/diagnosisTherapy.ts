@@ -349,3 +349,52 @@ export class LymeDiagnosis2 extends Item {
       })
     }
   }
+
+  
+export class Doctor extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Doc');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Bij welke arts ben je toen geweest? (meerdere antwoorden mogelijk)'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Huisarts"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Bedrijfsarts"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Specialist"],
+          ])
+        },
+        {
+          key: 'd', role: 'input',
+          content: new Map([
+            ["nl", "Ander soort arts, namelijk:"],
+          ])
+        },
+      ]
+    })
+  }
+}
