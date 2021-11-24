@@ -3,7 +3,7 @@ import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
-import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
 
 
 
@@ -28,8 +28,8 @@ export class TickBiteOnlyGroup extends Group {
 
     Q13: DateTickBite;
     Q14: DurationTickBite;
-    Q15: DoctorTickBite1;
-    Q16: DoctorTickBite2;
+    Q15: DoctorTickBite;
+    Q16: Doctor;
 
     G17_19: FormerLymeGroup;
     
@@ -66,9 +66,9 @@ export class TickBiteOnlyGroup extends Group {
 
         this.Q13 = new DateTickBite(this.key, required);
         this.Q14 = new DurationTickBite(this.key, required);
-        this.Q15 = new DoctorTickBite1(this.key, required);
+        this.Q15 = new DoctorTickBite(this.key, required);
         const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
-        this.Q16 = new DoctorTickBite2(this.key, required, q15Condition);
+        this.Q16 = new Doctor(this.key, required, q15Condition);
 
         this.G17_19 = new FormerLymeGroup(this.key, isRequired);
         
@@ -135,8 +135,8 @@ export class TickBiteOtherGroup extends Group {
  
      Q9: DurationTickBite;
 
-     Q10F: DoctorTickBite1;
-     Q11F: DoctorTickBite2;
+     Q10F: DoctorTickBite;
+     Q11F: Doctor;
 
 
 
@@ -158,8 +158,8 @@ export class TickBiteOtherGroup extends Group {
 
         this.Q9 = new DurationTickBite(this.key, required);
 
-        this.Q10F = new DoctorTickBite1(this.key, required);
-        this.Q11F = new DoctorTickBite2(this.key, required);
+        this.Q10F = new DoctorTickBite(this.key, required);
+        this.Q11F = new Doctor(this.key, required);
 
 
     }
@@ -857,14 +857,14 @@ class DurationTickBite extends Item {
 }
 
 
-class DoctorTickBite1 extends Item {
+class DoctorTickBite extends Item {
 
     optionKeys = {
         nameOfOption: 'a'
     }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DocTB1');
+    super(parentKey, 'DocTB');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -898,51 +898,4 @@ class DoctorTickBite1 extends Item {
 }
 
 
-class DoctorTickBite2 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DocTB2');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.multipleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Bij welke arts ben je toen geweest? (meerdere antwoorden mogelijk)'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Huisarts"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Bedrijfsarts"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "Specialist"],
-          ])
-        },
-        {
-          key: 'd', role: 'input',
-          content: new Map([
-            ["nl", "Ander soort arts, namelijk:"],
-          ])
-        },
-      ]
-    })
-  }
-}
 
