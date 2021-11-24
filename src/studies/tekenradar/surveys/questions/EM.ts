@@ -2,6 +2,9 @@ import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
+import { Doctor, FormerLymeGroup } from './diagnosisTherapy';
+import { PreviousTickBitesGroup } from './prevTickBites';
+import { LymeTherapy1, LymeTherapy5 } from './lyme';
 
 
 
@@ -11,22 +14,51 @@ export class EMGroup extends Group {
   //TODO: intro text (different than EM/Lyme groups)
 
   G1_9: TickBiteOtherGroup;
+  Q10: EM1;
+  Q11: EM2;
+  Q12: EM3;
+  Q13: DoctorEM;
+  Q14: Doctor;
+  Q15: EM4;
+
+  Q16: LymeTherapy1;
+  Q17: LymeTherapy5;
 
 
+
+  G17_19: FormerLymeGroup;
+  G20_21: PreviousTickBitesGroup;
+
+
+  //TODO: photo upload and corresponding text
 
   constructor(parentKey: string, isRequired?: boolean) {
       super(parentKey, 'EMG');
 
-      this.G1_9 = new TickBiteOtherGroup(this.key,isRequired);
+      const required = isRequired !== undefined ? isRequired : false;
 
-      
+      this.G1_9 = new TickBiteOtherGroup(this.key,isRequired);
+      this.Q10 = new EM1(this.key,required);
+      this.Q11 = new EM2(this.key,required);
+      this.Q12 = new EM3(this.key,required);
+      this.Q13 = new DoctorEM(this.key,required);
+      this.Q14 = new Doctor(this.key,required);
+      this.Q15 = new EM4(this.key,required);
+
+      this.Q16 = new LymeTherapy1(this.key,required);
+      this.Q17 = new LymeTherapy5(this.key,required);
+
+      this.G17_19 = new FormerLymeGroup(this.key,isRequired);
+      this.G20_21 = new PreviousTickBitesGroup(this.key,isRequired);
+
   }
 
   buildGroup() {
 
-    this.addItem(this.G1_9.get());
+    //this.addItem(this.G1_9.get());
 
-    
+    this.addItem(this.Q16.get());
+    this.addItem(this.Q17.get());
 
   }
 }
@@ -146,7 +178,7 @@ class EM3 extends Item {
   
   
 
-class EM4 extends Item {
+class DoctorEM extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM4');
@@ -182,58 +214,9 @@ class EM4 extends Item {
     }
   }
   
-
-  //TODO: maybe merge with similar question in tickBite file
-  class EM5 extends Item {
-
-    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-      super(parentKey, 'EM5');
-  
-      this.isRequired = isRequired;
-      this.condition = condition;
-    }
-  
-    buildItem() {
-      return SurveyItems.multipleChoice({
-        parentKey: this.parentKey,
-        itemKey: this.itemKey,
-        isRequired: this.isRequired,
-        condition: this.condition,
-        questionText: new Map([
-          ['nl', 'Bij welke arts ben je toen geweest? (meerdere antwoorden mogelijk)'],
-        ]),
-        responseOptions: [
-          {
-            key: 'a', role: 'option',
-            content: new Map([
-              ["nl", "Huisarts"],
-            ])
-          },
-          {
-            key: 'b', role: 'option',
-            content: new Map([
-              ["nl", "Bedrijfsarts"],
-            ])
-          },
-          {
-            key: 'c', role: 'option',
-            content: new Map([
-              ["nl", "Specialist"],
-            ])
-          },
-          {
-            key: 'd', role: 'input',
-            content: new Map([
-              ["nl", "Ander soort arts, namelijk:"],
-            ])
-          },
-        ]
-      })
-    }
-  }
   
   
-class EM6 extends Item {
+class EM4 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM6');
