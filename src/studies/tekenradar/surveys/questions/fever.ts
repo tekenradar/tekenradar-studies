@@ -34,8 +34,10 @@ export class FeverGroup extends Group {
     
 
 
-    constructor(parentKey: string,isRequired?: boolean) {
+    constructor(parentKey: string,isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'FeverG');
+
+        this.groupEditor.setCondition(condition);
     
         const required = isRequired !== undefined ? isRequired : false;
 
@@ -62,7 +64,7 @@ export class FeverGroup extends Group {
         this.Q23 = new FeverTherapy(this.key, required, Q16condition);
 
         this.Q24 = new FeverOtherCause1(this.key, required);
-        const Q24condition = SurveyEngine.singleChoice.none(this.Q24.key, this.Q24.optionKeys.nameOfOption);
+        const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nameOfOption);
         this.Q25 = new FeverOtherCause2(this.key, required, Q24condition);
         this.Q26 = new FeverOtherCause3(this.key, required, Q24condition);
         this.Q27 = new FeverOtherCause4(this.key, required, Q24condition);
