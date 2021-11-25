@@ -398,3 +398,193 @@ export class Doctor extends Item {
     })
   }
 }
+
+
+
+export class LymeTherapy1 extends Item {
+
+  optionKeys = {
+      nameOfOptionTabletten: 'a',
+      nameOfOptionInfuus: 'b'
+   }
+
+   responseOptionLyme = [
+    {
+      key: 'a', role: 'option',
+      content:  new Map([
+        ["nl", "Ja, tabletten antibiotica"],
+      ])
+    },
+    {
+      key: 'b', role: 'option',
+      content: new Map([
+        ["nl", "Ja, antibiotica via een infuus"],
+      ])
+    },
+    {
+      key: 'c', role: 'input',
+      content: new Map([
+        ["nl", "Nee, omdat:"],
+      ])
+    },
+  ]
+
+  responseOptionEM = [
+    {
+      key: 'a', role: 'option',
+      content:  new Map([
+        ["nl", "Ja"],
+      ])
+    },
+    {
+      key: 'b', role: 'option',
+      content: new Map([
+        ["nl", "Nee"],
+      ])
+    },
+  ] 
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeTher1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Heb je antibiotica voorgeschreven gekregen van je arts?'],
+      ]),
+      responseOptions: this.isPartOf('LymeG') ? this.responseOptionLyme : this.responseOptionEM
+    })
+  }
+}
+
+
+export class LymeTherapy2 extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeTher2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+  //TODO: multiple items with text here
+  //TODO: maybe multiple slots with text input???
+  buildItem() {
+    return SurveyItems.multilineTextInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Welke antibiotica heb je gekregen? (Dit kun je aflezen van de verpakking)'],
+      ]),
+    })
+  }
+}
+
+//extra question for infusion medication. (not merged to one question due to key uniqueness)
+export class LymeTherapy3 extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeTher3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+  //TODO: multiple items with text here
+  //TODO: maybe multiple slots with text input???
+  buildItem() {
+    return SurveyItems.multilineTextInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Welke antibiotica heb je gekregen? (Dit kun je aflezen van de verpakking)'],
+      ]),
+    })
+  }
+}
+
+//TODO: transfer to diagnosis and therapy and merge with lyme questions??
+export class LymeTherapy4 extends Item {
+
+  optionKeys = {
+      nameOfOption: 'a'
+   }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeTher4');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Ben je al met de antibioticakuur gestart?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+
+export class LymeTherapy5 extends Item {
+
+  qTextLyme = new Map([[
+    'nl', 'Wanneer heb je de eerste tablet antibiotica ingenomen of ben je gestart met het infuus?'
+  ]]);
+  qTextEM = new Map([[
+    'nl', 'Wanneer heb je de eerste pil antibiotica ingenomen?'
+  ]]);
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeTher5');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  //TODO: insert date and time input
+  buildItem() {
+    return SurveyItems.dateInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      dateInputMode: 'YMD',
+          placeholderText: new Map([
+              ["nl", "dd-mm-jjjj"],
+          ]),
+      questionText: this.isPartOf('LymeG')? this.qTextLyme : this.qTextEM,
+    })
+  }
+}
+
