@@ -25,8 +25,10 @@ export class ChronicGroup extends Group {
 
 
 
-    constructor(parentKey: string,isRequired?: boolean) {
+    constructor(parentKey: string,isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'CLG');
+
+        this.groupEditor.setCondition(condition);
 
         const required = isRequired !== undefined ? isRequired : false;
 
