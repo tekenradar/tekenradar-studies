@@ -2,9 +2,8 @@ import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
-import { Doctor, FormerLymeGroup } from './diagnosisTherapy';
+import { Doctor, FormerLymeGroup, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
-import { LymeTherapy1, LymeTherapy5 } from './lyme';
 
 
 
@@ -16,49 +15,75 @@ export class EMGroup extends Group {
   G1_9: TickBiteOtherGroup;
   Q10: EM1;
   Q11: EM2;
+  
+  //TODO: photo upload and corresponding text
   Q12: EM3;
   Q13: DoctorEM;
   Q14: Doctor;
   Q15: EM4;
 
   Q16: LymeTherapy1;
-  Q17: LymeTherapy5;
+  Q17: LymeTherapy2;
+  Q18: LymeTherapy4;
+  Q19: LymeTherapy5;
+
+  G20_22: FormerLymeGroup;
+  G23_24: PreviousTickBitesGroup;
 
 
-
-  G17_19: FormerLymeGroup;
-  G20_21: PreviousTickBitesGroup;
-
-
-  //TODO: photo upload and corresponding text
-
-  constructor(parentKey: string, isRequired?: boolean) {
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
       super(parentKey, 'EMG');
+
+      this.groupEditor.setCondition(condition);
 
       const required = isRequired !== undefined ? isRequired : false;
 
-      this.G1_9 = new TickBiteOtherGroup(this.key,isRequired);
-      this.Q10 = new EM1(this.key,required);
-      this.Q11 = new EM2(this.key,required);
-      this.Q12 = new EM3(this.key,required);
-      this.Q13 = new DoctorEM(this.key,required);
-      this.Q14 = new Doctor(this.key,required);
-      this.Q15 = new EM4(this.key,required);
+      this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
+      this.Q10 = new EM1(this.key, required);
+      //TODO: if date more than 3 months ago, exclusion from lyme studies by setting flag 
+      this.Q11 = new EM2(this.key, required);
+      //TODO: if option b from EM2 is selected, exclusion from lyme studies by setting flag 
+      this.Q12 = new EM3(this.key, required);
+      //TODO: if EM < 5cm, exclusion from lyme studies by setting flag 
+      this.Q13 = new DoctorEM(this.key, required);
+      const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.nameOfOption);
 
-      this.Q16 = new LymeTherapy1(this.key,required);
-      this.Q17 = new LymeTherapy5(this.key,required);
+      this.Q14 = new Doctor(this.key,required, Q13condition);
+      this.Q15 = new EM4(this.key,required, Q13condition);
+      //TODO: if b from EM4 is selected, exclusion from lyme studies by setting flag 
 
-      this.G17_19 = new FormerLymeGroup(this.key,isRequired);
-      this.G20_21 = new PreviousTickBitesGroup(this.key,isRequired);
+      this.Q16 = new LymeTherapy1(this.key, required);
+      ////TODO: if b from LymeTherapy1 is selected, exclusion from lyme studies by setting flag 
+      const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.nameOfOptionTabletten);
+      this.Q17 = new LymeTherapy2(this.key, required, Q16condition);
+      this.Q18 = new LymeTherapy4(this.key, required, Q16condition);
+      const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.nameOfOption);
+      this.Q19 = new LymeTherapy5(this.key, required, Q18condition);
+
+      this.G20_22 = new FormerLymeGroup(this.key, isRequired);
+      this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
   }
 
   buildGroup() {
 
-    //this.addItem(this.G1_9.get());
+    this.addItem(this.G1_9.get());
 
+    this.addItem(this.Q10.get());
+    this.addItem(this.Q11.get());
+    this.addItem(this.Q12.get());
+    this.addItem(this.Q13.get());
+    this.addItem(this.Q14.get());
+    this.addItem(this.Q15.get());
     this.addItem(this.Q16.get());
     this.addItem(this.Q17.get());
+    this.addItem(this.Q18.get());
+    this.addItem(this.Q19.get());
+
+    this.addItem(this.G20_22.get());
+    this.addItem(this.G23_24.get());
+
+    //TODO: upload photo text and function here.
 
   }
 }
@@ -88,7 +113,6 @@ class EM1 extends Item {
       ]),
       responseOptions: [
         {//TODO1: correct date mode and 'bij benadering?' after date input.
-          //TODO2: exclude patients with date more than 3 months ago?
           key: 'a', role: 'date',
           content: new Map([
             ["nl", "Datum dat de erythema migrans zich ontwikkelde:"],
@@ -179,6 +203,10 @@ class EM3 extends Item {
   
 
 class DoctorEM extends Item {
+
+    optionKeys = {
+      nameOfOption: 'a'
+  }
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM4');
