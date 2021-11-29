@@ -182,7 +182,7 @@ export class TickBiteOtherGroup extends Group {
         this.addItem(this.Q9.get());
         this.addPageBreak();
 
-        //TDOD: is this the recommended way to add fever group questions in this group?
+        //TODO: is this the recommended way to add fever group questions in this group?
         if (this.isPartOf('FeverG')) {
             this.addItem(this.Q10F.get()),
             this.addItem(this.Q11F.get()) 
@@ -460,7 +460,6 @@ class NumberTickBite extends Item {
     this.isRequired = isRequired;
     this.condition = condition;
   }
-  //TODO: alternative select box here???
   buildItem() {
     return SurveyItems.numericInput({
       parentKey: this.parentKey,
@@ -469,9 +468,11 @@ class NumberTickBite extends Item {
       condition: this.condition,
       questionText: new Map([
         ['nl', 'Door hoeveel teken ben je nu gebeten?'],
-      ]),//TODO: right way for default value?
+      ]),
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '80px',
       content: new Map([
-        ['nl', '1']
+        ['nl', '']
       ]),
       //TODO: default preset to 1
       contentBehindInput: true,
