@@ -2,12 +2,13 @@ import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { Age } from './demographie';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
 export class PDiffGroup extends Group {
 
   //TODO: insert intro text
-
+  T1: IntroPDiff;
   Q1: DetectTickBite;
   Q2: FeverTickBite;
   //TODO: text here
@@ -21,8 +22,9 @@ export class PDiffGroup extends Group {
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'PDiffG');
 
-     const required = isRequired !== undefined ? isRequired : false;
+    const required = isRequired !== undefined ? isRequired : false;
 
+    this.T1 = new IntroPDiff(this.key, required);
     this.Q1 = new DetectTickBite(this.key, required);
     const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
 
@@ -40,6 +42,7 @@ export class PDiffGroup extends Group {
 
   buildGroup() {
 
+    this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
@@ -53,6 +56,31 @@ export class PDiffGroup extends Group {
 
 }
 
+
+class IntroPDiff extends Item{
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'IntroPDiff');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.text({
+          content: new Map([
+          ["nl", "Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind)."],
+          ]),
+        })
+      ]
+    })
+  }
+}
 
 class DetectTickBite extends Item {
 
