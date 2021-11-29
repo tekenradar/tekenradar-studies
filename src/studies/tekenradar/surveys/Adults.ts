@@ -143,7 +143,8 @@ class AdultsDef extends SurveyDefinition {
         )
       )
 
-      //const ruleKids_Adults = SurveyEngine.getResponseValueAsNum(this.Start.Q7.key,)
+      //TODO: kids response age here
+      //const ruleKids_Adults = SurveyEngine.getResponseValueAsNum(this.Start.Q7.key)
 
     )
 
