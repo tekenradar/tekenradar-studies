@@ -7,11 +7,10 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 
 export class PDiffGroup extends Group {
 
-  //TODO: insert intro text
   T1: IntroPDiff;
   Q1: DetectTickBite;
   Q2: FeverTickBite;
-  //TODO: text here
+  T2: EMTextPDiff;
   Q3: EMTickBite;
   Q4: LymeTickBite1;
   Q5: LymeTickBite2;
@@ -29,6 +28,7 @@ export class PDiffGroup extends Group {
     const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
 
     this.Q2 = new FeverTickBite(this.key, required, q1Condition);
+    this.T2 = new EMTextPDiff(this.key, required);
     this.Q3 = new EMTickBite(this.key, required);
     this.Q4 = new LymeTickBite1(this.key, required);
     const q4Condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
@@ -45,6 +45,7 @@ export class PDiffGroup extends Group {
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
+    this.addItem(this.T2.get());
     this.addItem(this.Q3.get());
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
@@ -59,6 +60,15 @@ export class PDiffGroup extends Group {
 
 class IntroPDiff extends Item{
 
+  markdownContent = `
+  # Melding doen
+
+  #### Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
+
+  Wat wil je precies melden? Wat is op jou van toepassing?
+
+  `
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'IntroPDiff');
 
@@ -72,12 +82,13 @@ class IntroPDiff extends Item{
       itemKey: this.itemKey,
       condition: this.condition,
       content: [
-        ComponentGenerators.text({
-          content: new Map([
-          ["nl", "Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind)."],
-          ]),
+        ComponentGenerators.markdown({
+            content: new Map([
+                ["nl", this.markdownContent],
+            ]),
+            className: ''
         })
-      ]
+    ]
     })
   }
 }
@@ -163,6 +174,46 @@ class FeverTickBite extends Item {
           ])
         },
       ]
+    })
+  }
+}
+
+
+class EMTextPDiff extends Item{
+
+  markdownContent = `
+
+  #### Een "erythema migrans" is een **uitbreidende rode ring of vlek** rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme. 
+
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'EMTPDiff');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      /*content: [
+        ComponentGenerators.text({
+          content: new Map([
+          ["nl", "Text here"],
+          ]),
+        })
+      ]*/
+      content: [
+        ComponentGenerators.markdown({
+            content: new Map([
+                ["nl", this.markdownContent],
+            ]),
+            className: ''
+        })
+    ]
     })
   }
 }
@@ -303,7 +354,7 @@ class MedicationLyme extends Item {
 
 
   buildItem() {
-    return SurveyItems.multipleChoice({
+    return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -313,8 +364,7 @@ class MedicationLyme extends Item {
       ]),
       responseOptions: [
         {
-          //TODO: don't make filling in date mandatory to avoid getting stuck due to forgotten date
-          //TODO: date input mode and text after input
+          //NOTE: filling in date is NOT mandatory to avoid getting stuck due to forgotten date
           key: 'a', role: 'dateInput',
           content: new Map([
             ["nl", "Ja, ik ben gestart op"],
