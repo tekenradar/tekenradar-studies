@@ -195,11 +195,19 @@ export class TickBiteOtherGroup extends Group {
 
 class RecognisedTickBite extends Item {
 
+  qTextFever = new Map([[
+    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de koorts hebt gekregen, al gemeld?'
+  ]]);
+  qTextOther = new Map([[
+    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de erythema migrans of andere ziekte van Lyme die je nu meldt hebt gekregen, opgemerkt?'
+  ]]);
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RecTB');
 
     this.isRequired = isRequired;
     this.condition = condition;
+    
   }
 
   buildItem() {
@@ -208,9 +216,7 @@ class RecognisedTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de erythema migrans of andere ziekte van Lyme die je nu meldt hebt gekregen, opgemerkt?'],
-      ]),
+      questionText: this.isPartOf('FeverG') ? this.qTextFever : this.qTextOther,
       responseOptions: [
         {
           key: 'a', role: 'option',
