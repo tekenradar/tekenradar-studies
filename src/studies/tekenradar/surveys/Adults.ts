@@ -4,8 +4,9 @@ import { ChronicGroup } from './questions/chronic';
 import { EMGroup } from './questions/EM';
 import { FeverGroup } from './questions/fever';
 import { LymeGroup } from './questions/lyme';
-import { PDiffGroup } from './questions/PDiff';
+import { PDiffGroup } from './questions/PDiffQuestions';
 import { TickBiteOnlyGroup } from './questions/tickBite';
+
 
 
 class AdultsDef extends SurveyDefinition {
