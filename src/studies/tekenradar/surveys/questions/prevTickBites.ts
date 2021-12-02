@@ -92,6 +92,34 @@ class PreviousTickBites1 extends Item {
 
 class PreviousTickBites2 extends Item {
 
+    //TODO bold text "in de afgelopen 3 maanden" ?
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "in de afgelopen 3 maanden "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "opgemerkt?"],
+            ]),
+        },
+    ]
+
+    questionTextFollowup = [
+        {
+            content: new Map([
+                ["nl", 'Hoeveel tekenbeten heb je sinds je de vorige vragenlijst 3 maanden geleden invulde opgemerkt die nog niet gemeld zijn via je account op tekenradar.nl?'],
+            ]),
+        }
+    ]
+
     constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'PTB2');
 
@@ -105,9 +133,7 @@ class PreviousTickBites2 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new Map([ //TODO bold text "in de afgelopen 3 maanden" ?
-                ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 3 maanden opgemerkt?'],
-            ]),
+            questionText: this.isPartOf('FollowupG') ? this.questionTextFollowup : this.questionTextMain,
             responseOptions: [
                 {
                     key: 'a', role: 'option',
