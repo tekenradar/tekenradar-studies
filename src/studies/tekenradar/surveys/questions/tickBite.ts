@@ -4,13 +4,15 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
 
 
 export class TickBiteOnlyGroup extends Group {
 
-  //TODO: intro text here
+    //Note: T objects are text items
+    T1: IntroTB;
     Q1: EnvironmentTickBite;
     Q2: ActivityTickBite;
     Q3: PositionTickBite;
@@ -44,6 +46,7 @@ export class TickBiteOnlyGroup extends Group {
 
         const required = isRequired !== undefined ? isRequired : false;
 
+        this.T1 = new IntroTB(this.key, required);
         this.Q1 = new EnvironmentTickBite(this.key, required);
         this.Q2 = new ActivityTickBite(this.key, required);
         this.Q3 = new PositionTickBite(this.key, required);
@@ -80,6 +83,7 @@ export class TickBiteOnlyGroup extends Group {
 
     buildGroup() {
 
+        this.addItem(this.T1.get());
         this.addItem(this.Q1.get());
         this.addItem(this.Q2.get());
         this.addItem(this.Q3.get());
@@ -123,7 +127,7 @@ export class TickBiteOtherGroup extends Group {
 
     Start: RecognisedTickBite;
 
-     //TODO: inital text (fever has special text)
+     T1: IntroTB;
      Q1: EnvironmentTickBite;
      Q2: ActivityTickBite;
      Q3: PositionTickBite;
@@ -148,6 +152,7 @@ export class TickBiteOtherGroup extends Group {
         const required = isRequired !== undefined ? isRequired : false;
 
         this.Start = new RecognisedTickBite(this.key,required);
+        this.T1 = new IntroTB(this.key, required);
         this.Q1 = new EnvironmentTickBite(this.key, required);
         this.Q2 = new ActivityTickBite(this.key, required);
         this.Q3 = new PositionTickBite(this.key, required);
@@ -169,6 +174,7 @@ export class TickBiteOtherGroup extends Group {
     buildGroup() {
 
         this.addItem(this.Start.get());
+        this.addItem(this.T1.get());
         this.addItem(this.Q1.get());
         this.addItem(this.Q2.get());
         this.addItem(this.Q3.get());
@@ -192,6 +198,61 @@ export class TickBiteOtherGroup extends Group {
     }
 }
 
+
+class IntroTB extends Item{
+
+  markdownContentOnly = `
+  # Melden tekenbeet
+
+  De volgende vragen gaan over de tekenbeet. \
+  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+
+  `
+  
+  markdownContentOther = `
+  # Tekenbeet
+
+  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+
+  `
+  
+  markdownContentFever = `
+  # Melden tekenbeet
+
+  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'IntroTB');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+              ["nl", this.isPartOf('TBOnlyG') ? this.markdownContentOnly : (this.isPartOf('FeverG') ? this.markdownContentFever : this.markdownContentOther)],
+          ]),
+          className: ''
+      })
+       /* this.isPartOf('FeverG') ? this.qTextFever : this.qTextOther,
+        ComponentGenerators.markdown({
+            content: new Map([
+                ["nl", this.markdownContent],
+            ]),
+            className: ''
+        })*/
+    ]
+    })
+  }
+}
 
 class RecognisedTickBite extends Item {
 
