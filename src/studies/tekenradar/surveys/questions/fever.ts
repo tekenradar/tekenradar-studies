@@ -56,10 +56,10 @@ export class FeverGroup extends Group {
         const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.nameOfOption);
 
 
-        //SurveyEngine.logic.or(Q15condition,Q15condition);
+        const Q18_20condition = SurveyEngine.logic.or(SurveyEngine.logic.not(Q18condition),Q20condition);
 
-        this.Q21 = new FeverSymptom6(this.key, required, Q20condition); //TODO: also Q16condition and Q19condition here
-        this.Q22 = new FeverSymptom7(this.key, required, Q20condition); //TODO: also Q16condition and Q19condition here
+        this.Q21 = new FeverSymptom6(this.key, required, Q18_20condition); 
+        this.Q22 = new FeverSymptom7(this.key, required, Q18_20condition); 
 
         this.Q23 = new FeverTherapy(this.key, required, Q16condition);
 
