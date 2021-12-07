@@ -1,10 +1,11 @@
 import { Logger } from 'case-editor-tools/logger/logger';
 import { Study } from 'case-editor-tools/types/study';
 import { TekenradarStudy } from './studies/tekenradar';
-import { generateFilesForStudy } from './utils';
+import { generateFilesForStudy } from 'case-editor-tools/exporter';
+
 
 const studies: Study[] = [
-  TekenradarStudy,
+  TekenradarStudy
 ];
 
 const readStudyKey = () => {
@@ -30,6 +31,7 @@ const currentStudy = studies.filter(study => {
   }
   return study.studyKey === studyKey
 });
+
 if (!currentStudy || currentStudy.length < 1) {
   Logger.error(`No study find with key: ${studyKey}.`);
   process.exit(1)
