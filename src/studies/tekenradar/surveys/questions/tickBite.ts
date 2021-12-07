@@ -1,56 +1,310 @@
 import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { PreviousTickBitesGroup } from './prevTickBites';
+import { Residence, Gender } from './demographie';
+import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
-export class TickBiteGroup extends Group {
-
-  Q1: EnvironmentTickBite;
-  Q2: ActivityTickBite;
-  Q3: PositionTickBite;
-  Q4: NumberTickBite;
-  Q5: LocationBodyTickBite;
-  Q6: RemoveTick1;
-  Q7: RemoveTick2;
-  Q8: RemoveTick3;
-  Q9: RemoveTick4;
-
-  //TODO: correct way to implement condition: diplaying Q7-Q9 only if option b of Q6 is selected ??
-
-  constructor(parentKey: string) {
-    super(parentKey, 'TBG');
-
-    this.Q1 = new EnvironmentTickBite(this.key, false);
-    this.Q2 = new ActivityTickBite(this.key, false);
-    this.Q3 = new PositionTickBite(this.key, false);
-    this.Q4 = new NumberTickBite(this.key, false);
-    this.Q5 = new LocationBodyTickBite(this.key, false);
 
 
-    this.Q6 = new RemoveTick1(this.key, false);
+export class TickBiteOnlyGroup extends Group {
 
-    const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+    //Note: T-named objects are text items
+    T1: IntroTB;
+    Q1: EnvironmentTickBite;
+    Q2: ActivityTickBite;
+    Q3: PositionTickBite;
+    Q4: NumberTickBite;
+    Q5: LocationBodyTickBite;
+    Q6: RemoveTick1;
+    Q7: RemoveTick2;
+    Q8: RemoveTick3;
+    Q9: RemoveTick4;
+    G10_11: PreviousTickBitesGroup;
+    Q12: ReportedTickBites;
 
-    this.Q7 = new RemoveTick2(this.key, false, q6Condition);
-    this.Q8 = new RemoveTick3(this.key, false, q6Condition);
-    this.Q9 = new RemoveTick4(this.key, false, q6Condition);
+    P1: Residence;
+    P2: Gender;
 
+    Q13: DateTickBite;
+    Q14: DurationTickBite;
+    Q15: DoctorTickBite;
+    Q16: Doctor;
+
+    G17_19: FormerLymeGroup;
+    
+    Q20: GeneralTherapy;
+
+
+
+    constructor(parentKey: string,isRequired?: boolean,condition?: Expression) {
+        super(parentKey, 'TBOnlyG');
+
+        this.groupEditor.setCondition(condition);
+
+        const required = isRequired !== undefined ? isRequired : false;
+
+        this.T1 = new IntroTB(this.key, required);
+        this.Q1 = new EnvironmentTickBite(this.key, required);
+        this.Q2 = new ActivityTickBite(this.key, required);
+        this.Q3 = new PositionTickBite(this.key, required);
+        this.Q4 = new NumberTickBite(this.key, required);
+        this.Q5 = new LocationBodyTickBite(this.key, required);
+        
+        this.Q6 = new RemoveTick1(this.key,required);
+        const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+        this.Q7 = new RemoveTick2(this.key, required, q6Condition);
+        this.Q8 = new RemoveTick3(this.key,required, q6Condition);
+        this.Q9 = new RemoveTick4(this.key, required, q6Condition);
+
+        this.G10_11 = new PreviousTickBitesGroup(this.key, isRequired);
+
+        this.Q12 = new ReportedTickBites(this.key, required);
+
+        //TDOD If the respondent is not logged in ask p1 and p2, 
+        //if he is logged in, skip these two questions here as they 
+        //will be asked lateron in de questionaire (chapter S-A)
+        this.P1 = new Residence(this.key,required);
+        this.P2 = new Gender(this.key, required);
+
+        this.Q13 = new DateTickBite(this.key, required);
+        this.Q14 = new DurationTickBite(this.key, required);
+        this.Q15 = new DoctorTickBite(this.key, required);
+        const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
+        this.Q16 = new Doctor(this.key, required, q15Condition);
+
+        this.G17_19 = new FormerLymeGroup(this.key, isRequired);
+        
+        this.Q20 = new GeneralTherapy(this.key, required);
+
+    }
+
+    buildGroup() {
+
+        this.addItem(this.T1.get());
+        this.addItem(this.Q1.get());
+        this.addItem(this.Q2.get());
+        this.addItem(this.Q3.get());
+        this.addPageBreak();
+
+        this.addItem(this.Q4.get());
+        this.addItem(this.Q5.get());
+        this.addItem(this.Q6.get());
+        this.addItem(this.Q7.get());
+        this.addItem(this.Q8.get());
+        this.addItem(this.Q9.get());
+        this.addPageBreak();
+
+        this.addItem(this.G10_11.get());
+        this.addItem(this.Q12.get());
+        this.addPageBreak();
+
+
+        this.addItem(this.P1.get());
+        this.addItem(this.P2.get());
+        this.addPageBreak();
+
+        this.addItem(this.Q13.get());
+        this.addItem(this.Q14.get());
+        this.addItem(this.Q15.get());
+        this.addItem(this.Q16.get());
+        this.addPageBreak();
+
+        this.addItem(this.G17_19.get());
+        
+        this.addItem(this.Q20.get());
+        this.addPageBreak();
+
+
+    }
+}
+
+
+
+export class TickBiteOtherGroup extends Group {
+
+    Start: RecognisedTickBite;
+
+     T1: IntroTB;
+     Q1: EnvironmentTickBite;
+     Q2: ActivityTickBite;
+     Q3: PositionTickBite;
+     Q4: NumberTickBite;
+     Q5: LocationBodyTickBite;
+ 
+     //Note: RemoveTick1 is not part of surveys from other groups than TB
+     Q6: RemoveTick2;
+     Q7: RemoveTick3;
+     Q8: RemoveTick4;
+ 
+     Q9: DurationTickBite;
+
+     Q10F: DoctorTickBite;
+     Q11F: Doctor;
+
+
+
+    constructor(parentKey: string,isRequired?: boolean) {
+        super(parentKey, 'TBOtherG');
+
+        const required = isRequired !== undefined ? isRequired : false;
+
+        this.Start = new RecognisedTickBite(this.key,required);
+        this.T1 = new IntroTB(this.key, required);
+        this.Q1 = new EnvironmentTickBite(this.key, required);
+        this.Q2 = new ActivityTickBite(this.key, required);
+        this.Q3 = new PositionTickBite(this.key, required);
+        this.Q4 = new NumberTickBite(this.key, required);
+        this.Q5 = new LocationBodyTickBite(this.key, required);
+        
+        this.Q6 = new RemoveTick2(this.key, required);
+        this.Q7 = new RemoveTick3(this.key, required);
+        this.Q8 = new RemoveTick4(this.key, required);
+
+        this.Q9 = new DurationTickBite(this.key, required);
+
+        this.Q10F = new DoctorTickBite(this.key, required);
+        this.Q11F = new Doctor(this.key, required);
+
+
+    }
+
+    buildGroup() {
+
+        this.addItem(this.Start.get());
+        this.addItem(this.T1.get());
+        this.addItem(this.Q1.get());
+        this.addItem(this.Q2.get());
+        this.addItem(this.Q3.get());
+        this.addPageBreak();
+
+        this.addItem(this.Q4.get());
+        this.addItem(this.Q5.get());
+        this.addItem(this.Q6.get());
+        this.addItem(this.Q7.get());
+        this.addItem(this.Q8.get());
+        this.addItem(this.Q9.get());
+        this.addPageBreak();
+
+        //TODO: is this the recommended way to add fever group questions in this group?
+        if (this.isPartOf('FeverG')) {
+            this.addItem(this.Q10F.get()),
+            this.addItem(this.Q11F.get()) 
+        }
+
+
+    }
+}
+
+
+class IntroTB extends Item{
+
+  markdownContentOnly = `
+  # Melden tekenbeet
+
+  De volgende vragen gaan over de tekenbeet. \
+  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+
+  `
+  
+  markdownContentOther = `
+  # Tekenbeet
+
+  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+
+  `
+  
+  markdownContentFever = `
+  # Melden tekenbeet
+
+  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'IntroTB');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
   }
 
-  buildGroup() {
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+              ["nl", this.isPartOf('TBOnlyG') ? this.markdownContentOnly : (this.isPartOf('FeverG') ? this.markdownContentFever : this.markdownContentOther)],
+          ]),
+          className: ''
+      })
+       /* this.isPartOf('FeverG') ? this.qTextFever : this.qTextOther,
+        ComponentGenerators.markdown({
+            content: new Map([
+                ["nl", this.markdownContent],
+            ]),
+            className: ''
+        })*/
+    ]
+    })
+  }
+}
 
-    this.addItem(this.Q1.get());
-    this.addItem(this.Q2.get());
-    this.addItem(this.Q3.get());
-    this.addPageBreak();
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
-    this.addItem(this.Q6.get());
+class RecognisedTickBite extends Item {
 
-    this.addItem(this.Q7.get());
-    this.addItem(this.Q8.get());
-    this.addItem(this.Q9.get());
-    this.addPageBreak();
+  qTextFever = new Map([[
+    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de koorts hebt gekregen, al gemeld?'
+  ]]);
+  qTextOther = new Map([[
+    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de erythema migrans of andere ziekte van Lyme die je nu meldt hebt gekregen, opgemerkt?'
+  ]]);
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'RecTB');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+    
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.isPartOf('FeverG') ? this.qTextFever : this.qTextOther,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+        {//TODO: Pop up only shown if b or c is selected?
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"],
+          ])
+        },
+        {//TODO: correct date format and text after date here
+          key: 'c', role: 'date',
+          content: new Map([
+            ["nl", "Ja, de datum dat ik de tekenbeet heb opgelopen is ..........(dag/maand/jaar) bij benadering?"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Onbekend"],
+          ])
+        }
+      ]
+    })
   }
 }
 
@@ -273,7 +527,6 @@ class NumberTickBite extends Item {
     this.isRequired = isRequired;
     this.condition = condition;
   }
-  //TODO: select box here
   buildItem() {
     return SurveyItems.numericInput({
       parentKey: this.parentKey,
@@ -283,6 +536,8 @@ class NumberTickBite extends Item {
       questionText: new Map([
         ['nl', 'Door hoeveel teken ben je nu gebeten?'],
       ]),
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '80px',
       content: new Map([
         ['nl', '']
       ]),
@@ -290,7 +545,7 @@ class NumberTickBite extends Item {
       contentBehindInput: true,
       componentProperties: {
         min: 1,
-        max: 20
+        max: 20,
       }
     })
   }
@@ -504,116 +759,6 @@ class RemoveTick4 extends Item {
 }
 
 
-class PreviousTickBites1 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PTB1');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 5 jaar opgemerkt?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Geen tekenbeten"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "1 - 3 tekenbeten"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "4 - 10 tekenbeten"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "11 - 50 tekenbeten"],
-          ])
-        },
-        {
-          key: 'e', role: 'option',
-          content: new Map([
-            ["nl", "Meer dan 50 tekenbeten"],
-          ])
-        },
-      ]
-    })
-  }
-}
-
-
-
-class PreviousTickBites2 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PTB2');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 3 maanden opgemerkt?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Geen tekenbeten"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "1 - 3 tekenbeten"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "4 - 10 tekenbeten"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "11 - 50 tekenbeten"],
-          ])
-        },
-        {
-          key: 'e', role: 'option',
-          content: new Map([
-            ["nl", "Meer dan 50 tekenbeten"],
-          ])
-        },
-      ]
-    })
-  }
-}
-
 
 class ReportedTickBites extends Item {
 
@@ -782,10 +927,14 @@ class DurationTickBite extends Item {
 }
 
 
-class DoctorTickBite1 extends Item {
+class DoctorTickBite extends Item {
+
+    optionKeys = {
+        nameOfOption: 'a'
+    }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DocTB1');
+    super(parentKey, 'DocTB');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -819,45 +968,4 @@ class DoctorTickBite1 extends Item {
 }
 
 
-class DoctorTickBite2 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DocTB2');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.multipleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke arts is er bezocht? (meerdere antwoorden mogelijk)'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Huisarts"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Bedrijfsarts"],
-          ])
-        },
-        {
-          key: 'c', role: 'input',
-          content: new Map([
-            ["nl", "Ander soort arts, namelijk:"],
-          ])
-        },
-      ]
-    })
-  }
-}
 
