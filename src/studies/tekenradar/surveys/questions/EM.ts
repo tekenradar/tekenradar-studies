@@ -4,6 +4,7 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
 import { Doctor, FormerLymeGroup, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
 
@@ -16,7 +17,6 @@ export class EMGroup extends Group {
   Q10: EM1;
   Q11: EM2;
   
-  //TODO: photo upload and corresponding text
   Q12: EM3;
   Q13: DoctorEM;
   Q14: Doctor;
@@ -29,6 +29,10 @@ export class EMGroup extends Group {
 
   G20_22: FormerLymeGroup;
   G23_24: PreviousTickBitesGroup;
+  
+  T1: PhotoEM;
+
+  //TODO: example photo and photo upload Here
 
 
   constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
@@ -63,6 +67,8 @@ export class EMGroup extends Group {
       this.G20_22 = new FormerLymeGroup(this.key, isRequired);
       this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
+      this.T1 = new PhotoEM(this.key, required);
+
   }
 
   buildGroup() {
@@ -83,7 +89,8 @@ export class EMGroup extends Group {
     this.addItem(this.G20_22.get());
     this.addItem(this.G23_24.get());
 
-    //TODO: upload photo text and function here.
+    this.addItem(this.T1.get());
+    //TODO: upload photo text and example photo here.
 
   }
 }
@@ -280,3 +287,38 @@ class EM4 extends Item {
     }
   }
   
+
+class PhotoEM extends Item{
+
+  markdownContent = `
+  #Uploaden foto 
+
+  Wij vragen je om een foto van je  erythema migrans of andere huidafwijking door de ziekte van Lyme. Mocht je nu geen foto kunnen uploaden, dan ontvang je een herinnering per email om dat later alsnog te doen.\
+  Heb je geen huidafwijking door de ziekte van Lyme dan kun je deze vragenlijst overslaan.
+
+  Om een goed beeld te krijgen van de schaal van de foto stellen wij het zeer op prijs als er een lineaal of meetlint (of een voorwerp met een standaard grootte zoals bijvoorbeeld een muntstuk) naast de huidafwijking op de foto staat. Zie de voorbeeld foto.
+`
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PhotoEM');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+              ["nl", this.markdownContent ],
+          ]),
+          className: ''
+      })
+    ]
+    })
+  }
+}
