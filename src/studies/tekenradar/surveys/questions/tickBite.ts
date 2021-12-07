@@ -11,7 +11,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 
 export class TickBiteOnlyGroup extends Group {
 
-    //Note: T objects are text items
+    //Note: T-named objects are text items
     T1: IntroTB;
     Q1: EnvironmentTickBite;
     Q2: ActivityTickBite;
