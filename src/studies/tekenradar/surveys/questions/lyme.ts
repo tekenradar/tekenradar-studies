@@ -7,12 +7,10 @@ import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy1, LymeTher
 
 
 export class LymeGroup extends Group {
-
-    //TODO: tick bite report intro question and condition
-    //TODO: intro text (different than EM/Lyme groups)
-
+    
     G1_9: TickBiteOtherGroup;
 
+    //TODO: should header be shown?
     //Lyme questions here
     Q10: LymeDiagnosis1;
     Q11: LymeDiagnosis2;
