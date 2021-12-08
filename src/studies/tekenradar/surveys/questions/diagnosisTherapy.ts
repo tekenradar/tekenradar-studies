@@ -1,6 +1,8 @@
 import { Expression } from 'survey-engine/lib/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
 
@@ -129,12 +131,21 @@ class FormerLymeTherapy1 extends Item {
             ["nl", "Nee"],
           ])
         },
-        {//TODO input with following text
-          key: 'b', role: 'input',
-          content: new Map([
-            ["nl", "Ja; hoe vaak: .......Antibioticakuren"],
-          ])
-        },
+        SCOptions.cloze({
+          key: 'b', items: [
+              ClozeItemTypes.text({
+                  key: '1', content: new Map(
+                      [['nl', "Ja; hoe vaak:"]]
+                  )
+              }),
+              ClozeItemTypes.numberInput({
+                  key: '2', 
+                  inputLabel: new Map([['nl', 'Antibioticakuren']]),
+                  labelBehindInput: true,
+                  inputMaxWidth: '60px'
+              }),
+            ]
+          }),
         {
           key: 'c', role: 'option',
           content: new Map([
@@ -468,16 +479,22 @@ export class LymeTherapy1 extends Item {
 
 export class LymeTherapy2 extends Item {
 
+  markdownContentOnly = `
+  # Melden tekenbeet
+
+  De volgende vragen gaan over de tekenbeet. \
+  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+
+  `
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LymeTher2');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
-  //TODO: multiple items with text here
-  //TODO: maybe multiple slots with text input???
+
   buildItem() {
-    return SurveyItems.multilineTextInput({
+    return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -485,9 +502,65 @@ export class LymeTherapy2 extends Item {
       questionText: new Map([
         ['nl', 'Welke antibiotica heb je gekregen? (Dit kun je aflezen van de verpakking)'],
       ]),
+      items: [
+        ClozeItemTypes.text({
+          key: '1', content: new Map(
+              [['nl', "Naam van het middel:"]]
+          )
+        }),
+        ClozeItemTypes.textInput({ 
+          key: '2', 
+        }),
+        ClozeItemTypes.text({
+          key: '3', content: new Map(
+            [['nl', "dosis (mg per pil):"]]
+          )
+        }),
+        ClozeItemTypes.textInput({ 
+          key: '4', 
+        }),
+        ClozeItemTypes.text({
+          key: '5', content: new Map(
+            [['nl', "aantal pillen per dag"]]
+          )
+        }),
+        ClozeItemTypes.textInput({ 
+          key: '6', 
+        }),
+        ClozeItemTypes.text({
+          key: '7', content: new Map(
+            [['nl', "Op welk tijdstip neem je de pillen in? (bijvoorbeeld ‘s ochtends en ‘s avonds):"]]
+          )
+        }),
+        ClozeItemTypes.textInput({ 
+          key: '8', 
+        }),
+        ClozeItemTypes.text({
+          key: '9', content: new Map(
+            [['nl', "aantal dagen innemen:"]]
+          )
+        }),
+        ClozeItemTypes.numberInput({ 
+          key: '10', 
+          inputLabel: new Map([['en', 'dagen']]),
+          labelBehindInput: true,
+        }),
+        ClozeItemTypes.text({
+          key: '13', content: new Map(
+            [['nl', "overige informatie:"]]
+          )
+        }),
+        ClozeItemTypes.textInput({ 
+          key: '14', 
+        })
+      ],
     })
   }
 }
+
+
+
+
 
 //extra question for infusion medication. (not merged to one question due to key uniqueness)
 export class LymeTherapy3 extends Item {
