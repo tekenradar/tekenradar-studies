@@ -3,14 +3,14 @@ import { Expression } from 'survey-engine/lib/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 
-const commonHealthQuestionOptions = [
+/*const commonHealthQuestionOptions = [
   ComponentGenerators.option({
     key: '1', content: new Map([['en', 'Option 1']])
   }),
   ComponentGenerators.option({
     key: '2', content: new Map([['en', 'Option 2']])
   })
-]
+]*/
 
 class QuestionAboutMedicalHistory extends Item {
   qTextA = new Map([[
@@ -34,9 +34,23 @@ class QuestionAboutMedicalHistory extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.isPartOf('T0') ? this.qTextA : this.qTextB,
-      responseOptions: commonHealthQuestionOptions,
-      /*
-      content: new Map([
+      responseOptions: //commonHealthQuestionOptions,
+      [
+        {//TODO: is this correct dutch in the first option?
+          //(bij benadering stands after date input)
+          key: 'a', role: 'date',
+          content: new Map([
+            ["nl", "Datum bij benadering"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Weet niet"],
+          ])
+        },
+      ]
+     /* content: new Map([
           ['en', 'Hello']
       ]),*/
     })
