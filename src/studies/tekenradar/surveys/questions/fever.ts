@@ -4,19 +4,18 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
 import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
 
 
 export class FeverGroup extends Group {
 
-    //TODO: tick bite report intro question and condition
-    //TODO: intro text (different than EM/Lyme groups)
-
     G1_11: TickBiteOtherGroup;
     G12_14: FormerLymeGroup;
     Q15: GeneralTherapy;
 
+    T1: FeverText;
     Q16: FeverSymptom1;
     Q17: FeverSymptom2;
     Q18: FeverSymptom3;
@@ -45,6 +44,7 @@ export class FeverGroup extends Group {
         this.G12_14 = new FormerLymeGroup(this.key, isRequired);
         this.Q15 = new GeneralTherapy(this.key, required);
 
+        this.T1 = new FeverText(this.key, required);
         this.Q16 = new FeverSymptom1(this.key, required);
         const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.nameOfOption);
         this.Q17 = new FeverSymptom2(this.key, required, Q16condition);
@@ -101,6 +101,42 @@ export class FeverGroup extends Group {
     }
 
 }
+
+
+
+
+class FeverText extends Item{
+
+  markdownContent = `
+  #Tekenbeet en gezondheid (FE- B, questions 1 through 14)
+
+  De volgende vragen gaan over je tekenbeet en je gezondheid.
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'FeverT');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+              ["nl", this.markdownContent ],
+          ]),
+          className: ''
+      })
+    ]
+    })
+  }
+}
+
 
 
 class FeverSymptom1 extends Item {
