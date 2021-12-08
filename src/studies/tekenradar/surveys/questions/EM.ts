@@ -5,13 +5,12 @@ import { TickBiteOtherGroup } from './tickBite';
 import { Doctor, FormerLymeGroup, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
 
 export class EMGroup extends Group {
 
-  //TODO: tick bite report intro question and condition
-  //TODO: intro text (different than EM/Lyme groups)
 
   G1_9: TickBiteOtherGroup;
   Q10: EM1;
@@ -119,12 +118,25 @@ class EM1 extends Item {
         ['nl', 'Wanneer ontwikkelde zich de huidige erythema migrans die je nu meldt?'],
       ]),
       responseOptions: [
-        {//TODO1: correct date mode and 'bij benadering?' after date input.
-          key: 'a', role: 'date',
-          content: new Map([
-            ["nl", "Datum dat de erythema migrans zich ontwikkelde:"],
-          ])
-        },
+        //TODO: correct date conditions and date field smaller.
+        SCOptions.cloze({
+          key: 'a', items: [
+              ClozeItemTypes.text({
+                  key: '1', content: new Map(
+                      [['nl', "Datum dat de erythema migrans zich ontwikkelde:"]]
+                  )
+              }),
+              ClozeItemTypes.dateInput({
+                 dateInputMode: 'YMD',
+                  key: '2', 
+              }),
+              ClozeItemTypes.text({
+                key: '3', content: new Map(
+                    [['nl', "bij benadering?"]]
+                )
+            }),
+            ]
+          }),
         {
           key: 'b', role: 'option',
           content: new Map([
@@ -195,10 +207,10 @@ class EM3 extends Item {
         ]),
         titleClassName: 'sticky-top',
         inputMaxWidth: '80px',
-        content: new Map([
-          ['nl', 'cm']
+        inputLabel: new Map([
+            ['nl', 'cm']
         ]),
-        contentBehindInput: true,
+        //contentBehindInput: true,
         componentProperties: {
          min: 0,
          max: 100
@@ -291,7 +303,7 @@ class EM4 extends Item {
 class PhotoEM extends Item{
 
   markdownContent = `
-  #Uploaden foto 
+  # Uploaden foto 
 
   Wij vragen je om een foto van je  erythema migrans of andere huidafwijking door de ziekte van Lyme. Mocht je nu geen foto kunnen uploaden, dan ontvang je een herinnering per email om dat later alsnog te doen.\
   Heb je geen huidafwijking door de ziekte van Lyme dan kun je deze vragenlijst overslaan.
