@@ -9,13 +9,12 @@ import { LymeDiagnosisGroup } from './diagnosisTherapy'
 
 export class ChronicGroup extends Group {
 
-  //TODO: tick bite report intro question and condition
-  //TODO: intro text (different than EM/Lyme groups)
-
     G1_9: TickBiteOtherGroup
 
     G10_11: LymeDiagnosisGroup;
 
+    //TODO: should header be shown?
+    //Lyme questions here
     Q12: ChronicLymeDiagnosis1;
     Q13: ChronicLymeDiagnosis2;
     Q14: ChronicLymeTherapy1;
