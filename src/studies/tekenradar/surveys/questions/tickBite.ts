@@ -5,6 +5,7 @@ import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
 
@@ -273,39 +274,47 @@ class RecognisedTickBite extends Item {
 
   buildItem() {
     return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: this.isPartOf('FeverG') ? this.qTextFever : this.qTextOther,
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Nee"],
-          ])
-        },
-        {//TODO: Pop up only shown if b or c is selected?
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"],
-          ])
-        },
-        {//TODO: correct date format and text after date here
-          key: 'c', role: 'date',
-          content: new Map([
-            ["nl", "Ja, de datum dat ik de tekenbeet heb opgelopen is ..........(dag/maand/jaar) bij benadering?"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "Onbekend"],
-          ])
-        }
-      ]
-    })
-  }
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: this.isPartOf('FeverG') ? this.qTextFever : this.qTextOther,
+        //helpGroupContent: this.getHelpGroupContent(),
+        responseOptions: [
+            SCOptions.option(
+              'a', new Map([["nl", "Nee"]])
+            ),
+            SCOptions.option(
+              'b', new Map([["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"]])
+            ),   
+            SCOptions.cloze({
+                key: 'c', items: [
+                    ClozeItemTypes.text({
+                        key: '1', content: new Map(
+                            [['nl', "Ja, de datum dat ik de tekenbeet heb opgelopen is"]]
+                        )
+                    }),
+                    ClozeItemTypes.dateInput({
+                        dateInputMode: 'YMD',
+                        key: '2', 
+                        maxRelativeDate: {
+                          reference: SurveyEngine.timestampWithOffset({seconds: 0}),
+                          delta: {seconds: 0}}        
+                    }),
+                    ClozeItemTypes.text({
+                        key: '3',
+                        content: new Map(
+                            [['nl', "bij benadering?"]]
+                        )
+                    })
+                ]
+            }),
+            SCOptions.option(
+              'a', new Map([["nl", "Onbekend"]])
+            ),
+          ]
+        })
+      }
 }
 
 
@@ -538,11 +547,11 @@ class NumberTickBite extends Item {
       ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
-      content: new Map([
+      inputLabel: new Map([
         ['nl', '']
       ]),
       //TODO: default preset to 1
-      contentBehindInput: true,
+      //contentBehindInput: true,
       componentProperties: {
         min: 1,
         max: 20,
