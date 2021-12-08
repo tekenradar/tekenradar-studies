@@ -24,10 +24,10 @@ export class Age extends Item {
       ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
-      content: new Map([
+      inputLabel: new Map([
         ['nl', 'jaar']
       ]),
-      contentBehindInput: true,
+      //contentBehindInput: true,
       componentProperties: {
         min: 0,
         max: 120
