@@ -222,12 +222,32 @@ export class GeneralTherapy extends Item {
             ["nl", "Nee"],
           ])
         },
-        {//TODO: insert dropbox and text
-          key: 'b', role: 'input',
-          content: new Map([
-            ["nl", "Ja, namelijk (bijvoorbeeld antibiotica, paracetemol, etc): Medicijn: .............select box with these options: Tegen erythema migrans/ziekte van Lyme ; Tegen iets anders dan de ziekte van Lyme"],
-          ])
-        },
+        SCOptions.cloze({
+          key: 'b', items: [
+              ClozeItemTypes.text({
+                  key: '1', content: new Map(
+                      [['nl', "Ja, namelijk (bijvoorbeeld antibiotica, paracetemol, etc):"]]
+                  )
+              }),
+              ClozeItemTypes.clozeLineBreak(),
+              ClozeItemTypes.text({
+                key: '2', content: new Map(
+                    [['nl', "Medicijn:"]]
+                )
+              }),
+              ClozeItemTypes.textInput({
+                key: '2', 
+                inputMaxWidth: '120px'
+
+              }),
+              ClozeItemTypes.dropDown({
+                  key: '3', options: [
+                      SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
+                      SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
+                  ]
+              }),
+          ]
+      }),
       ]
     })
   }
@@ -511,6 +531,7 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.textInput({ 
           key: '2', 
         }),
+        ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '3', content: new Map(
             [['nl', "dosis (mg per pil):"]]
@@ -519,6 +540,7 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.textInput({ 
           key: '4', 
         }),
+        ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '5', content: new Map(
             [['nl', "aantal pillen per dag"]]
@@ -527,6 +549,7 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.textInput({ 
           key: '6', 
         }),
+        ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '7', content: new Map(
             [['nl', "Op welk tijdstip neem je de pillen in? (bijvoorbeeld ‘s ochtends en ‘s avonds):"]]
@@ -535,6 +558,7 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.textInput({ 
           key: '8', 
         }),
+        ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '9', content: new Map(
             [['nl', "aantal dagen innemen:"]]
@@ -545,6 +569,7 @@ export class LymeTherapy2 extends Item {
           inputLabel: new Map([['en', 'dagen']]),
           labelBehindInput: true,
         }),
+        ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '13', content: new Map(
             [['nl', "overige informatie:"]]
@@ -571,10 +596,8 @@ export class LymeTherapy3 extends Item {
     this.isRequired = isRequired;
     this.condition = condition;
   }
-  //TODO: multiple items with text here
-  //TODO: maybe multiple slots with text input???
   buildItem() {
-    return SurveyItems.multilineTextInput({
+    return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -582,6 +605,40 @@ export class LymeTherapy3 extends Item {
       questionText: new Map([
         ['nl', 'Welke antibiotica heb je gekregen? (Dit kun je aflezen van de verpakking)'],
       ]),
+      items: [
+        ClozeItemTypes.text({
+          key: '1', content: new Map(
+              [['nl', "Naam van het middel:"]]
+          )
+        }),
+        ClozeItemTypes.textInput({ 
+          key: '2', 
+        }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({
+          key: '3', content: new Map(
+            [['nl', "aantal dagen infuus:"]]
+          )
+        }),
+        ClozeItemTypes.numberInput({ 
+          key: '4', 
+          inputLabel: new Map([['en', 'dagen']]),
+          labelBehindInput: true,
+          inputMaxWidth: '80px',
+          componentProperties: {
+            min: 0,
+          }
+        }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({
+          key: '5', content: new Map(
+            [['nl', "overige informatie:"]]
+          )
+        }),
+        ClozeItemTypes.textInput({ 
+          key: '6', 
+        })
+      ],
     })
   }
 }
@@ -647,16 +704,52 @@ export class LymeTherapy5 extends Item {
 
   //TODO: insert date and time input
   buildItem() {
-    return SurveyItems.dateInput({
+    return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      dateInputMode: 'YMD',
-          placeholderText: new Map([
-              ["nl", "dd-mm-jjjj"],
-          ]),
       questionText: this.isPartOf('LymeG')? this.qTextLyme : this.qTextEM,
+      items: [
+        ClozeItemTypes.text({
+          key: '1', content: new Map(
+              [['nl', "Op"]]
+          )
+        }),
+        ClozeItemTypes.dateInput({
+          dateInputMode: 'YMD',
+          key: '2', 
+          maxRelativeDate: {
+            reference: SurveyEngine.timestampWithOffset({seconds: 0}),
+            delta: {seconds: 0}
+          }        
+        }),//TODO: text direct after date Input (without Line break)??
+        ClozeItemTypes.text({
+          key: '3', content: new Map(
+            [['nl', "(dag/maand/jaar) tussen"]]
+          )
+        }),
+        ClozeItemTypes.numberInput({ 
+          key: '4', 
+          inputLabel: new Map([['nl', ' en']]),
+          labelBehindInput: true,
+          inputMaxWidth: '80px',
+          componentProperties: {
+            min: 0,
+            max: 24
+          }
+        }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+        ClozeItemTypes.numberInput({ 
+          key: '5', 
+          inputLabel: new Map([['nl', ' uur']]),
+          labelBehindInput: true,
+          inputMaxWidth: '80px',
+          componentProperties: {
+            min: 0,
+            max: 24
+          }
+        })
+      ],
     })
   }
 }
