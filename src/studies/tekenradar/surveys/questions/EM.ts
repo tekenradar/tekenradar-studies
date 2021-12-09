@@ -11,7 +11,6 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 
 export class EMGroup extends Group {
 
-
   G1_9: TickBiteOtherGroup;
   Q10: EM1;
   Q11: EM2;
@@ -98,7 +97,7 @@ export class EMGroup extends Group {
 
 
 //TODO: change name of questions
-class EM1 extends Item {
+export class EM1 extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -149,7 +148,7 @@ class EM1 extends Item {
 }
 
 
-class EM2 extends Item {
+export class EM2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM2');
@@ -187,7 +186,7 @@ class EM2 extends Item {
   
 
   
-class EM3 extends Item {
+export class EM3 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM3');
@@ -221,7 +220,7 @@ class EM3 extends Item {
   
   
 
-class DoctorEM extends Item {
+export class DoctorEM extends Item {
 
     optionKeys = {
       nameOfOption: 'a'
@@ -263,7 +262,7 @@ class DoctorEM extends Item {
   
   
   
-class EM4 extends Item {
+export class EM4 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'EM6');
@@ -300,7 +299,7 @@ class EM4 extends Item {
   }
   
 
-class PhotoEM extends Item{
+export class PhotoEM extends Item{
 
   markdownContent = `
   # Uploaden foto 
