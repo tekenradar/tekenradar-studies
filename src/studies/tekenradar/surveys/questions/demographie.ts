@@ -27,7 +27,7 @@ export class Age extends Item {
       inputLabel: new Map([
         ['nl', 'jaar']
       ]),
-      //contentBehindInput: true,
+      labelBehindInput: true,
       componentProperties: {
         min: 0,
         max: 120
