@@ -4,10 +4,9 @@ import { ChronicGroup } from './questions/chronic';
 import { EMGroup } from './questions/EM';
 import { FeverGroup } from './questions/fever';
 import { LymeGroup } from './questions/lyme';
-import { PDiffGroup } from './questions/PDiffQuestions';
 import { TickBiteOnlyGroup } from './questions/tickBite';
 
-
+/*
 
 class AdultsDef extends SurveyDefinition {
 
@@ -32,7 +31,7 @@ class AdultsDef extends SurveyDefinition {
         ['en', 'Test']
       ]),
     });
-
+/* 
     this.Start = new PDiffGroup(this.key, false);
 
     const rule1 = SurveyEngine.logic.and(
@@ -142,7 +141,7 @@ class AdultsDef extends SurveyDefinition {
             SurveyEngine.compare.eq(SurveyEngine.singleChoice.getDateValue(this.Start.Q6.key, 'a'), '')
           )
         )
-      )
+      ) 
 
       //TODO: kids response age here
       //const ruleKids_Adults = SurveyEngine.getResponseValueAsNum(this.Start.Q7.key)
@@ -170,3 +169,4 @@ class AdultsDef extends SurveyDefinition {
 }
 
 export const Adults = new AdultsDef();
+*/
