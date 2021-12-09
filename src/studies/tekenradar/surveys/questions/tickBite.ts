@@ -683,30 +683,135 @@ class RemoveTick3 extends Item {
       //TODO: two number inputs for each option.
       //TODO: date and two number input in option d
       responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Vandaag, tussen ... en .... uur"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Gisteren, tussen .... en  .... uur"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "Eergisteren, tussen .... en ..... uur"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "Eerder namelijk, ................(dag/maand/jaar) tussen ... en..... uur"],
-          ])
-        },
+        SCOptions.cloze({
+          key: 'a', items: [
+              ClozeItemTypes.text({
+                  key: '1', content: new Map(
+                      [['nl', "Vandaag, tussen"]]
+                  )
+              }),
+              ClozeItemTypes.numberInput({
+                  key: '2', 
+                  inputLabel: new Map([["nl", " en"],]),
+                  labelBehindInput: true,  
+                  inputMaxWidth: '80px',
+                  componentProperties: {
+                    min: 0,
+                    max: 24
+                  }
+              }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+              ClozeItemTypes.numberInput({
+                  key: '3', 
+                  inputLabel: new Map([["nl", " uur"],]),
+                  labelBehindInput: true,  
+                  inputMaxWidth: '80px',
+                  componentProperties: {
+                  min: 0,
+                  max: 24
+                }
+            }),
+            ]
+          }),
+          SCOptions.cloze({
+            key: 'b', items: [
+                ClozeItemTypes.text({
+                    key: '1', content: new Map(
+                        [['nl', "Gisteren, tussen"]]
+                    )
+                }),
+                ClozeItemTypes.numberInput({
+                    key: '2', 
+                    inputLabel: new Map([["nl", " en"],]),
+                    labelBehindInput: true,  
+                    inputMaxWidth: '80px',
+                    componentProperties: {
+                      min: 0,
+                      max: 24
+                    }
+                }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+                ClozeItemTypes.numberInput({
+                    key: '3', 
+                    inputLabel: new Map([["nl", " uur"],]),
+                    labelBehindInput: true,  
+                    inputMaxWidth: '80px',
+                    componentProperties: {
+                    min: 0,
+                    max: 24
+                  }
+              }),
+              ]
+            }),
+            SCOptions.cloze({
+              key: 'c', items: [
+                  ClozeItemTypes.text({
+                      key: '1', content: new Map(
+                          [['nl', "Eergisteren, tussen"]]
+                      )
+                  }),
+                  ClozeItemTypes.numberInput({
+                      key: '2', 
+                      inputLabel: new Map([["nl", " en"],]),
+                      labelBehindInput: true,  
+                      inputMaxWidth: '80px',
+                      componentProperties: {
+                        min: 0,
+                        max: 24
+                      }
+                  }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+                  ClozeItemTypes.numberInput({
+                      key: '3', 
+                      inputLabel: new Map([["nl", " uur"],]),
+                      labelBehindInput: true,  
+                      inputMaxWidth: '80px',
+                      componentProperties: {
+                      min: 0,
+                      max: 24
+                    }
+                }),
+                ]
+              }),
+              SCOptions.cloze({
+                key: 'd', items: [
+                    ClozeItemTypes.text({
+                      key: '1', content: new Map(
+                          [['nl', "Eerder namelijk,"]]
+                      )
+                    }),
+                    ClozeItemTypes.dateInput({
+                      dateInputMode: 'YMD',
+                       key: '2', 
+                       maxRelativeDate: {
+                         reference: SurveyEngine.timestampWithOffset({seconds: 0}),
+                         delta: {seconds: 0}}        
+                    }),
+                    ClozeItemTypes.clozeLineBreak(),
+                    ClozeItemTypes.text({
+                      key: '3', content: new Map(
+                        [['nl', " (dag/maand/jaar) tussen"]]
+                      )
+                    }),
+                    ClozeItemTypes.numberInput({
+                        key: '4', 
+                        inputLabel: new Map([["nl", " en"],]),
+                        labelBehindInput: true,  
+                        inputMaxWidth: '80px',
+                        componentProperties: {
+                          min: 0,
+                          max: 24
+                        }
+                    }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+                    ClozeItemTypes.numberInput({
+                        key: '5', 
+                        inputLabel: new Map([["nl", " uur"],]),
+                        labelBehindInput: true,  
+                        inputMaxWidth: '80px',
+                        componentProperties: {
+                        min: 0,
+                        max: 24
+                      }
+                  }),
+                ]
+          }),     
       ]
     })
   }
@@ -856,30 +961,134 @@ class DateTickBite extends Item {
         ['nl', 'Wanneer heb je de tekenbeet (vermoedelijk) opgelopen?'],
       ]),
       responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Vandaag, tussen ... en ...uur"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Gisteren, tussen ... en ... uur"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "Eergisteren, tussen ... en ... uur"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "Eerder, op ....... (dag/maand/jaar) tussen... en ...uur"],
-          ])
-        },
+        SCOptions.cloze({
+          key: 'a', items: [
+              ClozeItemTypes.text({
+                  key: '1', content: new Map(
+                      [['nl', "Vandaag, tussen"]]
+                  )
+              }),
+              ClozeItemTypes.numberInput({
+                  key: '2', 
+                  inputLabel: new Map([["nl", " en"],]),
+                  labelBehindInput: true,  
+                  inputMaxWidth: '80px',
+                  componentProperties: {
+                    min: 0,
+                    max: 24
+                  }
+              }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+              ClozeItemTypes.numberInput({
+                  key: '3', 
+                  inputLabel: new Map([["nl", " uur"],]),
+                  labelBehindInput: true,  
+                  inputMaxWidth: '80px',
+                  componentProperties: {
+                  min: 0,
+                  max: 24
+                }
+            }),
+            ]
+          }),
+          SCOptions.cloze({
+            key: 'b', items: [
+                ClozeItemTypes.text({
+                    key: '1', content: new Map(
+                        [['nl', "Gisteren, tussen"]]
+                    )
+                }),
+                ClozeItemTypes.numberInput({
+                    key: '2', 
+                    inputLabel: new Map([["nl", " en"],]),
+                    labelBehindInput: true,  
+                    inputMaxWidth: '80px',
+                    componentProperties: {
+                      min: 0,
+                      max: 24
+                    }
+                }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+                ClozeItemTypes.numberInput({
+                    key: '3', 
+                    inputLabel: new Map([["nl", " uur"],]),
+                    labelBehindInput: true,  
+                    inputMaxWidth: '80px',
+                    componentProperties: {
+                    min: 0,
+                    max: 24
+                  }
+              }),
+              ]
+            }),
+            SCOptions.cloze({
+              key: 'c', items: [
+                  ClozeItemTypes.text({
+                      key: '1', content: new Map(
+                          [['nl', "Eergisteren, tussen"]]
+                      )
+                  }),
+                  ClozeItemTypes.numberInput({
+                      key: '2', 
+                      inputLabel: new Map([["nl", " en"],]),
+                      labelBehindInput: true,  
+                      inputMaxWidth: '80px',
+                      componentProperties: {
+                        min: 0,
+                        max: 24
+                      }
+                  }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+                  ClozeItemTypes.numberInput({
+                      key: '3', 
+                      inputLabel: new Map([["nl", " uur"],]),
+                      labelBehindInput: true,  
+                      inputMaxWidth: '80px',
+                      componentProperties: {
+                      min: 0,
+                      max: 24
+                    }
+                }),
+                ]
+              }),
+              SCOptions.cloze({
+                key: 'd', items: [
+                    ClozeItemTypes.text({
+                      key: '1', content: new Map(
+                          [['nl', "Eerder, op"]]
+                      )
+                    }),
+                    ClozeItemTypes.dateInput({
+                      dateInputMode: 'YMD',
+                       key: '2', 
+                       maxRelativeDate: {
+                         reference: SurveyEngine.timestampWithOffset({seconds: 0}),
+                         delta: {seconds: 0}}        
+                    }),//TODO: text direct after date Input (without Line break)??
+                    ClozeItemTypes.text({
+                      key: '3', content: new Map(
+                        [['nl', " (dag/maand/jaar) tussen"]]
+                      )
+                    }),
+                    ClozeItemTypes.numberInput({
+                        key: '4', 
+                        inputLabel: new Map([["nl", " en"],]),
+                        labelBehindInput: true,  
+                        inputMaxWidth: '80px',
+                        componentProperties: {
+                          min: 0,
+                          max: 24
+                        }
+                    }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
+                    ClozeItemTypes.numberInput({
+                        key: '5', 
+                        inputLabel: new Map([["nl", " uur"],]),
+                        labelBehindInput: true,  
+                        inputMaxWidth: '80px',
+                        componentProperties: {
+                        min: 0,
+                        max: 24
+                      }
+                  }),
+                  ]
+                }),     
       ]
     })
   }
@@ -906,31 +1115,69 @@ class DurationTickBite extends Item {
         ['nl', 'Hoe lang heeft de teek in de huid vastgezeten?'],
       ]),
       responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Korter dan 12 uur, namelijk ....... uur"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "12 - 24 uur, namelijk …… uur"],
-          ])
-        },
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "Langer dan 24 uur, namelijk ...... dagen/uur (rond a.u.b. af op hele dagen)"],
-          ])
-        },
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "Weet ik niet"],
-          ])
-        },
-      ]
+        SCOptions.cloze({
+          key: 'a', items: [
+              ClozeItemTypes.text({
+                  key: '1', content: new Map(
+                      [['nl', "Korter dan 12 uur, namelijk"]]
+                  )
+              }),
+              ClozeItemTypes.numberInput({
+                  key: '2', 
+                  inputLabel: new Map([["nl", " uur"],]),
+                  labelBehindInput: true,  
+                  inputMaxWidth: '80px',
+                  componentProperties: {
+                    min: 0,
+                    max: 12
+                  }
+              }),
+            ]
+          }),
+          SCOptions.cloze({
+            key: 'b', items: [
+                ClozeItemTypes.text({
+                    key: '1', content: new Map(
+                        [['nl', "12 - 24 uur, namelijk"]]
+                    )
+                }),
+                ClozeItemTypes.numberInput({
+                    key: '2', 
+                    inputLabel: new Map([["nl", " uur"],]),
+                    labelBehindInput: true,  
+                    inputMaxWidth: '80px',
+                    componentProperties: {
+                      min: 12,
+                      max: 24
+                    }
+                }),
+              ]
+            }),
+            SCOptions.cloze({
+              key: 'c', items: [
+                  ClozeItemTypes.text({
+                      key: '1', content: new Map(
+                          [['nl', "Langer dan 24 uur, namelijk"]]
+                      )
+                  }),
+                  ClozeItemTypes.textInput({
+                      key: '2', 
+                      inputMaxWidth: '200px'
+                  }),
+                  ClozeItemTypes.text({
+                    key: '3', content: new Map(
+                        [['nl', " dagen/uur (rond a.u.b. af op hele dagen)"]]
+                    )
+                }),
+                ]
+              }),
+              {
+                key: 'd', role: 'option',
+                content: new Map([
+                  ["nl", "Weet ik niet"],
+                ])
+              },
+            ]
     })
   }
 }
