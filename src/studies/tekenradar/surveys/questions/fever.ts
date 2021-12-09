@@ -105,7 +105,7 @@ export class FeverGroup extends Group {
 
 
 
-class FeverText extends Item{
+export class FeverText extends Item{
 
   markdownContent = `
   #Tekenbeet en gezondheid (FE- B, questions 1 through 14)
@@ -139,7 +139,7 @@ class FeverText extends Item{
 
 
 
-class FeverSymptom1 extends Item {
+export class FeverSymptom1 extends Item {
 
     optionKeys = {
         nameOfOption: 'a'
@@ -180,8 +180,7 @@ class FeverSymptom1 extends Item {
 }
 
 
-class FeverSymptom2 extends Item {
-
+export class FeverSymptom2 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FS2');
@@ -264,7 +263,7 @@ class FeverSymptom2 extends Item {
 }
 
 
-class FeverSymptom3 extends Item {
+export class FeverSymptom3 extends Item {
 
     optionKeys = {
         nameOfOption: 'b'
@@ -305,7 +304,7 @@ class FeverSymptom3 extends Item {
 }
 
 
-class FeverSymptom4 extends Item {
+export class FeverSymptom4 extends Item {
 
     optionKeys = {
         nameOfOption: 'a'
@@ -346,7 +345,7 @@ class FeverSymptom4 extends Item {
 }
 
 
-class FeverSymptom5 extends Item {
+export class FeverSymptom5 extends Item {
 
     optionKeys = {
         nameOfOption: 'a'
@@ -387,7 +386,7 @@ class FeverSymptom5 extends Item {
 }
 
 
-class FeverSymptom6 extends Item {
+export class FeverSymptom6 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FS6');
@@ -444,7 +443,7 @@ class FeverSymptom6 extends Item {
 
 
 
-class FeverSymptom7 extends Item {
+export class FeverSymptom7 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FS7');
@@ -480,7 +479,7 @@ class FeverSymptom7 extends Item {
 }
 
 
-class FeverTherapy extends Item {
+export class FeverTherapy extends Item {
  
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FT');
@@ -517,7 +516,7 @@ class FeverTherapy extends Item {
 }
 
 
-class FeverOtherCause1 extends Item {
+export class FeverOtherCause1 extends Item {
 
     optionKeys = {
         nameOfOption: 'h'
@@ -596,7 +595,7 @@ class FeverOtherCause1 extends Item {
 }
 
 
-class FeverOtherCause2 extends Item {
+export class FeverOtherCause2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'FOC2');
@@ -681,7 +680,7 @@ class FeverOtherCause2 extends Item {
   
   
 
-class FeverOtherCause3 extends Item {
+export class FeverOtherCause3 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'FOC3');
@@ -762,7 +761,7 @@ class FeverOtherCause3 extends Item {
   }
   
   
-class FeverOtherCause4 extends Item {
+export class FeverOtherCause4 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'FOC4');
