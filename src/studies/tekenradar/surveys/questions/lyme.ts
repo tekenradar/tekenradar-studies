@@ -98,7 +98,7 @@ export class LymeGroup extends Group {
 }
 
 
-  class LymeDiagnosis3 extends Item {
+  export class LymeDiagnosis3 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD3');
@@ -120,7 +120,7 @@ export class LymeGroup extends Group {
     }
   }
   
-class LymeDiagnosis4 extends Item {
+export class LymeDiagnosis4 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD4');
@@ -166,7 +166,7 @@ class LymeDiagnosis4 extends Item {
   }
   
    
-class LymeDiagnosis5 extends Item {
+export class LymeDiagnosis5 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD5');
@@ -204,7 +204,7 @@ class LymeDiagnosis5 extends Item {
   }
   
    
-class LymeDiagnosis6 extends Item {
+export class LymeDiagnosis6 extends Item {
 
     optionKeys = {
         nameOfOption: 'a'
@@ -245,7 +245,7 @@ class LymeDiagnosis6 extends Item {
   }
   
    
-class LymeDiagnosis7 extends Item {
+export class LymeDiagnosis7 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD7');
