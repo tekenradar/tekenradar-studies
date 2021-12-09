@@ -3,62 +3,10 @@ import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { Age } from './demographie';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
-export class PDiffGroup extends Group {
-
-  T1: IntroPDiff;
-  Q1: DetectTickBite;
-  Q2: FeverTickBite;
-  T2: EMTextPDiff;
-  Q3: EMTickBite;
-  Q4: LymeTickBite1;
-  Q5: LymeTickBite2;
-  Q6: MedicationLyme;
-  Q7: Age;
-
-
-  constructor(parentKey: string, isRequired?: boolean) {
-    super(parentKey, 'PDiffG');
-
-    const required = isRequired !== undefined ? isRequired : false;
-
-    this.T1 = new IntroPDiff(this.key, required);
-    this.Q1 = new DetectTickBite(this.key, required);
-    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
-
-    this.Q2 = new FeverTickBite(this.key, required, q1Condition);
-    this.T2 = new EMTextPDiff(this.key, required);
-    this.Q3 = new EMTickBite(this.key, required);
-    this.Q4 = new LymeTickBite1(this.key, required);
-    const q4Condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
-
-    this.Q5 = new LymeTickBite2(this.key, required, q4Condition);
-    this.Q6 = new MedicationLyme(this.key, required, q4Condition);
-    this.Q7 = new Age(this.key, required);
-
-  }
-
-
-  buildGroup() {
-
-    this.addItem(this.T1.get());
-    this.addItem(this.Q1.get());
-    this.addItem(this.Q2.get());
-    this.addItem(this.T2.get());
-    this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
-    this.addItem(this.Q6.get());
-    this.addItem(this.Q7.get());
-    this.addPageBreak();
-
-  }
-
-}
-
-
-class IntroPDiff extends Item{
+export class IntroPDiff extends Item{
 
   markdownContent = `
   # Melding doen
@@ -93,7 +41,7 @@ class IntroPDiff extends Item{
   }
 }
 
-class DetectTickBite extends Item {
+export class DetectTickBite extends Item {
 
   optionKeys = {
     nameOfOption: 'a'
@@ -135,7 +83,7 @@ class DetectTickBite extends Item {
 }
 
 
-class FeverTickBite extends Item {
+export class FeverTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FevTB');
@@ -179,7 +127,7 @@ class FeverTickBite extends Item {
 }
 
 
-class EMTextPDiff extends Item{
+export class EMTextPDiff extends Item{
 
   markdownContent = `
 
@@ -219,7 +167,7 @@ class EMTextPDiff extends Item{
 }
 
 
-class EMTickBite extends Item {
+export class EMTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EMTB');
@@ -258,7 +206,7 @@ class EMTickBite extends Item {
 
 
 
-class LymeTickBite1 extends Item {
+export class LymeTickBite1 extends Item {
 
   optionKeys = {
     nameOfOption: 'a'
@@ -300,7 +248,7 @@ class LymeTickBite1 extends Item {
 }
 
 
-class LymeTickBite2 extends Item {
+export class LymeTickBite2 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LTB2');
@@ -343,7 +291,7 @@ class LymeTickBite2 extends Item {
 }
 
 
-class MedicationLyme extends Item {
+export class MedicationLyme extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'MedLyme');
@@ -363,16 +311,30 @@ class MedicationLyme extends Item {
         ['nl', 'Ben je voor deze ziekte van Lyme behandeld met antibiotica?'],
       ]),
       responseOptions: [
-        {
-          //NOTE: filling in date is NOT mandatory to avoid getting stuck due to forgotten date
-          key: 'a', role: 'dateInput',
-          content: new Map([
-            ["nl", "Ja, ik ben gestart op"],
-          ]),
-          optionProps: {
-            max: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({seconds: 0}) }
-        },
-        },
+          SCOptions.cloze({
+            key: 'a', items: [
+                ClozeItemTypes.text({
+                    key: '1', content: new Map(
+                        [['nl', "Ja, ik ben gestart op"]]
+                    )
+                }),//NOTE: filling in date is NOT mandatory to avoid getting stuck due to forgotten date
+                ClozeItemTypes.dateInput({
+                   dateInputMode: 'YMD',
+                    key: '2', 
+                    maxRelativeDate: {
+                      reference: SurveyEngine.timestampWithOffset({seconds: 0}),
+                      delta: {seconds: 0}}        
+                }),//TODO: text direct after date Input (without Line break)??
+                ClozeItemTypes.text({
+                  key: '3', content: new Map(
+                      [['nl', "(vul hier de startdatum van je  antibiotica behandeling in, of een schatting daarvan)"]]
+                  )
+                }),
+              ]
+            }),
+          //optionProps: {
+          //  max: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({seconds: 0}) }
+          //}
         {
           key: 'b', role: 'option',
           content: new Map([
