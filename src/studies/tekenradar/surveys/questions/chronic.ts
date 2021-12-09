@@ -64,7 +64,7 @@ export class ChronicGroup extends Group {
 
 
 
-class ChronicLymeDiagnosis1 extends Item {
+export class ChronicLymeDiagnosis1 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLD1');
@@ -87,7 +87,7 @@ class ChronicLymeDiagnosis1 extends Item {
   }
 
   
-class ChronicLymeDiagnosis2 extends Item {
+export class ChronicLymeDiagnosis2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLD2');
@@ -110,7 +110,7 @@ class ChronicLymeDiagnosis2 extends Item {
   }
 
  
-  class ChronicLymeTherapy1 extends Item {
+  export class ChronicLymeTherapy1 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLT1');
@@ -133,7 +133,7 @@ class ChronicLymeDiagnosis2 extends Item {
   }
 
  
-  class ChronicLymeTherapy2 extends Item {
+  export class ChronicLymeTherapy2 extends Item {
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'CLT2');
