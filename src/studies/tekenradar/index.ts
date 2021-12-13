@@ -6,10 +6,11 @@ import { TBflow_Adults } from "./surveys/TBflow_Adults";
 import { LBflow_Adults } from "./surveys/LBflow_Adults";
 import { Chronicflow_Adults } from "./surveys/Chronicflow_Adults";
 import { Feverflow_Adults } from "./surveys/Feverflow_Adults";
+import { Followupflow_Adults } from "./surveys/Followupflow_Adults";
 
 export const TekenradarStudy: Study = {
     studyKey: 'tekenradar',
     surveys: [
-        PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults
+        PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Followupflow_Adults
     ]
 }
