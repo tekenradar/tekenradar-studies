@@ -112,13 +112,6 @@ class PreviousTickBites2 extends Item {
         },
     ]
 
-    questionTextFollowup = [
-        {
-            content: new Map([
-                ["nl", 'Hoeveel tekenbeten heb je sinds je de vorige vragenlijst 3 maanden geleden invulde opgemerkt die nog niet gemeld zijn via je account op tekenradar.nl?'],
-            ]),
-        }
-    ]
 
     constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'PTB2');
@@ -133,7 +126,7 @@ class PreviousTickBites2 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: this.isPartOf('FollowupG') ? this.questionTextFollowup : this.questionTextMain,
+            questionText: this.questionTextMain,
             responseOptions: [
                 {
                     key: 'a', role: 'option',
