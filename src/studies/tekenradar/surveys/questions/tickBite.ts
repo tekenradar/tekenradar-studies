@@ -189,8 +189,8 @@ export class TickBiteOtherGroup extends Group {
         this.addItem(this.Q9.get());
         this.addPageBreak();
 
-        //TODO: is this the recommended way to add fever group questions in this group?
-        if (this.isPartOf('FeverG')) {
+        //TODO: is this the recommended way to add fever survey questions in this group?
+        if (this.isPartOf('Feverflow')) {
             this.addItem(this.Q10F.get()),
             this.addItem(this.Q11F.get()) 
         }
@@ -239,7 +239,7 @@ class IntroTB extends Item{
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-              ["nl", this.isPartOf('TBOnlyG') ? this.markdownContentOnly : (this.isPartOf('FeverG') ? this.markdownContentFever : this.markdownContentOther)],
+              ["nl", this.isPartOf('TBOnlyG') ? this.markdownContentOnly : (this.isPartOf('Feverflow') ? this.markdownContentFever : this.markdownContentOther)],
           ]),
           className: ''
       })
@@ -278,7 +278,7 @@ class RecognisedTickBite extends Item {
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
-        questionText: this.isPartOf('FeverG') ? this.qTextFever : this.qTextOther,
+        questionText: this.isPartOf('Feverflow') ? this.qTextFever : this.qTextOther,
         //helpGroupContent: this.getHelpGroupContent(),
         responseOptions: [
             SCOptions.option(
