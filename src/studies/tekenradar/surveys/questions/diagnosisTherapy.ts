@@ -499,13 +499,6 @@ export class LymeTherapy1 extends Item {
 
 export class LymeTherapy2 extends Item {
 
-  markdownContentOnly = `
-  # Melden tekenbeet
-
-  De volgende vragen gaan over de tekenbeet. \
-  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
-
-  `
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LymeTher2');
 
@@ -709,7 +702,7 @@ export class LymeTherapy5 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf('LymeG')? this.qTextLyme : this.qTextEM,
+      questionText: this.isPartOf('LBflow')? this.qTextLyme : this.qTextEM,
       items: [
         ClozeItemTypes.text({
           key: '1', content: new Map(
