@@ -4,6 +4,8 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
 import { PreviousTickBitesGroup } from './prevTickBites'
 import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy1, LymeTherapy2, LymeTherapy3, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy'
+import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+
 
 
 export class LymeGroup extends Group {
@@ -100,6 +102,14 @@ export class LymeGroup extends Group {
 
   export class LymeDiagnosis3 extends Item {
 
+    qTextLyme = new Map([
+      ['nl', 'Welke klachten door de ziekte van Lyme heb/had je? Geef hier een uitgebreide beschrijving van je klachten en vermeld hierbij ook hoe dit bij jou is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
+    ])
+
+    qTextFollowUp = new Map([
+      ['nl', 'Welke nieuwe klachten door de ziekte van Lyme heeft/had je? Geef hier een uitgebreide beschrijving van je klachten en vermeld hierbij ook hoe dit bij jou is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
+    ])
+
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
       super(parentKey, 'LD3');
   
@@ -113,9 +123,7 @@ export class LymeGroup extends Group {
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
-        questionText: new Map([
-          ['nl', 'Welke klachten door de ziekte van Lyme heb/had je? Geef hier een uitgebreide beschrijving van je  klachten en vermeld hierbij ook hoe dit bij jou is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
-        ]),
+        questionText: this.isPartOf("Followupflow") ? this.qTextFollowUp : this.qTextLyme,
       })
     }
   }
@@ -129,7 +137,7 @@ export class LymeDiagnosis4 extends Item {
       this.condition = condition;
     }
   
-    buildItem() {
+    buildItem() {//TODO: check if it works woth MC questions too!!
       return SurveyItems.multipleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
@@ -139,14 +147,30 @@ export class LymeDiagnosis4 extends Item {
           ['nl', 'Wanneer zijn deze klachten door de ziekte van Lyme ontstaan?'],
         ]),
         responseOptions: [
-          {//TODO: is this correct dutch in the first option?
-            //(bij benadering stands after date input)
-            key: 'a', role: 'date',
-            content: new Map([
-              ["nl", "Datum bij benadering"],
-            ]),
-            disabled: SurveyEngine.multipleChoice.any(this.itemKey,'b')
-          },
+            SCOptions.cloze({
+              key: 'a', items: [
+                ClozeItemTypes.text({
+                    key: '1', content: new Map(
+                        [['en', "Datum"]]
+                    )
+                }),
+                ClozeItemTypes.dateInput({
+                  dateInputMode: 'YMD',
+                  key: '2', 
+                  maxRelativeDate: {
+                    reference: SurveyEngine.timestampWithOffset({seconds: 0}),
+                    delta: {seconds: 0}
+                  }        
+                }),
+                ClozeItemTypes.text({
+                  key: '3', content: new Map(
+                      [['en', "bij benadering"]]
+                  )
+              }),
+            ],
+            //TODO: how to disable option of cloze type?
+            //disabled: SurveyEngine.multipleChoice.any(this.itemKey,'b'),
+          }),   
           {//disable b if a is selected and disable a if b is selected
             key: 'b', role: 'option',
             content: new Map([
@@ -185,13 +209,28 @@ export class LymeDiagnosis5 extends Item {
           ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
         ]),
         responseOptions: [
-          {//TODO: is this correct dutch in the first option?
-            //(bij benadering stands after date input)
-            key: 'a', role: 'date',
-            content: new Map([
-              ["nl", "Datum bij benadering"],
-            ])
-          },
+          SCOptions.cloze({
+            key: 'a', items: [
+              ClozeItemTypes.text({
+                  key: '1', content: new Map(
+                      [['en', "Datum"]]
+                  )
+              }),
+              ClozeItemTypes.dateInput({
+                dateInputMode: 'YMD',
+                key: '2', 
+                maxRelativeDate: {
+                  reference: SurveyEngine.timestampWithOffset({seconds: 0}),
+                  delta: {seconds: 0}
+                }        
+              }),
+              ClozeItemTypes.text({
+                key: '3', content: new Map(
+                    [['en', "bij benadering"]]
+                )
+              }),
+            ],
+          }),          
           {
             key: 'b', role: 'option',
             content: new Map([
@@ -205,6 +244,15 @@ export class LymeDiagnosis5 extends Item {
   
    
 export class LymeDiagnosis6 extends Item {
+
+  
+   qTextLyme = new Map([
+     ['nl', 'Heb je op dit moment nog klachten door de ziekte van Lyme?'],
+    ])
+
+    qTextFollowUp = new Map([
+      ['nl', 'Heb je op dit moment nog klachten door deze nieuwe uiting van de ziekte van Lyme?'],
+    ])
 
     optionKeys = {
         nameOfOption: 'a'
@@ -223,9 +271,7 @@ export class LymeDiagnosis6 extends Item {
         itemKey: this.itemKey,
         isRequired: this.isRequired,
         condition: this.condition,
-        questionText: new Map([
-          ['nl', 'Heb je op dit moment nog klachten door de ziekte van Lyme?'],
-        ]),
+        questionText: this.isPartOf("Followupflow") ? this.qTextFollowUp : this.qTextLyme,
         responseOptions: [
           {
             key: 'a', role: 'option',
