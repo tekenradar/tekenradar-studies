@@ -94,6 +94,38 @@ export class EMGroup extends Group {
 }
 
 
+export class EMTextKids extends Item{
+
+  markdownContent = `
+  De vragen hieronder zijn voor een minderjarige. 
+  Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'EMTextK');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+            content: new Map([
+                ["nl", this.markdownContent],
+            ]),
+            className: ''
+        })
+    ]
+    })
+  }
+}
+
 
 
 //TODO: change name of questions
