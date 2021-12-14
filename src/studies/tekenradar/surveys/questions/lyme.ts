@@ -4,7 +4,7 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
 import { PreviousTickBitesGroup } from './prevTickBites'
 import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy1, LymeTherapy2, LymeTherapy3, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy'
-import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
 
@@ -137,7 +137,7 @@ export class LymeDiagnosis4 extends Item {
       this.condition = condition;
     }
   
-    buildItem() {//TODO: check if it works woth MC questions too!!
+    buildItem() {//TODO: check if it works woth MCOptions questions too!!
       return SurveyItems.multipleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
@@ -147,7 +147,7 @@ export class LymeDiagnosis4 extends Item {
           ['nl', 'Wanneer zijn deze klachten door de ziekte van Lyme ontstaan?'],
         ]),
         responseOptions: [
-            SCOptions.cloze({
+            MCOptions.cloze({
               key: 'a', items: [
                 ClozeItemTypes.text({
                     key: '1', content: new Map(
