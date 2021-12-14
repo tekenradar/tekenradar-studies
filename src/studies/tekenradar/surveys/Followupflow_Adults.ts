@@ -1,8 +1,8 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
-import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU1, SymptomsFU2, Text1FU, Text2FU } from './questions/followup';
-
+import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text2FU } from './questions/followup';
+import { Symptoms1 } from './questions/standard';
 
 class Followupflow_AdultsDef extends SurveyDefinition {
 
@@ -21,8 +21,8 @@ class Followupflow_AdultsDef extends SurveyDefinition {
     Q11: LymeDiagnosis6;
     Q12: MedicationFU1;
     Q13: MedicationFU2;
-    Q14: SymptomsFU1;
-    Q15: SymptomsFU2;
+    Q14: Symptoms1;
+    Q15: SymptomsFU;
 
 
     constructor(isRequired?: boolean) {
@@ -58,8 +58,8 @@ class Followupflow_AdultsDef extends SurveyDefinition {
         this.Q11 = new LymeDiagnosis6(this.key, required);
         this.Q12 = new MedicationFU1(this.key, required);
         this.Q13 = new MedicationFU2(this.key, required);
-        this.Q14 = new SymptomsFU1(this.key, required);
-        this.Q15 = new SymptomsFU2(this.key, required);
+        this.Q14 = new Symptoms1(this.key, required);
+        this.Q15 = new SymptomsFU(this.key, required);
 
     }
 
