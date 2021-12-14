@@ -452,7 +452,7 @@ class ActivityTickBite extends Item {
             ["nl", "Spelen"],
           ])
         },
-        {
+        {//TODO: show option g only if participant age > 12 years
           key: 'g', role: 'input',
           content: new Map([
             ["nl", "Werk gerelateerde activiteit, mijn beroep is:"],
