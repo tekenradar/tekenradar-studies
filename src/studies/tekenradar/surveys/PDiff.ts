@@ -2,6 +2,7 @@ import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, IntroPDiff, Lym
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Age } from './questions/demographie';
+import { FunctioningText } from './questions/standard';
 
 export class PDiffDef extends SurveyDefinition {
  
