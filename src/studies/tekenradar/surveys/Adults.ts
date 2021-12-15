@@ -6,6 +6,8 @@ import { FeverGroup } from './questions/fever';
 import { LymeGroup } from './questions/lyme';
 import { TickBiteOnlyGroup } from './questions/tickBite';
 
+
+//TODO: here are study rules of old structure. Transfer to new structure with seperate surveys.
 /*
 
 class AdultsDef extends SurveyDefinition {
