@@ -2,7 +2,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
-import { Fatigue, Functioning1, Functioning2, Functioning3, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, Text1Standard } from './questions/standard';
+import { Awareness, Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 
 
@@ -10,7 +10,7 @@ import { Residence, Gender } from './questions/demographie';
 class Standardflow_AdultsDef extends SurveyDefinition {
 
     Q1: Tekenradar;
-    T1: Text1Standard;
+    T1: StandardText1;
     Q2: Qualification;
     Q3: Residence;
     Q4: Gender;
@@ -22,8 +22,13 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     Q9: Functioning1;
     Q10: Functioning2;
     Q11: Functioning3;
+    Q12: Functioning4;
+    Q13: Functioning5;
     Q14: Fatigue;
-
+    Q15: Cognition;
+    T3: MedCareText;
+    Q16: MedCare1;
+    Q17: Awareness;
 
     constructor(isRequired?: boolean) {
         super({
@@ -42,7 +47,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
         const required = isRequired !== undefined ? isRequired : false;
         this.Q1 = new Tekenradar(this.key, required);
-        this.T1 = new Text1Standard(this.key, required);
+        this.T1 = new StandardText1(this.key, required);
         this.Q2 = new Qualification(this.key, required);
         this.Q3 = new Residence(this.key, required);
         this.Q4 = new Gender(this.key, required);
@@ -54,7 +59,13 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.Q9 = new Functioning1(this.key, required);
         this.Q10 = new Functioning2(this.key, required);
         this.Q11 = new Functioning3(this.key, required);
+        this.Q12 = new Functioning4(this.key, required);
+        this.Q13 = new Functioning5(this.key, required);
         this.Q14 = new Fatigue(this.key, required);
+        this.Q15 = new Cognition(this.key, required);
+        this.T3 = new MedCareText(this.key, required);
+        this.Q16 = new MedCare1(this.key, required);
+        this.Q17 = new Awareness(this.key, required);
 
 
     }
@@ -74,7 +85,13 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.addItem(this.Q9.get());
         this.addItem(this.Q10.get());
         this.addItem(this.Q11.get());
+        this.addItem(this.Q12.get());
+        this.addItem(this.Q13.get());
         this.addItem(this.Q14.get());
+        this.addItem(this.Q15.get());
+        this.addItem(this.T3.get());
+        this.addItem(this.Q16.get());
+        this.addItem(this.Q17.get());
     }
 }
 
