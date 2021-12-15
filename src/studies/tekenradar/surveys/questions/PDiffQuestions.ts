@@ -36,7 +36,7 @@ export class IntroPDiff extends Item{
             ]),
             className: ''
         })
-    ]
+      ]
     })
   }
 }
