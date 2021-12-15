@@ -2,7 +2,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
-import { Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, Text1Standard } from './questions/standard';
+import { Fatigue, Functioning1, Functioning2, Functioning3, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, Text1Standard } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 
 
@@ -17,6 +17,12 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     Q5: Symptoms1;
     Q6: Symptoms2;
     Q7: Symptoms3;
+    Q8: Pregnant;
+    T2: FunctioningText;
+    Q9: Functioning1;
+    Q10: Functioning2;
+    Q11: Functioning3;
+    Q14: Fatigue;
 
 
     constructor(isRequired?: boolean) {
@@ -43,7 +49,12 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.Q5 = new Symptoms1(this.key, required);
         this.Q6 = new Symptoms2(this.key, required);
         this.Q7 = new Symptoms3(this.key, required);
-
+        this.Q8 = new Pregnant(this.key, required);
+        this.T2 = new FunctioningText(this.key, required);
+        this.Q9 = new Functioning1(this.key, required);
+        this.Q10 = new Functioning2(this.key, required);
+        this.Q11 = new Functioning3(this.key, required);
+        this.Q14 = new Fatigue(this.key, required);
 
 
     }
@@ -58,7 +69,12 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.addItem(this.Q5.get());
         this.addItem(this.Q6.get());
         this.addItem(this.Q7.get());
-
+        this.addItem(this.Q8.get());
+        this.addItem(this.T2.get());
+        this.addItem(this.Q9.get());
+        this.addItem(this.Q10.get());
+        this.addItem(this.Q11.get());
+        this.addItem(this.Q14.get());
     }
 }
 
