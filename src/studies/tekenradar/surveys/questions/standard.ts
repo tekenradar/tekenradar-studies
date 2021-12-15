@@ -66,7 +66,7 @@ export class Tekenradar extends Item {
     }
   }
   
-  
+//TODO: why is Markdown not working in this text???
 export class Text1Standard extends Item{
 
     markdownContent = `
@@ -761,9 +761,7 @@ export class Pregnant extends Item {
   }
 
 
-
-  
-
+//TODO: why is Markdown not working in this text???
 export class FunctioningText extends Item{
 
     markdownContent = `
@@ -992,7 +990,6 @@ export class Functioning2 extends Item {
 
 export class Functioning3 extends Item {
 
-    //TODO bold text "in de afgelopen 3 maanden" ?
     questionTextMain = [
         {
             content: new Map([
@@ -1095,7 +1092,7 @@ export class Fatigue extends Item {
         scaleOptions: [
             {
                 key: '1', content: new Map([
-                    ["de", "Ja, dat klopt	"],
+                    ["de", "Ja, dat klopt"],
                 ])
             }, {
                 key: '2', content: new Map([
@@ -1163,9 +1160,20 @@ export class Cognition extends Item {
     questionTextMain = [
         {
             content: new Map([
-                ["nl", 'Met behulp van de volgende uitspraken willen wij een indruk krijgen van hoe je jezelf de laatste twee weken hebt gevoeld. Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: Ik voel me ontspannen: ja, dat klopt'],
+                ["nl", 'De volgende vragen gaan over kleine, alledaagse vergissingen die iedereen van tijd tot tijd maakt. Sommige van die vergissingen overkomen je '],
             ]),
-        }
+        },
+        {
+            content: new Map([
+                ["nl", "mogelijk "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "wat vaker dan andere. Vink hieronder aan hoe vaak je dit overkomt."],
+            ]),
+        },
     ]
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1186,11 +1194,25 @@ export class Cognition extends Item {
         scaleOptions: [
             {
                 key: '1', content: new Map([
-                    ["de", "Ja, dat klopt	"],
+                    ["de", "Zeer vaak"],
                 ])
             }, {
                 key: '2', content: new Map([
-                    ["de", "Nee, dat klopt niet"],
+                    ["de", "Vaak"],
+                ])
+            },
+            {
+                key: '3', content: new Map([
+                    ["de", "Af en toe"],
+                ])
+            }, {
+                key: '4', content: new Map([
+                    ["de", "Zelden"],
+                ])
+            },
+            {
+                key: '5', content: new Map([
+                    ["de", "Nooit"],
                 ])
             }
         ],	
