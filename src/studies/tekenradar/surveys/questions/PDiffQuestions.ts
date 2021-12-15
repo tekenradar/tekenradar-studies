@@ -14,7 +14,6 @@ export class IntroPDiff extends Item{
   #### Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
 
   Wat wil je precies melden? Wat is op jou van toepassing?
-
   `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
