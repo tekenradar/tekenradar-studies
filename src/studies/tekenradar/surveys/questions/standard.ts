@@ -717,3 +717,532 @@ export class Symptoms2 extends Item {
       })
     }
   }
+
+  
+
+export class Pregnant extends Item {
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'preg');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.singleChoice({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: new Map([
+          ['nl', 'Ben je zwanger?'],
+        ]),
+        responseOptions: [
+          {
+            key: 'a', role: 'numberInput',
+            content: new Map([
+              ["nl", "Ja, aantal weken:"],
+            ]),
+            optionProps: {
+                min: 1,
+                max: 43
+            }
+          },
+          {
+            key: 'b', role: 'option',
+            content: new Map([
+              ["nl", "Nee"],
+            ])
+          },
+        ]
+      })
+    }
+  }
+
+
+
+  
+
+export class FunctioningText extends Item{
+
+    markdownContent = `
+    # Functioneren 
+
+    In deze vragenlijst wordt naar je gezondheid gevraagd.
+    Wanneer je twijfelt over het antwoord op een vraag, probeer dan het antwoord te geven dat het meest van toepassing is.
+    
+    De volgende vragen gaan over dagelijkse bezigheden.
+    `
+  
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'FuncT');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.display({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        condition: this.condition,
+        content: [
+          ComponentGenerators.markdown({
+              content: new Map([
+                  ["nl", this.markdownContent],
+              ]),
+              className: ''
+          })
+        ]
+      })
+    }
+  }
+  
+export class Functioning1 extends Item {
+
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Word je door je gezondheid '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "op dit moment "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "beperkt bij deze bezigheden. Zo ja, in welke mate?"],
+            ]),
+        },
+    ]
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'Func1');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.responsiveSingleChoiceArray({
+        defaultMode: 'table',
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: this.questionTextMain,
+        scaleOptions: [
+            {
+                key: '1', content: new Map([
+                    ["de", "Ernstig beperkt"],
+                ])
+            }, {
+                key: '2', content: new Map([
+                    ["de", "Een beetje beperkt"],
+                ])
+            }, {
+                key: '3', content: new Map([
+                    ["de", "Helemaal niet beperkt"],
+                ])
+            }
+        ],	
+        rows: [
+            {
+                key: 'a', content: new Map([
+                    ["de", "Forse inspanning (zoals hardlopen, zware voorwerpen tillen, inspannend sporten)"],
+                ])
+            },
+            {
+                key: 'b', 
+                content: new Map([
+                ["nl", "Matige inspanning (zoals het verplaatsen van een tafel, stofzuigen, fietsen)"],
+                ])
+            },
+            {
+                key: 'c', 
+                content: new Map([
+                ["nl", "Tillen of boodschappen dragen"],
+                ])
+            },
+            {
+                key: 'd', 
+                content: new Map([
+                    ["nl", "Een paar trappen oplopen"],
+                ]),
+            },   
+            {
+                key: 'e', 
+                content: new Map([
+                ["nl", "Een trap oplopen"],
+                ])
+            },  
+            {
+                key: 'f', 
+                content: new Map([
+                ["nl", "Buigen, knielen, of bukken"],
+                ])
+            },  
+            {
+                key: 'g', 
+                content: new Map([
+                ["nl", "Meer dan een kilometer lopen"],
+                ])
+            },  
+            {
+                key: 'h', 
+                content: new Map([
+                ["nl", "Een halve kilometer lopen"],
+                ])
+            },  
+            {
+                key: 'i', 
+                content: new Map([
+                ["nl", "Honderd meter lopen"],
+                ])
+            },  
+            {
+                key: 'j', 
+                content: new Map([
+                ["nl", "Jezelf wassen en aankleden"],
+                ])
+            }
+        ]
+      })
+    }
+  }
+
+  
+export class Functioning2 extends Item {
+
+    //TODO bold text "in de afgelopen 3 maanden" ?
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'In hoeverre heeft je lichamelijke gezondheid of hebben je emotionele problemen je de '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "afgelopen 4 weken "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "belemmerd in je normale sociale bezigheden met gezin, vrienden, buren of anderen?"],
+            ]),
+        },
+    ]
+
+
+    constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+        super(parentKey, 'Func2');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: this.questionTextMain,
+            responseOptions: [
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Helemaal niet"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Enigszins"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Nogal"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "Veel"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "Heel erg veel"],
+                    ])
+                }
+            ]
+        })
+    }
+}
+
+
+export class Functioning3 extends Item {
+
+    //TODO bold text "in de afgelopen 3 maanden" ?
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Hoe vaak hebben je lichamelijke gezondheid of emotionele problemen gedurende de '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "afgelopen 4 weken "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "je sociale activiteiten (zoals bezoek aan vrienden of naaste familieleden) belemmerd?"],
+            ]),
+        },
+    ]
+
+
+    constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+        super(parentKey, 'Func3');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: this.questionTextMain,
+            responseOptions: [              
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Voortdurend"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Meestal"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Soms"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "Zelden"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "Nooit"],
+                    ])
+                }
+            ]
+        })
+    }
+}
+
+
+  
+export class Fatigue extends Item {
+
+    //TODO: maybe separate item for this header text
+    //TODO: how do I implement the example of selecting an answer?
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Met behulp van de volgende uitspraken willen wij een indruk krijgen van hoe je jezelf de laatste twee weken hebt gevoeld. Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: Ik voel me ontspannen: ja, dat klopt'],
+            ]),
+        }
+    ]
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'Fat');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.responsiveSingleChoiceArray({
+        defaultMode: 'table',
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: this.questionTextMain,
+        scaleOptions: [
+            {
+                key: '1', content: new Map([
+                    ["de", "Ja, dat klopt	"],
+                ])
+            }, {
+                key: '2', content: new Map([
+                    ["de", "Nee, dat klopt niet"],
+                ])
+            }
+        ],	
+        rows: [
+            {
+                key: 'a', content: new Map([
+                    ["de", "Ik voel me moe"],
+                ])
+            },
+            {
+                key: 'b', 
+                content: new Map([
+                ["nl", "Lichamelijk voel ik me uitgeput"],
+                ])
+            },
+            {
+                key: 'c', 
+                content: new Map([
+                ["nl", "Ik voel me fit"],
+                ])
+            },
+            {
+                key: 'd', 
+                content: new Map([
+                    ["nl", "Ik voel me slap"],
+                ]),
+            },   
+            {
+                key: 'e', 
+                content: new Map([
+                ["nl", "Ik voel me uitgerust"],
+                ])
+            },  
+            {
+                key: 'f', 
+                content: new Map([
+                ["nl", "Lichamelijk voel ik me in een slechte conditie"],
+                ])
+            },  
+            {
+                key: 'g', 
+                content: new Map([
+                ["nl", "Ik ben gauw moe"],
+                ])
+            },  
+            {
+                key: 'h', 
+                content: new Map([
+                ["nl", "Lichamelijk voel ik me in een uitstekende conditie"],
+                ])
+            },  
+        ]
+      })
+    }
+  }
+
+
+  
+export class Cognition extends Item {
+
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Met behulp van de volgende uitspraken willen wij een indruk krijgen van hoe je jezelf de laatste twee weken hebt gevoeld. Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: Ik voel me ontspannen: ja, dat klopt'],
+            ]),
+        }
+    ]
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'Cog');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.responsiveSingleChoiceArray({
+        defaultMode: 'table',
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: this.questionTextMain,
+        scaleOptions: [
+            {
+                key: '1', content: new Map([
+                    ["de", "Ja, dat klopt	"],
+                ])
+            }, {
+                key: '2', content: new Map([
+                    ["de", "Nee, dat klopt niet"],
+                ])
+            }
+        ],	
+        rows: [
+            {
+                key: 'a', content: new Map([
+                    ["de", "Ik voel me moe"],
+                ])
+            },
+            {
+                key: 'b', 
+                content: new Map([
+                ["nl", "Lichamelijk voel ik me uitgeput"],
+                ])
+            },
+            {
+                key: 'c', 
+                content: new Map([
+                ["nl", "Ik voel me fit"],
+                ])
+            },
+            {
+                key: 'd', 
+                content: new Map([
+                    ["nl", "Ik voel me slap"],
+                ]),
+            },   
+            {
+                key: 'e', 
+                content: new Map([
+                ["nl", "Ik voel me uitgerust"],
+                ])
+            },  
+            {
+                key: 'f', 
+                content: new Map([
+                ["nl", "Lichamelijk voel ik me in een slechte conditie"],
+                ])
+            },  
+            {
+                key: 'g', 
+                content: new Map([
+                ["nl", "Ik ben gauw moe"],
+                ])
+            },  
+            {
+                key: 'h', 
+                content: new Map([
+                ["nl", "Lichamelijk voel ik me in een uitstekende conditie"],
+                ])
+            },  
+        ]
+      })
+    }
+  }
