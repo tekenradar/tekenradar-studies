@@ -1,12 +1,7 @@
 import { Expression } from 'survey-engine/lib/data_types';
-import { Group, Item } from 'case-editor-tools/surveys/types';
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { PreviousTickBitesGroup } from './prevTickBites';
-import { Residence, Gender } from './demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { Item } from 'case-editor-tools/surveys/types';
+import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
-import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
-import { rm } from 'fs';
 
 
 
@@ -67,7 +62,7 @@ export class Tekenradar extends Item {
   }
   
 //TODO: why is Markdown not working in this text???
-export class Text1Standard extends Item{
+export class StandardText1 extends Item{
 
     markdownContent = `
     De volgende vraag gebruiken wij alleen om te bekijken of de deelnemers aan het 
@@ -75,7 +70,7 @@ export class Text1Standard extends Item{
     `
   
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-      super(parentKey, 'Text1St');
+      super(parentKey, 'StandardT1');
   
       this.isRequired = isRequired;
       this.condition = condition;
@@ -500,15 +495,15 @@ export class Symptoms2 extends Item {
         scaleOptions: [
             {
                 key: '1', content: new Map([
-                    ["de", "Geen last"],
+                    ["nl", "Geen last"],
                 ])
             }, {
                 key: '2', content: new Map([
-                    ["de", "Een beetje last"],
+                    ["nl", "Een beetje last"],
                 ])
             }, {
                 key: '3', content: new Map([
-                    ["de", "Veel last"],
+                    ["nl", "Veel last"],
                 ])
             }
         ],
@@ -516,7 +511,7 @@ export class Symptoms2 extends Item {
         rows: [
             {
                 key: 'a', content: new Map([
-                    ["de", "Buikpijn"],
+                    ["nl", "Buikpijn"],
                 ])
             },
             {
@@ -836,22 +831,22 @@ export class Functioning1 extends Item {
         scaleOptions: [
             {
                 key: '1', content: new Map([
-                    ["de", "Ernstig beperkt"],
+                    ["nl", "Ernstig beperkt"],
                 ])
             }, {
                 key: '2', content: new Map([
-                    ["de", "Een beetje beperkt"],
+                    ["nl", "Een beetje beperkt"],
                 ])
             }, {
                 key: '3', content: new Map([
-                    ["de", "Helemaal niet beperkt"],
+                    ["nl", "Helemaal niet beperkt"],
                 ])
             }
         ],	
         rows: [
             {
                 key: 'a', content: new Map([
-                    ["de", "Forse inspanning (zoals hardlopen, zware voorwerpen tillen, inspannend sporten)"],
+                    ["nl", "Forse inspanning (zoals hardlopen, zware voorwerpen tillen, inspannend sporten)"],
                 ])
             },
             {
@@ -1009,7 +1004,6 @@ export class Functioning3 extends Item {
         },
     ]
 
-
     constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'Func3');
 
@@ -1061,6 +1055,156 @@ export class Functioning3 extends Item {
 }
 
 
+
+export class Functioning4 extends Item {
+
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Hoeveel pijn had je de '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "afgelopen 4 weken"],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "?"],
+            ]),
+        },
+    ]
+    
+
+    constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+        super(parentKey, 'Func4');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: this.questionTextMain,
+            responseOptions: [              
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Geen"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Heel licht"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Licht"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "Nogal"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "Ernstig"],
+                    ])
+                },
+                {
+                    key: 'f', role: 'option',
+                    content: new Map([
+                        ["nl", "Heel ernstig"],
+                    ])
+                }
+            ]
+        })
+    }
+}
+
+
+export class Functioning5 extends Item {
+
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'In welke mate heeft pijn je de '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "afgelopen 4 weken "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "belemmerd bij je normale werkzaamheden (zowel werk buitenshuis als huishoudelijk werk)?"],
+            ]),
+        },
+    ]
+    constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+        super(parentKey, 'Func5');
+
+        this.isRequired = isRequired;
+        this.condition = condition;
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: this.questionTextMain,
+            responseOptions: [              
+                {
+                    key: 'a', role: 'option',
+                    content: new Map([
+                        ["nl", "Helemaal niet"],
+                    ])
+                },
+                {
+                    key: 'b', role: 'option',
+                    content: new Map([
+                        ["nl", "Een klein beetje"],
+                    ])
+                },
+                {
+                    key: 'c', role: 'option',
+                    content: new Map([
+                        ["nl", "Nogal"],
+                    ])
+                },
+                {
+                    key: 'd', role: 'option',
+                    content: new Map([
+                        ["nl", "Veel"],
+                    ])
+                },
+                {
+                    key: 'e', role: 'option',
+                    content: new Map([
+                        ["nl", "Heel erg veel"],
+                    ])
+                }
+            ]
+        })
+    }
+}
+
   
 export class Fatigue extends Item {
 
@@ -1092,18 +1236,18 @@ export class Fatigue extends Item {
         scaleOptions: [
             {
                 key: '1', content: new Map([
-                    ["de", "Ja, dat klopt"],
+                    ["nl", "Ja, dat klopt"],
                 ])
             }, {
                 key: '2', content: new Map([
-                    ["de", "Nee, dat klopt niet"],
+                    ["nl", "Nee, dat klopt niet"],
                 ])
             }
         ],	
         rows: [
             {
                 key: 'a', content: new Map([
-                    ["de", "Ik voel me moe"],
+                    ["nl", "Ik voel me moe"],
                 ])
             },
             {
@@ -1173,7 +1317,7 @@ export class Cognition extends Item {
             content: new Map([
                 ["nl", "wat vaker dan andere. Vink hieronder aan hoe vaak je dit overkomt."],
             ]),
-        },
+        }
     ]
 
     constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1194,74 +1338,399 @@ export class Cognition extends Item {
         scaleOptions: [
             {
                 key: '1', content: new Map([
-                    ["de", "Zeer vaak"],
+                    ["nl", "Zeer vaak"],
                 ])
             }, {
                 key: '2', content: new Map([
-                    ["de", "Vaak"],
+                    ["nl", "Vaak"],
                 ])
             },
             {
                 key: '3', content: new Map([
-                    ["de", "Af en toe"],
+                    ["nl", "Af en toe"],
                 ])
             }, {
                 key: '4', content: new Map([
-                    ["de", "Zelden"],
+                    ["nl", "Zelden"],
                 ])
             },
             {
                 key: '5', content: new Map([
-                    ["de", "Nooit"],
+                    ["nl", "Nooit"],
                 ])
             }
         ],	
         rows: [
             {
                 key: 'a', content: new Map([
-                    ["de", "Ik voel me moe"],
+                    ["nl", "Iets lezen en vlak daarna niet meer weten wat je gelezen hebt, zodat je het moet overlezen"],
                 ])
             },
             {
                 key: 'b', 
                 content: new Map([
-                ["nl", "Lichamelijk voel ik me uitgeput"],
+                ["nl", "Vergeten waarom je naar een bepaald gedeelte van je huis bent gelopen"],
                 ])
             },
             {
                 key: 'c', 
                 content: new Map([
-                ["nl", "Ik voel me fit"],
+                ["nl", "Wegwijzers over het hoofd zien"],
                 ])
             },
             {
                 key: 'd', 
                 content: new Map([
-                    ["nl", "Ik voel me slap"],
+                    ["nl", "Links en rechts verwarren bij het beschrijven van een route"],
                 ]),
             },   
             {
                 key: 'e', 
                 content: new Map([
-                ["nl", "Ik voel me uitgerust"],
+                ["nl", "Per ongeluk tegen mensen opbotsen"],
                 ])
             },  
             {
                 key: 'f', 
                 content: new Map([
-                ["nl", "Lichamelijk voel ik me in een slechte conditie"],
+                ["nl", "Niet meer weten of je het licht of het gas hebt uitgedaan, of de deur hebt afgesloten"],
                 ])
             },  
             {
                 key: 'g', 
                 content: new Map([
-                ["nl", "Ik ben gauw moe"],
+                ["nl", "Niet luisteren naar de naam van een persoon op het moment dat deze persoon zich aan je voorstelt."],
                 ])
             },  
             {
                 key: 'h', 
                 content: new Map([
-                ["nl", "Lichamelijk voel ik me in een uitstekende conditie"],
+                ["nl", "Iets er uitflappen en achteraf bedenken dat dat wel eens beledigend voor iemand zou kunnen zijn"],
+                ])
+            },  
+            {
+                key: 'i', 
+                content: new Map([
+                ["nl", "Niet merken dat iemand iets tegen je zegt als je met iets anders bezig bent."],
+                ])
+            },  
+            {
+                key: 'j', 
+                content: new Map([
+                ["nl", "Boos worden en daar later spijt van hebben."],
+                ])
+            }, 
+            {
+                key: 'k', 
+                content: new Map([
+                ["nl", "Belangrijke brieven dagenlang onbeantwoord laten"],
+                ])
+            }, 
+            {
+                key: 'l', 
+                content: new Map([
+                ["nl", "Vergeten welke straat je moet inslaan als je een route kiest die je goed kent, maar die je zelden gebruikt."],
+                ])
+            }, 
+            {
+                key: 'm', 
+                content: new Map([
+                ["nl", "In een supermarkt niet kunnen vinden wat je zoekt terwijl het er wel is"],
+                ])
+            }, 
+            {
+                key: 'n', 
+                content: new Map([
+                ["nl", "JE plotseling afvragen of je een woord op de juiste manier gebruikt"],
+                ])
+            }, 
+            {
+                key: 'o', 
+                content: new Map([
+                ["nl", "Moeite hebben met het nemen van beslissingen"],
+                ])
+            }, 
+            {
+                key: 'p', 
+                content: new Map([
+                ["nl", "Afspraken vergeten"],
+                ])
+            }, 
+            {
+                key: 'q', 
+                content: new Map([
+                ["nl", "Vergeten waar je iets hebt neergelegd, zoals een boek of een krant"],
+                ])
+            }, 
+            {
+                key: 'r', 
+                content: new Map([
+                ["nl", "Per ongeluk iets weggooien wat je nodig hebt en bewaren wat je wilde weggooien"],
+                ])
+            }, 
+            {
+                key: 's', 
+                content: new Map([
+                ["nl", "Dagdromen terwijl je eigenlijk naar iets of iemand zou moeten luisteren"],
+                ])
+            }, 
+            {
+                key: 't', 
+                content: new Map([
+                ["nl", "Namen van mensen vergeten"],
+                ])
+            }, 
+            {
+                key: 'u', 
+                content: new Map([
+                ["nl", "Beginnen met iets maar het niet afmaken, omdat je ongemerkt met iets anders bent begonnen"],
+                ])
+            }, 
+            {
+                key: 'v', 
+                content: new Map([
+                ["nl", "Niet op een woord kunnen komen terwijl het ‘op het puntje van je tong’ ligt"],
+                ])
+            }, 
+            {
+                key: 'w', 
+                content: new Map([
+                ["nl", "In een winkel vergeten wat je kwam kopen"],
+                ])
+            }, 
+            {
+                key: 'x', 
+                content: new Map([
+                ["nl", "Dingen uit je handen laten vallen"],
+                ])
+            }, 
+            {
+                key: 'y', 
+                content: new Map([
+                ["nl", "In een gesprek niets meer weten om over te praten."],
+                ])
+            }, 
+        ]
+      })
+    }
+  }
+
+  
+export class MedCareText extends Item{
+
+    markdownContent = `
+    Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad. 
+    `
+  
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'MedCText');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.display({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        condition: this.condition,
+        content: [
+          ComponentGenerators.markdown({
+              content: new Map([
+                  ["nl", this.markdownContent],
+              ]),
+              className: ''
+          })
+        ]
+      })
+    }
+  }
+  
+  
+  
+export class MedCare1 extends Item {
+
+    optionKeys = {
+        nameOfOption: 'a'
+     }
+
+     
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Heb je in de '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "afgelopen 3 maanden "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "contact gehad met een zorgverlener?"],
+            ]),
+        },
+    ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'MedC1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ]
+    })
+  }
+}
+  
+  
+export class Awareness extends Item {
+
+    questionTextMain = [
+        {
+            content: new Map([
+                ["nl", 'Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft: Helmaal geen invloed [ 0 / 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 / 10 ] zeer veel invloed'],
+            ]),
+        }
+    ]
+
+    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+      super(parentKey, 'Aware');
+  
+      this.isRequired = isRequired;
+      this.condition = condition;
+    }
+  
+    buildItem() {
+      return SurveyItems.responsiveSingleChoiceArray({
+        defaultMode: 'horizontal',
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.condition,
+        questionText: this.questionTextMain,
+        scaleOptions: [
+            {
+                key: '0', content: new Map([
+                    ["nl", "0"],
+                ])
+            }, {
+                key: '1', content: new Map([
+                    ["nl", "1"],
+                ])
+            }, {
+                key: '2', content: new Map([
+                    ["nl", "2"],
+                ])
+            },
+            {
+                key: '3', content: new Map([
+                    ["nl", "3"],
+                ])
+            }, {
+                key: '4', content: new Map([
+                    ["nl", "4"],
+                ])
+            },
+            {
+                key: '5', content: new Map([
+                    ["nl", "5"],
+                ])
+            },
+            {
+                key: '6', content: new Map([
+                    ["nl", "6"],
+                ])
+            }, {
+                key: '7', content: new Map([
+                    ["nl", "7"],
+                ])
+            },
+            {
+                key: '8', content: new Map([
+                    ["nl", "8"],
+                ])
+            }, {
+                key: '9', content: new Map([
+                    ["nl", "9"],
+                ])
+            },
+            {
+                key: '10', content: new Map([
+                    ["nl", "10"],
+                ])
+            }
+        ],	
+        rows: [
+            {
+                key: 'a', content: new Map([
+                    ["nl", "Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van lyme op je leven?"],
+                ])
+            },
+            {
+                key: 'b', 
+                content: new Map([
+                ["nl", "Hoe lang denk je dat de tekenbeet, erythema migrans of andere ziekte van lyme zal duren?"],
+                ])
+            },
+            {
+                key: 'c', 
+                content: new Map([
+                ["nl", "In hoeverre meen je de tekenbeet, erythema migrans of andere ziekte van lyme zelf te kunnen beheersen?"],
+                ])
+            },
+            {
+                key: 'd', 
+                content: new Map([
+                    ["nl", "In hoeverre denk je dat je behandeling helpt bij de erythema migrans of andere ziekte van lyme?"],
+                ]),
+            },   
+            {
+                key: 'e', 
+                content: new Map([
+                ["nl", "In hoeverre ervaar je lichamelijke klachten van de tekenbeet, erythema migrans of andere ziekte van Lyme ziekte?"],
+                ])
+            },  
+            {
+                key: 'f', 
+                content: new Map([
+                ["nl", "In hoeverre ben je bezorgd over de tekenbeet, erythema migrans of andere ziekte van Lyme?"],
+                ])
+            },  
+            {
+                key: 'g', 
+                content: new Map([
+                ["nl", "In hoeverre heb je het gevoel dat je de tekenbeet, erythema migrans of andere ziekte van Lyme begrijpt?"],
+                ])
+            },  
+            {
+                key: 'h', 
+                content: new Map([
+                ["nl", "In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme invloed op je gemoedstoestand? (b.v. maakt het je boos,angstig, van streek, of somber?)"],
                 ])
             },  
         ]
