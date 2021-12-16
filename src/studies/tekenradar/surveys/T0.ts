@@ -1,5 +1,5 @@
 import { Group, Item, SurveyDefinition } from "case-editor-tools/surveys/types";
-import { Expression } from 'survey-engine/lib/data_types';
+import { Expression } from 'survey-engine/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 
@@ -35,24 +35,24 @@ class QuestionAboutMedicalHistory extends Item {
       condition: this.condition,
       questionText: this.isPartOf('T0') ? this.qTextA : this.qTextB,
       responseOptions: //commonHealthQuestionOptions,
-      [
-        {//TODO: is this correct dutch in the first option?
-          //(bij benadering stands after date input)
-          key: 'a', role: 'date',
-          content: new Map([
-            ["nl", "Datum bij benadering"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Weet niet"],
-          ])
-        },
-      ]
-     /* content: new Map([
-          ['en', 'Hello']
-      ]),*/
+        [
+          {//TODO: is this correct dutch in the first option?
+            //(bij benadering stands after date input)
+            key: 'a', role: 'date',
+            content: new Map([
+              ["nl", "Datum bij benadering"],
+            ])
+          },
+          {
+            key: 'b', role: 'option',
+            content: new Map([
+              ["nl", "Weet niet"],
+            ])
+          },
+        ]
+      /* content: new Map([
+           ['en', 'Hello']
+       ]),*/
     })
   }
 }

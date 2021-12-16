@@ -1,4 +1,4 @@
-import { Expression, SurveyGroupItem, SurveyItem, SurveySingleItem } from 'survey-engine/lib/data_types';
+import { Expression, SurveyGroupItem, SurveyItem, SurveySingleItem } from 'survey-engine/data_types';
 import { SurveyDefinition, Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';

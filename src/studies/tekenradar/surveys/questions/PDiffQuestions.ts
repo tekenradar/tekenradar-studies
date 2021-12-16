@@ -1,4 +1,4 @@
-import { Expression } from 'survey-engine/lib/data_types';
+import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { Age } from './demographie';
@@ -6,7 +6,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
-export class IntroPDiff extends Item{
+export class IntroPDiff extends Item {
 
   markdownContent = `
   # Melding doen
@@ -30,10 +30,10 @@ export class IntroPDiff extends Item{
       condition: this.condition,
       content: [
         ComponentGenerators.markdown({
-            content: new Map([
-                ["nl", this.markdownContent],
-            ]),
-            className: ''
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
         })
       ]
     })
@@ -127,11 +127,11 @@ export class FeverTickBite extends Item {
 }
 
 
-export class EMTextPDiff extends Item{
+export class EMTextPDiff extends Item {
 
   markdownContent = `
 
-  #### Een "erythema migrans" is een **uitbreidende rode ring of vlek** rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme. 
+  #### Een "erythema migrans" is een **uitbreidende rode ring of vlek** rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
 
   `
 
@@ -156,12 +156,12 @@ export class EMTextPDiff extends Item{
       ]*/
       content: [
         ComponentGenerators.markdown({
-            content: new Map([
-                ["nl", this.markdownContent],
-            ]),
-            className: ''
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
         })
-    ]
+      ]
     })
   }
 }
@@ -311,30 +311,31 @@ export class MedicationLyme extends Item {
         ['nl', 'Ben je voor deze ziekte van Lyme behandeld met antibiotica?'],
       ]),
       responseOptions: [
-          SCOptions.cloze({
-            key: 'a', items: [
-                ClozeItemTypes.text({
-                    key: '1', content: new Map(
-                        [['nl', "Ja, ik ben gestart op"]]
-                    )
-                }),//NOTE: filling in date is NOT mandatory to avoid getting stuck due to forgotten date
-                ClozeItemTypes.dateInput({
-                   dateInputMode: 'YMD',
-                    key: '2', 
-                    maxRelativeDate: {
-                      reference: SurveyEngine.timestampWithOffset({seconds: 0}),
-                      delta: {seconds: 0}}        
-                }),//TODO: text direct after date Input (without Line break)??
-                ClozeItemTypes.text({
-                  key: '3', content: new Map(
-                      [['nl', "(vul hier de startdatum van je  antibiotica behandeling in, of een schatting daarvan)"]]
-                  )
-                }),
-              ]
+        SCOptions.cloze({
+          key: 'a', items: [
+            ClozeItemTypes.text({
+              key: '1', content: new Map(
+                [['nl', "Ja, ik ben gestart op"]]
+              )
+            }),//NOTE: filling in date is NOT mandatory to avoid getting stuck due to forgotten date
+            ClozeItemTypes.dateInput({
+              dateInputMode: 'YMD',
+              key: '2',
+              maxRelativeDate: {
+                reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
+                delta: { seconds: 0 }
+              }
+            }),//TODO: text direct after date Input (without Line break)??
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', "(vul hier de startdatum van je  antibiotica behandeling in, of een schatting daarvan)"]]
+              )
             }),
-          //optionProps: {
-          //  max: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({seconds: 0}) }
-          //}
+          ]
+        }),
+        //optionProps: {
+        //  max: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({seconds: 0}) }
+        //}
         {
           key: 'b', role: 'option',
           content: new Map([

@@ -1,5 +1,5 @@
 
-import { Expression } from 'survey-engine/lib/data_types';
+import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 
@@ -9,14 +9,14 @@ export class PreviousTickBitesGroup extends Group {
     Q1: PreviousTickBites1;
     Q2: PreviousTickBites2;
 
-   
+
     constructor(parentKey: string, isRequired?: boolean) {
         super(parentKey, 'PTBG');
 
 
-        this.Q1 = new PreviousTickBites1(this.key,isRequired);
+        this.Q1 = new PreviousTickBites1(this.key, isRequired);
         const q1Condition = SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.nameOfOption);
-        this.Q2 = new PreviousTickBites2(this.key,isRequired,q1Condition);
+        this.Q2 = new PreviousTickBites2(this.key, isRequired, q1Condition);
 
     }
 
@@ -33,7 +33,7 @@ class PreviousTickBites1 extends Item {
 
     optionKeys = {
         nameOfOption: 'a'
-     }
+    }
 
     constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'PTB1');
