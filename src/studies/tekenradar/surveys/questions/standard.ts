@@ -1,6 +1,7 @@
 import { Expression } from 'survey-engine/data_types';
 import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
@@ -718,7 +719,7 @@ export class Symptoms3 extends Item {
 export class Pregnant extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'preg');
+    super(parentKey, 'Preg');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1516,14 +1517,14 @@ export class Cognition extends Item {
 }
 
 
-export class MedCareText extends Item {
+export class MedCareText1 extends Item {
 
   markdownContent = `
     Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'MedCText');
+    super(parentKey, 'MedCText1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1608,6 +1609,110 @@ export class MedCare1 extends Item {
 }
 
 
+
+export class MedCareText2 extends Item {
+
+  markdownContent = `
+  Met zorgverleners bedoelen wij je huisarts, specialist, fysiotherapeut, psycholoog, maatschappelijkwerker, homeopaat, logopedist of andere arts, therapeut of zorgconsulent.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'MedCText2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
+export class MedCare2 extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'MedC2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.clozeQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([["nl","Met welke zorgverleners heb je contact gehad in de afgelopen 3 maanden? En hoe vaak?"]]),
+      items: [
+        ClozeItemTypes.text({
+          key: '1', content: new Map(
+            [['nl', "Zorgverlener:"]]
+          )
+        }),
+        ClozeItemTypes.textInput({
+          key: '2',
+        }),
+        ClozeItemTypes.text({
+          key: '3', content: new Map(
+            [['nl', "Aantal contacten:"]]
+          )
+        }),
+        ClozeItemTypes.textInput({
+          key: '4',
+        })
+      ]
+    })
+  }
+}
+
+
+
+export class MedCareText3 extends Item {
+
+  markdownContent = `
+  Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'MedCText3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
 export class Awareness extends Item {
 
   questionTextMain = [
@@ -1686,6 +1791,15 @@ export class Awareness extends Item {
         }
       ],
       rows: [
+         /* {
+            key: 'OS1',
+              startLabel: new Map([
+                  ['de', '...zielten auf die Politik des Gegners']
+              ]),
+              endLabel: new Map([
+                  ['de', '...zielten auf die Persönlichkeit des Gegners']
+              ]),
+          },*/
         {
           key: 'a', content: new Map([
             ["nl", "Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van lyme op je leven?"],
@@ -1733,6 +1847,139 @@ export class Awareness extends Item {
             ["nl", "In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme invloed op je gemoedstoestand? (b.v. maakt het je boos,angstig, van streek, of somber?)"],
           ])
         },
+      ]
+    })
+  }
+}
+
+
+
+export class Awareness1 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van lyme op je leven?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helmaal geen invloed']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel invloed']
+              ]),
+          },
+      ]
+    })
+  }
+}
+
+
+export class Awareness2 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoe lang denk je dat de tekenbeet, erythema migrans of andere ziekte van lyme zal duren?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helmaal geen invloed']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel invloed']
+              ]),
+          },
       ]
     })
   }
