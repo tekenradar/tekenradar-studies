@@ -1,8 +1,9 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
-import { Awareness, Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText } from './questions/standard';
+import { Awareness, Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1 } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 
 
@@ -26,9 +27,13 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     Q13: Functioning5;
     Q14: Fatigue;
     Q15: Cognition;
-    T3: MedCareText;
+    T3: MedCareText1;
     Q16: MedCare1;
-    Q17: Awareness;
+    T4: MedCareText2;
+    Q17: MedCare2;
+    T5: MedCareText3;
+    Q18: Awareness;
+    Q19: Awareness1;
 
     constructor(isRequired?: boolean) {
         super({
@@ -51,10 +56,11 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.Q2 = new Qualification(this.key, required);
         this.Q3 = new Residence(this.key, required);
         this.Q4 = new Gender(this.key, required);
+        const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
         this.Q5 = new Symptoms1(this.key, required);
         this.Q6 = new Symptoms2(this.key, required);
         this.Q7 = new Symptoms3(this.key, required);
-        this.Q8 = new Pregnant(this.key, required);
+        this.Q8 = new Pregnant(this.key, required, Q4condition);
         this.T2 = new FunctioningText(this.key, required);
         this.Q9 = new Functioning1(this.key, required);
         this.Q10 = new Functioning2(this.key, required);
@@ -63,10 +69,14 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.Q13 = new Functioning5(this.key, required);
         this.Q14 = new Fatigue(this.key, required);
         this.Q15 = new Cognition(this.key, required);
-        this.T3 = new MedCareText(this.key, required);
+        this.T3 = new MedCareText1(this.key, required);
         this.Q16 = new MedCare1(this.key, required);
-        this.Q17 = new Awareness(this.key, required);
-
+        const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.nameOfOption);
+        this.T4 = new MedCareText2(this.key, required);
+        this.Q17 = new MedCare2(this.key, required, Q16condition);
+        this.T5 = new MedCareText3(this.key, required, Q16condition);
+        this.Q18 = new Awareness(this.key, required);
+        this.Q19 = new Awareness1(this.key, required);
 
     }
 
@@ -91,7 +101,11 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.addItem(this.Q15.get());
         this.addItem(this.T3.get());
         this.addItem(this.Q16.get());
+        this.addItem(this.T4.get());
         this.addItem(this.Q17.get());
+        this.addItem(this.T5.get());
+        this.addItem(this.Q18.get());
+        this.addItem(this.Q19.get());
     }
 }
 
