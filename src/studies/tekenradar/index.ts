@@ -8,10 +8,15 @@ import { Chronicflow_Adults } from "./surveys/Chronicflow_Adults";
 import { Feverflow_Adults } from "./surveys/Feverflow_Adults";
 import { Followupflow_Adults } from "./surveys/Followupflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
+import { studyRules } from "./rules";
+import { ExampleSurvey } from "./surveys/ExampleSurvey";
 
 export const TekenradarStudy: Study = {
-    studyKey: 'tekenradar',
-    surveys: [
-        PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Followupflow_Adults, Standardflow_Adults
-    ]
+  studyKey: 'default',
+  outputFolderName: 'tekenradar',
+  studyRules: studyRules,
+  surveys: [
+    PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Followupflow_Adults, Standardflow_Adults,
+    ExampleSurvey
+  ]
 }

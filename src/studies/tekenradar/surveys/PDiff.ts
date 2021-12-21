@@ -5,7 +5,7 @@ import { Age } from './questions/demographie';
 import { FunctioningText } from './questions/standard';
 
 export class PDiffDef extends SurveyDefinition {
- 
+
   T1: IntroPDiff;
   Q1: DetectTickBite;
   Q2: FeverTickBite;
@@ -15,8 +15,8 @@ export class PDiffDef extends SurveyDefinition {
   Q5: LymeTickBite2;
   Q6: MedicationLyme;
   Q7: Age;
-    
-  
+
+
   constructor(isRequired?: boolean) {
     super({
       surveyKey: 'PDiff',
@@ -29,8 +29,9 @@ export class PDiffDef extends SurveyDefinition {
       durationText: new Map([
         ['en', 'Test']
       ]),
+      availableFor: 'public',
     });
-  
+
     const required = isRequired !== undefined ? isRequired : false;
 
     this.T1 = new IntroPDiff(this.key, required);
@@ -46,24 +47,23 @@ export class PDiffDef extends SurveyDefinition {
     this.Q5 = new LymeTickBite2(this.key, required, q4Condition);
     this.Q6 = new MedicationLyme(this.key, required, q4Condition);
     this.Q7 = new Age(this.key, required);
-    }
-  
-  
-    buildSurvey() {
-  
-      this.addItem(this.T1.get());
-      this.addItem(this.Q1.get());
-      this.addItem(this.Q2.get());
-      this.addItem(this.T2.get());
-      this.addItem(this.Q3.get());
-      this.addItem(this.Q4.get());
-      this.addItem(this.Q5.get());
-      this.addItem(this.Q6.get());
-      this.addItem(this.Q7.get());
-    }
-  
   }
 
-  
+
+  buildSurvey() {
+
+    this.addItem(this.T1.get());
+    this.addItem(this.Q1.get());
+    this.addItem(this.Q2.get());
+    this.addItem(this.T2.get());
+    this.addItem(this.Q3.get());
+    this.addItem(this.Q4.get());
+    this.addItem(this.Q5.get());
+    this.addItem(this.Q6.get());
+    this.addItem(this.Q7.get());
+  }
+
+}
+
+
 export const PDiff = new PDiffDef(false);
-  
