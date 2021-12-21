@@ -1,8 +1,58 @@
 import { Expression } from 'survey-engine/data_types';
-import { Item } from 'case-editor-tools/surveys/types';
+import { Item, Group } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+
+
+
+
+
+export class AwarenessGroup extends Group {
+
+  T1: AwarenessText;
+  Q1: Awareness1;
+  Q2: Awareness2;
+  Q3: Awareness3;
+  Q4: Awareness4;
+  Q5: Awareness5;
+  Q6: Awareness6;
+  Q7: Awareness7;
+  Q8: Awareness8;
+
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+    super(parentKey, 'LymeG');
+
+    this.groupEditor.setCondition(condition);
+
+    const required = isRequired !== undefined ? isRequired : false;
+
+    this.T1 = new AwarenessText(this.key, required);
+    this.Q1 = new Awareness1(this.key, required);
+    this.Q2 = new Awareness2(this.key, required);
+    this.Q3 = new Awareness3(this.key, required);
+    this.Q4 = new Awareness4(this.key, required);
+    this.Q5 = new Awareness5(this.key, required);
+    this.Q6 = new Awareness6(this.key, required);
+    this.Q7 = new Awareness7(this.key, required);
+    this.Q8 = new Awareness8(this.key, required);
+
+  }
+
+  buildGroup() {
+
+    this.addItem(this.T1.get());
+    this.addItem(this.Q1.get());
+    this.addItem(this.Q2.get());
+    this.addItem(this.Q3.get());
+    this.addItem(this.Q4.get());
+    this.addItem(this.Q5.get());
+    this.addItem(this.Q6.get());
+    this.addItem(this.Q7.get());
+    this.addItem(this.Q8.get());
+
+  }
+}
 
 
 
@@ -1713,140 +1763,30 @@ export class MedCareText3 extends Item {
 }
 
 
-export class Awareness extends Item {
+export class AwarenessText extends Item {
 
-  questionTextMain = [
-    {
-      content: new Map([
-        ["nl", 'Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft: Helmaal geen invloed [ 0 / 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 / 10 ] zeer veel invloed'],
-      ]),
-    }
-  ]
+  markdownContent = 'Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:'
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Aware');
+    super(parentKey, 'AwareT');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
 
+
   buildItem() {
-    return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'horizontal',
+    return SurveyItems.display({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
-      isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "0"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "1"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "2"],
-          ])
-        },
-        {
-          key: '3', content: new Map([
-            ["nl", "3"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "4"],
-          ])
-        },
-        {
-          key: '5', content: new Map([
-            ["nl", "5"],
-          ])
-        },
-        {
-          key: '6', content: new Map([
-            ["nl", "6"],
-          ])
-        }, {
-          key: '7', content: new Map([
-            ["nl", "7"],
-          ])
-        },
-        {
-          key: '8', content: new Map([
-            ["nl", "8"],
-          ])
-        }, {
-          key: '9', content: new Map([
-            ["nl", "9"],
-          ])
-        },
-        {
-          key: '10', content: new Map([
-            ["nl", "10"],
-          ])
-        }
-      ],
-      rows: [
-         /* {
-            key: 'OS1',
-              startLabel: new Map([
-                  ['de', '...zielten auf die Politik des Gegners']
-              ]),
-              endLabel: new Map([
-                  ['de', '...zielten auf die Persönlichkeit des Gegners']
-              ]),
-          },*/
-        {
-          key: 'a', content: new Map([
-            ["nl", "Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van lyme op je leven?"],
-          ])
-        },
-        {
-          key: 'b',
+      content: [
+        ComponentGenerators.markdown({
           content: new Map([
-            ["nl", "Hoe lang denk je dat de tekenbeet, erythema migrans of andere ziekte van lyme zal duren?"],
-          ])
-        },
-        {
-          key: 'c',
-          content: new Map([
-            ["nl", "In hoeverre meen je de tekenbeet, erythema migrans of andere ziekte van lyme zelf te kunnen beheersen?"],
-          ])
-        },
-        {
-          key: 'd',
-          content: new Map([
-            ["nl", "In hoeverre denk je dat je behandeling helpt bij de erythema migrans of andere ziekte van lyme?"],
+            ["nl", this.markdownContent],
           ]),
-        },
-        {
-          key: 'e',
-          content: new Map([
-            ["nl", "In hoeverre ervaar je lichamelijke klachten van de tekenbeet, erythema migrans of andere ziekte van Lyme ziekte?"],
-          ])
-        },
-        {
-          key: 'f',
-          content: new Map([
-            ["nl", "In hoeverre ben je bezorgd over de tekenbeet, erythema migrans of andere ziekte van Lyme?"],
-          ])
-        },
-        {
-          key: 'g',
-          content: new Map([
-            ["nl", "In hoeverre heb je het gevoel dat je de tekenbeet, erythema migrans of andere ziekte van Lyme begrijpt?"],
-          ])
-        },
-        {
-          key: 'h',
-          content: new Map([
-            ["nl", "In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme invloed op je gemoedstoestand? (b.v. maakt het je boos,angstig, van streek, of somber?)"],
-          ])
-        },
+          className: ''
+        })
       ]
     })
   }
@@ -1914,7 +1854,10 @@ export class Awareness1 extends Item {
                   ['de', 'Zeer veel invloed']
               ]),
           },
-      ]
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
     })
   }
 }
@@ -1980,7 +1923,426 @@ export class Awareness2 extends Item {
                   ['de', 'Zeer veel invloed']
               ]),
           },
-      ]
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+    }
     })
   }
 }
+
+
+export class Awareness3 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre meen je de tekenbeet, erythema migrans of andere ziekte van lyme zelf te kunnen beheersen?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal geen beheersing']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel beheersing']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+
+export class Awareness4 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre denk je dat je behandeling helpt bij de erythema migrans of andere ziekte van lyme?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware4');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal niet']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Uitermate veel']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness5 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre ervaar je lichamelijke klachten van de tekenbeet, erythema migrans of andere ziekte van Lyme ziekte?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware5');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helmaal geen invloed']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel invloed']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness6 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre ben je bezorgd over de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware6');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helmaal geen invloed']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel invloed']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness7 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre heb je het gevoel dat je de tekenbeet, erythema migrans of andere ziekte van Lyme begrijpt?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware7');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Ik begrijp mijn ziekte helemaal niet']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Ik begrijp mijn ziekte helemaal']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness8 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme invloed op je gemoedstoestand? (b.v. maakt het je boos,angstig, van streek, of somber?)'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Aware8');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helmaal geen invloed']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel invloed']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+    }
+    })
+  }
+}
+
