@@ -559,7 +559,7 @@ export class LymeTherapy2 extends Item {
         }),
         ClozeItemTypes.numberInput({
           key: '10',
-          inputLabel: new Map([['en', 'dagen']]),
+          inputLabel: new Map([['nl', 'dagen']]),
           labelBehindInput: true,
         }),
         ClozeItemTypes.clozeLineBreak(),
