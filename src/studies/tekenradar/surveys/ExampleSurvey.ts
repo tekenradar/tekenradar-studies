@@ -221,7 +221,7 @@ class MultipleChoiceOptionExample extends Item {
   }
 
   buildItem() {
-    return SurveyItems.singleChoice({
+    return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
