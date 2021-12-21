@@ -3,7 +3,7 @@ import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
-import { Awareness, Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1 } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 
 
@@ -32,8 +32,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     T4: MedCareText2;
     Q17: MedCare2;
     T5: MedCareText3;
-    Q18: Awareness;
-    Q19: Awareness1;
+    G18_25: AwarenessGroup;
+
 
     constructor(isRequired?: boolean) {
         super({
@@ -75,8 +75,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.T4 = new MedCareText2(this.key, required);
         this.Q17 = new MedCare2(this.key, required, Q16condition);
         this.T5 = new MedCareText3(this.key, required, Q16condition);
-        this.Q18 = new Awareness(this.key, required);
-        this.Q19 = new Awareness1(this.key, required);
+        this.G18_25 = new AwarenessGroup(this.key, isRequired);
 
     }
 
@@ -104,8 +103,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
         this.addItem(this.T4.get());
         this.addItem(this.Q17.get());
         this.addItem(this.T5.get());
-        this.addItem(this.Q18.get());
-        this.addItem(this.Q19.get());
+        this.addItem(this.G18_25.get());
+
     }
 }
 
