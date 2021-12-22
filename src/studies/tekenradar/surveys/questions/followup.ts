@@ -1,6 +1,6 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
-import { SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
@@ -355,7 +355,7 @@ export class MedicationFU1 extends Item {
           key: 'b', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "b.	Ja, namelijk "]]
+                [['en', "Ja, namelijk "]]
               )
             }),
             ClozeItemTypes.numberInput({
@@ -403,11 +403,12 @@ export class MedicationFU2 extends Item {
       questionText: new Map([//TODO: insert proper question text
         ['nl', 'Info per medication'],
       ]),
-      items: [
+      items:
+        [
         ClozeItemTypes.text({
           key: '1', content: new Map(
             [['nl', "Medicijn (naam of omschrijving):"]]
-          )
+          ),
         }),
         ClozeItemTypes.textInput({
           key: '2',
@@ -464,6 +465,7 @@ export class MedicationFU2 extends Item {
             [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
           )
         }),
+
       ],
     })
   }
