@@ -383,11 +383,15 @@ export class MedicationFU1 extends Item {
 
 export class MedicationFU2 extends Item {
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  condition2: Expression;
+
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'MedFU2');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.condition = SurveyEngine.compare.gt(condition, 0);
+    this.condition2 = SurveyEngine.compare.gt(condition, 1);
+
   }
 
   //TODO: ask this question for each medicin of former answer
@@ -405,68 +409,140 @@ export class MedicationFU2 extends Item {
       ]),
       items:
         [
-        ClozeItemTypes.text({
-          key: '1', content: new Map(
-            [['nl', "Medicijn (naam of omschrijving):"]]
-          ),
-        }),
-        ClozeItemTypes.textInput({
-          key: '2',
-        }),
-        ClozeItemTypes.clozeLineBreak(),
-        ClozeItemTypes.text({
-          key: '3', content: new Map(
-            [['nl', "Dosis:*"]]
-          )
-        }),
-        ClozeItemTypes.textInput({
-          key: '4',
-        }),
-        ClozeItemTypes.clozeLineBreak(),
-        ClozeItemTypes.text({
-          key: '5', content: new Map(
-            [['nl', "Aantal keren per dag:"]]
-          )
-        }),
-        ClozeItemTypes.numberInput({
-          key: '6',
-          inputMaxWidth: '60px',
-          inputLabel: new Map([["nl", " "],]),
-          componentProperties: {
-            min: 0,
-            max: 100
-          }
-        }),
-        ClozeItemTypes.clozeLineBreak(),
-        ClozeItemTypes.text({
-          key: '7', content: new Map(
-            [['nl', "Aantal dagen:"]]
-          )
-        }),
-        ClozeItemTypes.textInput({
-          key: '8',
-        }),
-        ClozeItemTypes.clozeLineBreak(),
-        ClozeItemTypes.text({
-          key: '9', content: new Map(
-            [['nl', "Waarom neem je dit medicijn?"]]
-          )
-        }),
-        ClozeItemTypes.dropDown({
-          key: '10', options: [
-            SCOptions.option('1', new Map([['nl', "Tegen de tekenbeet, erythema migrans of andere vorm van de ziekte van Lyme"]])),
-            SCOptions.option('2', new Map([['nl', "Om een andere reden (klacht, ziekte of aandoening)"]]))
-          ]
-        }),
-        ClozeItemTypes.clozeLineBreak(),
-        //TODO: checkbox is needed here
-        ClozeItemTypes.text({
-          key: '11', content: new Map(
-            [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
-          )
-        }),
-
-      ],
+          ClozeItemTypes.text({
+            key: '1', content: new Map(
+              [['nl', "Medicijn (naam of omschrijving):"]]
+            ),
+          }),
+          ClozeItemTypes.textInput({
+            key: '2',
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '3', content: new Map(
+              [['nl', "Dosis:*"]]
+            )
+          }),
+          ClozeItemTypes.textInput({
+            key: '4',
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '5', content: new Map(
+              [['nl', "Aantal keren per dag:"]]
+            )
+          }),
+          ClozeItemTypes.numberInput({
+            key: '6',
+            inputMaxWidth: '60px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            }
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '7', content: new Map(
+              [['nl', "Aantal dagen:"]]
+            )
+          }),
+          ClozeItemTypes.textInput({
+            key: '8',
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '9', content: new Map(
+              [['nl', "Waarom neem je dit medicijn?"]]
+            )
+          }),
+          ClozeItemTypes.dropDown({
+            key: '10', options: [
+              SCOptions.option('1', new Map([['nl', "Tegen de tekenbeet, erythema migrans of andere vorm van de ziekte van Lyme"]])),
+              SCOptions.option('2', new Map([['nl', "Om een andere reden (klacht, ziekte of aandoening)"]]))
+            ]
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //TODO: checkbox is needed here
+          ClozeItemTypes.text({
+            key: '11', content: new Map(
+              [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
+            )
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //2nd medication
+          ClozeItemTypes.text({
+            key: '1', content: new Map(
+              [['nl', "Medicijn (naam of omschrijving):"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.textInput({
+            key: '2',
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '3', content: new Map(
+              [['nl', "Dosis:*"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.textInput({
+            key: '4',
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '5', content: new Map(
+              [['nl', "Aantal keren per dag:"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.numberInput({
+            key: '6',
+            inputMaxWidth: '60px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '7', content: new Map(
+              [['nl', "Aantal dagen:"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.textInput({
+            key: '8',
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '9', content: new Map(
+              [['nl', "Waarom neem je dit medicijn?"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.dropDown({
+            key: '10', options: [
+              SCOptions.option('1', new Map([['nl', "Tegen de tekenbeet, erythema migrans of andere vorm van de ziekte van Lyme"]])),
+              SCOptions.option('2', new Map([['nl', "Om een andere reden (klacht, ziekte of aandoening)"]]))
+            ],
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //TODO: checkbox is needed here
+          ClozeItemTypes.text({
+            key: '11', content: new Map(
+              [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
+            ),
+            displayCondition: this.condition2
+          }),
+        ],
     })
   }
 }
