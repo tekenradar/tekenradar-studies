@@ -10,6 +10,7 @@ import { Followupflow_Adults } from "./surveys/Followupflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import { studyRules } from "./rules";
 import { ExampleSurvey } from "./surveys/ExampleSurvey";
+import { addExampleReminderMessage } from "./customRules/exampleReminder";
 
 export const TekenradarStudy: Study = {
   studyKey: 'default',
@@ -18,5 +19,8 @@ export const TekenradarStudy: Study = {
   surveys: [
     PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Followupflow_Adults, Standardflow_Adults,
     ExampleSurvey
+  ],
+  customStudyRules: [
+    addExampleReminderMessage
   ]
 }
