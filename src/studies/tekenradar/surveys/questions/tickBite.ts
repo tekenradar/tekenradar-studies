@@ -88,35 +88,22 @@ export class TickBiteOnlyGroup extends Group {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-    this.addPageBreak();
-
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
     this.addItem(this.Q9.get());
-    this.addPageBreak();
-
     this.addItem(this.G10_11.get());
     this.addItem(this.Q12.get());
-    this.addPageBreak();
-
-
     this.addItem(this.P1.get());
     this.addItem(this.P2.get());
-    this.addPageBreak();
-
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q15.get());
     this.addItem(this.Q16.get());
-    this.addPageBreak();
-
     this.addItem(this.G17_19.get());
-
     this.addItem(this.Q20.get());
-    this.addPageBreak();
 
 
   }
@@ -311,7 +298,7 @@ class RecognisedTickBite extends Item {
           ]
         }),
         SCOptions.option(
-          'a', new Map([["nl", "Onbekend"]])
+          'c', new Map([["nl", "Onbekend"]])
         ),
       ]
     })
@@ -551,8 +538,7 @@ class NumberTickBite extends Item {
       inputLabel: new Map([
         ['nl', '']
       ]),
-      //TODO: default preset to 1
-      //contentBehindInput: true,
+      //TODO: default preset to 1, not implemented yet
       componentProperties: {
         min: 1,
         max: 20,
@@ -681,8 +667,6 @@ class RemoveTick3 extends Item {
       questionText: new Map([
         ['nl', 'Wanneer heb je de teek verwijderd?'],
       ]),
-      //TODO: two number inputs for each option.
-      //TODO: date and two number input in option d
       responseOptions: [
         SCOptions.cloze({
           key: 'a', items: [
@@ -786,14 +770,19 @@ class RemoveTick3 extends Item {
                 delta: { seconds: 0 }
               }
             }),
-            ClozeItemTypes.clozeLineBreak(),
             ClozeItemTypes.text({
               key: '3', content: new Map(
-                [['nl', " (dag/maand/jaar) tussen"]]
+                [['nl', " (dag/maand/jaar)"]]
+              )
+            }),
+            ClozeItemTypes.clozeLineBreak(),
+            ClozeItemTypes.text({
+              key: '4', content: new Map(
+                [['nl', "tussen"]]
               )
             }),
             ClozeItemTypes.numberInput({
-              key: '4',
+              key: '5',
               inputLabel: new Map([["nl", " en"],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
@@ -803,7 +792,7 @@ class RemoveTick3 extends Item {
               }
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
             ClozeItemTypes.numberInput({
-              key: '5',
+              key: '6',
               inputLabel: new Map([["nl", " uur"],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
@@ -952,7 +941,6 @@ class DateTickBite extends Item {
     this.condition = condition;
   }
 
-  //TODO insert time input option here
   buildItem() {
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
@@ -1064,14 +1052,20 @@ class DateTickBite extends Item {
                 reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
                 delta: { seconds: 0 }
               }
-            }),//TODO: text direct after date Input (without Line break)??
+            }),
             ClozeItemTypes.text({
               key: '3', content: new Map(
-                [['nl', " (dag/maand/jaar) tussen"]]
+                [['nl', " (dag/maand/jaar)"]]
+              )
+            }),
+            ClozeItemTypes.clozeLineBreak(),
+            ClozeItemTypes.text({
+              key: '4', content: new Map(
+                [['nl', "tussen"]]
               )
             }),
             ClozeItemTypes.numberInput({
-              key: '4',
+              key: '5',
               inputLabel: new Map([["nl", " en"],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
@@ -1081,7 +1075,7 @@ class DateTickBite extends Item {
               }
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
             ClozeItemTypes.numberInput({
-              key: '5',
+              key: '6',
               inputLabel: new Map([["nl", " uur"],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
@@ -1107,7 +1101,6 @@ class DurationTickBite extends Item {
     this.condition = condition;
   }
 
-  //TODO insert time input option here
   buildItem() {
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
@@ -1162,15 +1155,22 @@ class DurationTickBite extends Item {
               key: '1', content: new Map(
                 [['nl', "Langer dan 24 uur, namelijk"]]
               )
-            }),
-            ClozeItemTypes.textInput({
+            }),//NOTE: I split this text field into two number input fields.
+            ClozeItemTypes.numberInput({
               key: '2',
-              inputMaxWidth: '200px'
+              inputLabel: new Map([["nl", " dagen"],]),
+              labelBehindInput: true,
+              inputMaxWidth: '80px',
             }),
-            ClozeItemTypes.text({
-              key: '3', content: new Map(
-                [['nl', " dagen/uur (rond a.u.b. af op hele dagen)"]]
-              )
+            ClozeItemTypes.numberInput({
+              key: '3',
+              inputLabel: new Map([["nl", " uur (rond a.u.b. af op hele dagen)"],]),
+              labelBehindInput: true,
+              inputMaxWidth: '80px',
+              componentProperties: {
+                min: 0,
+                max: 24
+              }
             }),
           ]
         }),
