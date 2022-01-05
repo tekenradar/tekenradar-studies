@@ -3,13 +3,15 @@ import { Expression } from "survey-engine/data_types";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { PDiff } from "./surveys/PDiff";
 import { ExampleSurvey } from "./surveys/ExampleSurvey";
+import { TBflow_Adults } from "./surveys/TBflow_Adults";
+import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 
 const isChildParticipant = () => StudyEngine.lt(
   StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
   18,
 )
 
-const handleTriggerTBFlowLogic = () => StudyEngine.if(
+const handleTriggerTBFlowLogic = () => StudyEngine.ifThen(
   // If:
   StudyEngine.and(
     StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
@@ -18,6 +20,7 @@ const handleTriggerTBFlowLogic = () => StudyEngine.if(
     StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
   ),
   // Then:
+  StudyEngine.participantActions.updateFlag('flow', 'TBflow'),
   StudyEngine.if(
     isChildParticipant(),
     StudyEngine.do(
@@ -25,13 +28,13 @@ const handleTriggerTBFlowLogic = () => StudyEngine.if(
       // TODO: add surveys according to TBkids flow
     ),
     StudyEngine.do(
-      StudyEngine.participantActions.updateFlag('ageCategory', 'adult')
-      // TODO: add surveys according to TBflow
+      StudyEngine.participantActions.updateFlag('ageCategory', 'adult'),
+      StudyEngine.participantActions.assignedSurveys.add(TBflow_Adults.key, 'immediate'),
     )
   )
 );
 
-const handleTriggerEMFlowLogic = () => StudyEngine.if(
+const handleTriggerEMFlowLogic = () => StudyEngine.ifThen(
   // If:
   StudyEngine.or(
     StudyEngine.and(
@@ -64,6 +67,21 @@ const handleTriggerEMFlowLogic = () => StudyEngine.if(
   )
 )
 
+const handleTBFlow_AdultsSubmit = StudyEngine.ifThen(
+  // If:
+  StudyEngine.checkSurveyResponseKey(TBflow_Adults.key),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(TBflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+)
+
+const handleStandardflow_AdultsSubmit = StudyEngine.ifThen(
+  // If:
+  StudyEngine.checkSurveyResponseKey(Standardflow_Adults.key),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults.key, 'all'),
+)
+
 const handlePDiffSubmit = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(PDiff.key),
 
@@ -84,7 +102,8 @@ const handleExampleSurveySubmit = StudyEngine.ifThen(
 
 const submitRules: Expression[] = [
   handlePDiffSubmit,
-  handleExampleSurveySubmit,
+  handleTBFlow_AdultsSubmit,
+  handleStandardflow_AdultsSubmit,
 ]
 
 /**
