@@ -9,19 +9,20 @@ import { TickBiteOnlyGroup } from './questions/tickBite';
 
 class TBflow_AdultsDef extends SurveyDefinition {
 
+  //TODO: maybe better to write questions direct in this survey and not as one TickBiteOnlyGroup?
     G1: TickBiteOnlyGroup;
-  
+
     constructor(isRequired?: boolean) {
       super({
         surveyKey: 'TBflow_Adults',
         name: new Map([
-          ['en', 'Test']
+          ['nl', 'Melden tekenbeet (TB-A)']
         ]),
         description: new Map([
-          ['en', 'Test']
+          ['nl', 'TB-flow, questions TB-A-1 through 19']
         ]),
         durationText: new Map([
-          ['en', 'Test']
+          ['nl', 'Test']
         ]),
       });
 
@@ -31,7 +32,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
   buildSurvey() {
 
     this.addItem(this.G1.get());
-    
+
   }
 }
 
