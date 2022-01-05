@@ -1,6 +1,7 @@
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyItems, ClozeItemTypes, MultipleChoiceOptionTypes } from 'case-editor-tools/surveys';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
+import { optionDefToItemComponent } from 'case-editor-tools/surveys/responseTypeGenerators/optionGroupComponents';
 
 class SingleChoiceExample extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -705,6 +706,64 @@ export class CustomExample extends Item {
   }
 }
 
+export class MultipleClozeExample extends Item {
+  constructor(parentKey: string, isRequired: boolean) {
+    super(parentKey, 'MulitCloze');
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.customQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Question with custom question with mapping:'],
+      ]),
+      responseItemDefs: [
+        {
+          key: 'cloze1',
+          role: 'cloze',
+          items: [
+            optionDefToItemComponent(ClozeItemTypes.dropDown({
+              key: '1',
+              options: [
+                { key: 'o1', role: 'option', content: new Map([['nl', 'Option 1']]) }
+              ]
+            })),
+            optionDefToItemComponent(ClozeItemTypes.text({
+              content: new Map([['nl', 'Text 1']])
+            })),
+            optionDefToItemComponent(ClozeItemTypes.textInput({
+              key: '2'
+            })),
+          ]
+        },
+        {
+          key: 'cloze2',
+          role: 'cloze',
+          items: [
+            optionDefToItemComponent(ClozeItemTypes.dropDown({
+              key: '1',
+              options: [
+                { key: 'o1', role: 'option', content: new Map([['nl', 'Option 1']]) }
+              ]
+            })),
+            optionDefToItemComponent(ClozeItemTypes.text({
+              content: new Map([['nl', 'Text 1']])
+            })),
+            optionDefToItemComponent(ClozeItemTypes.textInput({
+              key: '2'
+            })),
+          ]
+        },
+
+      ]
+    })
+  }
+}
+
 
 class ExampleSurveyDef extends SurveyDefinition {
   Q1: Item;
@@ -719,6 +778,7 @@ class ExampleSurveyDef extends SurveyDefinition {
   Q10: Item;
   QLikert: Item;
   QCloze: Item;
+  QMCloze: Item;
   QDate: Item;
   QSlider: Item;
   QRSCA: Item;
@@ -757,6 +817,7 @@ class ExampleSurveyDef extends SurveyDefinition {
     this.Q10 = new NumberInputExample(this.key, required);
     this.QLikert = new LikertExample(this.key, required);
     this.QCloze = new ClozeExample(this.key, required);
+    this.QMCloze = new MultipleClozeExample(this.key, required);
     this.QDate = new DateExample(this.key, required);
     this.QSlider = new SliderExample(this.key, required);
     this.QRSCA = new RSCAExample(this.key, required);
@@ -779,6 +840,7 @@ class ExampleSurveyDef extends SurveyDefinition {
     this.addItem(this.Q10.get());
     this.addItem(this.QLikert.get());
     this.addItem(this.QCloze.get());
+    this.addItem(this.QMCloze.get());
     this.addItem(this.QDate.get());
     this.addItem(this.QSlider.get());
     this.addItem(this.QRSCA.get());
