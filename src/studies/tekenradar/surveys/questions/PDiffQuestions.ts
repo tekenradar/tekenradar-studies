@@ -256,6 +256,9 @@ export class LymeTickBite1 extends Item {
 
 
 export class LymeTickBite2 extends Item {
+  optionKeys = {
+    andere: 'c',
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LTB2');
@@ -287,7 +290,7 @@ export class LymeTickBite2 extends Item {
           ])
         },
         {
-          key: 'c', role: 'option',
+          key: this.optionKeys.andere, role: 'option',
           content: new Map([
             ["nl", "Een andere vorm van de ziekte van Lyme"],
           ])
@@ -299,6 +302,9 @@ export class LymeTickBite2 extends Item {
 
 
 export class MedicationLyme extends Item {
+  optionKeys = {
+    no: 'c'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'MedLyme');
@@ -351,7 +357,7 @@ export class MedicationLyme extends Item {
           ])
         },
         {
-          key: 'c', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
