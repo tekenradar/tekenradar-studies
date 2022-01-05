@@ -236,12 +236,12 @@ export class GeneralTherapy extends Item {
               )
             }),
             ClozeItemTypes.textInput({
-              key: '2',
+              key: '3',
               inputMaxWidth: '120px'
 
             }),
             ClozeItemTypes.dropDown({
-              key: '3', options: [
+              key: '4', options: [
                 SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
                 SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
               ]
