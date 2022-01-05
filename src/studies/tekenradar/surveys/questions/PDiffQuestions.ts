@@ -11,9 +11,9 @@ export class IntroPDiff extends Item {
   markdownContent = `
   # Melding doen
 
-  #### Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
+  ##### Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
 
-  Wat wil je precies melden? Wat is op jou van toepassing?
+  ###### Wat wil je precies melden? Wat is op jou van toepassing?
   `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -131,7 +131,7 @@ export class EMTextPDiff extends Item {
 
   markdownContent = `
 
-  #### Een "erythema migrans" is een **uitbreidende rode ring of vlek** rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
+  ###### Een "erythema migrans" is een **uitbreidende rode ring of vlek** rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
 
   `
 
@@ -325,10 +325,11 @@ export class MedicationLyme extends Item {
                 reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
                 delta: { seconds: 0 }
               }
-            }),//TODO: text direct after date Input (without Line break)??
+            }),//TODO: if this text is too long as it is the case here the whole text is written in the next line
+            //instead of breaking text at the right position.
             ClozeItemTypes.text({
               key: '3', content: new Map(
-                [['nl', "(vul hier de startdatum van je  antibiotica behandeling in, of een schatting daarvan)"]]
+                [['nl', "(vul hier de startdatum van je antibiotica behandeling in, of een schatting daarvan)"]]
               )
             }),
           ]
