@@ -44,7 +44,7 @@ export class IntroPDiff extends Item {
 export class DetectTickBite extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -66,7 +66,7 @@ export class DetectTickBite extends Item {
       ]),
       responseOptions: [
         {
-          key: this.optionKeys.nameOfOption, role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -84,6 +84,9 @@ export class DetectTickBite extends Item {
 
 
 export class FeverTickBite extends Item {
+  optionKeys = {
+    yes: 'a'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FevTB');
@@ -104,7 +107,7 @@ export class FeverTickBite extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -168,6 +171,10 @@ export class EMTextPDiff extends Item {
 
 
 export class EMTickBite extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EMTB');
@@ -188,13 +195,13 @@ export class EMTickBite extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -207,9 +214,9 @@ export class EMTickBite extends Item {
 
 
 export class LymeTickBite1 extends Item {
-
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a',
+    no: 'b',
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -231,13 +238,13 @@ export class LymeTickBite1 extends Item {
       ]),
       responseOptions: [
         {
-          key: this.optionKeys.nameOfOption, role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])

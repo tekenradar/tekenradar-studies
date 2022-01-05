@@ -36,13 +36,13 @@ export class PDiffDef extends SurveyDefinition {
 
     this.T1 = new IntroPDiff(this.key, required);
     this.Q1 = new DetectTickBite(this.key, required);
-    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
+    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
 
     this.Q2 = new FeverTickBite(this.key, required, q1Condition);
     this.T2 = new EMTextPDiff(this.key, required);
     this.Q3 = new EMTickBite(this.key, required);
     this.Q4 = new LymeTickBite1(this.key, required);
-    const q4Condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
+    const q4Condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes);
 
     this.Q5 = new LymeTickBite2(this.key, required, q4Condition);
     this.Q6 = new MedicationLyme(this.key, required, q4Condition);

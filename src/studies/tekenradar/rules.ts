@@ -6,8 +6,35 @@ import { ExampleSurvey } from "./surveys/ExampleSurvey";
 
 const handlePDiffSubmit = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(PDiff.key),
-  // then do:
-  StudyEngine.participantActions.assignedSurveys.add(ExampleSurvey.key, 'immediate'),
+
+  // TODO: implement flow decisions
+
+  // TBflow
+  StudyEngine.ifThen(
+    // If:
+    StudyEngine.and(
+      StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
+      StudyEngine.singleChoice.none(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
+      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
+      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
+    ),
+    // Then:
+    StudyEngine.if(
+      StudyEngine.lt(
+        StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
+        18,
+      ),
+      StudyEngine.do(
+        StudyEngine.participantActions.updateFlag('ageCategory', 'child'),
+      ),
+      StudyEngine.do(
+        StudyEngine.participantActions.updateFlag('ageCategory', 'adult')
+      )
+    )
+  ),
+
+  // then do
+  // StudyEngine.participantActions.assignedSurveys.add(ExampleSurvey.key, 'immediate'),
 )
 
 const handleExampleSurveySubmit = StudyEngine.ifThen(
