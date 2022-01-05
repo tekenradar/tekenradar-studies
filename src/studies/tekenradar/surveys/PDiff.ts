@@ -21,13 +21,13 @@ export class PDiffDef extends SurveyDefinition {
     super({
       surveyKey: 'PDiff',
       name: new Map([
-        ['en', 'Test']
+        ['nl', 'Melding doen']
       ]),
       description: new Map([
-        ['en', 'Test']
+        ['nl', 'diff, start all flows, questions D1 through D7']
       ]),
       durationText: new Map([
-        ['en', 'Test']
+        ['nl', 'Test']
       ]),
       availableFor: 'public',
     });

@@ -140,7 +140,7 @@ class FormerLymeTherapy1 extends Item {
             }),
             ClozeItemTypes.numberInput({
               key: '2',
-              inputLabel: new Map([['nl', 'Antibioticakuren']]),
+              inputLabel: new Map([['nl', ' Antibioticakuren']]),
               labelBehindInput: true,
               inputMaxWidth: '60px'
             }),

@@ -31,9 +31,30 @@ export class PreviousTickBitesGroup extends Group {
 
 class PreviousTickBites1 extends Item {
 
+  //TODO bold text "in de afgelopen 5 jaar" or not (inconsistent in questionnaires --> ask RIVM)?
     optionKeys = {
         nameOfOption: 'a'
     }
+
+    questionTextMain = [
+      {
+          content: new Map([
+              ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
+          ]),
+      },
+      {
+          content: new Map([
+              ["nl", "in de afgelopen 5 jaar "],
+          ]),
+          className: "text-primary"
+      },
+      {
+          content: new Map([
+              ["nl", "opgemerkt?"],
+          ]),
+      },
+  ]
+
 
     constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'PTB1');
@@ -48,10 +69,7 @@ class PreviousTickBites1 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            //TODO bold text "in de afgelopen 5 jaar" ?
-            questionText: new Map([
-                ['nl', 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan in de afgelopen 5 jaar opgemerkt?'],
-            ]),
+            questionText: this.questionTextMain,
             responseOptions: [
                 {
                     key: 'a', role: 'option',
@@ -92,7 +110,7 @@ class PreviousTickBites1 extends Item {
 
 class PreviousTickBites2 extends Item {
 
-    //TODO bold text "in de afgelopen 3 maanden" ?
+    //TODO bold text "in de afgelopen 3 maanden" or not (inconsistent in questionnaires --> ask RIVM)?
     questionTextMain = [
         {
             content: new Map([
