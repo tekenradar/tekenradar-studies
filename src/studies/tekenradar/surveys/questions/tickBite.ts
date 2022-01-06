@@ -140,21 +140,23 @@ export class TickBiteOtherGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.Start = new RecognisedTickBite(this.key, required);
-    this.T1 = new IntroTB(this.key, required);
-    this.Q1 = new EnvironmentTickBite(this.key, required);
-    this.Q2 = new ActivityTickBite(this.key, required);
-    this.Q3 = new PositionTickBite(this.key, required);
-    this.Q4 = new NumberTickBite(this.key, required);
-    this.Q5 = new LocationBodyTickBite(this.key, required);
+    const QStartcondition = SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes);
 
-    this.Q6 = new RemoveTick2(this.key, required);
-    this.Q7 = new RemoveTick3(this.key, required);
-    this.Q8 = new RemoveTick4(this.key, required);
+    this.T1 = new IntroTB(this.key, required, QStartcondition);
+    this.Q1 = new EnvironmentTickBite(this.key, required, QStartcondition);
+    this.Q2 = new ActivityTickBite(this.key, required, QStartcondition);
+    this.Q3 = new PositionTickBite(this.key, required, QStartcondition);
+    this.Q4 = new NumberTickBite(this.key, required, QStartcondition);
+    this.Q5 = new LocationBodyTickBite(this.key, required, QStartcondition);
 
-    this.Q9 = new DurationTickBite(this.key, required);
+    this.Q6 = new RemoveTick2(this.key, required, QStartcondition);
+    this.Q7 = new RemoveTick3(this.key, required, QStartcondition);
+    this.Q8 = new RemoveTick4(this.key, required, QStartcondition);
 
-    this.Q10F = new DoctorTickBite(this.key, required);
-    this.Q11F = new Doctor(this.key, required);
+    this.Q9 = new DurationTickBite(this.key, required, QStartcondition);
+
+    this.Q10F = new DoctorTickBite(this.key, required, QStartcondition);
+    this.Q11F = new Doctor(this.key, required, QStartcondition);
 
 
   }
@@ -244,6 +246,10 @@ class IntroTB extends Item {
 
 class RecognisedTickBite extends Item {
 
+  optionKeys = {
+    yes: 'c',
+  }
+
   qTextFever = new Map([[
     'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de koorts hebt gekregen, al gemeld?'
   ]]);
@@ -298,7 +304,7 @@ class RecognisedTickBite extends Item {
           ]
         }),
         SCOptions.option(
-          'c', new Map([["nl", "Onbekend"]])
+          'd', new Map([["nl", "Onbekend"]])
         ),
       ]
     })
@@ -307,6 +313,22 @@ class RecognisedTickBite extends Item {
 
 
 class EnvironmentTickBite extends Item {
+
+  questionTextMain = [
+    {
+        content: new Map([
+            ["nl", 'In welk type omgeving heb je de tekenbeet opgelopen? '],
+        ]),
+    },
+    {
+        content: new Map([
+            ["nl", "(meerdere antwoorden mogelijk)"],
+        ]),
+        className: "fw-normal"
+    },
+
+]
+
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EnvTB');
@@ -321,9 +343,7 @@ class EnvironmentTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'In welk type omgeving heb je de tekenbeet opgelopen? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -387,6 +407,20 @@ class EnvironmentTickBite extends Item {
 
 class ActivityTickBite extends Item {
 
+  questionTextMain = [
+    {
+        content: new Map([
+            ["nl", 'Bij welke activiteit heb je de tekenbeet opgelopen? '],
+        ]),
+    },
+    {
+        content: new Map([
+            ["nl", "(meerdere antwoorden mogelijk)"],
+        ]),
+        className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'ActTB');
 
@@ -400,9 +434,7 @@ class ActivityTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Bij welke activiteit heb je de tekenbeet opgelopen? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -483,7 +515,7 @@ class PositionTickBite extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Weet je de locatie waar je de tekenbeet (vermoedelijk) heeft opgelopen?'],
+        ['nl', 'Weet je de locatie waar je de tekenbeet (vermoedelijk) hebt opgelopen?'],
       ]),
       responseOptions: [
         {
