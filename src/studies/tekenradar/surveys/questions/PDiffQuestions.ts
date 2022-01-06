@@ -367,3 +367,44 @@ export class MedicationLyme extends Item {
   }
 }
 
+
+
+export class WeeklyFlow extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b',
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'WFPDiff');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wilt u wekelijks doorgeven hoeveel tekenbeten u heeft gehad?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ]
+    })
+  }
+}
