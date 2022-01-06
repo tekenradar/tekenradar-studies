@@ -1,4 +1,4 @@
-import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme } from './questions/PDiffQuestions'
+import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme, WeeklyFlow } from './questions/PDiffQuestions'
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Age } from './questions/demographie';
@@ -15,6 +15,7 @@ export class PDiffDef extends SurveyDefinition {
   Q5: LymeTickBite2;
   Q6: MedicationLyme;
   Q7: Age;
+  Q8: WeeklyFlow;
 
 
   constructor(isRequired?: boolean) {
@@ -47,6 +48,7 @@ export class PDiffDef extends SurveyDefinition {
     this.Q5 = new LymeTickBite2(this.key, required, q4Condition);
     this.Q6 = new MedicationLyme(this.key, required, q4Condition);
     this.Q7 = new Age(this.key, required);
+    this.Q8 = new WeeklyFlow(this.key, required);
   }
 
 
@@ -61,6 +63,7 @@ export class PDiffDef extends SurveyDefinition {
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q7.get());
+    this.addItem(this.Q8.get());
   }
 
 }
