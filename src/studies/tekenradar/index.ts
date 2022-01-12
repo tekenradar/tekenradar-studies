@@ -15,6 +15,7 @@ import { TBflow_Kids } from "./surveys/TBflow_Kids";
 import { Chronicflow_Kids } from "./surveys/Chronicflow_Kids";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
 import { LBflow_Kids } from "./surveys/LBflow_Kids";
+import { Followupflow_Kids } from "./surveys/Followupflow_Kids";
 
 export const TekenradarStudy: Study = {
   studyKey: 'default',
@@ -22,7 +23,7 @@ export const TekenradarStudy: Study = {
   studyRules: studyRules,
   surveys: [
     PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Followupflow_Adults, Standardflow_Adults,
-    ExampleSurvey, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids
+    ExampleSurvey, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids, Followupflow_Kids
   ],
   customStudyRules: [
     addExampleReminderMessage
