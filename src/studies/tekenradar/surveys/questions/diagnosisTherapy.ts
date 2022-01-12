@@ -384,6 +384,20 @@ export class LymeDiagnosis2 extends Item {
 
 export class Doctor extends Item {
 
+  questionTextMain = [
+    {
+        content: new Map([
+            ["nl", 'Bij welke arts ben je toen geweest?'],
+        ]),
+    },
+    {
+        content: new Map([
+            ["nl", " (meerdere antwoorden mogelijk)"],
+        ]),
+        className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Doc');
 
@@ -397,9 +411,7 @@ export class Doctor extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Bij welke arts ben je toen geweest? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
