@@ -175,7 +175,7 @@ class FormerLymeTherapy2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Bent je toen hersteld van de eerdere erythema migrans of andere uiting van de ziekte van lyme?'],
+        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van lyme?'],
       ]),
       responseOptions: [
         {
@@ -199,6 +199,26 @@ class FormerLymeTherapy2 extends Item {
 //TODO: maybe transfer to tickbite file
 export class GeneralTherapy extends Item {
 
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Heb je in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 2 weken "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "medicijnen gebruikt?  Zo ja, welke medicijnen en tegen welke gezondheidsklachten?"],
+      ]),
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'GenTher');
 
@@ -212,9 +232,7 @@ export class GeneralTherapy extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Heb je in de afgelopen 2 weken medicijnen gebruikt? Zo ja, welke medicijnen en tegen welke gezondheidsklachten?'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
