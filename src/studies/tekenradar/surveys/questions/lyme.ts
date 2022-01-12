@@ -110,6 +110,11 @@ export class LymeDiagnosis3 extends Item {
     ['nl', 'Welke nieuwe klachten door de ziekte van Lyme heeft/had je? Geef hier een uitgebreide beschrijving van je klachten en vermeld hierbij ook hoe dit bij jou is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
   ])
 
+
+  qTextFollowUpKids = new Map([
+    ['nl', 'Welke nieuwe klachten door de ziekte van Lyme zijn of waren er. Geef hier een uitgebreide beschrijving van de klachten en vermeld hierbij ook hoe dit is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
+  ])
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LD3');
 
@@ -123,7 +128,7 @@ export class LymeDiagnosis3 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? this.qTextFollowUp : this.qTextLyme,
+      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
     })
   }
 }
@@ -192,6 +197,16 @@ export class LymeDiagnosis4 extends Item {
 
 export class LymeDiagnosis5 extends Item {
 
+  qTextMain = new Map([
+    ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
+  ])
+
+
+  qTextKids = new Map([
+    ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme vastgesteld?'],
+  ])
+
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LD5');
 
@@ -205,9 +220,7 @@ export class LymeDiagnosis5 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
-      ]),
+      questionText: this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
       responseOptions: [
         SCOptions.cloze({
           key: 'a', items: [
@@ -254,6 +267,10 @@ export class LymeDiagnosis6 extends Item {
     ['nl', 'Heb je op dit moment nog klachten door deze nieuwe uiting van de ziekte van Lyme?'],
   ])
 
+  qTextFollowUpKids = new Map([
+    ['nl', 'Zijn er op dit moment nog klachten door deze nieuwe uiting van de ziekte van Lyme?'],
+  ])
+
   optionKeys = {
     nameOfOption: 'a'
   }
@@ -271,7 +288,7 @@ export class LymeDiagnosis6 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? this.qTextFollowUp : this.qTextLyme,
+      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
       responseOptions: [
         {
           key: 'a', role: 'option',
