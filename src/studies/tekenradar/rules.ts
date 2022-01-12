@@ -5,6 +5,7 @@ import { PDiff } from "./surveys/PDiff";
 import { ExampleSurvey } from "./surveys/ExampleSurvey";
 import { TBflow_Adults } from "./surveys/TBflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
+import { ParticipantFlags } from "./participantFlags";
 
 const isChildParticipant = () => StudyEngine.lt(
   StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
@@ -20,15 +21,15 @@ const handleTriggerTBFlowLogic = () => StudyEngine.ifThen(
     StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
   ),
   // Then:
-  StudyEngine.participantActions.updateFlag('flow', 'TBflow'),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
   StudyEngine.if(
     isChildParticipant(),
     StudyEngine.do(
-      StudyEngine.participantActions.updateFlag('ageCategory', 'child'),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.ageCategory.key, ParticipantFlags.ageCategory.values.child),
       // TODO: add surveys according to TBkids flow
     ),
     StudyEngine.do(
-      StudyEngine.participantActions.updateFlag('ageCategory', 'adult'),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.ageCategory.key, ParticipantFlags.ageCategory.values.adult),
       StudyEngine.participantActions.assignedSurveys.add(TBflow_Adults.key, 'immediate'),
     )
   )
@@ -84,6 +85,10 @@ const handleStandardflow_AdultsSubmit = StudyEngine.ifThen(
 
 const handlePDiffSubmit = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(PDiff.key),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.ageFromPDiff.key,
+    StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
+  ),
 
   // TODO: implement flow decisions
   handleTriggerTBFlowLogic(),
