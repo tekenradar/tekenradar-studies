@@ -257,6 +257,8 @@ export class LymeTickBite1 extends Item {
 
 export class LymeTickBite2 extends Item {
   optionKeys = {
+    fever: 'a',
+    posTest: 'b',
     andere: 'c',
   }
 
@@ -303,6 +305,11 @@ export class LymeTickBite2 extends Item {
 
 export class MedicationLyme extends Item {
   optionKeys = {
+    yes: {
+      option: 'a',
+      dateInput: 'date',
+    },
+    startSoon: 'b',
     no: 'c'
   }
 
@@ -325,7 +332,8 @@ export class MedicationLyme extends Item {
       ]),
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.yes.option,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Ja, ik ben gestart op"]]
@@ -333,7 +341,7 @@ export class MedicationLyme extends Item {
             }),//NOTE: filling in date is NOT mandatory to avoid getting stuck due to forgotten date
             ClozeItemTypes.dateInput({
               dateInputMode: 'YMD',
-              key: '2',
+              key: this.optionKeys.yes.dateInput,
               maxRelativeDate: {
                 reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
                 delta: { seconds: 0 }
@@ -351,7 +359,7 @@ export class MedicationLyme extends Item {
         //  max: { dtype: 'exp', exp: SurveyEngine.timestampWithOffset({seconds: 0}) }
         //}
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.startSoon, role: 'option',
           content: new Map([
             ["nl", "Nee, maar ik start binnenkort met de behandeling"],
           ])

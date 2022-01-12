@@ -13,7 +13,17 @@ export const ParticipantFlags = {
     key: 'flow',
     values: {
       TBflow: 'TBflow',
-
+      EMflow: 'EMflow',
+      FEflow: 'FEflow',
+      LBflow: 'LBflow',
+      Chronicflow: 'Chronicflow',
+    },
+  },
+  weekyTBreporter: {
+    key: 'weeklyTBreporter',
+    values: {
+      true: 'true',
+      false: 'false'
     }
   }
 }

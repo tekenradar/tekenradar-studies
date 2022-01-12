@@ -3,6 +3,7 @@ import { SingleChoiceOptionTypes, SurveyItems, ClozeItemTypes, MultipleChoiceOpt
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 import { optionDefToItemComponent } from 'case-editor-tools/surveys/responseTypeGenerators/optionGroupComponents';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { ParticipantFlags } from '../participantFlags';
 
 class SingleChoiceExample extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -32,7 +33,7 @@ class SingleChoiceExample extends Item {
         ComponentGenerators.text({
           content: new Map([['nl', 'flag is smaller than 10']]),
           displayCondition: SurveyEngine.compare.lt(
-            SurveyEngine.participantFlags.getAsNum('testKey3'),
+            SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),
             10
           )
         }),
