@@ -582,6 +582,21 @@ class NumberTickBite extends Item {
 
 class LocationBodyTickBite extends Item {
 
+
+  questionTextMain = [
+    {
+        content: new Map([
+            ["nl", 'Wat was de locatie van de tekenbeet op je  lichaam?'],
+        ]),
+    },
+    {
+        content: new Map([
+            ["nl", " (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linker been aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle lokaties aangeven)"],
+        ]),
+        className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LocTB');
 
@@ -595,9 +610,7 @@ class LocationBodyTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wat was de locatie van de tekenbeet op je  lichaam? (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linker been aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle lokaties aangeven)'],
-      ]),
+      questionText: this.questionTextMain
     })
   }
 }
@@ -843,6 +856,21 @@ class RemoveTick3 extends Item {
 
 class RemoveTick4 extends Item {
 
+
+  questionTextMain = [
+    {
+        content: new Map([
+            ["nl", 'Wie heeft de teek verwijderd?'],
+        ]),
+    },
+    {
+        content: new Map([
+            ["nl", " (meerdere antwoorden mogelijk)"],
+        ]),
+        className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT4');
 
@@ -856,9 +884,7 @@ class RemoveTick4 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wie heeft de teek verwijderd? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText:this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -875,7 +901,7 @@ class RemoveTick4 extends Item {
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "Uzelf"],
+            ["nl", "Ik zelf"],
           ])
         },
         {
