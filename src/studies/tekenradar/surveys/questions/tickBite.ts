@@ -696,6 +696,18 @@ class RemoveTick2 extends Item {
 
 class RemoveTick3 extends Item {
 
+  drop_options = [
+      SCOptions.option('0', new Map([['nl', "0"]])),SCOptions.option('1', new Map([['nl', "1"]])),SCOptions.option('2', new Map([['nl', "2"]])),
+      SCOptions.option('3', new Map([['nl', "3"]])), SCOptions.option('4', new Map([['nl', "4"]])), SCOptions.option('5', new Map([['nl', "5"]])),
+      SCOptions.option('6', new Map([['nl', "6"]])), SCOptions.option('7', new Map([['nl', "7"]])), SCOptions.option('8', new Map([['nl', "8"]])),
+      SCOptions.option('9', new Map([['nl', "9"]])), SCOptions.option('10', new Map([['nl', "10"]])), SCOptions.option('11', new Map([['nl', "11"]])),
+      SCOptions.option('12', new Map([['nl', "12"]])),SCOptions.option('13', new Map([['nl', "13"]])),SCOptions.option('14', new Map([['nl', "14"]])),
+      SCOptions.option('15', new Map([['nl', "15"]])), SCOptions.option('16', new Map([['nl', "16"]])), SCOptions.option('17', new Map([['nl', "17"]])),
+      SCOptions.option('18', new Map([['nl', "18"]])), SCOptions.option('19', new Map([['nl', "19"]])), SCOptions.option('20', new Map([['nl', "20"]])),
+      SCOptions.option('21', new Map([['nl', "21"]])), SCOptions.option('22', new Map([['nl', "22"]])), SCOptions.option('23', new Map([['nl', "23"]])),
+      SCOptions.option('24', new Map([['nl', "24"]]))
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT3');
 
@@ -720,26 +732,12 @@ class RemoveTick3 extends Item {
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            ClozeItemTypes.numberInput({
-              key: '2',
-              inputLabel: new Map([["nl", " en"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.numberInput({
-              key: '3',
-              inputLabel: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
+            ClozeItemTypes.dropDown({
+              key: '2', options: this.drop_options
             }),
+            ClozeItemTypes.dropDown({
+              key: '3', options: this.drop_options
+            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
           ]
         }),
         SCOptions.cloze({
@@ -749,25 +747,21 @@ class RemoveTick3 extends Item {
                 [['nl', "Gisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.numberInput({
-              key: '2',
-              inputLabel: new Map([["nl", " en"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
+            ClozeItemTypes.dropDown({
+              key: '2', options: this.drop_options
+            }),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " en "]]
+              )
+            }),
+            ClozeItemTypes.dropDown({
+              key: '4', options: this.drop_options
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.numberInput({
-              key: '3',
-              inputLabel: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
+            ClozeItemTypes.text({
+              key: '5', content: new Map(
+                [['nl', " uur"]]
+              )
             }),
           ]
         }),
