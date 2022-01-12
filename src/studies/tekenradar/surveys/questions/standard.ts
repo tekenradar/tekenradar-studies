@@ -584,7 +584,7 @@ export class Symptoms2 extends Item {
           ]),
           //disabled: SurveyEngine.singleChoice.any(,'b')???
         },
-        {
+        {//TODO: this is skipped for KIDS
           key: 'e',
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
