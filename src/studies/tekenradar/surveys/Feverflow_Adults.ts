@@ -6,7 +6,7 @@ import { DoctorEM, EM1, EM2, EM3, EM4, EMGroup, PhotoEM } from './questions/EM';
 import { FeverText, FeverSymptom1, FeverSymptom2, FeverSymptom3, FeverSymptom4, FeverSymptom5, FeverSymptom6, FeverSymptom7, FeverTherapy, FeverOtherCause1, FeverOtherCause2, FeverOtherCause3, FeverOtherCause4 } from './questions/fever';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7 } from './questions/lyme';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
-import { TickBiteOnlyGroup, TickBiteOtherGroup } from './questions/tickBite';
+import { TickBiteOtherGroup } from './questions/tickBite';
 
 
 class Feverflow_AdultsDef extends SurveyDefinition {

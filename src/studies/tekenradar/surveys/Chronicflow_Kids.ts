@@ -5,7 +5,7 @@ import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerL
 import { DoctorEM, EM1, EM2, EM3, EM4, EMGroup, PhotoEM } from './questions/EM';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7 } from './questions/lyme';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
-import { TickBiteOnlyGroup, TickBiteOtherGroup } from './questions/tickBite';
+import { TickBiteOtherGroup } from './questions/tickBite';
 
 
 class Chronicflow_KidsDef extends SurveyDefinition {

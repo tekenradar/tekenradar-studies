@@ -8,109 +8,6 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
-
-
-export class TickBiteOnlyGroup extends Group {
-
-  //Note: T-named objects are text items
-  T1: IntroTB;
-  Q1: EnvironmentTickBite;
-  Q2: ActivityTickBite;
-  Q3: PositionTickBite;
-  Q4: NumberTickBite;
-  Q5: LocationBodyTickBite;
-  Q6: RemoveTick1;
-  Q7: RemoveTick2;
-  Q8: RemoveTick3;
-  Q9: RemoveTick4;
-  G10_11: PreviousTickBitesGroup;
-  Q12: ReportedTickBites;
-
-  P1: Residence;
-  P2: Gender;
-
-  Q13: DateTickBite;
-  Q14: DurationTickBite;
-  Q15: DoctorTickBite;
-  Q16: Doctor;
-
-  G17_19: FormerLymeGroup;
-
-  Q20: GeneralTherapy;
-
-
-
-  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'TBOnlyG');
-
-    this.groupEditor.setCondition(condition);
-
-    const required = isRequired !== undefined ? isRequired : false;
-
-    this.T1 = new IntroTB(this.key, required);
-    this.Q1 = new EnvironmentTickBite(this.key, required);
-    this.Q2 = new ActivityTickBite(this.key, required);
-    this.Q3 = new PositionTickBite(this.key, required);
-    this.Q4 = new NumberTickBite(this.key, required);
-    this.Q5 = new LocationBodyTickBite(this.key, required);
-
-    this.Q6 = new RemoveTick1(this.key, required);
-    const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
-    this.Q7 = new RemoveTick2(this.key, required, q6Condition);
-    this.Q8 = new RemoveTick3(this.key, required, q6Condition);
-    this.Q9 = new RemoveTick4(this.key, required, q6Condition);
-
-    this.G10_11 = new PreviousTickBitesGroup(this.key, isRequired);
-
-    this.Q12 = new ReportedTickBites(this.key, required);
-
-    //TDOD If the respondent is not logged in ask p1 and p2,
-    //if he is logged in, skip these two questions here as they
-    //will be asked lateron in de questionaire (chapter S-A)
-    this.P1 = new Residence(this.key, required);
-    this.P2 = new Gender(this.key, required);
-
-    this.Q13 = new DateTickBite(this.key, required);
-    this.Q14 = new DurationTickBite(this.key, required);
-    this.Q15 = new DoctorTickBite(this.key, required);
-    const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
-    this.Q16 = new Doctor(this.key, required, q15Condition);
-
-    this.G17_19 = new FormerLymeGroup(this.key, isRequired);
-
-    this.Q20 = new GeneralTherapy(this.key, required);
-
-  }
-
-  buildGroup() {
-
-    this.addItem(this.T1.get());
-    this.addItem(this.Q1.get());
-    this.addItem(this.Q2.get());
-    this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
-    this.addItem(this.Q6.get());
-    this.addItem(this.Q7.get());
-    this.addItem(this.Q8.get());
-    this.addItem(this.Q9.get());
-    this.addItem(this.G10_11.get());
-    this.addItem(this.Q12.get());
-    this.addItem(this.P1.get());
-    this.addItem(this.P2.get());
-    this.addItem(this.Q13.get());
-    this.addItem(this.Q14.get());
-    this.addItem(this.Q15.get());
-    this.addItem(this.Q16.get());
-    this.addItem(this.G17_19.get());
-    this.addItem(this.Q20.get());
-
-
-  }
-}
-
-
-
 export class TickBiteOtherGroup extends Group {
 
   Start: RecognisedTickBite;
@@ -189,7 +86,7 @@ export class TickBiteOtherGroup extends Group {
 }
 
 
-class IntroTB extends Item {
+export class IntroTB extends Item {
 
   markdownContentOnly = `
   # Melden tekenbeet
@@ -244,8 +141,8 @@ class IntroTB extends Item {
   }
 }
 
-class RecognisedTickBite extends Item {
 
+export class RecognisedTickBite extends Item {
   optionKeys = {
     yes: 'c',
   }
@@ -312,22 +209,21 @@ class RecognisedTickBite extends Item {
 }
 
 
-class EnvironmentTickBite extends Item {
-
+export class EnvironmentTickBite extends Item {
   questionTextMain = [
     {
-        content: new Map([
-            ["nl", 'In welk type omgeving heb je de tekenbeet opgelopen? '],
-        ]),
+      content: new Map([
+        ["nl", 'In welk type omgeving heb je de tekenbeet opgelopen? '],
+      ]),
     },
     {
-        content: new Map([
-            ["nl", "(meerdere antwoorden mogelijk)"],
-        ]),
-        className: "fw-normal"
+      content: new Map([
+        ["nl", "(meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
     },
 
-]
+  ]
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -405,19 +301,18 @@ class EnvironmentTickBite extends Item {
 }
 
 
-class ActivityTickBite extends Item {
-
+export class ActivityTickBite extends Item {
   questionTextMain = [
     {
-        content: new Map([
-            ["nl", 'Bij welke activiteit heb je de tekenbeet opgelopen? '],
-        ]),
+      content: new Map([
+        ["nl", 'Bij welke activiteit heb je de tekenbeet opgelopen? '],
+      ]),
     },
     {
-        content: new Map([
-            ["nl", "(meerdere antwoorden mogelijk)"],
-        ]),
-        className: "fw-normal"
+      content: new Map([
+        ["nl", "(meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
     },
   ]
 
@@ -496,7 +391,7 @@ class ActivityTickBite extends Item {
 }
 
 
-class PositionTickBite extends Item {
+export class PositionTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'PosTB');
@@ -548,7 +443,7 @@ class PositionTickBite extends Item {
 }
 
 
-class NumberTickBite extends Item {
+export class NumberTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'NumTB');
@@ -580,20 +475,18 @@ class NumberTickBite extends Item {
 }
 
 
-class LocationBodyTickBite extends Item {
-
-
+export class LocationBodyTickBite extends Item {
   questionTextMain = [
     {
-        content: new Map([
-            ["nl", 'Wat was de locatie van de tekenbeet op je  lichaam?'],
-        ]),
+      content: new Map([
+        ["nl", 'Wat was de locatie van de tekenbeet op je  lichaam?'],
+      ]),
     },
     {
-        content: new Map([
-            ["nl", " (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linker been aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle lokaties aangeven)"],
-        ]),
-        className: "fw-normal"
+      content: new Map([
+        ["nl", " (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linker been aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle lokaties aangeven)"],
+      ]),
+      className: "fw-normal"
     },
   ]
 
@@ -616,7 +509,7 @@ class LocationBodyTickBite extends Item {
 }
 
 
-class RemoveTick1 extends Item {
+export class RemoveTick1 extends Item {
 
   optionKeys = {
     nameOfOption: 'b'
@@ -657,8 +550,7 @@ class RemoveTick1 extends Item {
 }
 
 
-class RemoveTick2 extends Item {
-
+export class RemoveTick2 extends Item {
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT2');
 
@@ -694,18 +586,17 @@ class RemoveTick2 extends Item {
 }
 
 
-class RemoveTick3 extends Item {
-
+export class RemoveTick3 extends Item {
   drop_options = [
-      SCOptions.option('0', new Map([['nl', "0"]])),SCOptions.option('1', new Map([['nl', "1"]])),SCOptions.option('2', new Map([['nl', "2"]])),
-      SCOptions.option('3', new Map([['nl', "3"]])), SCOptions.option('4', new Map([['nl', "4"]])), SCOptions.option('5', new Map([['nl', "5"]])),
-      SCOptions.option('6', new Map([['nl', "6"]])), SCOptions.option('7', new Map([['nl', "7"]])), SCOptions.option('8', new Map([['nl', "8"]])),
-      SCOptions.option('9', new Map([['nl', "9"]])), SCOptions.option('10', new Map([['nl', "10"]])), SCOptions.option('11', new Map([['nl', "11"]])),
-      SCOptions.option('12', new Map([['nl', "12"]])),SCOptions.option('13', new Map([['nl', "13"]])),SCOptions.option('14', new Map([['nl', "14"]])),
-      SCOptions.option('15', new Map([['nl', "15"]])), SCOptions.option('16', new Map([['nl', "16"]])), SCOptions.option('17', new Map([['nl', "17"]])),
-      SCOptions.option('18', new Map([['nl', "18"]])), SCOptions.option('19', new Map([['nl', "19"]])), SCOptions.option('20', new Map([['nl', "20"]])),
-      SCOptions.option('21', new Map([['nl', "21"]])), SCOptions.option('22', new Map([['nl', "22"]])), SCOptions.option('23', new Map([['nl', "23"]])),
-      SCOptions.option('24', new Map([['nl', "24"]]))
+    SCOptions.option('0', new Map([['nl', "0"]])), SCOptions.option('1', new Map([['nl', "1"]])), SCOptions.option('2', new Map([['nl', "2"]])),
+    SCOptions.option('3', new Map([['nl', "3"]])), SCOptions.option('4', new Map([['nl', "4"]])), SCOptions.option('5', new Map([['nl', "5"]])),
+    SCOptions.option('6', new Map([['nl', "6"]])), SCOptions.option('7', new Map([['nl', "7"]])), SCOptions.option('8', new Map([['nl', "8"]])),
+    SCOptions.option('9', new Map([['nl', "9"]])), SCOptions.option('10', new Map([['nl', "10"]])), SCOptions.option('11', new Map([['nl', "11"]])),
+    SCOptions.option('12', new Map([['nl', "12"]])), SCOptions.option('13', new Map([['nl', "13"]])), SCOptions.option('14', new Map([['nl', "14"]])),
+    SCOptions.option('15', new Map([['nl', "15"]])), SCOptions.option('16', new Map([['nl', "16"]])), SCOptions.option('17', new Map([['nl', "17"]])),
+    SCOptions.option('18', new Map([['nl', "18"]])), SCOptions.option('19', new Map([['nl', "19"]])), SCOptions.option('20', new Map([['nl', "20"]])),
+    SCOptions.option('21', new Map([['nl', "21"]])), SCOptions.option('22', new Map([['nl', "22"]])), SCOptions.option('23', new Map([['nl', "23"]])),
+    SCOptions.option('24', new Map([['nl', "24"]]))
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -850,20 +741,20 @@ class RemoveTick3 extends Item {
 }
 
 
-class RemoveTick4 extends Item {
+export class RemoveTick4 extends Item {
 
 
   questionTextMain = [
     {
-        content: new Map([
-            ["nl", 'Wie heeft de teek verwijderd?'],
-        ]),
+      content: new Map([
+        ["nl", 'Wie heeft de teek verwijderd?'],
+      ]),
     },
     {
-        content: new Map([
-            ["nl", " (meerdere antwoorden mogelijk)"],
-        ]),
-        className: "fw-normal"
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
     },
   ]
 
@@ -880,7 +771,7 @@ class RemoveTick4 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:this.questionTextMain,
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -919,7 +810,7 @@ class RemoveTick4 extends Item {
 
 
 
-class ReportedTickBites extends Item {
+export class ReportedTickBites extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RepTB');
@@ -986,7 +877,7 @@ class ReportedTickBites extends Item {
 }
 
 
-class DateTickBite extends Item {
+export class DateTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'DTB');
@@ -1146,7 +1037,7 @@ class DateTickBite extends Item {
 }
 
 
-class DurationTickBite extends Item {
+export class DurationTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'DurTB');
@@ -1240,7 +1131,7 @@ class DurationTickBite extends Item {
 }
 
 
-class DoctorTickBite extends Item {
+export class DoctorTickBite extends Item {
 
   optionKeys = {
     nameOfOption: 'a'
