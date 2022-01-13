@@ -59,6 +59,21 @@ export class AwarenessGroup extends Group {
 
 export class Tekenradar extends Item {
 
+
+  questionTextMain = [
+    {
+        content: new Map([
+            ["nl", 'Hoe heb je over het onderzoek via Tekenradar.nl gehoord?'],
+        ]),
+    },
+    {
+        content: new Map([
+            ["nl", " (meerdere antwoorden mogelijk)"],
+        ]),
+        className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'tek');
 
@@ -72,9 +87,7 @@ export class Tekenradar extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Hoe heb je over het onderzoek via Tekenradar.nl gehoord? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -116,8 +129,7 @@ export class Tekenradar extends Item {
 export class StandardText1 extends Item {
 
   markdownContent = `
-    De volgende vraag gebruiken wij alleen om te bekijken of de deelnemers aan het
-    onderzoek een goede afspiegeling zijn van de Nederlandse samenleving.
+  ##### De volgende vraag gebruiken wij alleen om te bekijken of de deelnemers aan het onderzoek een goede afspiegeling zijn van de Nederlandse samenleving.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -811,12 +823,12 @@ export class Pregnant extends Item {
 export class FunctioningText extends Item {
 
   markdownContent = `
-    # Functioneren
+# Functioneren
 
-    In deze vragenlijst wordt naar je gezondheid gevraagd.
-    Wanneer je twijfelt over het antwoord op een vraag, probeer dan het antwoord te geven dat het meest van toepassing is.
+In deze vragenlijst wordt naar je gezondheid gevraagd.
+Wanneer je twijfelt over het antwoord op een vraag, probeer dan het antwoord te geven dat het meest van toepassing is.
 
-    De volgende vragen gaan over dagelijkse bezigheden.
+De volgende vragen gaan over dagelijkse bezigheden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1570,7 +1582,7 @@ export class Cognition extends Item {
 export class MedCareText1 extends Item {
 
   markdownContent = `
-    Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
+Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1735,7 +1747,7 @@ export class MedCare2 extends Item {
 export class MedCareText3 extends Item {
 
   markdownContent = `
-  Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
+Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -2388,7 +2400,7 @@ export class QuestionsKids extends Item {
 export class TextQUKids extends Item {
 
   markdownContent = `
-    Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
+Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
