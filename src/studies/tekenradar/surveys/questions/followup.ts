@@ -10,7 +10,7 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 export class Text1FU extends Item {
 
   markdownContent = `
-    De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
+De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -41,8 +41,8 @@ export class Text1FU extends Item {
 export class Text1FUKids extends Item {
 
   markdownContent = `
-      De vragen hieronder zijn voor een minderjarige.
-      Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -273,7 +273,7 @@ export class FeverFU2 extends Item {
 export class Text2FU extends Item {
 
   markdownContent = `
-    De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
+De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -445,9 +445,6 @@ export class MedicationFU2 extends Item {
       questionText: new Map([//TODO: insert proper question text
         ['nl', 'Info per medication'],
       ]),
-      footnoteText: new Map([//TODO: is this writtem at the end of question?
-        ['nl', 'Als je de dosis niet weet kun je die overslaan'],
-      ]),
       items:
         [
           ClozeItemTypes.text({
@@ -541,7 +538,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '17', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition2
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
@@ -619,7 +617,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '29', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition3
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
@@ -697,7 +696,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '41', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition4
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
@@ -775,7 +775,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '53', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition5
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
