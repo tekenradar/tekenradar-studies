@@ -34,13 +34,13 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: 'Standardflow_Adults',
       name: new Map([
-        ['en', 'Test']
+        ['nl', 'Test']
       ]),
       description: new Map([
-        ['en', 'Test']
+        ['nl', 'Test']
       ]),
       durationText: new Map([
-        ['en', 'Test']
+        ['nl', 'Test']
       ]),
       availableFor: 'temporary_participants'
     });
