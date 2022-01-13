@@ -9,29 +9,29 @@ import { TickBiteOnlyGroup } from './questions/tickBite';
 
 class TBflow_KidsDef extends SurveyDefinition {
 
-    G1: TickBiteOnlyGroup;
-  
-    constructor(isRequired?: boolean) {
-      super({
-        surveyKey: 'TBflow_Kids',
-        name: new Map([
-          ['en', 'Test']
-        ]),
-        description: new Map([
-          ['en', 'Test']
-        ]),
-        durationText: new Map([
-          ['en', 'Test']
-        ]),
-      });
+  G1: TickBiteOnlyGroup;
 
-      this.G1 = new TickBiteOnlyGroup(this.key, isRequired);
+  constructor(isRequired?: boolean) {
+    super({
+      surveyKey: 'TBflow_Kids',
+      name: new Map([
+        ['nl', 'Test']
+      ]),
+      description: new Map([
+        ['nl', 'Test']
+      ]),
+      durationText: new Map([
+        ['nl', 'Test']
+      ]),
+    });
+
+    this.G1 = new TickBiteOnlyGroup(this.key, isRequired);
   }
 
   buildSurvey() {
 
     this.addItem(this.G1.get());
-    
+
   }
 }
 
