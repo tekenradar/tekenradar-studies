@@ -23,6 +23,10 @@ class SingleChoiceExample extends Item {
       ]),
       topDisplayCompoments: [
         ComponentGenerators.text({
+          content: new Map([['nl', 'is logged in']]),
+          displayCondition: SurveyEngine.isLoggedIn(),
+        }),
+        ComponentGenerators.text({
           content: new Map([['nl', 'flag has key condition true']]),
           displayCondition: SurveyEngine.participantFlags.hasKey('testKey1'),
         }),

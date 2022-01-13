@@ -2,10 +2,8 @@ import { StudyRules } from "case-editor-tools/types/studyRules";
 import { Expression } from "survey-engine/data_types";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { PDiff } from "./surveys/PDiff";
-import { ExampleSurvey } from "./surveys/ExampleSurvey";
 import { TBflow_Adults } from "./surveys/TBflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
-import { ParticipantFlags } from "./participantFlags";
 import { handleTrigger_Chronicflow, handleTrigger_EMflow, handleTrigger_FEflow, handleTrigger_LBflow, handleTrigger_TBflow, handleTrigger_WeeklyTB, updateAgeFlags } from "./utils/studyRuleUtils";
 
 
