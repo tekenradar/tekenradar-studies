@@ -10,60 +10,60 @@ import { TickBiteOnlyGroup, TickBiteOtherGroup } from './questions/tickBite';
 
 class Chronicflow_KidsDef extends SurveyDefinition {
 
-    G1_9: TickBiteOtherGroup
+  G1_9: TickBiteOtherGroup
 
-    G10_11: LymeDiagnosisGroup;
+  G10_11: LymeDiagnosisGroup;
 
-    //TODO: should header be shown?
-    //Lyme questions here
-    Q12: ChronicLymeDiagnosis1;
-    Q13: ChronicLymeDiagnosis2;
-    Q14: ChronicLymeTherapy1;
-    Q15: ChronicLymeTherapy2;
-     
-    G16_17: PreviousTickBitesGroup;
+  //TODO: should header be shown?
+  //Lyme questions here
+  Q12: ChronicLymeDiagnosis1;
+  Q13: ChronicLymeDiagnosis2;
+  Q14: ChronicLymeTherapy1;
+  Q15: ChronicLymeTherapy2;
 
-    constructor(isRequired?: boolean) {
-      super({
-        surveyKey: 'Chronicflow_Kids',
-        name: new Map([
-          ['en', 'Test']
-        ]),
-        description: new Map([
-          ['en', 'Test']
-        ]),
-        durationText: new Map([
-          ['en', 'Test']
-        ]),
-      });
+  G16_17: PreviousTickBitesGroup;
 
-      
-      const required = isRequired !== undefined ? isRequired : false;
+  constructor(isRequired?: boolean) {
+    super({
+      surveyKey: 'Chronicflow_Kids',
+      name: new Map([
+        ['nl', 'Chronicflow kids title']
+      ]),
+      description: new Map([
+        ['nl', 'Test']
+      ]),
+      durationText: new Map([
+        ['nl', 'Test']
+      ]),
+    });
 
-      this.G1_9 = new TickBiteOtherGroup(this.key,isRequired);
 
-      this.G10_11 = new LymeDiagnosisGroup(this.key,isRequired);
-      
-      this.Q12 = new ChronicLymeDiagnosis1(this.key,required);
-      this.Q13 = new ChronicLymeDiagnosis2(this.key,required);
-      this.Q14 = new ChronicLymeTherapy1(this.key,required);
-      this.Q15 = new ChronicLymeTherapy2(this.key,required);
+    const required = isRequired !== undefined ? isRequired : false;
 
-      this.G16_17 = new PreviousTickBitesGroup(this.key,isRequired);
+    this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
+
+    this.G10_11 = new LymeDiagnosisGroup(this.key, isRequired);
+
+    this.Q12 = new ChronicLymeDiagnosis1(this.key, required);
+    this.Q13 = new ChronicLymeDiagnosis2(this.key, required);
+    this.Q14 = new ChronicLymeTherapy1(this.key, required);
+    this.Q15 = new ChronicLymeTherapy2(this.key, required);
+
+    this.G16_17 = new PreviousTickBitesGroup(this.key, isRequired);
 
   }
 
   buildSurvey() {
 
-      this.addItem(this.G1_9.get());
+    this.addItem(this.G1_9.get());
 
-      this.addItem(this.G10_11.get());
-      this.addItem(this.Q12.get());
-      this.addItem(this.Q13.get());
-      this.addItem(this.Q14.get());
-      this.addItem(this.Q15.get());
-      this.addItem(this.G16_17.get());
-   
+    this.addItem(this.G10_11.get());
+    this.addItem(this.Q12.get());
+    this.addItem(this.Q13.get());
+    this.addItem(this.Q14.get());
+    this.addItem(this.Q15.get());
+    this.addItem(this.G16_17.get());
+
   }
 }
 
