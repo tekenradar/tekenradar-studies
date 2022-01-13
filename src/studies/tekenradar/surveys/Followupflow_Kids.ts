@@ -58,13 +58,13 @@ class Followupflow_KidsDef extends SurveyDefinition {
         super({
             surveyKey: 'Followupflow_Kids',
             name: new Map([
-                ['en', 'Test']
+              ['nl', 'Followupflow Kids title']
             ]),
             description: new Map([
-                ['en', 'Test']
+                ['nl', 'Test']
             ]),
             durationText: new Map([
-                ['en', 'Test']
+                ['nl', 'Test']
             ]),
         });
 
