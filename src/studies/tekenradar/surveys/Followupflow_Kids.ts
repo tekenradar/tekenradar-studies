@@ -4,6 +4,7 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text1FUKids, Text2FU } from './questions/followup';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids, Symptoms1, Symptoms2, Symptoms3, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
+import { Func1KidsF1, Functioning1TextKids } from './questions/standard_Kids';
 
 class Followupflow_KidsDef extends SurveyDefinition {
 
@@ -39,6 +40,8 @@ class Followupflow_KidsDef extends SurveyDefinition {
     Q18: MedCare2;
     T5: MedCareText3;
 
+    T6_Kids: Functioning1TextKids;
+    Q19: Func1KidsF1;
 
     //T6_Kids
     //T3: FunctioningText;
@@ -105,6 +108,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.Q15 = new Symptoms2(this.key, required);
         this.Q16 = new Symptoms3(this.key, required);
 
+
       /*  this.T3 = new FunctioningText(this.key, required, Q6condition);
         this.Q17 = new Functioning1(this.key, required, Q6condition);
         this.Q18 = new Functioning2(this.key, required, Q6condition);
@@ -120,6 +124,9 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.T4 = new MedCareText2(this.key, required,Q6condition);
         this.Q18 = new MedCare2(this.key, required, Q17condition);
         this.T5 = new MedCareText3(this.key, required, Q17condition);
+
+        this.T6_Kids = new Functioning1TextKids(this.key, required);
+        this.Q19 = new Func1KidsF1(this.key, required);
 
         //this.Q26 = new Symptoms1(this.key, required, Q6condition);
         //this.Q27 = new SymptomsFU(this.key, required, Q6condition);
@@ -157,6 +164,9 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.T4.get());
         this.addItem(this.Q18.get());
         this.addItem(this.T5.get());
+
+        this.addItem(this.T6_Kids.get());
+        this.addItem(this.Q19.get());
 
 
     }
