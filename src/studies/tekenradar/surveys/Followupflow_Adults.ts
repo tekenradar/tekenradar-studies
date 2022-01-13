@@ -80,32 +80,32 @@ class Followupflow_AdultsDef extends SurveyDefinition {
     this.Q9 = new LymeDiagnosis4(this.key, required, Q6condition);
     this.Q10 = new LymeDiagnosis5(this.key, required, Q6condition);
     this.Q11 = new LymeDiagnosis6(this.key, required, Q6condition);
-    this.Q12 = new MedicationFU1(this.key, required, Q6condition);
+    this.Q12 = new MedicationFU1(this.key, required);
     //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
     const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.2');
 
     this.Q13 = new MedicationFU2(this.key, required, Q12number);
-    this.Q14 = new Symptoms2(this.key, required, Q6condition);
-    this.Q15 = new Symptoms3(this.key, required, Q6condition);
-    this.Q16 = new Pregnant(this.key, required, Q6condition);
-    this.T3 = new FunctioningText(this.key, required, Q6condition);
-    this.Q17 = new Functioning1(this.key, required, Q6condition);
-    this.Q18 = new Functioning2(this.key, required, Q6condition);
-    this.Q19 = new Functioning3(this.key, required, Q6condition);
-    this.Q20 = new Functioning4(this.key, required, Q6condition);
-    this.Q21 = new Functioning5(this.key, required, Q6condition);
-    this.Q22 = new Fatigue(this.key, required, Q6condition);
-    this.Q23 = new Cognition(this.key, required, Q6condition);
+    this.Q14 = new Symptoms2(this.key, required);
+    this.Q15 = new Symptoms3(this.key, required);
+    this.Q16 = new Pregnant(this.key, required);
+    this.T3 = new FunctioningText(this.key, required);
+    this.Q17 = new Functioning1(this.key, required);
+    this.Q18 = new Functioning2(this.key, required);
+    this.Q19 = new Functioning3(this.key, required);
+    this.Q20 = new Functioning4(this.key, required);
+    this.Q21 = new Functioning5(this.key, required);
+    this.Q22 = new Fatigue(this.key, required);
+    this.Q23 = new Cognition(this.key, required);
 
-    this.T4 = new MedCareText1(this.key, required, Q6condition);
-    this.Q24 = new MedCare1(this.key, required, Q6condition);
+    this.T4 = new MedCareText1(this.key, required);
+    this.Q24 = new MedCare1(this.key, required);
     const Q24condition = SurveyEngine.singleChoice.any(this.Q24.key, this.Q24.optionKeys.nameOfOption);
-    this.T5 = new MedCareText2(this.key, required, Q6condition);
+    this.T5 = new MedCareText2(this.key, required);
     this.Q25 = new MedCare2(this.key, required, Q24condition);
     this.T6 = new MedCareText3(this.key, required, Q24condition);
 
-    this.Q26 = new Symptoms1(this.key, required, Q6condition);
-    this.Q27 = new SymptomsFU(this.key, required, Q6condition);
+    this.Q26 = new Symptoms1(this.key, required);
+    this.Q27 = new SymptomsFU(this.key, required);
 
   }
 
