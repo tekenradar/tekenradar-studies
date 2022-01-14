@@ -292,7 +292,7 @@ export class EnvironmentTickBite extends Item {
         {
           key: 'i', role: 'option',
           content: new Map([
-            ["nl", "Weet niet"],
+            ["nl", "Weet ik niet"],
           ])
         },
       ]
@@ -382,7 +382,7 @@ export class ActivityTickBite extends Item {
         {
           key: 'i', role: 'option',
           content: new Map([
-            ["nl", "Weet niet"],
+            ["nl", "Weet ik niet"],
           ])
         },
       ]
@@ -434,7 +434,7 @@ export class PositionTickBite extends Item {
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "Nee, ik weet het"],
+            ["nl", "Nee, ik weet het niet"],
           ])
         },
       ]
