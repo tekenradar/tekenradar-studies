@@ -4,7 +4,7 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text1FUKids, Text2FU } from './questions/followup';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids, Symptoms1, Symptoms2, Symptoms3, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Func1KidsF1, Functioning1TextKids } from './questions/standard_Kids';
+import { Functioning1F1_Kids, Functioning2F1_Kids, Functioning3F1_Kids, Functioning4F1_Kids, Functioning5F1_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids } from './questions/standard_Kids';
 
 class Followupflow_KidsDef extends SurveyDefinition {
 
@@ -40,16 +40,15 @@ class Followupflow_KidsDef extends SurveyDefinition {
     Q18: MedCare2;
     T5: MedCareText3;
 
-    T6_Kids: Functioning1TextKids;
-    Q19: Func1KidsF1;
+    T6_Kids: FunctioningText1F1_Kids;
+    T7_Kids: FunctioningText2F1_Kids;
+    Q19: Functioning1F1_Kids;
+    Q20: Functioning2F1_Kids;
+    Q21: Functioning3F1_Kids;
+    Q22: Functioning4F1_Kids;
+    Q23: Functioning5F1_Kids;
 
-    //T6_Kids
-    //T3: FunctioningText;
-    //Q17: Functioning1;
-    //Q18: Functioning2;
-    //Q19: Functioning3;
-    //Q20: Functioning4;
-    //Q21: Functioning5;
+
     //Q22: Fatigue;
     //Q23: Cognition;
 
@@ -108,16 +107,6 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.Q15 = new Symptoms2(this.key, required);
         this.Q16 = new Symptoms3(this.key, required);
 
-
-      /*  this.T3 = new FunctioningText(this.key, required, Q6condition);
-        this.Q17 = new Functioning1(this.key, required, Q6condition);
-        this.Q18 = new Functioning2(this.key, required, Q6condition);
-        this.Q19 = new Functioning3(this.key, required, Q6condition);
-        this.Q20 = new Functioning4(this.key, required, Q6condition);
-        this.Q21 = new Functioning5(this.key, required, Q6condition);
-        this.Q22 = new Fatigue(this.key, required, Q6condition);
-        this.Q23 = new Cognition(this.key, required, Q6condition);*/
-
         this.T3 = new MedCareText1(this.key, required);
         this.Q17 = new MedCare1(this.key, required);
         const Q17condition = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOption);
@@ -125,11 +114,16 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.Q18 = new MedCare2(this.key, required, Q17condition);
         this.T5 = new MedCareText3(this.key, required, Q17condition);
 
-        this.T6_Kids = new Functioning1TextKids(this.key, required);
-        this.Q19 = new Func1KidsF1(this.key, required);
+        this.T6_Kids = new FunctioningText1F1_Kids(this.key, required);
+        this.T7_Kids = new FunctioningText2F1_Kids(this.key, required);
+        this.Q19 = new Functioning1F1_Kids(this.key, required);
+        this.Q20 = new Functioning2F1_Kids(this.key, required);
+        this.Q21 = new Functioning3F1_Kids(this.key, required);
+        this.Q22 = new Functioning4F1_Kids(this.key, required);
+        const Q22condition = SurveyEngine.singleChoice.any(this.Q22.key, this.Q22.optionKeys.nameOfOption);
+        this.Q23 = new Functioning5F1_Kids(this.key, required, Q22condition);
 
-        //this.Q26 = new Symptoms1(this.key, required, Q6condition);
-        //this.Q27 = new SymptomsFU(this.key, required, Q6condition);
+
 
     }
 
@@ -166,7 +160,12 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.T5.get());
 
         this.addItem(this.T6_Kids.get());
+        this.addItem(this.T7_Kids.get());
         this.addItem(this.Q19.get());
+        this.addItem(this.Q20.get());
+        this.addItem(this.Q21.get());
+        this.addItem(this.Q22.get());
+        this.addItem(this.Q23.get());
 
 
     }
