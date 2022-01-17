@@ -177,6 +177,7 @@ Hoe vaak heb je in de **afgelopen week** problemen gehad met...
 
 export class Functioning1F1_Kids extends Item {
 
+  condition_F1: Expression;
   questionTextMain = [
     /*{
         content: new Map([
@@ -195,6 +196,16 @@ export class Functioning1F1_Kids extends Item {
       ]),
     }
   ]
+
+
+  options_c = {
+    F1: new Map([
+      ["nl", "Deelnemen aan actief spel of lichamelijke oefeningen"],
+    ]),
+    F2: new Map([
+      ["nl", "Deelnemen aan sportactiviteiten of lichamelijke oefeningen"],
+    ]),
+  }
 
 
   option_c_f1 = [
@@ -262,14 +273,12 @@ export class Functioning1F1_Kids extends Item {
     }
   ]
 
-
-
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
     super(parentKey, 'Func1kS_F1');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.condition = condition1;
+    this.condition_F1 = condition2;
   }
 
   buildItem() {
@@ -317,9 +326,7 @@ export class Functioning1F1_Kids extends Item {
         },
         {
           key: 'c',
-          content: new Map([
-            ["nl", "Deelnemen aan actief spel of lichamelijke oefeningen"],
-          ])
+          content: this.condition_F1 ? this.options_c.F1 : this.options_c.F2,
         },
         {
           key: 'd',
@@ -329,21 +336,15 @@ export class Functioning1F1_Kids extends Item {
         },
         {
           key: 'e',
-          content: new Map([
-            ["nl", "Baden"],
-          ])
+          content: this.condition_F1 ? this.option_e_f1 : this.option_e_f2,
         },
         {
           key: 'f',
-          content: new Map([
-            ["nl", "Helpen met speelgoed opruimen"],
-          ])
+          content: this.condition_F1 ? this.option_f_f1 : this.option_f_f2,
         },
         {
           key: 'g',
-          content: new Map([
-            ["nl", "Het hebben van pijn"],
-          ])
+          content: this.condition_F1 ? this.option_g_f1 : this.option_g_f2,
         },
         {
           key: 'h',
@@ -359,6 +360,7 @@ export class Functioning1F1_Kids extends Item {
 
 export class Functioning1F3_Kids extends Item {
 
+
   questionTextMain = [
     {
       content: new Map([
@@ -366,7 +368,6 @@ export class Functioning1F3_Kids extends Item {
       ]),
     }
   ]
-
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -488,7 +489,7 @@ export class Functioning2F1_Kids extends Item {
     }
   ]
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition: Expression, condition2: Expression) {
     super(parentKey, 'Func2kS_F1');
 
     this.isRequired = isRequired;
@@ -767,6 +768,8 @@ export class Functioning3F1_Kids extends Item {
 
 export class Functioning3F3_Kids extends Item {
 
+  condition_F3: Expression;
+
   questionTextMain = [
     {
       content: new Map([
@@ -858,11 +861,12 @@ export class Functioning3F3_Kids extends Item {
   ]
 
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
     super(parentKey, 'Func3kS_F3');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.condition = condition1;
+    this.condition_F3 = condition2;
   }
 
   buildItem() {
@@ -898,9 +902,8 @@ export class Functioning3F3_Kids extends Item {
       ],
       rows: [
         {
-          key: 'a', content: new Map([
-            ["nl", "Ik heb problemen om met andere tieners op te schieten"],
-          ])
+          key: 'a',
+          content:this.condition_F3 ? this.option_a_f3 : this.option_a_f4
         },
         {
           key: 'b',
