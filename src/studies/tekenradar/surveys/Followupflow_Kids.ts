@@ -6,6 +6,7 @@ import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioni
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 class Followupflow_KidsDef extends SurveyDefinition {
 
@@ -120,33 +121,42 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.T5 = new MedCareText3(this.key, required, Q17condition);
 
         //different branches per age here
-        const cond_younger2 = SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),2);
+        const AgeFromPDiff = SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key);
+        const cond_younger2 = SurveyEngine.compare.lt(AgeFromPDiff,2);
         const cond_olderequal2 = SurveyEngine.logic.not(cond_younger2);
         const cond_2younger5 = SurveyEngine.logic.and(
-            SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),2),
-            SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),5));
+            SurveyEngine.compare.gte(AgeFromPDiff,2),
+            SurveyEngine.compare.lt(AgeFromPDiff,5));
         const cond_5younger8 = SurveyEngine.logic.and(
-          SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),5),
-          SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),8));
+          SurveyEngine.compare.gte(AgeFromPDiff,5),
+          SurveyEngine.compare.lt(AgeFromPDiff,8));
         const cond_8younger13 = SurveyEngine.logic.and(
-          SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),8),
-          SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),13));
+          SurveyEngine.compare.gte(AgeFromPDiff,8),
+          SurveyEngine.compare.lt(AgeFromPDiff,13));
         const cond_13younger18 = SurveyEngine.logic.and(
-          SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),13),
-          SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18));
+          SurveyEngine.compare.gte(AgeFromPDiff,13),
+          SurveyEngine.compare.lt(AgeFromPDiff,18));
+        const cond_2younger8 = SurveyEngine.logic.and(
+            SurveyEngine.compare.gte(AgeFromPDiff,2),
+            SurveyEngine.compare.lt(AgeFromPDiff,8));
+        const cond_8younger18 = SurveyEngine.logic.and(
+            SurveyEngine.compare.gte(AgeFromPDiff,8),
+            SurveyEngine.compare.lt(AgeFromPDiff,18));
 
-        const cond_younger8 = SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),8);
+        const cond_younger8 = SurveyEngine.compare.lt(AgeFromPDiff,8);
         const cond_olderequal8 = SurveyEngine.logic.not(cond_younger8);
 
         this.T6_Kids = new FunctioningText1F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
         this.T7_Kids = new FunctioningText2F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
-        this.Q19_a = new Functioning1F1_Kids(this.key, required, cond_younger8);
-        this.Q19_b = new Functioning1F3_Kids(this.key, required, cond_olderequal8);
-        this.Q20_a = new Functioning2F1_Kids(this.key, required, cond_younger8);
-        this.Q20_b = new Functioning2F3_Kids(this.key, required, cond_olderequal8);
+
+        this.Q19_a = new Functioning1F1_Kids(this.key, required, cond_2younger8, cond_2younger5);
+        this.Q19_b = new Functioning1F3_Kids(this.key, required, cond_8younger18);
+        //continue cond here
+        this.Q20_a = new Functioning2F1_Kids(this.key, required, cond_2younger8, cond_2younger5);
+        this.Q20_b = new Functioning2F3_Kids(this.key, required, cond_8younger18);
         this.Q21_a = new Functioning3F1_Kids(this.key, required, cond_younger8);
-        this.Q21_b = new Functioning3F3_Kids(this.key, required, cond_olderequal8);
-        this.Q22 = new Functioning4F1_Kids(this.key, required);
+        this.Q21_b = new Functioning3F3_Kids(this.key, required, cond_8younger18, cond_8younger13);
+        this.Q22 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
         const Q22condition = SurveyEngine.singleChoice.any(this.Q22.key, this.Q22.optionKeys.nameOfOption);
         this.Q23_a = new Functioning5F1_Kids(this.key, required, Q22condition);//TODO: cond her
         this.Q23_b = new Functioning5F3_Kids(this.key, required, cond_olderequal8);
