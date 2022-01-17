@@ -4,7 +4,8 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text1FUKids, Text2FU } from './questions/followup';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids, Symptoms1, Symptoms2, Symptoms3, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Functioning1F1_Kids, Functioning2F1_Kids, Functioning3F1_Kids, Functioning4F1_Kids, Functioning5F1_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids } from './questions/standard_Kids';
+import { Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids } from './questions/standard_Kids';
+import { ParticipantFlags } from '../participantFlags';
 
 class Followupflow_KidsDef extends SurveyDefinition {
 
@@ -42,11 +43,15 @@ class Followupflow_KidsDef extends SurveyDefinition {
 
     T6_Kids: FunctioningText1F1_Kids;
     T7_Kids: FunctioningText2F1_Kids;
-    Q19: Functioning1F1_Kids;
-    Q20: Functioning2F1_Kids;
-    Q21: Functioning3F1_Kids;
+    Q19_a: Functioning1F1_Kids;
+    Q19_b: Functioning1F3_Kids;
+    Q20_a: Functioning2F1_Kids;
+    Q20_b: Functioning2F3_Kids;
+    Q21_a: Functioning3F1_Kids;
+    Q21_b: Functioning3F3_Kids;
     Q22: Functioning4F1_Kids;
-    Q23: Functioning5F1_Kids;
+    Q23_a: Functioning5F1_Kids;
+    Q23_b: Functioning5F3_Kids;
 
 
     //Q22: Fatigue;
@@ -114,14 +119,37 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.Q18 = new MedCare2(this.key, required, Q17condition);
         this.T5 = new MedCareText3(this.key, required, Q17condition);
 
-        this.T6_Kids = new FunctioningText1F1_Kids(this.key, required);
-        this.T7_Kids = new FunctioningText2F1_Kids(this.key, required);
-        this.Q19 = new Functioning1F1_Kids(this.key, required);
-        this.Q20 = new Functioning2F1_Kids(this.key, required);
-        this.Q21 = new Functioning3F1_Kids(this.key, required);
+        //different branches per age here
+        const cond_younger2 = SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),2);
+        const cond_olderequal2 = SurveyEngine.logic.not(cond_younger2);
+        const cond_2younger5 = SurveyEngine.logic.and(
+            SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),2),
+            SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),5));
+        const cond_5younger8 = SurveyEngine.logic.and(
+          SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),5),
+          SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),8));
+        const cond_8younger13 = SurveyEngine.logic.and(
+          SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),8),
+          SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),13));
+        const cond_13younger18 = SurveyEngine.logic.and(
+          SurveyEngine.compare.gte(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),13),
+          SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18));
+
+        const cond_younger8 = SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),8);
+        const cond_olderequal8 = SurveyEngine.logic.not(cond_younger8);
+
+        this.T6_Kids = new FunctioningText1F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
+        this.T7_Kids = new FunctioningText2F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
+        this.Q19_a = new Functioning1F1_Kids(this.key, required, cond_younger8);
+        this.Q19_b = new Functioning1F3_Kids(this.key, required, cond_olderequal8);
+        this.Q20_a = new Functioning2F1_Kids(this.key, required, cond_younger8);
+        this.Q20_b = new Functioning2F3_Kids(this.key, required, cond_olderequal8);
+        this.Q21_a = new Functioning3F1_Kids(this.key, required, cond_younger8);
+        this.Q21_b = new Functioning3F3_Kids(this.key, required, cond_olderequal8);
         this.Q22 = new Functioning4F1_Kids(this.key, required);
         const Q22condition = SurveyEngine.singleChoice.any(this.Q22.key, this.Q22.optionKeys.nameOfOption);
-        this.Q23 = new Functioning5F1_Kids(this.key, required, Q22condition);
+        this.Q23_a = new Functioning5F1_Kids(this.key, required, Q22condition);//TODO: cond her
+        this.Q23_b = new Functioning5F3_Kids(this.key, required, cond_olderequal8);
 
 
 
@@ -161,13 +189,15 @@ class Followupflow_KidsDef extends SurveyDefinition {
 
         this.addItem(this.T6_Kids.get());
         this.addItem(this.T7_Kids.get());
-        this.addItem(this.Q19.get());
-        this.addItem(this.Q20.get());
-        this.addItem(this.Q21.get());
+        this.addItem(this.Q19_a.get());
+        this.addItem(this.Q19_b.get());
+        this.addItem(this.Q20_a.get());
+        this.addItem(this.Q20_b.get());
+        this.addItem(this.Q21_a.get());
+        this.addItem(this.Q21_b.get());
         this.addItem(this.Q22.get());
-        this.addItem(this.Q23.get());
-
-
+        this.addItem(this.Q23_a.get());
+        this.addItem(this.Q23_b.get());
     }
 }
 
