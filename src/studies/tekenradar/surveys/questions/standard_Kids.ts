@@ -322,11 +322,16 @@ export class Functioning1F1_Kids extends Item {
           key: 'b',
           content: new Map([
             ["nl", "Rennen"],
-          ])
+          ]),
         },
         {
-          key: 'c',
-          content: this.condition_F1 ? this.options_c.F1 : this.options_c.F2,
+          key: 'c_F1',
+          content: this.options_c.F1,
+          //displayCondition: this.condition_F1,
+        },
+        {
+          key: 'c_F2',
+          content: this.options_c.F2,
         },
         {
           key: 'd',
@@ -963,7 +968,7 @@ export class Functioning4F1_Kids extends Item {
           key: 'a', role: 'option',
           content: new Map([
             ["nl", "Ja, mijn kind gaat naar school, kinderdagverblijf of naar de peuterspeelzaal"],
-          ])
+          ]),
         },
         {
           key: 'b', role: 'option',
@@ -1215,3 +1220,275 @@ export class Functioning5F3_Kids extends Item {
     })
   }
 }
+
+
+
+
+
+export class Strength_Weakness_Kids extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+          ["nl", "Mijn kind:"],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'S-I1-SDQ3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '1', content: new Map([
+            ["nl", "Niet waar"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Een beetje waar"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Zeker waar"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Houdt rekening met gevoelens van anderen"],
+          ])
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Rusteloos, overactief, kan niet lang stilzitten"],
+          ])
+        },
+        {
+          key: 'c',
+          content: new Map([
+            ["nl", "Klaagt vaak over hoofdpijn, buikpijn, of misselijkheid"],
+          ])
+        },
+        {
+          key: 'd',
+          content: new Map([
+            ["nl", "Deelt makkelijk met andere kinderen (bijvoorbeeld speelgoed, snoep, potloden, enz.)"],
+          ]),
+        },
+        {
+          key: 'e',
+          content: new Map([
+            ["nl", "Heeft vaak driftbuien of woede-uitbarstingen"],
+          ])
+        },
+        {
+          key: 'f',
+          content: new Map([
+            ["nl", "Nogal op zichzelf, neigt er toe alleen te spelen"],
+          ])
+        },
+        {
+          key: 'g',
+          content: new Map([
+            ["nl", "Doorgaans gehoorzaam, doet gewoonlijk wat volwassenen vragen"],
+          ])
+        },
+        {
+          key: 'h',
+          content: new Map([
+            ["nl", "Heeft veel zorgen, lijkt vaak over dingen in te zitten"],
+          ])
+        },
+        {
+          key: 'i',
+          content: new Map([
+            ["nl", "Behulpzaam als iemand zich heeft bezeerd, van streek is of zich ziek voel"],
+          ])
+        },
+        {
+          key: 'j',
+          content: new Map([
+            ["nl", "Constant aan het wiebelen of friemelen"],
+          ])
+        },
+        {
+          key: 'k',
+          content: new Map([
+            ["nl", "Heeft minstens één goede vriend of vriendin"],
+          ])
+        },
+        {
+          key: 'l',
+          content: new Map([
+            ["nl", "Vecht vaak met andere kinderen of pest ze"],
+          ])
+        },
+        {
+          key: 'm',
+          content: new Map([
+            ["nl", "Vaak ongelukkig, in de put of in tranen"],
+          ])
+        },
+        {
+          key: 'n',
+          content: new Map([
+            ["nl", "Wordt over het algemeen aardig gevonden door andere kinderen"],
+          ])
+        },
+        {
+          key: 'o',
+          content: new Map([
+            ["nl", "Gemakkelijk afgeleid, heeft moeite om zich te concentreren"],
+          ])
+        },
+        {
+          key: 'p',
+          content: new Map([
+            ["nl", "Zenuwachtig of zich vastklampend in nieuwe situaties, verliest makkelijk zelfvertrouwen"],
+          ])
+        },
+        {
+          key: 'q',
+          content: new Map([
+            ["nl", "Aardig tegen jongere kinderen"],
+          ])
+        },
+        {
+          key: 'r',
+          content: new Map([
+            ["nl", "Maakt vaak ruzie met volwassenen"],
+          ])
+        },
+        {
+          key: 's',
+          content: new Map([
+            ["nl", "Wordt getreiterd of gepest door andere kinderen"],
+          ])
+        },
+        {
+          key: 't',
+          content: new Map([
+            ["nl", "Biedt vaak vrijwillig hulp aan anderen (ouders, leerkrachten, andere kinderen)"],
+          ])
+        },
+        {
+          key: 'u',
+          content: new Map([
+            ["nl", "Kan stoppen en nadenken voor iets te doen"],
+          ])
+        },
+        {
+          key: 'v',
+          content: new Map([
+            ["nl", "Kan gemeen doen tegen anderen"],
+          ])
+        },
+        {
+          key: 'w',
+          content: new Map([
+            ["nl", "Kan beter opschieten met volwassenen dan met andere kinderen"],
+          ])
+        },
+        {
+          key: 'x',
+          content: new Map([
+            ["nl", "Voor heel veel bang, is snel angstig"],
+          ])
+        },
+        {
+          key: 'y',
+          content: new Map([
+            ["nl", "Maakt opdrachten af, kan de aandacht goed vasthouden"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+
+export class Awareness_Kids6 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre bent u bezorgd over de erythema migrans of andere ziekte van Lyme van uw kind?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J6');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal niet bezorgd']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Uitermate bezorgd']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
