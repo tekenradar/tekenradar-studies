@@ -98,6 +98,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q9.get());
     this.addItem(this.G10_11.get());
     this.addItem(this.Q12.get());
+    this.addPageBreak();
     this.addItem(this.P1.get());
     this.addItem(this.P2.get());
     this.addItem(this.Q13.get());

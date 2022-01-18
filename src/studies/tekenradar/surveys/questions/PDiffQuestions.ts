@@ -1,7 +1,6 @@
-import { Expression } from 'survey-engine/data_types';
-import { Group, Item } from 'case-editor-tools/surveys/types';
+import { Expression, SurveySingleItem } from 'survey-engine/data_types';
+import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { Age } from './demographie';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
@@ -14,7 +13,7 @@ export class IntroPDiff extends Item {
 ##### Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
 
 ###### Wat wil je precies melden? Wat is op jou van toepassing?
-  `
+`
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'IntroPDiff');
@@ -44,7 +43,8 @@ export class IntroPDiff extends Item {
 export class DetectTickBite extends Item {
 
   optionKeys = {
-    yes: 'a'
+    yes: 'a',
+    no: 'b',
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -72,7 +72,7 @@ export class DetectTickBite extends Item {
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -377,17 +377,80 @@ export class MedicationLyme extends Item {
 
 
 
+export class WeeklyFlowPretext extends Item {
+  constructor(parentKey: string,) {
+    super(parentKey, 'WFPDiffPretext');
+  }
+
+  markdownContent = `
+We willen graag meten of het aantal tekenbeten over de tijd verandert.
+Hiervoor zoeken we deelnemers die regelmatig aan ons door willen geven hoeveel tekenbeten zij gehad hebben.
+Dat duurt minder dan een minuut per keer. Ook als je meestal géén tekenbeten hebt is het heel nuttig om dat te melden.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+
+}
+
+
+export class SurveyValidationText extends Item {
+  constructor(parentKey: string, condition: Expression) {
+    super(parentKey, 'Vtext');
+    this.condition = condition;
+  }
+
+  markdownContent = `
+#### Je kunt geen melding doen, omdat je hebt aangegeven dat je geen tekenbeet, rode ring of vlek, of andere vorm van de ziekte van Lyme hebt, en ook niet wekelijks tekenbeten wilt doorgeven.
+
+#### Voor vragen kun je een e-mail sturen naar info@tekenradar.nl.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: 'text-danger'
+        })
+      ]
+    })
+  }
+
+}
+
+
 export class WeeklyFlow extends Item {
   optionKeys = {
     yes: 'a',
     no: 'b',
+    alreadyDoing: 'c',
   }
+  extraValidationRules: Expression[];
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, extraValidationRules: Expression[]) {
     super(parentKey, 'WFPDiff');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.extraValidationRules = extraValidationRules;
   }
 
   buildItem() {
@@ -412,6 +475,20 @@ export class WeeklyFlow extends Item {
             ["nl", "Nee"],
           ])
         },
+        {
+          key: this.optionKeys.alreadyDoing, role: 'option',
+          content: new Map([
+            ["nl", "Ik doe al mee met het wekelijks tekenbeet melden "],
+          ])
+        },
+      ],
+      customValidations: [
+        {
+          key: 'pdiff', rule: SurveyEngine.logic.or(
+            ...this.extraValidationRules,
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.no)
+          ), type: 'hard'
+        }
       ]
     })
   }

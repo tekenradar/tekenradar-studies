@@ -1,8 +1,7 @@
-import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme, WeeklyFlow } from './questions/PDiffQuestions'
+import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme, SurveyValidationText, WeeklyFlow, WeeklyFlowPretext } from './questions/PDiffQuestions'
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Age } from './questions/demographie';
-import { FunctioningText } from './questions/standard';
 
 export class PDiffDef extends SurveyDefinition {
 
@@ -15,7 +14,9 @@ export class PDiffDef extends SurveyDefinition {
   Q5: LymeTickBite2;
   Q6: MedicationLyme;
   Q7: Age;
+  Q8pretext: WeeklyFlowPretext;
   Q8: WeeklyFlow;
+  SV: SurveyValidationText;
 
 
   constructor(isRequired?: boolean) {
@@ -48,12 +49,23 @@ export class PDiffDef extends SurveyDefinition {
     this.Q5 = new LymeTickBite2(this.key, required, q4Condition);
     this.Q6 = new MedicationLyme(this.key, required, q4Condition);
     this.Q7 = new Age(this.key, required);
-    this.Q8 = new WeeklyFlow(this.key, required);
+    this.Q8pretext = new WeeklyFlowPretext(this.key);
+    this.Q8 = new WeeklyFlow(this.key, required, [
+      SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.no),
+      SurveyEngine.singleChoice.none(this.Q3.key, this.Q3.optionKeys.no),
+      SurveyEngine.multipleChoice.none(this.Q4.key, this.Q4.optionKeys.no),
+    ]);
+    this.SV = new SurveyValidationText(this.key, SurveyEngine.logic.and(
+      SurveyEngine.logic.not(SurveyEngine.getSurveyItemValidation(this.Q8.key, 'pdiff')),
+      SurveyEngine.hasResponse(this.Q1.key, 'rg'),
+      SurveyEngine.hasResponse(this.Q3.key, 'rg'),
+      SurveyEngine.hasResponse(this.Q4.key, 'rg'),
+      SurveyEngine.hasResponse(this.Q8.key, 'rg'),
+    ));
   }
 
 
   buildSurvey() {
-
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
@@ -62,11 +74,13 @@ export class PDiffDef extends SurveyDefinition {
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());
-    this.addItem(this.Q7.get());
+    this.addItem(this.Q8pretext.get());
     this.addItem(this.Q8.get());
-  }
+    this.addItem(this.SV.get());
+    this.addItem(this.Q7.get());
 
+  }
 }
 
 
-export const PDiff = new PDiffDef(false);
+export const PDiff = new PDiffDef(true);
