@@ -125,11 +125,11 @@ export class Tekenradar extends Item {
   }
 }
 
-//TODO: why is Markdown not working in this text???
+
 export class StandardText1 extends Item {
 
   markdownContent = `
-  ##### De volgende vraag gebruiken wij alleen om te bekijken of de deelnemers aan het onderzoek een goede afspiegeling zijn van de Nederlandse samenleving.
+##### De volgende vraag gebruiken wij alleen om te bekijken of de deelnemers aan het onderzoek een goede afspiegeling zijn van de Nederlandse samenleving.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
