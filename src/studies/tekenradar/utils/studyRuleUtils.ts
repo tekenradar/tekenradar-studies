@@ -230,9 +230,9 @@ export const handleTrigger_WeeklyTB = () => StudyEngine.if(
   ),
   // Then:
   StudyEngine.do(
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.weekyTBreporter.key, ParticipantFlags.weekyTBreporter.values.true),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
   // Else:
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.weekyTBreporter.key, ParticipantFlags.weekyTBreporter.values.false),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.false),
 )

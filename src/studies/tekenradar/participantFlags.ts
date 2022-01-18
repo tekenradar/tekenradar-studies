@@ -19,7 +19,7 @@ export const ParticipantFlags = {
       Chronicflow: 'Chronicflow',
     },
   },
-  weekyTBreporter: {
+  weeklyTBreporter: {
     key: 'weeklyTBreporter',
     values: {
       true: 'true',
