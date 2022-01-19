@@ -1223,6 +1223,186 @@ export class Functioning5F3_Kids extends Item {
 
 
 
+//TODO: insert bold text!!!
+export class PainKids extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoe veel pijn heeft uw kind gehad '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "de afgelopen week"],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "? Plaats het blokje op de lijn waar die het best de ernst de pijn van uw kind"],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " weergeeft."],
+      ]),
+      className: "text-primary"
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-H1_1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.numericSlider({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      //questionSubText: new Map([
+      //  ["nl", "Mijn reukvermogen op dit moment: (geen reukvermogen 0 - uitstekend reukvermogen 100)."],
+      //]),
+      //TODO: bipolar slider label???
+      sliderLabel: new Map([
+        ["nl", "Geen pijn - veel pijn"],
+      ]),
+      noResponseLabel: new Map([
+        ["nl", "Klik op het blokje om een plaats op de lijn te kiezen."],
+      ]),
+      min: 0,
+      max: 10,
+      stepSize: 1,
+    })
+  }
+}
+
+
+export class SchoolKids1 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wat is het aantal lesuren '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "per week "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "dat geroosterd is voor kinderen uit de klas van uw kind? Of als uw kind nog niet op school zit: het aantal uren dat uw kind op een kinderdagverblijf of speelzaal stond ingeroosterd."],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-H1_2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+  //TODO: size of text input field?
+  buildItem() {
+    return SurveyItems.multilineTextInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain
+    })
+  }
+}
+
+
+export class SchoolKids2 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Aantal lesuren '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "in de afgelopen 2 (!) weken "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "dat uw kind gevolgd heeft (of aantal uren aanwezig op kinderdagverblijf/speelzaal):"],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-H1_3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+  //TODO: size of text input field?
+  buildItem() {
+    return SurveyItems.multilineTextInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain
+    })
+  }
+}
+
+
+export class SchoolKids3 extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoeveel schoolverzuim (of kinderdagverblijf of speelzaal verzuim) heeft uw kind '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "het laatste half jaar "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "ongeveer gehad?"],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-H1_4');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+  //TODO: size of text input field?
+  buildItem() {
+    return SurveyItems.multilineTextInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain
+    })
+  }
+}
 
 
 export class Strength_Weakness_Kids extends Item {
@@ -1423,6 +1603,432 @@ export class Strength_Weakness_Kids extends Item {
 }
 
 
+export class AwarenessKidsGroup extends Group {
+
+  T1: Awareness_KidsText;
+  Q1: Awareness_Kids1;
+  Q2: Awareness_Kids2;
+  Q3: Awareness_Kids3;
+  Q4: Awareness_Kids4;
+  Q5: Awareness_Kids5;
+  Q6: Awareness_Kids6;
+  Q7: Awareness_Kids7;
+  Q8: Awareness_Kids8;
+
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+    super(parentKey, 'LymeG');
+
+    this.groupEditor.setCondition(condition);
+
+    const required = isRequired !== undefined ? isRequired : false;
+
+    this.T1 = new Awareness_KidsText(this.key, required);
+    this.Q1 = new Awareness_Kids1(this.key, required);
+    this.Q2 = new Awareness_Kids2(this.key, required);
+    this.Q3 = new Awareness_Kids3(this.key, required);
+    this.Q4 = new Awareness_Kids4(this.key, required);
+    this.Q5 = new Awareness_Kids5(this.key, required);
+    this.Q6 = new Awareness_Kids6(this.key, required);
+    this.Q7 = new Awareness_Kids7(this.key, required);
+    this.Q8 = new Awareness_Kids8(this.key, required);
+
+  }
+
+  buildGroup() {
+
+    this.addItem(this.T1.get());
+    this.addItem(this.Q1.get());
+    this.addItem(this.Q2.get());
+    this.addItem(this.Q3.get());
+    this.addItem(this.Q4.get());
+    this.addItem(this.Q5.get());
+    this.addItem(this.Q6.get());
+    this.addItem(this.Q7.get());
+    this.addItem(this.Q8.get());
+
+  }
+}
+
+
+export class Awareness_KidsText extends Item {
+
+  markdownContent = `
+LET OP: De vragen hieronder zijn voor een ouder/verzorger. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
+
+Omcirkel alstublieft bij elke vraag het getal dat uw mening het beste weergeeft:
+ `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'AwareKidsT');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
+export class Awareness_Kids1 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoeveel invloed heeft de erythema migrans of andere ziekte van lyme van uw kind op uw leven?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal geen invloed']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel invloed']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness_Kids2 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoe lang denkt u dat de erythema migrans of andere ziekte van lyme van uw kind zal duren?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Heel erg kort']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Het hele leven']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness_Kids3 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre meent u dat de erythema migrans of andere ziekte van lyme van uw kind te beheersen is?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal geen beheersing']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Zeer veel beheersing']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+export class Awareness_Kids4 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre denkt u dat de behandeling van uw kind helpt bij de erythema migrans of andere ziekte van lyme?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J4');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal niet']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Uitermate veel']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+
+export class Awareness_Kids5 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre ervaart uw kind lichamelijke klachten van de erythema migrans of andere ziekte van Lyme?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J5');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal geen klachten']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Veel ernstige klachten']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
 
 export class Awareness_Kids6 extends Item {
 
@@ -1482,6 +2088,144 @@ export class Awareness_Kids6 extends Item {
               ]),
               endLabel: new Map([
                   ['de', 'Uitermate bezorgd']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness_Kids7 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre heeft u het gevoel dat u de erythema migrans of andere ziekte van Lyme van uw kind begrijpt?'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J7');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Ik begrijp de ziekte helemaal niet']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Ik begrijp de ziekte helemaal']
+              ]),
+          },
+      ],
+      withLabelRowModeProps: {
+        useBottomLabel: true,
+      }
+    })
+  }
+}
+
+
+export class Awareness_Kids8 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre heeft de erythema migrans of andere ziekte van Lyme van uw kind invloed op uw gemoedstoestand? (b.v. maakt het u boos, angstig, van streek, of somber?)'],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-J8');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveBipolarLikertArray({
+      defaultMode: 'withLabelRow',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0',
+        }, {
+          key: '1',
+        }, {
+          key: '2',
+        }, {
+          key: '3',
+        }, {
+          key: '4',
+        }, {
+          key: '5',
+        }, {
+          key: '6',
+        }, {
+          key: '7',
+        }, {
+          key: '8',
+        }, {
+          key: '9',
+        }, {
+          key: '10',
+      },
+      ],
+      rows: [
+          {
+            key: 'a',
+              startLabel: new Map([
+                  ['de', 'Helemaal geen invloed']
+              ]),
+              endLabel: new Map([
+                  ['de', 'Uitermate veel invloed']
               ]),
           },
       ],
