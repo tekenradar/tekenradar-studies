@@ -18,6 +18,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
     Q4: FeverFU1;
     Q5: FeverFU2;
     //TODO:change key
+    //TODO: Repeated text here
     //T2_Kids: Text1FUKids;
     T2: Text2FU;
     Q6: LymeFU;
@@ -68,10 +69,9 @@ class Followupflow_KidsDef extends SurveyDefinition {
     Q31: Strength_Weakness_Kids;
     G32_39: AwarenessKidsGroup;
 
-    //Q23: Cognition;
+    Q40: Symptoms1;
+    Q41: SymptomsFU;
 
-    //Q26: Symptoms1;
-    //Q27: SymptomsFU;
 
 
     constructor(isRequired?: boolean) {
@@ -187,6 +187,10 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.Q31 = new Strength_Weakness_Kids(this.key, required);
         this.G32_39 = new AwarenessKidsGroup(this.key, required)
 
+        this.Q40 = new Symptoms1(this.key, required);
+        //TODO: Q41 only at t=12!
+        this.Q41 = new SymptomsFU(this.key, required);
+
     }
 
     buildSurvey() {
@@ -244,8 +248,11 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q29.get());
 
         this.addItem(this.Q30.get());
+        this.addItem(this.Q31.get());
         this.addItem(this.G32_39.get());
 
+        this.addItem(this.Q40.get());
+        this.addItem(this.Q41.get());
     }
 }
 
