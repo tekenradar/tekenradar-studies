@@ -3,6 +3,7 @@ import { Item, Group } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { ParticipantFlags } from '../../participantFlags';
 
 
 
@@ -21,7 +22,7 @@ export class AwarenessGroup extends Group {
   Q8: Awareness8;
 
   constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'LymeG');
+    super(parentKey, 'AwareG');
 
     this.groupEditor.setCondition(condition);
 
@@ -233,11 +234,14 @@ export class Qualification extends Item {
 
 export class Symptoms1 extends Item {
 
+  condition_u18: Expression;
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Sym1');
 
     this.isRequired = isRequired;
     this.condition = condition;
+    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18);
   }
 
   buildItem() {
@@ -361,7 +365,8 @@ export class Symptoms1 extends Item {
           key: 'm', role: 'option',
           content: new Map([
             ["nl", "Verzakking"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 't6', role: 'text',
@@ -399,7 +404,8 @@ export class Symptoms1 extends Item {
           key: 'q', role: 'option',
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'r', role: 'option',
@@ -426,7 +432,7 @@ export class Symptoms1 extends Item {
             ["nl", "Epilepsie"],
           ])
         },
-        {
+        {//TODO - other words for kids
           key: 'u', role: 'option',
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
@@ -497,13 +503,15 @@ export class Symptoms1 extends Item {
           key: 'ae', role: 'option',
           content: new Map([
             ["nl", "Alcoholverslaving"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'af', role: 'option',
           content: new Map([
             ["nl", "Drugsverslaving"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'ag', role: 'option',
@@ -596,11 +604,12 @@ export class Symptoms2 extends Item {
           ]),
           //disabled: SurveyEngine.singleChoice.any(,'b')???
         },
-        {//TODO: this is skipped for KIDS
+        {
           key: 'e',
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
-          ])
+          ]),
+          displayCondition: SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18)
         },
         {
           key: 'f',
@@ -748,7 +757,7 @@ export class Symptoms3 extends Item {
           ])
         },
         {
-          key: 'b', role: 'input',
+          key: 'b', role: 'option',
           content: new Map([
             ["nl", "Veel"],
           ])
@@ -766,7 +775,7 @@ export class Symptoms3 extends Item {
           ])
         },
         {
-          key: 'e', role: 'input',
+          key: 'e', role: 'option',
           content: new Map([
             ["nl", "Ik heb geen klachten"],
           ])
