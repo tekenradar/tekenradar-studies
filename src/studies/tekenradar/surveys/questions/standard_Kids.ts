@@ -1297,7 +1297,7 @@ Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
     `
 
   constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
-    super(parentKey, 'kS_F1Text2');
+    super(parentKey, 'kS_G1Text2');
 
     this.isRequired = isRequired;
     this.condition = condition1;
@@ -1985,7 +1985,7 @@ export class AwarenessKidsGroup extends Group {
   Q8: Awareness_Kids8;
 
   constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'LymeG');
+    super(parentKey, 'AwareKidsG');
 
     this.groupEditor.setCondition(condition);
 
