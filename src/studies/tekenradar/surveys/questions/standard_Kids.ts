@@ -1222,8 +1222,377 @@ export class Functioning5F3_Kids extends Item {
 }
 
 
+export class FatigueText1F1_Kids extends Item {
 
-//TODO: insert bold text!!!
+  condition_F1: Expression;
+
+  markdownContent_F1 = `
+# Vermoeidheid
+De vragen hieronder zijn voor **een ouder/verzorger**.
+
+Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. Kunt u ons vertellen **hoe vaak** uw kind in de **afgelopen week** met elk van deze dingen problemen heeft gehad? Vink het cijfer aan dat het beste van toepassing is. U kunt kiezen uit:
+  - **0** als het **nooit** een probleem is
+  - **1** als het **bijna nooit** een probleem is
+  - **2** als het **soms** een probleem is
+  - **3** als het **vaak** een probleem is
+  - **4** als het **bijna altijd** een probleem is
+
+Er zijn geen goede of foute antwoorden.
+    `
+
+  markdownContent_F3 = `
+  # Vermoedheid
+  De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
+
+  Op deze pagina staat een lijst van dingen die een probleem voor jou kunnen zijn. Kun je ons vertellen **hoe vaak** je in de **afgelopen week** met elk van deze dingen problemen hebt gehad?
+  Klik het bolletje aan bij:
+  - **0** als het **nooit** een probleem is
+  - **1** als het **bijna nooit** een probleem is
+  - **2** als het **soms** een probleem is
+  - **3** als het **vaak** een probleem is
+  - **4** als het **bijna altijd** een probleem is
+
+  Er zijn geen goede of foute antwoorden.
+      `
+
+  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
+    super(parentKey, 'kS_G1Text1');
+
+    this.isRequired = isRequired;
+    this.condition = condition1;
+    this.condition_F1 = condition2;
+
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
+            ["nl",  this.condition_F1 ? this.markdownContent_F1 : this.markdownContent_F3],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class FatigueText2F1_Kids extends Item {
+
+  condition_F1: Expression;
+  markdownContent_F1 = `
+Hoe vaak heeft uw kind in de afgelopen week problemen gehad met:
+    `
+  markdownContent_F2 = `
+Hoezeer heeft uw kind in de afgelopen week een probleem gehad met:
+    `
+
+  markdownContent_F3 = `
+Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
+    super(parentKey, 'kS_F1Text2');
+
+    this.isRequired = isRequired;
+    this.condition = condition1;
+    this.condition_F1 = condition2;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.condition_F1 ? this.markdownContent_F1 : this.markdownContent_F3],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class Fatigue1F1_Kids extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", "Algemene vermoeidheid (problemen met...)"],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-G1-1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "Nooit"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "Bijna nooit"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Soms"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Vaak"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "Bijna altijd"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Moe voelen"],
+          ])
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Lichamelijk zwak voelen (niet sterk)"],
+          ])
+        },
+        {
+          key: 'c',
+          content: new Map([
+            ["nl", "Te moe voelen om dingen te doen die hij/zij leuk vindt"],
+          ])
+        },
+        {
+          key: 'd',
+          content: new Map([
+            ["nl", "Te moe voelen om tijd door te brengen met zijn/haar vrienden"],
+          ])
+        },
+        {
+          key: 'e',
+          content: new Map([
+            ["nl", "Moeite om dingen af te maken"],
+          ])
+        },
+        {
+          key: 'f',
+          content: new Map([
+            ["nl", "Moeite om aan dingen te beginnen"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+export class Fatigue2F1_Kids extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", "Slaap/Rust vermoeidheid (problemen met...)"],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-G1-2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "Nooit"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "Bijna nooit"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Soms"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Vaak"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "Bijna altijd"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Veel slapen"],
+          ])
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Moeite om de nacht door te slapen"],
+          ])
+        },
+        {
+          key: 'c',
+          content: new Map([
+            ["nl", "Moe voelen wanneer hij/zij 's ochtends wakker wordt"],
+          ])
+        },
+        {
+          key: 'd',
+          content: new Map([
+            ["nl", "Veel rusten"],
+          ])
+        },
+        {
+          key: 'e',
+          content: new Map([
+            ["nl", "Veel dutjes doen"],
+          ])
+        },
+        {
+          key: 'f',
+          content: new Map([
+            ["nl", "Veel tijd in bed doorbrengen"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+export class Fatigue3F1_Kids extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", "Cognitieve vermoeidheid (problemen met...)"],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-G1-3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "Nooit"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "Bijna nooit"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Soms"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Vaak"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "Bijna altijd"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Moeite om zijn/haar aandacht bij dingen te houden"],
+          ])
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Moeite om te onthouden wat mensen hem/haar vertellen"],
+          ])
+        },
+        {
+          key: 'c',
+          content: new Map([
+            ["nl", "Moeite om te onthouden wat hij/zij net gehoord heeft"],
+          ])
+        },
+        {
+          key: 'd',
+          content: new Map([
+            ["nl", "Moeite met snel denken"],
+          ])
+        },
+        {
+          key: 'e',
+          content: new Map([
+            ["nl", "Moeite te onthouden waar hij/zij net aan dacht"],
+          ])
+        },
+        {
+          key: 'f',
+          content: new Map([
+            ["nl", "Moeite om meer dan één ding tegelijk te onthouden"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+
 export class PainKids extends Item {
 
   questionTextMain = [
