@@ -4,7 +4,7 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text1FUKids, Text2FU } from './questions/followup';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids, Symptoms1, Symptoms2, Symptoms3, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids } from './questions/standard_Kids';
+import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1F1_Kids, FatigueText2F1_Kids, Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_Weakness_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
@@ -54,8 +54,20 @@ class Followupflow_KidsDef extends SurveyDefinition {
     Q23_a: Functioning5F1_Kids;
     Q23_b: Functioning5F3_Kids;
 
+    T8_Kids: FatigueText1F1_Kids;
+    T9_Kids: FatigueText2F1_Kids;
+    Q24: Fatigue1F1_Kids;
+    Q25: Fatigue2F1_Kids;
+    Q26: Fatigue3F1_Kids;
 
-    //Q22: Fatigue;
+    Q27: PainKids;
+    Q28: SchoolKids1;
+    Q29: SchoolKids2;
+    Q30: SchoolKids3;
+
+    Q31: Strength_Weakness_Kids;
+    G32_39: AwarenessKidsGroup;
+
     //Q23: Cognition;
 
     //Q26: Symptoms1;
@@ -161,7 +173,19 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.Q23_a = new Functioning5F1_Kids(this.key, required, Q22condition);//TODO: cond her
         this.Q23_b = new Functioning5F3_Kids(this.key, required, cond_olderequal8);
 
+        this.T8_Kids = new FatigueText1F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
+        this.T9_Kids = new FatigueText2F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
+        this.Q24 = new Fatigue1F1_Kids(this.key, required);
+        this.Q25 = new Fatigue2F1_Kids(this.key, required);
+        this.Q26 = new Fatigue3F1_Kids(this.key, required);
 
+        this.Q27 = new PainKids(this.key, required);
+        this.Q28 = new SchoolKids1(this.key, required);
+        this.Q29 = new SchoolKids2(this.key, required);
+        this.Q30 = new SchoolKids3(this.key, required);
+
+        this.Q31 = new Strength_Weakness_Kids(this.key, required);
+        this.G32_39 = new AwarenessKidsGroup(this.key, required)
 
     }
 
@@ -208,6 +232,20 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q22.get());
         this.addItem(this.Q23_a.get());
         this.addItem(this.Q23_b.get());
+
+        this.addItem(this.T8_Kids.get());
+        this.addItem(this.T9_Kids.get());
+        this.addItem(this.Q24.get());
+        this.addItem(this.Q25.get());
+        this.addItem(this.Q26.get());
+
+        this.addItem(this.Q27.get());
+        this.addItem(this.Q28.get());
+        this.addItem(this.Q29.get());
+
+        this.addItem(this.Q30.get());
+        this.addItem(this.G32_39.get());
+
     }
 }
 
