@@ -2,7 +2,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text1FUKids, Text2FU } from './questions/followup';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids, Symptoms1, Symptoms2, Symptoms3, TextQUKids } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids1, QuestionsKids2, Symptoms1, Symptoms2, Symptoms3, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1F1_Kids, FatigueText2F1_Kids, Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_Weakness_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
@@ -32,7 +32,8 @@ class Followupflow_KidsDef extends SurveyDefinition {
     Q13: MedicationFU2;
 
     //T4_Kids
-    Q14: QuestionsKids;
+    Q14: QuestionsKids1;
+    Q14_a: QuestionsKids2;
     T5_Kids: TextQUKids;
     Q15: Symptoms2;
     Q16: Symptoms3;
@@ -120,7 +121,10 @@ class Followupflow_KidsDef extends SurveyDefinition {
         const Q12number =  SurveyEngine.getResponseValueAsNum(this.Q12.key,'rg.scg.b.2');
         this.Q13 = new MedicationFU2(this.key, required, Q12number);
 
-        this.Q14 = new QuestionsKids(this.key, required);
+        this.Q14 = new QuestionsKids1(this.key, required);
+        const Q14condition = SurveyEngine.singleChoice.any(this.Q14.key, this.Q14.optionKeys.nameOfOption);
+        this.Q14_a = new QuestionsKids2(this.key, required, Q14condition);
+
         this.T5_Kids = new TextQUKids(this.key, required);
         this.Q15 = new Symptoms2(this.key, required);
         this.Q16 = new Symptoms3(this.key, required);
@@ -214,6 +218,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q12.get());
         this.addItem(this.Q13.get());
         this.addItem(this.Q14.get());
+        this.addItem(this.Q14_a.get());
 
         this.addItem(this.T5_Kids.get());
         this.addItem(this.Q15.get());
