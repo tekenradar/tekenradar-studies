@@ -1,6 +1,6 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, QuestionsKids } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, QuestionsKids1, QuestionsKids2 } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { Text1FUKids } from './questions/followup';
 import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1F1_Kids, FatigueText2F1_Kids, Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_Weakness_Kids } from './questions/standard_Kids';
@@ -16,7 +16,8 @@ class Standardflow_KidsDef extends SurveyDefinition {
   Q3: Residence;
   Q4: Gender;
   Q5: Symptoms1;
-  Q6: QuestionsKids;
+  Q6: QuestionsKids1;
+  Q6_a: QuestionsKids2;
   Q7: Symptoms2;
   Q8: Symptoms3;
 
@@ -81,7 +82,9 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.Q4 = new Gender(this.key, required);
 
     this.Q5 = new Symptoms1(this.key, required);
-    this.Q6 = new QuestionsKids(this.key, required);
+    this.Q6 = new QuestionsKids1(this.key, required);
+    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+    this.Q6_a = new QuestionsKids2(this.key, required, Q6condition);
     this.Q7 = new Symptoms2(this.key, required);
     this.Q8 = new Symptoms3(this.key, required);
 
@@ -161,6 +164,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
 
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());
+    this.addItem(this.Q6_a.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
 
