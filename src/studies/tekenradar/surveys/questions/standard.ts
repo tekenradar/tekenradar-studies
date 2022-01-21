@@ -4,6 +4,7 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
+//import { isExpressionStatement } from 'typescript';
 
 
 
@@ -234,6 +235,26 @@ export class Qualification extends Item {
 
 export class Symptoms1 extends Item {
 
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke lichamelijke en psychische problemen heb je? Kruis aan welke problemen je nu hebt. Kruis ook aan welke problemen je nog meer hebt gehad in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 12 maanden"],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", ". Je kunt dus meer dan 1 hokje aankruisen."],
+      ]),
+    },
+  ]
+
   condition_u18: Expression;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -250,9 +271,7 @@ export class Symptoms1 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke lichamelijke en psychische problemen heb je? Kruis aan welke problemen je nu hebt. Kruis ook aan welke problemen je nog meer hebt gehad in de afgelopen 12 maanden. Je kunt dus meer dan 1 hokje aankruisen.'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 't1', role: 'text',
@@ -546,11 +565,14 @@ export class Symptoms1 extends Item {
 
 export class Symptoms2 extends Item {
 
+  condition_u18: Expression;
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Sym2');
 
     this.isRequired = isRequired;
     this.condition = condition;
+    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18);
   }
 
   buildItem() {
@@ -609,7 +631,7 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18)
+          displayCondition: this.condition_u18
         },
         {
           key: 'f',
@@ -2368,10 +2390,14 @@ export class Awareness8 extends Item {
 }
 
 
-export class QuestionsKids extends Item {
+export class QuestionsKids1 extends Item {
+
+  optionKeys = {
+    nameOfOption: 'b'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'QuKids');
+    super(parentKey, 'QuKids1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -2394,15 +2420,73 @@ export class QuestionsKids extends Item {
           ])
         },
         {
-          key: 'b', role: 'input',
-          content: new Map([//TODO: insert radion button subitems here
-            ["nl", "Een ouder/verzorger van degene jonger dan 18 jaar, namelijk:"],
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Een ouder/verzorger van degene jonger dan 18 jaar"],
           ])
         },
       ]
     })
   }
 }
+
+
+export class QuestionsKids2 extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wie vult op dit moment de vragen in deze vragenlijst in? Een ouder/verzorger van degene jonger dan 18 jaar, namelijk:'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "[Please change text here to proper dutch]"],
+      ]),
+      className: "text-primary"
+    },
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'QuKids2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Moeder"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Vader"],
+          ])
+        },
+        {
+          key: 'c', role: 'input',
+          content: new Map([
+            ["nl", "Anders namelijk:"],
+          ])
+        }
+      ]
+    })
+  }
+}
+
 
 
 
