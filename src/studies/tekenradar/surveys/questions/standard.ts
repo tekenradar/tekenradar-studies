@@ -161,6 +161,24 @@ export class StandardText1 extends Item {
 
 export class Qualification extends Item {
 
+
+  questionTextMain_Adults = [
+    {
+        content: new Map([
+            ["nl", 'Wat is je hoogst voltooide opleiding?'],
+        ]),
+    }
+  ]
+
+  questionTextMain_Kids = [
+    {
+        content: new Map([
+            ["nl", 'Wat is de hoogst voltooide opleiding van je moeder /verzorgster (of van je vader/verzorger, als er geen moeder/verzorgster is)?'],
+        ]),
+    }
+  ]
+
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'qual');
 
@@ -174,9 +192,7 @@ export class Qualification extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wat is je hoogst voltooide opleiding?'],
-      ]),
+      questionText: this.isPartOf('Adults') ? this.questionTextMain_Adults : this.questionTextMain_Kids,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -185,7 +201,7 @@ export class Qualification extends Item {
           ])
         },
         {
-          key: 'b', role: 'input',
+          key: 'b', role: 'option',
           content: new Map([
             ["nl", "Lager onderwijs (basisschool, speciaal basisonderwijs)"],
           ])
@@ -203,7 +219,7 @@ export class Qualification extends Item {
           ])
         },
         {
-          key: 'e', role: 'input',
+          key: 'e', role: 'option',
           content: new Map([
             ["nl", "Middelbaar beroepsonderwijs en beroepsbegeleidend onderwijs (zoals MBO-lang, MTS, MEAO, BOL, BBL, INAS)"],
           ])
@@ -215,13 +231,13 @@ export class Qualification extends Item {
           ])
         },
         {
-          key: 'g', role: 'input',
+          key: 'g', role: 'option',
           content: new Map([
             ["nl", "Hoger beroepsonderwijs (zoals HBO, HTS, HEAO, kandidaatswetenschappelijk onderwijs)"],
           ])
         },
         {
-          key: 'h', role: 'input',
+          key: 'h', role: 'option',
           content: new Map([
             ["nl", "Wetenschappelijk onderwijs (universiteit)"],
           ])
@@ -619,12 +635,14 @@ export class Symptoms2 extends Item {
             ["nl", "Pijn in je armen, benen of gewrichten (knieën, heupen, enz.)"],
           ])
         },
-        {//TODO: this option only for females
+        {
           key: 'd',
           content: new Map([
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
-          //disabled: SurveyEngine.singleChoice.any(,'b')???
+          displayCondition: SurveyEngine.logic.and(
+            SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key,'female'),
+            SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),10))
         },
         {
           key: 'e',
