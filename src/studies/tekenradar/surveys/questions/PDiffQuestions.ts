@@ -121,7 +121,7 @@ export class FeverTickBite extends Item {
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "Nee, nog niet"],
+            ["nl", "Nee, nog niet, maar er zijn nog geen 4 weken verstreken sinds de tekenbeet"],
           ])
         },
       ]
@@ -346,11 +346,21 @@ export class MedicationLyme extends Item {
                 reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
                 delta: { seconds: 0 }
               }
-            }),//TODO: if this text is too long as it is the case here the whole text is written in the next line
-            //instead of breaking text at the right position.
+            }),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', ". Dit is de "]]
+              )
+            }),
+            ClozeItemTypes.dropDown({
+              key: 'dropdown', options: [
+                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('2', new Map([['nl', "geschatte"]]))
+              ]
+            }),
             ClozeItemTypes.text({
               key: '3', content: new Map(
-                [['nl', "(vul hier de startdatum van je antibiotica behandeling in, of een schatting daarvan)"]]
+                [['nl', " datum."]]
               )
             }),
           ]
