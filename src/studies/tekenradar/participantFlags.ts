@@ -9,6 +9,14 @@ export const ParticipantFlags = {
       adult: 'adult'
     }
   },
+  genderCategory: {
+    key: 'genderCategory',
+    values: {
+      male: 'male',
+      female: 'female',
+      other: 'other'
+    }
+  },
   flow: {
     key: 'flow',
     values: {
