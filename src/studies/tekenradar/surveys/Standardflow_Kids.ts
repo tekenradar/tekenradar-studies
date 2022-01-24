@@ -3,7 +3,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, QuestionsKids1, QuestionsKids2 } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { Text1FUKids } from './questions/followup';
-import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1F1_Kids, FatigueText2F1_Kids, Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_Weakness_Kids } from './questions/standard_Kids';
+import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1F1_Kids, FatigueText2F1_Kids, Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_Weakness_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 
 
@@ -54,6 +54,8 @@ class Standardflow_KidsDef extends SurveyDefinition {
   Q29: SchoolKids2;
   Q30: SchoolKids3;
 
+  T6_I1Kids: Strength_WeaknessI1Text_Kids;
+  T6_I3Kids: Strength_WeaknessI3Text_Kids;
   Q31: Strength_Weakness_Kids;
   G32_39: AwarenessKidsGroup;
 
@@ -120,8 +122,13 @@ class Standardflow_KidsDef extends SurveyDefinition {
       SurveyEngine.compare.gte(AgeFromPDiff, 8),
       SurveyEngine.compare.lt(AgeFromPDiff, 18));
 
+      //TODO: restructure
     const cond_younger8 = SurveyEngine.compare.lt(AgeFromPDiff, 8);
     const cond_olderequal8 = SurveyEngine.logic.not(cond_younger8);
+
+    const cond_younger11 = SurveyEngine.compare.lt(AgeFromPDiff, 11);
+    const cond_olderequal11 = SurveyEngine.logic.not(cond_younger11);
+
 
     this.T2_Kids = new FunctioningText1F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
     this.T3_Kids = new FunctioningText2F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
@@ -149,6 +156,8 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.Q29 = new SchoolKids2(this.key, required);
     this.Q30 = new SchoolKids3(this.key, required);
 
+    this.T6_I1Kids = new Strength_WeaknessI1Text_Kids(this.key, required, cond_younger11);
+    this.T6_I3Kids = new Strength_WeaknessI3Text_Kids(this.key, required, cond_olderequal11);
     this.Q31 = new Strength_Weakness_Kids(this.key, required);
     this.G32_39 = new AwarenessKidsGroup(this.key, required)
   }
@@ -199,6 +208,8 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q29.get());
 
     this.addItem(this.Q30.get());
+    this.addItem(this.T6_I1Kids.get());
+    this.addItem(this.T6_I3Kids.get());
     this.addItem(this.Q31.get());
     this.addItem(this.G32_39.get());
 
