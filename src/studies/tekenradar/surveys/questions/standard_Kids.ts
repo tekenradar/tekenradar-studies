@@ -1773,6 +1773,77 @@ export class SchoolKids3 extends Item {
   }
 }
 
+//TODO here
+export class Strength_WeaknessI1Text_Kids extends Item {
+
+  markdownContent_F1 = `
+# Sterke Kanten en Moeilijkheden
+
+De vragen hieronder zijn voor **een ouder/verzorger**.
+
+De volgende vragen gaan over gedragingen van kinderen. Wilt u bij iedere vraag aankruisen of dit ‘niet waar’, ‘een beetje waar’ of ‘zeker waar’ is voor uw kind. Wilt u uw antwoorden baseren op het gedrag van uw kind gedurende de laatste zes maanden. Het is van belang dat u alle vragen beantwoordt, ook als u niet helemaal zeker bent of als u de vraag niet geheel passend vindt voor uw kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition1?: Expression) {
+    super(parentKey, 'kS-I1-SDQ-Text');
+
+    this.isRequired = isRequired;
+    this.condition = condition1;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent_F1],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class Strength_WeaknessI3Text_Kids extends Item {
+
+  markdownContent_F3 = `
+# Sterke Kanten en Moeilijkheden
+
+De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf de** antwoorden kiezen.
+
+Wil je alsjeblieft bij iedere vraag een antwoord kiezen door op het bolletje te klikken bij 'Niet waar', 'Een beetje waar' of 'Zeker waar'. Het is belangrijk dat je alle vragen zo goed mogelijk beantwoordt, ook als je niet helemaal zeker bent of als je de vraag raar vindt. Wil je alsjeblieft bij je antwoorden denken hoe dat bij jou de laatste zes maanden is geweest.
+
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition1?: Expression) {
+    super(parentKey, 'kS-I3-SDQ-Text');
+
+    this.isRequired = isRequired;
+    this.condition = condition1;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent_F3],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 export class Strength_Weakness_Kids extends Item {
 
@@ -1787,7 +1858,7 @@ export class Strength_Weakness_Kids extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'S-I1-SDQ3');
+    super(parentKey, 'kS-I-SDQ');
 
     this.isRequired = isRequired;
     this.condition = condition;
