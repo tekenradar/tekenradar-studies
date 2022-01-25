@@ -80,7 +80,6 @@ Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook 
 
 export class FunctioningText1F1_Kids extends Item {
 
-  condition_F1: Expression;
 
   markdownContent_F1 = `
 # Functioneren
@@ -95,6 +94,35 @@ Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. 
 
 Er zijn geen goede of foute antwoorden.
     `
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_F1Text1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
+            ["nl",  this.markdownContent_F1 ],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
+export class FunctioningText1F3_Kids extends Item {
+
 
   markdownContent_F3 = `
   # Functioneren
@@ -111,12 +139,11 @@ Er zijn geen goede of foute antwoorden.
   Er zijn geen goede of foute antwoorden.
       `
 
-  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
-    super(parentKey, 'kS_F1Text1');
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_F3Text1');
 
     this.isRequired = isRequired;
-    this.condition = condition1;
-    this.condition_F1 = condition2;
+    this.condition = condition;
 
   }
 
@@ -128,7 +155,7 @@ Er zijn geen goede of foute antwoorden.
       content: [
         ComponentGenerators.markdown({
           content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
-            ["nl",  this.condition_F1 ? this.markdownContent_F1 : this.markdownContent_F3],
+            ["nl", this.markdownContent_F3],
           ]),
           className: ''
         })
@@ -141,21 +168,16 @@ Er zijn geen goede of foute antwoorden.
 
 export class FunctioningText2F1_Kids extends Item {
 
-  condition_F1: Expression;
   markdownContent_F1 = `
 Hoe vaak heeft uw kind in de **afgelopen week** problemen gehad met:
     `
 
-  markdownContent_F3 = `
-Hoe vaak heb je in de **afgelopen week** problemen gehad met...
-    `
-
-  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'kS_F1Text2');
 
     this.isRequired = isRequired;
-    this.condition = condition1;
-    this.condition_F1 = condition2;
+    this.condition = condition;
+
   }
 
   buildItem() {
@@ -166,7 +188,40 @@ Hoe vaak heb je in de **afgelopen week** problemen gehad met...
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.condition_F1 ? this.markdownContent_F1 : this.markdownContent_F3],
+            ["nl",  this.markdownContent_F1],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
+export class FunctioningText2F3_Kids extends Item {
+
+  markdownContent_F3 = `
+Hoe vaak heb je in de **afgelopen week** problemen gehad met...
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_F3Text2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent_F3],
           ]),
           className: ''
         })
@@ -177,7 +232,6 @@ Hoe vaak heb je in de **afgelopen week** problemen gehad met...
 
 export class Functioning1F1_Kids extends Item {
 
-  condition_F1: Expression;
   questionTextMain = [
     /*{
         content: new Map([
@@ -198,33 +252,16 @@ export class Functioning1F1_Kids extends Item {
   ]
 
 
-  options_c = {
-    F1: new Map([
+  option_c = [
+    {
+    content: new Map([
       ["nl", "Deelnemen aan actief spel of lichamelijke oefeningen"],
-    ]),
-    F2: new Map([
-      ["nl", "Deelnemen aan sportactiviteiten of lichamelijke oefeningen"],
-    ]),
-  }
-
-
-  option_c_f1 = [
-    {
-      content: new Map([
-          ["nl", "Deelnemen aan actief spel of lichamelijke oefeningen"],
       ]),
     }
   ]
 
-  option_c_f2 = [
-    {
-      content: new Map([
-          ["nl", "Deelnemen aan sportactiviteiten of lichamelijke oefeningen"],
-      ]),
-    }
-  ]
 
-  option_e_f1 = [
+  option_e = [
     {
       content: new Map([
           ["nl", "Baden"],
@@ -232,15 +269,8 @@ export class Functioning1F1_Kids extends Item {
     }
   ]
 
-  option_e_f2 = [
-    {
-      content: new Map([
-          ["nl", "Zelfstandig een bad of douche nemen"],
-      ]),
-    }
-  ]
 
-  option_f_f1 = [
+  option_f = [
     {
       content: new Map([
           ["nl", "Helpen met speelgoed opruimen"],
@@ -248,16 +278,9 @@ export class Functioning1F1_Kids extends Item {
     }
   ]
 
-  option_f_f2 = [
-    {
-      content: new Map([
-          ["nl", "Karweitjes doen, zoals het opruimen van zijn / haar speelgoed"],
-      ]),
-    }
-  ]
 
 
-  option_g_f1 = [
+  option_g = [
     {
       content: new Map([
           ["nl", "Het hebben van pijn"],
@@ -265,20 +288,12 @@ export class Functioning1F1_Kids extends Item {
     }
   ]
 
-  option_g_f2 = [
-    {
-      content: new Map([
-          ["nl", "Het hebben van wondjes of pijn"],
-      ]),
-    }
-  ]
 
-  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Func1kS_F1');
 
     this.isRequired = isRequired;
-    this.condition = condition1;
-    this.condition_F1 = condition2;
+    this.condition = condition;
   }
 
   buildItem() {
@@ -325,13 +340,9 @@ export class Functioning1F1_Kids extends Item {
           ]),
         },
         {
-          key: 'c_F1',
-          content: this.options_c.F1,
+          key: 'c',
+          content: this.option_c,
           //displayCondition: this.condition_F1,
-        },
-        {
-          key: 'c_F2',
-          content: this.options_c.F2,
         },
         {
           key: 'd',
@@ -341,15 +352,157 @@ export class Functioning1F1_Kids extends Item {
         },
         {
           key: 'e',
-          content: this.condition_F1 ? this.option_e_f1 : this.option_e_f2,
+          content: this.option_e,
         },
         {
           key: 'f',
-          content: this.condition_F1 ? this.option_f_f1 : this.option_f_f2,
+          content: this.option_f,
         },
         {
           key: 'g',
-          content: this.condition_F1 ? this.option_g_f1 : this.option_g_f2,
+          content: this.option_g,
+        },
+        {
+          key: 'h',
+          content: new Map([
+            ["nl", "Weinig energie hebben"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+export class Functioning1F2_Kids extends Item {
+
+  questionTextMain = [
+    /*{
+        content: new Map([
+            ["nl", 'Hoe vaak heeft uw kind in de '],
+        ]),
+    },
+    {
+        content: new Map([
+            ["nl", " afgelopen week"],
+        ]),
+        className: "text-decoration-underline"
+    },*/
+    {
+      content: new Map([
+          ["nl", "Lichamelijk functioneren (problemen met…)"],
+      ]),
+    }
+  ]
+
+
+  option_c = [
+    {
+    content: new Map([
+      ["nl", "Deelnemen aan sportactiviteiten of lichamelijke oefeningen"],
+    ]),
+    }
+  ]
+
+
+  option_e = [
+    {
+      content: new Map([
+          ["nl", "Zelfstandig een bad of douche nemen"],
+      ]),
+    }
+  ]
+
+  option_f = [
+    {
+      content: new Map([
+          ["nl", "Karweitjes doen, zoals het opruimen van zijn / haar speelgoed"],
+      ]),
+    }
+  ]
+
+
+
+  option_g = [
+    {
+      content: new Map([
+          ["nl", "Het hebben van wondjes of pijn"],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Func1kS_F2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "Nooit"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "Bijna nooit"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Soms"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Vaak"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "Bijna altijd"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Meer dan één straat op en neer lopen"],
+          ])
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Rennen"],
+          ]),
+        },
+        {
+          key: 'c',
+          content: this.option_c,
+          //displayCondition: this.condition_F1,
+        },
+        {
+          key: 'd',
+          content: new Map([
+            ["nl", "Iets zwaars optillen"],
+          ]),
+        },
+        {
+          key: 'e',
+          content: this.option_e,
+        },
+        {
+          key: 'f',
+          content: this.option_f,
+        },
+        {
+          key: 'g',
+          content: this.option_g,
         },
         {
           key: 'h',
@@ -478,7 +631,7 @@ export class Functioning2F1_Kids extends Item {
   ]
 
 
-  option_e_f1 = [
+  option_e = [
     {
       content: new Map([
           ["nl", "Zich zorgen maken/bang zijn"],
@@ -486,15 +639,8 @@ export class Functioning2F1_Kids extends Item {
     }
   ]
 
-  option_e_f2 = [
-    {
-      content: new Map([
-          ["nl", "Zorgen maken over wat hem/ haar zal overkomen"],
-      ]),
-    }
-  ]
 
-  constructor(parentKey: string, isRequired: boolean, condition: Expression, condition2: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Func2kS_F1');
 
     this.isRequired = isRequired;
@@ -558,14 +704,104 @@ export class Functioning2F1_Kids extends Item {
         },
         {
           key: 'e',
-          content: new Map([
-            ["nl", "Zich zorgen maken/bang zijn"],
-          ])
+          content: this.option_e,
         },
       ]
     })
   }
 }
+
+
+export class Functioning2F2_Kids extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", "Emotioneel functioneren (problemen met…)"],
+      ]),
+    }
+  ]
+
+
+  option_e = [
+    {
+      content: new Map([
+          ["nl", "Zorgen maken over wat hem/ haar zal overkomen"],
+      ]),
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Func2kS_F2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "Nooit"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "Bijna nooit"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Soms"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Vaak"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "Bijna altijd"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Zich angstig of bang voelen"],
+          ])
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Zich verdrietig of somber voelen"],
+          ])
+        },
+        {
+          key: 'c',
+          content: new Map([
+            ["nl", "Zich boos voelen"],
+          ])
+        },
+        {
+          key: 'd',
+          content: new Map([
+            ["nl", "Moeite met slapen"],
+          ]),
+        },
+        {
+          key: 'e',
+          content: this.option_e,
+        },
+      ]
+    })
+  }
+}
+
 
 
 export class Functioning2F3_Kids extends Item {
@@ -652,7 +888,6 @@ export class Functioning2F3_Kids extends Item {
 }
 
 
-
 export class Functioning3F1_Kids extends Item {
 
   questionTextMain = [
@@ -664,7 +899,7 @@ export class Functioning3F1_Kids extends Item {
   ]
 
 
-  option_a_f1 = [
+  option_a = [
     {
       content: new Map([
           ["nl", "Spelen met andere kinderen"],
@@ -672,30 +907,13 @@ export class Functioning3F1_Kids extends Item {
     }
   ]
 
-  option_a_f2 = [
-    {
-      content: new Map([
-          ["nl", "Op kunnen schieten met andere kinderen"],
-      ]),
-    }
-  ]
-
-  option_d_f1 = [
+  option_d = [
     {
       content: new Map([
           ["nl", "Bepaalde dingen niet kunnen die andere kinderen van zijn/haar leeftijd wel kunnen"],
       ]),
     }
   ]
-
-  option_d_f2 = [
-    {
-      content: new Map([
-          ["nl", "Kan bepaalde dingen niet die andere kinderen van zijn/ haar leeftijd wel kunnen"],
-      ]),
-    }
-  ]
-
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Func3kS_F1');
@@ -737,9 +955,7 @@ export class Functioning3F1_Kids extends Item {
       ],
       rows: [
         {
-          key: 'a', content: new Map([
-            ["nl", "Spelen met andere kinderen"],
-          ])
+          key: 'a', content: this.option_a,
         },
         {
           key: 'b',
@@ -755,9 +971,7 @@ export class Functioning3F1_Kids extends Item {
         },
         {
           key: 'd',
-          content: new Map([
-            ["nl", "Bepaalde dingen niet kunnen die andere kinderen van zijn/haar leeftijd wel kunnen"],
-          ]),
+          content: this.option_d,
         },
         {
           key: 'e',
@@ -771,9 +985,106 @@ export class Functioning3F1_Kids extends Item {
 }
 
 
-export class Functioning3F3_Kids extends Item {
+export class Functioning3F2_Kids extends Item {
 
-  condition_F3: Expression;
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", "Sociaal functioneren (problemen met…)"],
+      ]),
+    }
+  ]
+
+
+  option_a = [
+    {
+      content: new Map([
+          ["nl", "Op kunnen schieten met andere kinderen"],
+      ]),
+    }
+  ]
+
+  option_d = [
+    {
+      content: new Map([
+          ["nl", "Kan bepaalde dingen niet die andere kinderen van zijn/ haar leeftijd wel kunnen"],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Func3kS_F2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "Nooit"],
+          ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "Bijna nooit"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Soms"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Vaak"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "Bijna altijd"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: this.option_a,
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Andere kinderen willen zijn/haar vriend(in) niet zijn"],
+          ])
+        },
+        {
+          key: 'c',
+          content: new Map([
+            ["nl", "Gepest worden door andere kinderen"],
+          ])
+        },
+        {
+          key: 'd',
+          content: this.option_d,
+        },
+        {
+          key: 'e',
+          content: new Map([
+            ["nl", "Mee kunnen blijven doen tijdens het spelen met andere kinderen"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+
+export class Functioning3F3_Kids extends Item {
 
   questionTextMain = [
     {
@@ -784,7 +1095,7 @@ export class Functioning3F3_Kids extends Item {
   ]
 
 
-  option_a_f3 = [
+  option_a = [
     {
       content: new Map([
           ["nl", "Ik heb problemen om met andere kinderen op te schieten"],
@@ -792,16 +1103,7 @@ export class Functioning3F3_Kids extends Item {
     }
   ]
 
-  option_a_f4 = [
-    {
-      content: new Map([
-          ["nl", "Ik heb problemen om met andere tieners op te schieten"],
-      ]),
-    }
-  ]
-
-
-  option_b_f3 = [
+  option_b = [
     {
       content: new Map([
           ["nl", "Andere kinderen willen mijn vriend(in) niet zijn"],
@@ -809,15 +1111,7 @@ export class Functioning3F3_Kids extends Item {
     }
   ]
 
-  option_b_f4 = [
-    {
-      content: new Map([
-          ["nl", "Andere tieners willen mijn vriend(in) niet zijn"],
-      ]),
-    }
-  ]
-
-  option_c_f3 = [
+  option_c = [
     {
       content: new Map([
           ["nl", "Andere kinderen pesten mij"],
@@ -825,15 +1119,7 @@ export class Functioning3F3_Kids extends Item {
     }
   ]
 
-  option_c_f4 = [
-    {
-      content: new Map([
-          ["nl", "Andere tieners pesten mij"],
-      ]),
-    }
-  ]
-
-  option_d_f3 = [
+  option_d = [
     {
       content: new Map([
           ["nl", "Ik kan bepaalde dingen niet die andere kinderen van mijn leeftijd wel kunnen"],
@@ -841,15 +1127,8 @@ export class Functioning3F3_Kids extends Item {
     }
   ]
 
-  option_d_f4 = [
-    {
-      content: new Map([
-          ["nl", "Ik kan bepaalde dingen niet die andere tieners van mijn leeftijd wel kunnen"],
-      ]),
-    }
-  ]
 
-  option_e_f3 = [
+  option_e = [
     {
       content: new Map([
           ["nl", "Het is moeilijk mee te kunnen blijven doen als ik met andere kinderen speel"],
@@ -857,21 +1136,12 @@ export class Functioning3F3_Kids extends Item {
     }
   ]
 
-  option_e_f4 = [
-    {
-      content: new Map([
-          ["nl", "Het is moeilijk om mee te kunnen blijven doen met mijn leeftijdsgenoten"],
-      ]),
-    }
-  ]
 
-
-  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Func3kS_F3');
 
     this.isRequired = isRequired;
-    this.condition = condition1;
-    this.condition_F3 = condition2;
+    this.condition = condition;
   }
 
   buildItem() {
@@ -908,31 +1178,141 @@ export class Functioning3F3_Kids extends Item {
       rows: [
         {
           key: 'a',
-          content:this.condition_F3 ? this.option_a_f3 : this.option_a_f4
+          content: this.option_a,
         },
         {
           key: 'b',
-          content: new Map([
-            ["nl", "Andere tieners willen mijn vriend(in) niet zijn"],
-          ])
+          content: this.option_b,
         },
         {
           key: 'c',
-          content: new Map([
-            ["nl", "Andere tieners pesten mij"],
-          ])
+          content: this.option_c,
         },
         {
           key: 'd',
-          content: new Map([
-            ["nl", "Ik kan bepaalde dingen niet die andere tieners van mijn leeftijd wel kunnen"],
-          ]),
+          content: this.option_d,
         },
         {
           key: 'e',
-          content: new Map([
-            ["nl", "Het is moeilijk om mee te kunnen blijven doen met mijn leeftijdsgenoten"],
+          content: this.option_e,
+        },
+      ]
+    })
+  }
+}
+
+
+export class Functioning3F4_Kids extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", "Hoe ik met anderen op kan schieten (problemen met ... )"],
+      ]),
+    }
+  ]
+
+
+  option_a = [
+    {
+      content: new Map([
+          ["nl", "Ik heb problemen om met andere tieners op te schieten"],
+      ]),
+    }
+  ]
+
+
+  option_b = [
+    {
+      content: new Map([
+          ["nl", "Andere tieners willen mijn vriend(in) niet zijn"],
+      ]),
+    }
+  ]
+
+  option_c = [
+    {
+      content: new Map([
+          ["nl", "Andere tieners pesten mij"],
+      ]),
+    }
+  ]
+
+  option_d = [
+    {
+      content: new Map([
+          ["nl", "Ik kan bepaalde dingen niet die andere tieners van mijn leeftijd wel kunnen"],
+      ]),
+    }
+  ]
+
+  option_e = [
+    {
+      content: new Map([
+          ["nl", "Het is moeilijk om mee te kunnen blijven doen met mijn leeftijdsgenoten"],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Func3kS_F4');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '0', content: new Map([
+            ["nl", "Nooit"],
           ])
+        }, {
+          key: '1', content: new Map([
+            ["nl", "Bijna nooit"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Soms"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Vaak"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "Bijna altijd"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a',
+          content: this.option_a,
+        },
+        {
+          key: 'b',
+          content: this.option_b,
+        },
+        {
+          key: 'c',
+          content: this.option_c,
+        },
+        {
+          key: 'd',
+          content: this.option_d,
+        },
+        {
+          key: 'e',
+          content: this.option_e,
         },
       ]
     })
@@ -1222,11 +1602,10 @@ export class Functioning5F3_Kids extends Item {
 }
 
 
-export class FatigueText1F1_Kids extends Item {
+export class FatigueText1G1_Kids extends Item {
 
-  condition_F1: Expression;
 
-  markdownContent_F1 = `
+  markdownContent_G1 = `
 # Vermoeidheid
 De vragen hieronder zijn voor **een ouder/verzorger**.
 
@@ -1240,7 +1619,37 @@ Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. 
 Er zijn geen goede of foute antwoorden.
     `
 
-  markdownContent_F3 = `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_G1Text1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
+            ["nl", this.markdownContent_G1 ],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class FatigueText1G3_Kids extends Item {
+
+
+  markdownContent_G3 = `
   # Vermoedheid
   De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
 
@@ -1255,12 +1664,11 @@ Er zijn geen goede of foute antwoorden.
   Er zijn geen goede of foute antwoorden.
       `
 
-  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
-    super(parentKey, 'kS_G1Text1');
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
+    super(parentKey, 'kS_G3Text1');
 
     this.isRequired = isRequired;
-    this.condition = condition1;
-    this.condition_F1 = condition2;
+    this.condition = condition;
 
   }
 
@@ -1272,7 +1680,7 @@ Er zijn geen goede of foute antwoorden.
       content: [
         ComponentGenerators.markdown({
           content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
-            ["nl",  this.condition_F1 ? this.markdownContent_F1 : this.markdownContent_F3],
+            ["nl",  this.markdownContent_G3],
           ]),
           className: ''
         })
@@ -1282,26 +1690,18 @@ Er zijn geen goede of foute antwoorden.
 }
 
 
-export class FatigueText2F1_Kids extends Item {
+export class FatigueText2G1_Kids extends Item {
 
-  condition_F1: Expression;
-  markdownContent_F1 = `
+  markdownContent_G1 = `
 Hoe vaak heeft uw kind in de afgelopen week problemen gehad met:
     `
-  markdownContent_F2 = `
-Hoezeer heeft uw kind in de afgelopen week een probleem gehad met:
-    `
 
-  markdownContent_F3 = `
-Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
-    `
 
-  constructor(parentKey: string, isRequired: boolean, condition1: Expression, condition2: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'kS_G1Text2');
 
     this.isRequired = isRequired;
-    this.condition = condition1;
-    this.condition_F1 = condition2;
+    this.condition = condition;
   }
 
   buildItem() {
@@ -1312,7 +1712,7 @@ Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.condition_F1 ? this.markdownContent_F1 : this.markdownContent_F3],
+            ["nl", this.markdownContent_G1],
           ]),
           className: ''
         })
@@ -1320,6 +1720,71 @@ Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
     })
   }
 }
+
+
+export class FatigueText2G2_Kids extends Item {
+
+  markdownContent_G2 = `
+Hoezeer heeft uw kind in de afgelopen week een probleem gehad met:
+    `
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_G2Text2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent_G2],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class FatigueText2G3_Kids extends Item {
+
+
+  markdownContent_G3 = `
+Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_G3Text2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent_G3],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 
 export class Fatigue1F1_Kids extends Item {
