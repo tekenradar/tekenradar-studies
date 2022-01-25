@@ -8,6 +8,8 @@ import { Feverflow_Adults } from "../surveys/Feverflow_Adults";
 import { LBflow_Adults } from "../surveys/LBflow_Adults";
 import { LBflow_Kids } from "../surveys/LBflow_Kids";
 import { PDiff } from "../surveys/PDiff";
+import { Standardflow_Adults } from "../surveys/Standardflow_Adults";
+import { Standardflow_Kids } from "../surveys/Standardflow_Kids";
 import { TBflow_Adults } from "../surveys/TBflow_Adults";
 import { TBflow_Kids } from "../surveys/TBflow_Kids";
 import { WeeklyTB } from "../surveys/WeeklyTB";
@@ -16,6 +18,8 @@ const isChildParticipant = () => StudyEngine.lt(
   StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
   18,
 )
+
+const isLoggedIn = () => StudyEngine.participantState.hasStudyStatus('active')
 
 /**
  *
@@ -45,18 +49,46 @@ export const updateAgeFlags = () => StudyEngine.do(
 )
 
 /**
- *
+ * PDIFF - TB FLOW
  */
-export const handleTrigger_TBflow = () => StudyEngine.ifThen(
+const hasTBFlowCondition = () => StudyEngine.and(
+  StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
+  StudyEngine.singleChoice.none(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
+  StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
+  StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
+)
+
+
+export const handlePDiffNormal_TBflow = () => StudyEngine.ifThen(
   // If:
-  StudyEngine.and(
-    StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
-    StudyEngine.singleChoice.none(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
-    StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
-  ),
+  hasTBFlowCondition(),
   // Then:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+  StudyEngine.if(
+    isChildParticipant(),
+    // Then:
+    StudyEngine.do(
+      StudyEngine.participantActions.assignedSurveys.add(TBflow_Kids.key, 'immediate'),
+      StudyEngine.ifThen(
+        isLoggedIn(),
+        StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
+      )
+    ),
+    // Else:
+    StudyEngine.do(
+      StudyEngine.participantActions.assignedSurveys.add(TBflow_Adults.key, 'immediate'),
+      StudyEngine.ifThen(
+        isLoggedIn(),
+        StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+      )
+    )
+  )
+)
+
+export const handlePDiffUpdate_TBflow = () => StudyEngine.ifThen(
+  // If:
+  hasTBFlowCondition(),
+  // Then:
   StudyEngine.if(
     isChildParticipant(),
     // Then:
