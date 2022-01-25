@@ -4,7 +4,7 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import {FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text1FUKids, Text2FU } from './questions/followup';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids1, QuestionsKids2, Symptoms1, Symptoms2, Symptoms3, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1F1_Kids, FatigueText2F1_Kids, Functioning1F1_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F3_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText2F1_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_Weakness_Kids } from './questions/standard_Kids';
+import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_Weakness_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
@@ -44,20 +44,34 @@ class Followupflow_KidsDef extends SurveyDefinition {
     Q18: MedCare2;
     T5: MedCareText3;
 
-    T6_Kids: FunctioningText1F1_Kids;
-    T7_Kids: FunctioningText2F1_Kids;
-    Q19_a: Functioning1F1_Kids;
-    Q19_b: Functioning1F3_Kids;
-    Q20_a: Functioning2F1_Kids;
-    Q20_b: Functioning2F3_Kids;
-    Q21_a: Functioning3F1_Kids;
-    Q21_b: Functioning3F3_Kids;
-    Q22: Functioning4F1_Kids;
-    Q23_a: Functioning5F1_Kids;
-    Q23_b: Functioning5F3_Kids;
+    T6_F1: FunctioningText1F1_Kids;
+    T6_F3: FunctioningText1F3_Kids;
+    T7_F1: FunctioningText2F1_Kids;
+    T7_F3: FunctioningText2F3_Kids;
+    Q19_F1: Functioning1F1_Kids;
+    Q19_F2: Functioning1F2_Kids;
+    Q19_F3: Functioning1F3_Kids;
+    Q20_F1: Functioning2F1_Kids;
+    Q20_F2: Functioning2F2_Kids;
+    Q20_F3: Functioning2F3_Kids;
 
-    T8_Kids: FatigueText1F1_Kids;
-    T9_Kids: FatigueText2F1_Kids;
+    Q21_F1: Functioning3F1_Kids;
+    Q21_F2: Functioning3F2_Kids;
+    Q21_F3: Functioning3F3_Kids;
+    Q21_F4: Functioning3F4_Kids;
+
+    Q22_F1: Functioning4F1_Kids;
+
+    Q23_F1: Functioning5F1_Kids;
+    Q23_F2: Functioning5F2_Kids;
+    Q23_F3: Functioning5F3_Kids;
+
+    T8_G1: FatigueText1G1_Kids;
+    T8_G3: FatigueText1G3_Kids;
+    T9_G1: FatigueText2G1_Kids;
+    T9_G2: FatigueText2G2_Kids;
+    T9_G3: FatigueText2G3_Kids;
+
     Q24: Fatigue1F1_Kids;
     Q25: Fatigue2F1_Kids;
     Q26: Fatigue3F1_Kids;
@@ -162,23 +176,38 @@ class Followupflow_KidsDef extends SurveyDefinition {
         const cond_younger8 = SurveyEngine.compare.lt(AgeFromPDiff,8);
         const cond_olderequal8 = SurveyEngine.logic.not(cond_younger8);
 
-        this.T6_Kids = new FunctioningText1F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
-        this.T7_Kids = new FunctioningText2F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
+        this.T6_F1 = new FunctioningText1F1_Kids(this.key, required, cond_2younger8);
+        this.T6_F3 = new FunctioningText1F3_Kids(this.key, required, cond_8younger18);
+        this.T7_F1 = new FunctioningText2F1_Kids(this.key, required, cond_2younger8);
+        this.T7_F3 = new FunctioningText2F3_Kids(this.key, required, cond_8younger18);
 
-        this.Q19_a = new Functioning1F1_Kids(this.key, required, cond_2younger8, cond_2younger5);
-        this.Q19_b = new Functioning1F3_Kids(this.key, required, cond_8younger18);
-        //continue cond here
-        this.Q20_a = new Functioning2F1_Kids(this.key, required, cond_2younger8, cond_2younger5);
-        this.Q20_b = new Functioning2F3_Kids(this.key, required, cond_8younger18);
-        this.Q21_a = new Functioning3F1_Kids(this.key, required, cond_younger8);
-        this.Q21_b = new Functioning3F3_Kids(this.key, required, cond_8younger18, cond_8younger13);
-        this.Q22 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
-        const Q22condition = SurveyEngine.singleChoice.any(this.Q22.key, this.Q22.optionKeys.nameOfOption);
-        this.Q23_a = new Functioning5F1_Kids(this.key, required, Q22condition);//TODO: cond her
-        this.Q23_b = new Functioning5F3_Kids(this.key, required, cond_olderequal8);
 
-        this.T8_Kids = new FatigueText1F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
-        this.T9_Kids = new FatigueText2F1_Kids(this.key, required, cond_olderequal2, cond_younger8);
+        this.Q19_F1 = new Functioning1F1_Kids(this.key, required, cond_2younger5);
+        this.Q19_F2 = new Functioning1F2_Kids(this.key, required, cond_5younger8);
+        this.Q19_F3 = new Functioning1F3_Kids(this.key, required, cond_8younger18);
+
+        this.Q20_F1 = new Functioning2F1_Kids(this.key, required, cond_2younger5);
+        this.Q20_F2 = new Functioning2F2_Kids(this.key, required, cond_5younger8);
+        this.Q20_F3 = new Functioning2F3_Kids(this.key, required, cond_8younger18);
+
+        this.Q21_F1 = new Functioning3F1_Kids(this.key, required, cond_2younger5);
+        this.Q21_F2 = new Functioning3F2_Kids(this.key, required, cond_5younger8);
+        this.Q21_F3 = new Functioning3F3_Kids(this.key, required, cond_8younger13);
+        this.Q21_F4 = new Functioning3F4_Kids(this.key, required, cond_13younger18);
+
+        this.Q22_F1 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
+        const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.nameOfOption);
+
+        this.Q23_F1 = new Functioning5F1_Kids(this.key, required, Q22condition);
+        this.Q23_F2 = new Functioning5F2_Kids(this.key, required, cond_5younger8);
+        this.Q23_F3 = new Functioning5F3_Kids(this.key, required, cond_8younger18);
+
+        this.T8_G1 = new FatigueText1G1_Kids(this.key, required, cond_2younger8);
+        this.T8_G3 = new FatigueText1G3_Kids(this.key, required, cond_8younger18);
+        this.T9_G1 = new FatigueText2G1_Kids(this.key, required, cond_2younger5);
+        this.T9_G2 = new FatigueText2G2_Kids(this.key, required, cond_5younger8);
+        this.T9_G3 = new FatigueText2G3_Kids(this.key, required, cond_8younger18);
+
         this.Q24 = new Fatigue1F1_Kids(this.key, required);
         this.Q25 = new Fatigue2F1_Kids(this.key, required);
         this.Q26 = new Fatigue3F1_Kids(this.key, required);
@@ -230,20 +259,32 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q18.get());
         this.addItem(this.T5.get());
 
-        this.addItem(this.T6_Kids.get());
-        this.addItem(this.T7_Kids.get());
-        this.addItem(this.Q19_a.get());
-        this.addItem(this.Q19_b.get());
-        this.addItem(this.Q20_a.get());
-        this.addItem(this.Q20_b.get());
-        this.addItem(this.Q21_a.get());
-        this.addItem(this.Q21_b.get());
-        this.addItem(this.Q22.get());
-        this.addItem(this.Q23_a.get());
-        this.addItem(this.Q23_b.get());
+        this.addItem(this.T6_F1.get());
+        this.addItem(this.T6_F3.get());
+        this.addItem(this.T7_F1.get());
+        this.addItem(this.T7_F3.get());
+        this.addItem(this.Q19_F1.get());
+        this.addItem(this.Q19_F2.get());
+        this.addItem(this.Q19_F3.get());
+        this.addItem(this.Q20_F1.get());
+        this.addItem(this.Q20_F2.get());
+        this.addItem(this.Q20_F3.get());
 
-        this.addItem(this.T8_Kids.get());
-        this.addItem(this.T9_Kids.get());
+        this.addItem(this.Q21_F1.get());
+        this.addItem(this.Q21_F2.get());
+        this.addItem(this.Q21_F3.get());
+        this.addItem(this.Q21_F4.get());
+
+        this.addItem(this.Q22_F1.get());
+        this.addItem(this.Q23_F1.get());
+        this.addItem(this.Q23_F2.get());
+        this.addItem(this.Q23_F3.get());
+
+        this.addItem(this.T8_G1.get());
+        this.addItem(this.T8_G3.get());
+        this.addItem(this.T9_G1.get());
+        this.addItem(this.T9_G2.get());
+        this.addItem(this.T9_G3.get());
         this.addItem(this.Q24.get());
         this.addItem(this.Q25.get());
         this.addItem(this.Q26.get());
