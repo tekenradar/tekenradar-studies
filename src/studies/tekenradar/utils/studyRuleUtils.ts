@@ -224,13 +224,20 @@ export const handleTrigger_Chronicflow = () => {
 
 export const handleTrigger_WeeklyTB = () => StudyEngine.if(
   // If:
-  StudyEngine.singleChoice.any(
-    PDiff.Q8.key,
-    PDiff.Q8.optionKeys.yes
+  StudyEngine.or(
+    // Already in weekly reporting:
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+    // Or wants to join:
+    StudyEngine.singleChoice.any(
+      PDiff.Q8.key,
+      PDiff.Q8.optionKeys.yes,
+      PDiff.Q8.optionKeys.alreadyDoing,
+    ),
   ),
   // Then:
   StudyEngine.do(
     StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
   // Else:

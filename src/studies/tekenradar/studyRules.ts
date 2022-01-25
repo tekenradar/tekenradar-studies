@@ -43,10 +43,18 @@ const submitRules: Expression[] = [
   // TODO: add other submit rules
 ]
 
+const mergeRules: Expression[] = [
+  // handle update flow rule
+  // handle follow up rule
+  // handle weekly flow rule
+]
+
 /**
  * STUDY RULES
  */
 export const studyRules = new StudyRules(
   undefined,
   submitRules,
+  undefined,
+  mergeRules,
 )
