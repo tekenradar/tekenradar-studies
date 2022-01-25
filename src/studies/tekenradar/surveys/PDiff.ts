@@ -29,7 +29,7 @@ export class PDiffDef extends SurveyDefinition {
         ['nl', 'diff, start all flows, questions D1 through D7']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', '']
       ]),
       availableFor: 'public',
     });

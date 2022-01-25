@@ -64,15 +64,15 @@ export class Tekenradar extends Item {
 
   questionTextMain = [
     {
-        content: new Map([
-            ["nl", 'Hoe heb je over het onderzoek via Tekenradar.nl gehoord?'],
-        ]),
+      content: new Map([
+        ["nl", 'Hoe heb je over het onderzoek via Tekenradar.nl gehoord?'],
+      ]),
     },
     {
-        content: new Map([
-            ["nl", " (meerdere antwoorden mogelijk)"],
-        ]),
-        className: "fw-normal"
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
     },
   ]
 
@@ -164,17 +164,17 @@ export class Qualification extends Item {
 
   questionTextMain_Adults = [
     {
-        content: new Map([
-            ["nl", 'Wat is je hoogst voltooide opleiding?'],
-        ]),
+      content: new Map([
+        ["nl", 'Wat is je hoogst voltooide opleiding?'],
+      ]),
     }
   ]
 
   questionTextMain_Kids = [
     {
-        content: new Map([
-            ["nl", 'Wat is de hoogst voltooide opleiding van je moeder /verzorgster (of van je vader/verzorger, als er geen moeder/verzorgster is)?'],
-        ]),
+      content: new Map([
+        ["nl", 'Wat is de hoogst voltooide opleiding van je moeder /verzorgster (of van je vader/verzorger, als er geen moeder/verzorgster is)?'],
+      ]),
     }
   ]
 
@@ -278,7 +278,7 @@ export class Symptoms1 extends Item {
 
     this.isRequired = isRequired;
     this.condition = condition;
-    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18);
+    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
   }
 
   buildItem() {
@@ -588,7 +588,7 @@ export class Symptoms2 extends Item {
 
     this.isRequired = isRequired;
     this.condition = condition;
-    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),18);
+    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
   }
 
   buildItem() {
@@ -641,8 +641,8 @@ export class Symptoms2 extends Item {
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
           displayCondition: SurveyEngine.logic.and(
-            SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key,'female'),
-            SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),10))
+            SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
+            SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
         },
         {
           key: 'e',
@@ -1768,7 +1768,7 @@ export class MedCare2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([["nl","Met welke zorgverleners heb je contact gehad in de afgelopen 3 maanden? En hoe vaak?"]]),
+      questionText: new Map([["nl", "Met welke zorgverleners heb je contact gehad in de afgelopen 3 maanden? En hoe vaak?"]]),
       items: [
         ClozeItemTypes.text({
           key: '1', content: new Map(
@@ -1903,18 +1903,18 @@ export class Awareness1 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helmaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -1972,22 +1972,22 @@ export class Awareness2 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helmaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
-    }
+      }
     })
   }
 }
@@ -2041,18 +2041,18 @@ export class Awareness3 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal geen beheersing']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel beheersing']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen beheersing']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel beheersing']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2111,18 +2111,18 @@ export class Awareness4 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal niet']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Uitermate veel']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal niet']
+          ]),
+          endLabel: new Map([
+            ['de', 'Uitermate veel']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2180,18 +2180,18 @@ export class Awareness5 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helmaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2249,18 +2249,18 @@ export class Awareness6 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helmaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2318,18 +2318,18 @@ export class Awareness7 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Ik begrijp mijn ziekte helemaal niet']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Ik begrijp mijn ziekte helemaal']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Ik begrijp mijn ziekte helemaal niet']
+          ]),
+          endLabel: new Map([
+            ['de', 'Ik begrijp mijn ziekte helemaal']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2387,22 +2387,22 @@ export class Awareness8 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helmaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
-    }
+      }
     })
   }
 }

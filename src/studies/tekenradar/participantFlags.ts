@@ -10,7 +10,7 @@ export const ParticipantFlags = {
     }
   },
   genderCategory: {
-    key: 'genderCategory',
+    key: 'gender',
     values: {
       male: 'male',
       female: 'female',
