@@ -3,7 +3,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, QuestionsKids1, QuestionsKids2 } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { Text1FUKids } from './questions/followup';
-import { AwarenessKidsGroup, Fatigue1F1_Kids, Fatigue2F1_Kids, Fatigue3F1_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainKids, SchoolKids1, SchoolKids2, SchoolKids3, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_Weakness_Kids } from './questions/standard_Kids';
+import { AwarenessKidsGroup, Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI1_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 
 
@@ -58,18 +58,25 @@ class Standardflow_KidsDef extends SurveyDefinition {
   T5_G2: FatigueText2G2_Kids;
   T5_G3: FatigueText2G3_Kids;
 
-  Q24: Fatigue1F1_Kids;
-  Q25: Fatigue2F1_Kids;
-  Q26: Fatigue3F1_Kids;
+  Q24_G1: Fatigue1G1_Kids;
+  Q24_G3: Fatigue1G3_Kids;
+  Q25_G1: Fatigue2G1_Kids;
+  Q25_G3: Fatigue2G3_Kids;
+  Q26_G1: Fatigue3G1_Kids;
+  Q26_G3: Fatigue3G3_Kids;
 
-  Q27: PainKids;
-  Q28: SchoolKids1;
-  Q29: SchoolKids2;
-  Q30: SchoolKids3;
+  Q27_H1: PainH1_Kids;
+  Q27_H2: PainH2_Kids;
+  Q28_H1: School1H1_Kids;
+  Q28_H2: School1H2_Kids;
+  Q29_H1: School2H1_Kids;
+  Q29_H2: School2H2_Kids;
+  Q30_H1: School3H1_Kids;
+  Q30_H2: School3H2_Kids;
 
   T6_I1Kids: Strength_WeaknessI1Text_Kids;
   T6_I3Kids: Strength_WeaknessI3Text_Kids;
-  Q31: Strength_Weakness_Kids;
+  Q31: Strength_WeaknessI1_Kids;
   G32_39: AwarenessKidsGroup;
 
   constructor(isRequired?: boolean) {
@@ -174,18 +181,26 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.T5_G2 = new FatigueText2G2_Kids(this.key, required, cond_5younger8);
     this.T5_G3 = new FatigueText2G3_Kids(this.key, required, cond_8younger18);
 
-    this.Q24 = new Fatigue1F1_Kids(this.key, required);
-    this.Q25 = new Fatigue2F1_Kids(this.key, required);
-    this.Q26 = new Fatigue3F1_Kids(this.key, required);
+    this.Q24_G1 = new Fatigue1G1_Kids(this.key, required, cond_2younger8);
+    this.Q24_G3 = new Fatigue1G3_Kids(this.key, required, cond_8younger18);
 
-    this.Q27 = new PainKids(this.key, required);
-    this.Q28 = new SchoolKids1(this.key, required);
-    this.Q29 = new SchoolKids2(this.key, required);
-    this.Q30 = new SchoolKids3(this.key, required);
+    this.Q25_G1 = new Fatigue2G1_Kids(this.key, required, cond_2younger8);
+    this.Q25_G3 = new Fatigue2G3_Kids(this.key, required, cond_8younger18);
+    this.Q26_G1 = new Fatigue3G1_Kids(this.key, required, cond_2younger8);
+    this.Q26_G3 = new Fatigue3G3_Kids(this.key, required, cond_8younger18);
+
+    this.Q27_H1 = new PainH1_Kids(this.key, required, cond_2younger8);
+    this.Q27_H2 = new PainH2_Kids(this.key, required, cond_8younger18);
+    this.Q28_H1 = new School1H1_Kids(this.key, required, cond_2younger8);
+    this.Q28_H2 = new School1H2_Kids(this.key, required, cond_8younger18);
+    this.Q29_H1 = new School2H1_Kids(this.key, required, cond_2younger8);
+    this.Q29_H2 = new School2H2_Kids(this.key, required, cond_8younger18);
+    this.Q30_H1 = new School3H1_Kids(this.key, required, cond_2younger8);
+    this.Q30_H2 = new School3H2_Kids(this.key, required, cond_8younger18);
 
     this.T6_I1Kids = new Strength_WeaknessI1Text_Kids(this.key, required, cond_younger11);
     this.T6_I3Kids = new Strength_WeaknessI3Text_Kids(this.key, required, cond_olderequal11);
-    this.Q31 = new Strength_Weakness_Kids(this.key, required);
+    this.Q31 = new Strength_WeaknessI1_Kids(this.key, required);
     this.G32_39 = new AwarenessKidsGroup(this.key, required)
   }
 
@@ -239,15 +254,22 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.T5_G2.get());
     this.addItem(this.T5_G3.get());
 
-    this.addItem(this.Q24.get());
-    this.addItem(this.Q25.get());
-    this.addItem(this.Q26.get());
+    this.addItem(this.Q24_G1.get());
+    this.addItem(this.Q24_G3.get());
+    this.addItem(this.Q25_G1.get());
+    this.addItem(this.Q25_G3.get());
+    this.addItem(this.Q26_G1.get());
+    this.addItem(this.Q26_G3.get());
 
-    this.addItem(this.Q27.get());
-    this.addItem(this.Q28.get());
-    this.addItem(this.Q29.get());
+    this.addItem(this.Q27_H1.get());
+    this.addItem(this.Q27_H2.get());
+    this.addItem(this.Q28_H1.get());
+    this.addItem(this.Q28_H2.get());
+    this.addItem(this.Q29_H1.get());
+    this.addItem(this.Q29_H2.get());
+    this.addItem(this.Q30_H1.get());
+    this.addItem(this.Q30_H2.get());
 
-    this.addItem(this.Q30.get());
     this.addItem(this.T6_I1Kids.get());
     this.addItem(this.T6_I3Kids.get());
     this.addItem(this.Q31.get());
