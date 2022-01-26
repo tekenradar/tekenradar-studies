@@ -13,6 +13,7 @@ import { ParticipantFlags } from '../../participantFlags';
 export class AwarenessGroup extends Group {
 
   T1: AwarenessText;
+  T1_Kids: AwarenessText_Kids;
   Q1: Awareness1;
   Q2: Awareness2;
   Q3: Awareness3;
@@ -29,7 +30,11 @@ export class AwarenessGroup extends Group {
 
     const required = isRequired !== undefined ? isRequired : false;
 
+    const cond_adults =  SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.ageCategory.key, ParticipantFlags.ageCategory.values.adult);
+    const cond_kids = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.ageCategory.key, ParticipantFlags.ageCategory.values.child);
+
     this.T1 = new AwarenessText(this.key, required);
+    this.T1_Kids = new AwarenessText_Kids(this.key, required);
     this.Q1 = new Awareness1(this.key, required);
     this.Q2 = new Awareness2(this.key, required);
     this.Q3 = new Awareness3(this.key, required);
@@ -43,7 +48,9 @@ export class AwarenessGroup extends Group {
 
   buildGroup() {
 
-    this.addItem(this.T1.get());
+    this.isPartOf('Kids') ? this.addItem(this.T1_Kids.get()) : this.addItem(this.T1.get());
+    //this.addItem(this.T1.get());
+
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
@@ -242,6 +249,40 @@ export class Qualification extends Item {
             ["nl", "Wetenschappelijk onderwijs (universiteit)"],
           ])
         }
+      ]
+    })
+  }
+}
+
+
+export class SymptomsText1_Kids extends Item {
+
+  markdownContent = `
+# Algemene gezondheid
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'SyText1_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
       ]
     })
   }
@@ -577,6 +618,39 @@ export class Symptoms1 extends Item {
   }
 }
 
+
+export class SymptomsText2_Kids extends Item {
+
+  markdownContent = `
+# Symptomen
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'SyText2_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
 
 
 export class Symptoms2 extends Item {
@@ -1631,6 +1705,11 @@ export class Cognition extends Item {
 export class MedCareText1 extends Item {
 
   markdownContent = `
+# Zorgconsumptie
+
+De vragen hieronder zijn voor een minderjarige.
+Bent u een ouder/verzorger dan kunt u de antwoorden invullen voor/over uw kind.
+
 Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
     `
 
@@ -1854,6 +1933,42 @@ export class AwarenessText extends Item {
 }
 
 
+export class AwarenessText_Kids extends Item {
+
+  markdownContent = `
+# KLACHTEN PERCEPTIE
+
+De vragen hieronder zijn voor een minderjarige.
+Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
+
+Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
+`
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'AwareT');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 export class Awareness1 extends Item {
 
@@ -1909,7 +2024,7 @@ export class Awareness1 extends Item {
         {
           key: 'a',
           startLabel: new Map([
-            ['de', 'Helmaal geen invloed']
+            ['de', 'Helemaal geen invloed']
           ]),
           endLabel: new Map([
             ['de', 'Zeer veel invloed']
@@ -1978,10 +2093,10 @@ export class Awareness2 extends Item {
         {
           key: 'a',
           startLabel: new Map([
-            ['de', 'Helmaal geen invloed']
+            ['de', 'Heel erg kort']
           ]),
           endLabel: new Map([
-            ['de', 'Zeer veel invloed']
+            ['de', 'Mijn hele leven']
           ]),
         },
       ],
@@ -2065,10 +2180,18 @@ export class Awareness3 extends Item {
 
 export class Awareness4 extends Item {
 
-  questionTextMain = [
+  questionTextMain_Adults = [
     {
       content: new Map([
         ["nl", 'In hoeverre denk je dat je behandeling helpt bij de erythema migrans of andere ziekte van lyme?'],
+      ]),
+    }
+  ]
+
+  questionTextMain_Kids = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van lyme?'],
       ]),
     }
   ]
@@ -2087,7 +2210,7 @@ export class Awareness4 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.questionTextMain,
+      questionText: this.isPartOf('Kids')? this.questionTextMain_Kids : this.questionTextMain_Adults,
       scaleOptions: [
         {
           key: '0',
@@ -2186,10 +2309,10 @@ export class Awareness5 extends Item {
         {
           key: 'a',
           startLabel: new Map([
-            ['de', 'Helmaal geen invloed']
+            ['de', 'Helemaal geen klachten']
           ]),
           endLabel: new Map([
-            ['de', 'Zeer veel invloed']
+            ['de', 'Veel ernstige klachten']
           ]),
         },
       ],
@@ -2255,10 +2378,10 @@ export class Awareness6 extends Item {
         {
           key: 'a',
           startLabel: new Map([
-            ['de', 'Helmaal geen invloed']
+            ['de', 'Helemaal niet bezorgd']
           ]),
           endLabel: new Map([
-            ['de', 'Zeer veel invloed']
+            ['de', 'Uitermate bezorgd']
           ]),
         },
       ],
@@ -2393,10 +2516,10 @@ export class Awareness8 extends Item {
         {
           key: 'a',
           startLabel: new Map([
-            ['de', 'Helmaal geen invloed']
+            ['de', 'Helemaal geen invloed']
           ]),
           endLabel: new Map([
-            ['de', 'Zeer veel invloed']
+            ['de', 'Uitermate veel invloed']
           ]),
         },
       ],
