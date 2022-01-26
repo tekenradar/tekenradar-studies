@@ -124,14 +124,11 @@ class Followupflow_KidsDef extends SurveyDefinition {
         const Q1condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
         this.Q2 = new ReportedTB2(this.key, required, Q1condition);
         const Q2condition = SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.nameOfOption);
-        //const Q1_2condition = SurveyEngine.logic.and(Q1condition, Q2condition);
         this.Q3 = new PreviousTickBites3(this.key, required, Q2condition);
         this.Q4 = new FeverFU1(this.key, required,Q1condition);
         const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
         this.Q5 = new FeverFU2(this.key, required, Q4condition);
 
-
-        //this.T2_Kids = new Text1FUKids(this.key, required);
         this.T3 = new Text2FU(this.key, required);
         this.Q6 = new LymeFU(this.key, required);
         const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
@@ -143,6 +140,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
 
         this.T4 = new MedicationFUText_Kids(this.key, required);
         this.Q12 = new MedicationFU1(this.key, required);
+
         //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
         const Q12number =  SurveyEngine.getResponseValueAsNum(this.Q12.key,'rg.scg.b.2');
         this.Q13 = new MedicationFU2(this.key, required, Q12number);
