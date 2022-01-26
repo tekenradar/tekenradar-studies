@@ -2331,7 +2331,74 @@ export class Fatigue3G3_Kids extends Item {
 }
 
 
+export class PainTextH1_Kids extends Item {
 
+  markdownContent_H1 = `
+# Pijn en verzuim
+
+De vragen hieronder zijn voor **een ouder/verzorger**.
+    `
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_H1Text');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
+            ["nl",  this.markdownContent_H1 ],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
+export class PainTextH2_Kids extends Item {
+
+  markdownContent_H2 = `
+# Pijn en verzuim
+
+De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** het antwoord op de eerste vraag kiezen.
+
+Deze vraag gaat over of je de afgelopen week pijn hebt gehad:
+
+    `
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS_H2Text');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
+            ["nl",  this.markdownContent_H2 ],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
 
 export class PainH1_Kids extends Item {
 
@@ -2355,6 +2422,12 @@ export class PainH1_Kids extends Item {
     {
       content: new Map([
         ["nl", " weergeeft."],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "[REMARK: It is not possible to have 0 and 10 as well as Geen pijn - veel pijn written at the endings of the slider scale. Please add the explanation of slider scale steps in the question text here]"],
       ]),
       className: "text-primary"
     }
@@ -3174,9 +3247,207 @@ export class Strength_WeaknessI2_Kids extends Item {
 }
 
 
+export class Strength_WeaknessI3_Kids extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+          ["nl", ""],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kS-I3-SDQ');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'table',
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      scaleOptions: [
+        {
+          key: '1', content: new Map([
+            ["nl", "Niet waar"],
+          ])
+        }, {
+          key: '2', content: new Map([
+            ["nl", "Een beetje waar"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "Zeker waar"],
+          ])
+        }
+      ],
+      rows: [
+        {
+          key: 'a', content: new Map([
+            ["nl", "Ik probeer aardig te zijn tegen anderen. Ik houd rekening met hun gevoelens"],
+          ])
+        },
+        {
+          key: 'b',
+          content: new Map([
+            ["nl", "Ik ben rusteloos, ik kan niet lang stilzitten"],
+          ])
+        },
+        {
+          key: 'c',
+          content: new Map([
+            ["nl", "Ik heb vaak hoofdpijn, buikpijn, of ik ben misselijk"],
+          ])
+        },
+        {
+          key: 'd',
+          content: new Map([
+            ["nl", "Ik deel makkelijk met anderen (snoep, speelgoed, potloden, enz.)"],
+          ]),
+        },
+        {
+          key: 'e',
+          content: new Map([
+            ["nl", "Ik word erg boos en ben vaak driftig"],
+          ])
+        },
+        {
+          key: 'f',
+          content: new Map([
+            ["nl", "Ik ben nogal op mijzelf. Ik speel meestal alleen of bemoei mij niet met anderen"],
+          ])
+        },
+        {
+          key: 'g',
+          content: new Map([
+            ["nl", "Ik doe meestal wat me wordt opgedragen"],
+          ])
+        },
+        {
+          key: 'h',
+          content: new Map([
+            ["nl", "Ik pieker veel"],
+          ])
+        },
+        {
+          key: 'i',
+          content: new Map([
+            ["nl", "Ik help iemand die zich heeft bezeerd, van streek is of zich ziek voelt"],
+          ])
+        },
+        {
+          key: 'j',
+          content: new Map([
+            ["nl", "Ik zit constant te wiebelen of te friemelen"],
+          ])
+        },
+        {
+          key: 'k',
+          content: new Map([
+            ["nl", "Ik heb minstens één goede vriend of vriendin"],
+          ])
+        },
+        {
+          key: 'l',
+          content: new Map([
+            ["nl", "Ik vecht vaak. Het lukt mij andere mensen te laten doen wat ik wil"],
+          ])
+        },
+        {
+          key: 'm',
+          content: new Map([
+            ["nl", "Ik ben vaak ongelukkig, in de put of in tranen"],
+          ])
+        },
+        {
+          key: 'n',
+          content: new Map([
+            ["nl", "Andere jongeren van mijn leeftijd vinden mij over het algemeen aardig"],
+          ])
+        },
+        {
+          key: 'o',
+          content: new Map([
+            ["nl", "Ik ben snel afgeleid, ik vind het moeilijk om me te concentreren"],
+          ])
+        },
+        {
+          key: 'p',
+          content: new Map([
+            ["nl", "Ik ben zenuwachtig in nieuwe situaties. Ik verlies 	makkelijk mijn zelfvertrouwen"],
+          ])
+        },
+        {
+          key: 'q',
+          content: new Map([
+            ["nl", "Ik ben aardig tegen jongere kinderen"],
+          ])
+        },
+        {
+          key: 'r',
+          content: new Map([
+            ["nl", "Ik word er vaak van beschuldigd dat ik lieg of bedrieg"],
+          ])
+        },
+        {
+          key: 's',
+          content: new Map([
+            ["nl", "Andere kinderen of jongeren pesten of treiteren mij"],
+          ])
+        },
+        {
+          key: 't',
+          content: new Map([
+            ["nl", "Ik bied vaak anderen aan hun te helpen (ouders, leerkrachten, kinderen)"],
+          ])
+        },
+        {
+          key: 'u',
+          content: new Map([
+            ["nl", "Ik denk na voor ik iets doe"],
+          ])
+        },
+        {
+          key: 'v',
+          content: new Map([
+            ["nl", "Ik neem dingen weg die niet van mij zijn thuis, op school of op andere plaatsen"],
+          ])
+        },
+        {
+          key: 'w',
+          content: new Map([
+            ["nl", "Ik kan beter met volwassenen opschieten dan met jongeren van mijn leeftijd"],
+          ])
+        },
+        {
+          key: 'x',
+          content: new Map([
+            ["nl", "Ik ben voor heel veel dingen bang, ik ben snel angstig"],
+          ])
+        },
+        {
+          key: 'y',
+          content: new Map([
+            ["nl", "Ik maak af waar ik mee bezig ben. Ik kan mijn aandacht er goed bij houden"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
 export class AwarenessKidsGroup extends Group {
 
-  T1: Awareness_KidsText;
+  T1: Awareness_Text_KidsGroup;
   Q1: Awareness_Kids1;
   Q2: Awareness_Kids2;
   Q3: Awareness_Kids3;
@@ -3193,7 +3464,7 @@ export class AwarenessKidsGroup extends Group {
 
     const required = isRequired !== undefined ? isRequired : false;
 
-    this.T1 = new Awareness_KidsText(this.key, required);
+    this.T1 = new Awareness_Text_KidsGroup(this.key, required);
     this.Q1 = new Awareness_Kids1(this.key, required);
     this.Q2 = new Awareness_Kids2(this.key, required);
     this.Q3 = new Awareness_Kids3(this.key, required);
@@ -3221,9 +3492,10 @@ export class AwarenessKidsGroup extends Group {
 }
 
 
-export class Awareness_KidsText extends Item {
+export class Awareness_Text_KidsGroup extends Item {
 
   markdownContent = `
+# KLACHTEN PERCEPTIE
 LET OP: De vragen hieronder zijn voor een ouder/verzorger. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
 
 Omcirkel alstublieft bij elke vraag het getal dat uw mening het beste weergeeft:
