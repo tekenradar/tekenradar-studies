@@ -38,15 +38,17 @@ De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen v
 }
 
 
-export class Text1FUKids extends Item {
+export class BackgroundText_Kids extends Item {
 
   markdownContent = `
+# Achtergrond
+
 De vragen hieronder zijn voor een minderjarige.
 Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Text1FUKids');
+    super(parentKey, 'BGText_Kids');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -273,6 +275,11 @@ export class FeverFU2 extends Item {
 export class Text2FU extends Item {
 
   markdownContent = `
+# Diagnoses
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+
 De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
@@ -341,6 +348,39 @@ export class LymeFU extends Item {
   }
 }
 
+
+export class MedicationFUText_Kids extends Item {
+
+  markdownContent = `
+# Behandeling
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'MedTextFU_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
 
 export class MedicationFU1 extends Item {
 
