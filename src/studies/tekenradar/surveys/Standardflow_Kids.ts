@@ -228,22 +228,29 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
     this.addItem(this.Q4.get());
+
+    this.addPageBreak();
     this.addItem(this.T3.get());
     this.addItem(this.Q5.get());
+
+    this.addPageBreak();
     this.addItem(this.T4.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q6_a.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
 
+    this.addPageBreak();
     this.addItem(this.T5.get());
     this.addItem(this.Q9.get());
     this.addItem(this.T6.get());
     this.addItem(this.Q10.get());
     this.addItem(this.T7.get());
 
+    this.addPageBreak();
     this.addItem(this.G11_18.get());
 
+    this.addPageBreak();
     this.addItem(this.T8_F1.get());
     this.addItem(this.T8_F3.get());
     this.addItem(this.T9_F1.get());
@@ -265,6 +272,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q23_F2.get());
     this.addItem(this.Q23_F3.get());
 
+    this.addPageBreak();
     this.addItem(this.T10_G1.get());
     this.addItem(this.T10_G3.get());
     this.addItem(this.T11_G1.get());
@@ -278,6 +286,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q26_G1.get());
     this.addItem(this.Q26_G3.get());
 
+    this.addPageBreak();
     this.addItem(this.T12_H1.get());
     this.addItem(this.T12_H2.get());
     this.addItem(this.Q27_H1.get());
@@ -289,6 +298,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q30_H1.get());
     this.addItem(this.Q30_H2.get());
 
+    this.addPageBreak();
     this.addItem(this.T6_I1Kids.get());
     this.addItem(this.T6_I2Kids.get());
     this.addItem(this.T6_I3Kids.get());
