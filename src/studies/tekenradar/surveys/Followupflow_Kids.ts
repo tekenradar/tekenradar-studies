@@ -144,8 +144,8 @@ class Followupflow_KidsDef extends SurveyDefinition {
         //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
         const Q12number =  SurveyEngine.getResponseValueAsNum(this.Q12.key,'rg.scg.b.2');
         this.Q13 = new MedicationFU2(this.key, required, Q12number);
-        this.T5 = new SymptomsText2_Kids(this.key, required);
 
+        this.T5 = new SymptomsText2_Kids(this.key, required);
         this.Q14 = new QuestionsKids1(this.key, required);
         const Q14condition = SurveyEngine.singleChoice.any(this.Q14.key, this.Q14.optionKeys.nameOfOption);
         this.Q14_a = new QuestionsKids2(this.key, required, Q14condition);
@@ -265,6 +265,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q4.get());
         this.addItem(this.Q5.get());
 
+        this.addPageBreak();
         this.addItem(this.T3.get());
         this.addItem(this.Q6.get());
         this.addItem(this.Q7.get());
@@ -272,24 +273,28 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q9.get());
         this.addItem(this.Q10.get());
         this.addItem(this.Q11.get());
+
+        this.addPageBreak();
         this.addItem(this.T4.get());
         this.addItem(this.Q12.get());
         this.addItem(this.Q13.get());
-        this.addItem(this.T5.get());
 
+        this.addPageBreak();
+        this.addItem(this.T5.get());
         this.addItem(this.Q14.get());
         this.addItem(this.Q14_a.get());
-
         this.addItem(this.T6.get());
         this.addItem(this.Q15.get());
         this.addItem(this.Q16.get());
 
+        this.addPageBreak();
         this.addItem(this.T7.get());
         this.addItem(this.Q17.get());
         this.addItem(this.T8.get());
         this.addItem(this.Q18.get());
         this.addItem(this.T9.get());
 
+        this.addPageBreak();
         this.addItem(this.T10_F1.get());
         this.addItem(this.T10_F3.get());
         this.addItem(this.T11_F1.get());
@@ -311,6 +316,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q23_F2.get());
         this.addItem(this.Q23_F3.get());
 
+        this.addPageBreak();
         this.addItem(this.T12_G1.get());
         this.addItem(this.T12_G3.get());
         this.addItem(this.T13_G1.get());
@@ -323,6 +329,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q26_G1.get());
         this.addItem(this.Q26_G3.get());
 
+        this.addPageBreak();
         this.addItem(this.T14_H1.get());
         this.addItem(this.T14_H2.get());
         this.addItem(this.Q27_H1.get());
@@ -334,6 +341,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q30_H1.get());
         this.addItem(this.Q30_H2.get());
 
+        this.addPageBreak();
         this.addItem(this.T15_I1.get());
         this.addItem(this.T15_I2.get());
         this.addItem(this.T15_I3.get());
@@ -341,6 +349,7 @@ class Followupflow_KidsDef extends SurveyDefinition {
         this.addItem(this.Q31_I2.get());
         this.addItem(this.Q31_I3.get());
 
+        this.addPageBreak();
         this.addItem(this.T16.get());
         this.addItem(this.Q32.get());
         this.addItem(this.Q33.get());
