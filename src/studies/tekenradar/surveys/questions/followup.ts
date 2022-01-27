@@ -398,7 +398,7 @@ export class MedicationFU1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "medicijnen gebruikt?  (de anti conceptie pil niet meerekenen) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "],
+        ["nl", "medicijnen gebruikt?  (De anti conceptie pil niet meerekenen.) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "],
       ]),
     },
   ]
@@ -428,12 +428,12 @@ export class MedicationFU1 extends Item {
           key: 'b', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "Ja, namelijk "]]
+                [['en', "Ja, aantal medicijnen "]]
               )
             }),
             ClozeItemTypes.numberInput({
               key: '2',
-              inputLabel: new Map([["nl", "bij benadering"],]),
+              inputLabel: new Map([["nl", ""],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
               componentProperties: {
@@ -475,7 +475,6 @@ export class MedicationFU2 extends Item {
 
   }
 
-  //TODO: ask this question for each medicin of former answer
   buildItem() {
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
