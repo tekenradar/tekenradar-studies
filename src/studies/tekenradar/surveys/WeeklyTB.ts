@@ -5,7 +5,7 @@ class WeeklyTB_Def extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'WeelyTB',
+      surveyKey: 'WeeklyTB',
       name: new Map([
         ['nl', 'Test']
       ]),
