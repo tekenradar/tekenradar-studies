@@ -5,7 +5,6 @@ import { TBflow_Adults } from "./surveys/TBflow_Adults";
 import { LBflow_Adults } from "./surveys/LBflow_Adults";
 import { Chronicflow_Adults } from "./surveys/Chronicflow_Adults";
 import { Feverflow_Adults } from "./surveys/Feverflow_Adults";
-import { Followupflow_Adults } from "./surveys/Followupflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import { studyRules } from "./studyRules";
 import { ExampleSurvey } from "./surveys/ExampleSurvey";
@@ -14,19 +13,29 @@ import { TBflow_Kids } from "./surveys/TBflow_Kids";
 import { Chronicflow_Kids } from "./surveys/Chronicflow_Kids";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
 import { LBflow_Kids } from "./surveys/LBflow_Kids";
-import { Followupflow_Kids } from "./surveys/Followupflow_Kids";
 import { Standardflow_Kids } from "./surveys/Standardflow_Kids";
 import { WeeklyTB } from "./surveys/WeeklyTB";
 import { EMfoto } from "./surveys/EMfoto";
+import { T3_Adults } from "./surveys/T3_Adults";
+import { T6_Adults } from "./surveys/T6_Adults";
+import { T9_Adults } from "./surveys/T9_Adults";
+import { T12_Adults } from "./surveys/T12_Adults";
+import { T3_Kids } from "./surveys/T3_Kids";
+import { T6_Kids } from "./surveys/T6_Kids";
+import { T9_Kids } from "./surveys/T9_Kids";
+import { T12_Kids } from "./surveys/T12_Kids";
+import { ExitFollowUp } from "./surveys/ExitFollowUp";
 
 export const TekenradarStudy: Study = {
   studyKey: 'default',
   outputFolderName: 'tekenradar',
   studyRules: studyRules,
   surveys: [
-    PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Followupflow_Adults, Standardflow_Adults,
-    ExampleSurvey, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids, Followupflow_Kids, Standardflow_Kids,
-    WeeklyTB, EMfoto,
+    PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Standardflow_Adults,
+    ExampleSurvey, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids, Standardflow_Kids,
+    T3_Adults, T6_Adults, T9_Adults, T12_Adults,
+    T3_Kids, T6_Kids, T9_Kids, T12_Kids,
+    WeeklyTB, EMfoto, ExitFollowUp
   ],
   customStudyRules: [
     addExampleReminderMessage
