@@ -1,4 +1,6 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
+import { Duration } from "case-editor-tools/types/duration";
+import { Expression } from "survey-engine/data_types";
 import { ParticipantFlags } from "../participantFlags";
 import { Chronicflow_Adults } from "../surveys/Chronicflow_Adults";
 import { Chronicflow_Kids } from "../surveys/Chronicflow_Kids";
@@ -20,6 +22,24 @@ const isChildParticipant = () => StudyEngine.lt(
 )
 
 const isLoggedIn = () => StudyEngine.participantState.hasStudyStatus('active')
+
+const hasSurveyKeyValidUntilSoonerThan = (surveyKey: string, delta: Duration, reference?: number | Expression) => {
+  return StudyEngine.gt(
+    StudyEngine.timestampWithOffset(delta, reference),
+    StudyEngine.participantState.getSurveyKeyAssignedUntil(surveyKey),
+  )
+}
+
+export const isSurveyExpired = (surveyKey: string) => StudyEngine.and(
+  StudyEngine.participantState.hasSurveyKeyAssigned(surveyKey),
+  hasSurveyKeyValidUntilSoonerThan(surveyKey, { seconds: 0 })
+)
+
+export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifThen(
+  isSurveyExpired(surveyKey),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKey, 'all'),
+)
 
 /**
  *
@@ -58,7 +78,6 @@ const hasTBFlowCondition = () => StudyEngine.and(
   StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
 )
 
-
 export const handlePDiffNormal_TBflow = () => StudyEngine.ifThen(
   // If:
   hasTBFlowCondition(),
@@ -67,21 +86,9 @@ export const handlePDiffNormal_TBflow = () => StudyEngine.ifThen(
   StudyEngine.if(
     isChildParticipant(),
     // Then:
-    StudyEngine.do(
-      StudyEngine.participantActions.assignedSurveys.add(TBflow_Kids.key, 'immediate'),
-      StudyEngine.ifThen(
-        isLoggedIn(),
-        StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
-      )
-    ),
+    StudyEngine.participantActions.assignedSurveys.add(TBflow_Kids.key, 'immediate'),
     // Else:
-    StudyEngine.do(
-      StudyEngine.participantActions.assignedSurveys.add(TBflow_Adults.key, 'immediate'),
-      StudyEngine.ifThen(
-        isLoggedIn(),
-        StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
-      )
-    )
+    StudyEngine.participantActions.assignedSurveys.add(TBflow_Adults.key, 'immediate'),
   )
 )
 
@@ -99,38 +106,68 @@ export const handlePDiffUpdate_TBflow = () => StudyEngine.ifThen(
 )
 
 /**
- *
+ * PDIFF - EM FLOW
  */
-export const handleTrigger_EMflow = () => StudyEngine.ifThen(
-  // If:
-  StudyEngine.or(
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
-    ),
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-      StudyEngine.multipleChoice.none(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
-    ),
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-      StudyEngine.multipleChoice.any(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
-      StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.no),
-    ),
+const hasEMFlowCondition = () => StudyEngine.or(
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
+    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
   ),
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
+    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
+    StudyEngine.multipleChoice.none(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
+  ),
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
+    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
+    StudyEngine.multipleChoice.any(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
+    StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.no),
+  ),
+)
+
+export const handlePDiffNormal_EMflow = () => StudyEngine.ifThen(
+  // If:
+  hasEMFlowCondition(),
   // Then:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+  StudyEngine.if(
+    isChildParticipant(),
+    // Then:
+    StudyEngine.do(
+      StudyEngine.participantActions.assignedSurveys.add(EMflow_Kids.key, 'immediate'),
+      StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
+    ),
+    // Else:
+    StudyEngine.do(
+      StudyEngine.participantActions.assignedSurveys.add(EMflow_Adults.key, 'immediate'),
+      StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+    ),
+  )
+)
+
+export const handlePDiffUpdate_EMflow = () => StudyEngine.ifThen(
+  // If:
+  hasEMFlowCondition(),
+  // Then:
+  /*StudyEngine.ifThen(
+    StudyEngine.participantState.
+      // Then:
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+  ),
   StudyEngine.if(
     isChildParticipant(),
     // Then:
     StudyEngine.participantActions.assignedSurveys.add(EMflow_Kids.key, 'immediate'),
     // Else:
     StudyEngine.participantActions.assignedSurveys.add(EMflow_Adults.key, 'immediate'),
-  )
+  )*/
 )
 
+
+/**
+ * PDIFF - FE FLOW
+ */
 export const handleTrigger_FEflow = () => StudyEngine.ifThen(
   // If:
   StudyEngine.or(

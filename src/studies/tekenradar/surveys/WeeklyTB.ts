@@ -15,6 +15,8 @@ class WeeklyTB_Def extends SurveyDefinition {
       durationText: new Map([
         ['nl', 'Invullen duurt ongeveer 1 minuut.']
       ]),
+      availableFor: 'temporary_participants',
+      requireLoginBeforeSubmission: true,
     });
 
 

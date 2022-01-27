@@ -27,6 +27,13 @@ export const ParticipantFlags = {
       Chronicflow: 'Chronicflow',
     },
   },
+  followUp: {
+    key: 'followUp',
+    values: {
+      active: 'active',
+      finished: 'finished'
+    }
+  },
   weeklyTBreporter: {
     key: 'weeklyTBreporter',
     values: {
