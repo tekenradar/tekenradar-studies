@@ -1,11 +1,12 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { PhotoEM } from './questions/EM';
+import { PhotoEM_Text, UploadPhotoEM } from './questions/EM';
 
 
 class EMfoto_Def extends SurveyDefinition {
 
 
-  T1: PhotoEM;
+  T1: PhotoEM_Text;
+  Q1: UploadPhotoEM;
 
   constructor(isRequired?: boolean) {
     super({
@@ -25,7 +26,8 @@ class EMfoto_Def extends SurveyDefinition {
 
 
 
-    this.T1 = new PhotoEM(this.key, required);
+    this.T1 = new PhotoEM_Text(this.key, required);
+    this.Q1 = new UploadPhotoEM(this.key, required);
 
   }
 
@@ -33,7 +35,7 @@ class EMfoto_Def extends SurveyDefinition {
 
 
     this.addItem(this.T1.get());
-    //TODO: upload photo text and example photo here.
+    this.addItem(this.Q1.get());
   }
 }
 
