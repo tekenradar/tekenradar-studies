@@ -1,8 +1,7 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { ChronicGroup } from './questions/chronic';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
-import { DoctorEM, EM1, EM2, EM3, EM4, EMGroup, PhotoEM } from './questions/EM';
+import { DoctorEM, EM1, EM2, EM3, EM4, PhotoEM_Text, UploadPhotoEM } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
@@ -26,7 +25,9 @@ class EMflow_AdultsDef extends SurveyDefinition {
   G20_22: FormerLymeGroup;
   G23_24: PreviousTickBitesGroup;
 
-  T1: PhotoEM;
+  T1: PhotoEM_Text;
+  Q25: UploadPhotoEM;
+
 
   constructor(isRequired?: boolean) {
     super({
@@ -69,7 +70,8 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.G20_22 = new FormerLymeGroup(this.key, isRequired);
     this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
-    this.T1 = new PhotoEM(this.key, required);
+    this.T1 = new PhotoEM_Text(this.key, required);
+    this.Q25 = new UploadPhotoEM(this.key, required);
 
   }
 
@@ -92,7 +94,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.G23_24.get());
 
     this.addItem(this.T1.get());
-    //TODO: upload photo text and example photo here.
+    this.addItem(this.Q25.get());
   }
 }
 
