@@ -12,6 +12,14 @@ import { LBflow_Kids } from "../surveys/LBflow_Kids";
 import { PDiff } from "../surveys/PDiff";
 import { Standardflow_Adults } from "../surveys/Standardflow_Adults";
 import { Standardflow_Kids } from "../surveys/Standardflow_Kids";
+import { T12_Adults } from "../surveys/T12_Adults";
+import { T12_Kids } from "../surveys/T12_Kids";
+import { T3_Adults } from "../surveys/T3_Adults";
+import { T3_Kids } from "../surveys/T3_Kids";
+import { T6_Adults } from "../surveys/T6_Adults";
+import { T6_Kids } from "../surveys/T6_Kids";
+import { T9_Adults } from "../surveys/T9_Adults";
+import { T9_Kids } from "../surveys/T9_Kids";
 import { TBflow_Adults } from "../surveys/TBflow_Adults";
 import { TBflow_Kids } from "../surveys/TBflow_Kids";
 import { WeeklyTB } from "../surveys/WeeklyTB";
@@ -311,4 +319,63 @@ export const handleTrigger_WeeklyTB = () => StudyEngine.if(
   ),
   // Else:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.false),
+)
+
+
+/**
+ * FOLLOW UP FLOW UTILS
+ */
+export const removeFollowUpMessagesForSurvey = (surveyKey: string) => {
+  const inviteMessage = surveyKey + '_invite';
+  const reminderMessage = surveyKey + '_reminder';
+
+  return StudyEngine.do(
+    StudyEngine.participantActions.messages.remove(inviteMessage),
+    StudyEngine.participantActions.messages.remove(reminderMessage),
+  )
+}
+
+const addFollowUpSurvey = (surveyKey: string, startInDays: number, activeForDays: number) => {
+  const inviteMessage = surveyKey + '_invite';
+  const reminderMessage = surveyKey + '_reminder';
+  return StudyEngine.do(
+    StudyEngine.participantActions.assignedSurveys.add(
+      surveyKey,
+      'normal',
+      StudyEngine.timestampWithOffset({
+        days: startInDays,
+      }), StudyEngine.timestampWithOffset({
+        days: startInDays + activeForDays,
+      })),
+    StudyEngine.participantActions.messages.add(
+      inviteMessage,
+      StudyEngine.timestampWithOffset({
+        days: startInDays,
+      })),
+    StudyEngine.participantActions.messages.add(
+      reminderMessage,
+      StudyEngine.timestampWithOffset({
+        days: startInDays + 7,
+      })),
+    StudyEngine.participantActions.messages.add(
+      reminderMessage,
+      StudyEngine.timestampWithOffset({
+        days: startInDays + 14,
+      })),
+  )
+}
+
+
+export const initFollowUpFlow_Adults = () => StudyEngine.do(
+  addFollowUpSurvey(T3_Adults.key, 90, 89),
+  addFollowUpSurvey(T6_Adults.key, 180, 89),
+  addFollowUpSurvey(T9_Adults.key, 270, 89),
+  addFollowUpSurvey(T12_Adults.key, 360, 89),
+)
+
+export const initFollowUpFlow_Kids = () => StudyEngine.do(
+  addFollowUpSurvey(T3_Kids.key, 90, 89),
+  addFollowUpSurvey(T6_Kids.key, 180, 89),
+  addFollowUpSurvey(T9_Kids.key, 270, 89),
+  addFollowUpSurvey(T12_Kids.key, 360, 89),
 )

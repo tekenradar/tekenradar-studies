@@ -6,7 +6,7 @@ import { TBflow_Adults } from "./surveys/TBflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import {
   handleExpired_removeSurvey,
-  handlePDiffNormal_TBflow, handlePDiffUpdate_TBflow, isSurveyExpired, updateAgeFlags
+  handlePDiffNormal_TBflow, handlePDiffUpdate_TBflow, isSurveyExpired, removeFollowUpMessagesForSurvey, updateAgeFlags
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -201,6 +201,7 @@ const handleSubmit_T3_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T3_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  removeFollowUpMessagesForSurvey(T3_Adults.key)
 );
 
 const handleSubmit_T6_Adults = StudyEngine.ifThen(
@@ -209,6 +210,7 @@ const handleSubmit_T6_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T6_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  removeFollowUpMessagesForSurvey(T6_Adults.key)
 );
 
 const handleSubmit_T9_Adults = StudyEngine.ifThen(
@@ -217,6 +219,7 @@ const handleSubmit_T9_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T9_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  removeFollowUpMessagesForSurvey(T9_Adults.key)
 );
 
 const handleSubmit_T12_Adults = StudyEngine.ifThen(
@@ -225,7 +228,8 @@ const handleSubmit_T12_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T12_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished)
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
+  removeFollowUpMessagesForSurvey(T12_Adults.key)
 );
 
 const handleSubmit_T3_Kids = StudyEngine.ifThen(
@@ -234,6 +238,7 @@ const handleSubmit_T3_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T3_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  removeFollowUpMessagesForSurvey(T3_Kids.key)
 );
 
 const handleSubmit_T6_Kids = StudyEngine.ifThen(
@@ -242,6 +247,7 @@ const handleSubmit_T6_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T6_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  removeFollowUpMessagesForSurvey(T6_Kids.key)
 );
 
 const handleSubmit_T9_Kids = StudyEngine.ifThen(
@@ -250,6 +256,7 @@ const handleSubmit_T9_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T9_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  removeFollowUpMessagesForSurvey(T9_Kids.key)
 );
 
 const handleSubmit_T12_Kids = StudyEngine.ifThen(
@@ -258,7 +265,8 @@ const handleSubmit_T12_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T12_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished)
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
+  removeFollowUpMessagesForSurvey(T12_Kids.key)
 );
 
 const handleSubmit_ExitFollowUp = StudyEngine.ifThen(
