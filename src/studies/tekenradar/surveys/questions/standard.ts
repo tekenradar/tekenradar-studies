@@ -1782,10 +1782,14 @@ export class MedCare1 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: 'a', role: 'numberInput',
           content: new Map([
-            ["nl", "Ja"],
-          ])
+            ["nl", "Ja, aantal zorgverleners:"],
+          ]),
+          optionProps: {
+            min: 0,
+            max: 10,
+          }
         },
         {
           key: 'b', role: 'option',
@@ -1797,7 +1801,6 @@ export class MedCare1 extends Item {
     })
   }
 }
-
 
 
 export class MedCareText2 extends Item {
@@ -1834,11 +1837,22 @@ export class MedCareText2 extends Item {
 
 export class MedCare2 extends Item {
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  condition2: Expression;
+  condition3: Expression;
+  condition4: Expression;
+  condition5: Expression;
+
+
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'MedC2');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.condition = SurveyEngine.compare.gt(condition, 0);
+    this.condition2 = SurveyEngine.compare.gt(condition, 1);
+    this.condition3 = SurveyEngine.compare.gt(condition, 2);
+    this.condition4 = SurveyEngine.compare.gt(condition, 3);
+    this.condition5 = SurveyEngine.compare.gt(condition, 4);
+
   }
 
   buildItem() {
@@ -1847,29 +1861,149 @@ export class MedCare2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([["nl", "Met welke zorgverleners heb je contact gehad in de afgelopen 3 maanden? En hoe vaak?"]]),
-      items: [
-        ClozeItemTypes.text({
-          key: '1', content: new Map(
-            [['nl', "Zorgverlener:"]]
-          )
-        }),
-        ClozeItemTypes.textInput({
-          key: '2',
-        }),
-        ClozeItemTypes.text({
-          key: '3', content: new Map(
-            [['nl', "Aantal contacten:"]]
-          )
-        }),
-        ClozeItemTypes.textInput({
-          key: '4',
-        })
-      ]
+      questionText: new Map([
+        ['nl', "Met welke zorgverleners heb je contact gehad in de afgelopen 3 maanden? En hoe vaak?"],
+      ]),
+      items:
+        [
+          ClozeItemTypes.text({
+            key: '1', content: new Map(
+              [['nl', "1. Zorgverlener:"]]
+            ),
+          }),
+          ClozeItemTypes.textInput({
+            key: '2',
+          }),
+          ClozeItemTypes.text({
+            key: '3', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+          }),
+          ClozeItemTypes.numberInput({
+            key: '4',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            }
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //2nd Zorgverlener:
+          ClozeItemTypes.text({
+            key: '5', content: new Map(
+              [['nl', "2. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.textInput({
+            key: '6',
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.text({
+            key: '7', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.numberInput({
+            key: '8',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //3rd Zorgverlener:
+          ClozeItemTypes.text({
+            key: '9', content: new Map(
+              [['nl', "3. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.textInput({
+            key: '10',
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.text({
+            key: '11', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.numberInput({
+            key: '12',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //4th Zorgverlener:
+          ClozeItemTypes.text({
+            key: '13', content: new Map(
+              [['nl', "4. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.textInput({
+            key: '14',
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.text({
+            key: '15', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.numberInput({
+            key: '16',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //5th Zorgverlener:
+          ClozeItemTypes.text({
+            key: '17', content: new Map(
+              [['nl', "5. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition5
+          }),
+          ClozeItemTypes.textInput({
+            key: '18',
+            displayCondition: this.condition5
+          }),
+          ClozeItemTypes.text({
+            key: '19', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition5
+          }),
+          ClozeItemTypes.numberInput({
+            key: '20',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition5
+          }),
+        ],
     })
   }
 }
-
 
 
 export class MedCareText3 extends Item {
@@ -1878,11 +2012,11 @@ export class MedCareText3 extends Item {
 Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
     `
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'MedCText3');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.condition = SurveyEngine.compare.gt(condition, 0);
   }
 
   buildItem() {
