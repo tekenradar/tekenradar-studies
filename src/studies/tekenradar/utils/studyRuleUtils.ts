@@ -30,7 +30,7 @@ const isChildParticipant = () => StudyEngine.lt(
   18,
 )
 
-const isLoggedIn = () => StudyEngine.participantState.hasStudyStatus('active')
+export const isLoggedIn = () => StudyEngine.participantState.hasStudyStatus('active')
 
 const hasSurveyKeyValidUntilSoonerThan = (surveyKey: string, delta: Duration, reference?: number | Expression) => {
   return StudyEngine.gt(
@@ -111,15 +111,9 @@ export const handlePDiffRuleFor_EMflow = () => StudyEngine.ifThen(
   StudyEngine.if(
     isChildParticipant(),
     // Then:
-    StudyEngine.do(
-      StudyEngine.participantActions.assignedSurveys.add(EMflow_Kids.key, 'immediate'),
-      StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
-    ),
+    StudyEngine.participantActions.assignedSurveys.add(EMflow_Kids.key, 'immediate'),
     // Else:
-    StudyEngine.do(
-      StudyEngine.participantActions.assignedSurveys.add(EMflow_Adults.key, 'immediate'),
-      StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
-    ),
+    StudyEngine.participantActions.assignedSurveys.add(EMflow_Adults.key, 'immediate'),
   ),
   StudyEngine.ifThen(
     StudyEngine.or(
