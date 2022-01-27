@@ -156,10 +156,10 @@ class Followupflow_KidsDef extends SurveyDefinition {
 
         this.T7 = new MedCareText1(this.key, required);
         this.Q17 = new MedCare1(this.key, required);
-        const Q17condition = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOption);
-        this.T8 = new MedCareText2(this.key, required,Q6condition);
-        this.Q18 = new MedCare2(this.key, required, Q17condition);
-        this.T9 = new MedCareText3(this.key, required, Q17condition);
+        const Q17number = SurveyEngine.getResponseValueAsNum(this.Q17.key, 'rg.scg.a');
+        this.T8 = new MedCareText2(this.key, required);
+        this.Q18 = new MedCare2(this.key, required, Q17number);
+        this.T9 = new MedCareText3(this.key, required, Q17number);
 
       //different branches per age here
       const AgeFromPDiff = SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key);
