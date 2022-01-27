@@ -24,14 +24,16 @@ class Chronicflow_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: 'Chronicflow_Adults',
       name: new Map([
-        ['nl', 'Chronicflow adults title']
+        ['nl', 'Chronische klachten na lymeziekte melding']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je melding af te ronden.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
       ]),
+      availableFor: 'temporary_participants',
+      requireLoginBeforeSubmission: true,
     });
 
 

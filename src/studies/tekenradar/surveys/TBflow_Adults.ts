@@ -38,13 +38,13 @@ class TBflow_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: 'TBflow_Adults',
       name: new Map([
-        ['nl', 'Melden tekenbeet (TB-A)']
+        ['nl', 'Tekenbeetmelding']
       ]),
       description: new Map([
-        ['nl', 'TB-flow, questions TB-A-1 through 19']
+        ['nl', 'Klik hier om je melding af te ronden.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
       ]),
       availableFor: 'temporary_participants',
     });

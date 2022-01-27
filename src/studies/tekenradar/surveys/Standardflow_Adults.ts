@@ -42,7 +42,6 @@ class Standardflow_AdultsDef extends SurveyDefinition {
       durationText: new Map([
         ['nl', 'Test']
       ]),
-      availableFor: 'temporary_participants'
     });
 
 

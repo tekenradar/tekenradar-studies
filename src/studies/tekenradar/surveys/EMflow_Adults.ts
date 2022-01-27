@@ -33,14 +33,16 @@ class EMflow_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: 'EMflow_Adults',
       name: new Map([
-        ['nl', 'EMflow adults title']
+        ['nl', 'Erythema migrans melding']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je melding af te ronden.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
       ]),
+      availableFor: 'temporary_participants',
+      requireLoginBeforeSubmission: true,
     });
 
     const required = isRequired !== undefined ? isRequired : false;

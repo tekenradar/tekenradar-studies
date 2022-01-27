@@ -35,14 +35,16 @@ class LBflow_KidsDef extends SurveyDefinition {
     super({
       surveyKey: 'LBflow_Kids',
       name: new Map([
-        ['nl', 'LBFlow kids title']
+        ['nl', 'Andere lymeziekte melding']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je melding af te ronden.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
       ]),
+      availableFor: 'temporary_participants',
+      requireLoginBeforeSubmission: true,
     });
 
     const required = isRequired !== undefined ? isRequired : false;

@@ -33,14 +33,16 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: 'Feverflow_Adults',
       name: new Map([
-        ['nl', 'feverflow adults title']
+        ['nl', 'Koorts na tekenbeetmelding']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je melding af te ronden.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
       ]),
+      availableFor: 'temporary_participants',
+      requireLoginBeforeSubmission: true,
     });
 
 

@@ -7,13 +7,13 @@ class WeeklyTB_Def extends SurveyDefinition {
     super({
       surveyKey: 'WeeklyTB',
       name: new Map([
-        ['nl', 'Test']
+        ['nl', 'Wekelijkse tekenbeetvragenlijst']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om wekelijks je aantal tekenbeten door te geven.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 1 minuut.']
       ]),
     });
 

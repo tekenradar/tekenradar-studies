@@ -34,14 +34,15 @@ class TBflow_KidsDef extends SurveyDefinition {
     super({
       surveyKey: 'TBflow_Kids',
       name: new Map([
-        ['nl', 'Test']
+        ['nl', 'Tekenbeetmelding']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je melding af te ronden.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
       ]),
+      availableFor: 'temporary_participants',
     });
 
     const required = isRequired !== undefined ? isRequired : false;

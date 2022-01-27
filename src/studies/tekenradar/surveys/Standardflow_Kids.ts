@@ -101,7 +101,6 @@ class Standardflow_KidsDef extends SurveyDefinition {
       durationText: new Map([
         ['nl', 'Test']
       ]),
-      availableFor: 'temporary_participants'
     });
 
 

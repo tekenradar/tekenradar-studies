@@ -105,13 +105,13 @@ class T9_KidsDef extends SurveyDefinition {
     super({
       surveyKey: 'Followupflow_Kids',
       name: new Map([
-        ['nl', 'Followupflow Kids title']
+        ['nl', 'Vervolgvragenlijst']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om naar de vragenlijst te gaan']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
       ]),
     });
 
