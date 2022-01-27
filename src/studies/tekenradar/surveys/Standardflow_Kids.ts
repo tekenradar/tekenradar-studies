@@ -124,10 +124,10 @@ class Standardflow_KidsDef extends SurveyDefinition {
 
     this.T5 = new MedCareText1(this.key, required);
     this.Q9 = new MedCare1(this.key, required);
-    const Q9condition = SurveyEngine.singleChoice.any(this.Q9.key, this.Q9.optionKeys.nameOfOption);
-    this.T6 = new MedCareText2(this.key, required, Q9condition);
-    this.Q10 = new MedCare2(this.key, required, Q9condition);
-    this.T7 = new MedCareText3(this.key, required, Q9condition);
+    const Q9number = SurveyEngine.getResponseValueAsNum(this.Q9.key, 'rg.scg.a');
+    this.T6 = new MedCareText2(this.key, required);
+    this.Q10 = new MedCare2(this.key, required, Q9number);
+    this.T7 = new MedCareText3(this.key, required, Q9number);
 
     const AgeFromPDiff = SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key);
     const cond_younger2 = SurveyEngine.compare.lt(AgeFromPDiff, 2);
@@ -305,6 +305,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q31_I1.get());
     this.addItem(this.Q31_I2.get());
     this.addItem(this.Q31_I3.get());
+    this.addPageBreak();
     this.addItem(this.G32_39.get());
 
   }
