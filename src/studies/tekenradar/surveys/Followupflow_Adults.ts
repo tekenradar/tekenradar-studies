@@ -99,10 +99,10 @@ class Followupflow_AdultsDef extends SurveyDefinition {
 
     this.T4 = new MedCareText1(this.key, required);
     this.Q24 = new MedCare1(this.key, required);
-    const Q24condition = SurveyEngine.singleChoice.any(this.Q24.key, this.Q24.optionKeys.nameOfOption);
+    const Q24number = SurveyEngine.getResponseValueAsNum(this.Q24.key, 'rg.scg.a');
     this.T5 = new MedCareText2(this.key, required);
-    this.Q25 = new MedCare2(this.key, required, Q24condition);
-    this.T6 = new MedCareText3(this.key, required, Q24condition);
+    this.Q25 = new MedCare2(this.key, required, Q24number);
+    this.T6 = new MedCareText3(this.key, required, Q24number);
 
     this.Q26 = new Symptoms1(this.key, required);
     this.Q27 = new SymptomsFU(this.key, required);
