@@ -23,6 +23,7 @@ import { T9_Kids } from "../surveys/T9_Kids";
 import { TBflow_Adults } from "../surveys/TBflow_Adults";
 import { TBflow_Kids } from "../surveys/TBflow_Kids";
 import { WeeklyTB } from "../surveys/WeeklyTB";
+import { hasChronicflowCondition, hasEMFlowCondition, hasFEflowCondition, hasLBflowCondition, hasTBFlowCondition, hasWeeklyTBCondition } from "./pdiffRules";
 
 const isChildParticipant = () => StudyEngine.lt(
   StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
@@ -79,28 +80,7 @@ export const updateAgeFlags = () => StudyEngine.do(
 /**
  * PDIFF - TB FLOW
  */
-const hasTBFlowCondition = () => StudyEngine.and(
-  StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
-  StudyEngine.singleChoice.none(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
-  StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-  StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
-)
-
-export const handlePDiffNormal_TBflow = () => StudyEngine.ifThen(
-  // If:
-  hasTBFlowCondition(),
-  // Then:
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
-  StudyEngine.if(
-    isChildParticipant(),
-    // Then:
-    StudyEngine.participantActions.assignedSurveys.add(TBflow_Kids.key, 'immediate'),
-    // Else:
-    StudyEngine.participantActions.assignedSurveys.add(TBflow_Adults.key, 'immediate'),
-  )
-)
-
-export const handlePDiffUpdate_TBflow = () => StudyEngine.ifThen(
+export const handlePDiffRuleFor_TBflow = () => StudyEngine.ifThen(
   // If:
   hasTBFlowCondition(),
   // Then:
@@ -110,35 +90,24 @@ export const handlePDiffUpdate_TBflow = () => StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.add(TBflow_Kids.key, 'immediate'),
     // Else:
     StudyEngine.participantActions.assignedSurveys.add(TBflow_Adults.key, 'immediate'),
+  ),
+  StudyEngine.if(
+    // if not in a follow up flow:
+    StudyEngine.not(
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+    ),
+    // then:
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
   )
 )
 
 /**
  * PDIFF - EM FLOW
  */
-const hasEMFlowCondition = () => StudyEngine.or(
-  StudyEngine.and(
-    StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
-  ),
-  StudyEngine.and(
-    StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-    StudyEngine.multipleChoice.none(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
-  ),
-  StudyEngine.and(
-    StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-    StudyEngine.multipleChoice.any(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
-    StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.no),
-  ),
-)
-
-export const handlePDiffNormal_EMflow = () => StudyEngine.ifThen(
+export const handlePDiffRuleFor_EMflow = () => StudyEngine.ifThen(
   // If:
   hasEMFlowCondition(),
   // Then:
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
   StudyEngine.if(
     isChildParticipant(),
     // Then:
@@ -151,166 +120,126 @@ export const handlePDiffNormal_EMflow = () => StudyEngine.ifThen(
       StudyEngine.participantActions.assignedSurveys.add(EMflow_Adults.key, 'immediate'),
       StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
     ),
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      // not in a follow up:
+      StudyEngine.not(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+      ),
+      // or in an other flow:
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow)
+    ),
+    // then:
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
   )
 )
-
-export const handlePDiffUpdate_EMflow = () => StudyEngine.ifThen(
-  // If:
-  hasEMFlowCondition(),
-  // Then:
-  /*StudyEngine.ifThen(
-    StudyEngine.participantState.
-      // Then:
-      StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
-  ),
-  StudyEngine.if(
-    isChildParticipant(),
-    // Then:
-    StudyEngine.participantActions.assignedSurveys.add(EMflow_Kids.key, 'immediate'),
-    // Else:
-    StudyEngine.participantActions.assignedSurveys.add(EMflow_Adults.key, 'immediate'),
-  )*/
-)
-
 
 /**
  * PDIFF - FE FLOW
  */
-export const handleTrigger_FEflow = () => StudyEngine.ifThen(
+export const handlePDiffRuleFor_FEflow = () => StudyEngine.ifThen(
   // If:
-  StudyEngine.or(
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
-    ),
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-      StudyEngine.multipleChoice.any(PDiff.Q5.key, PDiff.Q5.optionKeys.fever),
-      StudyEngine.multipleChoice.none(PDiff.Q5.key, PDiff.Q5.optionKeys.posTest, PDiff.Q5.optionKeys.andere),
-    ),
-  ),
+  hasFEflowCondition(),
   // Then:
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
   StudyEngine.if(
     isChildParticipant(),
     // Then:
     StudyEngine.participantActions.assignedSurveys.add(TBflow_Kids.key, 'immediate'),
     // Else:
     StudyEngine.participantActions.assignedSurveys.add(Feverflow_Adults.key, 'immediate'),
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      // not in a follow up:
+      StudyEngine.not(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+      ),
+      // or in an other flow:
+      StudyEngine.or(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+      )
+    ),
+    // then:
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
   )
 )
 
-const Q6DateInputKey = `rg.scg.${PDiff.Q6.optionKeys.yes.option}.${PDiff.Q6.optionKeys.yes.dateInput}`;
-const getQ6DateValue = () => StudyEngine.getResponseValueAsNum(PDiff.Q6.key, Q6DateInputKey);
-
-export const handleTrigger_LBflow = () => StudyEngine.ifThen(
+/**
+ * PDIFF - LB FLOW
+ */
+export const handlePDiffRuleFor_LBflow = () => StudyEngine.ifThen(
   // If:
-  StudyEngine.or(
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-      StudyEngine.multipleChoice.any(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
-      StudyEngine.or(
-        StudyEngine.and(
-          StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.yes.option),
-          StudyEngine.lte(
-            getQ6DateValue(),
-            StudyEngine.timestampWithOffset({ days: -4 }),
-          ),
-        ),
-        StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.startSoon)
-      )
-    ),
-    StudyEngine.and(
-      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
-      // Q5 has no influence here
-      StudyEngine.or(
-        StudyEngine.and(
-          StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.yes.option),
-          StudyEngine.lte(
-            getQ6DateValue(),
-            StudyEngine.timestampWithOffset({ days: -4 }),
-          ),
-        ),
-        StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.startSoon, PDiff.Q6.optionKeys.no)
-      )
-    ),
-  ),
+  hasLBflowCondition(),
   // Then
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
   StudyEngine.if(
     isChildParticipant(),
     // Then:
     StudyEngine.participantActions.assignedSurveys.add(LBflow_Kids.key, 'immediate'),
     // Else:
     StudyEngine.participantActions.assignedSurveys.add(LBflow_Adults.key, 'immediate'),
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      // not in a follow up:
+      StudyEngine.not(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+      ),
+      // or in an other flow:
+      StudyEngine.or(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
+      )
+    ),
+    // then:
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
   )
 )
 
-export const handleTrigger_Chronicflow = () => {
-  const Q6dateCondition = StudyEngine.and(
-    StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.yes.option),
-    StudyEngine.or(
-      StudyEngine.gt(
-        getQ6DateValue(),
-        StudyEngine.timestampWithOffset({ days: -4 }),
-      ),
-      // Not defined, aka 0
-      StudyEngine.not(
-        StudyEngine.hasResponseKey(
-          PDiff.Q6.key,
-          Q6DateInputKey
-        )
-      ),
-    )
-  );
-
+/**
+ * PDIFF - Chronic FLOW
+ */
+export const handlePDiffRuleFor_Chronicflow = () => {
   return StudyEngine.ifThen(
     // If:
-    StudyEngine.or(
-      StudyEngine.and(
-        StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.yes),
-        StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-        StudyEngine.multipleChoice.any(PDiff.Q5.key, PDiff.Q5.optionKeys.andere),
-        Q6dateCondition
-      ),
-      StudyEngine.and(
-        StudyEngine.singleChoice.none(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
-        StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-        StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
-        Q6dateCondition
-      )
-    ),
-    // Then
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.Chronicflow),
+    hasChronicflowCondition(),
+    // Then:
     StudyEngine.if(
       isChildParticipant(),
       // Then:
       StudyEngine.participantActions.assignedSurveys.add(Chronicflow_Kids.key, 'immediate'),
       // Else:
       StudyEngine.participantActions.assignedSurveys.add(Chronicflow_Adults.key, 'immediate'),
+    ),
+    StudyEngine.ifThen(
+      StudyEngine.or(
+        // not in a follow up:
+        StudyEngine.not(
+          StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+        ),
+        // or in an other flow:
+        StudyEngine.or(
+          StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+          StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+          StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
+          StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
+        )
+      ),
+      // then:
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.Chronicflow),
+      StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
     )
   )
 }
 
-export const handleTrigger_WeeklyTB = () => StudyEngine.if(
+export const handlePDiffRuleFor_WeeklyTB = () => StudyEngine.if(
   // If:
-  StudyEngine.or(
-    // Already in weekly reporting:
-    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
-    // Or wants to join:
-    StudyEngine.singleChoice.any(
-      PDiff.Q8.key,
-      PDiff.Q8.optionKeys.yes,
-      PDiff.Q8.optionKeys.alreadyDoing,
-    ),
-  ),
+  hasWeeklyTBCondition(),
   // Then:
   StudyEngine.do(
     StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),

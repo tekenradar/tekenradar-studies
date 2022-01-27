@@ -5,8 +5,9 @@ import { PDiff } from "./surveys/PDiff";
 import { TBflow_Adults } from "./surveys/TBflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import {
-  handleExpired_removeSurvey,
-  handlePDiffNormal_TBflow, handlePDiffUpdate_TBflow, isSurveyExpired, removeFollowUpMessagesForSurvey, updateAgeFlags
+  handleExpired_removeSurvey, handlePDiffRuleFor_Chronicflow, handlePDiffRuleFor_EMflow, handlePDiffRuleFor_FEflow,
+  handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
+  isSurveyExpired, removeFollowUpMessagesForSurvey, updateAgeFlags
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -39,43 +40,33 @@ const reports = {
 }
 
 
+
 const handleSubmit_PDiff = StudyEngine.ifThen(
   // IF:
   StudyEngine.checkSurveyResponseKey(PDiff.key),
   // THEN:
-  // If first or renewed PDiff:
-  StudyEngine.if(
-    // If last PDiff, old enough:
-    StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ years: -1, days: 6 * 7 }), PDiff.key),
-    // Then: start as new - ignore previous flows:
-    StudyEngine.do(
-      updateAgeFlags(),
-      handlePDiffNormal_TBflow(),
-      handlePDiffNormal_EMflow(),
-      handlePDiffNormal_FEflow(),
-      handlePDiffNormal_LBflow(),
-      handlePDiffNormal_Chronicflow(),
-      handlePDiffNormal_WeeklyTB(),
-    ),
-    // Else:
-    StudyEngine.do(
-      handlePDiffUpdate_TBflow(),
-      handlePDiffUpdate_EMflow(),
-      handlePDiffUpdate_FEflow(),
-      handlePDiffUpdate_LBflow(),
-      handlePDiffUpdate_Chronicflow(),
-      handlePDiffUpdate_WeeklyTB(),
-    )
-  ),
+  updateAgeFlags(),
+  handlePDiffRuleFor_TBflow(),
+  handlePDiffRuleFor_EMflow(),
+  handlePDiffRuleFor_FEflow(),
+  handlePDiffRuleFor_LBflow(),
+  handlePDiffRuleFor_Chronicflow(),
+  handlePDiffRuleFor_WeeklyTB(),
 )
 
 const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(TBflow_Adults.key),
   // Then:
+  TODO: if StudyEngine.participantState.hasParticipantFlagKeyAndValue(
+    ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
+  )
   StudyEngine.participantActions.assignedSurveys.remove(TBflow_Adults.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate')
-  addReport
+    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate')
+addReport
+    // TODO: if should receive standard first but is in the weekly flow:
+// StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
+// StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   /*
   StudyEngine.participantActions.reports.init('test1'),
   StudyEngine.participantActions.reports.updateData('test1', 'key1', 'hello'),
@@ -99,14 +90,17 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   standardFlow
 )
 
+const addEMfotoReminderEmail = () => StudyEngine.participantActions.messages.add('emfotoReminder', StudyEngine.timestampWithOffset({ days: 2 }));
+
 const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(EMflow_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(EMflow_Adults.key, 'all'),
-  StudyEngine.ifThen(
-    // check if photo upload needed
-  )
+
+  // TODO: add standardflow
+  StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate'),
+  addEMfotoReminderEmail(),
 );
 
 
@@ -190,7 +184,13 @@ const handleSubmit_Emfoto = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(EMfoto.key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'all'),
+  StudyEngine.ifThen(
+    // TODO: check condition to make sure photo was uploaded, only then remove:
+    StudyEngine.hasResponseKey(EMfoto.Q1.key, 'rg'),
+    // Then:
+    StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'all'),
+    StudyEngine.participantActions.messages.remove('emfotoReminder'),
+  )
 );
 
 
@@ -274,6 +274,9 @@ const handleSubmit_ExitFollowUp = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(ExitFollowUp.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(ExitFollowUp.key, 'all'),
+  // TODO: depending on questions remove follow up surveys (e.g., kids or adults)
+  // TODO: remove all messages scheduled
+  // TODO: set follow up flag to finished
 );
 
 
