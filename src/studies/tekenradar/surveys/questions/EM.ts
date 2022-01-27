@@ -28,7 +28,7 @@ export class EMGroup extends Group {
   G20_22: FormerLymeGroup;
   G23_24: PreviousTickBitesGroup;
 
-  T1: PhotoEM;
+  T1: PhotoEM_Text;
 
   //TODO: example photo and photo upload Here
 
@@ -65,7 +65,7 @@ export class EMGroup extends Group {
     this.G20_22 = new FormerLymeGroup(this.key, isRequired);
     this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
-    this.T1 = new PhotoEM(this.key, required);
+    this.T1 = new PhotoEM_Text(this.key, required);
 
   }
 
@@ -331,7 +331,7 @@ export class EM4 extends Item {
 }
 
 
-export class PhotoEM extends Item {
+export class PhotoEM_Text extends Item {
 
   markdownContent = `
   # Uploaden foto
@@ -343,7 +343,7 @@ export class PhotoEM extends Item {
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PhotoEM');
+    super(parentKey, 'PhotoEMT');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -362,6 +362,29 @@ export class PhotoEM extends Item {
           className: ''
         })
       ]
+    })
+  }
+}
+
+
+//TODO Peter: upload function photo here
+export class UploadPhotoEM extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PhotoEM');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Selecteer hier de foto van je erythema migrans of andere huidafwijking'],
+      ]),
     })
   }
 }
