@@ -7,6 +7,8 @@ import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import {
   handleExpired_removeSurvey, handlePDiffRuleFor_Chronicflow, handlePDiffRuleFor_EMflow, handlePDiffRuleFor_FEflow,
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
+  initFollowUpFlow_Adults,
+  initFollowUpFlow_Kids,
   isLoggedIn,
   isSurveyExpired, removeFollowUpMessagesForSurvey, updateAgeFlags
 } from "./utils/studyRuleUtils";
@@ -36,12 +38,28 @@ const reports = {
   FollowUpReport: {
     key: 'followUp',
   },
-  TickBiteReport: {
-    key: 'tickbite'
-  }
+  TBReport: {
+    key: 'TB'
+  },
+  EMReport: {
+    key: 'EM'
+  },
+  FeverReport: {
+    key: 'Fever'
+  },
+  LBReport: {
+    key: 'LB'
+  },
+  ChronicReport: {
+    key: 'chronic'
+  },
 }
 
-
+export const emailKeys = {
+  FlowReminder: 'Flow_reminder',
+  StandardflowReminder: 'Standardflow_reminder',
+  EMfotoReminder: 'EMfoto_reminder',
+}
 
 const handleSubmit_PDiff = StudyEngine.ifThen(
   // IF:
@@ -56,11 +74,17 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
   handlePDiffRuleFor_WeeklyTB(),
 )
 
+const assignStandardFlow = (version: 'adults' | 'kids') => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.add(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'immediate'),
+  StudyEngine.participantActions.messages.add(emailKeys.StandardflowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
+);
+
 const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(TBflow_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(TBflow_Adults.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.and(
       isLoggedIn(),
@@ -71,7 +95,7 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
       )
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+    assignStandardFlow('adults'),
     StudyEngine.ifThen(
       StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
       // Then: remove weekly and add again to the end of the list
@@ -79,26 +103,17 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
       StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
     )
   ),
-  // TODO: add report
-
-
-  /*
-  StudyEngine.participantActions.reports.init('test1'),
-  StudyEngine.participantActions.reports.updateData('test1', 'key1', 'hello'),
-  StudyEngine.participantActions.reports.updateData('test1', 'key1', 'value1'),
-  StudyEngine.participantActions.reports.updateData('test2', 'key1', 'hello'),
-  StudyEngine.participantActions.reports.updateData('test2', 'key2', 'hello'),
-  StudyEngine.participantActions.reports.removeData('test2', 'key2'),
-  StudyEngine.participantActions.reports.init('test3'),
-  StudyEngine.participantActions.reports.cancel('test3'),
-  */
+  StudyEngine.participantActions.reports.init(reports.TBReport.key)
+  // TODO: add report details
 )
+
 
 const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(TBflow_Kids.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(TBflow_Kids.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.and(
       isLoggedIn(),
@@ -109,7 +124,7 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
       )
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
+    assignStandardFlow('kids'),
     StudyEngine.ifThen(
       StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
       // Then: remove weekly and add again to the end of the list
@@ -117,10 +132,11 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
       StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
     )
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.TBReport.key)
+  // TODO: add report details
 )
 
-const addEMfotoReminderEmail = () => StudyEngine.participantActions.messages.add('emfotoReminder', StudyEngine.timestampWithOffset({ days: 2 }));
+const addEMfotoReminderEmail = () => StudyEngine.participantActions.messages.add(emailKeys.EMfotoReminder, StudyEngine.timestampWithOffset({ days: 2 }));
 
 const assignEMfotoSurvey = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
@@ -132,6 +148,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(EMflow_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(EMflow_Adults.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -139,7 +156,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
       ),
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+    assignStandardFlow('adults'),
   ),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
@@ -148,7 +165,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.EMReport.key)
 );
 
 
@@ -157,6 +174,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(EMflow_Kids.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(EMflow_Kids.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -164,7 +182,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
       ),
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
+    assignStandardFlow('kids'),
   ),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
@@ -173,7 +191,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.EMReport.key)
 );
 
 const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
@@ -181,7 +199,7 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(Feverflow_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(Feverflow_Adults.key, 'all'),
-
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -189,7 +207,7 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
       ),
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+    assignStandardFlow('adults'),
   ),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
@@ -197,7 +215,7 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.FeverReport.key)
 );
 
 const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
@@ -205,6 +223,7 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(LBflow_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(LBflow_Adults.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -212,7 +231,7 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
       ),
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+    assignStandardFlow('adults'),
   ),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
@@ -221,7 +240,7 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.LBReport.key)
 );
 
 
@@ -230,6 +249,7 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(LBflow_Kids.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(LBflow_Kids.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -237,7 +257,7 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
       ),
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
+    assignStandardFlow('kids'),
   ),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
@@ -246,14 +266,16 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.LBReport.key)
 );
+
 
 const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(Chronicflow_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Adults.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -261,7 +283,7 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
       ),
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
+    assignStandardFlow('adults'),
   ),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
@@ -269,14 +291,16 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.ChronicReport.key)
 );
+
 
 const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(Chronicflow_Kids.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Kids.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -284,7 +308,7 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
       ),
     ),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
+    assignStandardFlow('kids'),
   ),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
@@ -292,7 +316,7 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
-  // TODO: add report
+  StudyEngine.participantActions.reports.init(reports.ChronicReport.key)
 );
 
 const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
@@ -300,9 +324,15 @@ const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(Standardflow_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults.key, 'all'),
-  // TODO: if TB flow and opted to not have follow up, don't
-  // TODO: handle follow up
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+  StudyEngine.participantActions.messages.remove(emailKeys.StandardflowReminder),
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      StudyEngine.not(StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow)),
+      // TODO: if TB and willing to participate: StudyEngine.singleChoice.any(Standardflow_Adults.Q1.key, Standardflow_Adults.Q1.)
+    ),
+    initFollowUpFlow_Adults(),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+  )
 );
 
 const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
@@ -310,9 +340,15 @@ const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey(Standardflow_Kids.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Kids.key, 'all'),
-  // TODO: if TB flow and opted to not have follow up, don't
-  // TODO: handle follow up
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+  StudyEngine.participantActions.messages.remove(emailKeys.StandardflowReminder),
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      StudyEngine.not(StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow)),
+      // TODO: if TB and willing to participate: StudyEngine.singleChoice.any(Standardflow_Adults.Q1.key, Standardflow_Adults.Q1.)
+    ),
+    initFollowUpFlow_Kids(),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+  )
 );
 
 const handleSubmit_WeeklyTB = StudyEngine.ifThen(
@@ -332,7 +368,7 @@ const handleSubmit_Emfoto = StudyEngine.ifThen(
     StudyEngine.hasResponseKey(EMfoto.Q1.key, 'rg'),
     // Then:
     StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'all'),
-    StudyEngine.participantActions.messages.remove('emfotoReminder'),
+    StudyEngine.participantActions.messages.remove(emailKeys.EMfotoReminder),
   )
 );
 
