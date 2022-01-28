@@ -122,6 +122,11 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
 
 const addEMfotoReminderEmail = () => StudyEngine.participantActions.messages.add('emfotoReminder', StudyEngine.timestampWithOffset({ days: 2 }));
 
+const assignEMfotoSurvey = () => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
+  addEMfotoReminderEmail(),
+)
+
 const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(EMflow_Adults.key),
@@ -136,8 +141,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
     // Then:
     StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
   ),
-  StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate'),
-  addEMfotoReminderEmail(),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
@@ -162,8 +166,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
     // Then:
     StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
   ),
-  StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate'),
-  addEMfotoReminderEmail(),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
@@ -211,8 +214,7 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
     // Then:
     StudyEngine.participantActions.assignedSurveys.add(Standardflow_Adults.key, 'immediate'),
   ),
-  StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate'),
-  addEMfotoReminderEmail(),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
@@ -237,8 +239,7 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
     // Then:
     StudyEngine.participantActions.assignedSurveys.add(Standardflow_Kids.key, 'immediate'),
   ),
-  StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate'),
-  addEMfotoReminderEmail(),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
