@@ -44,7 +44,7 @@ class T9_AdultsDef extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'Followupflow_Adults',
+      surveyKey: 'T9_Adults',
       name: new Map([
         ['nl', 'Vervolgvragenlijst']
       ]),

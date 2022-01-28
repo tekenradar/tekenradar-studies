@@ -103,7 +103,7 @@ class T3_KidsDef extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'Followupflow_Kids',
+      surveyKey: 'T3_Kids',
       name: new Map([
         ['nl', 'Vervolgvragenlijst']
       ]),
