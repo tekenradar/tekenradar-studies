@@ -1,7 +1,11 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
+import { IntroWeeklyTB, NumberTickBitesWeekly } from "./questions/weeklyTB";
 
 class WeeklyTB_Def extends SurveyDefinition {
   // TODO:
+
+  T1: IntroWeeklyTB;
+  Q1: NumberTickBitesWeekly;
 
   constructor(isRequired?: boolean) {
     super({
@@ -19,11 +23,16 @@ class WeeklyTB_Def extends SurveyDefinition {
       requireLoginBeforeSubmission: true,
     });
 
+    const required = isRequired !== undefined ? isRequired : false;
+    this.T1 = new IntroWeeklyTB(this.key, required);
+    this.Q1 = new NumberTickBitesWeekly(this.key, required);
 
   }
 
   buildSurvey() {
     // TODO:
+    this.addItem(this.T1.get());
+    this.addItem(this.Q1.get());
   }
 }
 
