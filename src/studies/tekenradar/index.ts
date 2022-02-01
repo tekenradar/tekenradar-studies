@@ -27,8 +27,7 @@ import { T12_Kids } from "./surveys/T12_Kids";
 import { ExitFollowUp } from "./surveys/ExitFollowUp";
 
 export const TekenradarStudy: Study = {
-  studyKey: 'default',
-  outputFolderName: 'tekenradar',
+  studyKey: 'tekenradar',
   studyRules: studyRules,
   surveys: [
     PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Standardflow_Adults,
