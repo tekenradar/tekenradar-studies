@@ -5,7 +5,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
-export class IntroWeeklyTB extends Item {
+export class IntroWeeklyTBInit extends Item {
 
   markdownContent = `
 # Wekelijkse tekenbeetmeldingen
@@ -15,7 +15,41 @@ Met de volgende vragen willen we meten of het aantal tekenbeten per week verande
 Geef het daadwerkelijke aantal tekenbeten op, ook als je meerdere tekenbeten op hetzelfde moment had.
 `
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean,  condition?: Expression) {
+    super(parentKey, 'IntroWeeklyTBInit');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+export class IntroWeeklyTB extends Item {
+
+  markdownContent = `
+# Wekelijkse tekenbeetmeldingen
+
+Met de volgende vraag willen we meten of het aantal tekenbeten per week verandert. Daarom is het belangrijk de vragenlijst te blijven invullen, ook als je langere tijd géén tekenbeten hebt.
+
+Geef het daadwerkelijke aantal tekenbeten op, ook als je meerdere tekenbeten op hetzelfde moment had.
+`
+
+  constructor(parentKey: string, isRequired: boolean,  condition?: Expression) {
     super(parentKey, 'IntroWeeklyTB');
 
     this.isRequired = isRequired;
@@ -325,10 +359,43 @@ export class OutroWeeklyTB extends Item {
 
   markdownContent = `
 ##### Hartelijk dank voor het invullen van deze vragen. Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
+
+##### Houd de plek van de tekenbeet de komende periode goed in de gaten en neem contact op met de huisarts als er een groeiende rode vlek of kring ontstaat of als u andere gezondheidsklachten krijgt die mogelijke met de ziekte van lyme te maken kunnen hebben.
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'OutroWeeklyTB');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class OutroWeeklyTBInit extends Item {
+
+  markdownContent = `
+##### Hartelijk dank voor het invullen van deze vragen. Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
+`
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'OutroWeeklyTBInit');
 
     this.isRequired = isRequired;
     this.condition = condition;
