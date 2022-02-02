@@ -97,8 +97,8 @@ export class EMGroup extends Group {
 export class EMTextKids extends Item {
 
   markdownContent = `
-  De vragen hieronder zijn voor een minderjarige.
-  Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+  ##### De vragen hieronder zijn voor een minderjarige.
+  ##### Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
   `
 

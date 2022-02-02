@@ -52,7 +52,7 @@ export class Residence extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
+      questionText: new Map([//TODO: ask RIVM if text should be changed (as in weekly TB)
         ['nl', 'Woonplaats van de persoon met de tekenbeet:'],
       ]),
       titleClassName: 'sticky-top',
@@ -82,7 +82,7 @@ export class Gender extends Item {
       condition: this.condition,
       questionText: new Map([
         ['nl', 'Geslacht.'],
-      ]),
+      ]),//TODO: ask RIVM if fourth option should be added
       responseOptions: [
         {
           key: 'a', role: 'option',

@@ -7,6 +7,40 @@ import { ParticipantFlags } from '../../participantFlags';
 
 
 
+export class BackgroundText_Kids extends Item {
+
+  markdownContent = `
+# Achtergrond
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'BGText_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
 
 export class QuestionsKids extends Item {
 
@@ -49,7 +83,7 @@ export class QuestionsKids extends Item {
 export class TextQUKids extends Item {
 
   markdownContent = `
-Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
+##### Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -169,7 +203,7 @@ export class FunctioningText1F3_Kids extends Item {
 export class FunctioningText2F1_Kids extends Item {
 
   markdownContent_F1 = `
-Hoe vaak heeft uw kind in de **afgelopen week** problemen gehad met:
+##### Hoe vaak heeft uw kind in de **afgelopen week** problemen gehad met:
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -202,7 +236,7 @@ Hoe vaak heeft uw kind in de **afgelopen week** problemen gehad met:
 export class FunctioningText2F3_Kids extends Item {
 
   markdownContent_F3 = `
-Hoe vaak heb je in de **afgelopen week** problemen gehad met...
+##### Hoe vaak heb je in de **afgelopen week** problemen gehad met...
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1693,7 +1727,7 @@ export class FatigueText1G3_Kids extends Item {
 export class FatigueText2G1_Kids extends Item {
 
   markdownContent_G1 = `
-Hoe vaak heeft uw kind in de afgelopen week problemen gehad met:
+ ##### Hoe vaak heeft uw kind in de afgelopen week problemen gehad met:
     `
 
 
@@ -1725,7 +1759,7 @@ Hoe vaak heeft uw kind in de afgelopen week problemen gehad met:
 export class FatigueText2G2_Kids extends Item {
 
   markdownContent_G2 = `
-Hoezeer heeft uw kind in de afgelopen week een probleem gehad met:
+##### Hoezeer heeft uw kind in de afgelopen week een probleem gehad met:
     `
 
 
@@ -1758,7 +1792,7 @@ export class FatigueText2G3_Kids extends Item {
 
 
   markdownContent_G3 = `
-Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
+##### Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

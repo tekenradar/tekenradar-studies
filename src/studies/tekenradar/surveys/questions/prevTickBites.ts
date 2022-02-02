@@ -36,7 +36,7 @@ class PreviousTickBites1 extends Item {
         nameOfOption: 'a'
     }
 
-    questionTextMain = [
+    questionTextMain1 = [
       {
           content: new Map([
               ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
@@ -56,6 +56,37 @@ class PreviousTickBites1 extends Item {
   ]
 
 
+  questionTextMainWeekly = [
+    {
+      content: new Map([
+        ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "in de afgelopen 5 jaar "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "opgemerkt? Als je in de afgelopen week tekenbeten hebt gehad, tel die dan "],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "niet "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", " mee!"],
+      ]),
+    },
+  ]
+
+
     constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'PTB1');
 
@@ -69,7 +100,7 @@ class PreviousTickBites1 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: this.questionTextMain,
+            questionText: this.isPartOf('WeeklyTB')? this.questionTextMainWeekly : this.questionTextMain1,
             responseOptions: [
                 {
                     key: 'a', role: 'option',
@@ -111,7 +142,7 @@ class PreviousTickBites1 extends Item {
 class PreviousTickBites2 extends Item {
 
     //TODO bold text "in de afgelopen 3 maanden" or not (inconsistent in questionnaires --> ask RIVM)?
-    questionTextMain = [
+    questionTextMain1 = [
         {
             content: new Map([
                 ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
@@ -130,6 +161,36 @@ class PreviousTickBites2 extends Item {
         },
     ]
 
+    questionTextMainWeekly = [
+      {
+          content: new Map([
+              ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
+          ]),
+      },
+      {
+          content: new Map([
+              ["nl", "in de afgelopen 3 maanden "],
+          ]),
+          className: "text-primary"
+      },
+      {
+          content: new Map([
+              ["nl", "opgemerkt? Als je in de afgelopen week tekenbeten hebt gehad, tel die dan "],
+          ]),
+      },
+      {
+        content: new Map([
+            ["nl", "niet "],
+        ]),
+        className: "text-primary"
+    },
+    {
+        content: new Map([
+            ["nl", "mee!"],
+        ]),
+    },
+  ]
+
 
     constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
         super(parentKey, 'PTB2');
@@ -144,7 +205,7 @@ class PreviousTickBites2 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: this.questionTextMain,
+            questionText: this.isPartOf('WeeklyTB')? this.questionTextMainWeekly : this.questionTextMain1,
             responseOptions: [
                 {
                     key: 'a', role: 'option',

@@ -10,7 +10,7 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 export class Text1FU extends Item {
 
   markdownContent = `
-De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
+##### De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -38,17 +38,17 @@ De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen v
 }
 
 
-export class BackgroundText_Kids extends Item {
+export class ThreeMonthsText_Kids extends Item {
 
   markdownContent = `
-# Achtergrond
+# 3 maanden
 
 De vragen hieronder zijn voor een minderjarige.
 Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'BGText_Kids');
+    super(parentKey, 'M3Text_Kids');
 
     this.isRequired = isRequired;
     this.condition = condition;

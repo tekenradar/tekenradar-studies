@@ -1806,7 +1806,7 @@ export class MedCare1 extends Item {
 export class MedCareText2 extends Item {
 
   markdownContent = `
-  Met zorgverleners bedoelen wij je huisarts, specialist, fysiotherapeut, psycholoog, maatschappelijkwerker, homeopaat, logopedist of andere arts, therapeut of zorgconsulent.
+  ##### Met zorgverleners bedoelen wij je huisarts, specialist, fysiotherapeut, psycholoog, maatschappelijkwerker, homeopaat, logopedist of andere arts, therapeut of zorgconsulent.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -2009,7 +2009,7 @@ export class MedCare2 extends Item {
 export class MedCareText3 extends Item {
 
   markdownContent = `
-Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
+##### Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition: Expression) {
@@ -2039,7 +2039,9 @@ Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, 
 
 export class AwarenessText extends Item {
 
-  markdownContent = 'Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:'
+  markdownContent = `
+##### Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:
+`
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'AwareT');
@@ -2712,15 +2714,9 @@ export class QuestionsKids2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Wie vult op dit moment de vragen in deze vragenlijst in? Een ouder/verzorger van degene jonger dan 18 jaar, namelijk:'],
+        ["nl", 'Welke ouder/verzorger vult op dit moment de vragen in?'],
       ]),
-    },
-    {
-      content: new Map([
-        ["nl", "[Please change text here to proper dutch]"],
-      ]),
-      className: "text-primary"
-    },
+    }
   ]
 
 
@@ -2768,7 +2764,7 @@ export class QuestionsKids2 extends Item {
 export class TextQUKids extends Item {
 
   markdownContent = `
-Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
+##### Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

@@ -1,7 +1,7 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
-import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, BackgroundText_Kids, Text2FU, MedicationFUText_Kids } from './questions/followup';
+import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, ThreeMonthsText_Kids, Text2FU, MedicationFUText_Kids } from './questions/followup';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, QuestionsKids1, QuestionsKids2, Symptoms1, Symptoms2, Symptoms3, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { AwarenessKidsGroup, Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
@@ -10,7 +10,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 
 class T9_KidsDef extends SurveyDefinition {
 
-  T1: BackgroundText_Kids;
+  T1: ThreeMonthsText_Kids;
   T2: Text1FU
   Q1: NewTB;
   Q2: ReportedTB2;
@@ -118,7 +118,7 @@ class T9_KidsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
-    this.T1 = new BackgroundText_Kids(this.key, required);
+    this.T1 = new ThreeMonthsText_Kids(this.key, required);
     this.T2 = new Text1FU(this.key, required);
     this.Q1 = new NewTB(this.key, required);
     const Q1condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
