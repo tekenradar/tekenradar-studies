@@ -37,6 +37,7 @@ export const ParticipantFlags = {
   weeklyTBreporter: {
     key: 'weeklyTBreporter',
     values: {
+      init: 'init',
       true: 'true',
       false: 'false'
     }
