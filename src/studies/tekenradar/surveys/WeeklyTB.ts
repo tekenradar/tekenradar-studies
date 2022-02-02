@@ -1,3 +1,4 @@
+import { SurveyEngine } from "case-editor-tools/surveys";
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Gender, Residence } from "./questions/demographie";
 import { PreviousTickBitesGroup } from "./questions/prevTickBites";
@@ -41,13 +42,14 @@ class WeeklyTB_Def extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
     this.T1 = new IntroWeeklyTB(this.key, required);
     this.Q1 = new NumberTickBitesWeekly(this.key, required);
-    this.Q2a = new NumberTickBites2a(this.key, required);
-    this.Q2b = new NumberTickBites2b(this.key, required);
-    this.Q2c = new NumberTickBites2c(this.key, required);
-    this.Q2d = new NumberTickBites2d(this.key, required);
-    this.Q2e = new NumberTickBites2e(this.key, required);
-    this.Q2f = new NumberTickBites2f(this.key, required);
-    this.Q2g = new NumberTickBites2g(this.key, required);
+    const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'),0);
+    this.Q2a = new NumberTickBites2a(this.key, required, Q1cond);
+    this.Q2b = new NumberTickBites2b(this.key, required, Q1cond);
+    this.Q2c = new NumberTickBites2c(this.key, required, Q1cond);
+    this.Q2d = new NumberTickBites2d(this.key, required, Q1cond);
+    this.Q2e = new NumberTickBites2e(this.key, required, Q1cond);
+    this.Q2f = new NumberTickBites2f(this.key, required, Q1cond);
+    this.Q2g = new NumberTickBites2g(this.key, required, Q1cond);
     this.Q3 = new Residence(this.key, required);
     this.Q4 = new Gender(this.key, required);
     this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired);
