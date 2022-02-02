@@ -120,6 +120,7 @@ export const hasChronicflowCondition = () => {
 export const hasWeeklyTBCondition = () => StudyEngine.or(
   // Already in weekly reporting:
   StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+  StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init),
   // Or wants to join:
   StudyEngine.singleChoice.any(
     PDiff.Q8.key,

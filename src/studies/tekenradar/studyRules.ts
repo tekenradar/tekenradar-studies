@@ -355,6 +355,7 @@ const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(WeeklyTB.key),
   // Then:
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
   StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
   StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal', StudyEngine.timestampWithOffset({ hours: 1 })),
 );

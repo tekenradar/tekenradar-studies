@@ -241,7 +241,12 @@ export const handlePDiffRuleFor_WeeklyTB = () => StudyEngine.if(
   hasWeeklyTBCondition(),
   // Then:
   StudyEngine.do(
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+    StudyEngine.if(
+      StudyEngine.not(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+      ),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init),
+    ),
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   ),
