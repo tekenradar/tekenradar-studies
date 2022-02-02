@@ -6,7 +6,6 @@ import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b,
 import { ParticipantFlags } from '../participantFlags';
 
 class WeeklyTB_Def extends SurveyDefinition {
-  // TODO:
 
   T1_init: IntroWeeklyTBInit;
   T1: IntroWeeklyTB;
@@ -71,7 +70,7 @@ class WeeklyTB_Def extends SurveyDefinition {
   }
 
   buildSurvey() {
-    // TODO:
+
     this.addItem(this.T1_init.get());
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
