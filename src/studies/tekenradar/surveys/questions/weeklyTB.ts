@@ -15,7 +15,7 @@ Met de volgende vragen willen we meten of het aantal tekenbeten per week verande
 Geef het daadwerkelijke aantal tekenbeten op, ook als je meerdere tekenbeten op hetzelfde moment had.
 `
 
-  constructor(parentKey: string, isRequired: boolean,  condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'IntroWeeklyTBInit');
 
     this.isRequired = isRequired;
@@ -49,7 +49,7 @@ Met de volgende vraag willen we meten of het aantal tekenbeten per week verander
 Geef het daadwerkelijke aantal tekenbeten op, ook als je meerdere tekenbeten op hetzelfde moment had.
 `
 
-  constructor(parentKey: string, isRequired: boolean,  condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'IntroWeeklyTB');
 
     this.isRequired = isRequired;
@@ -90,9 +90,9 @@ export class NumberTickBitesWeekly extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: //SurveyEngine.timestampWithOffset({ seconds: 0 }),
-      new Map([
-        ['nl', 'Hoeveel tekenbeten heb je gehad in de afgelopen week?'],
-      ]),
+        new Map([
+          ['nl', 'Hoeveel tekenbeten heb je gehad in de afgelopen week?'],
+        ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -125,10 +125,18 @@ export class NumberTickBites2a extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:
-      new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-        ['nl', `Hoeveel tekenbeten had je vandaag ${this.date.getDay()}.${this.date.getMonth()}.?`],
-      ]),
+      questionText: [
+        {
+          content: new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+            ['nl', `Hoeveel tekenbeten had je vandaag `],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: 0 }),
+          dateFormat: 'EEEE (dd.MM)',
+          languageCodes: ['nl']
+        }
+      ],
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -161,9 +169,9 @@ export class NumberTickBites2b extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText:
-      new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-        ['nl', `Hoeveel teken had je gisteren ?`],
-      ]),
+        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+          ['nl', `Hoeveel teken had je gisteren ?`],
+        ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -196,9 +204,9 @@ export class NumberTickBites2c extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText:
-      new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-        ['nl', `Hoeveel teken had je eergisteren,?`],
-      ]),
+        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+          ['nl', `Hoeveel teken had je eergisteren,?`],
+        ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -231,9 +239,9 @@ export class NumberTickBites2d extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText:
-      new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-        ['nl', `Hoeveel teken had je afgelopen ?`],
-      ]),
+        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+          ['nl', `Hoeveel teken had je afgelopen ?`],
+        ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -266,9 +274,9 @@ export class NumberTickBites2e extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText:
-      new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-        ['nl', `Hoeveel teken had je afgelopen ?`],
-      ]),
+        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+          ['nl', `Hoeveel teken had je afgelopen ?`],
+        ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -302,9 +310,9 @@ export class NumberTickBites2f extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText:
-      new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-        ['nl', `Hoeveel teken had je afgelopen ?`],
-      ]),
+        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+          ['nl', `Hoeveel teken had je afgelopen ?`],
+        ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -338,9 +346,9 @@ export class NumberTickBites2g extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText:
-      new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-        ['nl', `Hoeveel teken had je afgelopen ?`],
-      ]),
+        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+          ['nl', `Hoeveel teken had je afgelopen ?`],
+        ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
