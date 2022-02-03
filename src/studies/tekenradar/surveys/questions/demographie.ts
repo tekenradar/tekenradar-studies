@@ -40,20 +40,20 @@ export class Age extends Item {
 export class Residence extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Res');
+    super(parentKey, 'P1');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
 
   buildItem() {
-    return SurveyItems.multilineTextInput({
+    return SurveyItems.textInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([//TODO: ask RIVM if text should be changed (as in weekly TB)
-        ['nl', 'Woonplaats van de persoon met de tekenbeet:'],
+      questionText: new Map([
+        ['nl', 'Wat zijn de 4 cijfers van je postcode, of wat is je woonplaats?'],
       ]),
       titleClassName: 'sticky-top',
     })
@@ -68,7 +68,7 @@ export class Gender extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'gender');
+    super(parentKey, 'P2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -81,8 +81,8 @@ export class Gender extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Geslacht.'],
-      ]),//TODO: ask RIVM if fourth option should be added
+        ['nl', 'Wat is je geslacht?'],
+      ]),
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -100,6 +100,12 @@ export class Gender extends Item {
           key: 'c', role: 'option',
           content: new Map([
             ["nl", "Geen van bovenstaande"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Wil ik niet zeggen"],
           ])
         },
       ]
