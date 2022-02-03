@@ -128,12 +128,13 @@ export class NumberTickBites2a extends Item {
       questionText: [
         {
           content: new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-            ['nl', `Hoeveel tekenbeten had je vandaag `],
+            ['nl', `Hoeveel tekenbeten had je vandaag, `],
           ])
         },
         {
           date: SurveyEngine.timestampWithOffset({ days: 0 }),
-          dateFormat: 'EEEE (dd.MM)',
+          //dateFormat: 'EEEE (dd.MM)',
+          dateFormat: 'EEEE (dd.MM.)',
           languageCodes: ['nl']
         }
       ],
@@ -168,10 +169,23 @@ export class NumberTickBites2b extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:
-        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-          ['nl', `Hoeveel teken had je gisteren ?`],
-        ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Hoeveel teken had je gisteren `],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -1 }),
+          dateFormat: 'EEEE (dd.MM.)',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        },
+      ],
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -203,10 +217,23 @@ export class NumberTickBites2c extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:
-        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-          ['nl', `Hoeveel teken had je eergisteren,?`],
-        ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Hoeveel teken had je eergisteren, `],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -2 }),
+          dateFormat: 'EEEE (dd.MM.)',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        }
+      ],
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -238,10 +265,23 @@ export class NumberTickBites2d extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:
-        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-          ['nl', `Hoeveel teken had je afgelopen ?`],
-        ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Hoeveel teken had je afgelopen `],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -3 }),
+          dateFormat: 'EEEE (dd.MM.)',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        }
+      ],
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -273,10 +313,23 @@ export class NumberTickBites2e extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:
-        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-          ['nl', `Hoeveel teken had je afgelopen ?`],
-        ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Hoeveel teken had je afgelopen `],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -4 }),
+          dateFormat: 'EEEE (dd.MM.)',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        }
+      ],
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -309,10 +362,23 @@ export class NumberTickBites2f extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:
-        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-          ['nl', `Hoeveel teken had je afgelopen ?`],
-        ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Hoeveel teken had je afgelopen `],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -5 }),
+          dateFormat: 'EEEE (dd.MM.)',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        }
+      ],
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -345,10 +411,23 @@ export class NumberTickBites2g extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:
-        new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
-          ['nl', `Hoeveel teken had je afgelopen ?`],
-        ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Hoeveel teken had je afgelopen `],
+          ])
+        },
+        {
+          date: SurveyEngine.timestampWithOffset({ days: -6 }),
+          dateFormat: 'EEEE (dd.MM.)',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        }
+      ],
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
