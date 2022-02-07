@@ -156,6 +156,68 @@ export class SymptomsHeader extends Item {
   }
 }
 
+
+export class FatigueHeader extends Item {
+
+  markdownContent = `
+# Vermoeidheid
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'FatH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class CognitionHeader extends Item {
+
+  markdownContent = `
+# Cognitie
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'CogH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 export class Tekenradar extends Item {
 
 
@@ -563,7 +625,7 @@ export class Symptoms1 extends Item {
         {
           key: 'p', role: 'option',
           content: new Map([
-            ["nl", "Rugaandoening van hardnekkige aard, langer dan 3 maanden,of hernia"],
+            ["nl", "Rugaandoening van hardnekkige aard, langer dan 3 maanden, of hernia"],
           ])
         },
         {
@@ -1489,7 +1551,18 @@ export class Fatigue extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Met behulp van de volgende uitspraken willen wij een indruk krijgen van hoe je jezelf de laatste twee weken hebt gevoeld. Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: Ik voel me ontspannen: ja, dat klopt'],
+        ["nl", 'Met behulp van de volgende uitspraken willen wij een indruk krijgen van hoe je jezelf'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " de laatste twee weken hebt gevoeld."],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", ' Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: Ik voel me ontspannen: ja, dat klopt'],
       ]),
     }
   ]
@@ -2130,7 +2203,9 @@ export class MedCareText3 extends Item {
 export class AwarenessText extends Item {
 
   markdownContent = `
-##### Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:
+# KLACHTEN PERCEPTIE
+
+Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
