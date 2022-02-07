@@ -4,6 +4,7 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
+import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 //import { isExpressionStatement } from 'typescript';
 
 
@@ -1559,11 +1560,6 @@ export class Fatigue extends Item {
         ["nl", " de laatste twee weken hebt gevoeld."],
       ]),
       className: "text-primary"
-    },
-    {
-      content: new Map([
-        ["nl", ' Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: Ik voel me ontspannen: ja, dat klopt'],
-      ]),
     }
   ]
 
@@ -1582,17 +1578,74 @@ export class Fatigue extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      topDisplayCompoments: [//TODO: this is copied from longcovid survey and probably out of date. Update to latest syntax
+        {
+            role: 'text',
+            style: [{ key: 'variant', value: 'p' }],
+            content: generateLocStrings(new Map([
+                ["nl", 'Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel.'],
+            ]))
+        },
+
+        {
+            role: 'text',
+            style: [{ key: 'variant', value: 'p' }],
+            content: generateLocStrings(new Map([
+                ["nl", 'Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: '],
+            ]))
+        },
+        {
+          role: 'text',
+          style: [{ key: 'variant', value: 'p' }],
+          content: generateLocStrings(new Map([
+              ["nl", "Ik voel me ontspannen: ja, dat klopt"],
+          ]))
+        },
+        //ComponentGenerators.markdown({
+        //    content: new Map([
+        //        ['nl', imageContent]
+        //    ])
+        //}),
+        {
+            role: 'text',
+            style: [{ key: 'className', value: 'mb-1 border-bottom border-1 border-grey-5 pt-1 mt-2 fw-bold' }],
+            content: generateLocStrings(new Map([
+                ["nl", "1 = ja, dat klopt, 7 = nee, dat klopt niet"],
+            ]))
+        },
+
+    ],
       scaleOptions: [
         {
-          key: '1', content: new Map([
-            ["nl", "Ja, dat klopt"],
-          ])
+            key: '1', content: new Map([
+                ["nl", "1 ja, dat klopt"],
+            ])
         }, {
-          key: '2', content: new Map([
-            ["nl", "Nee, dat klopt niet"],
-          ])
+            key: '2', content: new Map([
+                ["nl", "2"],
+            ])
+        }, {
+            key: '3', content: new Map([
+                ["nl", "3"],
+            ])
+        }, {
+            key: '4', content: new Map([
+                ["nl", "4"],
+            ]),
+        }, {
+            key: '5', content: new Map([
+                ["nl", "5"],
+            ])
+        }, {
+            key: '6', content: new Map([
+                ["nl", "6"],
+            ])
+        }, {
+            key: '7', content: new Map([
+                ["nl", "7 nee, dat klopt niet"],
+            ])
         }
-      ],
+    ],
       rows: [
         {
           key: 'a', content: new Map([
