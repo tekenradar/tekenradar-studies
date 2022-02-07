@@ -392,6 +392,12 @@ export class ActivityTickBite extends Item {
 
 
 export class PositionTickBite extends Item {
+  optionKeys = {
+    precies: 'a',
+    ongeveer: 'b',
+    denkWeten: 'c',
+    nee: 'd',
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'PosTB');
@@ -400,9 +406,6 @@ export class PositionTickBite extends Item {
     this.condition = condition;
   }
 
-  //TODO: pop up map for response options 1-3
-  //Pop-up map (participants are asked to place a marker on the map,
-  //this map is  also to be shown on a map on the homepage)
   buildItem() {
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
@@ -414,29 +417,53 @@ export class PositionTickBite extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.precies, role: 'option',
           content: new Map([
             ["nl", "Ja, ik weet het precies"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.ongeveer, role: 'option',
           content: new Map([
             ["nl", "Ja, ik weet het ongeveer"],
           ])
         },
         {
-          key: 'c', role: 'option',
+          key: this.optionKeys.denkWeten, role: 'option',
           content: new Map([
             ["nl", "Ja, ik denk het te weten"],
           ])
         },
         {
-          key: 'd', role: 'option',
+          key: this.optionKeys.nee, role: 'option',
           content: new Map([
             ["nl", "Nee, ik weet het niet"],
           ])
         },
+      ]
+    })
+  }
+}
+
+export class TickBiteMap extends Item {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PosTBmap');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.customQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Weet je de locatie waar je de tekenbeet (vermoedelijk) hebt opgelopen?'],
+      ]),
+      responseItemDefs: [
+        { key: 'map', role: 'map', }
       ]
     })
   }
