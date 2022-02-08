@@ -144,7 +144,7 @@ Er zijn geen goede of foute antwoorden.
       content: [
         ComponentGenerators.markdown({
           content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
-            ["nl",  this.markdownContent_F1 ],
+            ["nl", this.markdownContent_F1],
           ]),
           className: ''
         })
@@ -222,7 +222,7 @@ export class FunctioningText2F1_Kids extends Item {
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl",  this.markdownContent_F1],
+            ["nl", this.markdownContent_F1],
           ]),
           className: ''
         })
@@ -280,7 +280,7 @@ export class Functioning1F1_Kids extends Item {
     },*/
     {
       content: new Map([
-          ["nl", "Lichamelijk functioneren (problemen met…)"],
+        ["nl", "Lichamelijk functioneren (problemen met…)"],
       ]),
     }
   ]
@@ -288,8 +288,8 @@ export class Functioning1F1_Kids extends Item {
 
   option_c = [
     {
-    content: new Map([
-      ["nl", "Deelnemen aan actief spel of lichamelijke oefeningen"],
+      content: new Map([
+        ["nl", "Deelnemen aan actief spel of lichamelijke oefeningen"],
       ]),
     }
   ]
@@ -298,7 +298,7 @@ export class Functioning1F1_Kids extends Item {
   option_e = [
     {
       content: new Map([
-          ["nl", "Baden"],
+        ["nl", "Baden"],
       ]),
     }
   ]
@@ -307,7 +307,7 @@ export class Functioning1F1_Kids extends Item {
   option_f = [
     {
       content: new Map([
-          ["nl", "Helpen met speelgoed opruimen"],
+        ["nl", "Helpen met speelgoed opruimen"],
       ]),
     }
   ]
@@ -317,7 +317,7 @@ export class Functioning1F1_Kids extends Item {
   option_g = [
     {
       content: new Map([
-          ["nl", "Het hebben van pijn"],
+        ["nl", "Het hebben van pijn"],
       ]),
     }
   ]
@@ -424,7 +424,7 @@ export class Functioning1F2_Kids extends Item {
     },*/
     {
       content: new Map([
-          ["nl", "Lichamelijk functioneren (problemen met…)"],
+        ["nl", "Lichamelijk functioneren (problemen met…)"],
       ]),
     }
   ]
@@ -432,9 +432,9 @@ export class Functioning1F2_Kids extends Item {
 
   option_c = [
     {
-    content: new Map([
-      ["nl", "Deelnemen aan sportactiviteiten of lichamelijke oefeningen"],
-    ]),
+      content: new Map([
+        ["nl", "Deelnemen aan sportactiviteiten of lichamelijke oefeningen"],
+      ]),
     }
   ]
 
@@ -442,7 +442,7 @@ export class Functioning1F2_Kids extends Item {
   option_e = [
     {
       content: new Map([
-          ["nl", "Zelfstandig een bad of douche nemen"],
+        ["nl", "Zelfstandig een bad of douche nemen"],
       ]),
     }
   ]
@@ -450,7 +450,7 @@ export class Functioning1F2_Kids extends Item {
   option_f = [
     {
       content: new Map([
-          ["nl", "Karweitjes doen, zoals het opruimen van zijn / haar speelgoed"],
+        ["nl", "Karweitjes doen, zoals het opruimen van zijn / haar speelgoed"],
       ]),
     }
   ]
@@ -460,7 +460,7 @@ export class Functioning1F2_Kids extends Item {
   option_g = [
     {
       content: new Map([
-          ["nl", "Het hebben van wondjes of pijn"],
+        ["nl", "Het hebben van wondjes of pijn"],
       ]),
     }
   ]
@@ -556,7 +556,7 @@ export class Functioning1F3_Kids extends Item {
   questionTextMain = [
     {
       content: new Map([
-          ["nl", "Over mijn gezondheid en activiteiten (problemen met ... )"],
+        ["nl", "Over mijn gezondheid en activiteiten (problemen met ... )"],
       ]),
     }
   ]
@@ -668,7 +668,7 @@ export class Functioning2F1_Kids extends Item {
   option_e = [
     {
       content: new Map([
-          ["nl", "Zich zorgen maken/bang zijn"],
+        ["nl", "Zich zorgen maken/bang zijn"],
       ]),
     }
   ]
@@ -760,7 +760,7 @@ export class Functioning2F2_Kids extends Item {
   option_e = [
     {
       content: new Map([
-          ["nl", "Zorgen maken over wat hem/ haar zal overkomen"],
+        ["nl", "Zorgen maken over wat hem/ haar zal overkomen"],
       ]),
     }
   ]
@@ -936,7 +936,7 @@ export class Functioning3F1_Kids extends Item {
   option_a = [
     {
       content: new Map([
-          ["nl", "Spelen met andere kinderen"],
+        ["nl", "Spelen met andere kinderen"],
       ]),
     }
   ]
@@ -944,7 +944,7 @@ export class Functioning3F1_Kids extends Item {
   option_d = [
     {
       content: new Map([
-          ["nl", "Bepaalde dingen niet kunnen die andere kinderen van zijn/haar leeftijd wel kunnen"],
+        ["nl", "Bepaalde dingen niet kunnen die andere kinderen van zijn/haar leeftijd wel kunnen"],
       ]),
     }
   ]
@@ -1033,7 +1033,7 @@ export class Functioning3F2_Kids extends Item {
   option_a = [
     {
       content: new Map([
-          ["nl", "Op kunnen schieten met andere kinderen"],
+        ["nl", "Op kunnen schieten met andere kinderen"],
       ]),
     }
   ]
@@ -1041,7 +1041,7 @@ export class Functioning3F2_Kids extends Item {
   option_d = [
     {
       content: new Map([
-          ["nl", "Kan bepaalde dingen niet die andere kinderen van zijn/ haar leeftijd wel kunnen"],
+        ["nl", "Kan bepaalde dingen niet die andere kinderen van zijn/ haar leeftijd wel kunnen"],
       ]),
     }
   ]
@@ -1132,7 +1132,7 @@ export class Functioning3F3_Kids extends Item {
   option_a = [
     {
       content: new Map([
-          ["nl", "Ik heb problemen om met andere kinderen op te schieten"],
+        ["nl", "Ik heb problemen om met andere kinderen op te schieten"],
       ]),
     }
   ]
@@ -1140,7 +1140,7 @@ export class Functioning3F3_Kids extends Item {
   option_b = [
     {
       content: new Map([
-          ["nl", "Andere kinderen willen mijn vriend(in) niet zijn"],
+        ["nl", "Andere kinderen willen mijn vriend(in) niet zijn"],
       ]),
     }
   ]
@@ -1148,7 +1148,7 @@ export class Functioning3F3_Kids extends Item {
   option_c = [
     {
       content: new Map([
-          ["nl", "Andere kinderen pesten mij"],
+        ["nl", "Andere kinderen pesten mij"],
       ]),
     }
   ]
@@ -1156,7 +1156,7 @@ export class Functioning3F3_Kids extends Item {
   option_d = [
     {
       content: new Map([
-          ["nl", "Ik kan bepaalde dingen niet die andere kinderen van mijn leeftijd wel kunnen"],
+        ["nl", "Ik kan bepaalde dingen niet die andere kinderen van mijn leeftijd wel kunnen"],
       ]),
     }
   ]
@@ -1165,7 +1165,7 @@ export class Functioning3F3_Kids extends Item {
   option_e = [
     {
       content: new Map([
-          ["nl", "Het is moeilijk mee te kunnen blijven doen als ik met andere kinderen speel"],
+        ["nl", "Het is moeilijk mee te kunnen blijven doen als ik met andere kinderen speel"],
       ]),
     }
   ]
@@ -1250,7 +1250,7 @@ export class Functioning3F4_Kids extends Item {
   option_a = [
     {
       content: new Map([
-          ["nl", "Ik heb problemen om met andere tieners op te schieten"],
+        ["nl", "Ik heb problemen om met andere tieners op te schieten"],
       ]),
     }
   ]
@@ -1259,7 +1259,7 @@ export class Functioning3F4_Kids extends Item {
   option_b = [
     {
       content: new Map([
-          ["nl", "Andere tieners willen mijn vriend(in) niet zijn"],
+        ["nl", "Andere tieners willen mijn vriend(in) niet zijn"],
       ]),
     }
   ]
@@ -1267,7 +1267,7 @@ export class Functioning3F4_Kids extends Item {
   option_c = [
     {
       content: new Map([
-          ["nl", "Andere tieners pesten mij"],
+        ["nl", "Andere tieners pesten mij"],
       ]),
     }
   ]
@@ -1275,7 +1275,7 @@ export class Functioning3F4_Kids extends Item {
   option_d = [
     {
       content: new Map([
-          ["nl", "Ik kan bepaalde dingen niet die andere tieners van mijn leeftijd wel kunnen"],
+        ["nl", "Ik kan bepaalde dingen niet die andere tieners van mijn leeftijd wel kunnen"],
       ]),
     }
   ]
@@ -1283,7 +1283,7 @@ export class Functioning3F4_Kids extends Item {
   option_e = [
     {
       content: new Map([
-          ["nl", "Het is moeilijk om mee te kunnen blijven doen met mijn leeftijdsgenoten"],
+        ["nl", "Het is moeilijk om mee te kunnen blijven doen met mijn leeftijdsgenoten"],
       ]),
     }
   ]
@@ -1670,7 +1670,7 @@ Er zijn geen goede of foute antwoorden.
       content: [
         ComponentGenerators.markdown({
           content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
-            ["nl", this.markdownContent_G1 ],
+            ["nl", this.markdownContent_G1],
           ]),
           className: ''
         })
@@ -1714,7 +1714,7 @@ export class FatigueText1G3_Kids extends Item {
       content: [
         ComponentGenerators.markdown({
           content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
-            ["nl",  this.markdownContent_G3],
+            ["nl", this.markdownContent_G3],
           ]),
           className: ''
         })
@@ -2388,7 +2388,7 @@ De vragen hieronder zijn voor **een ouder/verzorger**.
       content: [
         ComponentGenerators.markdown({
           content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
-            ["nl",  this.markdownContent_H1 ],
+            ["nl", this.markdownContent_H1],
           ]),
           className: ''
         })
@@ -2425,7 +2425,7 @@ Deze vraag gaat over of je de afgelopen week pijn hebt gehad:
       content: [
         ComponentGenerators.markdown({
           content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
-            ["nl",  this.markdownContent_H2 ],
+            ["nl", this.markdownContent_H2],
           ]),
           className: ''
         })
@@ -2891,7 +2891,7 @@ export class Strength_WeaknessI1_Kids extends Item {
   questionTextMain = [
     {
       content: new Map([
-          ["nl", "Mijn kind:"],
+        ["nl", "Mijn kind:"],
       ]),
     }
   ]
@@ -3089,7 +3089,7 @@ export class Strength_WeaknessI2_Kids extends Item {
   questionTextMain = [
     {
       content: new Map([
-          ["nl", "Mijn kind:"],
+        ["nl", "Mijn kind:"],
       ]),
     }
   ]
@@ -3287,7 +3287,7 @@ export class Strength_WeaknessI3_Kids extends Item {
   questionTextMain = [
     {
       content: new Map([
-          ["nl", ""],
+        ["nl", ""],
       ]),
     }
   ]
@@ -3610,18 +3610,18 @@ export class Awareness_Kids1 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -3679,18 +3679,18 @@ export class Awareness_Kids2 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Heel erg kort']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Het hele leven']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Heel erg kort']
+          ]),
+          endLabel: new Map([
+            ['de', 'Het hele leven']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -3748,18 +3748,18 @@ export class Awareness_Kids3 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal geen beheersing']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel beheersing']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen beheersing']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel beheersing']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -3816,18 +3816,18 @@ export class Awareness_Kids4 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal niet']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Uitermate veel']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal niet']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -3886,18 +3886,18 @@ export class Awareness_Kids5 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal geen klachten']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Veel ernstige klachten']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen klachten']
+          ]),
+          endLabel: new Map([
+            ['de', 'Veel ernstige klachten']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -3955,18 +3955,18 @@ export class Awareness_Kids6 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal niet bezorgd']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Uitermate bezorgd']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal niet bezorgd']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer bezorgd']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -4024,18 +4024,18 @@ export class Awareness_Kids7 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Ik begrijp de ziekte helemaal niet']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Ik begrijp de ziekte helemaal']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Ik begrijp de ziekte helemaal niet']
+          ]),
+          endLabel: new Map([
+            ['de', 'Ik begrijp de ziekte helemaal']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -4093,18 +4093,18 @@ export class Awareness_Kids8 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Uitermate veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
