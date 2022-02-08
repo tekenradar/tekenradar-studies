@@ -126,7 +126,7 @@ export class ChronicLymeTherapy1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', '. Hoe ben je behandeld voor de ziekte van Lyme? Geef hier de behandelmethode, bijvoorbeeld en antibioticakuur, de startdatum van de behandeling en de duur van de behandeling  aan.'],
+        ['nl', 'Hoe ben je behandeld voor de ziekte van Lyme? Geef hier de behandelmethode, bijvoorbeeld en antibioticakuur, de startdatum van de behandeling en de duur van de behandeling  aan.'],
       ]),
     })
   }
