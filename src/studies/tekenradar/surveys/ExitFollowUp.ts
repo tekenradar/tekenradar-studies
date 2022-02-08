@@ -7,13 +7,13 @@ class ExitFollowUp_Def extends SurveyDefinition {
     super({
       surveyKey: 'ExitFollowUp',
       name: new Map([
-        ['nl', 'TODO: Wants to quit flow']
+        ['nl', 'Stoppen met vervolgvragenlijsten']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je af te melden voor vragenlijsten']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt minder dan 5 minuten']
       ]),
     });
 
