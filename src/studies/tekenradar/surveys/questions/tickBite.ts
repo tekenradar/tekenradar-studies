@@ -840,7 +840,7 @@ export class RemoveTick4 extends Item {
 export class ReportedTickBites extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'RepTB');
+    super(parentKey, 'Q12');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -859,43 +859,43 @@ export class ReportedTickBites extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "Ik heb nog nooit een Tekenbeet gemeld op tekenradar"],
+            ["nl", "Ik heb nog nooit een tekenbeet gemeld op tekenradar"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "Geen teken gemeld dit jaar"],
+            ["nl", "Geen tekenbeten gemeld dit jaar"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "1 teek gemeld"],
+            ["nl", "1 tekenbeet gemeld"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "2 teken gemeld"],
+            ["nl", "2 tekenbeten gemeld"],
           ])
         },
         {
           key: 'e', role: 'option',
           content: new Map([
-            ["nl", "3-5 teken gemeld"],
+            ["nl", "3-5 tekenbeten gemeld"],
           ])
         },
         {
           key: 'f', role: 'option',
           content: new Map([
-            ["nl", "5-10 teken gemeld"],
+            ["nl", "5-10 tekenbeten gemeld"],
           ])
         },
         {
           key: 'g', role: 'option',
           content: new Map([
-            ["nl", "Meer dan 10 teken gemeld"],
+            ["nl", "Meer dan 10 tekenbeten gemeld"],
           ])
         },
       ]
