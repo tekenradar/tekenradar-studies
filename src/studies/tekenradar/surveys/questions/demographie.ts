@@ -64,7 +64,7 @@ export class Residence extends Item {
 export class Gender extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    woman: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

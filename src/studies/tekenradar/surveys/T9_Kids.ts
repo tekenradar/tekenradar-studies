@@ -121,17 +121,17 @@ class T9_KidsDef extends SurveyDefinition {
     this.T1 = new ThreeMonthsText_Kids(this.key, required);
     this.T2 = new Text1FU(this.key, required);
     this.Q1 = new NewTB(this.key, required);
-    const Q1condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
+    const Q1condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new ReportedTB2(this.key, required, Q1condition);
-    const Q2condition = SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.nameOfOption);
+    const Q2condition = SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.no);
     this.Q3 = new PreviousTickBites3(this.key, required, Q2condition);
     this.Q4 = new FeverFU1(this.key, required, Q1condition);
-    const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
+    const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes);
     this.Q5 = new FeverFU2(this.key, required, Q4condition);
 
     this.T3 = new Text2FU(this.key, required);
     this.Q6 = new LymeFU(this.key, required);
-    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes);
     this.Q7 = new LymeDiagnosis2(this.key, required, Q6condition);
     this.Q8 = new LymeDiagnosis3(this.key, required, Q6condition);
     this.Q9 = new LymeDiagnosis4(this.key, required, Q6condition);
@@ -147,7 +147,7 @@ class T9_KidsDef extends SurveyDefinition {
 
     this.T5 = new SymptomsText2_Kids(this.key, required);
     this.Q14 = new QuestionsKids1(this.key, required);
-    const Q14condition = SurveyEngine.singleChoice.any(this.Q14.key, this.Q14.optionKeys.nameOfOption);
+    const Q14condition = SurveyEngine.singleChoice.any(this.Q14.key, this.Q14.optionKeys.parent);
     this.Q14_a = new QuestionsKids2(this.key, required, Q14condition);
 
     this.T6 = new TextQUKids(this.key, required);
@@ -210,7 +210,7 @@ class T9_KidsDef extends SurveyDefinition {
     this.Q21_F4 = new Functioning3F4_Kids(this.key, required, cond_13younger18);
 
     this.Q22_F1 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
-    const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.nameOfOption);
+    const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.yes);
 
     this.Q23_F1 = new Functioning5F1_Kids(this.key, required, Q22condition);
     this.Q23_F2 = new Functioning5F2_Kids(this.key, required, cond_5younger8);

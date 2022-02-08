@@ -58,7 +58,7 @@ class TBflow_KidsDef extends SurveyDefinition {
     this.Q5 = new LocationBodyTickBite(this.key, required);
 
     this.Q6 = new RemoveTick1(this.key, required);
-    const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+    const q6Condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.no);
     this.Q7 = new RemoveTick2(this.key, required, q6Condition);
     this.Q8 = new RemoveTick3(this.key, required, q6Condition);
     this.Q9 = new RemoveTick4(this.key, required, q6Condition);
@@ -76,7 +76,7 @@ class TBflow_KidsDef extends SurveyDefinition {
     this.Q13 = new DateTickBite(this.key, required);
     this.Q14 = new DurationTickBite(this.key, required);
     this.Q15 = new DoctorTickBite(this.key, required);
-    const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
+    const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
     this.Q16 = new Doctor(this.key, required, q15Condition);
 
     this.G17_19 = new FormerLymeGroup(this.key, isRequired);

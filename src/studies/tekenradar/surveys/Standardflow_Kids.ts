@@ -116,7 +116,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.Q5 = new Symptoms1(this.key, required);
     this.T4 = new SymptomsText2_Kids(this.key, required);
     this.Q6 = new QuestionsKids1(this.key, required);
-    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.nameOfOption);
+    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.parent);
     this.Q6_a = new QuestionsKids2(this.key, required, Q6condition);
     this.Q7 = new Symptoms2(this.key, required);
     this.Q8 = new Symptoms3(this.key, required);
@@ -178,7 +178,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.Q21_F4 = new Functioning3F4_Kids(this.key, required, cond_13younger18);
 
     this.Q22_F1 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
-    const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.nameOfOption);
+    const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.yes);
 
     this.Q23_F1 = new Functioning5F1_Kids(this.key, required, Q22condition);
     this.Q23_F2 = new Functioning5F2_Kids(this.key, required, cond_5younger8);

@@ -61,7 +61,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.Q2 = new Qualification(this.key, required);
     this.Q3 = new Residence(this.key, required);
     this.Q4 = new Gender(this.key, required);
-    const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.nameOfOption);
+    const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.woman);
 
     this.H2 = new GenHealthHeader(this.key, required);
     this.Q5 = new Symptoms1(this.key, required);

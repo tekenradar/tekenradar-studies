@@ -78,7 +78,7 @@ Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 export class NewTB extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    yes: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -119,7 +119,7 @@ export class NewTB extends Item {
 export class ReportedTB2 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    no: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -211,7 +211,7 @@ export class PreviousTickBites3 extends Item {
 export class FeverFU1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -311,7 +311,7 @@ De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij 
 export class LymeFU extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    yes: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

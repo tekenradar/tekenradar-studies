@@ -20,7 +20,7 @@ export class FormerLymeGroup extends Group {
 
 
     this.Q1 = new FormerLymeDiagnosis(this.key, required);
-    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
+    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new FormerLymeTherapy1(this.key, required, q1Condition);
     this.Q3 = new FormerLymeTherapy2(this.key, required, q1Condition);
 
@@ -48,7 +48,7 @@ export class LymeDiagnosisGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.Q1 = new LymeDiagnosis1(this.key, required);
-    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.nameOfOption);
+    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new LymeDiagnosis2(this.key, required, q1Condition);
 
   }
@@ -67,7 +67,7 @@ export class LymeDiagnosisGroup extends Group {
 class FormerLymeDiagnosis extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -276,7 +276,7 @@ export class GeneralTherapy extends Item {
 export class LymeDiagnosis1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -465,8 +465,8 @@ export class Doctor extends Item {
 export class LymeTherapy1 extends Item {
 
   optionKeys = {
-    nameOfOptionTabletten: 'a',
-    nameOfOptionInfuus: 'b'
+    Tabletten: 'a',
+    Infuus: 'b'
   }
 
   responseOptionLyme = [
@@ -670,7 +670,7 @@ export class LymeTherapy3 extends Item {
 export class LymeTherapy4 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

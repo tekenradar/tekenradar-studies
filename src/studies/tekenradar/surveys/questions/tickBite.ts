@@ -1,6 +1,6 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
@@ -539,7 +539,7 @@ export class LocationBodyTickBite extends Item {
 export class RemoveTick1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    no: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -566,7 +566,7 @@ export class RemoveTick1 extends Item {
           ])
         },
         {
-          key: this.optionKeys.nameOfOption, role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -923,6 +923,12 @@ export class DateTickBite extends Item {
         ['nl', 'Wanneer heb je de tekenbeet (vermoedelijk) opgelopen?'],
       ]),
       responseOptions: [
+        SingleChoiceOptionTypes.timeInput({
+          key: '2',
+          inputLabelText: new Map([["nl", " en "],]),
+          labelBehindInput: true
+          //inputLabel: new Map([["nl", " en"],]),
+        }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
         SCOptions.cloze({
           key: 'a', items: [
             ClozeItemTypes.text({
@@ -930,18 +936,14 @@ export class DateTickBite extends Item {
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            ClozeItemTypes.numberInput({
+            SingleChoiceOptionTypes.timeInput({
               key: '2',
-              inputLabel: new Map([["nl", " en"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
+              inputLabelText: new Map([["nl", " en "],]),
+              labelBehindInput: true
+              //inputLabel: new Map([["nl", " en"],]),
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
             ClozeItemTypes.numberInput({
-              key: '3',
+              key: '4',
               inputLabel: new Map([["nl", " uur"],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
@@ -1161,7 +1163,7 @@ export class DurationTickBite extends Item {
 export class DoctorTickBite extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

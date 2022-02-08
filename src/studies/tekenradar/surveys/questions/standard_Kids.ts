@@ -1358,7 +1358,7 @@ export class Functioning3F4_Kids extends Item {
 export class Functioning4F1_Kids extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

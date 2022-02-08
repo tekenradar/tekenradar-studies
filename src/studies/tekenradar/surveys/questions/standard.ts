@@ -1958,7 +1958,7 @@ Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of
 export class MedCare1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes_number: 'a'
   }
 
 
@@ -2888,7 +2888,7 @@ export class Awareness8 extends Item {
 export class QuestionsKids1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    parent: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

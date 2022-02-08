@@ -52,26 +52,26 @@ class LBflow_AdultsDef extends SurveyDefinition {
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
 
     this.Q10 = new LymeDiagnosis1(this.key, required);
-    const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.nameOfOption);
+    const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.yes);
     this.Q11 = new LymeDiagnosis2(this.key, required, Q10condition);
     this.Q12 = new LymeDiagnosis3(this.key, required);
     this.Q13 = new LymeDiagnosis4(this.key, required);
     this.Q14 = new LymeDiagnosis5(this.key, required, Q10condition);
 
     this.Q15 = new LymeDiagnosis6(this.key, required);
-    const Q15condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
+    const Q15condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
     this.Q16 = new LymeDiagnosis7(this.key, required, Q15condition);
 
     this.Q17 = new LymeTherapy1(this.key, required);
-    const Q17conditionTabletten = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten);
-    const Q17conditionInfuus = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionInfuus);
-    const Q17conditionAnyMed = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten, this.Q17.optionKeys.nameOfOptionInfuus);
+    const Q17conditionTabletten = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Tabletten);
+    const Q17conditionInfuus = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Infuus);
+    const Q17conditionAnyMed = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Tabletten, this.Q17.optionKeys.Infuus);
     this.Q18 = new LymeTherapy2(this.key, required, Q17conditionTabletten);
     this.Q19 = new LymeTherapy3(this.key, required, Q17conditionInfuus);
 
 
     this.Q20 = new LymeTherapy4(this.key, required, Q17conditionAnyMed);
-    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.nameOfOption);
+    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
     this.Q21 = new LymeTherapy5(this.key, required, Q20condition);
 
     this.G22_24 = new FormerLymeGroup(this.key, isRequired);

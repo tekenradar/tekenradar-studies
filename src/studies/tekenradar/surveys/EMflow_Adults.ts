@@ -55,7 +55,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.Q12 = new EM3(this.key, required);
     //TODO: if EM < 5cm, exclusion from lyme studies by setting flag
     this.Q13 = new DoctorEM(this.key, required);
-    const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.nameOfOption);
+    const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.yes);
 
     this.Q14 = new Doctor(this.key, required, Q13condition);
     this.Q15 = new EM4(this.key, required, Q13condition);
@@ -63,10 +63,10 @@ class EMflow_AdultsDef extends SurveyDefinition {
 
     this.Q16 = new LymeTherapy1(this.key, required);
     ////TODO: if b from LymeTherapy1 is selected, exclusion from lyme studies by setting flag
-    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.nameOfOptionTabletten);
+    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.Tabletten);
     this.Q17 = new LymeTherapy2(this.key, required, Q16condition);
     this.Q18 = new LymeTherapy4(this.key, required, Q16condition);
-    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.nameOfOption);
+    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.yes);
     this.Q19 = new LymeTherapy5(this.key, required, Q18condition);
 
     this.G20_22 = new FormerLymeGroup(this.key, isRequired);

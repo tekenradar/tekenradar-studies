@@ -15,7 +15,7 @@ export class PreviousTickBitesGroup extends Group {
 
 
         this.Q1 = new PreviousTickBites1(this.key, isRequired);
-        const q1Condition = SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.nameOfOption);
+        const q1Condition = SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.none);
         this.Q2 = new PreviousTickBites2(this.key, isRequired, q1Condition);
 
     }
@@ -33,7 +33,7 @@ class PreviousTickBites1 extends Item {
 
   //TODO bold text "in de afgelopen 5 jaar" or not (inconsistent in questionnaires --> ask RIVM)?
     optionKeys = {
-        nameOfOption: 'a'
+        none: 'a'
     }
 
     questionTextMain1 = [
