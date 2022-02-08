@@ -3,7 +3,7 @@ import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { Doctor, FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
@@ -650,21 +650,17 @@ export class RemoveTick3 extends Item {
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            ClozeItemTypes.dropDown({
-              key: '2', options: this.drop_options
-            }),
-            ClozeItemTypes.text({
-              key: '3', content: new Map(
-                [['nl', " en "]]
-              )
-            }),
-            ClozeItemTypes.dropDown({
-              key: '4', options: this.drop_options
+            ClozeItemTypes.timeInput({
+              key: '2',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
+              labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.text({
-              key: '5', content: new Map(
-                [['nl', " uur"]]
-              )
+            ClozeItemTypes.timeInput({
+              key: '3',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
+              labelBehindInput: true,
             }),
           ]
         }),
@@ -675,21 +671,17 @@ export class RemoveTick3 extends Item {
                 [['nl', "Gisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.dropDown({
-              key: '2', options: this.drop_options
-            }),
-            ClozeItemTypes.text({
-              key: '3', content: new Map(
-                [['nl', " en "]]
-              )
-            }),
-            ClozeItemTypes.dropDown({
-              key: '4', options: this.drop_options
+            ClozeItemTypes.timeInput({
+              key: '2',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
+              labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.text({
-              key: '5', content: new Map(
-                [['nl', " uur"]]
-              )
+            ClozeItemTypes.timeInput({
+              key: '3',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
+              labelBehindInput: true,
             }),
           ]
         }),
@@ -700,21 +692,17 @@ export class RemoveTick3 extends Item {
                 [['nl', "Eergisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.dropDown({
-              key: '2', options: this.drop_options
-            }),
-            ClozeItemTypes.text({
-              key: '3', content: new Map(
-                [['nl', " en "]]
-              )
-            }),
-            ClozeItemTypes.dropDown({
-              key: '4', options: this.drop_options
+            ClozeItemTypes.timeInput({
+              key: '2',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
+              labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.text({
-              key: '5', content: new Map(
-                [['nl', " uur"]]
-              )
+            ClozeItemTypes.timeInput({
+              key: '3',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
+              labelBehindInput: true,
             }),
           ]
         }),
@@ -744,21 +732,17 @@ export class RemoveTick3 extends Item {
                 [['nl', "tussen"]]
               )
             }),
-            ClozeItemTypes.dropDown({
-              key: '5', options: this.drop_options
-            }),
-            ClozeItemTypes.text({
-              key: '6', content: new Map(
-                [['nl', " en "]]
-              )
-            }),
-            ClozeItemTypes.dropDown({
-              key: '7', options: this.drop_options
+            ClozeItemTypes.timeInput({
+              key: '5',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
+              labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.text({
-              key: '8', content: new Map(
-                [['nl', " uur"]]
-              )
+            ClozeItemTypes.timeInput({
+              key: '6',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
+              labelBehindInput: true,
             }),
           ]
         }),
@@ -923,11 +907,6 @@ export class DateTickBite extends Item {
         ['nl', 'Wanneer heb je de tekenbeet (vermoedelijk) opgelopen?'],
       ]),
       responseOptions: [
-        SingleChoiceOptionTypes.timeInput({
-          key: 'test',
-          inputLabelText: new Map([["nl", " uur "],]),
-          labelBehindInput: true
-        }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
         SCOptions.cloze({
           key: 'a', items: [
             ClozeItemTypes.text({
@@ -935,21 +914,17 @@ export class DateTickBite extends Item {
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            SingleChoiceOptionTypes.timeInput({
+            ClozeItemTypes.timeInput({
               key: '2',
-              inputLabelText: new Map([["nl", " en "],]),
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
               labelBehindInput: true
-              //inputLabel: new Map([["nl", " en"],]),
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.numberInput({
-              key: '4',
-              inputLabel: new Map([["nl", " uur"],]),
+            ClozeItemTypes.timeInput({
+              key: '3',
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
               labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
             }),
           ]
         }),
@@ -960,25 +935,17 @@ export class DateTickBite extends Item {
                 [['nl', "Gisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.numberInput({
+            ClozeItemTypes.timeInput({
               key: '2',
-              inputLabel: new Map([["nl", " en"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
+              labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.numberInput({
+            ClozeItemTypes.timeInput({
               key: '3',
-              inputLabel: new Map([["nl", " uur"],]),
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
               labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
             }),
           ]
         }),
@@ -989,25 +956,17 @@ export class DateTickBite extends Item {
                 [['nl', "Eergisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.numberInput({
+            ClozeItemTypes.timeInput({
               key: '2',
-              inputLabel: new Map([["nl", " en"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
+              labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.numberInput({
+            ClozeItemTypes.timeInput({
               key: '3',
-              inputLabel: new Map([["nl", " uur"],]),
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
               labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
             }),
           ]
         }),
@@ -1037,25 +996,17 @@ export class DateTickBite extends Item {
                 [['nl', "tussen"]]
               )
             }),
-            ClozeItemTypes.numberInput({
+            ClozeItemTypes.timeInput({
               key: '5',
-              inputLabel: new Map([["nl", " en"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " en"],]),
+              labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.numberInput({
+            ClozeItemTypes.timeInput({
               key: '6',
-              inputLabel: new Map([["nl", " uur"],]),
+              defaultValue: '13:00',
+              inputLabelText: new Map([["nl", " uur"],]),
               labelBehindInput: true,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 24
-              }
             }),
           ]
         }),
@@ -1098,7 +1049,7 @@ export class DurationTickBite extends Item {
               inputMaxWidth: '80px',
               componentProperties: {
                 min: 0,
-                max: 12
+                max: 12,
               }
             }),
           ]
@@ -1128,22 +1079,21 @@ export class DurationTickBite extends Item {
               key: '1', content: new Map(
                 [['nl', "Langer dan 24 uur, namelijk"]]
               )
-            }),//NOTE: I split this text field into two number input fields.
-            ClozeItemTypes.numberInput({
-              key: '2',
-              inputLabel: new Map([["nl", " dagen"],]),
-              labelBehindInput: true,
-              inputMaxWidth: '80px',
             }),
             ClozeItemTypes.numberInput({
-              key: '3',
-              inputLabel: new Map([["nl", " uur (rond a.u.b. af op hele dagen)"],]),
+              key: '2',
+              inputLabel: new Map([["nl", " "],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
               componentProperties: {
                 min: 0,
-                max: 24
               }
+            }),
+            ClozeItemTypes.dropDown({
+              key: '3', options: [
+                SCOptions.option('1', new Map([['nl', "uren"]])),
+                SCOptions.option('2', new Map([['nl', "dagen (rond a.u.b. af op hele dagen)"]]))
+              ]
             }),
           ]
         }),
