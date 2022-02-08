@@ -43,13 +43,13 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: 'Standardflow_Adults',
       name: new Map([
-        ['nl', 'Test']
+        ['nl', 'Tekenradarvragenlijst']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je melding af te ronden.']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Invullen duurt ongeveer 10 minuten.']
       ]),
     });
 

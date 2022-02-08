@@ -12,13 +12,13 @@ class EMfoto_Def extends SurveyDefinition {
     super({
       surveyKey: 'EMfoto',
       name: new Map([
-        ['nl', 'Upload a photo']
+        ['nl', 'Foto van rode ring of vlek (erythema migrans) uploaden']
       ]),
       description: new Map([
-        ['nl', 'Test']
+        ['nl', 'Klik hier om je foto te uploaden']
       ]),
       durationText: new Map([
-        ['nl', 'Test']
+        ['nl', 'Uploaden duurt minder dan 1 minuut']
       ]),
     });
 
