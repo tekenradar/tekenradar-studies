@@ -2,7 +2,7 @@ import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
-import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
@@ -13,7 +13,7 @@ export class FeverGroup extends Group {
 
   G1_11: TickBiteOtherGroup;
   G12_14: FormerLymeGroup;
-  Q15: GeneralTherapy;
+  Q15: GeneralTherapy1;
 
   T1: FeverText;
   Q16: FeverSymptom1;
@@ -42,18 +42,18 @@ export class FeverGroup extends Group {
 
     this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
     this.G12_14 = new FormerLymeGroup(this.key, isRequired);
-    this.Q15 = new GeneralTherapy(this.key, required);
+    this.Q15 = new GeneralTherapy1(this.key, required);
 
     this.T1 = new FeverText(this.key, required);
     this.Q16 = new FeverSymptom1(this.key, required);
-    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.nameOfOption);
+    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.yes);
     this.Q17 = new FeverSymptom2(this.key, required, Q16condition);
     this.Q18 = new FeverSymptom3(this.key, required, Q16condition);
-    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.nameOfOption);
+    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.no);
     this.Q19 = new FeverSymptom4(this.key, required, Q18condition);
-    const Q19condition = SurveyEngine.singleChoice.any(this.Q19.key, this.Q19.optionKeys.nameOfOption);
+    const Q19condition = SurveyEngine.singleChoice.any(this.Q19.key, this.Q19.optionKeys.yes);
     this.Q20 = new FeverSymptom5(this.key, required, Q19condition);
-    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.nameOfOption);
+    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
 
 
     const Q18_20condition = SurveyEngine.logic.or(SurveyEngine.logic.not(Q18condition), Q20condition);
@@ -64,7 +64,7 @@ export class FeverGroup extends Group {
     this.Q23 = new FeverTherapy(this.key, required, Q16condition);
 
     this.Q24 = new FeverOtherCause1(this.key, required);
-    const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nameOfOption);
+    const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nothing);
     this.Q25 = new FeverOtherCause2(this.key, required, Q24condition);
     this.Q26 = new FeverOtherCause3(this.key, required, Q24condition);
     this.Q27 = new FeverOtherCause4(this.key, required, Q24condition);
@@ -142,7 +142,7 @@ export class FeverText extends Item {
 export class FeverSymptom1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -266,7 +266,7 @@ export class FeverSymptom2 extends Item {
 export class FeverSymptom3 extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    no: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -307,7 +307,7 @@ export class FeverSymptom3 extends Item {
 export class FeverSymptom4 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -348,7 +348,7 @@ export class FeverSymptom4 extends Item {
 export class FeverSymptom5 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -519,7 +519,7 @@ export class FeverTherapy extends Item {
 export class FeverOtherCause1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'h'
+    nothing: 'h'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

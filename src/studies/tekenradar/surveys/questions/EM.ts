@@ -28,7 +28,7 @@ export class EMGroup extends Group {
   G20_22: FormerLymeGroup;
   G23_24: PreviousTickBitesGroup;
 
-  T1: PhotoEM;
+  T1: PhotoEM_Text;
 
   //TODO: example photo and photo upload Here
 
@@ -48,7 +48,7 @@ export class EMGroup extends Group {
     this.Q12 = new EM3(this.key, required);
     //TODO: if EM < 5cm, exclusion from lyme studies by setting flag
     this.Q13 = new DoctorEM(this.key, required);
-    const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.nameOfOption);
+    const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.yes);
 
     this.Q14 = new Doctor(this.key, required, Q13condition);
     this.Q15 = new EM4(this.key, required, Q13condition);
@@ -56,16 +56,16 @@ export class EMGroup extends Group {
 
     this.Q16 = new LymeTherapy1(this.key, required);
     ////TODO: if b from LymeTherapy1 is selected, exclusion from lyme studies by setting flag
-    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.nameOfOptionTabletten);
+    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.Tabletten);
     this.Q17 = new LymeTherapy2(this.key, required, Q16condition);
     this.Q18 = new LymeTherapy4(this.key, required, Q16condition);
-    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.nameOfOption);
+    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.yes);
     this.Q19 = new LymeTherapy5(this.key, required, Q18condition);
 
     this.G20_22 = new FormerLymeGroup(this.key, isRequired);
     this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
-    this.T1 = new PhotoEM(this.key, required);
+    this.T1 = new PhotoEM_Text(this.key, required);
 
   }
 
@@ -97,8 +97,8 @@ export class EMGroup extends Group {
 export class EMTextKids extends Item {
 
   markdownContent = `
-  De vragen hieronder zijn voor een minderjarige.
-  Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+  ##### De vragen hieronder zijn voor een minderjarige.
+  ##### Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
   `
 
@@ -255,7 +255,7 @@ export class EM3 extends Item {
 export class DoctorEM extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -331,7 +331,7 @@ export class EM4 extends Item {
 }
 
 
-export class PhotoEM extends Item {
+export class PhotoEM_Text extends Item {
 
   markdownContent = `
   # Uploaden foto
@@ -343,7 +343,7 @@ export class PhotoEM extends Item {
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PhotoEM');
+    super(parentKey, 'PhotoEMT');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -362,6 +362,29 @@ export class PhotoEM extends Item {
           className: ''
         })
       ]
+    })
+  }
+}
+
+
+//TODO Peter: upload function photo here
+export class UploadPhotoEM extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PhotoEM');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Selecteer hier de foto van je erythema migrans of andere huidafwijking'],
+      ]),
     })
   }
 }

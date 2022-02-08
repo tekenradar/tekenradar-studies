@@ -1,8 +1,11 @@
 import { Expression } from 'survey-engine/data_types';
 import { Item, Group } from 'case-editor-tools/surveys/types';
-import { SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { ParticipantFlags } from '../../participantFlags';
+import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
+//import { isExpressionStatement } from 'typescript';
 
 
 
@@ -11,6 +14,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 export class AwarenessGroup extends Group {
 
   T1: AwarenessText;
+  T1_Kids: AwarenessText_Kids;
   Q1: Awareness1;
   Q2: Awareness2;
   Q3: Awareness3;
@@ -21,13 +25,17 @@ export class AwarenessGroup extends Group {
   Q8: Awareness8;
 
   constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'LymeG');
+    super(parentKey, 'AwareG');
 
     this.groupEditor.setCondition(condition);
 
     const required = isRequired !== undefined ? isRequired : false;
 
+    const cond_adults = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.ageCategory.key, ParticipantFlags.ageCategory.values.adult);
+    const cond_kids = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.ageCategory.key, ParticipantFlags.ageCategory.values.child);
+
     this.T1 = new AwarenessText(this.key, required);
+    this.T1_Kids = new AwarenessText_Kids(this.key, required);
     this.Q1 = new Awareness1(this.key, required);
     this.Q2 = new Awareness2(this.key, required);
     this.Q3 = new Awareness3(this.key, required);
@@ -41,7 +49,9 @@ export class AwarenessGroup extends Group {
 
   buildGroup() {
 
-    this.addItem(this.T1.get());
+    this.isPartOf('Kids') ? this.addItem(this.T1_Kids.get()) : this.addItem(this.T1.get());
+    //this.addItem(this.T1.get());
+
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
@@ -55,9 +65,176 @@ export class AwarenessGroup extends Group {
 }
 
 
+export class BackgroundHeader extends Item {
 
+  markdownContent = `
+# Achtergrond
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'BackgH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class GenHealthHeader extends Item {
+
+  markdownContent = `
+# Algemene gezondheid
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'GenHH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class SymptomsHeader extends Item {
+
+  markdownContent = `
+# Symptomen
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'SymH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class FatigueHeader extends Item {
+
+  markdownContent = `
+# Vermoeidheid
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'FatH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class CognitionHeader extends Item {
+
+  markdownContent = `
+# Cognitie
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'CogH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
 
 export class Tekenradar extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoe heb je over het onderzoek via Tekenradar.nl gehoord?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'tek');
@@ -72,9 +249,7 @@ export class Tekenradar extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Hoe heb je over het onderzoek via Tekenradar.nl gehoord? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -112,12 +287,11 @@ export class Tekenradar extends Item {
   }
 }
 
-//TODO: why is Markdown not working in this text???
+
 export class StandardText1 extends Item {
 
   markdownContent = `
-    De volgende vraag gebruiken wij alleen om te bekijken of de deelnemers aan het
-    onderzoek een goede afspiegeling zijn van de Nederlandse samenleving.
+##### De volgende vraag gebruiken wij alleen om te bekijken of de deelnemers aan het onderzoek een goede afspiegeling zijn van de Nederlandse samenleving.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -147,6 +321,24 @@ export class StandardText1 extends Item {
 
 export class Qualification extends Item {
 
+
+  questionTextMain_Adults = [
+    {
+      content: new Map([
+        ["nl", 'Wat is je hoogst voltooide opleiding?'],
+      ]),
+    }
+  ]
+
+  questionTextMain_Kids = [
+    {
+      content: new Map([
+        ["nl", 'Wat is de hoogst voltooide opleiding van je moeder /verzorgster (of van je vader/verzorger, als er geen moeder/verzorgster is)?'],
+      ]),
+    }
+  ]
+
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'qual');
 
@@ -160,9 +352,7 @@ export class Qualification extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wat is je hoogst voltooide opleiding?'],
-      ]),
+      questionText: this.isPartOf('Adults') ? this.questionTextMain_Adults : this.questionTextMain_Kids,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -171,7 +361,7 @@ export class Qualification extends Item {
           ])
         },
         {
-          key: 'b', role: 'input',
+          key: 'b', role: 'option',
           content: new Map([
             ["nl", "Lager onderwijs (basisschool, speciaal basisonderwijs)"],
           ])
@@ -189,7 +379,7 @@ export class Qualification extends Item {
           ])
         },
         {
-          key: 'e', role: 'input',
+          key: 'e', role: 'option',
           content: new Map([
             ["nl", "Middelbaar beroepsonderwijs en beroepsbegeleidend onderwijs (zoals MBO-lang, MTS, MEAO, BOL, BBL, INAS)"],
           ])
@@ -201,13 +391,13 @@ export class Qualification extends Item {
           ])
         },
         {
-          key: 'g', role: 'input',
+          key: 'g', role: 'option',
           content: new Map([
             ["nl", "Hoger beroepsonderwijs (zoals HBO, HTS, HEAO, kandidaatswetenschappelijk onderwijs)"],
           ])
         },
         {
-          key: 'h', role: 'input',
+          key: 'h', role: 'option',
           content: new Map([
             ["nl", "Wetenschappelijk onderwijs (universiteit)"],
           ])
@@ -218,14 +408,71 @@ export class Qualification extends Item {
 }
 
 
+export class SymptomsText1_Kids extends Item {
+
+  markdownContent = `
+# Algemene gezondheid
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'SyText1_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
 
 export class Symptoms1 extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke lichamelijke en psychische problemen heb je? Kruis aan welke problemen je nu hebt. Kruis ook aan welke problemen je nog meer hebt gehad in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 12 maanden"],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", ". Je kunt dus meer dan 1 hokje aankruisen."],
+      ]),
+    },
+  ]
+
+  condition_u18: Expression;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Sym1');
 
     this.isRequired = isRequired;
     this.condition = condition;
+    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
   }
 
   buildItem() {
@@ -234,9 +481,7 @@ export class Symptoms1 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke lichamelijke en psychische problemen heb je? Kruis aan welke problemen je nu hebt. Kruis ook aan welke problemen je nog meer hebt gehad in de afgelopen 12 maanden. Je kunt dus meer dan 1 hokje aankruisen.'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 't1', role: 'text',
@@ -349,7 +594,8 @@ export class Symptoms1 extends Item {
           key: 'm', role: 'option',
           content: new Map([
             ["nl", "Verzakking"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 't6', role: 'text',
@@ -380,14 +626,15 @@ export class Symptoms1 extends Item {
         {
           key: 'p', role: 'option',
           content: new Map([
-            ["nl", "Rugaandoening van hardnekkige aard, langer dan 3 maanden,of hernia"],
+            ["nl", "Rugaandoening van hardnekkige aard, langer dan 3 maanden, of hernia"],
           ])
         },
         {
           key: 'q', role: 'option',
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'r', role: 'option',
@@ -414,7 +661,7 @@ export class Symptoms1 extends Item {
             ["nl", "Epilepsie"],
           ])
         },
-        {
+        {//TODO - other words for kids
           key: 'u', role: 'option',
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
@@ -485,13 +732,15 @@ export class Symptoms1 extends Item {
           key: 'ae', role: 'option',
           content: new Map([
             ["nl", "Alcoholverslaving"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'af', role: 'option',
           content: new Map([
             ["nl", "Drugsverslaving"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'ag', role: 'option',
@@ -523,14 +772,50 @@ export class Symptoms1 extends Item {
 }
 
 
+export class SymptomsText2_Kids extends Item {
+
+  markdownContent = `
+# Symptomen
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'SyText2_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 export class Symptoms2 extends Item {
+
+  condition_u18: Expression;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Sym2');
 
     this.isRequired = isRequired;
     this.condition = condition;
+    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
   }
 
   buildItem() {
@@ -577,18 +862,21 @@ export class Symptoms2 extends Item {
             ["nl", "Pijn in je armen, benen of gewrichten (knieën, heupen, enz.)"],
           ])
         },
-        {//TODO: this option only for females
+        {
           key: 'd',
           content: new Map([
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
-          //disabled: SurveyEngine.singleChoice.any(,'b')???
+          displayCondition: SurveyEngine.logic.and(
+            SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
+            SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
         },
         {
           key: 'e',
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
-          ])
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'f',
@@ -736,7 +1024,7 @@ export class Symptoms3 extends Item {
           ])
         },
         {
-          key: 'b', role: 'input',
+          key: 'b', role: 'option',
           content: new Map([
             ["nl", "Veel"],
           ])
@@ -754,7 +1042,7 @@ export class Symptoms3 extends Item {
           ])
         },
         {
-          key: 'e', role: 'input',
+          key: 'e', role: 'option',
           content: new Map([
             ["nl", "Ik heb geen klachten"],
           ])
@@ -811,12 +1099,12 @@ export class Pregnant extends Item {
 export class FunctioningText extends Item {
 
   markdownContent = `
-    # Functioneren
+# Functioneren
 
-    In deze vragenlijst wordt naar je gezondheid gevraagd.
-    Wanneer je twijfelt over het antwoord op een vraag, probeer dan het antwoord te geven dat het meest van toepassing is.
+In deze vragenlijst wordt naar je gezondheid gevraagd.
+Wanneer je twijfelt over het antwoord op een vraag, probeer dan het antwoord te geven dat het meest van toepassing is.
 
-    De volgende vragen gaan over dagelijkse bezigheden.
+De volgende vragen gaan over dagelijkse bezigheden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1264,8 +1552,14 @@ export class Fatigue extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Met behulp van de volgende uitspraken willen wij een indruk krijgen van hoe je jezelf de laatste twee weken hebt gevoeld. Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel. Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: Ik voel me ontspannen: ja, dat klopt'],
+        ["nl", 'Met behulp van de volgende uitspraken willen wij een indruk krijgen van hoe je jezelf'],
       ]),
+    },
+    {
+      content: new Map([
+        ["nl", " de laatste twee weken hebt gevoeld."],
+      ]),
+      className: "text-primary"
     }
   ]
 
@@ -1284,14 +1578,71 @@ export class Fatigue extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      topDisplayCompoments: [//TODO: this is copied from longcovid survey and probably out of date. Update to latest syntax
+        {
+          role: 'text',
+          style: [{ key: 'variant', value: 'p' }],
+          content: generateLocStrings(new Map([
+            ["nl", 'Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel.'],
+          ]))
+        },
+
+        {
+          role: 'text',
+          style: [{ key: 'variant', value: 'p' }],
+          content: generateLocStrings(new Map([
+            ["nl", 'Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: '],
+          ]))
+        },
+        {
+          role: 'text',
+          style: [{ key: 'variant', value: 'p' }],
+          content: generateLocStrings(new Map([
+            ["nl", "Ik voel me ontspannen: ja, dat klopt"],
+          ]))
+        },
+        //ComponentGenerators.markdown({
+        //    content: new Map([
+        //        ['nl', imageContent]
+        //    ])
+        //}),
+        {
+          role: 'text',
+          style: [{ key: 'className', value: 'mb-1 border-bottom border-1 border-grey-5 pt-1 mt-2 fw-bold' }],
+          content: generateLocStrings(new Map([
+            ["nl", "1 = ja, dat klopt, 7 = nee, dat klopt niet"],
+          ]))
+        },
+
+      ],
       scaleOptions: [
         {
           key: '1', content: new Map([
-            ["nl", "Ja, dat klopt"],
+            ["nl", "1 ja, dat klopt"],
           ])
         }, {
           key: '2', content: new Map([
-            ["nl", "Nee, dat klopt niet"],
+            ["nl", "2"],
+          ])
+        }, {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ]),
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        }, {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        }, {
+          key: '7', content: new Map([
+            ["nl", "7 nee, dat klopt niet"],
           ])
         }
       ],
@@ -1570,7 +1921,12 @@ export class Cognition extends Item {
 export class MedCareText1 extends Item {
 
   markdownContent = `
-    Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
+# Zorgconsumptie
+
+De vragen hieronder zijn voor een minderjarige.
+Bent u een ouder/verzorger dan kunt u de antwoorden invullen voor/over uw kind.
+
+Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1602,7 +1958,7 @@ export class MedCareText1 extends Item {
 export class MedCare1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes_number: 'a'
   }
 
 
@@ -1642,10 +1998,14 @@ export class MedCare1 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: 'a', role: 'numberInput',
           content: new Map([
-            ["nl", "Ja"],
-          ])
+            ["nl", "Ja, aantal zorgverleners:"],
+          ]),
+          optionProps: {
+            min: 0,
+            max: 5,
+          }
         },
         {
           key: 'b', role: 'option',
@@ -1659,11 +2019,10 @@ export class MedCare1 extends Item {
 }
 
 
-
 export class MedCareText2 extends Item {
 
   markdownContent = `
-  Met zorgverleners bedoelen wij je huisarts, specialist, fysiotherapeut, psycholoog, maatschappelijkwerker, homeopaat, logopedist of andere arts, therapeut of zorgconsulent.
+  ##### Met zorgverleners bedoelen wij je huisarts, specialist, fysiotherapeut, psycholoog, maatschappelijkwerker, homeopaat, logopedist of andere arts, therapeut of zorgconsulent.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -1694,11 +2053,22 @@ export class MedCareText2 extends Item {
 
 export class MedCare2 extends Item {
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  condition2: Expression;
+  condition3: Expression;
+  condition4: Expression;
+  condition5: Expression;
+
+
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'MedC2');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.condition = SurveyEngine.compare.gt(condition, 0);
+    this.condition2 = SurveyEngine.compare.gt(condition, 1);
+    this.condition3 = SurveyEngine.compare.gt(condition, 2);
+    this.condition4 = SurveyEngine.compare.gt(condition, 3);
+    this.condition5 = SurveyEngine.compare.gt(condition, 4);
+
   }
 
   buildItem() {
@@ -1707,42 +2077,162 @@ export class MedCare2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([["nl","Met welke zorgverleners heb je contact gehad in de afgelopen 3 maanden? En hoe vaak?"]]),
-      items: [
-        ClozeItemTypes.text({
-          key: '1', content: new Map(
-            [['nl', "Zorgverlener:"]]
-          )
-        }),
-        ClozeItemTypes.textInput({
-          key: '2',
-        }),
-        ClozeItemTypes.text({
-          key: '3', content: new Map(
-            [['nl', "Aantal contacten:"]]
-          )
-        }),
-        ClozeItemTypes.textInput({
-          key: '4',
-        })
-      ]
+      questionText: new Map([
+        ['nl', "Met welke zorgverleners heb je contact gehad in de afgelopen 3 maanden? En hoe vaak?"],
+      ]),
+      items:
+        [
+          ClozeItemTypes.text({
+            key: '1', content: new Map(
+              [['nl', "1. Zorgverlener:"]]
+            ),
+          }),
+          ClozeItemTypes.textInput({
+            key: '2',
+          }),
+          ClozeItemTypes.text({
+            key: '3', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+          }),
+          ClozeItemTypes.numberInput({
+            key: '4',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            }
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //2nd Zorgverlener:
+          ClozeItemTypes.text({
+            key: '5', content: new Map(
+              [['nl', "2. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.textInput({
+            key: '6',
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.text({
+            key: '7', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.numberInput({
+            key: '8',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //3rd Zorgverlener:
+          ClozeItemTypes.text({
+            key: '9', content: new Map(
+              [['nl', "3. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.textInput({
+            key: '10',
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.text({
+            key: '11', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.numberInput({
+            key: '12',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //4th Zorgverlener:
+          ClozeItemTypes.text({
+            key: '13', content: new Map(
+              [['nl', "4. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.textInput({
+            key: '14',
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.text({
+            key: '15', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.numberInput({
+            key: '16',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          //5th Zorgverlener:
+          ClozeItemTypes.text({
+            key: '17', content: new Map(
+              [['nl', "5. Zorgverlener:"]]
+            ),
+            displayCondition: this.condition5
+          }),
+          ClozeItemTypes.textInput({
+            key: '18',
+            displayCondition: this.condition5
+          }),
+          ClozeItemTypes.text({
+            key: '19', content: new Map(
+              [['nl', "aantal contacten:"]]
+            ),
+            displayCondition: this.condition5
+          }),
+          ClozeItemTypes.numberInput({
+            key: '20',
+            inputMaxWidth: '70px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
+            displayCondition: this.condition5
+          }),
+        ],
     })
   }
 }
 
 
-
 export class MedCareText3 extends Item {
 
   markdownContent = `
-  Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
+##### Tel voor het aantal contacten alle controles, spreekuren, bezoeken op afspraak, telefonische contacten en huisbezoeken mee. Telefonische contacten om een afspraak te maken dienen niet meegeteld te worden. Als je een antwoord niet precies weet, mag je gerust een schatting geven.
     `
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'MedCText3');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.condition = SurveyEngine.compare.gt(condition, 0);
   }
 
   buildItem() {
@@ -1765,7 +2255,11 @@ export class MedCareText3 extends Item {
 
 export class AwarenessText extends Item {
 
-  markdownContent = 'Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:'
+  markdownContent = `
+# KLACHTEN PERCEPTIE
+
+Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:
+`
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'AwareT');
@@ -1792,6 +2286,42 @@ export class AwarenessText extends Item {
   }
 }
 
+
+export class AwarenessText_Kids extends Item {
+
+  markdownContent = `
+# KLACHTEN PERCEPTIE
+
+De vragen hieronder zijn voor een minderjarige.
+Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
+
+Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
+`
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'AwareT');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
 
 
 export class Awareness1 extends Item {
@@ -1842,18 +2372,18 @@ export class Awareness1 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -1911,22 +2441,22 @@ export class Awareness2 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Heel erg kort']
+          ]),
+          endLabel: new Map([
+            ['de', 'Mijn hele leven']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
-    }
+      }
     })
   }
 }
@@ -1980,18 +2510,18 @@ export class Awareness3 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal geen beheersing']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel beheersing']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen beheersing']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel beheersing']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2004,10 +2534,18 @@ export class Awareness3 extends Item {
 
 export class Awareness4 extends Item {
 
-  questionTextMain = [
+  questionTextMain_Adults = [
     {
       content: new Map([
         ["nl", 'In hoeverre denk je dat je behandeling helpt bij de erythema migrans of andere ziekte van lyme?'],
+      ]),
+    }
+  ]
+
+  questionTextMain_Kids = [
+    {
+      content: new Map([
+        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van lyme?'],
       ]),
     }
   ]
@@ -2026,7 +2564,7 @@ export class Awareness4 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.questionTextMain,
+      questionText: this.isPartOf('Kids') ? this.questionTextMain_Kids : this.questionTextMain_Adults,
       scaleOptions: [
         {
           key: '0',
@@ -2050,18 +2588,18 @@ export class Awareness4 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helemaal niet']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Uitermate veel']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal niet']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2119,18 +2657,18 @@ export class Awareness5 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen klachten']
+          ]),
+          endLabel: new Map([
+            ['de', 'Veel ernstige klachten']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2188,18 +2726,18 @@ export class Awareness6 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal niet bezorgd']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer bezorgd']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2257,18 +2795,18 @@ export class Awareness7 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Ik begrijp mijn ziekte helemaal niet']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Ik begrijp mijn ziekte helemaal']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Ik begrijp mijn ziekte helemaal niet']
+          ]),
+          endLabel: new Map([
+            ['de', 'Ik begrijp mijn ziekte helemaal']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
@@ -2326,23 +2864,147 @@ export class Awareness8 extends Item {
           key: '9',
         }, {
           key: '10',
-      },
+        },
       ],
       rows: [
-          {
-            key: 'a',
-              startLabel: new Map([
-                  ['de', 'Helmaal geen invloed']
-              ]),
-              endLabel: new Map([
-                  ['de', 'Zeer veel invloed']
-              ]),
-          },
+        {
+          key: 'a',
+          startLabel: new Map([
+            ['de', 'Helemaal geen invloed']
+          ]),
+          endLabel: new Map([
+            ['de', 'Zeer veel invloed']
+          ]),
+        },
       ],
       withLabelRowModeProps: {
         useBottomLabel: true,
-    }
+      }
     })
   }
 }
 
+
+export class QuestionsKids1 extends Item {
+
+  optionKeys = {
+    parent: 'b'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'QuKids1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wie vult op dit moment de vragen in deze vragenlijst in?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Ikzelf, degene jonger dan 18 jaar"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Een ouder/verzorger van degene jonger dan 18 jaar"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+export class QuestionsKids2 extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke ouder/verzorger vult op dit moment de vragen in?'],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'QuKids2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Moeder"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Vader"],
+          ])
+        },
+        {
+          key: 'c', role: 'input',
+          content: new Map([
+            ["nl", "Anders namelijk:"],
+          ])
+        }
+      ]
+    })
+  }
+}
+
+
+
+
+export class TextQUKids extends Item {
+
+  markdownContent = `
+##### Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TextQuKids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}

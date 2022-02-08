@@ -10,7 +10,7 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 export class Text1FU extends Item {
 
   markdownContent = `
-    De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
+##### De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -38,12 +38,47 @@ export class Text1FU extends Item {
 }
 
 
+export class ThreeMonthsText_Kids extends Item {
+
+  markdownContent = `
+# 3 maanden
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'M3Text_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
 
 
 export class NewTB extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    yes: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -84,7 +119,7 @@ export class NewTB extends Item {
 export class ReportedTB2 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    no: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -176,7 +211,7 @@ export class PreviousTickBites3 extends Item {
 export class FeverFU1 extends Item {
 
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -240,7 +275,12 @@ export class FeverFU2 extends Item {
 export class Text2FU extends Item {
 
   markdownContent = `
-    De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
+# Diagnoses
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+
+De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -271,7 +311,7 @@ export class Text2FU extends Item {
 export class LymeFU extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    yes: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -309,6 +349,39 @@ export class LymeFU extends Item {
 }
 
 
+export class MedicationFUText_Kids extends Item {
+
+  markdownContent = `
+# Behandeling
+
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'MedTextFU_Kids');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 export class MedicationFU1 extends Item {
 
   questionTextMain = [
@@ -325,7 +398,7 @@ export class MedicationFU1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "medicijnen gebruikt?  (de anti conceptie pil niet meerekenen) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "],
+        ["nl", "medicijnen gebruikt?  (De anti conceptie pil niet meerekenen.) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "],
       ]),
     },
   ]
@@ -355,12 +428,12 @@ export class MedicationFU1 extends Item {
           key: 'b', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "Ja, namelijk "]]
+                [['en', "Ja, aantal medicijnen "]]
               )
             }),
             ClozeItemTypes.numberInput({
               key: '2',
-              inputLabel: new Map([["nl", "bij benadering"],]),
+              inputLabel: new Map([["nl", ""],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
               componentProperties: {
@@ -402,7 +475,6 @@ export class MedicationFU2 extends Item {
 
   }
 
-  //TODO: ask this question for each medicin of former answer
   buildItem() {
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
@@ -411,9 +483,6 @@ export class MedicationFU2 extends Item {
       condition: this.condition,
       questionText: new Map([//TODO: insert proper question text
         ['nl', 'Info per medication'],
-      ]),
-      footnoteText: new Map([//TODO: is this writtem at the end of question?
-        ['nl', 'Als je de dosis niet weet kun je die overslaan'],
       ]),
       items:
         [
@@ -508,7 +577,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '17', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition2
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
@@ -586,7 +656,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '29', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition3
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
@@ -664,7 +735,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '41', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition4
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
@@ -742,7 +814,8 @@ export class MedicationFU2 extends Item {
           ClozeItemTypes.text({
             key: '53', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            )
+            ),
+            displayCondition: this.condition5
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({

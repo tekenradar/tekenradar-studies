@@ -40,20 +40,20 @@ export class Age extends Item {
 export class Residence extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Res');
+    super(parentKey, 'P1');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
 
   buildItem() {
-    return SurveyItems.multilineTextInput({
+    return SurveyItems.textInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Woonplaats van de persoon met de tekenbeet:'],
+        ['nl', 'Wat zijn de 4 cijfers van je postcode, of wat is je woonplaats?'],
       ]),
       titleClassName: 'sticky-top',
     })
@@ -64,11 +64,11 @@ export class Residence extends Item {
 export class Gender extends Item {
 
   optionKeys = {
-    nameOfOption: 'b'
+    woman: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'gender');
+    super(parentKey, 'P2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -81,7 +81,7 @@ export class Gender extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Geslacht.'],
+        ['nl', 'Wat is je geslacht?'],
       ]),
       responseOptions: [
         {
@@ -100,6 +100,12 @@ export class Gender extends Item {
           key: 'c', role: 'option',
           content: new Map([
             ["nl", "Geen van bovenstaande"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Wil ik niet zeggen"],
           ])
         },
       ]

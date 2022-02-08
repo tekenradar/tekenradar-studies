@@ -1,7 +1,9 @@
 import { Item, SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { SingleChoiceOptionTypes, SurveyItems, ClozeItemTypes, MultipleChoiceOptionTypes } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes, SurveyItems, ClozeItemTypes, MultipleChoiceOptionTypes, SurveyEngine } from 'case-editor-tools/surveys';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 import { optionDefToItemComponent } from 'case-editor-tools/surveys/responseTypeGenerators/optionGroupComponents';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { ParticipantFlags } from '../participantFlags';
 
 class SingleChoiceExample extends Item {
   constructor(parentKey: string, isRequired: boolean) {
@@ -19,6 +21,27 @@ class SingleChoiceExample extends Item {
       questionText: new Map([
         ['nl', 'Simple single choice question'],
       ]),
+      topDisplayCompoments: [
+        ComponentGenerators.text({
+          content: new Map([['nl', 'is logged in']]),
+          displayCondition: SurveyEngine.isLoggedIn(),
+        }),
+        ComponentGenerators.text({
+          content: new Map([['nl', 'flag has key condition true']]),
+          displayCondition: SurveyEngine.participantFlags.hasKey('testKey1'),
+        }),
+        ComponentGenerators.text({
+          content: new Map([['nl', 'flag has key and value condition true']]),
+          displayCondition: SurveyEngine.participantFlags.hasKeyAndValue('testKey2', 'value'),
+        }),
+        ComponentGenerators.text({
+          content: new Map([['nl', 'flag is smaller than 10']]),
+          displayCondition: SurveyEngine.compare.lt(
+            SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key),
+            10
+          )
+        }),
+      ],
       responseOptions: [
         SingleChoiceOptionTypes.option('1',
           new Map([
@@ -29,7 +52,7 @@ class SingleChoiceExample extends Item {
           new Map([
             ['nl', 'Nee'],
           ]),
-        )
+        ),
       ]
     })
   }

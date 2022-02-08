@@ -44,26 +44,26 @@ export class LymeGroup extends Group {
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
 
     this.Q10 = new LymeDiagnosis1(this.key, required);
-    const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.nameOfOption);
+    const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.yes);
     this.Q11 = new LymeDiagnosis2(this.key, required, Q10condition);
     this.Q12 = new LymeDiagnosis3(this.key, required);
     this.Q13 = new LymeDiagnosis4(this.key, required);
     this.Q14 = new LymeDiagnosis5(this.key, required, Q10condition);
 
     this.Q15 = new LymeDiagnosis6(this.key, required);
-    const Q15condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.nameOfOption);
+    const Q15condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
     this.Q16 = new LymeDiagnosis7(this.key, required, Q15condition);
 
     this.Q17 = new LymeTherapy1(this.key, required);
-    const Q17conditionTabletten = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten);
-    const Q17conditionInfuus = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionInfuus);
-    const Q17conditionAnyMed = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.nameOfOptionTabletten, this.Q17.optionKeys.nameOfOptionInfuus);
+    const Q17conditionTabletten = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Tabletten);
+    const Q17conditionInfuus = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Infuus);
+    const Q17conditionAnyMed = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Tabletten, this.Q17.optionKeys.Infuus);
     this.Q18 = new LymeTherapy2(this.key, required, Q17conditionTabletten);
     this.Q19 = new LymeTherapy3(this.key, required, Q17conditionInfuus);
 
 
     this.Q20 = new LymeTherapy4(this.key, required, Q17conditionAnyMed);
-    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.nameOfOption);
+    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
     this.Q21 = new LymeTherapy5(this.key, required, Q20condition);
 
     this.G22_24 = new FormerLymeGroup(this.key, isRequired);
@@ -110,6 +110,11 @@ export class LymeDiagnosis3 extends Item {
     ['nl', 'Welke nieuwe klachten door de ziekte van Lyme heeft/had je? Geef hier een uitgebreide beschrijving van je klachten en vermeld hierbij ook hoe dit bij jou is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
   ])
 
+
+  qTextFollowUpKids = new Map([
+    ['nl', 'Welke nieuwe klachten door de ziekte van Lyme zijn of waren er. Geef hier een uitgebreide beschrijving van de klachten en vermeld hierbij ook hoe dit is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
+  ])
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LD3');
 
@@ -123,7 +128,7 @@ export class LymeDiagnosis3 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? this.qTextFollowUp : this.qTextLyme,
+      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
     })
   }
 }
@@ -192,6 +197,16 @@ export class LymeDiagnosis4 extends Item {
 
 export class LymeDiagnosis5 extends Item {
 
+  qTextMain = new Map([
+    ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
+  ])
+
+
+  qTextKids = new Map([
+    ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme vastgesteld?'],
+  ])
+
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LD5');
 
@@ -205,9 +220,7 @@ export class LymeDiagnosis5 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
-      ]),
+      questionText: this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
       responseOptions: [
         SCOptions.cloze({
           key: 'a', items: [
@@ -254,8 +267,12 @@ export class LymeDiagnosis6 extends Item {
     ['nl', 'Heb je op dit moment nog klachten door deze nieuwe uiting van de ziekte van Lyme?'],
   ])
 
+  qTextFollowUpKids = new Map([
+    ['nl', 'Zijn er op dit moment nog klachten door deze nieuwe uiting van de ziekte van Lyme?'],
+  ])
+
   optionKeys = {
-    nameOfOption: 'a'
+    yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -271,7 +288,7 @@ export class LymeDiagnosis6 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? this.qTextFollowUp : this.qTextLyme,
+      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
       responseOptions: [
         {
           key: 'a', role: 'option',
