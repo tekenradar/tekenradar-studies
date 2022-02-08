@@ -3,7 +3,7 @@ import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { Residence, Gender } from './demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { Doctor, FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 

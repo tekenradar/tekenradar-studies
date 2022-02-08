@@ -2,7 +2,7 @@ import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
-import { FormerLymeGroup, GeneralTherapy } from './diagnosisTherapy';
+import { FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
@@ -13,7 +13,7 @@ export class FeverGroup extends Group {
 
   G1_11: TickBiteOtherGroup;
   G12_14: FormerLymeGroup;
-  Q15: GeneralTherapy;
+  Q15: GeneralTherapy1;
 
   T1: FeverText;
   Q16: FeverSymptom1;
@@ -42,7 +42,7 @@ export class FeverGroup extends Group {
 
     this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
     this.G12_14 = new FormerLymeGroup(this.key, isRequired);
-    this.Q15 = new GeneralTherapy(this.key, required);
+    this.Q15 = new GeneralTherapy1(this.key, required);
 
     this.T1 = new FeverText(this.key, required);
     this.Q16 = new FeverSymptom1(this.key, required);

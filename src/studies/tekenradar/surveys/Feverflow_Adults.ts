@@ -1,6 +1,6 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { FormerLymeGroup, GeneralTherapy } from './questions/diagnosisTherapy';
+import { FormerLymeGroup, GeneralTherapy1 } from './questions/diagnosisTherapy';
 import { FeverText, FeverSymptom1, FeverSymptom2, FeverSymptom3, FeverSymptom4, FeverSymptom5, FeverSymptom6, FeverSymptom7, FeverTherapy, FeverOtherCause1, FeverOtherCause2, FeverOtherCause3, FeverOtherCause4 } from './questions/fever';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
@@ -11,7 +11,7 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
   G1_11: TickBiteOtherGroup;
   G12_14: FormerLymeGroup;
-  Q15: GeneralTherapy;
+  Q15: GeneralTherapy1;
 
   T1: FeverText;
   Q16: FeverSymptom1;
@@ -50,7 +50,7 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
     this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
     this.G12_14 = new FormerLymeGroup(this.key, isRequired);
-    this.Q15 = new GeneralTherapy(this.key, required);
+    this.Q15 = new GeneralTherapy1(this.key, required);
 
     this.T1 = new FeverText(this.key, required);
     this.Q16 = new FeverSymptom1(this.key, required);
