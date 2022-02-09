@@ -10,7 +10,9 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 export class Text1FU extends Item {
 
   markdownContent = `
-##### De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
+# 3 maanden
+
+De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -274,7 +276,7 @@ export class FeverFU2 extends Item {
 
 export class Text2FU extends Item {
 
-  markdownContent = `
+  markdownContentKids = `
 # Diagnoses
 
 De vragen hieronder zijn voor een minderjarige.
@@ -282,6 +284,12 @@ Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
 De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
+
+  markdownContentAdults = `
+# Diagnoses
+
+De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
+        `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Text2FU');
@@ -298,7 +306,7 @@ De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij 
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.markdownContent],
+            ["nl", this.isPartOf('Kids') ? this.markdownContentKids : this.markdownContentAdults],
           ]),
           className: ''
         })
@@ -348,6 +356,36 @@ export class LymeFU extends Item {
   }
 }
 
+
+export class MedicationHeader extends Item {
+
+  markdownContent = `
+# Behandeling
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'MedHeader');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
 
 export class MedicationFUText_Kids extends Item {
 
