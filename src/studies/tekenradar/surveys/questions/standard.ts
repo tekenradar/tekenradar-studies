@@ -875,7 +875,9 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
-          displayCondition: SurveyEngine.logic.and(
+          displayCondition:
+          this.isPartOf("Adults")? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
+          SurveyEngine.logic.and(
             SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
             SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
         },

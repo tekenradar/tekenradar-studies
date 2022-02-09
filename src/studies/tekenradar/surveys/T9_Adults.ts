@@ -4,6 +4,7 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text2FU } from './questions/followup';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, Symptoms1, Symptoms2, Symptoms3 } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
+import { ParticipantFlags } from '../participantFlags';
 
 class T9_AdultsDef extends SurveyDefinition {
 
@@ -87,7 +88,8 @@ class T9_AdultsDef extends SurveyDefinition {
     this.Q13 = new MedicationFU2(this.key, required, Q12number);
     this.Q14 = new Symptoms2(this.key, required);
     this.Q15 = new Symptoms3(this.key, required);
-    this.Q16 = new Pregnant(this.key, required);
+    const cond_woman = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
+    this.Q16 = new Pregnant(this.key, required,cond_woman);
     this.T3 = new FunctioningText(this.key, required);
     this.Q17 = new Functioning1(this.key, required);
     this.Q18 = new Functioning2(this.key, required);
