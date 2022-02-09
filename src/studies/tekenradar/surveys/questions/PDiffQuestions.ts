@@ -134,7 +134,7 @@ export class EMTextPDiff extends Item {
 
   markdownContent = `
 
-  ###### Een "erythema migrans" is een **uitbreidende rode ring of vlek** rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
+##### Een "erythema migrans" is een **uitbreidende rode ring of vlek** rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
 
   `
 
