@@ -61,19 +61,18 @@ export class TickBiteOtherGroup extends Group {
   buildGroup() {
 
     this.addItem(this.Start.get());
+
+    this.addPageBreak();
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-    this.addPageBreak();
-
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
     this.addItem(this.Q9.get());
-    this.addPageBreak();
 
     //TODO: is this the recommended way to add fever survey questions in this group?
     if (this.isPartOf('Feverflow')) {
@@ -236,12 +235,25 @@ export class RecognisedTickBite extends Item {
                 delta: { seconds: 0 }
               }
             }),
+            ClozeItemTypes.clozeLineBreak(),
             ClozeItemTypes.text({
               key: '3',
               content: new Map(
-                [['nl', "bij benadering?"]]
+                [['nl', "Dit is de "]]
               )
-            })
+            }),
+            ClozeItemTypes.dropDown({
+              key: '4',options: [
+                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('2', new Map([['nl', "geschatte"]]))
+              ]
+            }),
+            ClozeItemTypes.text({
+              key: '5',
+              content: new Map(
+                [['nl', " datum."]]
+              )
+            }),
           ]
         }),
         SCOptions.option(
@@ -529,7 +541,7 @@ export class NumberTickBite extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Door hoeveel teken ben je nu gebeten?'],
+        ['nl', 'Door hoeveel teken ben je toen gebeten?'],
       ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
@@ -555,7 +567,7 @@ export class LocationBodyTickBite extends Item {
     },
     {
       content: new Map([
-        ["nl", " (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linker been aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle locaties aangeven)"],
+        ["nl", " (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linkerbeen aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle locaties aangeven)"],
       ]),
       className: "fw-normal"
     },
@@ -658,17 +670,21 @@ export class RemoveTick2 extends Item {
 
 
 export class RemoveTick3 extends Item {
-  drop_options = [
-    SCOptions.option('0', new Map([['nl', "0"]])), SCOptions.option('1', new Map([['nl', "1"]])), SCOptions.option('2', new Map([['nl', "2"]])),
-    SCOptions.option('3', new Map([['nl', "3"]])), SCOptions.option('4', new Map([['nl', "4"]])), SCOptions.option('5', new Map([['nl', "5"]])),
-    SCOptions.option('6', new Map([['nl', "6"]])), SCOptions.option('7', new Map([['nl', "7"]])), SCOptions.option('8', new Map([['nl', "8"]])),
-    SCOptions.option('9', new Map([['nl', "9"]])), SCOptions.option('10', new Map([['nl', "10"]])), SCOptions.option('11', new Map([['nl', "11"]])),
-    SCOptions.option('12', new Map([['nl', "12"]])), SCOptions.option('13', new Map([['nl', "13"]])), SCOptions.option('14', new Map([['nl', "14"]])),
-    SCOptions.option('15', new Map([['nl', "15"]])), SCOptions.option('16', new Map([['nl', "16"]])), SCOptions.option('17', new Map([['nl', "17"]])),
-    SCOptions.option('18', new Map([['nl', "18"]])), SCOptions.option('19', new Map([['nl', "19"]])), SCOptions.option('20', new Map([['nl', "20"]])),
-    SCOptions.option('21', new Map([['nl', "21"]])), SCOptions.option('22', new Map([['nl', "22"]])), SCOptions.option('23', new Map([['nl', "23"]])),
-    SCOptions.option('24', new Map([['nl', "24"]]))
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wanneer heb je de teek verwijderd?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (als je het niet meer precies weet, maak dan een schatting)"],
+      ]),
+      className: "fw-normal"
+    },
   ]
+
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'RemT3');
@@ -683,9 +699,7 @@ export class RemoveTick3 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wanneer heb je de teek verwijderd?'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
           key: 'a', items: [
@@ -1062,6 +1076,21 @@ export class DateTickBite extends Item {
 
 export class DurationTickBite extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Hoe lang heeft de teek in de huid vastgezeten?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (als je het niet meer precies weet, maak dan een schatting)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'DurTB');
 
@@ -1075,9 +1104,7 @@ export class DurationTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Hoe lang heeft de teek in de huid vastgezeten?'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
           key: 'a', items: [

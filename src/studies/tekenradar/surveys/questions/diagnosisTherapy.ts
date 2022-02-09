@@ -639,6 +639,20 @@ export class LymeTherapy1 extends Item {
 
 export class LymeTherapy2 extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke antibiotica heb je gekregen?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (Dit kun je aflezen van de verpakking)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LymeTher2');
 
@@ -652,9 +666,7 @@ export class LymeTherapy2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke antibiotica heb je gekregen? (Dit kun je aflezen van de verpakking)'],
-      ]),
+      questionText:this.questionTextMain,
       items: [
         ClozeItemTypes.text({
           key: '1', content: new Map(
@@ -723,6 +735,20 @@ export class LymeTherapy2 extends Item {
 //extra question for infusion medication. (not merged to one question due to key uniqueness)
 export class LymeTherapy3 extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke antibiotica heb je gekregen?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (Dit kun je aflezen van de verpakking)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LymeTher3');
 
@@ -735,9 +761,7 @@ export class LymeTherapy3 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke antibiotica heb je gekregen? (Dit kun je aflezen van de verpakking)'],
-      ]),
+      questionText: this.questionTextMain,
       items: [
         ClozeItemTypes.text({
           key: '1', content: new Map(

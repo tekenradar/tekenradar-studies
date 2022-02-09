@@ -94,6 +94,38 @@ export class EMGroup extends Group {
 }
 
 
+export class ReportHeader extends Item {
+
+  markdownContent = `
+# Melding
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'RepHeader');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
 export class EMTextKids extends Item {
 
   markdownContent = `
@@ -104,6 +136,39 @@ export class EMTextKids extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EMTextK');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class EMHeader extends Item {
+
+  markdownContent = `
+# Erythema migrans
+
+De volgende vragen gaan over je melding van erythema migrans.
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'EMHeader');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -146,7 +211,7 @@ export class EM1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wanneer ontwikkelde zich de huidige erythema migrans die je nu meldt?'],
+        ['nl', 'Wanneer ontwikkelde zich de erythema migrans die je nu meldt?'],
       ]),
       responseOptions: [
         //TODO: correct date conditions and date field smaller.
@@ -154,16 +219,30 @@ export class EM1 extends Item {
           key: 'a', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['nl', "Datum dat de erythema migrans zich ontwikkelde:"]]
+                [['nl', "De erythema migrans ontwikkelde zich op"]]
               )
             }),
             ClozeItemTypes.dateInput({
               dateInputMode: 'YMD',
               key: '2',
             }),
+            ClozeItemTypes.clozeLineBreak(),
             ClozeItemTypes.text({
-              key: '3', content: new Map(
-                [['nl', "bij benadering?"]]
+              key: '3',
+              content: new Map(
+                [['nl', "Dit is de "]]
+              )
+            }),
+            ClozeItemTypes.dropDown({
+              key: '4',options: [
+                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('2', new Map([['nl', "geschatte"]]))
+              ]
+            }),
+            ClozeItemTypes.text({
+              key: '5',
+              content: new Map(
+                [['nl', " datum."]]
               )
             }),
           ]
@@ -310,7 +389,7 @@ export class EM4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Was de rode ring of vlek volgens je huisarts ontstaan door een tekenbeet?'],
+        ['nl', 'Was de rode ring of vlek volgens je arts ontstaan door een tekenbeet?'],
       ]),
       responseOptions: [
         {
