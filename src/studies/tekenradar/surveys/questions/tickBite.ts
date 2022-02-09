@@ -414,7 +414,7 @@ export class ActivityTickBite extends Item {
         {//TODO: show option g only if participant age > 12 years
           key: 'g', role: 'input',
           content: new Map([
-            ["nl", "Werk gerelateerde activiteit, mijn beroep is:"],
+            ["nl", "Werk gerelateerde activiteit, namelijk:"],
           ])
         },
         {
@@ -555,7 +555,7 @@ export class LocationBodyTickBite extends Item {
     },
     {
       content: new Map([
-        ["nl", " (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linker been aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle lokaties aangeven)"],
+        ["nl", " (graag zo specifiek mogelijk aangeven, bijvoorbeeld: linker been aan de buitenkant boven de enkel. Als je door meerdere teken gebeten bent graag alle locaties aangeven)"],
       ]),
       className: "fw-normal"
     },
@@ -1136,7 +1136,7 @@ export class DurationTickBite extends Item {
             ClozeItemTypes.dropDown({
               key: '3', options: [
                 SCOptions.option('1', new Map([['nl', "uren"]])),
-                SCOptions.option('2', new Map([['nl', "dagen (rond a.u.b. af op hele dagen)"]]))
+                SCOptions.option('2', new Map([['nl', "dagen (rond af op hele dagen)"]]))
               ]
             }),
           ]

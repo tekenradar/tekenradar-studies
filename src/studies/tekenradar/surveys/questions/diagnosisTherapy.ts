@@ -560,13 +560,7 @@ export class Doctor extends Item {
           ])
         },
         {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "Specialist"],
-          ])
-        },
-        {
-          key: 'd', role: 'input',
+          key: 'c', role: 'input',
           content: new Map([
             ["nl", "Ander soort arts, namelijk:"],
           ])
