@@ -214,7 +214,7 @@ export class GeneralTherapy1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "medicijnen gebruikt?  Zo ja, welke medicijnen en tegen welke gezondheidsklachten?"],
+        ["nl", "medicijnen gebruikt? Bijvoorbeeld antibiotica, paracetamol, etc. Zo ja, welke medicijnen en tegen welke gezondheidsklachten?"],
       ]),
     },
   ]

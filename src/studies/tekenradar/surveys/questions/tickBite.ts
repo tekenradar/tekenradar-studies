@@ -88,11 +88,21 @@ export class TickBiteOtherGroup extends Group {
 
 export class IntroTB extends Item {
 
-  markdownContentOnly = `
+  markdownContentTBflow_Adults = `
   # Melden tekenbeet
 
-  De volgende vragen gaan over de tekenbeet. \
+  De volgende vragen gaan over de tekenbeet.
+
   Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+
+  `
+
+  markdownContentTBflow_Kids = `
+  # Melden tekenbeet
+
+  De volgende vragen gaan over de tekenbeet.
+
+  Indien je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
 
   `
 
@@ -125,7 +135,7 @@ export class IntroTB extends Item {
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.isPartOf('TBOnlyG') ? this.markdownContentOnly : (this.isPartOf('Feverflow') ? this.markdownContentFever : this.markdownContentOther)],
+            ["nl", this.isPartOf('TBflow_Adults') ? this.markdownContentTBflow_Adults : (this.isPartOf('Feverflow') ? this.markdownContentFever : (this.isPartOf('TBflow_Kids') ? this.markdownContentTBflow_Kids : this.markdownContentOther))],
           ]),
           className: ''
         })
@@ -140,6 +150,40 @@ export class IntroTB extends Item {
     })
   }
 }
+
+
+export class TBGeneralHeader extends Item {
+
+  markdownContentTBflow = `
+  # Tekenbeten algemeen
+  `
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kTB-B_Header');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentTBflow],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
 
 
 export class RecognisedTickBite extends Item {
