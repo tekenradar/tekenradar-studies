@@ -129,9 +129,11 @@ export class ReportHeader extends Item {
 export class EMTextKids extends Item {
 
   markdownContent = `
-  ##### De vragen hieronder zijn voor een minderjarige.
-  ##### Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+# Melding
 
+De vragen hieronder zijn voor een minderjarige.
+
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
   `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -169,6 +171,38 @@ De volgende vragen gaan over je melding van erythema migrans.
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EMHeader');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+export class EMHeaderKids extends Item {
+
+  markdownContent = `
+# Melding Erythema migrans
+
+De vragen hieronder zijn voor een minderjarige. Ben je de ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+  `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'EMHeaderKids');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -320,6 +354,7 @@ export class EM3 extends Item {
       inputLabel: new Map([
         ['nl', 'cm']
       ]),
+      labelBehindInput: true,
       //contentBehindInput: true,
       componentProperties: {
         min: 0,
