@@ -83,7 +83,7 @@ export class QuestionsKids extends Item {
 export class TextQUKids extends Item {
 
   markdownContent = `
-##### Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
+##### Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet uit.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -3529,10 +3529,10 @@ export class AwarenessKidsGroup extends Group {
 export class Awareness_Text_KidsGroup extends Item {
 
   markdownContent = `
-# KLACHTEN PERCEPTIE
+# Klachten Perceptie
 LET OP: De vragen hieronder zijn voor een ouder/verzorger. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
 
-Omcirkel alstublieft bij elke vraag het getal dat uw mening het beste weergeeft:
+Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
  `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -3567,7 +3567,7 @@ export class Awareness_Kids1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoeveel invloed heeft de erythema migrans of andere ziekte van lyme van uw kind op uw leven?'],
+        ["nl", 'Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van lyme van uw kind op uw leven?'],
       ]),
     }
   ]
@@ -3636,7 +3636,7 @@ export class Awareness_Kids2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoe lang denkt u dat de erythema migrans of andere ziekte van lyme van uw kind zal duren?'],
+        ["nl", 'Hoe lang denkt u dat de tekenbeet, erythema migrans of andere ziekte van lyme van uw kind zal duren?'],
       ]),
     }
   ]
@@ -3705,7 +3705,7 @@ export class Awareness_Kids3 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre meent u dat de erythema migrans of andere ziekte van lyme van uw kind te beheersen is?'],
+        ["nl", 'In hoeverre meent u dat de tekenbeet, erythema migrans of andere ziekte van lyme van uw kind te beheersen is?'],
       ]),
     }
   ]
@@ -3773,7 +3773,7 @@ export class Awareness_Kids4 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre denkt u dat de behandeling van uw kind helpt bij de erythema migrans of andere ziekte van lyme?'],
+        ["nl", 'In hoeverre denkt u dat de behandeling van uw kind helpt bij de tekenbeet, erythema migrans of andere ziekte van lyme?'],
       ]),
     }
   ]
@@ -3843,7 +3843,7 @@ export class Awareness_Kids5 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre ervaart uw kind lichamelijke klachten van de erythema migrans of andere ziekte van Lyme?'],
+        ["nl", 'In hoeverre ervaart uw kind lichamelijke klachten van de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
       ]),
     }
   ]
@@ -3912,7 +3912,7 @@ export class Awareness_Kids6 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre bent u bezorgd over de erythema migrans of andere ziekte van Lyme van uw kind?'],
+        ["nl", 'In hoeverre bent u bezorgd over de tekenbeet, erythema migrans of andere ziekte van Lyme van uw kind?'],
       ]),
     }
   ]
@@ -3981,7 +3981,7 @@ export class Awareness_Kids7 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre heeft u het gevoel dat u de erythema migrans of andere ziekte van Lyme van uw kind begrijpt?'],
+        ["nl", 'In hoeverre heeft u het gevoel dat u de tekenbeet, erythema migrans of andere ziekte van Lyme van uw kind begrijpt?'],
       ]),
     }
   ]
@@ -4050,7 +4050,7 @@ export class Awareness_Kids8 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre heeft de erythema migrans of andere ziekte van Lyme van uw kind invloed op uw gemoedstoestand? (b.v. maakt het u boos, angstig, van streek, of somber?)'],
+        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme van uw kind invloed op uw gemoedstoestand? (b.v. maakt het u boos, angstig, van streek, of somber?)'],
       ]),
     }
   ]

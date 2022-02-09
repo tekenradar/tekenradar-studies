@@ -1,6 +1,6 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, QuestionsKids1, QuestionsKids2, SymptomsText1_Kids, SymptomsText2_Kids } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, QuestionsKids1, QuestionsKids2, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { ThreeMonthsText_Kids } from './questions/followup';
 import { AwarenessKidsGroup, Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3_Kids, PainTextH1_Kids, PainTextH2_Kids, BackgroundText_Kids } from './questions/standard_Kids';
@@ -21,6 +21,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
   T4: SymptomsText2_Kids;
   Q6: QuestionsKids1;
   Q6_a: QuestionsKids2;
+  T4_a: TextQUKids;
   Q7: Symptoms2;
   Q8: Symptoms3;
 
@@ -118,6 +119,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.Q6 = new QuestionsKids1(this.key, required);
     const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.parent);
     this.Q6_a = new QuestionsKids2(this.key, required, Q6condition);
+    this.T4_a = new TextQUKids(this.key, required);
     this.Q7 = new Symptoms2(this.key, required);
     this.Q8 = new Symptoms3(this.key, required);
 
@@ -236,6 +238,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.T4.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q6_a.get());
+    this.addItem(this.T4_a.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
 

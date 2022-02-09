@@ -472,7 +472,7 @@ export class Symptoms1 extends Item {
 
     this.isRequired = isRequired;
     this.condition = condition;
-    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
+    this.condition_u18 = SurveyEngine.compare.lt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
   }
 
   buildItem() {
@@ -634,7 +634,7 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
           ]),
-          displayCondition: this.condition_u18
+          displayCondition: SurveyEngine.logic.not(this.condition_u18)
         },
         {
           key: 'r', role: 'option',
@@ -662,10 +662,18 @@ export class Symptoms1 extends Item {
           ])
         },
         {//TODO - other words for kids
-          key: 'u', role: 'option',
+          key: 'u_Adults', role: 'option',
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
-          ])
+          ]),
+          displayCondition: SurveyEngine.logic.not(this.condition_u18)
+        },
+        {//TODO - other words for kids
+          key: 'u_Kids', role: 'option',
+          content: new Map([
+            ["nl", "Andere ziekten van het zenuwstelsel"],
+          ]),
+          displayCondition: this.condition_u18
         },
         {
           key: 'v', role: 'option',
@@ -713,7 +721,7 @@ export class Symptoms1 extends Item {
         {
           key: 'ab', role: 'option',
           content: new Map([
-            ["nl", "Letsel door ongeluk in en om huis sport, school, werk of in het verkeer"],
+            ["nl", "Letsel door ongeluk in en om huis, sport, school, werk of in het verkeer"],
           ])
         },
         {
@@ -733,14 +741,14 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Alcoholverslaving"],
           ]),
-          displayCondition: this.condition_u18
+          displayCondition: SurveyEngine.logic.not(this.condition_u18)
         },
         {
           key: 'af', role: 'option',
           content: new Map([
             ["nl", "Drugsverslaving"],
           ]),
-          displayCondition: this.condition_u18
+          displayCondition: SurveyEngine.logic.not(this.condition_u18)
         },
         {
           key: 'ag', role: 'option',
@@ -935,13 +943,13 @@ export class Symptoms2 extends Item {
         {
           key: 'o',
           content: new Map([
-            ["nl", "Zich moe voelen of gebrek aan energie hebben"],
+            ["nl", "Je moe voelen of gebrek aan energie hebben"],
           ])
         },
         {
           key: 'p',
           content: new Map([
-            ["nl", "Zich niet goed kunnen concentreren, of last van vergeetachtigheid"],
+            ["nl", "Je niet goed kunnen concentreren, of last van vergeetachtigheid"],
           ])
         },
         {

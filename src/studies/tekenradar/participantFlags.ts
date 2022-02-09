@@ -14,7 +14,8 @@ export const ParticipantFlags = {
     values: {
       male: 'male',
       female: 'female',
-      other: 'other'
+      other: 'other',
+      unknown: 'unknown'
     }
   },
   flow: {
