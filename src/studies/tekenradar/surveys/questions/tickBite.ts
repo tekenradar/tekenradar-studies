@@ -54,7 +54,8 @@ export class TickBiteOtherGroup extends Group {
     this.Q9 = new DurationTickBite(this.key, required, QStartcondition);
 
     this.Q10F = new DoctorTickBite(this.key, required, QStartcondition);
-    this.Q11F = new Doctor(this.key, required, QStartcondition);
+    const condDoc = SurveyEngine.singleChoice.any(this.Q10F.key, this.Q10F.optionKeys.yes);
+    this.Q11F = new Doctor(this.key, required, condDoc);
 
 
   }

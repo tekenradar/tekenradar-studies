@@ -41,6 +41,7 @@ export class FeverGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
+    //TODO: show this only if first answer is c
     this.G12_14 = new FormerLymeGroup(this.key, isRequired);
     this.Q15 = new GeneralTherapy1(this.key, required);
 
@@ -108,9 +109,9 @@ export class FeverGroup extends Group {
 export class FeverText extends Item {
 
   markdownContent = `
-  #Tekenbeet en gezondheid (FE- B, questions 1 through 14)
+# Tekenbeet en gezondheid
 
-  De volgende vragen gaan over je tekenbeet en je gezondheid.
+De volgende vragen gaan over je tekenbeet en je gezondheid.
   `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -182,6 +183,25 @@ export class FeverSymptom1 extends Item {
 
 export class FeverSymptom2 extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Binnen hoeveel weken '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "na "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", 'de tekenbeet kreeg je koorts?'],
+      ]),
+    }
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FS2');
 
@@ -195,9 +215,7 @@ export class FeverSymptom2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Binnen hoeveel weken na de tekenbeet kreeg je koorts?'],
-      ]),
+      questionText: this.questionTextMain,
       //TODO: maybe "weken na de tekenbeet" as seperate text after dropbox
       responseOptions: [
         {

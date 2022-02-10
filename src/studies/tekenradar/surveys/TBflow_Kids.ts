@@ -1,7 +1,7 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { Gender, Residence } from './questions/demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy1 } from './questions/diagnosisTherapy';
+import { Doctor, FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { ActivityTickBite, DateTickBite, DoctorTickBite, DurationTickBite, EnvironmentTickBite, IntroTB, LocationBodyTickBite, NumberTickBite, PositionTickBite, RemoveTick1, RemoveTick2, RemoveTick3, RemoveTick4, ReportedTickBites, TBGeneralHeader, TickBiteMap } from './questions/tickBite';
 
@@ -31,7 +31,9 @@ class TBflow_KidsDef extends SurveyDefinition {
 
   G17_19: FormerLymeGroup;
 
-  Q20: GeneralTherapy1;
+  Q20_a: GeneralTherapy1;
+  Q20_b: GeneralTherapy2;
+
   constructor(isRequired?: boolean) {
     super({
       surveyKey: 'TBflow_Kids',
@@ -83,7 +85,9 @@ class TBflow_KidsDef extends SurveyDefinition {
 
     this.G17_19 = new FormerLymeGroup(this.key, isRequired);
 
-    this.Q20 = new GeneralTherapy1(this.key, required);
+    this.Q20_a = new GeneralTherapy1(this.key, required);
+    const Q20_a_number = SurveyEngine.getResponseValueAsNum(this.Q20_a.key, 'rg.scg.b');
+    this.Q20_b = new GeneralTherapy2(this.key, required, Q20_a_number);
   }
 
   buildSurvey() {
@@ -111,8 +115,8 @@ class TBflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q15.get());
     this.addItem(this.Q16.get());
     this.addItem(this.G17_19.get());
-    this.addItem(this.Q20.get());
-
+    this.addItem(this.Q20_a.get());
+    this.addItem(this.Q20_b.get());
   }
 }
 

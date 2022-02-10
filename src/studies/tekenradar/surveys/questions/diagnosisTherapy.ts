@@ -15,9 +15,10 @@ export class FormerLymeGroup extends Group {
   Q5: FormerLymeTherapy4;
 
 
-  constructor(parentKey: string, isRequired?: boolean) {
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
     super(parentKey, 'FLG');
 
+    this.groupEditor.setCondition(condition);
     const required = isRequired !== undefined ? isRequired : false;
 
 

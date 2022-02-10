@@ -1,6 +1,7 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { FormerLymeGroup, GeneralTherapy1 } from './questions/diagnosisTherapy';
+import { FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
+import { ReportHeader } from './questions/EM';
 import { FeverText, FeverSymptom1, FeverSymptom2, FeverSymptom3, FeverSymptom4, FeverSymptom5, FeverSymptom6, FeverSymptom7, FeverTherapy, FeverOtherCause1, FeverOtherCause2, FeverOtherCause3, FeverOtherCause4 } from './questions/fever';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
@@ -8,10 +9,11 @@ import { TickBiteOtherGroup } from './questions/tickBite';
 
 class Feverflow_AdultsDef extends SurveyDefinition {
 
-
+  H1: ReportHeader;
   G1_11: TickBiteOtherGroup;
   G12_14: FormerLymeGroup;
-  Q15: GeneralTherapy1;
+  Q15_a: GeneralTherapy1;
+  Q15_b: GeneralTherapy2;
 
   T1: FeverText;
   Q16: FeverSymptom1;
@@ -48,9 +50,14 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
+
+    this.H1 = new ReportHeader(this.key, required);
     this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
-    this.G12_14 = new FormerLymeGroup(this.key, isRequired);
-    this.Q15 = new GeneralTherapy1(this.key, required);
+    const Qstartcondition = SurveyEngine.singleChoice.any(this.G1_11.Start.key, this.G1_11.Start.optionKeys.yes);
+    this.G12_14 = new FormerLymeGroup(this.key, isRequired, Qstartcondition);
+    this.Q15_a = new GeneralTherapy1(this.key, required, Qstartcondition);
+    const Q15_a_number = SurveyEngine.getResponseValueAsNum(this.Q15_a.key, 'rg.scg.b');
+    this.Q15_b = new GeneralTherapy2(this.key, required, Q15_a_number);
 
     this.T1 = new FeverText(this.key, required);
     this.Q16 = new FeverSymptom1(this.key, required);
@@ -83,10 +90,14 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
   buildSurvey() {
 
-
+    this.addItem(this.H1.get());
     this.addItem(this.G1_11.get());
     this.addItem(this.G12_14.get());
-    this.addItem(this.Q15.get());
+    this.addItem(this.Q15_a.get());
+    this.addItem(this.Q15_b.get());
+    this.addPageBreak();
+
+    this.addItem(this.T1.get());
     this.addItem(this.Q16.get());
     this.addItem(this.Q17.get());
     this.addItem(this.Q18.get());
