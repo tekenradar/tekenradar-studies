@@ -6,6 +6,8 @@ import { Residence, Gender } from './demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { ParticipantFlags } from '../../participantFlags';
+import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 
 
 export class TickBiteOtherGroup extends Group {
@@ -15,7 +17,7 @@ export class TickBiteOtherGroup extends Group {
   T1: IntroTB;
   Q1: EnvironmentTickBite;
   Q2: ActivityTickBite;
-  Q3: PositionTickBite;
+  Q3: TickBiteLocationGroup;
   Q4: NumberTickBite;
   Q5: LocationBodyTickBite;
 
@@ -42,7 +44,7 @@ export class TickBiteOtherGroup extends Group {
     this.T1 = new IntroTB(this.key, required, QStartcondition);
     this.Q1 = new EnvironmentTickBite(this.key, required, QStartcondition);
     this.Q2 = new ActivityTickBite(this.key, required, QStartcondition);
-    this.Q3 = new PositionTickBite(this.key, required, QStartcondition);
+    this.Q3 = new TickBiteLocationGroup(this.key, required, QStartcondition);
     this.Q4 = new NumberTickBite(this.key, required, QStartcondition);
     this.Q5 = new LocationBodyTickBite(this.key, required, QStartcondition);
 
@@ -53,7 +55,8 @@ export class TickBiteOtherGroup extends Group {
     this.Q9 = new DurationTickBite(this.key, required, QStartcondition);
 
     this.Q10F = new DoctorTickBite(this.key, required, QStartcondition);
-    this.Q11F = new Doctor(this.key, required, QStartcondition);
+    const condDoc = SurveyEngine.singleChoice.any(this.Q10F.key, this.Q10F.optionKeys.yes);
+    this.Q11F = new Doctor(this.key, required, condDoc);
 
 
   }
@@ -105,6 +108,16 @@ export class IntroTB extends Item {
 
   `
 
+
+  markdownContentEMflow_Kids = `
+  # Tekenbeet
+
+  De vragen hieronder zijn voor een minderjarige.
+  Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+
+  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+  `
+
   markdownContentOther = `
   # Tekenbeet
 
@@ -134,7 +147,7 @@ export class IntroTB extends Item {
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.isPartOf('TBflow_Adults') ? this.markdownContentTBflow_Adults : (this.isPartOf('Feverflow') ? this.markdownContentFever : (this.isPartOf('TBflow_Kids') ? this.markdownContentTBflow_Kids : this.markdownContentOther))],
+            ["nl", this.isPartOf('TBflow_Adults') ? this.markdownContentTBflow_Adults : (this.isPartOf('Feverflow') ? this.markdownContentFever : (this.isPartOf('TBflow_Kids') ? this.markdownContentTBflow_Kids : (this.isPartOf('EMflow_Kids') ? this.markdownContentEMflow_Kids : this.markdownContentOther)))],
           ]),
           className: ''
         })
@@ -243,7 +256,7 @@ export class RecognisedTickBite extends Item {
               )
             }),
             ClozeItemTypes.dropDown({
-              key: '4',options: [
+              key: '4', options: [
                 SCOptions.option('1', new Map([['nl', "exacte"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
@@ -423,11 +436,13 @@ export class ActivityTickBite extends Item {
             ["nl", "Spelen"],
           ])
         },
-        {//TODO: show option g only if participant age > 12 years
+        {// show option g only if participant age > 12 years
           key: 'g', role: 'input',
           content: new Map([
             ["nl", "Werk gerelateerde activiteit, namelijk:"],
-          ])
+          ]),
+          displayCondition: this.isPartOf("Adults") ? undefined :
+            SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 12)
         },
         {
           key: 'h', role: 'input',
@@ -447,7 +462,7 @@ export class ActivityTickBite extends Item {
 }
 
 
-export class PositionTickBite extends Item {
+class TickBiteLocationKnown extends Item {
   optionKeys = {
     precies: 'a',
     ongeveer: 'b',
@@ -456,7 +471,7 @@ export class PositionTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PosTB');
+    super(parentKey, 'Q1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -501,9 +516,9 @@ export class PositionTickBite extends Item {
   }
 }
 
-export class TickBiteMap extends Item {
+class TickBiteMap extends Item {
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'PosTBmap');
+    super(parentKey, 'Q2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -519,9 +534,36 @@ export class TickBiteMap extends Item {
         ['nl', 'Weet je de locatie waar je de tekenbeet (vermoedelijk) hebt opgelopen?'],
       ]),
       responseItemDefs: [
-        { key: 'map', role: 'map', }
+        {
+          key: 'map', role: 'map', content: generateLocStrings(new Map([
+            ['nl', 'Klik op de kaart om (ongeveer) de locatie aan te geven waar u de tekenbeet heeft opgelopen.']
+          ]))
+        }
       ]
     })
+  }
+}
+
+export class TickBiteLocationGroup extends Group {
+  Q1: TickBiteLocationKnown;
+  Q2: TickBiteMap;
+
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+    super(parentKey, 'TBLoc');
+
+    this.groupEditor.setCondition(condition);
+    const required = isRequired !== undefined ? isRequired : false;
+
+
+    this.Q1 = new TickBiteLocationKnown(this.key, required);
+    const showMap = SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.nee);
+    this.Q2 = new TickBiteMap(this.key, required, showMap);
+
+  }
+
+  buildGroup() {
+    this.addItem(this.Q1.get());
+    this.addItem(this.Q2.get());
   }
 }
 

@@ -1,15 +1,17 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
-import { DoctorEM, EM1, EM2, EM3, EM4, EMTextKids, PhotoEM_Text, UploadPhotoEM } from './questions/EM';
+import { DoctorEM, EM1, EM2, EM3, EM4, EMHeaderKids, EMTextKids, PhotoEM_Text, UploadPhotoEM } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
 
 class EMflow_KidsDef extends SurveyDefinition {
 
-  T1a: EMTextKids;
+  H1: EMTextKids;
   G1_9: TickBiteOtherGroup;
+
+  H2: EMHeaderKids;
   Q10: EM1;
   Q11: EM2;
 
@@ -47,8 +49,9 @@ class EMflow_KidsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
-    this.T1a = new EMTextKids(this.key, required);
+    this.H1 = new EMTextKids(this.key, required);
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
+    this.H2 = new EMHeaderKids(this.key, required);
     this.Q10 = new EM1(this.key, required);
     //TODO: if date more than 3 months ago, exclusion from lyme studies by setting flag
     this.Q11 = new EM2(this.key, required);
@@ -80,9 +83,11 @@ class EMflow_KidsDef extends SurveyDefinition {
   buildSurvey() {
 
     //TODO: same T1a text for kids several times in EMflow
-    this.addItem(this.T1a.get());
+    this.addItem(this.H1.get());
     this.addItem(this.G1_9.get());
 
+    this.addPageBreak();
+    this.addItem(this.H2.get());
     this.addItem(this.Q10.get());
     this.addItem(this.Q11.get());
     this.addItem(this.Q12.get());
@@ -97,6 +102,7 @@ class EMflow_KidsDef extends SurveyDefinition {
     this.addItem(this.G20_22.get());
     this.addItem(this.G23_24.get());
 
+    this.addPageBreak();
     this.addItem(this.T1.get());
     this.addItem(this.Q25.get());
   }

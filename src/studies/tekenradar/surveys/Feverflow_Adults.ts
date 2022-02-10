@@ -1,6 +1,7 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { FormerLymeGroup, GeneralTherapy1 } from './questions/diagnosisTherapy';
+import { FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
+import { ReportHeader } from './questions/EM';
 import { FeverText, FeverSymptom1, FeverSymptom2, FeverSymptom3, FeverSymptom4, FeverSymptom5, FeverSymptom6, FeverSymptom7, FeverTherapy, FeverOtherCause1, FeverOtherCause2, FeverOtherCause3, FeverOtherCause4 } from './questions/fever';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
@@ -8,10 +9,11 @@ import { TickBiteOtherGroup } from './questions/tickBite';
 
 class Feverflow_AdultsDef extends SurveyDefinition {
 
-
+  H1: ReportHeader;
   G1_11: TickBiteOtherGroup;
   G12_14: FormerLymeGroup;
-  Q15: GeneralTherapy1;
+  Q15_a: GeneralTherapy1;
+  Q15_b: GeneralTherapy2;
 
   T1: FeverText;
   Q16: FeverSymptom1;
@@ -48,9 +50,14 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
+
+    this.H1 = new ReportHeader(this.key, required);
     this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
-    this.G12_14 = new FormerLymeGroup(this.key, isRequired);
-    this.Q15 = new GeneralTherapy1(this.key, required);
+    const Qstartcondition = SurveyEngine.singleChoice.any(this.G1_11.Start.key, this.G1_11.Start.optionKeys.yes);
+    this.G12_14 = new FormerLymeGroup(this.key, isRequired, Qstartcondition);
+    this.Q15_a = new GeneralTherapy1(this.key, required, Qstartcondition);
+    const Q15_a_number = SurveyEngine.getResponseValueAsNum(this.Q15_a.key, 'rg.scg.b');
+    this.Q15_b = new GeneralTherapy2(this.key, required, Q15_a_number);
 
     this.T1 = new FeverText(this.key, required);
     this.Q16 = new FeverSymptom1(this.key, required);
@@ -64,7 +71,7 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
 
 
-    const Q18_20condition = SurveyEngine.logic.or(SurveyEngine.logic.not(Q18condition), Q20condition);
+    const Q18_20condition = SurveyEngine.logic.and(Q16condition, SurveyEngine.logic.or(SurveyEngine.logic.not(Q18condition), Q20condition));
 
     this.Q21 = new FeverSymptom6(this.key, required, Q18_20condition);
     this.Q22 = new FeverSymptom7(this.key, required, Q18_20condition);
@@ -74,6 +81,8 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     this.Q24 = new FeverOtherCause1(this.key, required);
     const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nothing);
     this.Q25 = new FeverOtherCause2(this.key, required, Q24condition);
+
+
     this.Q26 = new FeverOtherCause3(this.key, required, Q24condition);
     this.Q27 = new FeverOtherCause4(this.key, required, Q24condition);
 
@@ -83,10 +92,14 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
   buildSurvey() {
 
-
+    this.addItem(this.H1.get());
     this.addItem(this.G1_11.get());
     this.addItem(this.G12_14.get());
-    this.addItem(this.Q15.get());
+    this.addItem(this.Q15_a.get());
+    this.addItem(this.Q15_b.get());
+    this.addPageBreak();
+
+    this.addItem(this.T1.get());
     this.addItem(this.Q16.get());
     this.addItem(this.Q17.get());
     this.addItem(this.Q18.get());

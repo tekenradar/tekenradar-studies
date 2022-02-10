@@ -3,7 +3,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { Gender, Residence } from './questions/demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
-import { ActivityTickBite, DateTickBite, DoctorTickBite, DurationTickBite, EnvironmentTickBite, IntroTB, LocationBodyTickBite, NumberTickBite, PositionTickBite, RemoveTick1, RemoveTick2, RemoveTick3, RemoveTick4, ReportedTickBites, TBGeneralHeader, TickBiteMap } from './questions/tickBite';
+import { ActivityTickBite, DateTickBite, DoctorTickBite, DurationTickBite, EnvironmentTickBite, IntroTB, LocationBodyTickBite, NumberTickBite, RemoveTick1, RemoveTick2, RemoveTick3, RemoveTick4, ReportedTickBites, TBGeneralHeader, TickBiteLocationGroup } from './questions/tickBite';
 
 
 class TBflow_AdultsDef extends SurveyDefinition {
@@ -11,8 +11,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
   T1: IntroTB;
   Q1: EnvironmentTickBite;
   Q2: ActivityTickBite;
-  Q3: PositionTickBite;
-  PosTBmap: TickBiteMap;
+  Q3: TickBiteLocationGroup;
   Q4: NumberTickBite;
   Q5: LocationBodyTickBite;
   Q6: RemoveTick1;
@@ -58,9 +57,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.T1 = new IntroTB(this.key, required);
     this.Q1 = new EnvironmentTickBite(this.key, required);
     this.Q2 = new ActivityTickBite(this.key, required);
-    this.Q3 = new PositionTickBite(this.key, required);
-    const showMap = SurveyEngine.singleChoice.none(this.Q3.key, this.Q3.optionKeys.nee);
-    this.PosTBmap = new TickBiteMap(this.key, required, showMap);
+    this.Q3 = new TickBiteLocationGroup(this.key, required);
 
     this.Q4 = new NumberTickBite(this.key, required);
     this.Q5 = new LocationBodyTickBite(this.key, required);
@@ -71,7 +68,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.Q8 = new RemoveTick3(this.key, required, q6Condition);
     this.Q9 = new RemoveTick4(this.key, required, q6Condition);
 
-    this.G10_11 = new PreviousTickBitesGroup(this.key, isRequired);
+    this.G10_11 = new PreviousTickBitesGroup(this.key, required);
 
     this.Q12 = new ReportedTickBites(this.key, required);
 
@@ -88,7 +85,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
     this.Q16 = new Doctor(this.key, required, q15Condition);
 
-    this.G17_19 = new FormerLymeGroup(this.key, isRequired);
+    this.G17_19 = new FormerLymeGroup(this.key, required);
 
     this.Q20_a = new GeneralTherapy1(this.key, required);
     const Q20_a_number = SurveyEngine.getResponseValueAsNum(this.Q20_a.key, 'rg.scg.b');
@@ -100,7 +97,6 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-    this.addItem(this.PosTBmap.get());
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());
@@ -123,4 +119,4 @@ class TBflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const TBflow_Adults = new TBflow_AdultsDef();
+export const TBflow_Adults = new TBflow_AdultsDef(true);

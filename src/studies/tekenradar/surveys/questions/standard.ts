@@ -1930,11 +1930,16 @@ export class Cognition extends Item {
 
 export class MedCareText1 extends Item {
 
-  markdownContent = `
+  markdownContentKids = `
 # Zorgconsumptie
 
 De vragen hieronder zijn voor een minderjarige.
 Bent u een ouder/verzorger dan kunt u de antwoorden invullen voor/over uw kind.
+
+Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
+    `
+    markdownContentAdults = `
+# Zorgconsumptie
 
 Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
     `
@@ -1954,7 +1959,7 @@ Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.markdownContent],
+            ["nl", this.isPartOf('Kids')? this.markdownContentKids : this.markdownContentAdults],
           ]),
           className: ''
         })

@@ -1,14 +1,18 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ChronicLymeDiagnosis1, ChronicLymeDiagnosis2, ChronicLymeTherapy1, ChronicLymeTherapy2 } from './questions/chronic';
 import { LymeDiagnosisGroup } from './questions/diagnosisTherapy';
+import { ReportHeader } from './questions/EM';
+import { LymeHeader } from './questions/lyme';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
 
 class Chronicflow_KidsDef extends SurveyDefinition {
 
+  H1: ReportHeader;
   G1_9: TickBiteOtherGroup
 
+  H2: LymeHeader;
   G10_11: LymeDiagnosisGroup;
 
   //TODO: should header be shown?
@@ -39,8 +43,10 @@ class Chronicflow_KidsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
+    this.H1 = new ReportHeader(this.key, required);
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
 
+    this.H2 = new LymeHeader(this.key, required);
     this.G10_11 = new LymeDiagnosisGroup(this.key, isRequired);
 
     this.Q12 = new ChronicLymeDiagnosis1(this.key, required);
@@ -54,8 +60,11 @@ class Chronicflow_KidsDef extends SurveyDefinition {
 
   buildSurvey() {
 
+    this.addItem(this.H1.get());
     this.addItem(this.G1_9.get());
+    this.addPageBreak();
 
+    this.addItem(this.H2.get());
     this.addItem(this.G10_11.get());
     this.addItem(this.Q12.get());
     this.addItem(this.Q13.get());
