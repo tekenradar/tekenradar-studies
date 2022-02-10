@@ -107,6 +107,16 @@ export class IntroTB extends Item {
 
   `
 
+
+  markdownContentEMflow_Kids = `
+  # Tekenbeet
+
+  De vragen hieronder zijn voor een minderjarige.
+  Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+
+  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+  `
+
   markdownContentOther = `
   # Tekenbeet
 
@@ -136,7 +146,7 @@ export class IntroTB extends Item {
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.isPartOf('TBflow_Adults') ? this.markdownContentTBflow_Adults : (this.isPartOf('Feverflow') ? this.markdownContentFever : (this.isPartOf('TBflow_Kids') ? this.markdownContentTBflow_Kids : this.markdownContentOther))],
+            ["nl", this.isPartOf('TBflow_Adults') ? this.markdownContentTBflow_Adults : (this.isPartOf('Feverflow') ? this.markdownContentFever : (this.isPartOf('TBflow_Kids') ? this.markdownContentTBflow_Kids : (this.isPartOf('EMflow_Kids') ? this.markdownContentEMflow_Kids : this.markdownContentOther)))],
           ]),
           className: ''
         })

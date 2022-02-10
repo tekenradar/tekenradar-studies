@@ -1026,26 +1026,18 @@ export class LymeTherapy5 extends Item {
             [['nl', "(dag/maand/jaar) tussen"]]
           )
         }),
-        ClozeItemTypes.numberInput({
+        ClozeItemTypes.timeInput({
           key: '4',
-          inputLabel: new Map([['nl', ' en']]),
-          labelBehindInput: true,
-          inputMaxWidth: '80px',
-          componentProperties: {
-            min: 0,
-            max: 24
-          }
+          defaultValue: '13:00',
+          inputLabelText: new Map([["nl", " en"],]),
+          labelBehindInput: true
         }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-        ClozeItemTypes.numberInput({
+        ClozeItemTypes.timeInput({
           key: '5',
-          inputLabel: new Map([['nl', ' uur']]),
+          defaultValue: '13:00',
+          inputLabelText: new Map([["nl", " uur"],]),
           labelBehindInput: true,
-          inputMaxWidth: '80px',
-          componentProperties: {
-            min: 0,
-            max: 24
-          }
-        })
+        }),
       ],
     })
   }
