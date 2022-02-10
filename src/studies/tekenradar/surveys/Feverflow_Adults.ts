@@ -71,7 +71,7 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
 
 
-    const Q18_20condition = SurveyEngine.logic.or(SurveyEngine.logic.not(Q18condition), Q20condition);
+    const Q18_20condition = SurveyEngine.logic.and(Q16condition, SurveyEngine.logic.or(SurveyEngine.logic.not(Q18condition), Q20condition));
 
     this.Q21 = new FeverSymptom6(this.key, required, Q18_20condition);
     this.Q22 = new FeverSymptom7(this.key, required, Q18_20condition);
@@ -81,6 +81,8 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     this.Q24 = new FeverOtherCause1(this.key, required);
     const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nothing);
     this.Q25 = new FeverOtherCause2(this.key, required, Q24condition);
+
+
     this.Q26 = new FeverOtherCause3(this.key, required, Q24condition);
     this.Q27 = new FeverOtherCause4(this.key, required, Q24condition);
 
