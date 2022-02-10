@@ -1,6 +1,7 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
+import { ReportHeader } from './questions/EM';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7 } from './questions/lyme';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
@@ -9,6 +10,7 @@ import { TickBiteOtherGroup } from './questions/tickBite';
 class LBflow_AdultsDef extends SurveyDefinition {
 
 
+  H1: ReportHeader;
   G1_9: TickBiteOtherGroup;
 
   //TODO: should header be shown?
@@ -49,6 +51,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
+    this.H1 = new ReportHeader(this.key, required);
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
 
     this.Q10 = new LymeDiagnosis1(this.key, required);
@@ -80,6 +83,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
 
   buildSurvey() {
 
+    this.addItem(this.H1.get());
     this.addItem(this.G1_9.get());
 
     this.addItem(this.Q10.get());

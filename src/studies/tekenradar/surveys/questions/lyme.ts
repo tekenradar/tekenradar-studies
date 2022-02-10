@@ -5,6 +5,7 @@ import { TickBiteOtherGroup } from './tickBite';
 import { PreviousTickBitesGroup } from './prevTickBites'
 import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy1, LymeTherapy2, LymeTherapy3, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy'
 import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
 
@@ -96,6 +97,40 @@ export class LymeGroup extends Group {
     this.addPageBreak();
 
 
+  }
+}
+
+
+
+export class LymeHeader extends Item {
+
+  markdownContent = `
+# Ziekte van Lyme
+
+De volgende vragen gaan over je melding van de ziekte van Lyme.
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
   }
 }
 
