@@ -6,6 +6,7 @@ import { Residence, Gender } from './demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { ParticipantFlags } from '../../participantFlags';
 
 
 export class TickBiteOtherGroup extends Group {
@@ -423,11 +424,13 @@ export class ActivityTickBite extends Item {
             ["nl", "Spelen"],
           ])
         },
-        {//TODO: show option g only if participant age > 12 years
+        {// show option g only if participant age > 12 years
           key: 'g', role: 'input',
           content: new Map([
             ["nl", "Werk gerelateerde activiteit, namelijk:"],
-          ])
+          ]),
+          displayCondition: this.isPartOf("Adults")? undefined :
+           SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 12)
         },
         {
           key: 'h', role: 'input',

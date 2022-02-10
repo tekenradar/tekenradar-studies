@@ -1,18 +1,19 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
-import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7 } from './questions/lyme';
+import { ReportHeader } from './questions/EM';
+import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7, LymeHeader } from './questions/lyme';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
 
 class LBflow_KidsDef extends SurveyDefinition {
 
-
+  H1: ReportHeader;
   G1_9: TickBiteOtherGroup;
 
-  //TODO: should header be shown?
-  //Lyme questions here
+
+  H2: LymeHeader;
   Q10: LymeDiagnosis1;
   Q11: LymeDiagnosis2;
   Q12: LymeDiagnosis3;
@@ -49,8 +50,10 @@ class LBflow_KidsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
+    this.H1 = new ReportHeader(this.key, required);
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
 
+    this.H2 = new LymeHeader(this.key, required);
     this.Q10 = new LymeDiagnosis1(this.key, required);
     const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.yes);
     this.Q11 = new LymeDiagnosis2(this.key, required, Q10condition);
@@ -80,8 +83,11 @@ class LBflow_KidsDef extends SurveyDefinition {
 
   buildSurvey() {
 
+    this.addItem(this.H1.get());
     this.addItem(this.G1_9.get());
+    this.addPageBreak();
 
+    this.addItem(this.H2.get());
     this.addItem(this.Q10.get());
     this.addItem(this.Q11.get());
     this.addItem(this.Q12.get());
