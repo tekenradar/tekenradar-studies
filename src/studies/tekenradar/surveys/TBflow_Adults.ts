@@ -68,7 +68,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.Q8 = new RemoveTick3(this.key, required, q6Condition);
     this.Q9 = new RemoveTick4(this.key, required, q6Condition);
 
-    this.G10_11 = new PreviousTickBitesGroup(this.key, isRequired);
+    this.G10_11 = new PreviousTickBitesGroup(this.key, required);
 
     this.Q12 = new ReportedTickBites(this.key, required);
 
@@ -85,7 +85,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
     this.Q16 = new Doctor(this.key, required, q15Condition);
 
-    this.G17_19 = new FormerLymeGroup(this.key, isRequired);
+    this.G17_19 = new FormerLymeGroup(this.key, required);
 
     this.Q20_a = new GeneralTherapy1(this.key, required);
     const Q20_a_number = SurveyEngine.getResponseValueAsNum(this.Q20_a.key, 'rg.scg.b');
@@ -119,4 +119,4 @@ class TBflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const TBflow_Adults = new TBflow_AdultsDef();
+export const TBflow_Adults = new TBflow_AdultsDef(true);

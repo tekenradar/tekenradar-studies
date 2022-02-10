@@ -10,8 +10,6 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 export class Text1FU extends Item {
 
   markdownContent = `
-# 3 maanden
-
 De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen van de vorige vragenlijst 3 maanden geleden.
     `
 
