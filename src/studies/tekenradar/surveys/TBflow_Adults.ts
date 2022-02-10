@@ -3,7 +3,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { Gender, Residence } from './questions/demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
-import { ActivityTickBite, DateTickBite, DoctorTickBite, DurationTickBite, EnvironmentTickBite, IntroTB, LocationBodyTickBite, NumberTickBite, PositionTickBite, RemoveTick1, RemoveTick2, RemoveTick3, RemoveTick4, ReportedTickBites, TBGeneralHeader, TickBiteMap } from './questions/tickBite';
+import { ActivityTickBite, DateTickBite, DoctorTickBite, DurationTickBite, EnvironmentTickBite, IntroTB, LocationBodyTickBite, NumberTickBite, RemoveTick1, RemoveTick2, RemoveTick3, RemoveTick4, ReportedTickBites, TBGeneralHeader, TickBiteLocationGroup } from './questions/tickBite';
 
 
 class TBflow_AdultsDef extends SurveyDefinition {
@@ -11,8 +11,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
   T1: IntroTB;
   Q1: EnvironmentTickBite;
   Q2: ActivityTickBite;
-  Q3: PositionTickBite;
-  PosTBmap: TickBiteMap;
+  Q3: TickBiteLocationGroup;
   Q4: NumberTickBite;
   Q5: LocationBodyTickBite;
   Q6: RemoveTick1;
@@ -58,9 +57,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.T1 = new IntroTB(this.key, required);
     this.Q1 = new EnvironmentTickBite(this.key, required);
     this.Q2 = new ActivityTickBite(this.key, required);
-    this.Q3 = new PositionTickBite(this.key, required);
-    const showMap = SurveyEngine.singleChoice.none(this.Q3.key, this.Q3.optionKeys.nee);
-    this.PosTBmap = new TickBiteMap(this.key, required, showMap);
+    this.Q3 = new TickBiteLocationGroup(this.key, required);
 
     this.Q4 = new NumberTickBite(this.key, required);
     this.Q5 = new LocationBodyTickBite(this.key, required);
@@ -100,7 +97,6 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-    this.addItem(this.PosTBmap.get());
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());
