@@ -191,7 +191,7 @@ export class LymeDiagnosis4 extends Item {
           key: 'a', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "Datum"]]
+                [['en', "De klachten door de ziekte van Lyme zijn onstaan op "]]
               )
             }),
             ClozeItemTypes.dateInput({
@@ -202,9 +202,22 @@ export class LymeDiagnosis4 extends Item {
                 delta: { seconds: 0 }
               }
             }),
+            ClozeItemTypes.clozeLineBreak(),
             ClozeItemTypes.text({
               key: '3', content: new Map(
-                [['en', "bij benadering"]]
+                [['en', "Dit is de "]]
+              )
+            }),
+            ClozeItemTypes.dropDown({
+              key: '4',options: [
+                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('2', new Map([['nl', "geschatte"]]))
+              ]
+            }),
+            ClozeItemTypes.text({
+              key: '5',
+              content: new Map(
+                [['nl', " datum."]]
               )
             }),
           ],
@@ -214,7 +227,7 @@ export class LymeDiagnosis4 extends Item {
         {//disable b if a is selected and disable a if b is selected
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "Weet niet"],
+            ["nl", "Weet ik niet"],
           ]),
           disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'a')
         },
@@ -261,7 +274,7 @@ export class LymeDiagnosis5 extends Item {
           key: 'a', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "Datum"]]
+                [['en', "De arts heeft de uiting van ziekte van Lyme bij mij vastgesteld op "]]
               )
             }),
             ClozeItemTypes.dateInput({
@@ -272,9 +285,22 @@ export class LymeDiagnosis5 extends Item {
                 delta: { seconds: 0 }
               }
             }),
+            ClozeItemTypes.clozeLineBreak(),
             ClozeItemTypes.text({
               key: '3', content: new Map(
-                [['en', "bij benadering"]]
+                [['en', "Dit is de "]]
+              )
+            }),
+            ClozeItemTypes.dropDown({
+              key: '4',options: [
+                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('2', new Map([['nl', "geschatte"]]))
+              ]
+            }),
+            ClozeItemTypes.text({
+              key: '5',
+              content: new Map(
+                [['nl', " datum."]]
               )
             }),
           ],
@@ -282,7 +308,7 @@ export class LymeDiagnosis5 extends Item {
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "Weet niet"],
+            ["nl", "Weet ik niet"],
           ])
         },
       ]

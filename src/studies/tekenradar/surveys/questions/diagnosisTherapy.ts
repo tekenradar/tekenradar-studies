@@ -770,7 +770,7 @@ export class LymeTherapy1 extends Item {
       questionText: new Map([
         ['nl', 'Heb je antibiotica voorgeschreven gekregen van je arts?'],
       ]),
-      responseOptions: this.isPartOf('LymeG') ? this.responseOptionLyme : this.responseOptionEM
+      responseOptions: this.isPartOf('LBflow') ? this.responseOptionLyme : this.responseOptionEM
     })
   }
 }
