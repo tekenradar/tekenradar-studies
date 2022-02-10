@@ -186,4 +186,4 @@ class T12_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const T12_Adults = new T12_AdultsDef();
+export const T12_Adults = new T12_AdultsDef(true);

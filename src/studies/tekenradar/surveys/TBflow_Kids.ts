@@ -116,4 +116,4 @@ class TBflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const TBflow_Kids = new TBflow_KidsDef();
+export const TBflow_Kids = new TBflow_KidsDef(true);

@@ -73,4 +73,4 @@ class Chronicflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const Chronicflow_Adults = new Chronicflow_AdultsDef();
+export const Chronicflow_Adults = new Chronicflow_AdultsDef(true);

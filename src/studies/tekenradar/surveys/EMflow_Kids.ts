@@ -108,4 +108,4 @@ class EMflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const EMflow_Kids = new EMflow_KidsDef();
+export const EMflow_Kids = new EMflow_KidsDef(true);

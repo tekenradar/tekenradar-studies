@@ -109,4 +109,4 @@ class LBflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const LBflow_Adults = new LBflow_AdultsDef();
+export const LBflow_Adults = new LBflow_AdultsDef(true);

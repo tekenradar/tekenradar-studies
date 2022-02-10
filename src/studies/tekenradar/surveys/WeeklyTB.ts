@@ -42,12 +42,12 @@ class WeeklyTB_Def extends SurveyDefinition {
     });
 
 
-    const InitCond = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key,ParticipantFlags.weeklyTBreporter.values.init);
+    const InitCond = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init);
     const required = isRequired !== undefined ? isRequired : false;
     this.T1_init = new IntroWeeklyTBInit(this.key, required, InitCond);
     this.T1 = new IntroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
     this.Q1 = new NumberTickBitesWeekly(this.key, required);
-    const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'),0);
+    const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'), 0);
     this.Q2a = new NumberTickBites2a(this.key, required, Q1cond);
     this.Q2b = new NumberTickBites2b(this.key, required, Q1cond);
     this.Q2c = new NumberTickBites2c(this.key, required, Q1cond);
@@ -83,11 +83,11 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.addItem(this.Q2g.get());
     this.addItem(this.Q3.get());
     this.addItem(this.Q4.get());
-    this.addItem(this. G5_6.get());
+    this.addItem(this.G5_6.get());
     this.addItem(this.T2_init.get());
     this.addItem(this.T2.get());
     this.addItem(this.Q7.get());
   }
 }
 
-export const WeeklyTB = new WeeklyTB_Def();
+export const WeeklyTB = new WeeklyTB_Def(true);

@@ -313,4 +313,4 @@ class Standardflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const Standardflow_Kids = new Standardflow_KidsDef();
+export const Standardflow_Kids = new Standardflow_KidsDef(true);

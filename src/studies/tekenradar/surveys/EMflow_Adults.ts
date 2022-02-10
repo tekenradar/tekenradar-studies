@@ -109,4 +109,4 @@ class EMflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const EMflow_Adults = new EMflow_AdultsDef();
+export const EMflow_Adults = new EMflow_AdultsDef(true);

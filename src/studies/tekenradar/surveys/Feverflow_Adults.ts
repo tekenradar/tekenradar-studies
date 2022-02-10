@@ -117,4 +117,4 @@ class Feverflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const Feverflow_Adults = new Feverflow_AdultsDef();
+export const Feverflow_Adults = new Feverflow_AdultsDef(true);

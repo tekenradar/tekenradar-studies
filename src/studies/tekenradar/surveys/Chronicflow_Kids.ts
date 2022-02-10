@@ -75,4 +75,4 @@ class Chronicflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const Chronicflow_Kids = new Chronicflow_KidsDef();
+export const Chronicflow_Kids = new Chronicflow_KidsDef(true);

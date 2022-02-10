@@ -109,4 +109,4 @@ class LBflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const LBflow_Kids = new LBflow_KidsDef();
+export const LBflow_Kids = new LBflow_KidsDef(true);

@@ -184,4 +184,4 @@ class T3_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const T3_Adults = new T3_AdultsDef();
+export const T3_Adults = new T3_AdultsDef(true);

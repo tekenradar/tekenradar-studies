@@ -356,4 +356,4 @@ class T9_KidsDef extends SurveyDefinition {
   }
 }
 
-export const T9_Kids = new T9_KidsDef();
+export const T9_Kids = new T9_KidsDef(true);

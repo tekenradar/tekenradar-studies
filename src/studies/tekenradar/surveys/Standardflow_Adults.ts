@@ -143,4 +143,4 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const Standardflow_Adults = new Standardflow_AdultsDef();
+export const Standardflow_Adults = new Standardflow_AdultsDef(true);
