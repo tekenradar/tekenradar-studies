@@ -439,7 +439,7 @@ export class ActivityTickBite extends Item {
         {// show option g only if participant age > 12 years
           key: 'g', role: 'input',
           content: new Map([
-            ["nl", "Werk gerelateerde activiteit, namelijk:"],
+            ["nl", "Werkgerelateerde activiteit, namelijk:"],
           ]),
           displayCondition: this.isPartOf("Adults") ? undefined :
             SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 12)

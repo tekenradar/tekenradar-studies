@@ -597,25 +597,13 @@ export class Symptoms1 extends Item {
           ]),
           displayCondition: this.condition_u18
         },
-        {
-          key: 't6', role: 'text',
-          style: [{ key: 'className', value: 'fw-bold mb-2' }],
-          content: new Map([
-            ["nl", "Andere ziektes"],
-          ])
-        },
-        {
-          key: 'n', role: 'option',
-          content: new Map([
-            ["nl", "Suikerziekte"],
-          ])
-        },
-        {
-          key: 'o', role: 'option',
-          content: new Map([
-            ["nl", "Schildklierafwijking"],
-          ])
-        },
+        //{
+        //key: 't6', role: 'text',
+        //style: [{ key: 'className', value: 'fw-bold mb-2' }],
+        //content: new Map([
+        //  ["nl", "Andere ziektes"],
+        //])
+        //},
         {
           key: 't7', role: 'text',
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
@@ -700,6 +688,18 @@ export class Symptoms1 extends Item {
             ["nl", "Andere lichamelijke of psychische problemen"],
           ])
         },
+        {//these two items n and o moved down by kees
+          key: 'n', role: 'option',
+          content: new Map([
+            ["nl", "Suikerziekte"],
+          ])
+        },
+        {
+          key: 'o', role: 'option',
+          content: new Map([
+            ["nl", "Schildklierafwijking"],
+          ])
+        },
         {
           key: 'y', role: 'option',
           content: new Map([
@@ -769,9 +769,17 @@ export class Symptoms1 extends Item {
           ])
         },
         {
+          key: 't6', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", ""], //kees added empty text field to create space between last item and the items above
+          ])
+        },
+
+        {
           key: 'aj', role: 'option',
           content: new Map([
-            ["nl", "Geen van de bovenstaande"],
+            ["nl", "Geen van bovenstaande"],
           ])
         },
       ]
@@ -876,10 +884,10 @@ export class Symptoms2 extends Item {
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
           displayCondition:
-          this.isPartOf("Adults")? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
-          SurveyEngine.logic.and(
-            SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
-            SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
+            this.isPartOf("Adults") ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
+              SurveyEngine.logic.and(
+                SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
+                SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
         },
         {
           key: 'e',
@@ -1938,7 +1946,7 @@ Bent u een ouder/verzorger dan kunt u de antwoorden invullen voor/over uw kind.
 
 Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
     `
-    markdownContentAdults = `
+  markdownContentAdults = `
 # Zorgconsumptie
 
 Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
@@ -1959,7 +1967,7 @@ Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.isPartOf('Kids')? this.markdownContentKids : this.markdownContentAdults],
+            ["nl", this.isPartOf('Kids') ? this.markdownContentKids : this.markdownContentAdults],
           ]),
           className: ''
         })

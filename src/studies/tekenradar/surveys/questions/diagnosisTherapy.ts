@@ -148,12 +148,12 @@ class FormerLymeTherapy1 extends Item {
           key: 'b', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['nl', "Ja; hoe vaak:"]]
+                [['nl', "Ja, aantal antibioticakuren:"]]
               )
             }),
             ClozeItemTypes.numberInput({
               key: '2',
-              inputLabel: new Map([['nl', ' Antibioticakuren']]),
+              inputLabel: new Map([['nl', '']]), //emptied by kvdw
               labelBehindInput: true,
               inputMaxWidth: '60px'
             }),
@@ -354,7 +354,7 @@ export class GeneralTherapy1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "medicijnen gebruikt? Bijvoorbeeld antibiotica, paracetamol, etc. Zo ja, welke medicijnen en tegen welke gezondheidsklachten?"],
+        ["nl", "medicijnen gebruikt? Bijvoorbeeld antibiotica, paracetamol, etc."],
       ]),
     },
   ]
@@ -382,14 +382,14 @@ export class GeneralTherapy1 extends Item {
         },
         SingleChoiceOptionTypes.numberInput({
           key: 'b',
-              inputLabel: new Map([['nl', 'Ja, aantal medicijnen: ']]),
-              labelBehindInput: false,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 5
-              }
-            }),
+          inputLabel: new Map([['nl', 'Ja, aantal medicijnen: ']]),
+          labelBehindInput: false,
+          inputMaxWidth: '80px',
+          componentProperties: {
+            min: 0,
+            max: 5
+          }
+        }),
         /*           ClozeItemTypes.text({ //inputMaxWidth: '80px',
                      key: '2', content: new Map(
                        [['nl', ",namelijk (bijvoorbeeld antibiotica, paracetemol, etc):"]]
@@ -428,7 +428,7 @@ export class GeneralTherapy2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', "Namelijk (bijvoorbeeld antibiotica, paracetemol, etc):"],
+        ['nl', "Welke medicijnen en tegen welke gezondheidsklachten? (bijvoorbeeld antibiotica, paracetemol, etc):"],
       ]),
       items:
         [
@@ -806,7 +806,7 @@ export class LymeTherapy2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:this.questionTextMain,
+      questionText: this.questionTextMain,
       items: [
         ClozeItemTypes.text({
           key: '1', content: new Map(
