@@ -315,7 +315,7 @@ class FormerLymeTherapy4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van lyme?'],
+        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
       ]),
       responseOptions: [
         {
