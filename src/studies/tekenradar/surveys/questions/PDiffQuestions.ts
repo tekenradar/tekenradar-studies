@@ -394,7 +394,7 @@ export class WeeklyFlowPretext extends Item {
 
   markdownContent = `
 ##### We willen graag meten of het aantal tekenbeten over de tijd verandert.
-##### Hiervoor zoeken we deelnemers die regelmatig aan ons door willen geven hoeveel tekenbeten zij gehad hebben.
+##### Hiervoor zoeken we deelnemers die wekelijks aan ons door willen geven hoeveel tekenbeten zij gehad hebben.
 ##### Dat duurt minder dan een minuut per keer. Ook als je meestal géén tekenbeten hebt is het heel nuttig om dat te melden.
 `
 
@@ -470,7 +470,7 @@ export class WeeklyFlow extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wilt u wekelijks doorgeven hoeveel tekenbeten u heeft gehad?'],
+        ['nl', 'Wil je wekelijks doorgeven hoeveel tekenbeten je hebt gehad?'],
       ]),
       responseOptions: [
         {

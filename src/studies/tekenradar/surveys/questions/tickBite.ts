@@ -536,7 +536,7 @@ class TickBiteMap extends Item {
       responseItemDefs: [
         {
           key: 'map', role: 'map', content: generateLocStrings(new Map([
-            ['nl', 'Klik op de kaart om (ongeveer) de locatie aan te geven waar u de tekenbeet heeft opgelopen.']
+            ['nl', 'Klik op de kaart en plaats de teek (ongeveer) op de locatie waar je de tekenbeet hebt opgelopen. Zoom in om de locatie preciezer aan te kunnen geven']
           ]))
         }
       ]
@@ -955,31 +955,31 @@ export class ReportedTickBites extends Item {
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "1 tekenbeet gemeld"],
+            ["nl", "1 tekenbeet gemeld dit jaar"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "2 tekenbeten gemeld"],
+            ["nl", "2 tekenbeten gemeld dit jaar"],
           ])
         },
         {
           key: 'e', role: 'option',
           content: new Map([
-            ["nl", "3-5 tekenbeten gemeld"],
+            ["nl", "3-5 tekenbeten gemeld dit jaar"],
           ])
         },
         {
           key: 'f', role: 'option',
           content: new Map([
-            ["nl", "5-10 tekenbeten gemeld"],
+            ["nl", "5-10 tekenbeten gemeld dit jaar"],
           ])
         },
         {
           key: 'g', role: 'option',
           content: new Map([
-            ["nl", "Meer dan 10 tekenbeten gemeld"],
+            ["nl", "Meer dan 10 tekenbeten gemeld dit jaar"],
           ])
         },
       ]
