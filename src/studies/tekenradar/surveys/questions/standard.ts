@@ -837,7 +837,11 @@ export class Symptoms2 extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -860,7 +864,6 @@ export class Symptoms2 extends Item {
           ])
         }
       ],
-
       rows: [
         {
           key: 'a', content: new Map([
@@ -1180,7 +1183,11 @@ export class Functioning1 extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1591,7 +1598,11 @@ export class Fatigue extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1750,7 +1761,11 @@ export class Cognition extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,

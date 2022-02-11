@@ -332,7 +332,11 @@ export class Functioning1F1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -474,7 +478,11 @@ export class Functioning1F2_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -571,7 +579,11 @@ export class Functioning1F3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -683,7 +695,11 @@ export class Functioning2F1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -774,7 +790,11 @@ export class Functioning2F2_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -857,7 +877,11 @@ export class Functioning2F3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -958,7 +982,11 @@ export class Functioning3F1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1056,7 +1084,11 @@ export class Functioning3F2_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1180,7 +1212,11 @@ export class Functioning3F3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1298,7 +1334,11 @@ export class Functioning3F4_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1415,7 +1455,11 @@ export class Functioning5F1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1487,7 +1531,11 @@ export class Functioning5F2_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1571,7 +1619,11 @@ export class Functioning5F3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1840,7 +1892,11 @@ export class Fatigue1G1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -1931,7 +1987,11 @@ export class Fatigue1G3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2022,7 +2082,11 @@ export class Fatigue2G1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2112,7 +2176,11 @@ export class Fatigue2G3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2203,7 +2271,11 @@ export class Fatigue3G1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2294,7 +2366,11 @@ export class Fatigue3G3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2906,7 +2982,11 @@ export class Strength_WeaknessI1_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -3104,7 +3184,11 @@ export class Strength_WeaknessI2_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -3302,7 +3386,11 @@ export class Strength_WeaknessI3_Kids extends Item {
 
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
-      defaultMode: 'table',
+      defaultMode: 'horizontal',
+      responsiveModes: {
+        md: 'table',
+        sm: 'horizontal'
+      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
