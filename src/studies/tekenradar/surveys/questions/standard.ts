@@ -5,6 +5,7 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
+import { Standardflow_Adults } from '../Standardflow_Adults';
 //import { isExpressionStatement } from 'typescript';
 
 
@@ -884,7 +885,7 @@ export class Symptoms2 extends Item {
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
           displayCondition:
-            this.isPartOf("Adults") ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
+            this.isPartOf(Standardflow_Adults.key) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
               SurveyEngine.logic.and(
                 SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
                 SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))

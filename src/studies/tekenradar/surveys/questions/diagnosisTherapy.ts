@@ -155,7 +155,10 @@ class FormerLymeTherapy1 extends Item {
               key: '2',
               inputLabel: new Map([['nl', '']]), //emptied by kvdw
               labelBehindInput: true,
-              inputMaxWidth: '60px'
+              inputMaxWidth: '70px',
+              componentProperties: {
+                min: 0
+              }
             }),
           ]
         }),
@@ -315,7 +318,7 @@ class FormerLymeTherapy4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van lyme?'],
+        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
       ]),
       responseOptions: [
         {
@@ -853,6 +856,9 @@ export class LymeTherapy2 extends Item {
           key: '10',
           inputLabel: new Map([['nl', 'dagen']]),
           labelBehindInput: true,
+          componentProperties: {
+            min: 0
+          }
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
