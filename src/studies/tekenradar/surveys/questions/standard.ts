@@ -772,7 +772,7 @@ export class Symptoms1 extends Item {
           key: 't6', role: 'text',
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
           content: new Map([
-            ["nl", ""], //kees added empty text field to create space between last item and the items above
+            ["nl", " "], //kees added empty text field to create space between last item and the items above;
           ])
         },
 
