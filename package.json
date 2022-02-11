@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@types/node": "^16.10.3",
-    "case-editor-tools": "^1.0.0-beta.39",
+    "case-editor-tools": "^1.0.0-beta.40",
     "typescript": "^4.4.3"
   }
 }
