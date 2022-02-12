@@ -6,6 +6,7 @@ import { Doctor, FormerLymeGroup, LymeTherapy1, LymeTherapy2, LymeTherapy4, Lyme
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { EMSizeExample } from './images';
 
 
 
@@ -268,7 +269,7 @@ export class EM1 extends Item {
               )
             }),
             ClozeItemTypes.dropDown({
-              key: '4',options: [
+              key: '4', options: [
                 SCOptions.option('1', new Map([['nl', "exacte"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
@@ -347,7 +348,10 @@ export class EM3 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Hoe groot is de erythema migrans? Meet hiervoor de doorsnede van de vlek, zie het voorbeeld op de foto. Als de EM niet meer zichtbaar is, maak dan een zo goed mogelijke schatting.'],
+        ['nl', 'Hoe groot is de erythema migrans?'],
+      ]),
+      questionSubText: new Map([
+        ['nl', 'Meet hiervoor de doorsnede van de vlek, zie het voorbeeld op de foto. Als de EM niet meer zichtbaar is, maak dan een zo goed mogelijke schatting.'],
       ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
@@ -359,7 +363,17 @@ export class EM3 extends Item {
       componentProperties: {
         min: 0,
         max: 100
-      }
+      },
+      bottomDisplayCompoments: [
+        ComponentGenerators.markdown({
+          className: 'mt-2',
+          content: new Map([
+            ['nl', `
+<img src="${EMSizeExample}" width="100%" style="max-width: 500px"/>
+            `]
+          ])
+        })
+      ]
     })
   }
 }
