@@ -1,5 +1,5 @@
 import { Expression } from 'survey-engine/data_types';
-import { Group, Item } from 'case-editor-tools/surveys/types';
+import { Group, Item, OptionDef } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
@@ -390,7 +390,7 @@ export class GeneralTherapy1 extends Item {
           inputMaxWidth: '80px',
           componentProperties: {
             min: 0,
-            max: 5
+            max: 30
           }
         }),
         /*           ClozeItemTypes.text({ //inputMaxWidth: '80px',
@@ -405,11 +405,7 @@ export class GeneralTherapy1 extends Item {
 
 
 export class GeneralTherapy2 extends Item {
-
-  condition2: Expression;
-  condition3: Expression;
-  condition4: Expression;
-  condition5: Expression;
+  gtValue: Expression;
 
 
   constructor(parentKey: string, isRequired: boolean, condition: Expression) {
@@ -417,14 +413,32 @@ export class GeneralTherapy2 extends Item {
 
     this.isRequired = isRequired;
     this.condition = SurveyEngine.compare.gt(condition, 0);
-    this.condition2 = SurveyEngine.compare.gt(condition, 1);
-    this.condition3 = SurveyEngine.compare.gt(condition, 2);
-    this.condition4 = SurveyEngine.compare.gt(condition, 3);
-    this.condition5 = SurveyEngine.compare.gt(condition, 4);
-
+    this.gtValue = condition;
   }
 
   buildItem() {
+    const cItems: Array<OptionDef> = [];
+    Array.from({ length: 30 }).forEach((_, index) => {
+      cItems.push(ClozeItemTypes.text({
+        key: `row-${index + 1}-label`,
+        content: new Map(
+          [['nl', `Medicijn ${index + 1}:`]]
+        ),
+        displayCondition: SurveyEngine.compare.gt(this.gtValue, index),
+      }));
+      cItems.push(ClozeItemTypes.textInput({
+        key: `row-${index + 1}-input`,
+        displayCondition: SurveyEngine.compare.gt(this.gtValue, index),
+      }));
+      cItems.push(ClozeItemTypes.dropDown({
+        key: `row-${index + 1}-dropdown`, options: [
+          SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
+          SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
+        ],
+        displayCondition: SurveyEngine.compare.gt(this.gtValue, index),
+      }));
+      cItems.push(ClozeItemTypes.clozeLineBreak());
+    })
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -433,99 +447,7 @@ export class GeneralTherapy2 extends Item {
       questionText: new Map([
         ['nl', "Welke medicijnen en tegen welke gezondheidsklachten? (bijvoorbeeld antibiotica, paracetemol, etc):"],
       ]),
-      items:
-        [
-          ClozeItemTypes.text({
-            key: '1', content: new Map(
-              [['nl', "Medicijn 1:"]]
-            ),
-          }),
-          ClozeItemTypes.textInput({
-            key: '2',
-          }),
-          ClozeItemTypes.dropDown({
-            key: '3', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ]
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //2nd Medication:
-          ClozeItemTypes.text({
-            key: '4', content: new Map(
-              [['nl', "Medicijn 2:"]]
-            ),
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.textInput({
-            key: '5',
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.dropDown({
-            key: '6', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //3rd medication:
-          ClozeItemTypes.text({
-            key: '7', content: new Map(
-              [['nl', "Medicijn 3:"]]
-            ),
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.textInput({
-            key: '8',
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.dropDown({
-            key: '9', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //4th medication:
-          ClozeItemTypes.text({
-            key: '10', content: new Map(
-              [['nl', "Medicijn 4:"]]
-            ),
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.textInput({
-            key: '11',
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.dropDown({
-            key: '12', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //5th medication:
-          ClozeItemTypes.text({
-            key: '17', content: new Map(
-              [['nl', "Medicijn 5:"]]
-            ),
-            displayCondition: this.condition5
-          }),
-          ClozeItemTypes.textInput({
-            key: '18',
-            displayCondition: this.condition5
-          }),
-          ClozeItemTypes.dropDown({
-            key: '12', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition5
-          }),
-        ],
+      items: cItems,
     })
   }
 }
