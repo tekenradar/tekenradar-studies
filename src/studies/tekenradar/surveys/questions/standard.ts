@@ -1877,7 +1877,7 @@ export class Cognition extends Item {
         {
           key: 'n',
           content: new Map([
-            ["nl", "JE plotseling afvragen of je een woord op de juiste manier gebruikt"],
+            ["nl", "Je plotseling afvragen of je een woord op de juiste manier gebruikt"],
           ])
         },
         {
@@ -2576,7 +2576,7 @@ export class Awareness4 extends Item {
   questionTextMain_Adults = [
     {
       content: new Map([
-        ["nl", 'In hoeverre denk je dat je behandeling helpt bij de erythema migrans of andere ziekte van lyme?'],
+        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van lyme?'],
       ]),
     }
   ]

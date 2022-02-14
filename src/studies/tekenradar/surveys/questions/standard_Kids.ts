@@ -2562,7 +2562,7 @@ export class PainH1_Kids extends Item {
       //]),
       //TODO: bipolar slider label???
       sliderLabel: new Map([
-        ["nl", "Geen pijn - veel pijn"],
+        ["nl", "0=Geen pijn - 10=veel pijn"],
       ]),
       noResponseLabel: new Map([
         ["nl", "Klik op het blokje om een plaats op de lijn te kiezen."],
