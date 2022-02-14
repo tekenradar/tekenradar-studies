@@ -79,12 +79,13 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     this.Q23 = new FeverTherapy(this.key, required, Q16condition);
 
     this.Q24 = new FeverOtherCause1(this.key, required);
-    const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nothing);
-    this.Q25 = new FeverOtherCause2(this.key, required, Q24condition);
+    //const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nothing);
+    const Q24anycondition = SurveyEngine.multipleChoice.any(this.Q24.key, this.Q24.optionKeys.a, this.Q24.optionKeys.b, this.Q24.optionKeys.c, this.Q24.optionKeys.d, this.Q24.optionKeys.e, this.Q24.optionKeys.f, this.Q24.optionKeys.g);
+    this.Q25 = new FeverOtherCause2(this.key, required, Q24anycondition);
 
 
-    this.Q26 = new FeverOtherCause3(this.key, required, Q24condition);
-    this.Q27 = new FeverOtherCause4(this.key, required, Q24condition);
+    this.Q26 = new FeverOtherCause3(this.key, required, Q24anycondition);
+    this.Q27 = new FeverOtherCause4(this.key, required);
 
     this.G28_29 = new PreviousTickBitesGroup(this.key, isRequired)
 

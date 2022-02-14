@@ -43,9 +43,6 @@ class T6_AdultsDef extends SurveyDefinition {
   T5: MedCareText2;
   Q25: MedCare2;
   T6: MedCareText3;
-  H5: GenHealthHeader;
-  Q26: Symptoms1;
-  Q27: SymptomsFU;
 
 
 
@@ -120,9 +117,6 @@ class T6_AdultsDef extends SurveyDefinition {
     this.Q25 = new MedCare2(this.key, required, Q24number);
     this.T6 = new MedCareText3(this.key, required, Q24number);
 
-    this.H5 = new GenHealthHeader(this.key, required);
-    this.Q26 = new Symptoms1(this.key, required);
-    this.Q27 = new SymptomsFU(this.key, required);
 
   }
 
@@ -178,10 +172,6 @@ class T6_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q25.get());
     this.addItem(this.T6.get());
     this.addPageBreak();
-
-    this.addItem(this.H5.get());
-    this.addItem(this.Q26.get());
-    this.addItem(this.Q27.get());
 
   }
 }
