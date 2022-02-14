@@ -1,4 +1,5 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { applyRequiredQuestions } from './globalConstants';
 import { PhotoEM_Text, UploadPhotoEM } from './questions/EM';
 
 
@@ -39,4 +40,4 @@ class EMfoto_Def extends SurveyDefinition {
   }
 }
 
-export const EMfoto = new EMfoto_Def(true);
+export const EMfoto = new EMfoto_Def(applyRequiredQuestions);

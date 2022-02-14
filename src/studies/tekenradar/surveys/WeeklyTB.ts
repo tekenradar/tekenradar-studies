@@ -4,6 +4,7 @@ import { Gender, Residence } from "./questions/demographie";
 import { PreviousTickBitesGroup } from "./questions/prevTickBites";
 import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly, OutroWeeklyTB, OutroWeeklyTBInit, RemarkWeeklyTB } from "./questions/weeklyTB";
 import { ParticipantFlags } from '../participantFlags';
+import { applyRequiredQuestions } from "./globalConstants";
 
 class WeeklyTB_Def extends SurveyDefinition {
 
@@ -90,4 +91,4 @@ class WeeklyTB_Def extends SurveyDefinition {
   }
 }
 
-export const WeeklyTB = new WeeklyTB_Def(true);
+export const WeeklyTB = new WeeklyTB_Def(applyRequiredQuestions);

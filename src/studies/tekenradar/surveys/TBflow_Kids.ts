@@ -1,5 +1,6 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { applyRequiredQuestions } from './globalConstants';
 import { Gender, Residence } from './questions/demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
@@ -116,4 +117,4 @@ class TBflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const TBflow_Kids = new TBflow_KidsDef(true);
+export const TBflow_Kids = new TBflow_KidsDef(applyRequiredQuestions);

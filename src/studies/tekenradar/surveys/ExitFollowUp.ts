@@ -1,4 +1,5 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { applyRequiredQuestions } from './globalConstants';
 
 
 class ExitFollowUp_Def extends SurveyDefinition {
@@ -30,4 +31,4 @@ class ExitFollowUp_Def extends SurveyDefinition {
   }
 }
 
-export const ExitFollowUp = new ExitFollowUp_Def();
+export const ExitFollowUp = new ExitFollowUp_Def(applyRequiredQuestions);

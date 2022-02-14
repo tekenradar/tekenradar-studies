@@ -1,4 +1,5 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { applyRequiredQuestions } from './globalConstants';
 import { ChronicLymeDiagnosis1, ChronicLymeDiagnosis2, ChronicLymeTherapy1, ChronicLymeTherapy2 } from './questions/chronic';
 import { LymeDiagnosisGroup } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
@@ -75,4 +76,4 @@ class Chronicflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const Chronicflow_Kids = new Chronicflow_KidsDef(true);
+export const Chronicflow_Kids = new Chronicflow_KidsDef(applyRequiredQuestions);
