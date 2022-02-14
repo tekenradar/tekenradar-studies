@@ -103,6 +103,8 @@ class Standardflow_KidsDef extends SurveyDefinition {
       durationText: new Map([
         ['nl', 'Invullen duurt ongeveer 10 minuten.']
       ]),
+      availableFor: 'temporary_participants',
+      requireLoginBeforeSubmission: true,
     });
 
 
