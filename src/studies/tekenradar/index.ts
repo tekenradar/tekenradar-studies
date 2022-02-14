@@ -25,6 +25,7 @@ import { T6_Kids } from "./surveys/T6_Kids";
 import { T9_Kids } from "./surveys/T9_Kids";
 import { T12_Kids } from "./surveys/T12_Kids";
 import { ExitFollowUp } from "./surveys/ExitFollowUp";
+import { changeFollowupTimingToNow } from "./customRules/changeFollowupTiming";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
@@ -37,6 +38,6 @@ export const TekenradarStudy: Study = {
     WeeklyTB, EMfoto, ExitFollowUp
   ],
   customStudyRules: [
-    addExampleReminderMessage
+    changeFollowupTimingToNow,
   ]
 }
