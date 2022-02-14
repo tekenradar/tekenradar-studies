@@ -1203,7 +1203,9 @@ export class DurationTickBite extends Item {
               }
             }),
             ClozeItemTypes.dropDown({
-              key: '3', options: [
+              key: '3',
+              placeholder: new Map([['nl', '-- kies een optie --']]),
+              options: [
                 SCOptions.option('1', new Map([['nl', "uren"]])),
                 SCOptions.option('2', new Map([['nl', "dagen (rond af op hele dagen)"]]))
               ]
