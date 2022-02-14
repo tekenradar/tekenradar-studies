@@ -581,50 +581,55 @@ export class MedicationFU2 extends Item {
             ]
           }),
           ClozeItemTypes.clozeLineBreak(),
-          //TODO: checkbox is needed here
           ClozeItemTypes.text({
             key: '12', content: new Map(
               [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
             )
           }),
+          ClozeItemTypes.dropDown({
+            key: '13', options: [
+              SCOptions.option('1', new Map([['nl', "Ja"]])),
+              SCOptions.option('2', new Map([['nl', "Nee"]]))
+            ]
+          }),
           ClozeItemTypes.clozeLineBreak(),
           //2nd medication
           ClozeItemTypes.text({
-            key: '13', content: new Map(
+            key: '14', content: new Map(
               [['nl', "Medicijn 2 (naam of omschrijving):"]]
             ),
             displayCondition: this.condition2
           }),
           ClozeItemTypes.textInput({
-            key: '14',
+            key: '15',
             displayCondition: this.condition2
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '15', content: new Map(
+            key: '16', content: new Map(
               [['nl', "Dosis:"]]
             ),
             displayCondition: this.condition2
           }),
           ClozeItemTypes.textInput({
-            key: '16',
+            key: '17',
             displayCondition: this.condition2
           }),//TODO: this input is not mandatory
           ClozeItemTypes.text({
-            key: '17', content: new Map(
+            key: '18', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
             ),
             displayCondition: this.condition2
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '18', content: new Map(
+            key: '19', content: new Map(
               [['nl', "Aantal keren per dag:"]]
             ),
             displayCondition: this.condition2
           }),
           ClozeItemTypes.numberInput({
-            key: '19',
+            key: '20',
             inputMaxWidth: '60px',
             inputLabel: new Map([["nl", " "],]),
             componentProperties: {
@@ -635,53 +640,48 @@ export class MedicationFU2 extends Item {
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '20', content: new Map(
+            key: '21', content: new Map(
               [['nl', "Aantal dagen:"]]
             ),
             displayCondition: this.condition2
           }),
           ClozeItemTypes.textInput({
-            key: '21',
+            key: '22',
             displayCondition: this.condition2
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '22', content: new Map(
+            key: '23', content: new Map(
               [['nl', "Waarom neem je dit medicijn?"]]
             ),
             displayCondition: this.condition2
           }),
           ClozeItemTypes.dropDown({
-            key: '23', options: [
+            key: '24', options: [
               SCOptions.option('1', new Map([['nl', "Tegen de tekenbeet, erythema migrans of andere vorm van de ziekte van Lyme"]])),
               SCOptions.option('2', new Map([['nl', "Om een andere reden (klacht, ziekte of aandoening)"]]))
             ],
             displayCondition: this.condition2
           }),
           ClozeItemTypes.clozeLineBreak(),
-          //TODO: checkbox is needed here
           ClozeItemTypes.text({
-            key: '24', content: new Map(
+            key: '25', content: new Map(
               [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
             ),
+            displayCondition: this.condition2
+          }),
+          ClozeItemTypes.dropDown({
+            key: '26', options: [
+              SCOptions.option('1', new Map([['nl', "Ja"]])),
+              SCOptions.option('2', new Map([['nl', "Nee"]]))
+            ],
             displayCondition: this.condition2
           }),
           ClozeItemTypes.clozeLineBreak(),
           //3rd medication
           ClozeItemTypes.text({
-            key: '25', content: new Map(
-              [['nl', "Medicijn 3 (naam of omschrijving):"]]
-            ),
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.textInput({
-            key: '26',
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          ClozeItemTypes.text({
             key: '27', content: new Map(
-              [['nl', "Dosis:"]]
+              [['nl', "Medicijn 3 (naam of omschrijving):"]]
             ),
             displayCondition: this.condition3
           }),
@@ -689,100 +689,117 @@ export class MedicationFU2 extends Item {
             key: '28',
             displayCondition: this.condition3
           }),
-          ClozeItemTypes.text({
-            key: '29', content: new Map(
-              [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            ),
-            displayCondition: this.condition3
-          }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '30', content: new Map(
-              [['nl', "Aantal keren per dag:"]]
+            key: '29', content: new Map(
+              [['nl', "Dosis:"]]
             ),
             displayCondition: this.condition3
           }),
-          ClozeItemTypes.numberInput({
-            key: '31',
-            inputMaxWidth: '60px',
-            inputLabel: new Map([["nl", " "],]),
-            componentProperties: {
-              min: 0,
-              max: 100
-            },
+          ClozeItemTypes.textInput({
+            key: '30',
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.text({
+            key: '31', content: new Map(
+              [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
+            ),
             displayCondition: this.condition3
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
             key: '32', content: new Map(
-              [['nl', "Aantal dagen:"]]
+              [['nl', "Aantal keren per dag:"]]
             ),
             displayCondition: this.condition3
           }),
-          ClozeItemTypes.textInput({
+          ClozeItemTypes.numberInput({
             key: '33',
+            inputMaxWidth: '60px',
+            inputLabel: new Map([["nl", " "],]),
+            componentProperties: {
+              min: 0,
+              max: 100
+            },
             displayCondition: this.condition3
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
             key: '34', content: new Map(
+              [['nl', "Aantal dagen:"]]
+            ),
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.textInput({
+            key: '35',
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '36', content: new Map(
               [['nl', "Waarom neem je dit medicijn?"]]
             ),
             displayCondition: this.condition3
           }),
           ClozeItemTypes.dropDown({
-            key: '35', options: [
+            key: '37', options: [
               SCOptions.option('1', new Map([['nl', "Tegen de tekenbeet, erythema migrans of andere vorm van de ziekte van Lyme"]])),
               SCOptions.option('2', new Map([['nl', "Om een andere reden (klacht, ziekte of aandoening)"]]))
             ],
             displayCondition: this.condition3
           }),
           ClozeItemTypes.clozeLineBreak(),
-          //TODO: checkbox is needed here
           ClozeItemTypes.text({
-            key: '36', content: new Map(
+            key: '38', content: new Map(
               [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
             ),
+            displayCondition: this.condition3
+          }),
+          ClozeItemTypes.dropDown({
+            key: '39', options: [
+              SCOptions.option('1', new Map([['nl', "Ja"]])),
+              SCOptions.option('2', new Map([['nl', "Nee"]]))
+            ],
             displayCondition: this.condition3
           }),
           ClozeItemTypes.clozeLineBreak(),
           //4th medication
           ClozeItemTypes.text({
-            key: '37', content: new Map(
+            key: '40', content: new Map(
               [['nl', "Medicijn 4 (naam of omschrijving):"]]
             ),
             displayCondition: this.condition4
           }),
           ClozeItemTypes.textInput({
-            key: '38',
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          ClozeItemTypes.text({
-            key: '39', content: new Map(
-              [['nl', "Dosis:"]]
-            ),
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.textInput({
-            key: '40',
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.text({
-            key: '41', content: new Map(
-              [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
-            ),
+            key: '41',
             displayCondition: this.condition4
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
             key: '42', content: new Map(
+              [['nl', "Dosis:"]]
+            ),
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.textInput({
+            key: '43',
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.text({
+            key: '44', content: new Map(
+              [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
+            ),
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.clozeLineBreak(),
+          ClozeItemTypes.text({
+            key: '45', content: new Map(
               [['nl', "Aantal keren per dag:"]]
             ),
             displayCondition: this.condition4
           }),
           ClozeItemTypes.numberInput({
-            key: '43',
+            key: '46',
             inputMaxWidth: '60px',
             inputLabel: new Map([["nl", " "],]),
             componentProperties: {
@@ -793,75 +810,81 @@ export class MedicationFU2 extends Item {
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '44', content: new Map(
+            key: '47', content: new Map(
               [['nl', "Aantal dagen:"]]
             ),
             displayCondition: this.condition4
           }),
           ClozeItemTypes.textInput({
-            key: '45',
+            key: '48',
             displayCondition: this.condition4
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '46', content: new Map(
+            key: '49', content: new Map(
               [['nl', "Waarom neem je dit medicijn?"]]
             ),
             displayCondition: this.condition4
           }),
           ClozeItemTypes.dropDown({
-            key: '47', options: [
+            key: '50', options: [
               SCOptions.option('1', new Map([['nl', "Tegen de tekenbeet, erythema migrans of andere vorm van de ziekte van Lyme"]])),
               SCOptions.option('2', new Map([['nl', "Om een andere reden (klacht, ziekte of aandoening)"]]))
             ],
             displayCondition: this.condition4
           }),
           ClozeItemTypes.clozeLineBreak(),
-          //TODO: checkbox is needed here
           ClozeItemTypes.text({
-            key: '48', content: new Map(
+            key: '51', content: new Map(
               [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
             ),
+            displayCondition: this.condition4
+          }),
+          ClozeItemTypes.dropDown({
+            key: '52', options: [
+              SCOptions.option('1', new Map([['nl', "Ja"]])),
+              SCOptions.option('2', new Map([['nl', "Nee"]]))
+            ],
             displayCondition: this.condition4
           }),
           ClozeItemTypes.clozeLineBreak(),
           //5th medication
           ClozeItemTypes.text({
-            key: '49', content: new Map(
+            key: '53', content: new Map(
               [['nl', "Medicijn 5 (naam of omschrijving):"]]
             ),
             displayCondition: this.condition5
           }),
           ClozeItemTypes.textInput({
-            key: '50',
+            key: '54',
             displayCondition: this.condition5
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '51', content: new Map(
+            key: '55', content: new Map(
               [['nl', "Dosis:"]]
             ),
             displayCondition: this.condition5
           }),
           ClozeItemTypes.textInput({
-            key: '52',
+            key: '56',
             displayCondition: this.condition5
           }),
           ClozeItemTypes.text({
-            key: '53', content: new Map(
+            key: '57', content: new Map(
               [['nl', "(Als je de dosis niet weet kun je die overslaan)"]]
             ),
             displayCondition: this.condition5
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '54', content: new Map(
+            key: '58', content: new Map(
               [['nl', "Aantal keren per dag:"]]
             ),
             displayCondition: this.condition5
           }),
           ClozeItemTypes.numberInput({
-            key: '55',
+            key: '59',
             inputMaxWidth: '60px',
             inputLabel: new Map([["nl", " "],]),
             componentProperties: {
@@ -872,35 +895,41 @@ export class MedicationFU2 extends Item {
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '56', content: new Map(
+            key: '60', content: new Map(
               [['nl', "Aantal dagen:"]]
             ),
             displayCondition: this.condition5
           }),
           ClozeItemTypes.textInput({
-            key: '57',
+            key: '61',
             displayCondition: this.condition5
           }),
           ClozeItemTypes.clozeLineBreak(),
           ClozeItemTypes.text({
-            key: '58', content: new Map(
+            key: '62', content: new Map(
               [['nl', "Waarom neem je dit medicijn?"]]
             ),
             displayCondition: this.condition5
           }),
           ClozeItemTypes.dropDown({
-            key: '59', options: [
+            key: '63', options: [
               SCOptions.option('1', new Map([['nl', "Tegen de tekenbeet, erythema migrans of andere vorm van de ziekte van Lyme"]])),
               SCOptions.option('2', new Map([['nl', "Om een andere reden (klacht, ziekte of aandoening)"]]))
             ],
             displayCondition: this.condition5
           }),
           ClozeItemTypes.clozeLineBreak(),
-          //TODO: checkbox is needed here
           ClozeItemTypes.text({
-            key: '60', content: new Map(
+            key: '64', content: new Map(
               [['nl', "Medicijnen tijdens ziekenhuisopname gebruikt"]]
             ),
+            displayCondition: this.condition5
+          }),
+          ClozeItemTypes.dropDown({
+            key: '65', options: [
+              SCOptions.option('1', new Map([['nl', "Ja"]])),
+              SCOptions.option('2', new Map([['nl', "Nee"]]))
+            ],
             displayCondition: this.condition5
           }),
         ],
