@@ -330,7 +330,7 @@ class FormerLymeTherapy4 extends Item {
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "Nee, ik ben klachten blijven houden tot op heden"],
+            ["nl", "Nee, ik ben tot op heden klachten blijven houden"],
           ])
         },
       ]

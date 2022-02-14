@@ -650,14 +650,14 @@ export class Symptoms1 extends Item {
             ["nl", "Epilepsie"],
           ])
         },
-        {//TODO - other words for kids
+        {
           key: 'u_Adults', role: 'option',
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
           ]),
           displayCondition: SurveyEngine.logic.not(this.condition_u18)
         },
-        {//TODO - other words for kids
+        {
           key: 'u_Kids', role: 'option',
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel"],

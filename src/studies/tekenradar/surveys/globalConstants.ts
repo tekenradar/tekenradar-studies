@@ -1,1 +1,1 @@
-export const applyRequiredQuestions = true;
+export const applyRequiredQuestions = false;

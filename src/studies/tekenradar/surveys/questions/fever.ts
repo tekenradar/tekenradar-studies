@@ -221,7 +221,7 @@ export class FeverSymptom2 extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "1 weken na de tekenbeet"],
+            ["nl", "1 week na de tekenbeet"],
           ])
         },
         {
@@ -272,7 +272,7 @@ export class FeverSymptom2 extends Item {
         }, {
           key: '11', role: 'option',
           content: new Map([
-            ["nl", "10 of meer weken na de tekenbeet"],
+            ["nl", "11 of meer weken na de tekenbeet"],
           ]),
         },
       ],
@@ -536,7 +536,29 @@ export class FeverTherapy extends Item {
 
 export class FeverOtherCause1 extends Item {
 
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Is er in de afgelopen 4 weken één van de onderstaande ziektebeelden bij je vastgesteld? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
   optionKeys = {
+    a: 'a',
+    b: 'b',
+    c: 'c',
+    d: 'd',
+    e: 'e',
+    f: 'f',
+    g: 'g',
     nothing: 'h'
   }
 
@@ -553,9 +575,7 @@ export class FeverOtherCause1 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Is er in de afgelopen 4 weken één van de onderstaande ziektebeelden bij je vastgesteld? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -615,6 +635,21 @@ export class FeverOtherCause1 extends Item {
 
 export class FeverOtherCause2 extends Item {
 
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke arts(en) heeft/hebben bovenstaande ziektebeeld(en) vastgesteld? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FOC2');
 
@@ -628,9 +663,7 @@ export class FeverOtherCause2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke arts(en) heeft/hebben bovenstaande ziektebeeld(en) vastgesteld? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -700,6 +733,20 @@ export class FeverOtherCause2 extends Item {
 
 export class FeverOtherCause3 extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welk onderzoek is hiervoor bij jou gedaan in de afgelopen 4 weken? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FOC3');
 
@@ -713,9 +760,7 @@ export class FeverOtherCause3 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welk onderzoek is hiervoor bij jou gedaan in de afgelopen 4 weken? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         //TODO: disable other option if a is selected?
         {
@@ -781,6 +826,21 @@ export class FeverOtherCause3 extends Item {
 
 export class FeverOtherCause4 extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke nieuwe klachten heb je sinds 4 weken (of heb je in de afgelopen 4 weken gehad)? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FOC4');
 
@@ -794,9 +854,7 @@ export class FeverOtherCause4 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke nieuwe klachten heb je sinds 4 weken (of heb je in de afgelopen 4 weken gehad)? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
