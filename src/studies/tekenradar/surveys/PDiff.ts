@@ -54,7 +54,7 @@ export class PDiffDef extends SurveyDefinition {
     this.Q8 = new WeeklyFlow(this.key, required, [
       SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.no),
       SurveyEngine.singleChoice.none(this.Q3.key, this.Q3.optionKeys.no),
-      SurveyEngine.multipleChoice.none(this.Q4.key, this.Q4.optionKeys.no),
+      SurveyEngine.singleChoice.none(this.Q4.key, this.Q4.optionKeys.no),
     ]);
     this.SV = new SurveyValidationText(this.key, SurveyEngine.logic.and(
       SurveyEngine.logic.not(SurveyEngine.getSurveyItemValidation(this.Q8.key, 'pdiff')),
