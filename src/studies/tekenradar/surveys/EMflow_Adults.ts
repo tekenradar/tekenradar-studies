@@ -1,5 +1,6 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { applyRequiredQuestions } from './globalConstants';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
 import { DoctorEM, EM1, EM2, EM3, EM4, EMHeader, PhotoEM_Text, ReportHeader, UploadPhotoEM } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
@@ -109,4 +110,4 @@ class EMflow_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const EMflow_Adults = new EMflow_AdultsDef(true);
+export const EMflow_Adults = new EMflow_AdultsDef(applyRequiredQuestions);

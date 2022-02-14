@@ -5,6 +5,7 @@ import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, MedicationHea
 import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, GenHealthHeader, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, Symptoms1, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
+import { applyRequiredQuestions } from './globalConstants';
 
 class T3_AdultsDef extends SurveyDefinition {
 
@@ -184,4 +185,4 @@ class T3_AdultsDef extends SurveyDefinition {
   }
 }
 
-export const T3_Adults = new T3_AdultsDef(true);
+export const T3_Adults = new T3_AdultsDef(applyRequiredQuestions);
