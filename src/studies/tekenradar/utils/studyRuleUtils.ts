@@ -268,7 +268,7 @@ export const removeFollowUpMessagesForSurvey = (surveyKey: string) => {
   )
 }
 
-const addFollowUpSurvey = (surveyKey: string, startInDays: number, activeForDays: number) => {
+export const addFollowUpSurvey = (surveyKey: string, startInDays: number, activeForDays: number) => {
   const inviteMessage = surveyKey + '_invite';
   const reminderMessage = surveyKey + '_reminder';
   return StudyEngine.do(
