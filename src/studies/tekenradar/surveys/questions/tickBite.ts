@@ -754,7 +754,8 @@ export class RemoveTick3 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: 'a',
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Vandaag, tussen"]]
@@ -775,7 +776,9 @@ export class RemoveTick3 extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'b', items: [
+          key: 'b',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Gisteren, tussen"]]
@@ -796,7 +799,9 @@ export class RemoveTick3 extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: 'c',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eergisteren, tussen"]]
@@ -817,7 +822,9 @@ export class RemoveTick3 extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'd', items: [
+          key: 'd',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eerder namelijk,"]]
@@ -1039,7 +1046,9 @@ export class DateTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'b', items: [
+          key: 'b',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Gisteren, tussen"]]
@@ -1060,7 +1069,9 @@ export class DateTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: 'c',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eergisteren, tussen"]]
@@ -1081,7 +1092,9 @@ export class DateTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'd', items: [
+          key: 'd',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eerder, op"]]
@@ -1159,7 +1172,8 @@ export class DurationTickBite extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: 'a',
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Korter dan 12 uur, namelijk"]]
@@ -1178,7 +1192,9 @@ export class DurationTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'b', items: [
+          key: 'b',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "12 - 24 uur, namelijk"]]
@@ -1197,7 +1213,9 @@ export class DurationTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: 'c',
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Langer dan 24 uur, namelijk"]]
@@ -1222,12 +1240,12 @@ export class DurationTickBite extends Item {
             }),
           ]
         }),
-        {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "Weet ik niet"],
-          ])
-        },
+        SCOptions.option(
+          'd', new Map([["nl", "Weet ik niet"]]),
+          {
+            className: TextBorderFormat,
+          }
+        )
       ]
     })
   }
