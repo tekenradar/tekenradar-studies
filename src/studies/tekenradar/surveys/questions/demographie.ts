@@ -1,7 +1,11 @@
 import { Expression, SurveyGroupItem, SurveyItem, SurveySingleItem } from 'survey-engine/data_types';
 import { SurveyDefinition, Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { inputKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { toEditorSettings } from 'typescript';
+import { SurveyEditor } from 'case-editor-tools/surveys/survey-editor/survey-editor';
+import { expWithArgs, generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 
 
 export class Age extends Item {
@@ -44,6 +48,7 @@ export class Residence extends Item {
 
     this.isRequired = isRequired;
     this.condition = condition;
+
   }
 
   buildItem() {
@@ -56,6 +61,25 @@ export class Residence extends Item {
         ['nl', 'Wat zijn de 4 cijfers van je postcode, of wat is je woonplaats?'],
       ]),
       titleClassName: 'sticky-top',
+      customValidations: [
+        {
+            key: 'r2',
+            type: 'hard',
+            rule: SurveyEngine.logic.or(
+                expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
+                expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, inputKey].join('.'), '^[0-9][0-9][0-9][0-9]$'),
+            )
+        }
+    ],
+    bottomDisplayCompoments: [
+      {
+          role: 'error',
+          content: generateLocStrings(new Map([
+              ["nl", "Voer de eerste vier cijfers van je postcode in"],
+          ])),
+          displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
+      }
+  ]
     })
   }
 }
@@ -112,4 +136,3 @@ export class Gender extends Item {
     })
   }
 }
-
