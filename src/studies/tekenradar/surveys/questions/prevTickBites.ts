@@ -2,6 +2,8 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { WeeklyTB } from '../WeeklyTB';
+import { WeeklyFlow } from './PDiffQuestions';
 
 
 export class PreviousTickBitesGroup extends Group {

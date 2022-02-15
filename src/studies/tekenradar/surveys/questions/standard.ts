@@ -10,6 +10,7 @@ import { T3_Adults } from '../T3_Adults';
 import { T6_Adults } from '../T6_Adults';
 import { T9_Adults } from '../T9_Adults';
 import { T12_Adults } from '../T12_Adults';
+import { SurveySuffix } from '../globalConstants';
 //import { isExpressionStatement } from 'typescript';
 
 
@@ -54,7 +55,7 @@ export class AwarenessGroup extends Group {
 
   buildGroup() {
 
-    this.isPartOf('Kids') ? this.addItem(this.T1_Kids.get()) : this.addItem(this.T1.get());
+    this.isPartOf(SurveySuffix.Kids) ? this.addItem(this.T1_Kids.get()) : this.addItem(this.T1.get());
     //this.addItem(this.T1.get());
 
     this.addItem(this.Q1.get());
@@ -357,7 +358,7 @@ export class Qualification extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf('Adults') ? this.questionTextMain_Adults : this.questionTextMain_Kids,
+      questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.questionTextMain_Kids,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -600,7 +601,7 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Verzakking"],
           ]),
-          displayCondition: this.condition_u18
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         //{
         //key: 't6', role: 'text',
@@ -627,7 +628,7 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
           ]),
-          displayCondition: SurveyEngine.logic.not(this.condition_u18)
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         {
           key: 'r', role: 'option',
@@ -659,14 +660,14 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
           ]),
-          displayCondition: SurveyEngine.logic.not(this.condition_u18)
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         {
           key: 'u_Kids', role: 'option',
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel"],
           ]),
-          displayCondition: this.condition_u18
+          displayCondition: (!(this.isPartOf(SurveySuffix.Kids))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         {
           key: 'v', role: 'option',
@@ -746,14 +747,14 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Alcoholverslaving"],
           ]),
-          displayCondition: SurveyEngine.logic.not(this.condition_u18)
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         {
           key: 'af', role: 'option',
           content: new Map([
             ["nl", "Drugsverslaving"],
           ]),
-          displayCondition: SurveyEngine.logic.not(this.condition_u18)
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         {
           key: 'ag', role: 'option',
@@ -891,18 +892,18 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
-          //displayCondition:
-          //  SurveyEngine.logic.or(this.isPartOf(Standardflow_Adults.key), this.isPartOf(T3_Adults.key), this.isPartOf(T6_Adults.key), this.isPartOf(T9_Adults.key), this.isPartOf(T12_Adults.key)) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
-          //    SurveyEngine.logic.and(
-          //      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
-          //      SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
+          displayCondition:
+            this.isPartOf(SurveySuffix.Adults) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
+              SurveyEngine.logic.and(
+                SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
+                SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
         },
         {
           key: 'e',
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: (!(this.isPartOf(Standardflow_Adults.key) || this.isPartOf(T3_Adults.key) || this.isPartOf(T6_Adults.key) || this.isPartOf(T9_Adults.key) || this.isPartOf(T12_Adults.key))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         {
           key: 'f',
@@ -1987,7 +1988,7 @@ Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.isPartOf('Kids') ? this.markdownContentKids : this.markdownContentAdults],
+            ["nl", this.isPartOf(SurveySuffix.Kids) ? this.markdownContentKids : this.markdownContentAdults],
           ]),
           className: ''
         })
@@ -2607,7 +2608,7 @@ export class Awareness4 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf('Kids') ? this.questionTextMain_Kids : this.questionTextMain_Adults,
+      questionText: this.isPartOf(SurveySuffix.Kids) ? this.questionTextMain_Kids : this.questionTextMain_Adults,
       scaleOptions: [
         {
           key: '0',

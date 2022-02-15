@@ -8,6 +8,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
+import { SurveySuffix, TextBorderFormat } from '../globalConstants';
 
 
 export class TickBiteOtherGroup extends Group {
@@ -231,11 +232,15 @@ export class RecognisedTickBite extends Item {
           'a', new Map([["nl", "Nee"]])
         ),
         SCOptions.option(
-          'b', new Map([["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"]])
+          'b',
+          new Map([["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"]]),
+          {
+            className: TextBorderFormat,
+          },
         ),
         SCOptions.cloze({
           key: 'c',
-          className: 'border-top border-grey-2 pt-2',
+          className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
@@ -272,7 +277,10 @@ export class RecognisedTickBite extends Item {
           ]
         }),
         SCOptions.option(
-          'd', new Map([["nl", "Onbekend"]])
+          'd', new Map([["nl", "Onbekend"]]),
+          {
+            className: TextBorderFormat,
+          }
         ),
       ]
     })
@@ -443,7 +451,7 @@ export class ActivityTickBite extends Item {
           content: new Map([
             ["nl", "Werkgerelateerde activiteit, namelijk:"],
           ]),
-          displayCondition: this.isPartOf("Adults") ? undefined :
+          displayCondition: this.isPartOf(SurveySuffix.Adults) ? undefined :
             SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 12)
         },
         {

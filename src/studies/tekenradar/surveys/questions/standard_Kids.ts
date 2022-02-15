@@ -2500,7 +2500,7 @@ Deze vraag gaat over of je de afgelopen week pijn hebt gehad:
       condition: this.condition,
       content: [
         ComponentGenerators.markdown({
-          content: new Map([ // this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
+          content: new Map([
             ["nl", this.markdownContent_H2],
           ]),
           className: ''

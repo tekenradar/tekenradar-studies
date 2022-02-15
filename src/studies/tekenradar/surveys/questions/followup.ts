@@ -3,6 +3,7 @@ import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { SurveySuffix } from '../globalConstants';
 
 
 
@@ -304,7 +305,7 @@ De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij 
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.isPartOf('Kids') ? this.markdownContentKids : this.markdownContentAdults],
+            ["nl", this.isPartOf(SurveySuffix.Kids) ? this.markdownContentKids : this.markdownContentAdults],
           ]),
           className: ''
         })
