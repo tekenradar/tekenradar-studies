@@ -1276,7 +1276,7 @@ export class DoctorTickBite extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -1291,6 +1291,3 @@ export class DoctorTickBite extends Item {
     })
   }
 }
-
-
-
