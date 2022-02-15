@@ -891,18 +891,18 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
-          displayCondition:
-            this.isPartOf(Standardflow_Adults.key || T3_Adults.key || T6_Adults.key || T9_Adults.key || T12_Adults.key) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
-              SurveyEngine.logic.and(
-                SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
-                SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
+          //displayCondition:
+          //  SurveyEngine.logic.or(this.isPartOf(Standardflow_Adults.key), this.isPartOf(T3_Adults.key), this.isPartOf(T6_Adults.key), this.isPartOf(T9_Adults.key), this.isPartOf(T12_Adults.key)) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
+          //    SurveyEngine.logic.and(
+          //      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
+          //      SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
         },
         {
           key: 'e',
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: this.isPartOf(Standardflow_Adults.key || T3_Adults.key || T6_Adults.key || T9_Adults.key || T12_Adults.key) ? undefined : this.condition_u18
+          displayCondition: (!(this.isPartOf(Standardflow_Adults.key) || this.isPartOf(T3_Adults.key) || this.isPartOf(T6_Adults.key) || this.isPartOf(T9_Adults.key) || this.isPartOf(T12_Adults.key))) ? SurveyEngine.compare.gt(1,2) : undefined,
         },
         {
           key: 'f',
@@ -3051,3 +3051,7 @@ export class TextQUKids extends Item {
     })
   }
 }
+function gt(arg0: number, arg1: number): Expression | undefined {
+  throw new Error('Function not implemented.');
+}
+

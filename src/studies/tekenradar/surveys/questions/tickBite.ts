@@ -234,7 +234,9 @@ export class RecognisedTickBite extends Item {
           'b', new Map([["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"]])
         ),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: 'c',
+          className: 'border-top border-grey-2 pt-2',
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Ja, de datum dat ik de tekenbeet heb opgelopen is"]]
