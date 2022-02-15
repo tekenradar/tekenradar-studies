@@ -330,3 +330,16 @@ export const initFollowUpFlow_Kids = () => StudyEngine.do(
   addFollowUpSurvey(T9_Kids.key, 270, 89),
   addFollowUpSurvey(T12_Kids.key, 360, 89),
 )
+
+
+export const takeOverFlagIfExist = (key: string) => StudyEngine.if(
+  StudyEngine.participantState.incomingParticipantState.hasParticipantFlagKey(key),
+  StudyEngine.participantActions.updateFlag(
+    key, StudyEngine.participantState.incomingParticipantState.getParticipantFlagValue(key),
+  ),
+)
+export const takeOverSurveyIfAssigned = (key: string) => StudyEngine.ifThen(
+  StudyEngine.participantState.incomingParticipantState.hasSurveyKeyAssigned(key),
+  StudyEngine.participantActions.assignedSurveys.remove(key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.add(key, 'immediate'),
+)
