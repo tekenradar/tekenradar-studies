@@ -898,7 +898,7 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: this.condition_u18
+          displayCondition: this.isPartOf("Adults") ? undefined : this.condition_u18
         },
         {
           key: 'f',
