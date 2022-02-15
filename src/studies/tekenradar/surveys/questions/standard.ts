@@ -6,6 +6,10 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 import { Standardflow_Adults } from '../Standardflow_Adults';
+import { T3_Adults } from '../T3_Adults';
+import { T6_Adults } from '../T6_Adults';
+import { T9_Adults } from '../T9_Adults';
+import { T12_Adults } from '../T12_Adults';
 //import { isExpressionStatement } from 'typescript';
 
 
@@ -888,7 +892,7 @@ export class Symptoms2 extends Item {
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
           displayCondition:
-            this.isPartOf(Standardflow_Adults.key) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
+            this.isPartOf(Standardflow_Adults.key || T3_Adults.key || T6_Adults.key || T9_Adults.key || T12_Adults.key) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
               SurveyEngine.logic.and(
                 SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
                 SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
@@ -898,7 +902,7 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: this.isPartOf("Adults") ? undefined : this.condition_u18
+          displayCondition: this.isPartOf(Standardflow_Adults.key || T3_Adults.key || T6_Adults.key || T9_Adults.key || T12_Adults.key) ? undefined : this.condition_u18
         },
         {
           key: 'f',
