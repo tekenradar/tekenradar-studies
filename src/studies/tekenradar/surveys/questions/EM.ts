@@ -505,7 +505,7 @@ export class UploadPhotoEM extends Item {
     this.condition = condition;
   }
   buildItem() {
-    return SurveyItems.textInput({
+    return SurveyItems.customQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -513,6 +513,11 @@ export class UploadPhotoEM extends Item {
       questionText: new Map([
         ['nl', 'Selecteer hier de foto van je erythema migrans of andere huidafwijking'],
       ]),
+      responseItemDefs: [
+        {
+          key: 'file', role: 'file', mapToRole: 'input',
+        }
+      ]
     })
   }
 }

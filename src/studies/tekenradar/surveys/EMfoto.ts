@@ -25,8 +25,6 @@ class EMfoto_Def extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
-
-
     this.T1 = new PhotoEM_Text(this.key, required);
     this.Q1 = new UploadPhotoEM(this.key, required);
 
