@@ -26,13 +26,16 @@ import { T9_Kids } from "./surveys/T9_Kids";
 import { T12_Kids } from "./surveys/T12_Kids";
 import { ExitFollowUp } from "./surveys/ExitFollowUp";
 import { changeFollowupTimingToNow } from "./customRules/changeFollowupTiming";
+import { T0_Invites } from "./surveys/T0_Invites";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
   studyRules: studyRules,
   surveys: [
-    PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Standardflow_Adults,
-    ExampleSurvey, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids, Standardflow_Kids,
+    PDiff,
+    TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids,
+    T0_Invites,
+    Standardflow_Kids, Standardflow_Adults,
     T3_Adults, T6_Adults, T9_Adults, T12_Adults,
     T3_Kids, T6_Kids, T9_Kids, T12_Kids,
     WeeklyTB, EMfoto, ExitFollowUp
