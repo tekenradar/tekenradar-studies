@@ -3,6 +3,7 @@ import { Group, Item, OptionDef } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { SurveySuffix } from '../globalConstants';
 
 
 
@@ -583,10 +584,24 @@ export class LymeDiagnosis2 extends Item {
 
 export class Doctor extends Item {
 
-  questionTextMain = [
+  questionTextMain_Adults = [
     {
       content: new Map([
         ["nl", 'Bij welke arts ben je toen geweest?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+  questionTextMain_Kids = [
+    {
+      content: new Map([
+        ["nl", 'Bij welke arts ben je geweest?'],
       ]),
     },
     {
@@ -610,7 +625,7 @@ export class Doctor extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.questionTextMain,
+      questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.questionTextMain_Kids,
       responseOptions: [
         {
           key: 'a', role: 'option',
