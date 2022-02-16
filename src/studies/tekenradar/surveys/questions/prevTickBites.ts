@@ -33,7 +33,6 @@ export class PreviousTickBitesGroup extends Group {
 
 class PreviousTickBites1 extends Item {
 
-  //TODO bold text "in de afgelopen 5 jaar" or not (inconsistent in questionnaires --> ask RIVM)?
     optionKeys = {
         none: 'a'
     }
@@ -143,7 +142,6 @@ class PreviousTickBites1 extends Item {
 
 class PreviousTickBites2 extends Item {
 
-    //TODO bold text "in de afgelopen 3 maanden" or not (inconsistent in questionnaires --> ask RIVM)?
     questionTextMain1 = [
         {
             content: new Map([

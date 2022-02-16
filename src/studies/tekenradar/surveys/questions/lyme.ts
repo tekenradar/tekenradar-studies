@@ -13,7 +13,6 @@ export class LymeGroup extends Group {
 
   G1_9: TickBiteOtherGroup;
 
-  //TODO: should header be shown?
   //Lyme questions here
   Q10: LymeDiagnosis1;
   Q11: LymeDiagnosis2;
@@ -177,7 +176,7 @@ export class LymeDiagnosis4 extends Item {
     this.condition = condition;
   }
 
-  buildItem() {//TODO: check if it works woth MCOptions questions too!!
+  buildItem() {
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -221,8 +220,6 @@ export class LymeDiagnosis4 extends Item {
               )
             }),
           ],
-          //TODO: how to disable option of cloze type?
-          //disabled: SurveyEngine.multipleChoice.any(this.itemKey,'b'),
         }),
         {//disable b if a is selected and disable a if b is selected
           key: 'b', role: 'option',

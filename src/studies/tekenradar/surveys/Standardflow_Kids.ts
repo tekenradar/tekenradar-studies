@@ -35,7 +35,6 @@ class Standardflow_KidsDef extends SurveyDefinition {
   //NOTE: Awareness group is for teens here and for their parents at end of question flow.
   G11_18: AwarenessGroup;
 
-  //TODO: wait for feedback and update function groups
   T8_F1: FunctioningText1F1_Kids;
   T8_F3: FunctioningText1F3_Kids;
   T9_F1: FunctioningText2F1_Kids;

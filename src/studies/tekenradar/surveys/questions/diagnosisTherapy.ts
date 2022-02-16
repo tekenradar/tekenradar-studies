@@ -942,7 +942,6 @@ export class LymeTherapy5 extends Item {
     this.condition = condition;
   }
 
-  //TODO: insert date and time input
   buildItem() {
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
@@ -963,7 +962,7 @@ export class LymeTherapy5 extends Item {
             reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
             delta: { seconds: 0 }
           }
-        }),//TODO: text direct after date Input (without Line break)??
+        }),
         ClozeItemTypes.text({
           key: '3', content: new Map(
             [['nl', "(dag/maand/jaar) tussen"]]

@@ -41,7 +41,6 @@ export class FeverGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
-    //TODO: show this only if first answer is c
     this.G12_14 = new FormerLymeGroup(this.key, isRequired);
     this.Q15 = new GeneralTherapy1(this.key, required);
 
@@ -216,7 +215,6 @@ export class FeverSymptom2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      //TODO: maybe "weken na de tekenbeet" as seperate text after dropbox
       responseOptions: [
         {
           key: '1', role: 'option',

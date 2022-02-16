@@ -127,7 +127,7 @@ export class NumberTickBites2a extends Item {
       condition: this.condition,
       questionText: [
         {
-          content: new Map([//TODO Peter: Insert current date as format: "week day (day.month.)" example: "zondag (19 december)"
+          content: new Map([
             ['nl', `Hoeveel tekenbeten had je vandaag, `],
           ])
         },

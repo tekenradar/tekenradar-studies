@@ -13,8 +13,6 @@ export class ChronicGroup extends Group {
 
   G10_11: LymeDiagnosisGroup;
 
-  //TODO: should header be shown?
-  //Lyme questions here
   Q12: ChronicLymeDiagnosis1;
   Q13: ChronicLymeDiagnosis2;
   Q14: ChronicLymeTherapy1;
@@ -67,7 +65,6 @@ export class ChronicGroup extends Group {
 export class ChronicLymeDiagnosis1 extends Item {
 
 
-  //TODO bold text "in de afgelopen 5 jaar" or not (inconsistent in questionnaires --> ask RIVM)?
   optionKeys = {
     none: 'a'
 }

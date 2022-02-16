@@ -250,7 +250,7 @@ class T3_KidsDef extends SurveyDefinition {
 
     this.T16 = new SymptomsText1_Kids(this.key, required);
     this.Q32 = new Symptoms1(this.key, required);
-    //TODO: Q33 only at t=12!
+    //TODO: Q33 only at t=12??
     this.Q33 = new SymptomsFU(this.key, required);
 
   }

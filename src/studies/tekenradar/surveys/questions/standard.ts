@@ -1122,7 +1122,6 @@ export class Pregnant extends Item {
 }
 
 
-//TODO: why is Markdown not working in this text???
 export class FunctioningText extends Item {
 
   markdownContent = `
@@ -1281,7 +1280,6 @@ export class Functioning1 extends Item {
 
 export class Functioning2 extends Item {
 
-  //TODO bold text "in de afgelopen 3 maanden" ?
   questionTextMain = [
     {
       content: new Map([
@@ -1578,7 +1576,6 @@ export class Functioning5 extends Item {
 
 export class Fatigue extends Item {
 
-  //TODO: maybe separate item for this header text
   //TODO: how do I implement the example of selecting an answer?
   questionTextMain = [
     {

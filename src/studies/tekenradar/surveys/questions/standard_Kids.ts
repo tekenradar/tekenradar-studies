@@ -69,7 +69,7 @@ export class QuestionsKids extends Item {
         },
         {
           key: 'b', role: 'input',
-          content: new Map([//TODO: insert radion button subitems here
+          content: new Map([
             ["nl", "Een ouder/verzorger van degene jonger dan 18 jaar, namelijk:"],
           ])
         },

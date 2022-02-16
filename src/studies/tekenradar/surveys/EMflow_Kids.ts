@@ -83,7 +83,7 @@ class EMflow_KidsDef extends SurveyDefinition {
 
   buildSurvey() {
 
-    //TODO: same T1a text for kids several times in EMflow
+
     this.addItem(this.H1.get());
     this.addItem(this.G1_9.get());
 

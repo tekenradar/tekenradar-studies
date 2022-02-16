@@ -16,8 +16,6 @@ class Chronicflow_KidsDef extends SurveyDefinition {
   H2: LymeHeader;
   G10_11: LymeDiagnosisGroup;
 
-  //TODO: should header be shown?
-  //Lyme questions here
   Q12: ChronicLymeDiagnosis1;
   Q13: ChronicLymeDiagnosis2;
   Q14: ChronicLymeTherapy1;
