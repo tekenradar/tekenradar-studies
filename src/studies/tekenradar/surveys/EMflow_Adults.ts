@@ -2,7 +2,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions } from './globalConstants';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
-import { DoctorEM, EM1, EM2, EM3, EM4, EMHeader, PhotoEM_Text, ReportHeader, UploadPhotoEM } from './questions/EM';
+import { DoctorEM, EM1, EM2, EM3, EM4, EMHeader, ReportHeader } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
@@ -28,9 +28,6 @@ class EMflow_AdultsDef extends SurveyDefinition {
 
   G20_22: FormerLymeGroup;
   G23_24: PreviousTickBitesGroup;
-
-  T1: PhotoEM_Text;
-  Q25: UploadPhotoEM;
 
 
   constructor(isRequired?: boolean) {
@@ -79,9 +76,6 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.G20_22 = new FormerLymeGroup(this.key, isRequired);
     this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
-    this.T1 = new PhotoEM_Text(this.key, required);
-    this.Q25 = new UploadPhotoEM(this.key, required);
-
   }
 
   buildSurvey() {
@@ -103,10 +97,6 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q19.get());
     this.addItem(this.G20_22.get());
     this.addItem(this.G23_24.get());
-
-    this.addPageBreak();
-    this.addItem(this.T1.get());
-    this.addItem(this.Q25.get());
   }
 }
 
