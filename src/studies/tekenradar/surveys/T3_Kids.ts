@@ -95,11 +95,6 @@ class T3_KidsDef extends SurveyDefinition {
   Q31_I2: Strength_WeaknessI2_Kids;
   Q31_I3: Strength_WeaknessI3_Kids;
 
-  T16: SymptomsText1_Kids;
-  Q32: Symptoms1;
-  Q33: SymptomsFU;
-
-
 
   constructor(isRequired?: boolean) {
     super({
@@ -248,10 +243,6 @@ class T3_KidsDef extends SurveyDefinition {
     this.Q31_I2 = new Strength_WeaknessI2_Kids(this.key, required, cond_5younger11);
     this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, cond_11younger18);
 
-    this.T16 = new SymptomsText1_Kids(this.key, required);
-    this.Q32 = new Symptoms1(this.key, required);
-    //TODO: Q33 only at t=12??
-    this.Q33 = new SymptomsFU(this.key, required);
 
   }
 
@@ -349,10 +340,6 @@ class T3_KidsDef extends SurveyDefinition {
     this.addItem(this.Q31_I2.get());
     this.addItem(this.Q31_I3.get());
 
-    this.addPageBreak();
-    this.addItem(this.T16.get());
-    this.addItem(this.Q32.get());
-    this.addItem(this.Q33.get());
   }
 }
 
