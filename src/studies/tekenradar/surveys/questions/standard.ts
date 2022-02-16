@@ -2386,8 +2386,8 @@ export class Awareness1 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2395,43 +2395,60 @@ export class Awareness1 extends Item {
       questionText: this.questionTextMain,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
-        }, {
-          key: '3',
-        }, {
-          key: '4',
-        }, {
-          key: '5',
-        }, {
-          key: '6',
-        }, {
-          key: '7',
-        }, {
-          key: '8',
-        }, {
-          key: '9',
-        }, {
-          key: '10',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         },
+        {
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
+        }, {
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
+        }, {
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
+        },
+        {
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
+        }, {
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
+        }, {
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
+        }, {
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
+        }, {
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Helemaal geen invloed']
-          ]),
-          endLabel: new Map([
-            ['de', 'Zeer veel invloed']
-          ]),
+          key: 'a', content: new Map([
+            ["nl", "0 = Helemaal geen invloed, 10 = Zeer veel invloed"],
+          ])
         },
       ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
     })
   }
 }
@@ -2455,8 +2472,8 @@ export class Awareness2 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2464,31 +2481,59 @@ export class Awareness2 extends Item {
       questionText: this.questionTextMain,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         }, {
-          key: '3',
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
         }, {
-          key: '4',
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
         }, {
-          key: '5',
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
         }, {
-          key: '6',
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
         }, {
-          key: '7',
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
         }, {
-          key: '8',
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
         }, {
-          key: '9',
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
         }, {
-          key: '10',
-        },
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
+          key: 'a', content: new Map([
+            ["nl", "0 = Heel erg kort, 10 = Mijn hele leven"],
+          ])
+        },
+      ],
+     /*   {
           key: 'a',
           startLabel: new Map([
             ['de', 'Heel erg kort']
@@ -2497,10 +2542,10 @@ export class Awareness2 extends Item {
             ['de', 'Mijn hele leven']
           ]),
         },
-      ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
+      ],*/
+     // withLabelRowModeProps: {
+     //   useBottomLabel: true,
+     // }
     })
   }
 }
@@ -2524,8 +2569,8 @@ export class Awareness3 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2533,43 +2578,58 @@ export class Awareness3 extends Item {
       questionText: this.questionTextMain,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         }, {
-          key: '3',
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
         }, {
-          key: '4',
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
         }, {
-          key: '5',
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
         }, {
-          key: '6',
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
         }, {
-          key: '7',
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
         }, {
-          key: '8',
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
         }, {
-          key: '9',
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
         }, {
-          key: '10',
-        },
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Helemaal geen beheersing']
-          ]),
-          endLabel: new Map([
-            ['de', 'Zeer veel beheersing']
-          ]),
+          key: 'a', content: new Map([
+            ["nl", "0 = Helemaal geen beheersing, 10 = Zeer veel beheersing"],
+          ])
         },
       ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
     })
   }
 }
@@ -2602,8 +2662,8 @@ export class Awareness4 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2611,43 +2671,58 @@ export class Awareness4 extends Item {
       questionText: this.isPartOf(SurveySuffix.Kids) ? this.questionTextMain_Kids : this.questionTextMain_Adults,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         }, {
-          key: '3',
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
         }, {
-          key: '4',
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
         }, {
-          key: '5',
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
         }, {
-          key: '6',
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
         }, {
-          key: '7',
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
         }, {
-          key: '8',
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
         }, {
-          key: '9',
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
         }, {
-          key: '10',
-        },
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Helemaal niet']
-          ]),
-          endLabel: new Map([
-            ['de', 'Zeer veel']
-          ]),
+          key: 'a', content: new Map([
+            ["nl", "0 = Helemaal niet, 10 = Zeer veel"],
+          ])
         },
       ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
     })
   }
 }
@@ -2671,8 +2746,8 @@ export class Awareness5 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2680,43 +2755,58 @@ export class Awareness5 extends Item {
       questionText: this.questionTextMain,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         }, {
-          key: '3',
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
         }, {
-          key: '4',
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
         }, {
-          key: '5',
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
         }, {
-          key: '6',
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
         }, {
-          key: '7',
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
         }, {
-          key: '8',
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
         }, {
-          key: '9',
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
         }, {
-          key: '10',
-        },
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Helemaal geen klachten']
-          ]),
-          endLabel: new Map([
-            ['de', 'Veel ernstige klachten']
-          ]),
+          key: 'a', content: new Map([
+            ["nl", "0 = Helemaal geen klachten, 10 = Veel ernstige klachten"],
+          ])
         },
       ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
     })
   }
 }
@@ -2740,8 +2830,8 @@ export class Awareness6 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2749,43 +2839,58 @@ export class Awareness6 extends Item {
       questionText: this.questionTextMain,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         }, {
-          key: '3',
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
         }, {
-          key: '4',
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
         }, {
-          key: '5',
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
         }, {
-          key: '6',
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
         }, {
-          key: '7',
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
         }, {
-          key: '8',
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
         }, {
-          key: '9',
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
         }, {
-          key: '10',
-        },
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Helemaal niet bezorgd']
-          ]),
-          endLabel: new Map([
-            ['de', 'Zeer bezorgd']
-          ]),
+          key: 'a', content: new Map([
+            ["nl", "0 = Helemaal niet bezorgd, 10 = Zeer bezorgd"],
+          ])
         },
       ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
     })
   }
 }
@@ -2809,8 +2914,8 @@ export class Awareness7 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2818,43 +2923,58 @@ export class Awareness7 extends Item {
       questionText: this.questionTextMain,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         }, {
-          key: '3',
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
         }, {
-          key: '4',
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
         }, {
-          key: '5',
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
         }, {
-          key: '6',
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
         }, {
-          key: '7',
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
         }, {
-          key: '8',
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
         }, {
-          key: '9',
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
         }, {
-          key: '10',
-        },
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Ik begrijp mijn ziekte helemaal niet']
-          ]),
-          endLabel: new Map([
-            ['de', 'Ik begrijp mijn ziekte helemaal']
-          ]),
+          key: 'a', content: new Map([
+            ["nl", "0 = Ik begrijp mijn ziekte helemaal niet, 10 = Ik begrijp mijn ziekte helemaal"],
+          ])
         },
       ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
     })
   }
 }
@@ -2878,8 +2998,8 @@ export class Awareness8 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.responsiveBipolarLikertArray({
-      defaultMode: 'withLabelRow',
+    return SurveyItems.responsiveSingleChoiceArray({
+      defaultMode: 'horizontal',
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -2887,43 +3007,58 @@ export class Awareness8 extends Item {
       questionText: this.questionTextMain,
       scaleOptions: [
         {
-          key: '0',
+          key: '0', content: new Map([
+            ["nl", "0"],
+          ])
         }, {
-          key: '1',
+          key: '1', content: new Map([
+            ["nl", "1"],
+          ])
         }, {
-          key: '2',
+          key: '2', content: new Map([
+            ["nl", "2"],
+          ])
         }, {
-          key: '3',
+          key: '3', content: new Map([
+            ["nl", "3"],
+          ])
         }, {
-          key: '4',
+          key: '4', content: new Map([
+            ["nl", "4"],
+          ])
         }, {
-          key: '5',
+          key: '5', content: new Map([
+            ["nl", "5"],
+          ])
         }, {
-          key: '6',
+          key: '6', content: new Map([
+            ["nl", "6"],
+          ])
         }, {
-          key: '7',
+          key: '7', content: new Map([
+            ["nl", "7"],
+          ])
         }, {
-          key: '8',
+          key: '8', content: new Map([
+            ["nl", "8"],
+          ])
         }, {
-          key: '9',
+          key: '9', content: new Map([
+            ["nl", "9"],
+          ])
         }, {
-          key: '10',
-        },
+          key: '10', content: new Map([
+            ["nl", "10"],
+          ])
+        }
       ],
       rows: [
         {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Helemaal geen invloed']
-          ]),
-          endLabel: new Map([
-            ['de', 'Zeer veel invloed']
-          ]),
+          key: 'a', content: new Map([
+            ["nl", "0 = Helemaal geen invloed, 10 = Zeer veel invloed"],
+          ])
         },
       ],
-      withLabelRowModeProps: {
-        useBottomLabel: true,
-      }
     })
   }
 }
