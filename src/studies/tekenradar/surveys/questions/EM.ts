@@ -404,7 +404,7 @@ export class DoctorEM extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
