@@ -12,8 +12,6 @@ export class FormerLymeGroup extends Group {
   Q1: FormerLymeDiagnosis;
   Q2: FormerLymeTherapy1;
   Q3: FormerLymeTherapy2;
-  Q4: FormerLymeTherapy3;
-  Q5: FormerLymeTherapy4;
 
 
   constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
@@ -26,11 +24,7 @@ export class FormerLymeGroup extends Group {
     this.Q1 = new FormerLymeDiagnosis(this.key, required);
     const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new FormerLymeTherapy1(this.key, required, q1Condition);
-    const q2Condition = SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes);
-    this.Q3 = new FormerLymeTherapy2(this.key, required, q2Condition);
-    const q3Condition = SurveyEngine.getResponseValueAsNum(this.Q3.key, 'rg.num');
-    this.Q4 = new FormerLymeTherapy3(this.key, required, q3Condition);
-    this.Q5 = new FormerLymeTherapy4(this.key, required, q1Condition);
+    this.Q3 = new FormerLymeTherapy2(this.key, required, q1Condition);
 
   }
 
@@ -39,8 +33,6 @@ export class FormerLymeGroup extends Group {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
 
   }
 }
@@ -175,135 +167,9 @@ class FormerLymeTherapy1 extends Item {
 }
 
 
+
+
 class FormerLymeTherapy2 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLTher2');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.numericInput({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Om hoeveel antiobioticakuren gaat het?'],
-      ]),
-      titleClassName: 'sticky-top',
-      inputMaxWidth: '80px',
-      inputLabel: new Map([
-        ['nl', 'kuren']
-      ]),
-      labelBehindInput: true,
-      //contentBehindInput: true,
-      componentProperties: {
-        min: 0,
-        max: 5
-      }
-    })
-  }
-}
-
-
-export class FormerLymeTherapy3 extends Item {
-
-  condition2: Expression;
-  condition3: Expression;
-  condition4: Expression;
-  condition5: Expression;
-
-
-  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
-    super(parentKey, 'FLTher3');
-
-    this.isRequired = isRequired;
-    this.condition = SurveyEngine.compare.gt(condition, 0);
-    this.condition2 = SurveyEngine.compare.gt(condition, 1);
-    this.condition3 = SurveyEngine.compare.gt(condition, 2);
-    this.condition4 = SurveyEngine.compare.gt(condition, 3);
-    this.condition5 = SurveyEngine.compare.gt(condition, 4);
-
-  }
-
-  buildItem() {
-    return SurveyItems.clozeQuestion({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', "Namelijk antibiotica:"],
-      ]),
-      items:
-        [
-          ClozeItemTypes.text({
-            key: '1', content: new Map(
-              [['nl', "Antibiotica 1:"]]
-            ),
-          }),
-          ClozeItemTypes.textInput({
-            key: '2',
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //2nd Medication:
-          ClozeItemTypes.text({
-            key: '3', content: new Map(
-              [['nl', "Antibiotica 2:"]]
-            ),
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.textInput({
-            key: '4',
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //3rd medication:
-          ClozeItemTypes.text({
-            key: '5', content: new Map(
-              [['nl', "Antibiotica 3:"]]
-            ),
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.textInput({
-            key: '6',
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //4th medication:
-          ClozeItemTypes.text({
-            key: '7', content: new Map(
-              [['nl', "Antibiotica 4:"]]
-            ),
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.textInput({
-            key: '8',
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //5th medication:
-          ClozeItemTypes.text({
-            key: '9', content: new Map(
-              [['nl', "Antibiotica 5:"]]
-            ),
-            displayCondition: this.condition5
-          }),
-          ClozeItemTypes.textInput({
-            key: '18',
-            displayCondition: this.condition5
-          }),
-        ],
-    })
-  }
-}
-
-
-
-class FormerLymeTherapy4 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FLTher4');
