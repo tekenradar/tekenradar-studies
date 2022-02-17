@@ -580,6 +580,23 @@ export class TickBiteLocationGroup extends Group {
 
 export class NumberTickBite extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Door hoeveel teken ben je toen gebeten?'],
+      ]),
+    },
+  ]
+
+  questionTextMain_EMKids = [
+    {
+      content: new Map([
+        ["nl", 'Door hoeveel teken was je gebeten?'],
+      ]),
+    },
+  ]
+
+//questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.questionTextMain_Kids,
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'NumTB');
 
@@ -592,9 +609,7 @@ export class NumberTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Door hoeveel teken ben je toen gebeten?'],
-      ]),
+      questionText: this.isPartOf("EMflow_Kids") ? this.questionTextMain_EMKids : this.questionTextMain,
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
