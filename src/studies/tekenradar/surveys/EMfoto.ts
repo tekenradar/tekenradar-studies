@@ -4,8 +4,6 @@ import { PhotoEM_Text, UploadPhotoEM } from './questions/EM';
 
 
 class EMfoto_Def extends SurveyDefinition {
-
-
   T1: PhotoEM_Text;
   Q1: UploadPhotoEM;
 
@@ -31,8 +29,6 @@ class EMfoto_Def extends SurveyDefinition {
   }
 
   buildSurvey() {
-
-
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
   }
