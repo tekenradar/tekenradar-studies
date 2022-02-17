@@ -150,6 +150,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(EMflow_Adults.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.not(
@@ -164,7 +165,6 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
@@ -181,6 +181,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(EMflow_Kids.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.not(
@@ -195,7 +196,6 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
@@ -240,6 +240,7 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(LBflow_Adults.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.not(
@@ -254,7 +255,6 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
@@ -271,6 +271,7 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(LBflow_Kids.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
+  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.not(
@@ -285,7 +286,6 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  assignEMfotoSurvey(),
   StudyEngine.ifThen(
     StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
     // Then: remove weekly and add again to the end of the list
