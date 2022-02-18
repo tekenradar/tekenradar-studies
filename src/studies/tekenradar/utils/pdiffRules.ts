@@ -67,7 +67,7 @@ export const hasLBflowCondition = () => StudyEngine.or(
   ),
   StudyEngine.and(
     StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
+    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
     // Q5 has no influence here
     StudyEngine.or(
       StudyEngine.and(
