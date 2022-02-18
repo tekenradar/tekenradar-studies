@@ -274,7 +274,7 @@ export const addFollowUpSurvey = (surveyKey: string, startInDays: number, active
   return StudyEngine.do(
     StudyEngine.participantActions.assignedSurveys.add(
       surveyKey,
-      'normal',
+      'prio',
       StudyEngine.timestampWithOffset({
         days: startInDays,
       }), StudyEngine.timestampWithOffset({
