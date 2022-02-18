@@ -423,12 +423,13 @@ const handleSubmit_Emfoto = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(EMfoto.key),
   // Then:
-  StudyEngine.ifThen(
-    // TODO: check condition to make sure photo was uploaded, only then remove:
+  StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'first'),
+  StudyEngine.if(
     StudyEngine.hasResponseKey(EMfoto.Q1.key, 'rg'),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'all'),
     StudyEngine.participantActions.messages.remove(emailKeys.EMfotoReminder),
+    // Else: add again for later
+    StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'prio', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
   )
 );
 
