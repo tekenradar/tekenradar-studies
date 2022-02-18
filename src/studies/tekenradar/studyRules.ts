@@ -423,11 +423,14 @@ const handleSubmit_Emfoto = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(EMfoto.key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'first'),
+  StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'all'),
   StudyEngine.if(
     StudyEngine.hasResponseKey(EMfoto.Q1.key, 'rg'),
     // Then:
-    StudyEngine.participantActions.messages.remove(emailKeys.EMfotoReminder),
+    StudyEngine.do(
+      StudyEngine.participantActions.messages.remove(emailKeys.EMfotoReminder),
+      StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
+    ),
     // Else: add again for later
     StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'prio', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
   )
