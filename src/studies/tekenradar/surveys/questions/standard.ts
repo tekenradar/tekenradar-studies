@@ -601,7 +601,7 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Verzakking"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         //{
         //key: 't6', role: 'text',
@@ -628,7 +628,7 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'r', role: 'option',
@@ -660,14 +660,14 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'u_Kids', role: 'option',
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Kids))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Kids))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'v', role: 'option',
@@ -747,14 +747,14 @@ export class Symptoms1 extends Item {
           content: new Map([
             ["nl", "Alcoholverslaving"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'af', role: 'option',
           content: new Map([
             ["nl", "Drugsverslaving"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'ag', role: 'option',
@@ -778,7 +778,7 @@ export class Symptoms1 extends Item {
           key: 't6', role: 'text',
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
           content: new Map([
-            ["nl", " "], //kees added empty text field to create space between last item and the items above;
+            ["nl", "Vink hieronder aan als geen van bovenstaande geldt"],
           ])
         },
 
@@ -903,7 +903,7 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1,2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'f',
@@ -2297,7 +2297,7 @@ export class MedCareText3 extends Item {
 export class AwarenessText extends Item {
 
   markdownContent = `
-# KLACHTEN PERCEPTIE
+# Klachten perceptie
 
 Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:
 `
@@ -2530,19 +2530,19 @@ export class Awareness2 extends Item {
           ])
         },
       ],
-     /*   {
-          key: 'a',
-          startLabel: new Map([
-            ['de', 'Heel erg kort']
-          ]),
-          endLabel: new Map([
-            ['de', 'Mijn hele leven']
-          ]),
-        },
-      ],*/
-     // withLabelRowModeProps: {
-     //   useBottomLabel: true,
-     // }
+      /*   {
+           key: 'a',
+           startLabel: new Map([
+             ['de', 'Heel erg kort']
+           ]),
+           endLabel: new Map([
+             ['de', 'Mijn hele leven']
+           ]),
+         },
+       ],*/
+      // withLabelRowModeProps: {
+      //   useBottomLabel: true,
+      // }
     })
   }
 }
