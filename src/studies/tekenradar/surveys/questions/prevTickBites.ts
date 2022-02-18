@@ -38,9 +38,39 @@ class PreviousTickBites1 extends Item {
     }
 
     questionTextMain1 = [
+        {
+            content: new Map([
+                ["nl", 'Hoeveel tekenbeten heb je '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "in de afgelopen 5 jaar "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "opgemerkt? (Als je tekenbeten die je nu meldt "],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "niet "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "meetelt)"],
+            ]),
+        }
+    ]
+
+    questionTextMain_Chronic = [
       {
           content: new Map([
-              ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
+              ["nl", 'Hoeveel tekenbeten heb je '],
           ]),
       },
       {
@@ -101,7 +131,7 @@ class PreviousTickBites1 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: this.isPartOf('WeeklyTB')? this.questionTextMainWeekly : this.questionTextMain1,
+            questionText: this.isPartOf('Chronicflow') ? this.questionTextMain_Chronic : (this.isPartOf('WeeklyTB')? this.questionTextMainWeekly : this.questionTextMain1),
             responseOptions: [
                 {
                     key: 'a', role: 'option',
@@ -145,7 +175,37 @@ class PreviousTickBites2 extends Item {
     questionTextMain1 = [
         {
             content: new Map([
-                ["nl", 'Als je deze tekenbeet niet meetelt, hoeveel tekenbeten heb je dan '],
+                ["nl", 'Hoeveel tekenbeten heb je '],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "in de afgelopen 3 maanden "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "opgemerkt? (Als je tekenbeten die je nu meldt "],
+            ]),
+        },
+        {
+            content: new Map([
+                ["nl", "niet "],
+            ]),
+            className: "text-primary"
+        },
+        {
+            content: new Map([
+                ["nl", "meetelt)"],
+            ]),
+        }
+    ]
+
+    questionTextMain_Chronic = [
+        {
+            content: new Map([
+                ["nl", 'Hoeveel tekenbeten heb je '],
             ]),
         },
         {
@@ -205,7 +265,7 @@ class PreviousTickBites2 extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: this.isPartOf('WeeklyTB')? this.questionTextMainWeekly : this.questionTextMain1,
+            questionText: this.isPartOf('Chronicflow') ? this.questionTextMain_Chronic : (this.isPartOf('WeeklyTB')? this.questionTextMainWeekly : this.questionTextMain1),
             responseOptions: [
                 {
                     key: 'a', role: 'option',
