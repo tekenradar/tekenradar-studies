@@ -1,4 +1,4 @@
-import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme, SurveyValidationText, WeeklyFlow, WeeklyFlowPretext } from './questions/PDiffQuestions'
+import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, FlowStartText, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme, SurveyValidationText, WeeklyFlow, WeeklyFlowPretext } from './questions/PDiffQuestions'
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Age } from './questions/demographie';
@@ -17,6 +17,7 @@ export class PDiffDef extends SurveyDefinition {
   Q7: Age;
   Q8pretext: WeeklyFlowPretext;
   Q8: WeeklyFlow;
+  FS: FlowStartText;
   SV: SurveyValidationText;
 
 
@@ -63,6 +64,123 @@ export class PDiffDef extends SurveyDefinition {
       SurveyEngine.hasResponse(this.Q4.key, 'rg'),
       SurveyEngine.hasResponse(this.Q8.key, 'rg'),
     ));
+
+    /**
+     * START TEXTS
+     */
+    const EMFlowActive = SurveyEngine.logic.or(
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.no),
+      ),
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        SurveyEngine.multipleChoice.none(this.Q5.key, this.Q5.optionKeys.andere),
+      ),
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        SurveyEngine.multipleChoice.any(this.Q5.key, this.Q5.optionKeys.andere),
+        SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.no),
+      ),
+    );
+
+    const Q6DateInputKey = `rg.scg.${this.Q6.optionKeys.yes.option}.${this.Q6.optionKeys.yes.dateInput}`;
+    const getQ6DateValue = () => SurveyEngine.getResponseValueAsNum(this.Q6.key, Q6DateInputKey);
+
+    const LBFlowActive = SurveyEngine.logic.or(
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        SurveyEngine.multipleChoice.any(this.Q5.key, this.Q5.optionKeys.andere),
+        SurveyEngine.logic.or(
+          SurveyEngine.logic.and(
+            SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes.option),
+            SurveyEngine.compare.gte(
+              getQ6DateValue(),
+              SurveyEngine.timestampWithOffset({ days: -4 }),
+            ),
+          ),
+          SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.startSoon)
+        )
+      ),
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        // Q5 has no influence here
+        SurveyEngine.logic.or(
+          SurveyEngine.logic.and(
+            SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes.option),
+            SurveyEngine.compare.gte(
+              getQ6DateValue(),
+              SurveyEngine.timestampWithOffset({ days: -4 }),
+            ),
+          ),
+          SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.startSoon, this.Q6.optionKeys.no)
+        )
+      ),
+    )
+
+    const Q6dateCondition = SurveyEngine.logic.and(
+      SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes.option),
+      SurveyEngine.logic.or(
+        SurveyEngine.compare.lt(
+          getQ6DateValue(),
+          SurveyEngine.timestampWithOffset({ days: -4 }),
+        ),
+        // Not defined, aka 0
+        SurveyEngine.logic.not(
+          SurveyEngine.hasResponse(
+            this.Q6.key,
+            Q6DateInputKey
+          )
+        ),
+      )
+    );
+
+
+    const ChronicflowActive = SurveyEngine.logic.or(
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        SurveyEngine.multipleChoice.any(this.Q5.key, this.Q5.optionKeys.andere),
+        Q6dateCondition
+      ),
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.none(this.Q2.key, this.Q2.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        Q6dateCondition
+      )
+    );
+
+    const FeverFlowActive = SurveyEngine.logic.or(
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.no),
+      ),
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        SurveyEngine.multipleChoice.any(this.Q5.key, this.Q5.optionKeys.fever),
+        SurveyEngine.multipleChoice.none(this.Q5.key, this.Q5.optionKeys.posTest, this.Q5.optionKeys.andere),
+      ),
+    );
+
+    this.FS = new FlowStartText(this.key, {
+      showItem: SurveyEngine.logic.or(
+        EMFlowActive, LBFlowActive, ChronicflowActive, FeverFlowActive
+      ),
+      EMFlowActive: EMFlowActive,
+      LBFlowActive: LBFlowActive,
+      ChronicflowActive: ChronicflowActive,
+      FeverFlowActive: FeverFlowActive,
+    })
   }
 
 
@@ -79,7 +197,7 @@ export class PDiffDef extends SurveyDefinition {
     this.addItem(this.Q8.get());
     this.addItem(this.SV.get());
     this.addItem(this.Q7.get());
-
+    this.addItem(this.FS.get());
   }
 }
 

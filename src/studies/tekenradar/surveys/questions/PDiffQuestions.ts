@@ -447,6 +447,93 @@ export class SurveyValidationText extends Item {
 
 }
 
+export class FlowStartText extends Item {
+  EMFlowActive: Expression;
+  FeverFlowActive: Expression;
+  LBFlowActive: Expression;
+  ChronicflowActive: Expression;
+
+  constructor(parentKey: string, conditions: {
+    showItem: Expression,
+    EMFlowActive: Expression,
+    FeverFlowActive: Expression,
+    LBFlowActive: Expression,
+    ChronicflowActive: Expression,
+  }) {
+    super(parentKey, 'StartText');
+    this.condition = conditions.showItem;
+
+    this.EMFlowActive = conditions.EMFlowActive;
+    this.FeverFlowActive = conditions.FeverFlowActive;
+    this.LBFlowActive = conditions.LBFlowActive;
+    this.ChronicflowActive = conditions.ChronicflowActive;
+  }
+
+  markdownContentEMFlow = `
+### Erythema migrans melden
+
+Een “erythema migrans” is een uitbreidende rode ring of vlek rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
+
+Maak hieronder een account aan om verder te gaan met de melding.
+Je email adres wordt niet voor andere doeleinden gebruikt.
+`
+
+  markdownContentFeverFlow = `
+### Tekenbeet melden
+
+Maak hieronder een account aan om verder te gaan met de melding.
+Je email adres wordt niet voor andere doeleinden gebruikt.
+`
+
+  markdownContentLBFlow = `
+### Ziekte van Lyme melden
+
+Maak hieronder een account aan om verder te gaan met de melding.
+Je email adres wordt niet voor andere doeleinden gebruikt.
+`
+
+  markdownContentChronicFlow = `
+### Ziekte van Lyme melden
+
+Maak hieronder een account aan om verder te gaan met de melding.
+Je email adres wordt niet voor andere doeleinden gebruikt.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentEMFlow],
+          ]),
+          displayCondition: this.EMFlowActive,
+        }),
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentFeverFlow],
+          ]),
+          displayCondition: this.FeverFlowActive,
+        }),
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentLBFlow],
+          ]),
+          displayCondition: this.LBFlowActive,
+        }),
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentChronicFlow],
+          ]),
+          displayCondition: this.ChronicflowActive,
+        }),
+      ]
+    })
+  }
+}
+
 
 export class WeeklyFlow extends Item {
   optionKeys = {
