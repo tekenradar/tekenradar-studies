@@ -197,7 +197,7 @@ De volgende vragen gaan over je melding van erythema migrans.
 export class EMHeaderKids extends Item {
 
   markdownContent = `
-# Melding Erythema migrans
+# Erythema migrans
 
 De vragen hieronder zijn voor een minderjarige. Ben je de ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
   `
