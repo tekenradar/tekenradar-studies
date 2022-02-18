@@ -58,28 +58,28 @@ export class Residence extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wat zijn de 4 cijfers van je postcode, of wat is je woonplaats?'],
+        ['nl', 'Wat zijn de 4 cijfers van je postcode?'],
       ]),
       titleClassName: 'sticky-top',
       customValidations: [
         {
-            key: 'r2',
-            type: 'hard',
-            rule: SurveyEngine.logic.or(
-                expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
-                expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, inputKey].join('.'), '^[0-9][0-9][0-9][0-9]$'),
-            )
+          key: 'r2',
+          type: 'hard',
+          rule: SurveyEngine.logic.or(
+            expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
+            expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, inputKey].join('.'), '^[0-9][0-9][0-9][0-9]$'),
+          )
         }
-    ],
-    bottomDisplayCompoments: [
-      {
+      ],
+      bottomDisplayCompoments: [
+        {
           role: 'error',
           content: generateLocStrings(new Map([
-              ["nl", "Voer de eerste vier cijfers van je postcode in"],
+            ["nl", "Voer de eerste vier cijfers van je postcode in"],
           ])),
           displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
-      }
-  ]
+        }
+      ]
     })
   }
 }
