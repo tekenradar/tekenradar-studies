@@ -83,7 +83,9 @@ const assignStandardFlow = (version: 'adults' | 'kids') => StudyEngine.do(
 
 const assignT0Invite = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.add(T0_Invites.key, 'immediate'),
+  StudyEngine.participantActions.assignedSurveys.add(T0_Invites.key, 'immediate', 0, StudyEngine.timestampWithOffset({
+    days: 1
+  })),
 )
 
 const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
@@ -524,6 +526,12 @@ const handleSubmit_ExitFollowUp = StudyEngine.ifThen(
 
 
 // -----------------------------------------------
+const handleExpired_T0_Invites = StudyEngine.ifThen(
+  isSurveyExpired(T0_Invites.key),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
+)
+
 const handleExpired_T12_Adults = StudyEngine.ifThen(
   isSurveyExpired(T12_Adults.key),
   // Then:
@@ -586,6 +594,7 @@ const submitRules: Expression[] = [
  * TIMER RULE LIST
  */
 const timerRules: Expression[] = [
+  handleExpired_T0_Invites,
   handleExpired_removeSurvey(T3_Adults.key),
   handleExpired_removeSurvey(T6_Adults.key),
   handleExpired_removeSurvey(T9_Adults.key),
