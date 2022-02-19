@@ -1,4 +1,4 @@
-import { SurveyItems } from "case-editor-tools/surveys";
+import { ClozeItemTypes, SurveyItems } from "case-editor-tools/surveys";
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { Expression } from 'survey-engine/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
@@ -148,7 +148,7 @@ export class UitnodigingAanvullendOnderzoek extends Item {
 }
 
 
-export class ContactGroupPretext extends Item {
+class ContactGroupPretext extends Item {
 
   markdownContent = `
 **Vul hieronder je contactgegevens in zodat we je kunnen benaderen.**
@@ -180,9 +180,63 @@ Je contactgegevens worden alleen gebruikt om informatie te geven over aanvullend
   }
 }
 
+class Name extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'Naam');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+
+  buildItem() {
+    return SurveyItems.clozeQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'Naam'
+      ]]),
+      confidentialMode: "replace",
+      items: [
+        ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Voornaam: ']]) }),
+        ClozeItemTypes.textInput({ key: 'vn' }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({ key: 't2', content: new Map([['nl', 'Achternaam: ']]) }),
+        ClozeItemTypes.textInput({ key: 'an' }),
+      ]
+    })
+  }
+}
+
+class Email extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'Email');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'Email'
+      ]]),
+      confidentialMode: "replace",
+      placeholderText: new Map([['nl', '...']])
+    })
+  }
+}
+
 
 export class ContactgegevensGroup extends Group {
   PreText: ContactGroupPretext;
+  Name: Name;
+  Email: Email;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Contactgegevens');
@@ -190,9 +244,13 @@ export class ContactgegevensGroup extends Group {
     this.groupEditor.setCondition(condition);
 
     this.PreText = new ContactGroupPretext(this.key)
+    this.Name = new Name(this.key, isRequired)
+    this.Email = new Email(this.key, isRequired)
   }
 
   buildGroup(): void {
     this.addItem(this.PreText.get())
+    this.addItem(this.Name.get())
+    this.addItem(this.Email.get())
   }
 }
