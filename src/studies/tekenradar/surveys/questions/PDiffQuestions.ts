@@ -177,7 +177,7 @@ export class EMTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EMTB');
+    super(parentKey, 'D3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -220,7 +220,7 @@ export class LymeTickBite1 extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LTB1');
+    super(parentKey, 'D4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -263,7 +263,7 @@ export class LymeTickBite2 extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LTB2');
+    super(parentKey, 'D5');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -314,7 +314,7 @@ export class MedicationLyme extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'MedLyme');
+    super(parentKey, 'D6');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -544,7 +544,7 @@ export class WeeklyFlow extends Item {
   extraValidationRules: Expression[];
 
   constructor(parentKey: string, isRequired: boolean, extraValidationRules: Expression[]) {
-    super(parentKey, 'WFPDiff');
+    super(parentKey, 'D8');
 
     this.isRequired = isRequired;
     this.extraValidationRules = extraValidationRules;
