@@ -173,8 +173,13 @@ export class PDiffDef extends SurveyDefinition {
     );
 
     this.FS = new FlowStartText(this.key, {
-      showItem: SurveyEngine.logic.or(
-        EMFlowActive, LBFlowActive, ChronicflowActive, FeverFlowActive
+      showItem: SurveyEngine.logic.and(
+        SurveyEngine.logic.not(
+          SurveyEngine.isLoggedIn()
+        ),
+        SurveyEngine.logic.or(
+          EMFlowActive, LBFlowActive, ChronicflowActive, FeverFlowActive
+        ),
       ),
       EMFlowActive: EMFlowActive,
       LBFlowActive: LBFlowActive,
