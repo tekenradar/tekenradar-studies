@@ -1,7 +1,7 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
-import { UitnodigingOnderzoek, UitnodigingOnderzoekText } from './questions/invitationQuestions';
+import { ContactgegevensGroup, UitnodigingAanvullendOnderzoek, UitnodigingAanvullendOnderzoekText, UitnodigingOnderzoek, UitnodigingOnderzoekText } from './questions/invitationQuestions';
 import { SurveyEndGroup } from './questions/surveyEnd';
 
 
@@ -12,7 +12,9 @@ export class T0_InvitesDef extends SurveyDefinition {
   Q1: UitnodigingOnderzoek;
 
   // Other studies
-  // TODO:
+  T2: UitnodigingAanvullendOnderzoekText;
+  Q2: UitnodigingAanvullendOnderzoek;
+  Contactgegevens: ContactgegevensGroup;
 
   EndGroup: SurveyEndGroup;
 
@@ -36,6 +38,10 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.T1 = new UitnodigingOnderzoekText(this.key);
     this.Q1 = new UitnodigingOnderzoek(this.key, required);
 
+    this.T2 = new UitnodigingAanvullendOnderzoekText(this.key);
+    this.Q2 = new UitnodigingAanvullendOnderzoek(this.key, required);
+    this.Contactgegevens = new ContactgegevensGroup(this.key, required, SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes));
+
     this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.yes))
   }
 
@@ -43,9 +49,13 @@ export class T0_InvitesDef extends SurveyDefinition {
   buildSurvey() {
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
-    // TODO: additional studies
-
     this.addPageBreak()
+
+    this.addItem(this.T2.get());
+    this.addItem(this.Q2.get());
+    this.addItem(this.Contactgegevens.get())
+    this.addPageBreak()
+
     this.addItem(this.EndGroup.get());
   }
 }

@@ -5,14 +5,47 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { ParticipantFlags } from '../../participantFlags';
 import { surveyCategoryNames, surveyKeys } from '../globalConstants';
 
-class T0EndText extends Item {
+class T0_Invites_EndText extends Item {
 
   markdownContent = `
-Todo: add survey end text after initial flow (T0_Invites or Standardflow)
+Als je een recente tekenbeet hebt gemeld, houd dan de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
+
+Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
+
+Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet. De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
 `
 
   constructor(parentKey: string, condition?: Expression) {
-    super(parentKey, 'T0EndText');
+    super(parentKey, 'T0_Invites_EndText');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        }),
+      ]
+    })
+  }
+}
+
+class StandardflowEndText extends Item {
+
+  markdownContent = `
+Todo: add survey end text after initial flow (Standardflow)
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'StandardflowEndText');
 
     this.condition = condition;
   }
@@ -139,7 +172,8 @@ class Comment extends Item {
 
 export class SurveyEndGroup extends Group {
 
-  T0EndText: T0EndText;
+  T0_Invites_EndText: T0_Invites_EndText;
+  StandardflowEndText: StandardflowEndText;
   FollowupEndText: FollowupEndText;
   WeeklyEndText: WeeklyEndText;
   Comment: Comment;
@@ -148,15 +182,19 @@ export class SurveyEndGroup extends Group {
     super(parentKey, 'END');
     this.groupEditor.setCondition(condition);
 
-    this.T0EndText = new T0EndText(this.key);
+    this.T0_Invites_EndText = new T0_Invites_EndText(this.key);
+    this.StandardflowEndText = new T0_Invites_EndText(this.key);
     this.FollowupEndText = new FollowupEndText(this.key);
     this.WeeklyEndText = new WeeklyEndText(this.key);
     this.Comment = new Comment(this.key, isRequired);
   }
 
   buildGroup(): void {
-    if (this.isPartOf(surveyKeys.T0_Invites) || this.isPartOf(surveyCategoryNames.Standardflow)) {
-      this.addItem(this.T0EndText.get())
+    if (this.isPartOf(surveyKeys.T0_Invites)) {
+      this.addItem(this.T0_Invites_EndText.get())
+    }
+    if (this.isPartOf(surveyCategoryNames.Standardflow)) {
+      this.addItem(this.StandardflowEndText.get())
     }
     if (this.isPartOf(surveyCategoryNames.T3) || this.isPartOf(surveyCategoryNames.T6) || this.isPartOf(surveyCategoryNames.T9) || this.isPartOf(surveyCategoryNames.T12)) {
       this.addItem(this.FollowupEndText.get())
