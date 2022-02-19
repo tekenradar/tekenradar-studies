@@ -5,7 +5,8 @@ import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, MedicationHea
 import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, GenHealthHeader, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, Symptoms1, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
-import { applyRequiredQuestions } from './globalConstants';
+import { applyRequiredQuestions, surveyKeys } from './globalConstants';
+import { SurveyEndGroup } from './questions/surveyEnd';
 
 class T12_AdultsDef extends SurveyDefinition {
 
@@ -47,12 +48,12 @@ class T12_AdultsDef extends SurveyDefinition {
   H5: GenHealthHeader;
   Q26: Symptoms1;
   Q27: SymptomsFU;
-
+  EndGroup: SurveyEndGroup;
 
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'T12_Adults',
+      surveyKey: surveyKeys.T12_Adults,
       name: new Map([
         ['nl', 'Vervolgvragenlijst']
       ]),
@@ -123,7 +124,7 @@ class T12_AdultsDef extends SurveyDefinition {
     this.H5 = new GenHealthHeader(this.key, required);
     this.Q26 = new Symptoms1(this.key, required);
     this.Q27 = new SymptomsFU(this.key, required);
-
+    this.EndGroup = new SurveyEndGroup(this.key, false);
   }
 
   buildSurvey() {
@@ -183,7 +184,8 @@ class T12_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q26.get());
     this.addItem(this.Q27.get());
 
-
+    this.addPageBreak();
+    this.addItem(this.EndGroup.get());
   }
 }
 

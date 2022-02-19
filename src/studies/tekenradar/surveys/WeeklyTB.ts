@@ -6,7 +6,7 @@ import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b,
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from "./globalConstants";
 import { SurveyEndGroup } from "./questions/surveyEnd";
-import { surveyKeys } from ".";
+import { surveyKeys } from "./globalConstants";
 
 class WeeklyTB_Def extends SurveyDefinition {
 

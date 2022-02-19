@@ -3,8 +3,7 @@ import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
-import { WeeklyTB } from '../WeeklyTB';
-import { surveyKeys } from '..';
+import { surveyKeys } from '../globalConstants';
 
 class WeeklyEndText extends Item {
 

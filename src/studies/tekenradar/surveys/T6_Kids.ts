@@ -6,7 +6,8 @@ import { MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Questions
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
-import { applyRequiredQuestions } from './globalConstants';
+import { applyRequiredQuestions, surveyKeys } from './globalConstants';
+import { SurveyEndGroup } from './questions/surveyEnd';
 
 class T6_KidsDef extends SurveyDefinition {
 
@@ -94,14 +95,11 @@ class T6_KidsDef extends SurveyDefinition {
   Q31_I1: Strength_WeaknessI1_Kids;
   Q31_I2: Strength_WeaknessI2_Kids;
   Q31_I3: Strength_WeaknessI3_Kids;
-
-
-
-
+  EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'T6_Kids',
+      surveyKey: surveyKeys.T6_Kids,
       name: new Map([
         ['nl', 'Vervolgvragenlijst']
       ]),
@@ -245,7 +243,7 @@ class T6_KidsDef extends SurveyDefinition {
     this.Q31_I1 = new Strength_WeaknessI1_Kids(this.key, required, cond_2younger5);
     this.Q31_I2 = new Strength_WeaknessI2_Kids(this.key, required, cond_5younger11);
     this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, cond_11younger18);
-
+    this.EndGroup = new SurveyEndGroup(this.key, false);
 
   }
 
@@ -343,6 +341,8 @@ class T6_KidsDef extends SurveyDefinition {
     this.addItem(this.Q31_I2.get());
     this.addItem(this.Q31_I3.get());
 
+    this.addPageBreak();
+    this.addItem(this.EndGroup.get());
   }
 }
 
