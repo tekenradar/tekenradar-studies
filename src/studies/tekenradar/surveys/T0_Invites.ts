@@ -1,6 +1,8 @@
+import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions } from './globalConstants';
 import { UitnodigingOnderzoek, UitnodigingOnderzoekText } from './questions/invitationQuestions';
+import { SurveyEndGroup } from './questions/surveyEnd';
 
 
 export class T0_InvitesDef extends SurveyDefinition {
@@ -12,6 +14,7 @@ export class T0_InvitesDef extends SurveyDefinition {
   // Other studies
   // TODO:
 
+  EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
     super({
@@ -32,12 +35,18 @@ export class T0_InvitesDef extends SurveyDefinition {
 
     this.T1 = new UitnodigingOnderzoekText(this.key);
     this.Q1 = new UitnodigingOnderzoek(this.key, required);
+
+    this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.yes))
   }
 
 
   buildSurvey() {
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
+    // TODO: additional studies
+
+    this.addPageBreak()
+    this.addItem(this.EndGroup.get());
   }
 }
 

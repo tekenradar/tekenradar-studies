@@ -6,6 +6,7 @@ import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b,
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from "./globalConstants";
 import { SurveyEndGroup } from "./questions/surveyEnd";
+import { surveyKeys } from ".";
 
 class WeeklyTB_Def extends SurveyDefinition {
 
@@ -27,7 +28,7 @@ class WeeklyTB_Def extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'WeeklyTB',
+      surveyKey: surveyKeys.WeeklyTB,
       name: new Map([
         ['nl', 'Wekelijkse tekenbeetvragenlijst']
       ]),

@@ -3,6 +3,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions } from './globalConstants';
+import { SurveyEndGroup } from './questions/surveyEnd';
 
 
 class Standardflow_AdultsDef extends SurveyDefinition {
@@ -38,6 +39,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   Q17: MedCare2;
   T5: MedCareText3;
   G18_25: AwarenessGroup;
+  EndGroup: SurveyEndGroup;
 
 
   constructor(isRequired?: boolean) {
@@ -95,7 +97,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.T5 = new MedCareText3(this.key, required, Q16number);
 
     this.G18_25 = new AwarenessGroup(this.key, isRequired);
-
+    this.EndGroup = new SurveyEndGroup(this.key, false)
   }
 
   buildSurvey() {
@@ -143,6 +145,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.addPageBreak();
     this.addItem(this.G18_25.get());
 
+    this.addItem(this.EndGroup.get());
   }
 }
 

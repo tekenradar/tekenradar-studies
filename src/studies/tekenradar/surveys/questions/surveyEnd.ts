@@ -4,6 +4,7 @@ import { Group, Item } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
 import { WeeklyTB } from '../WeeklyTB';
+import { surveyKeys } from '..';
 
 class WeeklyEndText extends Item {
 
@@ -92,7 +93,7 @@ export class SurveyEndGroup extends Group {
   }
 
   buildGroup(): void {
-    if (this.isPartOf(WeeklyTB.key)) {
+    if (this.isPartOf(surveyKeys.WeeklyTB)) {
       this.addItem(this.WeeklyEndText.get())
     }
     this.addItem(this.Comment.get())

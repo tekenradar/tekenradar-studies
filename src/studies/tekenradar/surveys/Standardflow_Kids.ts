@@ -6,6 +6,7 @@ import { ThreeMonthsText_Kids } from './questions/followup';
 import { AwarenessKidsGroup, Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3_Kids, PainTextH1_Kids, PainTextH2_Kids, BackgroundText_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
+import { SurveyEndGroup } from './questions/surveyEnd';
 
 
 class Standardflow_KidsDef extends SurveyDefinition {
@@ -89,6 +90,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
   Q31_I3: Strength_WeaknessI3_Kids;
 
   G32_39: AwarenessKidsGroup;
+  EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
     super({
@@ -221,6 +223,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, cond_11younger18);
 
     this.G32_39 = new AwarenessKidsGroup(this.key, required)
+    this.EndGroup = new SurveyEndGroup(this.key, false)
   }
 
   buildSurvey() {
@@ -311,6 +314,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q31_I3.get());
     this.addPageBreak();
     this.addItem(this.G32_39.get());
+    this.addItem(this.EndGroup.get());
 
   }
 }
