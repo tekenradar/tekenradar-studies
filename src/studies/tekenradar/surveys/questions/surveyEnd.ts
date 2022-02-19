@@ -3,7 +3,66 @@ import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
-import { surveyKeys } from '../globalConstants';
+import { surveyCategoryNames, surveyKeys } from '../globalConstants';
+
+class T0EndText extends Item {
+
+  markdownContent = `
+Todo: add survey end text after initial flow (T0_Invites or Standardflow)
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'T0EndText');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        }),
+      ]
+    })
+  }
+}
+
+
+class FollowupEndText extends Item {
+
+  markdownContent = `
+Todo: add survey end text for follow up
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'FollowupEndText');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        }),
+      ]
+    })
+  }
+}
 
 class WeeklyEndText extends Item {
 
@@ -80,6 +139,8 @@ class Comment extends Item {
 
 export class SurveyEndGroup extends Group {
 
+  T0EndText: T0EndText;
+  FollowupEndText: FollowupEndText;
   WeeklyEndText: WeeklyEndText;
   Comment: Comment;
 
@@ -87,11 +148,19 @@ export class SurveyEndGroup extends Group {
     super(parentKey, 'END');
     this.groupEditor.setCondition(condition);
 
+    this.T0EndText = new T0EndText(this.key);
+    this.FollowupEndText = new FollowupEndText(this.key);
     this.WeeklyEndText = new WeeklyEndText(this.key);
     this.Comment = new Comment(this.key, isRequired);
   }
 
   buildGroup(): void {
+    if (this.isPartOf(surveyKeys.T0_Invites) || this.isPartOf(surveyCategoryNames.Standardflow)) {
+      this.addItem(this.T0EndText.get())
+    }
+    if (this.isPartOf(surveyCategoryNames.T3) || this.isPartOf(surveyCategoryNames.T6) || this.isPartOf(surveyCategoryNames.T9) || this.isPartOf(surveyCategoryNames.T12)) {
+      this.addItem(this.FollowupEndText.get())
+    }
     if (this.isPartOf(surveyKeys.WeeklyTB)) {
       this.addItem(this.WeeklyEndText.get())
     }

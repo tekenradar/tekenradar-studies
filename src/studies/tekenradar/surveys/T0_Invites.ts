@@ -1,6 +1,6 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { applyRequiredQuestions } from './globalConstants';
+import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { UitnodigingOnderzoek, UitnodigingOnderzoekText } from './questions/invitationQuestions';
 import { SurveyEndGroup } from './questions/surveyEnd';
 
@@ -18,7 +18,7 @@ export class T0_InvitesDef extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'T0_Invites',
+      surveyKey: surveyKeys.T0_Invites,
       name: new Map([
         ['nl', 'Uitnodiging tekenradar onderzoek']
       ]),

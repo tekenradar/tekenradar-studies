@@ -2,7 +2,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
-import { applyRequiredQuestions } from './globalConstants';
+import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 
 
@@ -44,7 +44,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'Standardflow_Adults',
+      surveyKey: surveyKeys.Standardflow_Adults,
       name: new Map([
         ['nl', 'Tekenradarvragenlijst']
       ]),

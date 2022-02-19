@@ -6,6 +6,7 @@ export const SurveySuffix = {
 }
 
 export const surveyCategoryNames = {
+  Standardflow: 'Standardflow',
   T3: 'T3',
   T6: 'T6',
   T9: 'T9',
@@ -14,6 +15,9 @@ export const surveyCategoryNames = {
 
 export const surveyKeys = {
   WeeklyTB: "WeeklyTB",
+  T0_Invites: "T0_Invites",
+  Standardflow_Kids: `${surveyCategoryNames.Standardflow}_${SurveySuffix.Kids}`,
+  Standardflow_Adults: `${surveyCategoryNames.Standardflow}_${SurveySuffix.Adults}`,
   T3_Kids: `${surveyCategoryNames.T3}_${SurveySuffix.Kids}`,
   T3_Adults: `${surveyCategoryNames.T3}_${SurveySuffix.Adults}`,
   T6_Kids: `${surveyCategoryNames.T6}_${SurveySuffix.Kids}`,
