@@ -1,20 +1,11 @@
 import { Expression } from 'survey-engine/data_types';
 import { Item, Group } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
-import { Standardflow_Adults } from '../Standardflow_Adults';
-import { T3_Adults } from '../T3_Adults';
-import { T6_Adults } from '../T6_Adults';
-import { T9_Adults } from '../T9_Adults';
-import { T12_Adults } from '../T12_Adults';
 import { SurveySuffix } from '../globalConstants';
-//import { isExpressionStatement } from 'typescript';
-
-
-
 
 
 export class AwarenessGroup extends Group {

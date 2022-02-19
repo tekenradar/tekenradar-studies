@@ -2,9 +2,10 @@ import { SurveyEngine } from "case-editor-tools/surveys";
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Gender, Residence } from "./questions/demographie";
 import { PreviousTickBitesGroup } from "./questions/prevTickBites";
-import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly, OutroWeeklyTB, OutroWeeklyTBInit, RemarkWeeklyTB } from "./questions/weeklyTB";
+import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly } from "./questions/weeklyTB";
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from "./globalConstants";
+import { SurveyEndGroup } from "./questions/surveyEnd";
 
 class WeeklyTB_Def extends SurveyDefinition {
 
@@ -21,9 +22,7 @@ class WeeklyTB_Def extends SurveyDefinition {
   Q3: Residence;
   Q4: Gender;
   G5_6: PreviousTickBitesGroup;
-  T2_init: OutroWeeklyTBInit;
-  T2: OutroWeeklyTB;
-  Q7: RemarkWeeklyTB;
+  EndGroup: SurveyEndGroup;
 
 
   constructor(isRequired?: boolean) {
@@ -64,10 +63,7 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.Q3 = new Residence(this.key, required, InitFlowCond);
     this.Q4 = new Gender(this.key, required, InitFlowCond);
     this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired);
-    this.T2_init = new OutroWeeklyTBInit(this.key, required, InitCond);
-    this.T2 = new OutroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
-    this.Q7 = new RemarkWeeklyTB(this.key, required);
-
+    this.EndGroup = new SurveyEndGroup(this.key, false, undefined);
   }
 
   buildSurvey() {
@@ -85,9 +81,7 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.addItem(this.Q3.get());
     this.addItem(this.Q4.get());
     this.addItem(this.G5_6.get());
-    this.addItem(this.T2_init.get());
-    this.addItem(this.T2.get());
-    this.addItem(this.Q7.get());
+    this.addItem(this.EndGroup.get());
   }
 }
 
