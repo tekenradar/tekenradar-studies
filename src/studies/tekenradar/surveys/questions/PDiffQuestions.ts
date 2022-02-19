@@ -544,7 +544,7 @@ export class WeeklyFlow extends Item {
   extraValidationRules: Expression[];
 
   constructor(parentKey: string, isRequired: boolean, extraValidationRules: Expression[]) {
-    super(parentKey, 'D8');
+    super(parentKey, 'D7');
 
     this.isRequired = isRequired;
     this.extraValidationRules = extraValidationRules;
