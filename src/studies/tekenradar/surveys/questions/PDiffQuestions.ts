@@ -48,7 +48,7 @@ export class DetectTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DetTB');
+    super(parentKey, 'D1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -89,7 +89,7 @@ export class FeverTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FevTB');
+    super(parentKey, 'D2');
 
     this.isRequired = isRequired;
     this.condition = condition;
