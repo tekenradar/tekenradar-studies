@@ -54,6 +54,19 @@ export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifT
 /**
  *
  */
+export const resetToPDiffStart = () => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.removeAll(),
+  StudyEngine.participantActions.messages.removeAll(),
+  StudyEngine.if(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'prio'),
+  ),
+)
+
+
+/**
+ *
+ */
 export const updateAgeFlags = () => StudyEngine.do(
   StudyEngine.if(
     // IF:

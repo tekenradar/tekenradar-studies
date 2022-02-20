@@ -10,7 +10,7 @@ import {
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
   isLoggedIn,
-  isSurveyExpired, removeFollowUpMessagesForSurvey, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags
+  isSurveyExpired, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -66,7 +66,13 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
   // IF:
   StudyEngine.checkSurveyResponseKey(PDiff.key),
   // THEN:
-  updateAgeFlags(),
+  StudyEngine.ifThen(
+    StudyEngine.not(
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+    ),
+    updateAgeFlags(),
+    resetToPDiffStart(),
+  ),
   handlePDiffRuleFor_TBflow(),
   handlePDiffRuleFor_EMflow(),
   handlePDiffRuleFor_FEflow(),
