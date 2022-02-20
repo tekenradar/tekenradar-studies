@@ -227,7 +227,7 @@ class Email extends Item {
         'nl', 'Email'
       ]]),
       confidentialMode: "replace",
-      placeholderText: new Map([['nl', '...']])
+      placeholderText: new Map([['nl', 'voer je e-mailadres in']])
     })
   }
 }

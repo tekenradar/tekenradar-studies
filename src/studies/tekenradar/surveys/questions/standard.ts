@@ -822,12 +822,13 @@ Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 export class Symptoms2 extends Item {
 
   condition_u18: Expression;
+  isFemaleCondition: Expression;
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+  constructor(parentKey: string, isRequired: boolean, isFemaleCondition: Expression) {
     super(parentKey, 'Sym2');
 
     this.isRequired = isRequired;
-    this.condition = condition;
+    this.isFemaleCondition = isFemaleCondition;
     this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
   }
 
@@ -883,11 +884,11 @@ export class Symptoms2 extends Item {
           content: new Map([
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
-          displayCondition:
-            this.isPartOf(SurveySuffix.Adults) ? SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female) :
-              SurveyEngine.logic.and(
-                SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
-                SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10))
+          displayCondition: this.isPartOf(SurveySuffix.Adults) ? this.isFemaleCondition :
+            SurveyEngine.logic.and(
+              this.isFemaleCondition,
+              SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10)
+            )
         },
         {
           key: 'e',

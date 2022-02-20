@@ -124,7 +124,11 @@ class Standardflow_KidsDef extends SurveyDefinition {
     const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.parent);
     this.Q6_a = new QuestionsKids2(this.key, required, Q6condition);
     this.T4_a = new TextQUKids(this.key, required);
-    this.Q7 = new Symptoms2(this.key, required);
+    const isFemale = SurveyEngine.logic.or(
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
+      SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.woman)
+    );
+    this.Q7 = new Symptoms2(this.key, required, isFemale);
     this.Q8 = new Symptoms3(this.key, required);
 
     this.T5 = new MedCareText1(this.key, required);

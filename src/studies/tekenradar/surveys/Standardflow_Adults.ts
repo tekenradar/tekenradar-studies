@@ -4,6 +4,7 @@ import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioni
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
+import { ParticipantFlags } from '../participantFlags';
 
 
 class Standardflow_AdultsDef extends SurveyDefinition {
@@ -72,7 +73,11 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.Q5 = new Symptoms1(this.key, required);
 
     this.H3 = new SymptomsHeader(this.key, required);
-    this.Q6 = new Symptoms2(this.key, required);
+    const isFemale = SurveyEngine.logic.or(
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
+      SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.woman)
+    );
+    this.Q6 = new Symptoms2(this.key, required, isFemale);
     this.Q7 = new Symptoms3(this.key, required);
     this.Q8 = new Pregnant(this.key, required, Q4condition);
 

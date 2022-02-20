@@ -94,7 +94,8 @@ class T6_AdultsDef extends SurveyDefinition {
     this.Q13 = new MedicationFU2(this.key, required, Q12number);
 
     this.H2 = new SymptomsHeader(this.key, required);
-    this.Q14 = new Symptoms2(this.key, required);
+    const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
+    this.Q14 = new Symptoms2(this.key, required, isFemale);
     this.Q15 = new Symptoms3(this.key, required);
     const cond_woman = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
     this.Q16 = new Pregnant(this.key, required, cond_woman);

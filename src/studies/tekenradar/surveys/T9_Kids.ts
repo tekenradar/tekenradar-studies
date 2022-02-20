@@ -149,7 +149,8 @@ class T9_KidsDef extends SurveyDefinition {
     this.Q14_a = new QuestionsKids2(this.key, required, Q14condition);
 
     this.T6 = new TextQUKids(this.key, required);
-    this.Q15 = new Symptoms2(this.key, required);
+    const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
+    this.Q15 = new Symptoms2(this.key, required, isFemale);
     this.Q16 = new Symptoms3(this.key, required);
 
     this.T7 = new MedCareText1(this.key, required);
