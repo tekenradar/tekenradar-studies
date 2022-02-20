@@ -306,7 +306,7 @@ export class EnvironmentTickBite extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A1');
+    super(parentKey, 'TB_A1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -396,7 +396,7 @@ export class ActivityTickBite extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A2');
+    super(parentKey, 'TB_A2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -598,7 +598,7 @@ export class NumberTickBite extends Item {
 
   //questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.questionTextMain_Kids,
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A4');
+    super(parentKey, 'TB_A4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -641,7 +641,7 @@ export class LocationBodyTickBite extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A5');
+    super(parentKey, 'TB_A5');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -666,7 +666,7 @@ export class RemoveTick1 extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A6');
+    super(parentKey, 'TB_A6');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -702,7 +702,7 @@ export class RemoveTick1 extends Item {
 
 export class RemoveTick2 extends Item {
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A7');
+    super(parentKey, 'TB_A7');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -754,7 +754,7 @@ export class RemoveTick3 extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A8');
+    super(parentKey, 'TB_A8');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -902,7 +902,7 @@ export class RemoveTick4 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A9');
+    super(parentKey, 'TB_A9');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -956,7 +956,7 @@ export class RemoveTick4 extends Item {
 export class ReportedTickBites extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.A12');
+    super(parentKey, 'TB_A12');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1023,7 +1023,7 @@ export class ReportedTickBites extends Item {
 export class DateTickBite extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.B13');
+    super(parentKey, 'TB_B13');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1172,7 +1172,7 @@ export class DurationTickBite extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.B14');
+    super(parentKey, 'TB_B14');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1274,7 +1274,7 @@ export class DoctorTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TB.B15');
+    super(parentKey, 'TB_B15');
 
     this.isRequired = isRequired;
     this.condition = condition;
