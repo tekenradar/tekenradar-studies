@@ -1,6 +1,6 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { applyRequiredQuestions } from './globalConstants';
+import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
 import { FeverText, FeverSymptom1, FeverSymptom2, FeverSymptom3, FeverSymptom4, FeverSymptom5, FeverSymptom6, FeverSymptom7, FeverTherapy, FeverOtherCause1, FeverOtherCause2, FeverOtherCause3, FeverOtherCause4 } from './questions/fever';
@@ -34,7 +34,7 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'Feverflow_Adults',
+      surveyKey: surveyKeys.Feverflow_Adults,
       name: new Map([
         ['nl', 'Koorts na tekenbeetmelding']
       ]),

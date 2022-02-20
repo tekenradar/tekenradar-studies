@@ -8,11 +8,11 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 export class IntroPDiff extends Item {
 
   markdownContent = `
-# Melding doen
+### Melding doen
 
-##### Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
+Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
 
-###### Wat wil je precies melden? Wat is op jou van toepassing?
+Wat wil je precies melden? Wat is op jou van toepassing?
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

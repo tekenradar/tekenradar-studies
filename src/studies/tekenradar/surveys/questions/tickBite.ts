@@ -1,19 +1,18 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
-import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { PreviousTickBitesGroup } from './prevTickBites';
-import { Residence, Gender } from './demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { Doctor } from './diagnosisTherapy';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
-import { SurveySuffix, TextBorderFormat } from '../globalConstants';
+import { surveyCategoryNames, SurveySuffix, TextBorderFormat } from '../globalConstants';
 
 
 export class TickBiteOtherGroup extends Group {
 
   Start: RecognisedTickBite;
+  SelectTickbiteReport: SelectTickbiteReport;
 
   T1: IntroTB;
   Q1: EnvironmentTickBite;
@@ -40,8 +39,9 @@ export class TickBiteOtherGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.Start = new RecognisedTickBite(this.key, required);
-    const QStartcondition = SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes);
+    this.SelectTickbiteReport = new SelectTickbiteReport(this.key, required, SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yesOnTekenradar));
 
+    const QStartcondition = SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes);
     this.T1 = new IntroTB(this.key, required, QStartcondition);
     this.Q1 = new EnvironmentTickBite(this.key, required, QStartcondition);
     this.Q2 = new ActivityTickBite(this.key, required, QStartcondition);
@@ -65,6 +65,7 @@ export class TickBiteOtherGroup extends Group {
   buildGroup() {
 
     this.addItem(this.Start.get());
+    this.addItem(this.SelectTickbiteReport.get());
 
     this.addPageBreak();
     this.addItem(this.T1.get());
@@ -78,13 +79,10 @@ export class TickBiteOtherGroup extends Group {
     this.addItem(this.Q8.get());
     this.addItem(this.Q9.get());
 
-    //TODO: is this the recommended way to add fever survey questions in this group?
-    if (this.isPartOf('Feverflow')) {
-      this.addItem(this.Q10F.get()),
-        this.addItem(this.Q11F.get())
+    if (this.isPartOf(surveyCategoryNames.Feverflow)) {
+      this.addItem(this.Q10F.get())
+      this.addItem(this.Q11F.get())
     }
-
-
   }
 }
 
@@ -92,46 +90,43 @@ export class TickBiteOtherGroup extends Group {
 export class IntroTB extends Item {
 
   markdownContentTBflow_Adults = `
-  # Melden tekenbeet
+### Melden tekenbeet
 
-  De volgende vragen gaan over de tekenbeet.
+De volgende vragen gaan over de tekenbeet.
 
-  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
 
   `
 
   markdownContentTBflow_Kids = `
-  # Melden tekenbeet
+### Melden tekenbeet
 
-  De volgende vragen gaan over de tekenbeet.
+De volgende vragen gaan over de tekenbeet.
 
-  Indien je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
-
+Indien je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
   `
 
 
   markdownContentEMflow_Kids = `
-  # Tekenbeet
+### Tekenbeet
 
-  De vragen hieronder zijn voor een minderjarige.
-  Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
-  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
   `
 
   markdownContentOther = `
-  # Tekenbeet
+### Tekenbeet
 
-  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
-
-  `
+De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+`
 
   markdownContentFever = `
-  # Melden tekenbeet
+### Melden tekenbeet
 
-  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
-
-  `
+Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+`
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'IntroTB');
@@ -168,7 +163,7 @@ export class IntroTB extends Item {
 export class TBGeneralHeader extends Item {
 
   markdownContentTBflow = `
-  # Tekenbeten algemeen
+### Tekenbeten algemeen
   `
 
 
@@ -201,6 +196,7 @@ export class TBGeneralHeader extends Item {
 
 export class RecognisedTickBite extends Item {
   optionKeys = {
+    yesOnTekenradar: 'b',
     yes: 'c',
   }
 
@@ -225,21 +221,21 @@ export class RecognisedTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf('Feverflow') ? this.qTextFever : this.qTextOther,
+      questionText: this.isPartOf(surveyCategoryNames.Feverflow) ? this.qTextFever : this.qTextOther,
       //helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         SCOptions.option(
           'a', new Map([["nl", "Nee"]])
         ),
         SCOptions.option(
-          'b',
+          this.optionKeys.yesOnTekenradar,
           new Map([["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"]]),
           {
             className: TextBorderFormat,
           },
         ),
         SCOptions.cloze({
-          key: 'c',
+          key: this.optionKeys.yes,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -283,6 +279,31 @@ export class RecognisedTickBite extends Item {
           }
         ),
       ]
+    })
+  }
+}
+
+export class SelectTickbiteReport extends Item {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'A1b');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.customQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([["nl", "TODO: Question text, select a previous TB report"]]),
+      responseItemDefs: [
+        {
+          key: 'TBR', role: 'TBReportSelector', mapToRole: 'input'
+        }
+      ],
     })
   }
 }
