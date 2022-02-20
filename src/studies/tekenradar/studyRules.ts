@@ -10,7 +10,7 @@ import {
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
   isLoggedIn,
-  isSurveyExpired, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags
+  isSurveyExpired, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -116,14 +116,7 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
     )
   ),
   // gender category:
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(TBflow_Adults.P2.key, TBflow_Adults.P2.optionKeys.male),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
-  ),
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(TBflow_Adults.P2.key, TBflow_Adults.P2.optionKeys.female),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
-  ),
+  updateGenderFlag(TBflow_Adults.P2.key),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
@@ -152,14 +145,7 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
     )
   ),
   // Gender category:
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(TBflow_Kids.P2.key, TBflow_Kids.P2.optionKeys.male),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
-  ),
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(TBflow_Kids.P2.key, TBflow_Kids.P2.optionKeys.female),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
-  ),
+  updateGenderFlag(TBflow_Kids.P2.key),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
@@ -420,15 +406,7 @@ const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
     initFollowUpFlow_Adults(),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
   ),
-  // Gender category:
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(Standardflow_Adults.P2.key, Standardflow_Adults.P2.optionKeys.male),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
-  ),
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(Standardflow_Adults.P2.key, Standardflow_Adults.P2.optionKeys.female),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
-  ),
+  updateGenderFlag(Standardflow_Adults.P2.key),
 );
 
 
@@ -446,14 +424,7 @@ const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
     StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
   ),
   // Gender category:
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(Standardflow_Kids.P2.key, Standardflow_Kids.P2.optionKeys.male),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
-  ),
-  StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(Standardflow_Kids.P2.key, Standardflow_Kids.P2.optionKeys.female),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
-  ),
+  updateGenderFlag(Standardflow_Kids.P2.key),
 );
 
 const handleSubmit_WeeklyTB = StudyEngine.ifThen(
@@ -463,6 +434,7 @@ const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
   StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
   StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal', StudyEngine.timestampWithOffset({ hours: 1 })),
+  updateGenderFlag(WeeklyTB.P2.key),
 );
 
 const handleSubmit_Emfoto = StudyEngine.ifThen(

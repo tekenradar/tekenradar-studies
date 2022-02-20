@@ -89,6 +89,8 @@ export class Gender extends Item {
   optionKeys = {
     male: 'a',
     female: 'b',
+    other: 'c',
+    unknown: 'd',
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -121,13 +123,13 @@ export class Gender extends Item {
           ])
         },
         {
-          key: 'c', role: 'option',
+          key: this.optionKeys.other, role: 'option',
           content: new Map([
             ["nl", "Geen van bovenstaande"],
           ])
         },
         {
-          key: 'd', role: 'option',
+          key: this.optionKeys.unknown, role: 'option',
           content: new Map([
             ["nl", "Wil ik niet zeggen"],
           ])

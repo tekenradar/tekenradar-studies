@@ -20,8 +20,8 @@ class WeeklyTB_Def extends SurveyDefinition {
   Q2e: NumberTickBites2e;
   Q2f: NumberTickBites2f;
   Q2g: NumberTickBites2g;
-  Q3: Residence;
-  Q4: Gender;
+  P1: Residence;
+  P2: Gender;
   G5_6: PreviousTickBitesGroup;
   EndGroup: SurveyEndGroup;
 
@@ -62,8 +62,8 @@ class WeeklyTB_Def extends SurveyDefinition {
       InitCond
     );
 
-    this.Q3 = new Residence(this.key, required, InitFlowCond);
-    this.Q4 = new Gender(this.key, required, SurveyEngine.logic.and(
+    this.P1 = new Residence(this.key, required, InitFlowCond);
+    this.P2 = new Gender(this.key, required, SurveyEngine.logic.and(
       InitCond,
       SurveyEngine.logic.not(
         SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key)
@@ -85,8 +85,8 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.addItem(this.Q2e.get());
     this.addItem(this.Q2f.get());
     this.addItem(this.Q2g.get());
-    this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
+    this.addItem(this.P1.get());
+    this.addItem(this.P2.get());
     this.addItem(this.G5_6.get());
     this.addItem(this.EndGroup.get());
   }

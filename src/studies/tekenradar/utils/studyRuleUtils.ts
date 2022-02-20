@@ -91,6 +91,25 @@ export const updateAgeFlags = () => StudyEngine.do(
   )
 )
 
+export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(genderQuestionKey, Standardflow_Adults.P2.optionKeys.male),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(genderQuestionKey, Standardflow_Adults.P2.optionKeys.female),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(genderQuestionKey, Standardflow_Adults.P2.optionKeys.other),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.other)
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(genderQuestionKey, Standardflow_Adults.P2.optionKeys.unknown),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.unknown)
+  ),
+)
+
 /**
  * PDIFF - TB FLOW
  */
