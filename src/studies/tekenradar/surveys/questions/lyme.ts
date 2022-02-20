@@ -150,7 +150,7 @@ export class LymeDiagnosis3 extends Item {
   ])
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LD3');
+    super(parentKey, 'LB.B3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -170,7 +170,7 @@ export class LymeDiagnosis3 extends Item {
 export class LymeDiagnosis4 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LD4');
+    super(parentKey, 'LB.B4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -208,7 +208,7 @@ export class LymeDiagnosis4 extends Item {
               )
             }),
             ClozeItemTypes.dropDown({
-              key: '4',options: [
+              key: '4', options: [
                 SCOptions.option('1', new Map([['nl', "exacte"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
@@ -289,7 +289,7 @@ export class LymeDiagnosis5 extends Item {
               )
             }),
             ClozeItemTypes.dropDown({
-              key: '4',options: [
+              key: '4', options: [
                 SCOptions.option('1', new Map([['nl', "exacte"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]

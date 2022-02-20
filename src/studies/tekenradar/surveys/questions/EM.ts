@@ -233,7 +233,7 @@ export class EM1 extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EM1');
+    super(parentKey, 'EM.B1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -297,7 +297,7 @@ export class EM1 extends Item {
 export class EM2 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EM2');
+    super(parentKey, 'EM.B2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -335,7 +335,7 @@ export class EM2 extends Item {
 export class EM3 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EM3');
+    super(parentKey, 'EM.B3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -387,7 +387,7 @@ export class DoctorEM extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EM4');
+    super(parentKey, 'EM.B4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -425,7 +425,7 @@ export class DoctorEM extends Item {
 export class EM4 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EM6');
+    super(parentKey, 'EM.B6');
 
     this.isRequired = isRequired;
     this.condition = condition;
