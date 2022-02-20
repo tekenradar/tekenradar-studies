@@ -72,8 +72,12 @@ class T3_AdultsDef extends SurveyDefinition {
     const Q1_2condition = SurveyEngine.logic.and(Q1condition, Q2condition);
     this.Q3 = new PreviousTickBites3(this.key, required, Q1_2condition);
 
-    //TODO: add 4 and 5 only for TB & EM flow at t=3months
-    this.Q4 = new FeverFU1(this.key, required);
+    // add 4 and 5 only for TB & EM flow at t=3months
+    const showQ4 = SurveyEngine.logic.or(
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+    )
+    this.Q4 = new FeverFU1(this.key, required, showQ4);
     const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes);
     this.Q5 = new FeverFU2(this.key, required, Q4condition);
 

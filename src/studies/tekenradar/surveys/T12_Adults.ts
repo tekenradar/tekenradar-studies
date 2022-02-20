@@ -14,8 +14,7 @@ class T12_AdultsDef extends SurveyDefinition {
   Q1: NewTB;
   Q2: ReportedTB2;
   Q3: PreviousTickBites3;
-  Q4: FeverFU1;
-  Q5: FeverFU2;
+
   T2: Text2FU;
   Q6: LymeFU;
   Q7: LymeDiagnosis2;
@@ -76,11 +75,6 @@ class T12_AdultsDef extends SurveyDefinition {
     const Q1_2condition = SurveyEngine.logic.and(Q1condition, Q2condition);
     this.Q3 = new PreviousTickBites3(this.key, required, Q1_2condition);
 
-    //TODO: add 4 and 5 only for TB & EM flow at t=3months
-    this.Q4 = new FeverFU1(this.key, required);
-    const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes);
-    this.Q5 = new FeverFU2(this.key, required, Q4condition);
-
     this.T2 = new Text2FU(this.key, required);
     this.Q6 = new LymeFU(this.key, required);
     const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes);
@@ -134,8 +128,6 @@ class T12_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
     this.addPageBreak();
 
     this.addItem(this.T2.get());

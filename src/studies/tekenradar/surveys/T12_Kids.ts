@@ -16,8 +16,7 @@ class T12_KidsDef extends SurveyDefinition {
   Q1: NewTB;
   Q2: ReportedTB2;
   Q3: PreviousTickBites3;
-  Q4: FeverFU1;
-  Q5: FeverFU2;
+
   T3: Text2FU;
   Q6: LymeFU;
   Q7: LymeDiagnosis2;
@@ -126,9 +125,6 @@ class T12_KidsDef extends SurveyDefinition {
     this.Q2 = new ReportedTB2(this.key, required, Q1condition);
     const Q2condition = SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.no);
     this.Q3 = new PreviousTickBites3(this.key, required, Q2condition);
-    this.Q4 = new FeverFU1(this.key, required, Q1condition);
-    const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes);
-    this.Q5 = new FeverFU2(this.key, required, Q4condition);
 
     this.T3 = new Text2FU(this.key, required);
     this.Q6 = new LymeFU(this.key, required);
@@ -252,7 +248,7 @@ class T12_KidsDef extends SurveyDefinition {
 
     this.T16 = new SymptomsText1_Kids(this.key, required);
     this.Q32 = new Symptoms1(this.key, required);
-    //TODO: Q33 only at t=12!
+
     this.Q33 = new SymptomsFU(this.key, required);
     this.EndGroup = new SurveyEndGroup(this.key, false);
   }
@@ -264,8 +260,6 @@ class T12_KidsDef extends SurveyDefinition {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
 
     this.addPageBreak();
     this.addItem(this.T3.get());
