@@ -59,10 +59,16 @@ class WeeklyTB_Def extends SurveyDefinition {
 
     const InitFlowCond = SurveyEngine.logic.and(
       SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.flow.key)),
-      InitCond);
+      InitCond
+    );
 
     this.Q3 = new Residence(this.key, required, InitFlowCond);
-    this.Q4 = new Gender(this.key, required, InitFlowCond);
+    this.Q4 = new Gender(this.key, required, SurveyEngine.logic.and(
+      InitCond,
+      SurveyEngine.logic.not(
+        SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key)
+      )
+    ));
     this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired);
     this.EndGroup = new SurveyEndGroup(this.key, false, undefined);
   }
