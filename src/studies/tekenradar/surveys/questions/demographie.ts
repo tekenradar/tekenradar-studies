@@ -86,9 +86,9 @@ export class Residence extends Item {
 
 
 export class Gender extends Item {
-
   optionKeys = {
-    woman: 'b'
+    male: 'a',
+    female: 'b',
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -109,13 +109,13 @@ export class Gender extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.male, role: 'option',
           content: new Map([
             ["nl", "Man"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.female, role: 'option',
           content: new Map([
             ["nl", "Vrouw"],
           ])

@@ -115,6 +115,16 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
       StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
     )
   ),
+  // gender category:
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(TBflow_Adults.P2.key, TBflow_Adults.P2.optionKeys.male),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(TBflow_Adults.P2.key, TBflow_Adults.P2.optionKeys.female),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
 )
@@ -141,6 +151,16 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
       StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
     )
   ),
+  // Gender category:
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(TBflow_Kids.P2.key, TBflow_Kids.P2.optionKeys.male),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(TBflow_Kids.P2.key, TBflow_Kids.P2.optionKeys.female),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
 )
@@ -399,7 +419,16 @@ const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
     ),
     initFollowUpFlow_Adults(),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
-  )
+  ),
+  // Gender category:
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(Standardflow_Adults.P2.key, Standardflow_Adults.P2.optionKeys.male),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(Standardflow_Adults.P2.key, Standardflow_Adults.P2.optionKeys.female),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
+  ),
 );
 
 
@@ -415,7 +444,16 @@ const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
     ),
     initFollowUpFlow_Kids(),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
-  )
+  ),
+  // Gender category:
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(Standardflow_Kids.P2.key, Standardflow_Kids.P2.optionKeys.male),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.male)
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(Standardflow_Kids.P2.key, Standardflow_Kids.P2.optionKeys.female),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female)
+  ),
 );
 
 const handleSubmit_WeeklyTB = StudyEngine.ifThen(

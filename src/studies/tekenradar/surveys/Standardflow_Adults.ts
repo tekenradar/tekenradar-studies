@@ -13,8 +13,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   Q1: Tekenradar;
   T1: StandardText1;
   Q2: Qualification;
-  Q3: Residence;
-  Q4: Gender;
+  P1: Residence;
+  P2: Gender;
 
   H2: GenHealthHeader;
   Q5: Symptoms1;
@@ -65,9 +65,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.Q1 = new Tekenradar(this.key, required);
     this.T1 = new StandardText1(this.key, required);
     this.Q2 = new Qualification(this.key, required);
-    this.Q3 = new Residence(this.key, required);
-    this.Q4 = new Gender(this.key, required);
-    const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.woman);
+    this.P1 = new Residence(this.key, required);
+    this.P2 = new Gender(this.key, required);
 
     this.H2 = new GenHealthHeader(this.key, required);
     this.Q5 = new Symptoms1(this.key, required);
@@ -75,11 +74,11 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.H3 = new SymptomsHeader(this.key, required);
     const isFemale = SurveyEngine.logic.or(
       SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
-      SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.woman)
+      SurveyEngine.singleChoice.any(this.P2.key, this.P2.optionKeys.female)
     );
     this.Q6 = new Symptoms2(this.key, required, isFemale);
     this.Q7 = new Symptoms3(this.key, required);
-    this.Q8 = new Pregnant(this.key, required, Q4condition);
+    this.Q8 = new Pregnant(this.key, required, isFemale);
 
     this.T2 = new FunctioningText(this.key, required);
     this.Q9 = new Functioning1(this.key, required);
@@ -111,8 +110,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q1.get());
     this.addItem(this.T1.get());
     this.addItem(this.Q2.get());
-    this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
+    this.addItem(this.P1.get());
+    this.addItem(this.P2.get());
 
     this.addPageBreak();
     this.addItem(this.H2.get());
