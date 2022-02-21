@@ -57,19 +57,16 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.Q2f = new NumberTickBites2f(this.key, required, Q1cond);
     this.Q2g = new NumberTickBites2g(this.key, required, Q1cond);
 
-    const InitFlowCond = SurveyEngine.logic.and(
-      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.flow.key)),
-      InitCond
-    );
-
-    this.P1 = new Residence(this.key, required, InitFlowCond);
-    this.P2 = new Gender(this.key, required, SurveyEngine.logic.and(
-      InitCond,
-      SurveyEngine.logic.not(
-        SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key)
-      )
+    this.P1 = new Residence(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.postalCode.key)
     ));
-    this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired);
+    this.P2 = new Gender(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key)
+    ));
+
+    // Show only in first weekly report:
+    this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init));
+
     this.EndGroup = new SurveyEndGroup(this.key, false, undefined);
   }
 

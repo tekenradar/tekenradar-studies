@@ -65,8 +65,13 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.Q1 = new Tekenradar(this.key, required);
     this.T1 = new StandardText1(this.key, required);
     this.Q2 = new Qualification(this.key, required);
-    this.P1 = new Residence(this.key, required);
-    this.P2 = new Gender(this.key, required);
+
+    this.P1 = new Residence(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.postalCode.key)
+    ));
+    this.P2 = new Gender(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key)
+    ));
 
     this.H2 = new GenHealthHeader(this.key, required);
     this.Q5 = new Symptoms1(this.key, required);

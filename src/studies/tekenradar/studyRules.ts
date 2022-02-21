@@ -7,11 +7,12 @@ import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import {
   assignStandardFlow,
   assignT0Invite,
+  finishFollowUp,
   handleExpired_removeSurvey, handlePDiffRuleFor_Chronicflow, handlePDiffRuleFor_EMflow, handlePDiffRuleFor_FEflow,
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isSurveyExpired, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag
+  isSurveyExpired, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -108,6 +109,7 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   ),
   // gender category:
   updateGenderFlag(TBflow_Adults.P2.key),
+  updatePostalCodeFlag(TBflow_Adults.P1.key),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
@@ -137,6 +139,7 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   ),
   // Gender category:
   updateGenderFlag(TBflow_Kids.P2.key),
+  updatePostalCodeFlag(TBflow_Kids.P1.key),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
@@ -375,6 +378,7 @@ const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
     StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
   ),
   updateGenderFlag(Standardflow_Adults.P2.key),
+  updatePostalCodeFlag(Standardflow_Adults.P1.key),
 );
 
 
@@ -393,6 +397,7 @@ const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
   ),
   // Gender category:
   updateGenderFlag(Standardflow_Kids.P2.key),
+  updatePostalCodeFlag(Standardflow_Kids.P1.key),
 );
 
 const handleSubmit_WeeklyTB = StudyEngine.ifThen(
@@ -403,6 +408,7 @@ const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
   StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal', StudyEngine.timestampWithOffset({ hours: 1 })),
   updateGenderFlag(WeeklyTB.P2.key),
+  updatePostalCodeFlag(WeeklyTB.P1.key),
 );
 
 const handleSubmit_Emfoto = StudyEngine.ifThen(
@@ -520,16 +526,14 @@ const handleExpired_T12_Adults = StudyEngine.ifThen(
   isSurveyExpired(T12_Adults.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T12_Adults.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.remove(ExitFollowUp.key, 'all'),
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished)
+  finishFollowUp(),
 )
 
 const handleExpired_T12_Kids = StudyEngine.ifThen(
   isSurveyExpired(T12_Kids.key),
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T12_Kids.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.remove(ExitFollowUp.key, 'all'),
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished)
+  finishFollowUp(),
 )
 
 

@@ -1,5 +1,6 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
 import { Gender, Residence } from './questions/demographie';
 import { Doctor, FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
@@ -74,11 +75,22 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.Q12 = new ReportedTickBites(this.key, required);
 
     this.H1 = new TBGeneralHeader(this.key, required);
-    //TODO If the respondent is not logged in ask p1 and p2,
-    //if he is logged in, skip these two questions here as they
-    //will be asked lateron in de questionaire (chapter S-A)
-    this.P1 = new Residence(this.key, required);
-    this.P2 = new Gender(this.key, required);
+
+    // If the respondent is not logged in ask p1 and p2,
+    // if he is logged in, skip these two questions here as they
+    // will be asked lateron in de questionaire (chapter S-A)
+    this.P1 = new Residence(this.key, required,
+      SurveyEngine.logic.or(
+        SurveyEngine.logic.not(SurveyEngine.isLoggedIn()),
+        SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.postalCode.key))
+      )
+    );
+    this.P2 = new Gender(this.key, required,
+      SurveyEngine.logic.or(
+        SurveyEngine.logic.not(SurveyEngine.isLoggedIn()),
+        SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key))
+      )
+    );
 
     this.Q13 = new DateTickBite(this.key, required);
     this.Q14 = new DurationTickBite(this.key, required);
