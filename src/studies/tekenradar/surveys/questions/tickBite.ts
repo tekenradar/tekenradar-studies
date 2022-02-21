@@ -298,7 +298,7 @@ export class SelectTickbiteReport extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([["nl", "TODO: Question text, select a previous TB report"]]),
+      questionText: new Map([["nl", "Selecteer hieronder de juiste tekenbeet"]]),
       responseItemDefs: [
         {
           key: 'TBR', role: 'TBReportSelector', mapToRole: 'input'
