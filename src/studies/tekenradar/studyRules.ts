@@ -375,8 +375,13 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
   StudyEngine.ifThen(
-    // If want to participate in follow up:
-    StudyEngine.singleChoice.any(T0_Invites.Q1.key, T0_Invites.Q1.optionKeys.yes),
+    // If want to participate in follow up: (and not yet in follow up)
+    StudyEngine.and(
+      StudyEngine.singleChoice.any(T0_Invites.Q1.key, T0_Invites.Q1.optionKeys.yes),
+      StudyEngine.not(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+      )
+    ),
     StudyEngine.if(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.ageCategory.key, ParticipantFlags.ageCategory.values.child),
       // if child participant:
