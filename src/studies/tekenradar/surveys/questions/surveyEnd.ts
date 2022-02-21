@@ -8,6 +8,8 @@ import { surveyCategoryNames, surveyKeys } from '../globalConstants';
 class T0_Invites_EndText extends Item {
 
   markdownContent = `
+### Hartelijk dank voor je melding op Tekenradar.nl
+
 Als je een recente tekenbeet hebt gemeld, houd dan de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
 
 Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
@@ -71,7 +73,15 @@ Todo: add survey end text after initial flow (Standardflow)
 class FollowupEndText extends Item {
 
   markdownContent = `
-Todo: add survey end text for follow up
+### Hartelijk dank voor het invullen van de vragenlijst.
+
+Je helpt ons daardoor mee met onderzoek naar tekenbeten en de ziekte van Lyme. Over 3 maanden ontvang je weer een nieuwe vragenlijst per e-mail.
+`
+
+  markdownContentT12 = `
+### Hartelijk dank voor het invullen van de vragenlijst.
+
+Dit was de laatste vragenlijst. Je hebt ons daardoor geholpen met onderzoek naar tekenbeten en de ziekte van Lyme.
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -88,7 +98,7 @@ Todo: add survey end text for follow up
       content: [
         ComponentGenerators.markdown({
           content: new Map([
-            ["nl", this.markdownContent],
+            ["nl", this.isPartOf(surveyCategoryNames.T12) ? this.markdownContentT12 : this.markdownContent],
           ]),
           className: ''
         }),

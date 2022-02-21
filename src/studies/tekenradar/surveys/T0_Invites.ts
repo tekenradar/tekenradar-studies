@@ -38,8 +38,10 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.T1 = new UitnodigingOnderzoekText(this.key);
     this.Q1 = new UitnodigingOnderzoek(this.key, required);
 
-    this.T2 = new UitnodigingAanvullendOnderzoekText(this.key);
-    this.Q2 = new UitnodigingAanvullendOnderzoek(this.key, required);
+    const showAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
+
+    this.T2 = new UitnodigingAanvullendOnderzoekText(this.key, showAdditionalStudyInvite);
+    this.Q2 = new UitnodigingAanvullendOnderzoek(this.key, required, showAdditionalStudyInvite);
     this.Contactgegevens = new ContactgegevensGroup(this.key, required, SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes));
 
     this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.yes))
@@ -50,7 +52,6 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
     this.addPageBreak()
-
     this.addItem(this.T2.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Contactgegevens.get())
