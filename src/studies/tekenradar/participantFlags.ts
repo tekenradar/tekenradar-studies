@@ -18,6 +18,12 @@ export const ParticipantFlags = {
       unknown: 'unknown'
     }
   },
+  postalCode: {
+    key: 'postalCode',
+    values: {
+      known: 'known'
+    }
+  },
   flow: {
     key: 'flow',
     values: {

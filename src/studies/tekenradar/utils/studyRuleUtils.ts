@@ -7,6 +7,7 @@ import { Chronicflow_Adults } from "../surveys/Chronicflow_Adults";
 import { Chronicflow_Kids } from "../surveys/Chronicflow_Kids";
 import { EMflow_Adults } from "../surveys/EMflow_Adults";
 import { EMflow_Kids } from "../surveys/EMflow_Kids";
+import { ExitFollowUp } from "../surveys/ExitFollowUp";
 import { Feverflow_Adults } from "../surveys/Feverflow_Adults";
 import { LBflow_Adults } from "../surveys/LBflow_Adults";
 import { LBflow_Kids } from "../surveys/LBflow_Kids";
@@ -141,6 +142,18 @@ export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(
     StudyEngine.participantActions.updateFlag(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.unknown)
   ),
 )
+
+export const updatePostalCodeFlag = (questionKey: string) => StudyEngine.ifThen(
+  StudyEngine.hasResponseKey(questionKey, 'rg'),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.postalCode.key, ParticipantFlags.postalCode.values.known)
+)
+
+export const finishFollowUp = () => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.remove(ExitFollowUp.key, 'all'),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key)
+)
+
 
 /**
  * PDIFF - TB FLOW
