@@ -12,7 +12,7 @@ import {
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isSurveyExpired, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
+  isSurveyExpired, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -100,16 +100,11 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
     ),
     // Then:
     assignT0Invite(),
-    StudyEngine.ifThen(
-      StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-      // Then: remove weekly and add again to the end of the list
-      StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-      StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-    )
   ),
   // gender category:
   updateGenderFlag(TBflow_Adults.P2.key),
   updatePostalCodeFlag(TBflow_Adults.P1.key),
+  reAssignWeeklyToTheEndOfList(),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
@@ -130,16 +125,11 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
     ),
     // Then:
     assignT0Invite(),
-    StudyEngine.ifThen(
-      StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-      // Then: remove weekly and add again to the end of the list
-      StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-      StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-    )
   ),
   // Gender category:
   updateGenderFlag(TBflow_Kids.P2.key),
   updatePostalCodeFlag(TBflow_Kids.P1.key),
+  reAssignWeeklyToTheEndOfList(),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key)
   // TODO: add report details
@@ -169,12 +159,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.EMReport.key)
 );
 
@@ -196,12 +181,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.EMReport.key)
 );
 
@@ -221,12 +201,7 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.FeverReport.key)
 );
 
@@ -247,14 +222,11 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.LBReport.key)
 );
+
+
 
 
 const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
@@ -274,12 +246,7 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.LBReport.key)
 );
 
@@ -300,12 +267,7 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.ChronicReport.key)
 );
 
@@ -326,12 +288,7 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.ChronicReport.key)
 );
 
@@ -356,12 +313,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
       assignStandardFlow('adults'),
     )
   ),
-  StudyEngine.ifThen(
-    StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
-    // Then: remove weekly and add again to the end of the list
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
-  ),
+  reAssignWeeklyToTheEndOfList(),
 );
 
 const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(

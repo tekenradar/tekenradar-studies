@@ -96,6 +96,17 @@ export const assignT0Invite = () => StudyEngine.do(
   })),
 )
 
+export const reAssignWeeklyToTheEndOfList = () => StudyEngine.ifThen(
+  StudyEngine.participantState.hasSurveyKeyAssigned(WeeklyTB.key),
+  // Then: remove weekly and add again to the end of the list
+  StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
+  StudyEngine.if(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal'),
+    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
+  )
+)
+
 
 /**
  *
