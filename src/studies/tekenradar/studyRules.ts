@@ -5,12 +5,13 @@ import { PDiff } from "./surveys/PDiff";
 import { TBflow_Adults } from "./surveys/TBflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import {
+  assignStandardFlow,
+  assignT0Invite,
   handleExpired_removeSurvey, handlePDiffRuleFor_Chronicflow, handlePDiffRuleFor_EMflow, handlePDiffRuleFor_FEflow,
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isLoggedIn,
-  isSurveyExpired, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag
+  isSurveyExpired, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -66,12 +67,14 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
   // IF:
   StudyEngine.checkSurveyResponseKey(PDiff.key),
   // THEN:
+  removeAllT0Surveys(),
   StudyEngine.ifThen(
     StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
     ),
     updateAgeFlags(),
     resetToPDiffStart(),
+    StudyEngine.participantActions.startNewStudySession(),
   ),
   handlePDiffRuleFor_TBflow(),
   handlePDiffRuleFor_EMflow(),
@@ -81,18 +84,6 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
   handlePDiffRuleFor_WeeklyTB(),
 )
 
-const assignStandardFlow = (version: 'adults' | 'kids') => StudyEngine.do(
-  StudyEngine.participantActions.assignedSurveys.remove(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.add(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'immediate'),
-  StudyEngine.participantActions.messages.add(emailKeys.StandardflowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
-);
-
-const assignT0Invite = () => StudyEngine.do(
-  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.add(T0_Invites.key, 'immediate', 0, StudyEngine.timestampWithOffset({
-    days: 1
-  })),
-)
 
 const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   // If:
@@ -166,14 +157,10 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
-    StudyEngine.or(
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-          ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
-        ),
-      ),
+    // if not in a follow up yet:
+    StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-        ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow
+        ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
       ),
     ),
     // Then:
@@ -197,14 +184,10 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
-    StudyEngine.or(
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-          ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
-        ),
-      ),
+    // if not in a follow up yet:
+    StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-        ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow
+        ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
       ),
     ),
     // Then:
@@ -226,14 +209,10 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(Feverflow_Adults.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
-    StudyEngine.or(
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-          ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
-        ),
-      ),
+    // if not in a follow up yet:
+    StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-        ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow
+        ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
       ),
     ),
     // Then:
@@ -256,14 +235,10 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
-    StudyEngine.or(
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-          ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
-        ),
-      ),
+    // if not in a follow up yet:
+    StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-        ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow
+        ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
       ),
     ),
     // Then:
@@ -287,14 +262,10 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
-    StudyEngine.or(
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-          ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
-        ),
-      ),
+    // if not in a follow up yet:
+    StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-        ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow
+        ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
       ),
     ),
     // Then:
@@ -317,14 +288,10 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Adults.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
-    StudyEngine.or(
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-          ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
-        ),
-      ),
+    // if not in a follow up yet:
+    StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-        ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow
+        ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
       ),
     ),
     // Then:
@@ -347,14 +314,10 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Kids.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
-    StudyEngine.or(
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-          ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
-        ),
-      ),
+    // if not in a follow up yet:
+    StudyEngine.not(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(
-        ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow
+        ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active
       ),
     ),
     // Then:
