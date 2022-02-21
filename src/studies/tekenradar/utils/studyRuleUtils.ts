@@ -68,7 +68,7 @@ export const resetToPDiffStart = () => StudyEngine.do(
 
 export const assignStandardFlow = (version: 'adults' | 'kids') => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.add(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'immediate'),
+  StudyEngine.participantActions.assignedSurveys.add(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'immediate', 0, StudyEngine.timestampWithOffset({ days: 7 * 6 })),
   StudyEngine.participantActions.messages.add(emailKeys.StandardflowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
 );
 

@@ -522,6 +522,19 @@ const handleExpired_T0_Invites = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
 )
 
+const handleExpired_Standardflow = () => StudyEngine.do(
+  StudyEngine.ifThen(
+    isSurveyExpired(Standardflow_Kids.key),
+    // Then:
+    StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Kids.key, 'all'),
+  ),
+  StudyEngine.ifThen(
+    isSurveyExpired(Standardflow_Adults.key),
+    // Then:
+    StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults.key, 'all'),
+  ),
+)
+
 const handleExpired_T12_Adults = StudyEngine.ifThen(
   isSurveyExpired(T12_Adults.key),
   // Then:
@@ -583,6 +596,7 @@ const submitRules: Expression[] = [
  */
 const timerRules: Expression[] = [
   handleExpired_T0_Invites,
+  handleExpired_Standardflow(),
   handleExpired_removeSurvey(T3_Adults.key),
   handleExpired_removeSurvey(T6_Adults.key),
   handleExpired_removeSurvey(T9_Adults.key),
