@@ -199,6 +199,13 @@ export const handlePDiffRuleFor_EMflow = () => StudyEngine.ifThen(
     // If part of a follow-up:
     StudyEngine.ifThen(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+      StudyEngine.if(
+        isChildParticipant(),
+        // Then:
+        assignStandardFlow('kids'),
+        // Else:
+        assignStandardFlow('adults'),
+      ),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
       StudyEngine.if(
         isChildParticipant(),
@@ -235,6 +242,16 @@ export const handlePDiffRuleFor_FEflow = () => StudyEngine.ifThen(
       StudyEngine.or(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+      ),
+      StudyEngine.ifThen(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+        StudyEngine.if(
+          isChildParticipant(),
+          // Then:
+          assignStandardFlow('kids'),
+          // Else:
+          assignStandardFlow('adults'),
+        ),
       ),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
       StudyEngine.if(
@@ -273,6 +290,16 @@ export const handlePDiffRuleFor_LBflow = () => StudyEngine.ifThen(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
+      ),
+      StudyEngine.ifThen(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+        StudyEngine.if(
+          isChildParticipant(),
+          // Then:
+          assignStandardFlow('kids'),
+          // Else:
+          assignStandardFlow('adults'),
+        ),
       ),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
       StudyEngine.if(
@@ -313,6 +340,16 @@ export const handlePDiffRuleFor_Chronicflow = () => {
           StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
           StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
           StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
+        ),
+        StudyEngine.ifThen(
+          StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+          StudyEngine.if(
+            isChildParticipant(),
+            // Then:
+            assignStandardFlow('kids'),
+            // Else:
+            assignStandardFlow('adults'),
+          ),
         ),
         StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.Chronicflow),
         StudyEngine.if(
