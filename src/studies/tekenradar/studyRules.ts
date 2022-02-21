@@ -711,6 +711,7 @@ const mergeRules: Expression[] = [
       takeOverFlagIfExist(ParticipantFlags.followUp.key),
       takeOverFlagIfExist(ParticipantFlags.ageCategory.key),
       takeOverFlagIfExist(ParticipantFlags.genderCategory.key),
+      takeOverFlagIfExist(ParticipantFlags.postalCode.key),
       StudyEngine.if(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(
           ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.false,
