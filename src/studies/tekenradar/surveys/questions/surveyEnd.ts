@@ -14,7 +14,7 @@ Houdt de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier
 
 Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 
-Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet. De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
+Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die nog niet hebt). De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -51,7 +51,7 @@ Als je een tekenbeet hebt gemeld, houdt dan de plek van de tekenbeet de komende 
 
 Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 
-Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet. De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
+Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die nog niet hebt). De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
 
 `
 
