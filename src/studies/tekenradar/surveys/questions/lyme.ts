@@ -150,7 +150,7 @@ export class LymeDiagnosis3 extends Item {
   ])
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LB.B3');
+    super(parentKey, 'LB_B3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -170,7 +170,7 @@ export class LymeDiagnosis3 extends Item {
 export class LymeDiagnosis4 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LB.B4');
+    super(parentKey, 'LB_B4');
 
     this.isRequired = isRequired;
     this.condition = condition;

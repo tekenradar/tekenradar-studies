@@ -13,6 +13,7 @@ import { LBflow_Kids } from "../surveys/LBflow_Kids";
 import { PDiff } from "../surveys/PDiff";
 import { Standardflow_Adults } from "../surveys/Standardflow_Adults";
 import { Standardflow_Kids } from "../surveys/Standardflow_Kids";
+import { T0_Invites } from "../surveys/T0_Invites";
 import { T12_Adults } from "../surveys/T12_Adults";
 import { T12_Kids } from "../surveys/T12_Kids";
 import { T3_Adults } from "../surveys/T3_Adults";
@@ -61,6 +62,37 @@ export const resetToPDiffStart = () => StudyEngine.do(
     StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'prio'),
   ),
+)
+
+
+export const assignStandardFlow = (version: 'adults' | 'kids') => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.remove(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.add(version === 'adults' ? Standardflow_Adults.key : Standardflow_Kids.key, 'immediate'),
+  StudyEngine.participantActions.messages.add(emailKeys.StandardflowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
+);
+
+export const removeAllT0Surveys = () => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.remove(TBflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(TBflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(EMflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(EMflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Feverflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(LBflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(LBflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults.key, 'all'),
+  StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
+  StudyEngine.participantActions.messages.remove(emailKeys.StandardflowReminder),
+)
+
+export const assignT0Invite = () => StudyEngine.do(
+  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.add(T0_Invites.key, 'immediate', 0, StudyEngine.timestampWithOffset({
+    days: 1
+  })),
 )
 
 
@@ -149,19 +181,23 @@ export const handlePDiffRuleFor_EMflow = () => StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.add(EMflow_Adults.key, 'immediate'),
   ),
   StudyEngine.participantActions.messages.add(emailKeys.FlowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
-  StudyEngine.ifThen(
-    StudyEngine.or(
-      // not in a follow up:
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
+  StudyEngine.if(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active),
+    // If part of a follow-up:
+    StudyEngine.ifThen(
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
+      StudyEngine.if(
+        isChildParticipant(),
+        // Then:
+        initFollowUpFlow_Kids(),
+        // Else:
+        initFollowUpFlow_Adults()
       ),
-      // or in an other flow:
-      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow)
     ),
-    // then:
+    // Else (not in a follow up):
     StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
-    StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
-  )
+  ),
 )
 
 /**
@@ -179,22 +215,26 @@ export const handlePDiffRuleFor_FEflow = () => StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.add(Feverflow_Adults.key, 'immediate'),
   ),
   StudyEngine.participantActions.messages.add(emailKeys.FlowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
-  StudyEngine.ifThen(
-    StudyEngine.or(
-      // not in a follow up:
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
-      ),
-      // or in an other flow:
+  StudyEngine.if(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active),
+    // If part of a follow-up:
+    StudyEngine.ifThen(
       StudyEngine.or(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
-      )
+      ),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
+      StudyEngine.if(
+        isChildParticipant(),
+        // Then:
+        initFollowUpFlow_Kids(),
+        // Else:
+        initFollowUpFlow_Adults()
+      ),
     ),
-    // then:
+    // Else (not in a follow up):
     StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
-    StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
-  )
+  ),
 )
 
 /**
@@ -212,23 +252,27 @@ export const handlePDiffRuleFor_LBflow = () => StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.add(LBflow_Adults.key, 'immediate'),
   ),
   StudyEngine.participantActions.messages.add(emailKeys.FlowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
-  StudyEngine.ifThen(
-    StudyEngine.or(
-      // not in a follow up:
-      StudyEngine.not(
-        StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
-      ),
-      // or in an other flow:
+  StudyEngine.if(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active),
+    // If part of a follow-up:
+    StudyEngine.ifThen(
       StudyEngine.or(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
-      )
+      ),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
+      StudyEngine.if(
+        isChildParticipant(),
+        // Then:
+        initFollowUpFlow_Kids(),
+        // Else:
+        initFollowUpFlow_Adults()
+      ),
     ),
-    // then:
+    // Else (not in a follow up):
     StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
-    StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
-  )
+  ),
 )
 
 /**
@@ -247,24 +291,28 @@ export const handlePDiffRuleFor_Chronicflow = () => {
       StudyEngine.participantActions.assignedSurveys.add(Chronicflow_Adults.key, 'immediate'),
     ),
     StudyEngine.participantActions.messages.add(emailKeys.FlowReminder, StudyEngine.timestampWithOffset({ hours: 24 })),
-    StudyEngine.ifThen(
-      StudyEngine.or(
-        // not in a follow up:
-        StudyEngine.not(
-          StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
-        ),
-        // or in an other flow:
+    StudyEngine.if(
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active),
+      // If part of a follow-up:
+      StudyEngine.ifThen(
         StudyEngine.or(
           StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
           StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow),
           StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.FEflow),
           StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.LBflow),
-        )
+        ),
+        StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.Chronicflow),
+        StudyEngine.if(
+          isChildParticipant(),
+          // Then:
+          initFollowUpFlow_Kids(),
+          // Else:
+          initFollowUpFlow_Adults()
+        ),
       ),
-      // then:
+      // Else (not in a follow up):
       StudyEngine.participantActions.updateFlag(ParticipantFlags.flow.key, ParticipantFlags.flow.values.Chronicflow),
-      StudyEngine.participantActions.removeFlag(ParticipantFlags.followUp.key), // Reset follow up if there was any
-    )
+    ),
   )
 }
 
