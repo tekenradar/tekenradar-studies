@@ -10,11 +10,11 @@ class T0_Invites_EndText extends Item {
   markdownContent = `
 ### Hartelijk dank voor je melding op Tekenradar.nl
 
-Als je een recente tekenbeet hebt gemeld, houd dan de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
+Houdt de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
 
 Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 
-Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je dat nu nog niet hebt). De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
+Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet. De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -43,7 +43,16 @@ Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je dat
 class StandardflowEndText extends Item {
 
   markdownContent = `
-Todo: add survey end text after initial flow (Standardflow)
+### Hartelijk dank voor je melding op Tekenradar.nl
+
+Er is een email naar je verstuurd waarin staat hoe je je deelname aan Tekenradar.nl kunt bevestigen.
+
+Als je een tekenbeet hebt gemeld, houdt dan de plek van de tekenbeet de komende drie maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans(?)) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
+
+Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
+
+Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet. De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
+
 `
 
   constructor(parentKey: string, condition?: Expression) {
