@@ -10,9 +10,11 @@ class T0_Invites_EndText extends Item {
   markdownContent = `
 ### Hartelijk dank voor je melding op Tekenradar.nl
 
+**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+
 Houdt de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
 
-Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
+Als je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 
 Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die nog niet hebt). De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
 `
@@ -45,11 +47,13 @@ class StandardflowEndText extends Item {
   markdownContent = `
 ### Hartelijk dank voor je melding op Tekenradar.nl
 
+**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+
 Er is een email naar je verstuurd waarin staat hoe je je deelname aan Tekenradar.nl kunt bevestigen.
 
 Als je een tekenbeet hebt gemeld, houdt dan de plek van de tekenbeet de komende drie maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans(?)) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
 
-Als je zo'n (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
+Als je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 
 Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die nog niet hebt). De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.
 
@@ -84,11 +88,15 @@ class FollowupEndText extends Item {
   markdownContent = `
 ### Hartelijk dank voor het invullen van de vragenlijst.
 
+**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+
 Je helpt ons daardoor mee met onderzoek naar tekenbeten en de ziekte van Lyme. Over 3 maanden ontvang je weer een nieuwe vragenlijst per e-mail.
 `
 
   markdownContentT12 = `
 ### Hartelijk dank voor het invullen van de vragenlijst.
+
+**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
 
 Dit was de laatste vragenlijst. Je hebt ons daardoor geholpen met onderzoek naar tekenbeten en de ziekte van Lyme.
 `
@@ -119,12 +127,20 @@ Dit was de laatste vragenlijst. Je hebt ons daardoor geholpen met onderzoek naar
 class WeeklyEndText extends Item {
 
   markdownContentFirstTime = `
-Hartelijk dank voor het invullen van deze vragen. Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
+### Hartelijk dank voor het invullen van deze vragen.
+
+**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+
+Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
 `
   markdownContentNormal = `
-Hartelijk dank voor het invullen van deze vragen. Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
+### Hartelijk dank voor het invullen van deze vragen.
 
-Houd de plek van de tekenbeet de komende periode goed in de gaten en neem contact op met de huisarts als er een groeiende rode vlek of kring ontstaat of als u andere gezondheidsklachten krijgt die mogelijke met de ziekte van lyme te maken kunnen hebben.
+**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+
+Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
+
+Als je een tekenbeet hebt gehad, houd dan de plek van de tekenbeet de komende periode goed in de gaten en neem contact op met de huisarts als er een groeiende rode vlek of kring ontstaat of als je andere gezondheidsklachten krijgt die mogelijke met de ziekte van Lyme te maken kunnen hebben.
 `
 
   constructor(parentKey: string, condition?: Expression) {

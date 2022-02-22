@@ -56,7 +56,7 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.addItem(this.Q2.get());
     this.addItem(this.Contactgegevens.get())
     this.addPageBreak()
-
+    this.addPageBreak();
     this.addItem(this.EndGroup.get());
   }
 }

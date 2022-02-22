@@ -85,6 +85,7 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.addItem(this.P1.get());
     this.addItem(this.P2.get());
     this.addItem(this.G5_6.get());
+    this.addPageBreak();
     this.addItem(this.EndGroup.get());
   }
 }

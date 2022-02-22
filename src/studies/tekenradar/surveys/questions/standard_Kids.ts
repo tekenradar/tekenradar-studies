@@ -1736,7 +1736,7 @@ export class FatigueText1G3_Kids extends Item {
 
 
   markdownContent_G3 = `
-  # Vermoedheid
+  # Vermoeidheid
   De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
 
   Op deze pagina staat een lijst van dingen die een probleem voor jou kunnen zijn. Kun je ons vertellen **hoe vaak** je in de **afgelopen week** met elk van deze dingen problemen hebt gehad?
@@ -1779,7 +1779,7 @@ export class FatigueText1G3_Kids extends Item {
 export class FatigueText2G1_Kids extends Item {
 
   markdownContent_G1 = `
- ##### Hoe vaak heeft uw kind in de afgelopen week problemen gehad met:
+ ##### Hoe vaak heeft uw kind in de **afgelopen week** problemen gehad met:
     `
 
 
@@ -1844,7 +1844,7 @@ export class FatigueText2G3_Kids extends Item {
 
 
   markdownContent_G3 = `
-##### Hoezeer is dit voor jou in de AFGELOPEN WEEK een probleem geweest:
+##### Hoezeer is dit voor jou in de **afgelopen week** een probleem geweest:
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -2859,7 +2859,7 @@ export class School3H2_Kids extends Item {
 export class Strength_WeaknessI1Text_Kids extends Item {
 
   markdownContent_F1 = `
-# Sterke Kanten en Moeilijkheden
+# Sterke kanten en moeilijkheden
 
 De vragen hieronder zijn voor **een ouder/verzorger**.
 
@@ -2894,7 +2894,7 @@ De volgende vragen gaan over gedragingen van kinderen. Wilt u bij iedere vraag a
 export class Strength_WeaknessI2Text_Kids extends Item {
 
   markdownContent_I2 = `
-# Sterke Kanten en Moeilijkheden
+# Sterke kanten en moeilijkheden
 
 De vragen hieronder zijn voor **een ouder/verzorger**. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
 
@@ -2928,7 +2928,7 @@ Wilt u alstublieft bij iedere vraag een antwoord kiezen door op het bolletje te 
 export class Strength_WeaknessI3Text_Kids extends Item {
 
   markdownContent_F3 = `
-# Sterke Kanten en Moeilijkheden
+# Sterke kanten en moeilijkheden
 
 De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf de** antwoorden kiezen.
 
@@ -3617,8 +3617,8 @@ export class AwarenessKidsGroup extends Group {
 export class Awareness_Text_KidsGroup extends Item {
 
   markdownContent = `
-# Klachten Perceptie
-LET OP: De vragen hieronder zijn voor een ouder/verzorger. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
+# Klachten perceptie
+LET OP: De vragen hieronder zijn voor een **ouder/verzorger**. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
 
 Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
  `

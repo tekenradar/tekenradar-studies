@@ -2323,7 +2323,7 @@ Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:
 export class AwarenessText_Kids extends Item {
 
   markdownContent = `
-# KLACHTEN PERCEPTIE
+# Klachten perceptie
 
 De vragen hieronder zijn voor een minderjarige.
 Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
@@ -2362,7 +2362,7 @@ export class Awareness1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van lyme op je leven?'],
+        ["nl", 'Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van Lyme op je leven?'],
       ]),
     }
   ]
@@ -2448,7 +2448,7 @@ export class Awareness2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoe lang denk je dat de tekenbeet, erythema migrans of andere ziekte van lyme zal duren?'],
+        ["nl", 'Hoe lang denk je dat de tekenbeet, erythema migrans of andere ziekte van Lyme zal duren?'],
       ]),
     }
   ]
@@ -2545,7 +2545,7 @@ export class Awareness3 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre meen je de tekenbeet, erythema migrans of andere ziekte van lyme zelf te kunnen beheersen?'],
+        ["nl", 'In hoeverre meen je de tekenbeet, erythema migrans of andere ziekte van Lyme zelf te kunnen beheersen?'],
       ]),
     }
   ]
@@ -2630,7 +2630,7 @@ export class Awareness4 extends Item {
   questionTextMain_Adults = [
     {
       content: new Map([
-        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van lyme?'],
+        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
       ]),
     }
   ]
@@ -2638,7 +2638,7 @@ export class Awareness4 extends Item {
   questionTextMain_Kids = [
     {
       content: new Map([
-        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van lyme?'],
+        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
       ]),
     }
   ]

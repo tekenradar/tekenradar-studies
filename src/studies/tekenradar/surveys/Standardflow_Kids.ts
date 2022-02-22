@@ -324,6 +324,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q31_I3.get());
     this.addPageBreak();
     this.addItem(this.G32_39.get());
+    this.addPageBreak();
     this.addItem(this.EndGroup.get());
 
   }

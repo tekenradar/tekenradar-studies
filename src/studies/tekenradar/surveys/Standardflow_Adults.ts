@@ -153,7 +153,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
     this.addPageBreak();
     this.addItem(this.G18_25.get());
-
+    this.addPageBreak();
     this.addItem(this.EndGroup.get());
   }
 }
