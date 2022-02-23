@@ -300,7 +300,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   StudyEngine.ifThen(
     // If want to participate in follow up: (and not yet in follow up)
     StudyEngine.and(
-      StudyEngine.singleChoice.any(T0_Invites.Q1.key, T0_Invites.Q1.optionKeys.yes),
+      StudyEngine.consent.accepted(T0_Invites.Q1.key),
       StudyEngine.not(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
       )

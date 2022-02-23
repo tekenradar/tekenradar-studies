@@ -38,13 +38,13 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.T1 = new UitnodigingOnderzoekText(this.key);
     this.Q1 = new UitnodigingOnderzoek(this.key, required);
 
-    const showAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
+    const showAdditionalStudyInvite = SurveyEngine.consentQuestion.accepted(this.Q1.key);
 
     this.T2 = new UitnodigingAanvullendOnderzoekText(this.key, showAdditionalStudyInvite);
     this.Q2 = new UitnodigingAanvullendOnderzoek(this.key, required, showAdditionalStudyInvite);
-    this.Contactgegevens = new ContactgegevensGroup(this.key, required, SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes));
+    this.Contactgegevens = new ContactgegevensGroup(this.key, required, SurveyEngine.consentQuestion.accepted(this.Q2.key));
 
-    this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.yes))
+    this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.not(SurveyEngine.consentQuestion.accepted(this.Q1.key)))
   }
 
 
