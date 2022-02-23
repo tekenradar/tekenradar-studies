@@ -36,13 +36,16 @@ import { T3_Kids } from "./surveys/T3_Kids";
 import { ParticipantFlags } from "./participantFlags";
 import { TBflow_Kids } from "./surveys/TBflow_Kids";
 import { T0_Invites } from "./surveys/T0_Invites";
+import { multipleChoiceKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 
 const reports = {
   FollowUpReport: {
     key: 'followUp',
   },
   TBReport: {
-    key: 'TB'
+    key: 'TB',
+    environment: 'environment',
+    activity: 'activity',
   },
   EMReport: {
     key: 'EM'
@@ -107,7 +110,13 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   reAssignWeeklyToTheEndOfList(),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key),
-  StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key)
+  StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.environment,
+    StudyEngine.getSelectedKeys(TBflow_Adults.Q1.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+  ),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.activity,
+    StudyEngine.getSelectedKeys(TBflow_Adults.Q2.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+  )
   // TODO: add report details
 )
 
@@ -133,7 +142,13 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   reAssignWeeklyToTheEndOfList(),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key),
-  StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key)
+  StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.environment,
+    StudyEngine.getSelectedKeys(TBflow_Kids.Q1.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+  ),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.activity,
+    StudyEngine.getSelectedKeys(TBflow_Kids.Q2.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+  )
   // TODO: add report details
 )
 
