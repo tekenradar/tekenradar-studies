@@ -106,7 +106,8 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   updatePostalCodeFlag(TBflow_Adults.P1.key),
   reAssignWeeklyToTheEndOfList(),
   // Report:
-  StudyEngine.participantActions.reports.init(reports.TBReport.key)
+  StudyEngine.participantActions.reports.init(reports.TBReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key)
   // TODO: add report details
 )
 
@@ -131,7 +132,8 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   updatePostalCodeFlag(TBflow_Kids.P1.key),
   reAssignWeeklyToTheEndOfList(),
   // Report:
-  StudyEngine.participantActions.reports.init(reports.TBReport.key)
+  StudyEngine.participantActions.reports.init(reports.TBReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key)
   // TODO: add report details
 )
 
@@ -160,7 +162,8 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  StudyEngine.participantActions.reports.init(reports.EMReport.key)
+  StudyEngine.participantActions.reports.init(reports.EMReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)
 );
 
 
@@ -182,7 +185,8 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  StudyEngine.participantActions.reports.init(reports.EMReport.key)
+  StudyEngine.participantActions.reports.init(reports.EMReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)
 );
 
 const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
@@ -202,7 +206,8 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  StudyEngine.participantActions.reports.init(reports.FeverReport.key)
+  StudyEngine.participantActions.reports.init(reports.FeverReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FeverReport.key, reports.FeverReport.key)
 );
 
 const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
@@ -223,7 +228,8 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  StudyEngine.participantActions.reports.init(reports.LBReport.key)
+  StudyEngine.participantActions.reports.init(reports.LBReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.LBReport.key, reports.LBReport.key)
 );
 
 
@@ -247,7 +253,8 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  StudyEngine.participantActions.reports.init(reports.LBReport.key)
+  StudyEngine.participantActions.reports.init(reports.LBReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.LBReport.key, reports.LBReport.key)
 );
 
 
@@ -268,7 +275,8 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  StudyEngine.participantActions.reports.init(reports.ChronicReport.key)
+  StudyEngine.participantActions.reports.init(reports.ChronicReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.ChronicReport.key, reports.ChronicReport.key)
 );
 
 
@@ -289,7 +297,8 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  StudyEngine.participantActions.reports.init(reports.ChronicReport.key)
+  StudyEngine.participantActions.reports.init(reports.ChronicReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.ChronicReport.key, reports.ChronicReport.key)
 );
 
 const handleSubmit_T0_Invites = StudyEngine.ifThen(
@@ -388,6 +397,7 @@ const handleSubmit_T3_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T3_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   removeFollowUpMessagesForSurvey(T3_Adults.key)
 );
 
@@ -397,6 +407,7 @@ const handleSubmit_T6_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T6_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   removeFollowUpMessagesForSurvey(T6_Adults.key)
 );
 
@@ -406,6 +417,7 @@ const handleSubmit_T9_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T9_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   removeFollowUpMessagesForSurvey(T9_Adults.key)
 );
 
@@ -415,6 +427,7 @@ const handleSubmit_T12_Adults = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T12_Adults.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
   removeFollowUpMessagesForSurvey(T12_Adults.key)
 );
@@ -425,6 +438,7 @@ const handleSubmit_T3_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T3_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   removeFollowUpMessagesForSurvey(T3_Kids.key)
 );
 
@@ -434,6 +448,8 @@ const handleSubmit_T6_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T6_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   removeFollowUpMessagesForSurvey(T6_Kids.key)
 );
 
@@ -443,6 +459,7 @@ const handleSubmit_T9_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T9_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   removeFollowUpMessagesForSurvey(T9_Kids.key)
 );
 
@@ -452,6 +469,7 @@ const handleSubmit_T12_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T12_Kids.key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
   removeFollowUpMessagesForSurvey(T12_Kids.key)
 );
