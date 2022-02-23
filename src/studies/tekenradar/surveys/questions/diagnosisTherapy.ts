@@ -836,13 +836,13 @@ export class LymeTherapy5 extends Item {
         }),
         ClozeItemTypes.timeInput({
           key: '4',
-          defaultValue: '13:00',
+          defaultValue: '--:--',
           inputLabelText: new Map([["nl", " en"],]),
           labelBehindInput: true
         }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
         ClozeItemTypes.timeInput({
           key: '5',
-          defaultValue: '13:00',
+          defaultValue: '--:--',
           inputLabelText: new Map([["nl", " uur"],]),
           labelBehindInput: true,
         }),
