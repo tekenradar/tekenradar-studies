@@ -4,7 +4,6 @@ import { Expression } from 'survey-engine/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 
 export class UitnodigingOnderzoekText extends Item {
-
   markdownContent = `
 ## Uitnodiging onderzoek
 
@@ -12,7 +11,7 @@ Wij vragen je of je mee wilt doen aan onderzoek, omdat je een tekenbeet of de zi
     `
 
   constructor(parentKey: string, condition?: Expression) {
-    super(parentKey, 'UitnodigingText');
+    super(parentKey, 'UitnTR_Pretext');
 
     this.condition = condition;
   }
@@ -36,9 +35,48 @@ Wij vragen je of je mee wilt doen aan onderzoek, omdat je een tekenbeet of de zi
 
 
 export class UitnodigingOnderzoek extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Uitnodiging');
+    super(parentKey, 'UitnTR');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en de ziekte van Lyme?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ]
+    })
+  }
+}
+export class UitnodigingOnderzoekConsent extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'UitnTR_Consent');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -51,16 +89,16 @@ export class UitnodigingOnderzoek extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en de ziekte van Lyme? '],
+        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en de ziekte van Lyme?'],
       ]),
       checkBoxLabel: new Map([
-        ["nl", "TODO: I want to participate - click here to accept the conditions."],
+        ["nl", "Ik geef toestemming"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Mensen die meedoen aan Tekenradar onderzoek kunnen in aanmerking komen voor aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen.
+Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga je akkoord dat het RIVM en/of samenwerkingspartners je gegevens voor dit onderzoek zullen verwerken.
         `]]),
         })
       ],
@@ -127,9 +165,49 @@ Mensen die meedoen aan Tekenradar onderzoek kunnen in aanmerking komen voor aanv
 
 
 export class UitnodigingAanvullendOnderzoek extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'AO');
+    super(parentKey, 'UitnAO');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Mogen we je benaderen voor aanvullend onderzoek?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja, ik geef toestemming om eventueel benaderd te worden voor aanvullend wetenschappelijk onderzoek, en ik geef daarvoor hieronder mijn contactgegevens."],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee, ik wil niet benaderd worden voor aanvullend onderzoek."],
+          ])
+        },
+      ],
+    })
+  }
+}
+
+export class UitnodigingAanvullendOnderzoekConsent extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'UitnAO_Consent');
 
     this.isRequired = isRequired;
     this.condition = condition;
