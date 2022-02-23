@@ -6,6 +6,7 @@ export const SurveySuffix = {
 }
 
 export const surveyCategoryNames = {
+  Chronicflow: 'Chronicflow',
   Feverflow: 'Feverflow',
   Standardflow: 'Standardflow',
   T3: 'T3',

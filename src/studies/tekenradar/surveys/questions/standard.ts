@@ -1577,9 +1577,14 @@ export class Fatigue extends Item {
     },
     {
       content: new Map([
-        ["nl", " de laatste twee weken hebt gevoeld."],
+        ["nl", " de laatste twee weken"],
       ]),
       className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", " hebt gevoeld."],
+      ]),
     }
   ]
 
@@ -1594,7 +1599,7 @@ export class Fatigue extends Item {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
       responsiveModes: {
-        md: 'table',
+        // md: 'table',
         sm: 'horizontal'
       },
       parentKey: this.parentKey,
