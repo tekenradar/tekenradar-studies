@@ -7,7 +7,9 @@ export class UitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek
 
-Wij vragen je of je mee wilt doen aan onderzoek, omdat je een tekenbeet of de ziekte van Lyme hebt gemeld. Je vult direct hierna dan nog een aantal extra vragen in, en het komende jaar iedere 3 maanden een nieuwe vragenlijst over je gezondheid.
+Wij vragen je of je mee wilt doen aan onderzoek, omdat je een tekenbeet of de ziekte van Lyme hebt gemeld. Je vult direct hierna dan nog een aantal extra vragen in, en het komende jaar iedere 3 maanden een nieuwe vragenlijst over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per mail een herinnering via noreply@tekenradar.nl.
+
+Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
     `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -103,14 +105,10 @@ Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aa
         })
       ],
       dialogTitle: new Map([
-        ["nl", "TODO: title for consent dialog"],
+        ["nl", "Toestemmingsformulier"],
       ]),
       dialogContent: new Map([
         ["nl", `
-Wij vragen je of je mee wilt doen aan onderzoek, omdat je een tekenbeet of de ziekte van Lyme hebt gemeld. Je vult direct hierna dan nog een aantal extra vragen in, en het komende jaar iedere 3 maanden een nieuwe vragenlijst over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per mail een herinnering via noreply@tekenradar.nl.
-
-Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de privacyverklaring van Tekenradar en de RIVM privacyverklaring.
-
 Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga je akkoord dat het RIVM en/of samenwerkingspartners je gegevens voor dit onderzoek zullen verwerken.
 
 Ook:
@@ -125,7 +123,7 @@ Ook:
         ["nl", "Ja, ik geef toestemming"],
       ]),
       rejectBtn: new Map([
-        ["nl", "TODO: reject"],
+        ["nl", "Ik doe toch niet mee"],
       ]),
     })
   }
@@ -184,13 +182,13 @@ export class UitnodigingAanvullendOnderzoek extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Mogen we je benaderen voor aanvullend onderzoek?'],
+        ['nl', 'Mogen we je benaderen voor aanvullend wetenschappelijk onderzoek?'],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja, ik geef toestemming om eventueel benaderd te worden voor aanvullend wetenschappelijk onderzoek, en ik geef daarvoor hieronder mijn contactgegevens."],
+            ["nl", "Ja, ik wil benaderd worden voor aanvullend onderzoek"],
           ])
         },
         {
@@ -220,10 +218,10 @@ export class UitnodigingAanvullendOnderzoekConsent extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en de ziekte van Lyme? '],
+        ['nl', ''],
       ]),
       checkBoxLabel: new Map([
-        ["nl", "TODO: I want to participate - click here to accept the conditions."],
+        ["nl", "Ja, ik geef toestemming om eventueel benaderd te worden voor aanvullend wetenschappelijk onderzoek, en ik geef daarvoor hiervoor mijn contactgegevens."],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
@@ -234,7 +232,7 @@ Mensen die meedoen aan Tekenradar onderzoek kunnen in aanmerking komen voor aanv
         })
       ],
       dialogTitle: new Map([
-        ["nl", "TODO: title for consent dialog"],
+        ["nl", "Toestemmingsformulier"],
       ]),
       dialogContent: new Map([
         ["nl", `
@@ -251,7 +249,7 @@ Ook:
         ["nl", "Ja, ik geef toestemming"],
       ]),
       rejectBtn: new Map([
-        ["nl", "TODO: reject"],
+        ["nl", "Ik wil toch niet benaderd worden"],
       ]),
     })
   }
