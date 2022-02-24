@@ -36,7 +36,7 @@ import { T3_Kids } from "./surveys/T3_Kids";
 import { ParticipantFlags } from "./participantFlags";
 import { TBflow_Kids } from "./surveys/TBflow_Kids";
 import { T0_Invites } from "./surveys/T0_Invites";
-import { multipleChoiceKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
+import { inputKey, multipleChoiceKey, numericInputKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 
 const reports = {
   FollowUpReport: {
@@ -46,6 +46,8 @@ const reports = {
     key: 'TB',
     environment: 'environment',
     activity: 'activity',
+    count: 'count',
+    location: 'location',
   },
   EMReport: {
     key: 'EM'
@@ -116,8 +118,13 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.activity,
     StudyEngine.getSelectedKeys(TBflow_Adults.Q2.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
-  )
-  // TODO: add report details
+  ),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.count,
+    StudyEngine.getResponseValueAsStr(TBflow_Adults.Q4.key, `${responseGroupKey}.${numericInputKey}`), 'int'
+  ),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.location,
+    StudyEngine.getResponseValueAsStr(TBflow_Adults.Q5.key, `${responseGroupKey}.${inputKey}`), 'string'
+  ),
 )
 
 
@@ -148,8 +155,13 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.activity,
     StudyEngine.getSelectedKeys(TBflow_Kids.Q2.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
-  )
-  // TODO: add report details
+  ),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.count,
+    StudyEngine.getResponseValueAsStr(TBflow_Kids.Q4.key, `${responseGroupKey}.${numericInputKey}`), 'int'
+  ),
+  StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.location,
+    StudyEngine.getResponseValueAsStr(TBflow_Kids.Q5.key, `${responseGroupKey}.${inputKey}`), 'string'
+  ),
 )
 
 const addEMfotoReminderEmail = () => StudyEngine.participantActions.messages.add(emailKeys.EMfotoReminder, StudyEngine.timestampWithOffset({ days: 2 }));
