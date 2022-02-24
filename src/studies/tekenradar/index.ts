@@ -27,6 +27,8 @@ import { T12_Kids } from "./surveys/T12_Kids";
 import { ExitFollowUp } from "./surveys/ExitFollowUp";
 import { changeFollowupTimingToNow } from "./customRules/changeFollowupTiming";
 import { T0_Invites } from "./surveys/T0_Invites";
+import { participantMessages } from "./messageConfigs/participantMessages";
+import { weeklyTBMessage } from "./messageConfigs/weeklyTBMessage";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
@@ -42,5 +44,9 @@ export const TekenradarStudy: Study = {
   ],
   customStudyRules: [
     changeFollowupTimingToNow,
+  ],
+  messageConfigs: [
+    participantMessages,
+    weeklyTBMessage,
   ]
 }
