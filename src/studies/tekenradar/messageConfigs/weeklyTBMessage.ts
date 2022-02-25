@@ -10,10 +10,10 @@ export const weeklyTBMessage: MessageConfig = {
   defaultLanguage: 'nl',
   label: 'Reminder message for weekly TB reporter cohort',
   period: { days: 7 },
-  sendingTime: { hour: 12, minute: 0 },
+  sendingTime: { hour: 1, minute: 0 },
   translations: [{
     lang: 'nl',
-    subject: 'TODO'
+    subject: 'De wekelijkse Tekenradarvragenlijst staat voor je klaar'
   }],
   headerOverrides: headerOverrides,
 }

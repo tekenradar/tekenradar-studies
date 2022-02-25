@@ -91,16 +91,16 @@ export class UitnodigingOnderzoekConsent extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en de ziekte van Lyme?'],
+        ['nl', ''],
       ]),
       checkBoxLabel: new Map([
-        ["nl", "Ik geef toestemming"],
+        ["nl", "Toestemming geven"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga je akkoord dat het RIVM en/of samenwerkingspartners je gegevens voor dit onderzoek zullen verwerken.
+Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
         `]]),
         })
       ],
@@ -109,7 +109,7 @@ Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aa
       ]),
       dialogContent: new Map([
         ["nl", `
-Door de knop “ik geef toestemming” aan te klikken stem je in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga je akkoord dat het RIVM en/of samenwerkingspartners je gegevens voor dit onderzoek zullen verwerken.
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken.
 
 Ook:
 - Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
@@ -221,13 +221,13 @@ export class UitnodigingAanvullendOnderzoekConsent extends Item {
         ['nl', ''],
       ]),
       checkBoxLabel: new Map([
-        ["nl", "Ja, ik geef toestemming om eventueel benaderd te worden voor aanvullend wetenschappelijk onderzoek, en ik geef daarvoor hiervoor mijn contactgegevens."],
+        ["nl", "Toestemming geven"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Mensen die meedoen aan Tekenradar onderzoek kunnen in aanmerking komen voor aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen.
+            Om je te benaderen voor aanvullend onderzoek hebben we ook je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
         `]]),
         })
       ],
@@ -236,13 +236,14 @@ Mensen die meedoen aan Tekenradar onderzoek kunnen in aanmerking komen voor aanv
       ]),
       dialogContent: new Map([
         ["nl", `
-Door de knop “ja, ik geef toestemming” aan te klikken stem je in om eventueel benaderd worden voor aanvullend (deel)onderzoek via Tekenradar en ga je akkoord dat het RIVM en/of samenwerkingspartners indien nodig je contactgegevens zullen verwerken.
+Door hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.
 Meer informatie over onder andere het doel van Tekenradar onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
 
 Ook:
 
-- Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
+- Weet ik dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
 - Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.
+- Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners verwerkt te worden.
 - Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).
         `]]),
       acceptBtn: new Map([
@@ -261,7 +262,7 @@ class ContactGroupPretext extends Item {
   markdownContent = `
 **Vul hieronder je contactgegevens in zodat we je kunnen benaderen.**
 
-We vragen opnieuw om je email adres omdat we vanwege regelgeving het email adres van je account niet zomaar mogen gebruiken om je te benaderen. Je kunt als je dat wilt wel hetzelfde email adres invullen.
+We vragen opnieuw om je email adres omdat we vanwege regelgeving het email adres van je account niet mogen inzien. Je kunt als je dat wilt wel hetzelfde email adres invullen.
 Je contactgegevens worden alleen gebruikt om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
 `
 

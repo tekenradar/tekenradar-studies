@@ -1,6 +1,6 @@
 
 export const headerOverrides = {
-  from: '"Tekenradar" <noreply@rivm.nl>',
-  sender: 'noreply@rivm.nl',
-  replyTo: ['contact@tekenradar.nl'],
+  from: '"Tekenradar" <noreply@tekenradar.nl>',
+  sender: 'noreply@tekenradar.nl',
+  replyTo: ['info@tekenradar.nl'],
 }
