@@ -41,7 +41,9 @@ export class TickBiteOtherGroup extends Group {
     this.Start = new RecognisedTickBite(this.key, required);
     this.SelectTickbiteReport = new SelectTickbiteReport(this.key, required, SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yesOnTekenradar));
 
-    const QStartcondition = SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes);
+    const QStartcondition = this.isPartOf(surveyCategoryNames.Feverflow) ?
+      SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes, this.Start.optionKeys.no)
+      : SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes);
     this.T1 = new IntroTB(this.key, required, QStartcondition);
     this.Q1 = new EnvironmentTickBite(this.key, required, QStartcondition);
     this.Q2 = new ActivityTickBite(this.key, required, QStartcondition);
@@ -196,6 +198,7 @@ export class TBGeneralHeader extends Item {
 
 export class RecognisedTickBite extends Item {
   optionKeys = {
+    no: 'a',
     yesOnTekenradar: 'b',
     yes: 'c',
   }
@@ -225,7 +228,7 @@ export class RecognisedTickBite extends Item {
       //helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         SCOptions.option(
-          'a', new Map([["nl", "Nee"]])
+          this.optionKeys.no, new Map([["nl", "Nee"]])
         ),
         SCOptions.option(
           this.optionKeys.yesOnTekenradar,
