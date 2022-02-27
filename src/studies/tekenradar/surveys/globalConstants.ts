@@ -8,6 +8,7 @@ export const SurveySuffix = {
 export const surveyCategoryNames = {
   Chronicflow: 'Chronicflow',
   Feverflow: 'Feverflow',
+  EMflow: 'EMflow',
   Standardflow: 'Standardflow',
   T3: 'T3',
   T6: 'T6',
@@ -18,6 +19,8 @@ export const surveyCategoryNames = {
 export const surveyKeys = {
   WeeklyTB: "WeeklyTB",
   T0_Invites: "T0_Invites",
+  EMflow_Adults: `${surveyCategoryNames.EMflow}_${SurveySuffix.Adults}`,
+  EMflow_Kids: `${surveyCategoryNames.EMflow}_${SurveySuffix.Kids}`,
   Feverflow_Adults: `${surveyCategoryNames.Feverflow}_${SurveySuffix.Adults}`,
   Standardflow_Kids: `${surveyCategoryNames.Standardflow}_${SurveySuffix.Kids}`,
   Standardflow_Adults: `${surveyCategoryNames.Standardflow}_${SurveySuffix.Adults}`,
@@ -29,6 +32,8 @@ export const surveyKeys = {
   T9_Adults: `${surveyCategoryNames.T9}_${SurveySuffix.Adults}`,
   T12_Kids: `${surveyCategoryNames.T12}_${SurveySuffix.Kids}`,
   T12_Adults: `${surveyCategoryNames.T12}_${SurveySuffix.Adults}`,
+  QuitWeeklyTB: 'QuitWeekly',
+  QuitFollowUp: 'QuitFU',
 }
 
 

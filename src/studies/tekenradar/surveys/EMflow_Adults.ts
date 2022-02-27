@@ -1,6 +1,6 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { applyRequiredQuestions } from './globalConstants';
+import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
 import { DoctorEM, EM1, EM2, EM3, EM4, EMHeader, ReportHeader } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
@@ -32,7 +32,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'EMflow_Adults',
+      surveyKey: surveyKeys.EMflow_Adults,
       name: new Map([
         ['nl', 'Erythema migrans melding']
       ]),

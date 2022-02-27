@@ -6,7 +6,6 @@ import { ParticipantFlags } from '../../participantFlags';
 import { surveyCategoryNames, surveyKeys } from '../globalConstants';
 
 class T0_Invites_EndText extends Item {
-
   markdownContent = `
 ### Hartelijk dank voor je melding op Tekenradar.nl
 
@@ -41,6 +40,7 @@ Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die
     })
   }
 }
+
 
 class StandardflowEndText extends Item {
 
@@ -187,13 +187,18 @@ class Comment extends Item {
   }
 
   buildItem() {
+
+    const questionText = (this.isPartOf(surveyKeys.QuitWeeklyTB) || this.isPartOf(surveyKeys.QuitFollowUp)) ?
+      'Als u aanvullende feedback voor ons heeft, kunt u deze hier invoeren' :
+      'Als je nog extra informatie bij bovenstaande vragen hebt kun je dit hieronder invullen.'
+
     return SurveyItems.multilineTextInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Als je nog extra informatie bij bovenstaande vragen hebt kun je dit hieronder invullen.'],
+        ['nl', questionText],
       ]),
       questionSubText: new Map([
         ['nl', 'Let op: deze informatie wordt bij de door jou ingevulde vragenlijst opgeslagen en niet direct door de onderzoekers bekeken.'],

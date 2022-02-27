@@ -38,7 +38,8 @@ export const ParticipantFlags = {
     key: 'followUp',
     values: {
       active: 'active',
-      finished: 'finished'
+      finished: 'finished',
+      quitted: 'quitted',
     }
   },
   weeklyTBreporter: {

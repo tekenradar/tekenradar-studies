@@ -1,7 +1,8 @@
-import { ClozeItemTypes, SurveyItems } from "case-editor-tools/surveys";
+import { ClozeItemTypes, SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { Expression } from 'survey-engine/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
+import { Gender } from "./demographie";
 
 export class UitnodigingOnderzoekText extends Item {
   markdownContent = `
@@ -79,6 +80,132 @@ export class UitnodigingOnderzoekConsent extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'UitnTR_Consent');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.consent({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', ''],
+      ]),
+      checkBoxLabel: new Map([
+        ["nl", "Toestemming geven"],
+      ]),
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", `
+Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+        `]]),
+        })
+      ],
+      dialogTitle: new Map([
+        ["nl", "Toestemmingsformulier"],
+      ]),
+      dialogContent: new Map([
+        ["nl", `
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken.
+
+Ook:
+- Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
+- Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
+- Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
+- Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).
+- Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin onder mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.
+- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).
+        `]]),
+      acceptBtn: new Map([
+        ["nl", "Ja, ik geef toestemming"],
+      ]),
+      rejectBtn: new Map([
+        ["nl", "Ik doe toch niet mee"],
+      ]),
+    })
+  }
+}
+
+export class kEMUitnodigingOnderzoekText extends Item {
+  markdownContent = `
+## Uitnodiging onderzoek
+
+Wij vragen je of je mee wilt doen aan onderzoek, omdat je een tekenbeet of de ziekte van Lyme hebt gemeld. Je vult direct hierna dan nog een aantal extra vragen in, en het komende jaar iedere 3 maanden een nieuwe vragenlijst over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per mail een herinnering via noreply@tekenradar.nl.
+
+Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
+    `
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'kEMUitnTR_Pretext');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+export class kEMUitnodigingOnderzoek extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kEMUitnTR');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en de ziekte van Lyme?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ]
+    })
+  }
+}
+export class kEMUitnodigingOnderzoekConsent extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kEMUitnTR_Consent');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -227,7 +354,7 @@ export class UitnodigingAanvullendOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-            Om je te benaderen voor aanvullend onderzoek hebben we ook je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+Om je te benaderen voor aanvullend onderzoek hebben we ook je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
         `]]),
         })
       ],
@@ -289,6 +416,52 @@ Je contactgegevens worden alleen gebruikt om informatie te geven over aanvullend
   }
 }
 
+class GP extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'GP');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+
+  buildItem() {
+    return SurveyItems.clozeQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'De gegevens van mijn huisarts:'
+      ]]),
+      confidentialMode: "replace",
+      items: [
+        ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Praktijknaam: ']]) }),
+        ClozeItemTypes.textInput({ key: 'pn', className: 'w-100' }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({ key: 't2', content: new Map([['nl', 'Naam huisarts: ']]) }),
+        ClozeItemTypes.textInput({ key: 'nh', className: 'w-100' }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({ key: 'taddr', className: 'fw-bold mt-2', content: new Map([['nl', 'Adres: ']]) }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({ key: 't3', content: new Map([['nl', 'Straatnaam: ']]) }),
+        ClozeItemTypes.textInput({ key: 'str', className: 'flex-grow-1' }),
+        ClozeItemTypes.text({ key: 't4', content: new Map([['nl', 'Huisnummer: ']]) }),
+        ClozeItemTypes.textInput({ key: 'hnr', className: '' }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({ key: 't5', content: new Map([['nl', 'Postcode: ']]) }),
+        ClozeItemTypes.textInput({ key: 'pc', className: '' }),
+        ClozeItemTypes.text({ key: 't6', content: new Map([['nl', 'Plaats: ']]) }),
+        ClozeItemTypes.textInput({ key: 'plaats', className: 'flex-grow-1' }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({ key: 'tcont', className: 'fw-bold mt-2', content: new Map([['nl', 'Contact: ']]) }),
+        ClozeItemTypes.clozeLineBreak(),
+        ClozeItemTypes.text({ key: 't7', content: new Map([['nl', 'Telefoonnummer praktijk: ']]) }),
+        ClozeItemTypes.textInput({ key: 'tel', className: 'w-100' }),
+      ]
+    })
+  }
+}
+
 class Name extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
     super(parentKey, 'Naam');
@@ -309,11 +482,36 @@ class Name extends Item {
       confidentialMode: "replace",
       items: [
         ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Voornaam: ']]) }),
-        ClozeItemTypes.textInput({ key: 'vn' }),
+        ClozeItemTypes.textInput({ key: 'vn', className: 'flex-grow-1' }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 't2', content: new Map([['nl', 'Achternaam: ']]) }),
-        ClozeItemTypes.textInput({ key: 'an' }),
+        ClozeItemTypes.textInput({ key: 'an', className: 'flex-grow-1' }),
       ]
+    })
+  }
+}
+
+class Birthday extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'Birthday');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+
+  buildItem() {
+    return SurveyItems.dateInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'Mijn geboortedatum:'
+      ]]),
+      confidentialMode: "replace",
+      dateInputMode: 'YMD',
+      maxRelativeDate: { delta: { days: 0 } },
+      // minRelativeDate: { delta: { years: -19 } },
     })
   }
 }
@@ -341,11 +539,38 @@ class Email extends Item {
   }
 }
 
+class Telephone extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'Tel');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'Mijnn telefoonnummer'
+      ]]),
+      confidentialMode: "replace",
+      placeholderText: new Map([['nl', 'voer je telefonnummer in']])
+    })
+  }
+}
+
 
 export class ContactgegevensGroup extends Group {
   PreText: ContactGroupPretext;
   Name: Name;
   Email: Email;
+  Telephone: Telephone;
+  Gender: Gender;
+  Birthday: Birthday;
+  GP: GP;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Contactgegevens');
@@ -355,11 +580,137 @@ export class ContactgegevensGroup extends Group {
     this.PreText = new ContactGroupPretext(this.key)
     this.Name = new Name(this.key, isRequired)
     this.Email = new Email(this.key, isRequired)
+    this.Telephone = new Telephone(this.key, isRequired)
+    this.Gender = new Gender(this.key, isRequired)
+    this.Birthday = new Birthday(this.key, isRequired)
+    this.GP = new GP(this.key, isRequired)
   }
 
   buildGroup(): void {
     this.addItem(this.PreText.get())
     this.addItem(this.Name.get())
     this.addItem(this.Email.get())
+
+    this.addItem(this.Telephone.get())
+    this.addItem(this.Birthday.get())
+    this.addItem(this.Gender.get())
+    this.addItem(this.GP.get())
+
+  }
+}
+
+class FutureStudies extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'FS');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: new Map([[
+        'nl', 'Het kan zijn dat je in de toekomst nog in aanmerking komt voor aanvullend of vervolgonderzoek naar tekenbeten of infectieziekten. Mogen we je dan eventueel ook benaderen voor die onderzoeken?'
+      ]]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option', content: new Map([['nl', 'Ja']])
+        },
+        {
+          key: 'b', role: 'option', content: new Map([['nl', 'Nee']])
+        },
+      ]
+    })
+  }
+}
+
+export class StandardInviteGroup extends Group {
+  // Standard Tekenradar
+  T1: UitnodigingOnderzoekText;
+  UitnodigingOnderzoek: UitnodigingOnderzoek;
+  UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
+
+  // Other studies
+  T2: UitnodigingAanvullendOnderzoekText;
+  UitnodigingAanvullendOnderzoek: UitnodigingAanvullendOnderzoek;
+  UitnodigingAanvullendOnderzoekConsent: UitnodigingAanvullendOnderzoekConsent;
+  Contactgegevens: ContactgegevensGroup;
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'STD');
+
+    this.groupEditor.setCondition(condition);
+
+    this.T1 = new UitnodigingOnderzoekText(this.key);
+    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired);
+    this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
+
+    const showAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes);
+    this.T2 = new UitnodigingAanvullendOnderzoekText(this.key, showAdditionalStudyInvite);
+    this.UitnodigingAanvullendOnderzoek = new UitnodigingAanvullendOnderzoek(this.key, isRequired, showAdditionalStudyInvite);
+    this.UitnodigingAanvullendOnderzoekConsent = new UitnodigingAanvullendOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingAanvullendOnderzoek.key, this.UitnodigingAanvullendOnderzoek.optionKeys.yes));
+    this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingAanvullendOnderzoek.key, this.UitnodigingAanvullendOnderzoek.optionKeys.yes));
+  }
+
+  buildGroup(): void {
+    this.addItem(this.T1.get());
+    this.addItem(this.UitnodigingOnderzoek.get());
+    this.addItem(this.UitnodigingOnderzoekConsent.get());
+    this.addPageBreak()
+    this.addItem(this.T2.get());
+    this.addItem(this.UitnodigingAanvullendOnderzoek.get());
+    this.addItem(this.UitnodigingAanvullendOnderzoekConsent.get());
+    this.addItem(this.Contactgegevens.get())
+  }
+}
+
+
+export class kEMInviteGroup extends Group {
+  T0: kEMUitnodigingOnderzoekText;
+  kEMUitnodigingOnderzoek: kEMUitnodigingOnderzoek;
+  kEMUitnodigingOnderzoekConsent: kEMUitnodigingOnderzoekConsent;
+
+  Contactgegevens: ContactgegevensGroup;
+  FutureStudies: FutureStudies;
+
+  // Standard Tekenradar
+  T1: UitnodigingOnderzoekText;
+  UitnodigingOnderzoek: UitnodigingOnderzoek;
+  UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'kEM');
+
+    this.groupEditor.setCondition(condition);
+
+    this.T0 = new kEMUitnodigingOnderzoekText(this.key);
+    this.kEMUitnodigingOnderzoek = new kEMUitnodigingOnderzoek(this.key, isRequired);
+    this.kEMUitnodigingOnderzoekConsent = new kEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+
+    this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+    this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+
+    this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.no));
+    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.no));
+    this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
+  }
+
+  buildGroup(): void {
+    this.addItem(this.T0.get());
+    this.addItem(this.kEMUitnodigingOnderzoek.get());
+    this.addItem(this.kEMUitnodigingOnderzoekConsent.get());
+    this.addPageBreak()
+    this.addItem(this.Contactgegevens.get());
+    this.addItem(this.FutureStudies.get());
+    this.addPageBreak()
+
+    this.addItem(this.T1.get());
+    this.addItem(this.UitnodigingOnderzoek.get());
+    this.addItem(this.UitnodigingOnderzoekConsent.get());
+    this.addPageBreak()
   }
 }

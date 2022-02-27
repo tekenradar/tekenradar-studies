@@ -7,11 +7,12 @@ import { Chronicflow_Adults } from "../surveys/Chronicflow_Adults";
 import { Chronicflow_Kids } from "../surveys/Chronicflow_Kids";
 import { EMflow_Adults } from "../surveys/EMflow_Adults";
 import { EMflow_Kids } from "../surveys/EMflow_Kids";
-import { ExitFollowUp } from "../surveys/ExitFollowUp";
 import { Feverflow_Adults } from "../surveys/Feverflow_Adults";
 import { LBflow_Adults } from "../surveys/LBflow_Adults";
 import { LBflow_Kids } from "../surveys/LBflow_Kids";
 import { PDiff } from "../surveys/PDiff";
+import { QuitFollowUp } from "../surveys/QuitFollowUp";
+import { QuitWeeklyTB } from "../surveys/QuitWeekly";
 import { Standardflow_Adults } from "../surveys/Standardflow_Adults";
 import { Standardflow_Kids } from "../surveys/Standardflow_Kids";
 import { T0_Invites } from "../surveys/T0_Invites";
@@ -62,6 +63,7 @@ export const resetToPDiffStart = () => StudyEngine.do(
   StudyEngine.if(
     StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'prio'),
+    StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
   ),
 )
 
@@ -102,7 +104,9 @@ export const reAssignWeeklyToTheEndOfList = () => StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
   StudyEngine.if(
     StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+    // Then:
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal'),
+    // Else:
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
   )
 )
@@ -160,9 +164,25 @@ export const updatePostalCodeFlag = (questionKey: string) => StudyEngine.ifThen(
 )
 
 export const finishFollowUp = () => StudyEngine.do(
-  StudyEngine.participantActions.assignedSurveys.remove(ExitFollowUp.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(QuitFollowUp.key, 'all'),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key)
+)
+
+export const quitFollowUp = () => StudyEngine.do(
+  // StudyEngine.participantActions.assignedSurveys.remove(QuitFollowUp.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.removeAll(),
+  StudyEngine.participantActions.messages.removeAll(),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.quitted),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init),
+    ),
+    StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal', StudyEngine.timestampWithOffset({ hours: 1 })),
+    StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
+  ),
 )
 
 

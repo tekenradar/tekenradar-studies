@@ -1,23 +1,14 @@
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
-import { ContactgegevensGroup, UitnodigingAanvullendOnderzoek, UitnodigingAanvullendOnderzoekConsent, UitnodigingAanvullendOnderzoekText, UitnodigingOnderzoek, UitnodigingOnderzoekConsent, UitnodigingOnderzoekText } from './questions/invitationQuestions';
+import { kEMInviteGroup, StandardInviteGroup } from './questions/invitationQuestions';
 import { SurveyEndGroup } from './questions/surveyEnd';
 
 
 export class T0_InvitesDef extends SurveyDefinition {
-
-  // Standard Tekenradar
-  T1: UitnodigingOnderzoekText;
-  UitnodigingOnderzoek: UitnodigingOnderzoek;
-  UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
-
-  // Other studies
-  T2: UitnodigingAanvullendOnderzoekText;
-  UitnodigingAanvullendOnderzoek: UitnodigingAanvullendOnderzoek;
-  UitnodigingAanvullendOnderzoekConsent: UitnodigingAanvullendOnderzoekConsent;
-  Contactgegevens: ContactgegevensGroup;
-
+  StandardInviteGroup: StandardInviteGroup;
+  kEMInviteGroup: kEMInviteGroup;
   EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
@@ -37,30 +28,21 @@ export class T0_InvitesDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
-    this.T1 = new UitnodigingOnderzoekText(this.key);
-    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, required);
-    this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, required, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
+    this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow)
+    ));
+    this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow));
 
-    const showAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes);
-    this.T2 = new UitnodigingAanvullendOnderzoekText(this.key, showAdditionalStudyInvite);
-    this.UitnodigingAanvullendOnderzoek = new UitnodigingAanvullendOnderzoek(this.key, required, showAdditionalStudyInvite);
-    this.UitnodigingAanvullendOnderzoekConsent = new UitnodigingAanvullendOnderzoekConsent(this.key, required, SurveyEngine.singleChoice.any(this.UitnodigingAanvullendOnderzoek.key, this.UitnodigingAanvullendOnderzoek.optionKeys.yes));
-    this.Contactgegevens = new ContactgegevensGroup(this.key, required, SurveyEngine.singleChoice.any(this.UitnodigingAanvullendOnderzoek.key, this.UitnodigingAanvullendOnderzoek.optionKeys.yes));
-
-    this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes)))
+    this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.and(
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.StandardInviteGroup.UitnodigingOnderzoek.key, this.StandardInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.kEMInviteGroup.UitnodigingOnderzoek.key, this.kEMInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
+    ))
   }
 
 
   buildSurvey() {
-    this.addItem(this.T1.get());
-    this.addItem(this.UitnodigingOnderzoek.get());
-    this.addItem(this.UitnodigingOnderzoekConsent.get());
-    this.addPageBreak()
-    this.addItem(this.T2.get());
-    this.addItem(this.UitnodigingAanvullendOnderzoek.get());
-    this.addItem(this.UitnodigingAanvullendOnderzoekConsent.get());
-    this.addItem(this.Contactgegevens.get())
-    this.addPageBreak()
+    this.addItem(this.StandardInviteGroup.get());
+    this.addItem(this.kEMInviteGroup.get());
     this.addPageBreak();
     this.addItem(this.EndGroup.get());
   }

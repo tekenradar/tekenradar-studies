@@ -3366,8 +3366,6 @@ export class Strength_WeaknessI2_Kids extends Item {
 
 
 export class Strength_WeaknessI3_Kids extends Item {
-
-
   questionTextMain = [
     {
       content: new Map([

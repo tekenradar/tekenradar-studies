@@ -12,7 +12,7 @@ import {
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isSurveyExpired, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
+  isSurveyExpired, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -24,7 +24,6 @@ import { Chronicflow_Kids } from "./surveys/Chronicflow_Kids";
 import { WeeklyTB } from "./surveys/WeeklyTB";
 import { Standardflow_Kids } from "./surveys/Standardflow_Kids";
 import { EMfoto } from "./surveys/EMfoto";
-import { ExitFollowUp } from "./surveys/ExitFollowUp";
 import { T3_Adults } from "./surveys/T3_Adults";
 import { T6_Adults } from "./surveys/T6_Adults";
 import { T9_Adults } from "./surveys/T9_Adults";
@@ -37,6 +36,8 @@ import { ParticipantFlags } from "./participantFlags";
 import { TBflow_Kids } from "./surveys/TBflow_Kids";
 import { T0_Invites } from "./surveys/T0_Invites";
 import { inputKey, multipleChoiceKey, numericInputKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
+import { QuitWeeklyTB } from "./surveys/QuitWeekly";
+import { QuitFollowUp } from "./surveys/QuitFollowUp";
 
 const reports = {
   FollowUpReport: {
@@ -336,7 +337,11 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   StudyEngine.ifThen(
     // If want to participate in follow up: (and not yet in follow up)
     StudyEngine.and(
-      StudyEngine.consent.accepted(T0_Invites.UitnodigingOnderzoekConsent.key),
+      StudyEngine.or(
+        StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingOnderzoekConsent.key),
+        StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.UitnodigingOnderzoekConsent.key),
+        StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
+      ),
       StudyEngine.not(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
       )
@@ -501,14 +506,28 @@ const handleSubmit_T12_Kids = StudyEngine.ifThen(
   removeFollowUpMessagesForSurvey(T12_Kids.key)
 );
 
-const handleSubmit_ExitFollowUp = StudyEngine.ifThen(
+const handleSubmit_QuitFollowUp = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(ExitFollowUp.key),
+  StudyEngine.checkSurveyResponseKey(QuitFollowUp.key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(ExitFollowUp.key, 'all'),
-  // TODO: depending on questions remove follow up surveys (e.g., kids or adults)
-  // TODO: remove all messages scheduled
-  // TODO: set follow up flag to finished
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(QuitFollowUp.Confirm.key, QuitFollowUp.Confirm.optionKeys.yes),
+    // Then
+    quitFollowUp(),
+  ),
+);
+
+const handleSubmit_QuitWeeklyTB = StudyEngine.ifThen(
+  // If:
+  StudyEngine.checkSurveyResponseKey(QuitWeeklyTB.key),
+  // Then:
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(QuitWeeklyTB.Confirm.key, QuitWeeklyTB.Confirm.optionKeys.yes),
+    // Then
+    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.weeklyTBreporter.key),
+    StudyEngine.participantActions.assignedSurveys.remove(QuitWeeklyTB.key, 'all'),
+  )
 );
 
 
@@ -584,7 +603,8 @@ const submitRules: Expression[] = [
   handleSubmit_T9_Kids,
   handleSubmit_T12_Adults,
   handleSubmit_T12_Kids,
-  handleSubmit_ExitFollowUp,
+  handleSubmit_QuitFollowUp,
+  handleSubmit_QuitWeeklyTB,
 ]
 
 
