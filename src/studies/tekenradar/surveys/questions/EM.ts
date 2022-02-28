@@ -19,7 +19,7 @@ export class EMGroup extends Group {
   EM_B3: EM_B3;
   Q13: DoctorEM;
   Q14: Doctor;
-  Q15: EM4;
+  EM_B6: EM_B6;
 
   Q16: LymeTherapy1;
   Q17: LymeTherapy2;
@@ -52,7 +52,7 @@ export class EMGroup extends Group {
     const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.yes);
 
     this.Q14 = new Doctor(this.key, required, Q13condition);
-    this.Q15 = new EM4(this.key, required, Q13condition);
+    this.EM_B6 = new EM_B6(this.key, required, Q13condition);
     //TODO: if b from EM4 is selected, exclusion from lyme studies by setting flag
 
     this.Q16 = new LymeTherapy1(this.key, required);
@@ -79,7 +79,7 @@ export class EMGroup extends Group {
     this.addItem(this.EM_B3.get());
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
-    this.addItem(this.Q15.get());
+    this.addItem(this.EM_B6.get());
     this.addItem(this.Q16.get());
     this.addItem(this.Q17.get());
     this.addItem(this.Q18.get());
@@ -430,7 +430,11 @@ export class DoctorEM extends Item {
 
 
 
-export class EM4 extends Item {
+export class EM_B6 extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EM_B6');
@@ -450,13 +454,13 @@ export class EM4 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])

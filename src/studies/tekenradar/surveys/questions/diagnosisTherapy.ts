@@ -8,8 +8,7 @@ import { SurveySuffix } from '../globalConstants';
 
 
 export class FormerLymeGroup extends Group {
-
-  Q1: FormerLymeDiagnosis;
+  FLD: FormerLymeDiagnosis;
   Q2: FormerLymeTherapy1;
   Q3: FormerLymeTherapy2;
 
@@ -21,8 +20,8 @@ export class FormerLymeGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
 
-    this.Q1 = new FormerLymeDiagnosis(this.key, required);
-    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
+    this.FLD = new FormerLymeDiagnosis(this.key, required);
+    const q1Condition = SurveyEngine.singleChoice.any(this.FLD.key, this.FLD.optionKeys.yes);
     this.Q2 = new FormerLymeTherapy1(this.key, required, q1Condition);
     this.Q3 = new FormerLymeTherapy2(this.key, required, q1Condition);
 
@@ -30,7 +29,7 @@ export class FormerLymeGroup extends Group {
 
   buildGroup() {
 
-    this.addItem(this.Q1.get());
+    this.addItem(this.FLD.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
 
@@ -67,9 +66,9 @@ export class LymeDiagnosisGroup extends Group {
 
 
 class FormerLymeDiagnosis extends Item {
-
   optionKeys = {
-    yes: 'a'
+    yes: 'a',
+    no: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -90,13 +89,13 @@ class FormerLymeDiagnosis extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -170,6 +169,9 @@ class FormerLymeTherapy1 extends Item {
 
 
 class FormerLymeTherapy2 extends Item {
+  optionKeys = {
+    yes: 'a'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FLTher4');
@@ -189,7 +191,7 @@ class FormerLymeTherapy2 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -562,7 +564,7 @@ export class LymeTherapy1 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher1');
+    super(parentKey, 'LT1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -584,6 +586,9 @@ export class LymeTherapy1 extends Item {
 
 
 export class LymeTherapy2 extends Item {
+  optionKeys = {
+    dayCount: '10',
+  }
 
   questionTextMain = [
     {
@@ -600,7 +605,7 @@ export class LymeTherapy2 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher2');
+    super(parentKey, 'LT2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -656,7 +661,7 @@ export class LymeTherapy2 extends Item {
           )
         }),
         ClozeItemTypes.numberInput({
-          key: '10',
+          key: this.optionKeys.dayCount,
           inputLabel: new Map([['nl', 'dagen']]),
           labelBehindInput: true,
           componentProperties: {
@@ -699,7 +704,7 @@ export class LymeTherapy3 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher3');
+    super(parentKey, 'LT3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -753,11 +758,12 @@ export class LymeTherapy3 extends Item {
 export class LymeTherapy4 extends Item {
 
   optionKeys = {
-    yes: 'a'
+    yes: 'a',
+    no: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher4');
+    super(parentKey, 'LT4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -774,13 +780,13 @@ export class LymeTherapy4 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -802,7 +808,7 @@ export class LymeTherapy5 extends Item {
   ]]);
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher5');
+    super(parentKey, 'LT5');
 
     this.isRequired = isRequired;
     this.condition = condition;

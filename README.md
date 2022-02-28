@@ -23,7 +23,7 @@ Edit the content for example inside `src/studies/tekenradar` as you wish.
 To run the script to generate all the configuration files, you can use:
 
 ```sh
-npm start study=<studyKey>
+npm start study=tekenradar
 ```
 
 The results will be generated inside the `output` folder.

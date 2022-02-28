@@ -2,7 +2,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
-import { DoctorEM, EM_B1, EM_B2, EM_B3, EM4, EMHeader, ReportHeader } from './questions/EM';
+import { DoctorEM, EM_B1, EM_B2, EM_B3, EM_B6, EMHeader, ReportHeader } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
@@ -19,7 +19,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
   EM_B3: EM_B3;
   Q13: DoctorEM;
   Q14: Doctor;
-  Q15: EM4;
+  EM_B6: EM_B6;
 
   Q16: LymeTherapy1;
   Q17: LymeTherapy2;
@@ -62,7 +62,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.yes);
 
     this.Q14 = new Doctor(this.key, required, Q13condition);
-    this.Q15 = new EM4(this.key, required, Q13condition);
+    this.EM_B6 = new EM_B6(this.key, required, Q13condition);
     //TODO: if b from EM4 is selected, exclusion from lyme studies by setting flag
 
     this.Q16 = new LymeTherapy1(this.key, required);
@@ -90,7 +90,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.EM_B3.get());
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
-    this.addItem(this.Q15.get());
+    this.addItem(this.EM_B6.get());
     this.addItem(this.Q16.get());
     this.addItem(this.Q17.get());
     this.addItem(this.Q18.get());

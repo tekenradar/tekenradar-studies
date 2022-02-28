@@ -1,4 +1,4 @@
-import { numericInputKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { clozeKey, numericInputKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { Duration } from "case-editor-tools/types/duration";
 import { Expression } from "survey-engine/data_types";
@@ -158,23 +158,27 @@ export const kEMflagLogic = () => StudyEngine.ifThen(
       ),
       StudyEngine.singleChoice.any(EMflow_Kids.EM_B1.key, EMflow_Kids.EM_B1.optionKeys.unknown),
     ),
-    /*
-    TODO: finish rules
     StudyEngine.and(
-      b6 = a,
-      b8 >= 3
-    ),
-    StudyEngine.and(
-      b9 = b,
-      b10 <= 7 days ago
+      StudyEngine.singleChoice.any(EMflow_Kids.EM_B6.key, EMflow_Kids.EM_B6.optionKeys.yes),
+      StudyEngine.gte(
+        StudyEngine.getResponseValueAsNum(EMflow_Kids.LT2.key, `${responseGroupKey}.${clozeKey}.${EMflow_Kids.LT2.optionKeys.dayCount}`),
+        3
+      )
     ),
     StudyEngine.or(
-      b11 = a,
-      b13 = a
-    )*/
+      StudyEngine.singleChoice.any(EMflow_Kids.LT4.key, EMflow_Kids.LT4.optionKeys.no),
+      StudyEngine.gte(
+        StudyEngine.getResponseValueAsNum(EMflow_Kids.LT5.key, `${responseGroupKey}.${clozeKey}.2`),
+        StudyEngine.timestampWithOffset({ days: -7 })
+      )
+    ),
+    StudyEngine.or(
+      StudyEngine.singleChoice.any(EMflow_Kids.G20_22.FLD.key, EMflow_Kids.G20_22.FLD.optionKeys.no),
+      StudyEngine.singleChoice.any(EMflow_Kids.G20_22.Q3.key, EMflow_Kids.G20_22.Q3.optionKeys.yes)
+    )
   ),
   // Then:
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
 )
 
 export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(

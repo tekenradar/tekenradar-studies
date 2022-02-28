@@ -2,7 +2,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
-import { DoctorEM, EM_B1, EM_B2, EM_B3, EM4, EMHeaderKids, EMTextKids } from './questions/EM';
+import { DoctorEM, EM_B1, EM_B2, EM_B3, EM_B6, EMHeaderKids, EMTextKids } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
@@ -19,12 +19,12 @@ class EMflow_KidsDef extends SurveyDefinition {
   EM_B3: EM_B3;
   Q13: DoctorEM;
   Q14: Doctor;
-  Q15: EM4;
+  EM_B6: EM_B6;
 
-  Q16: LymeTherapy1;
-  Q17: LymeTherapy2;
-  Q18: LymeTherapy4;
-  Q19: LymeTherapy5;
+  LT1: LymeTherapy1;
+  LT2: LymeTherapy2;
+  LT4: LymeTherapy4;
+  LT5: LymeTherapy5;
 
   G20_22: FormerLymeGroup;
   G23_24: PreviousTickBitesGroup;
@@ -61,16 +61,16 @@ class EMflow_KidsDef extends SurveyDefinition {
     const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.yes);
 
     this.Q14 = new Doctor(this.key, required, Q13condition);
-    this.Q15 = new EM4(this.key, required, Q13condition);
+    this.EM_B6 = new EM_B6(this.key, required, Q13condition);
     //TODO: if b from EM4 is selected, exclusion from lyme studies by setting flag
 
-    this.Q16 = new LymeTherapy1(this.key, required);
+    this.LT1 = new LymeTherapy1(this.key, required);
     ////TODO: if b from LymeTherapy1 is selected, exclusion from lyme studies by setting flag
-    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.Tabletten);
-    this.Q17 = new LymeTherapy2(this.key, required, Q16condition);
-    this.Q18 = new LymeTherapy4(this.key, required, Q16condition);
-    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.yes);
-    this.Q19 = new LymeTherapy5(this.key, required, Q18condition);
+    const Q16condition = SurveyEngine.singleChoice.any(this.LT1.key, this.LT1.optionKeys.Tabletten);
+    this.LT2 = new LymeTherapy2(this.key, required, Q16condition);
+    this.LT4 = new LymeTherapy4(this.key, required, Q16condition);
+    const Q18condition = SurveyEngine.singleChoice.any(this.LT4.key, this.LT4.optionKeys.yes);
+    this.LT5 = new LymeTherapy5(this.key, required, Q18condition);
 
     this.G20_22 = new FormerLymeGroup(this.key, isRequired);
     this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
@@ -89,11 +89,11 @@ class EMflow_KidsDef extends SurveyDefinition {
     this.addItem(this.EM_B3.get());
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
-    this.addItem(this.Q15.get());
-    this.addItem(this.Q16.get());
-    this.addItem(this.Q17.get());
-    this.addItem(this.Q18.get());
-    this.addItem(this.Q19.get());
+    this.addItem(this.EM_B6.get());
+    this.addItem(this.LT1.get());
+    this.addItem(this.LT2.get());
+    this.addItem(this.LT4.get());
+    this.addItem(this.LT5.get());
 
     this.addItem(this.G20_22.get());
     this.addItem(this.G23_24.get());
