@@ -12,7 +12,7 @@ import {
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isSurveyExpired, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
+  isSurveyExpired, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -194,7 +194,6 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)
 );
 
-
 const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(EMflow_Kids.key),
@@ -212,6 +211,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
+  kEMflagLogic(),
   reAssignWeeklyToTheEndOfList(),
   StudyEngine.participantActions.reports.init(reports.EMReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)

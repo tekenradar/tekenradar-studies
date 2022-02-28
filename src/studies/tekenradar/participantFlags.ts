@@ -49,5 +49,11 @@ export const ParticipantFlags = {
       true: 'true',
       false: 'false'
     }
+  },
+  kEM: {
+    key: 'kEM',
+    values: {
+      likely: 'likely'
+    }
   }
 }

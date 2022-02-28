@@ -1,3 +1,4 @@
+import { numericInputKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { Duration } from "case-editor-tools/types/duration";
 import { Expression } from "survey-engine/data_types";
@@ -139,6 +140,43 @@ export const updateAgeFlags = () => StudyEngine.do(
   )
 )
 
+export const kEMflagLogic = () => StudyEngine.ifThen(
+  // if:
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(EMflow_Kids.EM_B2.key, EMflow_Kids.EM_B2.optionKeys.yes),
+    StudyEngine.gte(
+      StudyEngine.getResponseValueAsNum(EMflow_Kids.EM_B3.key, `${responseGroupKey}.${numericInputKey}`),
+      5
+    ),
+    StudyEngine.or(
+      StudyEngine.and(
+        StudyEngine.singleChoice.any(EMflow_Kids.EM_B1.key, EMflow_Kids.EM_B1.optionKeys.period.key),
+        StudyEngine.gt(
+          StudyEngine.getResponseValueAsNum(EMflow_Kids.EM_B1.key, `${responseGroupKey}.${singleChoiceKey}.${EMflow_Kids.EM_B1.optionKeys.period.key}.${EMflow_Kids.EM_B1.optionKeys.period.dateValue}`),
+          StudyEngine.timestampWithOffset({ days: -90 })
+        ),
+      ),
+      StudyEngine.singleChoice.any(EMflow_Kids.EM_B1.key, EMflow_Kids.EM_B1.optionKeys.unknown),
+    ),
+    /*
+    TODO: finish rules
+    StudyEngine.and(
+      b6 = a,
+      b8 >= 3
+    ),
+    StudyEngine.and(
+      b9 = b,
+      b10 <= 7 days ago
+    ),
+    StudyEngine.or(
+      b11 = a,
+      b13 = a
+    )*/
+  ),
+  // Then:
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)
+)
+
 export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(
   StudyEngine.ifThen(
     StudyEngine.singleChoice.any(genderQuestionKey, Standardflow_Adults.P2.optionKeys.male),
@@ -166,7 +204,8 @@ export const updatePostalCodeFlag = (questionKey: string) => StudyEngine.ifThen(
 export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(QuitFollowUp.key, 'all'),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
-  StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key)
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key)
 )
 
 export const quitFollowUp = () => StudyEngine.do(
@@ -175,6 +214,7 @@ export const quitFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.messages.removeAll(),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.quitted),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),

@@ -2,7 +2,7 @@ import { ClozeItemTypes, SurveyEngine, SurveyItems } from "case-editor-tools/sur
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { Expression } from 'survey-engine/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { Gender } from "./demographie";
+import { ParticipantFlags } from "../../participantFlags";
 
 export class UitnodigingOnderzoekText extends Item {
   markdownContent = `
@@ -433,7 +433,7 @@ class GP extends Item {
       questionText: new Map([[
         'nl', 'De gegevens van mijn huisarts:'
       ]]),
-      confidentialMode: "replace",
+      confidentialMode: "add",
       items: [
         ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Praktijknaam: ']]) }),
         ClozeItemTypes.textInput({ key: 'pn', className: 'w-100' }),
@@ -554,10 +554,58 @@ class Telephone extends Item {
       condition: this.condition,
       isRequired: this.isRequired,
       questionText: new Map([[
-        'nl', 'Mijnn telefoonnummer'
+        'nl', 'Mijn telefoonnummer'
       ]]),
       confidentialMode: "replace",
       placeholderText: new Map([['nl', 'voer je telefonnummer in']])
+    })
+  }
+}
+
+class GenderForContact extends Item {
+  optionKeys = {
+    male: 'a',
+    female: 'b',
+    other: 'c'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'GENDER');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      confidentialMode: 'replace',
+      questionText: new Map([
+        ['nl', 'Wat is je geslacht?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.male, role: 'option',
+          content: new Map([
+            ["nl", "Man"],
+          ])
+        },
+        {
+          key: this.optionKeys.female, role: 'option',
+          content: new Map([
+            ["nl", "Vrouw"],
+          ])
+        },
+        {
+          key: this.optionKeys.other, role: 'option',
+          content: new Map([
+            ["nl", "Geen van bovenstaande"],
+          ])
+        },
+      ]
     })
   }
 }
@@ -568,7 +616,7 @@ export class ContactgegevensGroup extends Group {
   Name: Name;
   Email: Email;
   Telephone: Telephone;
-  Gender: Gender;
+  Gender: GenderForContact;
   Birthday: Birthday;
   GP: GP;
 
@@ -580,10 +628,18 @@ export class ContactgegevensGroup extends Group {
     this.PreText = new ContactGroupPretext(this.key)
     this.Name = new Name(this.key, isRequired)
     this.Email = new Email(this.key, isRequired)
-    this.Telephone = new Telephone(this.key, isRequired)
-    this.Gender = new Gender(this.key, isRequired)
-    this.Birthday = new Birthday(this.key, isRequired)
-    this.GP = new GP(this.key, isRequired)
+
+    const showTelQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely);
+    this.Telephone = new Telephone(this.key, isRequired, showTelQ)
+
+    const showGenderQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely);
+    this.Gender = new GenderForContact(this.key, isRequired, showGenderQ)
+
+    const showBirthdayQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely);
+    this.Birthday = new Birthday(this.key, isRequired, showBirthdayQ)
+
+    const showGPq = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)
+    this.GP = new GP(this.key, isRequired, showGPq)
   }
 
   buildGroup(): void {

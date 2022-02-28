@@ -29,9 +29,9 @@ export class T0_InvitesDef extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow)
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)
     ));
-    this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.EMflow));
+    this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely));
 
     this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.and(
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.StandardInviteGroup.UitnodigingOnderzoek.key, this.StandardInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),

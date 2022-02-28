@@ -2,7 +2,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
-import { DoctorEM, EM1, EM2, EM3, EM4, EMHeader, ReportHeader } from './questions/EM';
+import { DoctorEM, EM_B1, EM_B2, EM_B3, EM4, EMHeader, ReportHeader } from './questions/EM';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
@@ -13,10 +13,10 @@ class EMflow_AdultsDef extends SurveyDefinition {
   G1_9: TickBiteOtherGroup;
 
   H2: EMHeader;
-  Q10: EM1;
-  Q11: EM2;
+  EM_B1: EM_B1;
+  EM_B2: EM_B2;
 
-  Q12: EM3;
+  EM_B3: EM_B3;
   Q13: DoctorEM;
   Q14: Doctor;
   Q15: EM4;
@@ -52,11 +52,11 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
 
     this.H2 = new EMHeader(this.key, required);
-    this.Q10 = new EM1(this.key, required);
+    this.EM_B1 = new EM_B1(this.key, required);
     //TODO: if date more than 3 months ago, exclusion from lyme studies by setting flag
-    this.Q11 = new EM2(this.key, required);
+    this.EM_B2 = new EM_B2(this.key, required);
     //TODO: if option b from EM2 is selected, exclusion from lyme studies by setting flag
-    this.Q12 = new EM3(this.key, required);
+    this.EM_B3 = new EM_B3(this.key, required);
     //TODO: if EM < 5cm, exclusion from lyme studies by setting flag
     this.Q13 = new DoctorEM(this.key, required);
     const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.yes);
@@ -85,9 +85,9 @@ class EMflow_AdultsDef extends SurveyDefinition {
 
     this.addPageBreak();
     this.addItem(this.H2.get());
-    this.addItem(this.Q10.get());
-    this.addItem(this.Q11.get());
-    this.addItem(this.Q12.get());
+    this.addItem(this.EM_B1.get());
+    this.addItem(this.EM_B2.get());
+    this.addItem(this.EM_B3.get());
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q15.get());

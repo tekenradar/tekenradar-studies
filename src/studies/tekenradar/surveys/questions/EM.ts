@@ -13,10 +13,10 @@ import { EMSizeExample } from './images';
 export class EMGroup extends Group {
 
   G1_9: TickBiteOtherGroup;
-  Q10: EM1;
-  Q11: EM2;
+  EM_B1: EM_B1;
+  EM_B2: EM_B2;
 
-  Q12: EM3;
+  EM_B3: EM_B3;
   Q13: DoctorEM;
   Q14: Doctor;
   Q15: EM4;
@@ -42,11 +42,11 @@ export class EMGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
-    this.Q10 = new EM1(this.key, required);
+    this.EM_B1 = new EM_B1(this.key, required);
     //TODO: if date more than 3 months ago, exclusion from lyme studies by setting flag
-    this.Q11 = new EM2(this.key, required);
+    this.EM_B2 = new EM_B2(this.key, required);
     //TODO: if option b from EM2 is selected, exclusion from lyme studies by setting flag
-    this.Q12 = new EM3(this.key, required);
+    this.EM_B3 = new EM_B3(this.key, required);
     //TODO: if EM < 5cm, exclusion from lyme studies by setting flag
     this.Q13 = new DoctorEM(this.key, required);
     const Q13condition = SurveyEngine.singleChoice.any(this.Q13.key, this.Q13.optionKeys.yes);
@@ -74,9 +74,9 @@ export class EMGroup extends Group {
 
     this.addItem(this.G1_9.get());
 
-    this.addItem(this.Q10.get());
-    this.addItem(this.Q11.get());
-    this.addItem(this.Q12.get());
+    this.addItem(this.EM_B1.get());
+    this.addItem(this.EM_B2.get());
+    this.addItem(this.EM_B3.get());
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q15.get());
@@ -227,10 +227,14 @@ De vragen hieronder zijn voor een minderjarige. Ben je de ouder/verzorger dan ku
 }
 
 
-
-//TODO: change name of questions
-export class EM1 extends Item {
-
+export class EM_B1 extends Item {
+  optionKeys = {
+    period: {
+      key: 'a',
+      dateValue: '2'
+    },
+    unknown: 'b'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EM_B1');
@@ -251,7 +255,7 @@ export class EM1 extends Item {
       responseOptions: [
         //TODO: correct date conditions and date field smaller.
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.period.key, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "De erythema migrans ontwikkelde zich op"]]
@@ -259,7 +263,7 @@ export class EM1 extends Item {
             }),
             ClozeItemTypes.dateInput({
               dateInputMode: 'YMD',
-              key: '2',
+              key: this.optionKeys.period.dateValue,
             }),
             ClozeItemTypes.clozeLineBreak(),
             ClozeItemTypes.text({
@@ -283,7 +287,7 @@ export class EM1 extends Item {
           ]
         }),
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.unknown, role: 'option',
           content: new Map([
             ["nl", "Onbekend"],
           ])
@@ -294,7 +298,11 @@ export class EM1 extends Item {
 }
 
 
-export class EM2 extends Item {
+export class EM_B2 extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EM_B2');
@@ -314,13 +322,13 @@ export class EM2 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -332,7 +340,7 @@ export class EM2 extends Item {
 
 
 
-export class EM3 extends Item {
+export class EM_B3 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'EM_B3');
