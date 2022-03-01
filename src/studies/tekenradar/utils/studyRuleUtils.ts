@@ -146,7 +146,7 @@ export const kEMflagLogic = () => StudyEngine.ifThen(
     StudyEngine.singleChoice.any(EMflow_Kids.EM_B2.key, EMflow_Kids.EM_B2.optionKeys.yes),
     StudyEngine.gte(
       StudyEngine.getResponseValueAsNum(EMflow_Kids.EM_B3.key, `${responseGroupKey}.${numericInputKey}`),
-      5
+      3
     ),
     StudyEngine.or(
       StudyEngine.and(
