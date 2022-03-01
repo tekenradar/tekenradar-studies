@@ -174,7 +174,7 @@ class FormerLymeTherapy2 extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLTher4');
+    super(parentKey, 'FLTher2');
 
     this.isRequired = isRequired;
     this.condition = condition;
