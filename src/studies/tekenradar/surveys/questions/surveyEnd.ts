@@ -189,8 +189,8 @@ class Comment extends Item {
   buildItem() {
 
     const questionText = (this.isPartOf(surveyKeys.QuitWeeklyTB) || this.isPartOf(surveyKeys.QuitFollowUp)) ?
-      'Als je nog feedback voor ons hebt, bijvoorbeeld waarom je gaat stoppen, kun je dat hieronder invullen' :
-      'Als je nog feedback voor ons hebt, bijvoorbeeld waarom je gaat stoppen, kun je dat hieronder invullen'
+      'Als je nog feedback voor ons hebt, kun je dat hieronder invullen' :
+      'Als je nog feedback voor ons hebt, kun je dat hieronder invullen'
 
     return SurveyItems.multilineTextInput({
       parentKey: this.parentKey,
