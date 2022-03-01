@@ -148,7 +148,14 @@ export class PDiffDef extends SurveyDefinition {
         Q6dateCondition
       ),
       SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes),
         SurveyEngine.singleChoice.none(this.Q2.key, this.Q2.optionKeys.yes),
+        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
+        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+        Q6dateCondition
+      ),
+      SurveyEngine.logic.and(
+        SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.no),
         SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
         SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
         Q6dateCondition
