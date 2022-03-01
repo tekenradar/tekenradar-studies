@@ -1,3 +1,4 @@
+import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
@@ -98,6 +99,10 @@ class TBflow_KidsDef extends SurveyDefinition {
     this.Q20_a = new GeneralTherapy1(this.key, required);
     const Q20_a_number = SurveyEngine.getResponseValueAsNum(this.Q20_a.key, 'rg.scg.b');
     this.Q20_b = new GeneralTherapy2(this.key, required, Q20_a_number);
+
+    this.editor.setPrefillRules([
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q4.key, 'rg.num', 1)
+    ])
   }
 
   buildSurvey() {

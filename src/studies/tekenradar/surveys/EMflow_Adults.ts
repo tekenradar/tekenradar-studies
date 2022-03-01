@@ -1,3 +1,4 @@
+import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
@@ -76,6 +77,9 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.G20_22 = new FormerLymeGroup(this.key, isRequired);
     this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
+    this.editor.setPrefillRules([
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
+    ])
   }
 
   buildSurvey() {

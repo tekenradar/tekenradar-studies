@@ -1,3 +1,4 @@
+import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions } from './globalConstants';
 import { ChronicLymeDiagnosis1, ChronicLymeDiagnosis2, ChronicLymeTherapy1, ChronicLymeTherapy2 } from './questions/chronic';
@@ -55,6 +56,9 @@ class Chronicflow_KidsDef extends SurveyDefinition {
 
     this.G16_17 = new PreviousTickBitesGroup(this.key, isRequired);
 
+    this.editor.setPrefillRules([
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
+    ])
   }
 
   buildSurvey() {
