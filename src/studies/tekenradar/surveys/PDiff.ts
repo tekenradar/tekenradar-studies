@@ -155,22 +155,27 @@ export class PDiffDef extends SurveyDefinition {
       )
     );
 
-    const FeverFlowActive = SurveyEngine.logic.or(
-      SurveyEngine.logic.and(
-        SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes),
-        SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes),
-        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
-        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.no),
+    const FeverFlowActive = SurveyEngine.logic.and(
+      SurveyEngine.compare.gte(
+        SurveyEngine.getResponseValueAsNum(this.Q7.key, 'rg.num'),
+        18
       ),
-      SurveyEngine.logic.and(
-        SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes),
-        SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes),
-        SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
-        SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
-        SurveyEngine.multipleChoice.any(this.Q5.key, this.Q5.optionKeys.fever),
-        SurveyEngine.multipleChoice.none(this.Q5.key, this.Q5.optionKeys.posTest, this.Q5.optionKeys.andere),
-      ),
-    );
+      SurveyEngine.logic.or(
+        SurveyEngine.logic.and(
+          SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes),
+          SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes),
+          SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
+          SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.no),
+        ),
+        SurveyEngine.logic.and(
+          SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes),
+          SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes),
+          SurveyEngine.singleChoice.any(this.Q3.key, this.Q3.optionKeys.no),
+          SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes),
+          SurveyEngine.multipleChoice.any(this.Q5.key, this.Q5.optionKeys.fever),
+          SurveyEngine.multipleChoice.none(this.Q5.key, this.Q5.optionKeys.posTest, this.Q5.optionKeys.andere),
+        ),
+      ));
 
     this.FS = new FlowStartText(this.key, {
       showItem: SurveyEngine.logic.and(
