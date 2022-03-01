@@ -87,14 +87,6 @@ class T9_KidsDef extends SurveyDefinition {
   Q30_H1: School3H1_Kids;
   Q30_H2: School3H2_Kids;
 
-
-  T15_I1: Strength_WeaknessI1Text_Kids;
-  T15_I2: Strength_WeaknessI2Text_Kids;
-  T15_I3: Strength_WeaknessI3Text_Kids;
-  Q31_I1: Strength_WeaknessI1_Kids;
-  Q31_I2: Strength_WeaknessI2_Kids;
-  Q31_I3: Strength_WeaknessI3_Kids;
-
   EndGroup: SurveyEndGroup;
 
 
@@ -236,12 +228,6 @@ class T9_KidsDef extends SurveyDefinition {
     this.Q30_H1 = new School3H1_Kids(this.key, required, cond_2younger8);
     this.Q30_H2 = new School3H2_Kids(this.key, required, cond_8younger18);
 
-    this.T15_I1 = new Strength_WeaknessI1Text_Kids(this.key, required, cond_2younger5);
-    this.T15_I2 = new Strength_WeaknessI2Text_Kids(this.key, required, cond_5younger11);
-    this.T15_I3 = new Strength_WeaknessI3Text_Kids(this.key, required, cond_11younger18);
-    this.Q31_I1 = new Strength_WeaknessI1_Kids(this.key, required, cond_2younger5);
-    this.Q31_I2 = new Strength_WeaknessI2_Kids(this.key, required, cond_5younger11);
-    this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, cond_11younger18);
     this.EndGroup = new SurveyEndGroup(this.key, false);
   }
 
@@ -328,14 +314,6 @@ class T9_KidsDef extends SurveyDefinition {
     this.addItem(this.Q29_H2.get());
     this.addItem(this.Q30_H1.get());
     this.addItem(this.Q30_H2.get());
-
-    this.addPageBreak();
-    this.addItem(this.T15_I1.get());
-    this.addItem(this.T15_I2.get());
-    this.addItem(this.T15_I3.get());
-    this.addItem(this.Q31_I1.get());
-    this.addItem(this.Q31_I2.get());
-    this.addItem(this.Q31_I3.get());
 
     this.addPageBreak();
     this.addItem(this.EndGroup.get());

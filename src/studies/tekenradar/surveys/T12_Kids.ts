@@ -87,17 +87,9 @@ class T12_KidsDef extends SurveyDefinition {
   Q30_H1: School3H1_Kids;
   Q30_H2: School3H2_Kids;
 
-
-  T15_I1: Strength_WeaknessI1Text_Kids;
-  T15_I2: Strength_WeaknessI2Text_Kids;
-  T15_I3: Strength_WeaknessI3Text_Kids;
-  Q31_I1: Strength_WeaknessI1_Kids;
-  Q31_I2: Strength_WeaknessI2_Kids;
-  Q31_I3: Strength_WeaknessI3_Kids;
-
-  T16: SymptomsText1_Kids;
-  Q32: Symptoms1;
-  Q33: SymptomsFU;
+  T15: SymptomsText1_Kids;
+  Q31: Symptoms1;
+  Q32: SymptomsFU;
 
   EndGroup: SurveyEndGroup;
 
@@ -239,17 +231,10 @@ class T12_KidsDef extends SurveyDefinition {
     this.Q30_H1 = new School3H1_Kids(this.key, required, cond_2younger8);
     this.Q30_H2 = new School3H2_Kids(this.key, required, cond_8younger18);
 
-    this.T15_I1 = new Strength_WeaknessI1Text_Kids(this.key, required, cond_2younger5);
-    this.T15_I2 = new Strength_WeaknessI2Text_Kids(this.key, required, cond_5younger11);
-    this.T15_I3 = new Strength_WeaknessI3Text_Kids(this.key, required, cond_11younger18);
-    this.Q31_I1 = new Strength_WeaknessI1_Kids(this.key, required, cond_2younger5);
-    this.Q31_I2 = new Strength_WeaknessI2_Kids(this.key, required, cond_5younger11);
-    this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, cond_11younger18);
+    this.T15 = new SymptomsText1_Kids(this.key, required);
+    this.Q31 = new Symptoms1(this.key, required);
 
-    this.T16 = new SymptomsText1_Kids(this.key, required);
-    this.Q32 = new Symptoms1(this.key, required);
-
-    this.Q33 = new SymptomsFU(this.key, required);
+    this.Q32 = new SymptomsFU(this.key, required);
     this.EndGroup = new SurveyEndGroup(this.key, false);
   }
 
@@ -338,17 +323,9 @@ class T12_KidsDef extends SurveyDefinition {
     this.addItem(this.Q30_H2.get());
 
     this.addPageBreak();
-    this.addItem(this.T15_I1.get());
-    this.addItem(this.T15_I2.get());
-    this.addItem(this.T15_I3.get());
-    this.addItem(this.Q31_I1.get());
-    this.addItem(this.Q31_I2.get());
-    this.addItem(this.Q31_I3.get());
-
-    this.addPageBreak();
-    this.addItem(this.T16.get());
+    this.addItem(this.T15.get());
+    this.addItem(this.Q31.get());
     this.addItem(this.Q32.get());
-    this.addItem(this.Q33.get());
 
     this.addPageBreak();
     this.addItem(this.EndGroup.get());
