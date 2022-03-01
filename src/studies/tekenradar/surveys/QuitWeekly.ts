@@ -18,7 +18,7 @@ class QuitWeeklyTB_Def extends SurveyDefinition {
         ['nl', 'Klik hier om je af te melden voor vragenlijsten']
       ]),
       durationText: new Map([
-        ['nl', 'Invullen duurt minder dan 1 minute']
+        ['nl', 'Invullen duurt minder dan 1 minuut']
       ]),
     });
 

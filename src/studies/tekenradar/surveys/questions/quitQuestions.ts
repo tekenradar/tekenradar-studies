@@ -24,7 +24,7 @@ export class ConfirmFollowUpQuitting extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'TODO: are you sure, you want to quit the follow up surveys?'],
+        ['nl', 'Weet je zeker dat je wilt stoppen met de vervolgvragenlijsten? (Klik na je keuze hieronder nog op verzenden)'],
       ]),
       responseOptions: [
         {
@@ -64,7 +64,7 @@ export class ConfirmWeeklyTBQuitting extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'TODO: are you sure, you want to quit the weekly tekenradar surveys?'],
+        ['nl', 'Weet je zeker dat je wilt stoppen met de wekelijkse tekenbeetvragenlijsten? (Klik na je keuze hieronder nog op verzenden)'],
       ]),
       responseOptions: [
         {

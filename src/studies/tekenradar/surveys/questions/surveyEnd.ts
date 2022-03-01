@@ -7,9 +7,9 @@ import { surveyCategoryNames, surveyKeys } from '../globalConstants';
 
 class T0_Invites_EndText extends Item {
   markdownContent = `
-### Hartelijk dank voor je melding op Tekenradar.nl
+### Let op: klik onderaan nog op "verzenden" om je antwoorden op te sturen!
 
-**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+**Hartelijk dank voor je melding op Tekenradar.nl.**
 
 Houdt de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
 
@@ -45,9 +45,9 @@ Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die
 class StandardflowEndText extends Item {
 
   markdownContent = `
-### Hartelijk dank voor je melding op Tekenradar.nl
+### Let op: klik onderaan nog op "verzenden" om je antwoorden op te sturen!
 
-**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+**Hartelijk dank voor je melding op Tekenradar.nl.**
 
 Er is een email naar je verstuurd waarin staat hoe je je deelname aan Tekenradar.nl kunt bevestigen.
 
@@ -86,17 +86,17 @@ Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die
 class FollowupEndText extends Item {
 
   markdownContent = `
-### Hartelijk dank voor het invullen van de vragenlijst.
+### Let op: klik onderaan nog op "verzenden" om je antwoorden op te sturen!
 
-**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+**Hartelijk dank voor het invullen van de vragenlijst**
 
-Je helpt ons daardoor mee met onderzoek naar tekenbeten en de ziekte van Lyme. Over 3 maanden ontvang je weer een nieuwe vragenlijst per e-mail.
+Je helpt ons daardoor met onderzoek naar tekenbeten en de ziekte van Lyme, ook als je zelf geen klachten (meer) hebt. Over 3 maanden ontvang je weer een nieuwe vragenlijst per e-mail.
 `
 
   markdownContentT12 = `
-### Hartelijk dank voor het invullen van de vragenlijst.
+### Let op: klik onderaan nog op "verzenden" om je antwoorden op te sturen!
 
-**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+**Hartelijk dank voor het invullen van de vragenlijst**
 
 Dit was de laatste vragenlijst. Je hebt ons daardoor geholpen met onderzoek naar tekenbeten en de ziekte van Lyme.
 `
@@ -127,16 +127,16 @@ Dit was de laatste vragenlijst. Je hebt ons daardoor geholpen met onderzoek naar
 class WeeklyEndText extends Item {
 
   markdownContentFirstTime = `
-### Hartelijk dank voor het invullen van deze vragen.
+### Let op: klik onderaan nog op "verzenden" om je antwoorden op te sturen!
 
-**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+**Hartelijk dank voor het invullen van deze vragen.**
 
 Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
 `
   markdownContentNormal = `
-### Hartelijk dank voor het invullen van deze vragen.
+### Let op: klik onderaan nog op "verzenden" om je antwoorden op te sturen!
 
-**Klik onderaan nog op "verzenden" om je antwoorden op te sturen!**
+**Hartelijk dank voor het invullen van deze vragen.**
 
 Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
 
@@ -189,8 +189,8 @@ class Comment extends Item {
   buildItem() {
 
     const questionText = (this.isPartOf(surveyKeys.QuitWeeklyTB) || this.isPartOf(surveyKeys.QuitFollowUp)) ?
-      'Als u aanvullende feedback voor ons heeft, kunt u deze hier invoeren' :
-      'Als je nog extra informatie bij bovenstaande vragen hebt kun je dit hieronder invullen.'
+      'Als je nog feedback voor ons hebt, bijvoorbeeld waarom je gaat stoppen, kun je dat hieronder invullen' :
+      'Als je nog feedback voor ons hebt, bijvoorbeeld waarom je gaat stoppen, kun je dat hieronder invullen'
 
     return SurveyItems.multilineTextInput({
       parentKey: this.parentKey,
@@ -201,10 +201,10 @@ class Comment extends Item {
         ['nl', questionText],
       ]),
       questionSubText: new Map([
-        ['nl', 'Let op: deze informatie wordt bij de door jou ingevulde vragenlijst opgeslagen en niet direct door de onderzoekers bekeken.'],
+        ['nl', 'Let op: deze informatie wordt eerst opgeslagen en niet direct door de onderzoekers bekeken.'],
       ]),
       inputLabelText: new Map([
-        ['nl', 'Insturen opmerking:'],
+        ['nl', ''],
       ]),
     })
   }

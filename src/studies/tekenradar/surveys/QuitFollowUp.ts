@@ -12,13 +12,13 @@ class QuitFollowUp_Def extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.QuitFollowUp,
       name: new Map([
-        ['nl', 'Alleen stoppen met vervolgvragenlijsten, maar mijn account behouden']
+        ['nl', 'Stoppen met vervolgvragenlijsten']
       ]),
       description: new Map([
         ['nl', 'Klik hier om je af te melden voor vragenlijsten']
       ]),
       durationText: new Map([
-        ['nl', 'Invullen duurt minder dan 1 minute']
+        ['nl', 'Invullen duurt minder dan 1 minuut']
       ]),
     });
 
