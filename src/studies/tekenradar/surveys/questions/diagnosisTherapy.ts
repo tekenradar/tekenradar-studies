@@ -137,7 +137,7 @@ class FormerLymeTherapy1 extends Item {
           ])
         },
         SCOptions.cloze({
-          key: 'b', items: [
+          key: this.optionKeys.yes, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Ja, aantal antibioticakuren:"]]
@@ -347,7 +347,7 @@ export class LymeDiagnosis1 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -529,13 +529,13 @@ export class LymeTherapy1 extends Item {
 
   responseOptionLyme = [
     {
-      key: 'a', role: 'option',
+      key: this.optionKeys.Tabletten, role: 'option',
       content: new Map([
         ["nl", "Ja, tabletten antibiotica"],
       ])
     },
     {
-      key: 'b', role: 'option',
+      key: this.optionKeys.Infuus, role: 'option',
       content: new Map([
         ["nl", "Ja, antibiotica via een infuus"],
       ])

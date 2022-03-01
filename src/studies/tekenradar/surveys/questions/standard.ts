@@ -2036,7 +2036,7 @@ export class MedCare1 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         {
-          key: 'a', role: 'numberInput',
+          key: this.optionKeys.yes_number, role: 'numberInput',
           content: new Map([
             ["nl", "Ja, aantal zorgverleners:"],
           ]),
@@ -3088,7 +3088,7 @@ export class QuestionsKids1 extends Item {
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.parent, role: 'option',
           content: new Map([
             ["nl", "Een ouder/verzorger van degene jonger dan 18 jaar"],
           ])
