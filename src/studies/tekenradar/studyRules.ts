@@ -81,6 +81,7 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
     ),
     updateAgeFlags(),
     resetToPDiffStart(),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
     StudyEngine.participantActions.startNewStudySession(),
   ),
   handlePDiffRuleFor_TBflow(),
@@ -414,7 +415,7 @@ const handleSubmit_Emfoto = StudyEngine.ifThen(
     // Then:
     StudyEngine.do(
       StudyEngine.participantActions.messages.remove(emailKeys.EMfotoReminder),
-      StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
+      // StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
     ),
     // Else: add again for later
     StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'prio', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
