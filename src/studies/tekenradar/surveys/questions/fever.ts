@@ -309,7 +309,7 @@ export class FeverSymptom3 extends Item {
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -344,7 +344,7 @@ export class FeverSymptom4 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -385,7 +385,7 @@ export class FeverSymptom5 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja, ik ga nu meteen mijn temperatuur opmeten"],
           ])
@@ -576,51 +576,51 @@ export class FeverOtherCause1 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.a, role: 'option',
           content: new Map([
             ["nl", "Longontsteking of andere luchtweginfectie (pneumonie, bronchitis)"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.b, role: 'option',
           content: new Map([
             ["nl", "Bijholteontsteking of oorontsteking (sinusitis, otitis)"],
           ])
         },
         {
-          key: 'c', role: 'option',
+          key: this.optionKeys.c, role: 'option',
           content: new Map([
             ["nl", "Keelontsteking (tonsillitis, faryngitis, laryngitis)"],
           ])
         },
         {
-          key: 'd', role: 'option',
+          key: this.optionKeys.d, role: 'option',
           content: new Map([
             ["nl", "Buikgriep: misselijkheid, braken, diarree  (gastro-enteritis, gastritis, enteritis)"],
           ])
         },
         {
-          key: 'e', role: 'option',
+          key: this.optionKeys.e, role: 'option',
           content: new Map([
             ["nl", "Blaasontsteking, urineweginfectie of nierbekkenontsteking (cystitis, pyelonefritis)"],
           ])
         },
         {
-          key: 'f', role: 'option',
+          key: this.optionKeys.f, role: 'option',
           content: new Map([
             ["nl", "Huidinfectie (erysipelas, cellulitis)"],
           ])
         },
         //TODO: text field mandatory or not?
         {
-          key: 'g', role: 'input',
+          key: this.optionKeys.g, role: 'input',
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
         },
         //TODO: disable other option if h is selected?
         {
-          key: 'h', role: 'option',
+          key: this.optionKeys.nothing, role: 'option',
           content: new Map([
             ["nl", "Geen van bovenstaande"],
           ])

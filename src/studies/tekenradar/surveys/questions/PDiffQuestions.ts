@@ -280,13 +280,13 @@ export class LymeTickBite2 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.fever, role: 'option',
           content: new Map([
             ["nl", "Koorts"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.posTest, role: 'option',
           content: new Map([
             ["nl", "Een positieve bloedtest voor de ziekte van Lyme"],
           ])

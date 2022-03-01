@@ -349,7 +349,7 @@ export class LymeDiagnosis6 extends Item {
       questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])

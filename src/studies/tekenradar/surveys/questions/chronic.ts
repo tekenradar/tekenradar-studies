@@ -65,10 +65,6 @@ export class ChronicGroup extends Group {
 export class ChronicLymeDiagnosis1 extends Item {
 
 
-  optionKeys = {
-    none: 'a'
-}
-
   questionTextMain = [
     {
       content: new Map([

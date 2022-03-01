@@ -129,7 +129,7 @@ class PreviousTickBites1 extends Item {
       questionText: this.isPartOf('Chronicflow') ? this.questionTextMain_Chronic : (this.isPartOf('WeeklyTB') ? this.questionTextMainWeekly : this.questionTextMain1),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.none, role: 'option',
           content: new Map([
             ["nl", "Geen tekenbeten"],
           ])

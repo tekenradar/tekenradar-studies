@@ -106,7 +106,7 @@ export class NewTB extends Item {
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -141,7 +141,7 @@ export class ReportedTB2 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -233,7 +233,7 @@ export class FeverFU1 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -345,7 +345,7 @@ export class LymeFU extends Item {
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
