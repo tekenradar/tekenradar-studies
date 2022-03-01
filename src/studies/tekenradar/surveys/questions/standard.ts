@@ -1589,7 +1589,7 @@ export class Fatigue extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Fat');
+    super(parentKey, 'CIS');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1623,18 +1623,13 @@ export class Fatigue extends Item {
             ["nl", 'Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: '],
           ]))
         },
-        {
-          role: 'text',
-          style: [{ key: 'variant', value: 'p' }],
-          content: generateLocStrings(new Map([
-            ["nl", "Ik voel me ontspannen: ja, dat klopt"],
-          ]))
-        },
-        //ComponentGenerators.markdown({
-        //    content: new Map([
-        //        ['nl', imageContent]
-        //    ])
-        //}),
+        ComponentGenerators.markdown({
+          content: new Map([
+            ['nl', `
+<img src="https://raw.githubusercontent.com/tekenradar/participant-webapp/content/public/assets/images/survey-content/CIS_fatigue_example.png" width="100%"/>
+                `]
+          ])
+        }),
         {
           role: 'text',
           style: [{ key: 'className', value: 'mb-1 border-bottom border-1 border-grey-5 pt-1 mt-2 fw-bold' }],
