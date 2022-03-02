@@ -518,8 +518,8 @@ export class MedicationFU2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([//TODO: insert proper question text
-        ['nl', 'Info per medication'],
+      questionText: new Map([
+        ['nl', 'Details per medicijn'],
       ]),
       items:
         [
