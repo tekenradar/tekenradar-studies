@@ -561,7 +561,7 @@ class Telephone extends Item {
         'nl', 'Mijn telefoonnummer'
       ]]),
       confidentialMode: "replace",
-      placeholderText: new Map([['nl', 'voer je telefonnummer in']])
+      placeholderText: new Map([['nl', 'voer je telefoonnummer in']])
     })
   }
 }
