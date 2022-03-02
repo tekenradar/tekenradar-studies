@@ -244,12 +244,16 @@ class T3_KidsDef extends SurveyDefinition {
     this.Q30_H1 = new School3H1_Kids(this.key, required, cond_2younger8);
     this.Q30_H2 = new School3H2_Kids(this.key, required, cond_8younger18);
 
-    this.T15_I1 = new Strength_WeaknessI1Text_Kids(this.key, required, cond_2younger5);
-    this.T15_I2 = new Strength_WeaknessI2Text_Kids(this.key, required, cond_5younger11);
-    this.T15_I3 = new Strength_WeaknessI3Text_Kids(this.key, required, cond_11younger18);
-    this.Q31_I1 = new Strength_WeaknessI1_Kids(this.key, required, cond_2younger5);
-    this.Q31_I2 = new Strength_WeaknessI2_Kids(this.key, required, cond_5younger11);
-    this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, cond_11younger18);
+    //skip following questions for TBflow
+    const cond_notTBflow = SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow));
+
+    this.T15_I1 = new Strength_WeaknessI1Text_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_2younger5));
+    this.T15_I2 = new Strength_WeaknessI2Text_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_5younger11));
+    this.T15_I3 = new Strength_WeaknessI3Text_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_11younger18));
+    this.Q31_I1 = new Strength_WeaknessI1_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_2younger5));
+    this.Q31_I2 = new Strength_WeaknessI2_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_5younger11));
+    this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_11younger18));
     this.EndGroup = new SurveyEndGroup(this.key, false);
 
   }
