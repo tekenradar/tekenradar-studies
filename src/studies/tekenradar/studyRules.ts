@@ -401,6 +401,10 @@ const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
   StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
   StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal', StudyEngine.timestampWithOffset({ hours: 1 })),
+  StudyEngine.ifThen(
+    StudyEngine.not(StudyEngine.participantState.hasSurveyKeyAssigned(QuitWeeklyTB.key)),
+    StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
+  ),
   updateGenderFlag(WeeklyTB.P2.key),
   updatePostalCodeFlag(WeeklyTB.P1.key),
 );

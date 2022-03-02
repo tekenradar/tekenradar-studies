@@ -61,8 +61,11 @@ export const handleExpired_removeSurvey = (surveyKey: string) => StudyEngine.ifT
 export const resetToPDiffStart = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.removeAll(),
   StudyEngine.participantActions.messages.removeAll(),
-  StudyEngine.if(
-    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
+      StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init),
+    ),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'prio'),
     StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
   ),
@@ -109,6 +112,10 @@ export const reAssignWeeklyToTheEndOfList = () => StudyEngine.ifThen(
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal'),
     // Else:
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
+  ),
+  StudyEngine.ifThen(
+    StudyEngine.not(StudyEngine.participantState.hasSurveyKeyAssigned(QuitWeeklyTB.key)),
+    StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
   )
 )
 
@@ -454,6 +461,10 @@ export const handlePDiffRuleFor_WeeklyTB = () => StudyEngine.if(
     ),
     StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
     StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'immediate'),
+    StudyEngine.ifThen(
+      StudyEngine.not(StudyEngine.participantState.hasSurveyKeyAssigned(QuitWeeklyTB.key)),
+      StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
+    )
   ),
   // Else:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.false),
