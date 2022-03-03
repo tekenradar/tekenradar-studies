@@ -486,10 +486,10 @@ class Name extends Item {
       confidentialMode: "replace",
       items: [
         ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Voornaam: ']]) }),
-        ClozeItemTypes.textInput({ key: 'vn', className: 'flex-grow-1' }),
+        ClozeItemTypes.textInput({ key: 'vn', className: 'flex-grow-1', alignText: 'start' }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 't2', content: new Map([['nl', 'Achternaam: ']]) }),
-        ClozeItemTypes.textInput({ key: 'an', className: 'flex-grow-1' }),
+        ClozeItemTypes.textInput({ key: 'an', className: 'flex-grow-1', alignText: 'start' }),
       ]
     })
   }
