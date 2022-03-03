@@ -220,7 +220,6 @@ export const finishFollowUp = () => StudyEngine.do(
 )
 
 export const quitFollowUp = () => StudyEngine.do(
-  // StudyEngine.participantActions.assignedSurveys.remove(QuitFollowUp.key, 'all'),
   StudyEngine.participantActions.assignedSurveys.removeAll(),
   StudyEngine.participantActions.messages.removeAll(),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.quitted),
@@ -528,6 +527,7 @@ export const initFollowUpFlow_Adults = () => StudyEngine.do(
   addFollowUpSurvey(T6_Adults.key, 180, 89),
   addFollowUpSurvey(T9_Adults.key, 270, 89),
   addFollowUpSurvey(T12_Adults.key, 360, 89),
+  StudyEngine.participantActions.assignedSurveys.add(QuitFollowUp.key, 'optional'),
 )
 
 export const initFollowUpFlow_Kids = () => StudyEngine.do(
@@ -545,6 +545,7 @@ export const initFollowUpFlow_Kids = () => StudyEngine.do(
   addFollowUpSurvey(T6_Kids.key, 180, 89),
   addFollowUpSurvey(T9_Kids.key, 270, 89),
   addFollowUpSurvey(T12_Kids.key, 360, 89),
+  StudyEngine.participantActions.assignedSurveys.add(QuitFollowUp.key, 'optional'),
 )
 
 
