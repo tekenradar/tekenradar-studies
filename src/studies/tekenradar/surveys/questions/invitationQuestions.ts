@@ -99,7 +99,7 @@ export class UitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen. (We vragen ook toestemming bij het aanmaken van een account, voor het geval dat meerdere personen gebruik maken van 1 account.)
         `]]),
         })
       ],
@@ -226,7 +226,7 @@ export class kEMUitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen. (We vragen ook toestemming bij het aanmaken van een account, voor het geval dat meerdere personen gebruik maken van 1 account.)
         `]]),
         })
       ],
