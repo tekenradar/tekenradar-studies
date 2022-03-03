@@ -1,4 +1,4 @@
-export const applyRequiredQuestions = false;
+export const applyRequiredQuestions = true;
 
 export const SurveySuffix = {
   Adults: 'Adults',
