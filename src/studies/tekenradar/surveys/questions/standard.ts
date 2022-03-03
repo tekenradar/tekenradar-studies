@@ -1612,7 +1612,7 @@ export class Fatigue extends Item {
           role: 'text',
           style: [{ key: 'variant', value: 'p' }],
           content: generateLocStrings(new Map([
-            ["nl", 'Zet een kruisje in het hokje dat het meest overeenkomt met je gevoel.'],
+            ["nl", 'Klik het hokje aan dat het meest overeenkomt met je gevoel.'],
           ]))
         },
 
@@ -1634,7 +1634,7 @@ export class Fatigue extends Item {
           role: 'text',
           style: [{ key: 'className', value: 'mb-1 border-bottom border-1 border-grey-5 pt-1 mt-2 fw-bold' }],
           content: generateLocStrings(new Map([
-            ["nl", "1 = ja, dat klopt, 7 = nee, dat klopt niet"],
+            ["nl", "Klik nu hieronder aan welk van de antwoorden het meest overeenkomt met je gevoel"],
           ]))
         },
 
