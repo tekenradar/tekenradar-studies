@@ -1,11 +1,12 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, Awareness1, AwarenessText, AwarenessGroup, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { ParticipantFlags } from '../participantFlags';
 import { TicP_Group } from './questions/ticp';
+import { IPQ } from './questions/ipq';
 
 
 class Standardflow_AdultsDef extends SurveyDefinition {
@@ -24,6 +25,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   Q6: Symptoms2;
   Q7: Symptoms3;
   Q8: Pregnant;
+
   T2: FunctioningText;
   Q9: Functioning1;
   Q10: Functioning2;
@@ -33,11 +35,12 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
   H4: FatigueHeader;
   Q14: Fatigue;
+
   H5: CognitionHeader;
   Q15: Cognition;
 
   TicP: TicP_Group;
-  G18_25: AwarenessGroup;
+  IPQ: IPQ;
   EndGroup: SurveyEndGroup;
 
 
@@ -99,7 +102,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.TicP = new TicP_Group(this.key, required);
 
 
-    this.G18_25 = new AwarenessGroup(this.key, isRequired);
+    this.IPQ = new IPQ(this.key, isRequired);
     this.EndGroup = new SurveyEndGroup(this.key, false)
   }
 
@@ -142,8 +145,9 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.TicP.get());
     this.addPageBreak();
 
-    this.addItem(this.G18_25.get());
+    this.addItem(this.IPQ.get());
     this.addPageBreak();
+
     this.addItem(this.EndGroup.get());
   }
 }

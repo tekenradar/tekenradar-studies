@@ -22,13 +22,17 @@ class T6_AdultsDef extends SurveyDefinition {
   Q9: LymeDiagnosis4;
   Q10: LymeDiagnosis5;
   Q11: LymeDiagnosis6;
+
   H1: MedicationHeader;
   Q12: MedicationFU1;
   Q13: MedicationFU2;
+
   H2: SymptomsHeader;
   Q14: Symptoms2;
   Q15: Symptoms3;
+
   Q16: Pregnant;
+
   T3: FunctioningText;
   Q17: Functioning1;
   Q18: Functioning2;
