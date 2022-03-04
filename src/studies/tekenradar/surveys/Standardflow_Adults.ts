@@ -1,6 +1,6 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, PHQ_15, Symptoms3, AboutTekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, PHQ_15, SF36, AboutTekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
@@ -22,7 +22,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
   H3: SymptomsHeader;
   PHQ_15: PHQ_15;
-  Q7: Symptoms3;
+  SF36: SF36;
   Q8: Pregnant;
 
   T2: FunctioningText;
@@ -82,7 +82,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
       SurveyEngine.singleChoice.any(this.P2.key, this.P2.optionKeys.female)
     );
     this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
-    this.Q7 = new Symptoms3(this.key, required);
+    this.SF36 = new SF36(this.key, required);
     this.Q8 = new Pregnant(this.key, required, isFemale);
 
     this.T2 = new FunctioningText(this.key, required);
@@ -119,7 +119,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
     this.addItem(this.H3.get());
     this.addItem(this.PHQ_15.get());
-    this.addItem(this.Q7.get());
+    this.addItem(this.SF36.get());
     this.addItem(this.Q8.get());
     this.addPageBreak();
 

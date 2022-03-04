@@ -1,6 +1,6 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Qualification, PHQ_15, Symptoms3, AboutTekenradar, StandardText1, QuestionsKids1, QuestionsKids2, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
+import { Qualification, PHQ_15, SF36, AboutTekenradar, StandardText1, QuestionsKids1, QuestionsKids2, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3_Kids, PainTextH1_Kids, PainTextH2_Kids, BackgroundText_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
@@ -27,7 +27,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
   Q6_a: QuestionsKids2;
   T4_a: TextQUKids;
   PHQ_15: PHQ_15;
-  Q8: Symptoms3;
+  SF36: SF36;
 
   TicP: TicP_Group;
 
@@ -133,7 +133,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
       SurveyEngine.singleChoice.any(this.P2.key, this.P2.optionKeys.female)
     );
     this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
-    this.Q8 = new Symptoms3(this.key, required);
+    this.SF36 = new SF36(this.key, required);
 
     this.TicP = new TicP_Group(this.key, required);
 
@@ -252,7 +252,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q6_a.get());
     this.addItem(this.T4_a.get());
     this.addItem(this.PHQ_15.get());
-    this.addItem(this.Q8.get());
+    this.addItem(this.SF36.get());
     this.addPageBreak();
 
     this.addItem(this.TicP.get());
