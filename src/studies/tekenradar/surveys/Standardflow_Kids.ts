@@ -1,13 +1,12 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, QuestionsKids1, QuestionsKids2, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
+import { Qualification, Symptoms2, Symptoms3, Tekenradar, StandardText1, QuestionsKids1, QuestionsKids2, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
-import { ThreeMonthsText_Kids } from './questions/followup';
 import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3_Kids, PainTextH1_Kids, PainTextH2_Kids, BackgroundText_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
-import { TicP_Group } from './questions/ticp';
+import { TicP_Comorbidity, TicP_Group } from './questions/ticp';
 import { IPQ_Parents } from './questions/ipq_parents';
 import { IPQ } from './questions/ipq';
 
@@ -21,7 +20,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
   P1: Residence;
   P2: Gender;
   T3: SymptomsText1_Kids;
-  Q5: Symptoms1;
+  TicP_Comorbidity: TicP_Comorbidity;
 
   T4: SymptomsText2_Kids;
   Q6: QuestionsKids1;
@@ -123,7 +122,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
 
 
     this.T3 = new SymptomsText1_Kids(this.key, required);
-    this.Q5 = new Symptoms1(this.key, required);
+    this.TicP_Comorbidity = new TicP_Comorbidity(this.key, required);
     this.T4 = new SymptomsText2_Kids(this.key, required);
     this.Q6 = new QuestionsKids1(this.key, required);
     const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.parent);
@@ -245,7 +244,7 @@ class Standardflow_KidsDef extends SurveyDefinition {
 
     this.addPageBreak();
     this.addItem(this.T3.get());
-    this.addItem(this.Q5.get());
+    this.addItem(this.TicP_Comorbidity.get());
 
     this.addPageBreak();
     this.addItem(this.T4.get());

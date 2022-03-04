@@ -2,13 +2,13 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, ThreeMonthsText_Kids, Text2FU, MedicationFUText_Kids } from './questions/followup';
-import { QuestionsKids1, QuestionsKids2, Symptoms1, Symptoms2, Symptoms3, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
+import { QuestionsKids1, QuestionsKids2, Symptoms2, Symptoms3, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
-import { TicP_Group } from './questions/ticp';
+import { TicP_Comorbidity, TicP_Group } from './questions/ticp';
 
 class T12_KidsDef extends SurveyDefinition {
 
@@ -85,7 +85,7 @@ class T12_KidsDef extends SurveyDefinition {
   Q30_H2: School3H2_Kids;
 
   T15: SymptomsText1_Kids;
-  Q31: Symptoms1;
+  TicP_Comorbidity: TicP_Comorbidity;
   Q32: SymptomsFU;
 
   EndGroup: SurveyEndGroup;
@@ -224,7 +224,7 @@ class T12_KidsDef extends SurveyDefinition {
     this.Q30_H2 = new School3H2_Kids(this.key, required, cond_8younger18);
 
     this.T15 = new SymptomsText1_Kids(this.key, required);
-    this.Q31 = new Symptoms1(this.key, required);
+    this.TicP_Comorbidity = new TicP_Comorbidity(this.key, required);
 
     this.Q32 = new SymptomsFU(this.key, required);
     this.EndGroup = new SurveyEndGroup(this.key, false);
@@ -313,7 +313,7 @@ class T12_KidsDef extends SurveyDefinition {
 
     this.addPageBreak();
     this.addItem(this.T15.get());
-    this.addItem(this.Q31.get());
+    this.addItem(this.TicP_Comorbidity.get());
     this.addItem(this.Q32.get());
 
     this.addPageBreak();

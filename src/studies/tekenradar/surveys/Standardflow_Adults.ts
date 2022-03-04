@@ -1,11 +1,11 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms2, Symptoms3, Tekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { ParticipantFlags } from '../participantFlags';
-import { TicP_Group } from './questions/ticp';
+import { TicP_Comorbidity, TicP_Group } from './questions/ticp';
 import { IPQ } from './questions/ipq';
 
 
@@ -19,7 +19,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   P2: Gender;
 
   H2: GenHealthHeader;
-  Q5: Symptoms1;
+  TicP_Comorbidity: TicP_Comorbidity;
 
   H3: SymptomsHeader;
   Q6: Symptoms2;
@@ -75,7 +75,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     ));
 
     this.H2 = new GenHealthHeader(this.key, required);
-    this.Q5 = new Symptoms1(this.key, required);
+    this.TicP_Comorbidity = new TicP_Comorbidity(this.key, required);
 
     this.H3 = new SymptomsHeader(this.key, required);
     const isFemale = SurveyEngine.logic.or(
@@ -100,8 +100,6 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.Q15 = new Cognition(this.key, required);
 
     this.TicP = new TicP_Group(this.key, required);
-
-
     this.IPQ = new IPQ(this.key, isRequired);
     this.EndGroup = new SurveyEndGroup(this.key, false)
   }
@@ -114,30 +112,30 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q2.get());
     this.addItem(this.P1.get());
     this.addItem(this.P2.get());
-
     this.addPageBreak();
+
     this.addItem(this.H2.get());
-    this.addItem(this.Q5.get());
-
+    this.addItem(this.TicP_Comorbidity.get());
     this.addPageBreak();
+
     this.addItem(this.H3.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
-
     this.addPageBreak();
+
     this.addItem(this.T2.get());
     this.addItem(this.Q9.get());
     this.addItem(this.Q10.get());
     this.addItem(this.Q11.get());
     this.addItem(this.Q12.get());
     this.addItem(this.Q13.get());
-
     this.addPageBreak();
+
     this.addItem(this.H4.get());
     this.addItem(this.Q14.get());
-
     this.addPageBreak();
+
     this.addItem(this.H5.get());
     this.addItem(this.Q15.get());
     this.addPageBreak();

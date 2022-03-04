@@ -2,12 +2,12 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text2FU } from './questions/followup';
-import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, GenHealthHeader, Pregnant, Symptoms1, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
+import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, GenHealthHeader, Pregnant, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
-import { TicP_Group } from './questions/ticp';
+import { TicP_Comorbidity, TicP_Group } from './questions/ticp';
 
 class T12_AdultsDef extends SurveyDefinition {
 
@@ -44,7 +44,7 @@ class T12_AdultsDef extends SurveyDefinition {
   TicP: TicP_Group;
 
   H5: GenHealthHeader;
-  Q26: Symptoms1;
+  TicP_Comorbidity: TicP_Comorbidity;
   Q27: SymptomsFU;
   EndGroup: SurveyEndGroup;
 
@@ -111,7 +111,7 @@ class T12_AdultsDef extends SurveyDefinition {
     this.TicP = new TicP_Group(this.key, required);
 
     this.H5 = new GenHealthHeader(this.key, required);
-    this.Q26 = new Symptoms1(this.key, required);
+    this.TicP_Comorbidity = new TicP_Comorbidity(this.key, required);
     this.Q27 = new SymptomsFU(this.key, required);
     this.EndGroup = new SurveyEndGroup(this.key, false);
   }
@@ -164,7 +164,7 @@ class T12_AdultsDef extends SurveyDefinition {
     this.addPageBreak();
 
     this.addItem(this.H5.get());
-    this.addItem(this.Q26.get());
+    this.addItem(this.TicP_Comorbidity.get());
     this.addItem(this.Q27.get());
 
     this.addPageBreak();
