@@ -47,7 +47,7 @@ Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of
     `
 
   constructor(parentKey: string, condition?: Expression) {
-    super(parentKey, 'Q1PreText');
+    super(parentKey, 'Header');
     this.condition = condition;
   }
 
