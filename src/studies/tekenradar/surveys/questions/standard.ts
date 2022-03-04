@@ -2110,7 +2110,8 @@ export class MedCare2 extends Item {
       cItems.push(ClozeItemTypes.textInput({
         key: `row_${index + 1}_input`,
         displayCondition: rowCondition,
-        className: 'flex-grow-1'
+        className: 'flex-grow-1',
+        alignText: 'start',
       }));
       cItems.push(ClozeItemTypes.clozeLineBreak());
       cItems.push(ClozeItemTypes.text({
