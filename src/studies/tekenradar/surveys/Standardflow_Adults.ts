@@ -1,6 +1,6 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms2, Symptoms3, Tekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, PHQ_15, Symptoms3, AboutTekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
@@ -10,11 +10,10 @@ import { IPQ } from './questions/ipq';
 
 
 class Standardflow_AdultsDef extends SurveyDefinition {
-
   H1: BackgroundHeader;
-  Q1: Tekenradar;
+  AboutTekenradar: AboutTekenradar;
   T1: StandardText1;
-  Q2: Qualification;
+  Qualification: Qualification;
   P1: Residence;
   P2: Gender;
 
@@ -22,7 +21,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   TicP_Comorbidity: TicP_Comorbidity;
 
   H3: SymptomsHeader;
-  Q6: Symptoms2;
+  PHQ_15: PHQ_15;
   Q7: Symptoms3;
   Q8: Pregnant;
 
@@ -63,9 +62,9 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
     this.H1 = new BackgroundHeader(this.key, required);
-    this.Q1 = new Tekenradar(this.key, required);
+    this.AboutTekenradar = new AboutTekenradar(this.key, required);
     this.T1 = new StandardText1(this.key, required);
-    this.Q2 = new Qualification(this.key, required);
+    this.Qualification = new Qualification(this.key, required);
 
     this.P1 = new Residence(this.key, required, SurveyEngine.logic.not(
       SurveyEngine.participantFlags.hasKey(ParticipantFlags.postalCode.key)
@@ -82,7 +81,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
       SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female),
       SurveyEngine.singleChoice.any(this.P2.key, this.P2.optionKeys.female)
     );
-    this.Q6 = new Symptoms2(this.key, required, isFemale);
+    this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
     this.Q7 = new Symptoms3(this.key, required);
     this.Q8 = new Pregnant(this.key, required, isFemale);
 
@@ -107,9 +106,9 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   buildSurvey() {
 
     this.addItem(this.H1.get());
-    this.addItem(this.Q1.get());
+    this.addItem(this.AboutTekenradar.get());
     this.addItem(this.T1.get());
-    this.addItem(this.Q2.get());
+    this.addItem(this.Qualification.get());
     this.addItem(this.P1.get());
     this.addItem(this.P2.get());
     this.addPageBreak();
@@ -119,7 +118,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.addPageBreak();
 
     this.addItem(this.H3.get());
-    this.addItem(this.Q6.get());
+    this.addItem(this.PHQ_15.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
     this.addPageBreak();

@@ -2,7 +2,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
-import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
+import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, PHQ_15, Symptoms3, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
@@ -28,7 +28,7 @@ class T3_AdultsDef extends SurveyDefinition {
   Q12: MedicationFU1;
   Q13: MedicationFU2;
   H2: SymptomsHeader;
-  Q14: Symptoms2;
+  PHQ_15: PHQ_15;
   Q15: Symptoms3;
   Q16: Pregnant;
   T3: FunctioningText;
@@ -97,7 +97,7 @@ class T3_AdultsDef extends SurveyDefinition {
 
     this.H2 = new SymptomsHeader(this.key, required);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.Q14 = new Symptoms2(this.key, required, isFemale);
+    this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
     this.Q15 = new Symptoms3(this.key, required);
     const cond_woman = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
     this.Q16 = new Pregnant(this.key, required, cond_woman);
@@ -143,7 +143,7 @@ class T3_AdultsDef extends SurveyDefinition {
     this.addPageBreak();
 
     this.addItem(this.H2.get());
-    this.addItem(this.Q14.get());
+    this.addItem(this.PHQ_15.get());
     this.addItem(this.Q15.get());
     this.addItem(this.Q16.get());
     this.addPageBreak();

@@ -3176,7 +3176,7 @@ export class Strength_WeaknessI2_Kids extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'kS-I2-SDQ');
+    super(parentKey, 'SDQ_2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -3376,7 +3376,7 @@ export class Strength_WeaknessI3_Kids extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'kS-I3-SDQ');
+    super(parentKey, 'SDQ_3');
 
     this.isRequired = isRequired;
     this.condition = condition;

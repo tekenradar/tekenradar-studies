@@ -165,9 +165,7 @@ export class CognitionHeader extends Item {
   }
 }
 
-export class Tekenradar extends Item {
-
-
+export class AboutTekenradar extends Item {
   questionTextMain = [
     {
       content: new Map([
@@ -183,7 +181,7 @@ export class Tekenradar extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'tek');
+    super(parentKey, 'AboutTR');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -266,8 +264,6 @@ export class StandardText1 extends Item {
 
 
 export class Qualification extends Item {
-
-
   questionTextMain_Adults = [
     {
       content: new Map([
@@ -286,7 +282,7 @@ export class Qualification extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'qual');
+    super(parentKey, 'QUAL');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -422,17 +418,14 @@ Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 }
 
 
-export class Symptoms2 extends Item {
-
-  condition_u18: Expression;
+export class PHQ_15 extends Item {
   isFemaleCondition: Expression;
 
   constructor(parentKey: string, isRequired: boolean, isFemaleCondition: Expression) {
-    super(parentKey, 'Sym2');
+    super(parentKey, 'PHQ_15');
 
     this.isRequired = isRequired;
     this.isFemaleCondition = isFemaleCondition;
-    this.condition_u18 = SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 18);
   }
 
   buildItem() {
