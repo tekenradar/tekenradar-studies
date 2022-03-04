@@ -1,10 +1,11 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, MedCare1, MedCareText1, MedCareText2, MedCare2, MedCareText3, Awareness1, AwarenessText, AwarenessGroup, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, Symptoms1, Symptoms2, Symptoms3, Tekenradar, StandardText1, Awareness1, AwarenessText, AwarenessGroup, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { ParticipantFlags } from '../participantFlags';
+import { TicP_Group } from './questions/ticp';
 
 
 class Standardflow_AdultsDef extends SurveyDefinition {
@@ -34,11 +35,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   Q14: Fatigue;
   H5: CognitionHeader;
   Q15: Cognition;
-  T3: MedCareText1;
-  Q16: MedCare1;
-  T4: MedCareText2;
-  Q17: MedCare2;
-  T5: MedCareText3;
+
+  TicP: TicP_Group;
   G18_25: AwarenessGroup;
   EndGroup: SurveyEndGroup;
 
@@ -98,12 +96,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.H5 = new CognitionHeader(this.key, required);
     this.Q15 = new Cognition(this.key, required);
 
-    this.T3 = new MedCareText1(this.key, required);
-    this.Q16 = new MedCare1(this.key, required);
-    const Q16number = SurveyEngine.getResponseValueAsNum(this.Q16.key, 'rg.scg.a');
-    this.T4 = new MedCareText2(this.key, required);
-    this.Q17 = new MedCare2(this.key, required, Q16number);
-    this.T5 = new MedCareText3(this.key, required, Q16number);
+    this.TicP = new TicP_Group(this.key, required);
+
 
     this.G18_25 = new AwarenessGroup(this.key, isRequired);
     this.EndGroup = new SurveyEndGroup(this.key, false)
@@ -143,15 +137,11 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.addPageBreak();
     this.addItem(this.H5.get());
     this.addItem(this.Q15.get());
-
     this.addPageBreak();
-    this.addItem(this.T3.get());
-    this.addItem(this.Q16.get());
-    this.addItem(this.T4.get());
-    this.addItem(this.Q17.get());
-    this.addItem(this.T5.get());
 
+    this.addItem(this.TicP.get());
     this.addPageBreak();
+
     this.addItem(this.G18_25.get());
     this.addPageBreak();
     this.addItem(this.EndGroup.get());

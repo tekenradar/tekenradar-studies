@@ -2,11 +2,12 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text2FU } from './questions/followup';
-import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, GenHealthHeader, MedCare1, MedCare2, MedCareText1, MedCareText2, MedCareText3, Pregnant, Symptoms1, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
+import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, GenHealthHeader, Pregnant, Symptoms1, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
+import { TicP_Group } from './questions/ticp';
 
 class T3_AdultsDef extends SurveyDefinition {
 
@@ -40,11 +41,9 @@ class T3_AdultsDef extends SurveyDefinition {
   Q22: Fatigue;
   H4: CognitionHeader;
   Q23: Cognition;
-  T4: MedCareText1;
-  Q24: MedCare1;
-  T5: MedCareText2;
-  Q25: MedCare2;
-  T6: MedCareText3;
+
+  TicP: TicP_Group;
+
   EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
@@ -115,12 +114,7 @@ class T3_AdultsDef extends SurveyDefinition {
     this.H4 = new CognitionHeader(this.key, required);
     this.Q23 = new Cognition(this.key, required);
 
-    this.T4 = new MedCareText1(this.key, required);
-    this.Q24 = new MedCare1(this.key, required);
-    const Q24number = SurveyEngine.getResponseValueAsNum(this.Q24.key, 'rg.scg.a');
-    this.T5 = new MedCareText2(this.key, required);
-    this.Q25 = new MedCare2(this.key, required, Q24number);
-    this.T6 = new MedCareText3(this.key, required, Q24number);
+    this.TicP = new TicP_Group(this.key, required);
     this.EndGroup = new SurveyEndGroup(this.key, false);
   }
 
@@ -170,11 +164,7 @@ class T3_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q23.get());
     this.addPageBreak();
 
-    this.addItem(this.T4.get());
-    this.addItem(this.Q24.get());
-    this.addItem(this.T5.get());
-    this.addItem(this.Q25.get());
-    this.addItem(this.T6.get());
+    this.addItem(this.TicP.get());
     this.addPageBreak();
 
     this.addItem(this.EndGroup.get());

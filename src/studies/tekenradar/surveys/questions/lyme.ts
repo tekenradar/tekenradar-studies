@@ -1,9 +1,6 @@
 import { Expression } from 'survey-engine/data_types';
-import { Group, Item } from 'case-editor-tools/surveys/types';
+import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { TickBiteOtherGroup } from './tickBite';
-import { PreviousTickBitesGroup } from './prevTickBites'
-import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy1, LymeTherapy2, LymeTherapy3, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy'
 import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
