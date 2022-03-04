@@ -786,7 +786,7 @@ export class Symptoms2 extends Item {
       defaultMode: 'horizontal',
       responsiveModes: {
         md: 'table',
-        sm: 'horizontal'
+        // sm: 'horizontal'
       },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
