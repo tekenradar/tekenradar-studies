@@ -8,41 +8,9 @@ import { responseGroupKey, inputKey, dropDownKey } from 'case-editor-tools/const
 
 
 
-export class FormerLymeGroup extends Group {
-  FLD: FormerLymeDiagnosis;
-  Q2: FormerLymeTherapy1;
-  Q3: FormerLymeTherapy2;
-
-
-  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'FLG');
-
-    this.groupEditor.setCondition(condition);
-    const required = isRequired !== undefined ? isRequired : false;
-
-
-    this.FLD = new FormerLymeDiagnosis(this.key, required);
-    const q1Condition = SurveyEngine.singleChoice.any(this.FLD.key, this.FLD.optionKeys.yes);
-    this.Q2 = new FormerLymeTherapy1(this.key, required, q1Condition);
-    this.Q3 = new FormerLymeTherapy2(this.key, required, q1Condition);
-
-  }
-
-  buildGroup() {
-
-    this.addItem(this.FLD.get());
-    this.addItem(this.Q2.get());
-    this.addItem(this.Q3.get());
-
-  }
-}
-
-
 export class LymeDiagnosisGroup extends Group {
-
   Q1: LymeDiagnosis1;
   Q2: LymeDiagnosis2;
-
 
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'LymeDiagG');
@@ -52,159 +20,11 @@ export class LymeDiagnosisGroup extends Group {
     this.Q1 = new LymeDiagnosis1(this.key, required);
     const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new LymeDiagnosis2(this.key, required, q1Condition);
-
   }
 
   buildGroup() {
-
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
-
-  }
-}
-
-
-
-
-class FormerLymeDiagnosis extends Item {
-  optionKeys = {
-    yes: 'a',
-    no: 'b'
-  }
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLD');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Is er bij jou ooit eerder een erythema migrans of een andere vorm van de ziekte van Lyme vastgesteld?'],
-      ]),
-      responseOptions: [
-        {
-          key: this.optionKeys.yes, role: 'option',
-          content: new Map([
-            ["nl", "Ja"],
-          ])
-        },
-        {
-          key: this.optionKeys.no, role: 'option',
-          content: new Map([
-            ["nl", "Nee"],
-          ])
-        },
-      ]
-    })
-  }
-}
-
-
-
-class FormerLymeTherapy1 extends Item {
-
-  optionKeys = {
-    yes: 'b'
-  }
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLTher1');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Heb je een antibiotica kuur gekregen voor deze eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Nee"],
-          ])
-        },
-        SCOptions.cloze({
-          key: this.optionKeys.yes, items: [
-            ClozeItemTypes.text({
-              key: '1', content: new Map(
-                [['nl', "Ja, aantal antibioticakuren:"]]
-              )
-            }),
-            ClozeItemTypes.numberInput({
-              key: '2',
-              inputLabel: new Map([['nl', '']]), //emptied by kvdw
-              labelBehindInput: true,
-              inputMaxWidth: '70px',
-              componentProperties: {
-                min: 0
-              }
-            }),
-          ]
-        }),
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "Onbekend"],
-          ])
-        },
-      ]
-    })
-  }
-}
-
-
-
-
-class FormerLymeTherapy2 extends Item {
-  optionKeys = {
-    yes: 'a'
-  }
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLTher2');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
-      ]),
-      responseOptions: [
-        {
-          key: this.optionKeys.yes, role: 'option',
-          content: new Map([
-            ["nl", "Ja"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Nee, ik ben tot op heden klachten blijven houden"],
-          ])
-        },
-      ]
-    })
   }
 }
 
@@ -318,7 +138,7 @@ export class GeneralTherapy2 extends Item {
           SurveyEngine.hasResponse(this.key, `rg.cloze.row-${index + 1}-input`),
           SurveyEngine.hasResponse(this.key, `rg.cloze.row-${index + 1}-dropdown`)),
         SurveyEngine.logic.not(SurveyEngine.compare.gt(this.gtValue, index)),
-        )
+      )
       );
     })
 
@@ -335,7 +155,7 @@ export class GeneralTherapy2 extends Item {
         {
           key: 'GenT2', rule:
             SurveyEngine.logic.and(...cVal),
-            type: 'hard'
+          type: 'hard'
         }
       ]
     })

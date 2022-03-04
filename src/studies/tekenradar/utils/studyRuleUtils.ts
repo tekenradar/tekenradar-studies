@@ -180,8 +180,8 @@ export const kEMflagLogic = () => StudyEngine.ifThen(
       )
     ),
     StudyEngine.or(
-      StudyEngine.singleChoice.any(EMflow_Kids.G20_22.FLD.key, EMflow_Kids.G20_22.FLD.optionKeys.no),
-      StudyEngine.singleChoice.any(EMflow_Kids.G20_22.Q3.key, EMflow_Kids.G20_22.Q3.optionKeys.yes)
+      StudyEngine.singleChoice.any(EMflow_Kids.FLG.FLD.key, EMflow_Kids.FLG.FLD.optionKeys.no),
+      StudyEngine.singleChoice.any(EMflow_Kids.FLG.Q3.key, EMflow_Kids.FLG.Q3.optionKeys.yes)
     )
   ),
   // Then:
