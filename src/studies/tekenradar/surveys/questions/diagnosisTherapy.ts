@@ -4,6 +4,7 @@ import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SurveySuffix } from '../globalConstants';
+import { responseGroupKey, inputKey, dropDownKey } from 'case-editor-tools/constants/key-definitions';
 
 
 
@@ -308,6 +309,19 @@ export class GeneralTherapy2 extends Item {
       }));
       cItems.push(ClozeItemTypes.clozeLineBreak());
     })
+
+
+    const cVal: Array<Expression> = [];
+    Array.from({ length: 30 }).forEach((_, index) => {
+      cVal.push(SurveyEngine.logic.or(
+        SurveyEngine.logic.and(
+          SurveyEngine.hasResponse(this.key, `rg.cloze.row-${index + 1}-input`),
+          SurveyEngine.hasResponse(this.key, `rg.cloze.row-${index + 1}-dropdown`)),
+        SurveyEngine.logic.not(SurveyEngine.compare.gt(this.gtValue, index)),
+        )
+      );
+    })
+
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -317,6 +331,13 @@ export class GeneralTherapy2 extends Item {
         ['nl', "Welke medicijnen en tegen welke gezondheidsklachten? (bijvoorbeeld antibiotica, paracetemol, etc):"],
       ]),
       items: cItems,
+      customValidations: [
+        {
+          key: 'GenT2', rule:
+            SurveyEngine.logic.and(...cVal),
+            type: 'hard'
+        }
+      ]
     })
   }
 }
@@ -855,5 +876,9 @@ export class LymeTherapy5 extends Item {
       ],
     })
   }
+}
+
+function expWithArgs(arg0: string, arg1: any): Expression {
+  throw new Error('Function not implemented.');
 }
 
