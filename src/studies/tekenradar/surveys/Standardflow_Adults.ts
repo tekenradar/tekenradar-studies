@@ -1,6 +1,6 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, PHQ_15, SF36, AboutTekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
+import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, PHQ_15, PHQ_15_FU, AboutTekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
@@ -22,8 +22,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
   H3: SymptomsHeader;
   PHQ_15: PHQ_15;
-  SF36: SF36;
-  Q8: Pregnant;
+  PHQ_15_FU: PHQ_15_FU;
+  Pregnancy: Pregnant;
 
   T2: FunctioningText;
   Q9: Functioning1;
@@ -82,8 +82,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
       SurveyEngine.singleChoice.any(this.P2.key, this.P2.optionKeys.female)
     );
     this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
-    this.SF36 = new SF36(this.key, required);
-    this.Q8 = new Pregnant(this.key, required, isFemale);
+    this.PHQ_15_FU = new PHQ_15_FU(this.key, required);
+    this.Pregnancy = new Pregnant(this.key, required, isFemale);
 
     this.T2 = new FunctioningText(this.key, required);
     this.Q9 = new Functioning1(this.key, required);
@@ -119,8 +119,8 @@ class Standardflow_AdultsDef extends SurveyDefinition {
 
     this.addItem(this.H3.get());
     this.addItem(this.PHQ_15.get());
-    this.addItem(this.SF36.get());
-    this.addItem(this.Q8.get());
+    this.addItem(this.PHQ_15_FU.get());
+    this.addItem(this.Pregnancy.get());
     this.addPageBreak();
 
     this.addItem(this.T2.get());

@@ -613,10 +613,10 @@ export class PHQ_15 extends Item {
 }
 
 
-export class SF36 extends Item {
+export class PHQ_15_FU extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'SF36');
+    super(parentKey, 'PHQ_15_FU');
 
     this.isRequired = isRequired;
     this.condition = condition;

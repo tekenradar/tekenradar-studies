@@ -2,7 +2,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import { LymeFU, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
-import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, PHQ_15, SF36, SymptomsHeader } from './questions/standard';
+import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, PHQ_15, PHQ_15_FU, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
@@ -28,8 +28,8 @@ class T9_AdultsDef extends SurveyDefinition {
   Q13: MedicationFU2;
   H2: SymptomsHeader;
   PHQ_15: PHQ_15;
-  SF36: SF36;
-  Q16: Pregnant;
+  PHQ_15_FU: PHQ_15_FU;
+  Pregnant: Pregnant;
   T3: FunctioningText;
   Q17: Functioning1;
   Q18: Functioning2;
@@ -88,9 +88,9 @@ class T9_AdultsDef extends SurveyDefinition {
     this.H2 = new SymptomsHeader(this.key, required);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
     this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
-    this.SF36 = new SF36(this.key, required);
+    this.PHQ_15_FU = new PHQ_15_FU(this.key, required);
     const cond_woman = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.Q16 = new Pregnant(this.key, required, cond_woman);
+    this.Pregnant = new Pregnant(this.key, required, cond_woman);
     this.T3 = new FunctioningText(this.key, required);
     this.Q17 = new Functioning1(this.key, required);
     this.Q18 = new Functioning2(this.key, required);
@@ -133,8 +133,8 @@ class T9_AdultsDef extends SurveyDefinition {
 
     this.addItem(this.H2.get());
     this.addItem(this.PHQ_15.get());
-    this.addItem(this.SF36.get());
-    this.addItem(this.Q16.get());
+    this.addItem(this.PHQ_15_FU.get());
+    this.addItem(this.Pregnant.get());
     this.addPageBreak();
 
     this.addItem(this.T3.get());
