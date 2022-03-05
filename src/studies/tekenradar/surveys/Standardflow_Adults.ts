@@ -1,12 +1,13 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Cognition, Fatigue, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, Qualification, PHQ_15, PHQ_15_FU, AboutTekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
+import { Cognition, Fatigue, Pregnant, Qualification, PHQ_15, PHQ_15_FU, AboutTekenradar, StandardText1, BackgroundHeader, GenHealthHeader, SymptomsHeader, FatigueHeader, CognitionHeader } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { ParticipantFlags } from '../participantFlags';
 import { TicP_Comorbidity, TicP_Group } from './questions/ticp';
 import { IPQ } from './questions/ipq';
+import { SF36 } from './questions/sf36';
 
 
 class Standardflow_AdultsDef extends SurveyDefinition {
@@ -25,12 +26,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
   PHQ_15_FU: PHQ_15_FU;
   Pregnancy: Pregnant;
 
-  T2: FunctioningText;
-  Q9: Functioning1;
-  Q10: Functioning2;
-  Q11: Functioning3;
-  Q12: Functioning4;
-  Q13: Functioning5;
+  SF36: SF36;
 
   H4: FatigueHeader;
   Q14: Fatigue;
@@ -85,12 +81,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.PHQ_15_FU = new PHQ_15_FU(this.key, required);
     this.Pregnancy = new Pregnant(this.key, required, isFemale);
 
-    this.T2 = new FunctioningText(this.key, required);
-    this.Q9 = new Functioning1(this.key, required);
-    this.Q10 = new Functioning2(this.key, required);
-    this.Q11 = new Functioning3(this.key, required);
-    this.Q12 = new Functioning4(this.key, required);
-    this.Q13 = new Functioning5(this.key, required);
+    this.SF36 = new SF36(this.key, required);
 
     this.H4 = new FatigueHeader(this.key, required);
     this.Q14 = new Fatigue(this.key, required);
@@ -123,12 +114,7 @@ class Standardflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Pregnancy.get());
     this.addPageBreak();
 
-    this.addItem(this.T2.get());
-    this.addItem(this.Q9.get());
-    this.addItem(this.Q10.get());
-    this.addItem(this.Q11.get());
-    this.addItem(this.Q12.get());
-    this.addItem(this.Q13.get());
+    this.addItem(this.SF36.get());
     this.addPageBreak();
 
     this.addItem(this.H4.get());

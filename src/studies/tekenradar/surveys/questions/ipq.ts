@@ -36,12 +36,9 @@ export class IPQ extends Group {
     this.Q6 = new Awareness6(this.key, required);
     this.Q7 = new Awareness7(this.key, required);
     this.Q8 = new Awareness8(this.key, required);
-
   }
 
   buildGroup() {
-
-
     this.addItem(this.Header.get());
 
     this.addItem(this.Q1.get());
@@ -52,9 +49,9 @@ export class IPQ extends Group {
     this.addItem(this.Q6.get());
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
-
   }
 }
+
 
 export class Header extends Item {
   markdownContentKids = `

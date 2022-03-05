@@ -2,12 +2,13 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import { LymeFU, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
-import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, Pregnant, PHQ_15, PHQ_15_FU, SymptomsHeader } from './questions/standard';
+import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Pregnant, PHQ_15, PHQ_15_FU, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { TicP_Group } from './questions/ticp';
+import { SF36 } from './questions/sf36';
 
 class T9_AdultsDef extends SurveyDefinition {
 
@@ -30,12 +31,7 @@ class T9_AdultsDef extends SurveyDefinition {
   PHQ_15: PHQ_15;
   PHQ_15_FU: PHQ_15_FU;
   Pregnant: Pregnant;
-  T3: FunctioningText;
-  Q17: Functioning1;
-  Q18: Functioning2;
-  Q19: Functioning3;
-  Q20: Functioning4;
-  Q21: Functioning5;
+  SF36: SF36;
   H3: FatigueHeader;
   Q22: Fatigue;
   H4: CognitionHeader;
@@ -91,12 +87,7 @@ class T9_AdultsDef extends SurveyDefinition {
     this.PHQ_15_FU = new PHQ_15_FU(this.key, required);
     const cond_woman = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
     this.Pregnant = new Pregnant(this.key, required, cond_woman);
-    this.T3 = new FunctioningText(this.key, required);
-    this.Q17 = new Functioning1(this.key, required);
-    this.Q18 = new Functioning2(this.key, required);
-    this.Q19 = new Functioning3(this.key, required);
-    this.Q20 = new Functioning4(this.key, required);
-    this.Q21 = new Functioning5(this.key, required);
+    this.SF36 = new SF36(this.key, required);
 
     this.H3 = new FatigueHeader(this.key, required);
     this.Q22 = new Fatigue(this.key, required);
@@ -137,12 +128,7 @@ class T9_AdultsDef extends SurveyDefinition {
     this.addItem(this.Pregnant.get());
     this.addPageBreak();
 
-    this.addItem(this.T3.get());
-    this.addItem(this.Q17.get());
-    this.addItem(this.Q18.get());
-    this.addItem(this.Q19.get());
-    this.addItem(this.Q20.get());
-    this.addItem(this.Q21.get());
+    this.addItem(this.SF36.get());
     this.addPageBreak();
 
     this.addItem(this.H3.get());
