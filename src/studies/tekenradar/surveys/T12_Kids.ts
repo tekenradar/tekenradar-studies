@@ -4,11 +4,12 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import { LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, ThreeMonthsText_Kids, Text2FU, MedicationFUText_Kids } from './questions/followup';
 import { QuestionsKids1, QuestionsKids2, PHQ_15, PHQ_15_FU, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
+import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { TicP_Comorbidity, TicP_Group } from './questions/ticp';
+import { Pedsql_13_18, Pedsql_2_4, Pedsql_5_7, Pedsql_8_12 } from './questions/pedsql';
 
 class T12_KidsDef extends SurveyDefinition {
 
@@ -38,27 +39,10 @@ class T12_KidsDef extends SurveyDefinition {
 
   TicP: TicP_Group;
 
-  T10_F1: FunctioningText1F1_Kids;
-  T10_F3: FunctioningText1F3_Kids;
-  T11_F1: FunctioningText2F1_Kids;
-  T11_F3: FunctioningText2F3_Kids;
-  Q19_F1: Functioning1F1_Kids;
-  Q19_F2: Functioning1F2_Kids;
-  Q19_F3: Functioning1F3_Kids;
-  Q20_F1: Functioning2F1_Kids;
-  Q20_F2: Functioning2F2_Kids;
-  Q20_F3: Functioning2F3_Kids;
-
-  Q21_F1: Functioning3F1_Kids;
-  Q21_F2: Functioning3F2_Kids;
-  Q21_F3: Functioning3F3_Kids;
-  Q21_F4: Functioning3F4_Kids;
-
-  Q22_F1: Functioning4F1_Kids;
-
-  Q23_F1: Functioning5F1_Kids;
-  Q23_F2: Functioning5F2_Kids;
-  Q23_F3: Functioning5F3_Kids;
+  Pedsql_2_4: Pedsql_2_4;
+  Pedsql_5_7: Pedsql_5_7;
+  Pedsql_8_12: Pedsql_8_12;
+  Pedsql_13_18: Pedsql_13_18;
 
   T12_G1: FatigueText1G1_Kids;
   T12_G3: FatigueText1G3_Kids;
@@ -165,38 +149,11 @@ class T12_KidsDef extends SurveyDefinition {
     const cond_8younger18 = SurveyEngine.logic.and(
       SurveyEngine.compare.gte(AgeFromPDiff, 8),
       SurveyEngine.compare.lt(AgeFromPDiff, 18));
-    const cond_5younger11 = SurveyEngine.logic.and(
-      SurveyEngine.compare.gte(AgeFromPDiff, 5),
-      SurveyEngine.compare.lt(AgeFromPDiff, 11));
-    const cond_11younger18 = SurveyEngine.logic.and(
-      SurveyEngine.compare.gte(AgeFromPDiff, 11),
-      SurveyEngine.compare.lt(AgeFromPDiff, 18));
 
-    this.T10_F1 = new FunctioningText1F1_Kids(this.key, required, cond_2younger8);
-    this.T10_F3 = new FunctioningText1F3_Kids(this.key, required, cond_8younger18);
-    this.T11_F1 = new FunctioningText2F1_Kids(this.key, required, cond_2younger8);
-    this.T11_F3 = new FunctioningText2F3_Kids(this.key, required, cond_8younger18);
-
-
-    this.Q19_F1 = new Functioning1F1_Kids(this.key, required, cond_2younger5);
-    this.Q19_F2 = new Functioning1F2_Kids(this.key, required, cond_5younger8);
-    this.Q19_F3 = new Functioning1F3_Kids(this.key, required, cond_8younger18);
-
-    this.Q20_F1 = new Functioning2F1_Kids(this.key, required, cond_2younger5);
-    this.Q20_F2 = new Functioning2F2_Kids(this.key, required, cond_5younger8);
-    this.Q20_F3 = new Functioning2F3_Kids(this.key, required, cond_8younger18);
-
-    this.Q21_F1 = new Functioning3F1_Kids(this.key, required, cond_2younger5);
-    this.Q21_F2 = new Functioning3F2_Kids(this.key, required, cond_5younger8);
-    this.Q21_F3 = new Functioning3F3_Kids(this.key, required, cond_8younger13);
-    this.Q21_F4 = new Functioning3F4_Kids(this.key, required, cond_13younger18);
-
-    this.Q22_F1 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
-    const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.yes);
-
-    this.Q23_F1 = new Functioning5F1_Kids(this.key, required, Q22condition);
-    this.Q23_F2 = new Functioning5F2_Kids(this.key, required, cond_5younger8);
-    this.Q23_F3 = new Functioning5F3_Kids(this.key, required, cond_8younger18);
+    this.Pedsql_2_4 = new Pedsql_2_4(this.key, required, cond_2younger5);
+    this.Pedsql_5_7 = new Pedsql_5_7(this.key, required, cond_5younger8);
+    this.Pedsql_8_12 = new Pedsql_8_12(this.key, required, cond_8younger13);
+    this.Pedsql_13_18 = new Pedsql_13_18(this.key, required, cond_13younger18);
 
     this.T12_G1 = new FatigueText1G1_Kids(this.key, required, cond_2younger8);
     this.T12_G3 = new FatigueText1G3_Kids(this.key, required, cond_8younger18);
@@ -231,14 +188,13 @@ class T12_KidsDef extends SurveyDefinition {
   }
 
   buildSurvey() {
-
     this.addItem(this.T1.get());
     this.addItem(this.T2.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
-
     this.addPageBreak();
+
     this.addItem(this.T3.get());
     this.addItem(this.Q6.get());
     this.addItem(this.Q7.get());
@@ -246,47 +202,30 @@ class T12_KidsDef extends SurveyDefinition {
     this.addItem(this.Q9.get());
     this.addItem(this.Q10.get());
     this.addItem(this.Q11.get());
-
     this.addPageBreak();
+
     this.addItem(this.T4.get());
     this.addItem(this.Q12.get());
     this.addItem(this.Q13.get());
-
     this.addPageBreak();
+
     this.addItem(this.T5.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q14_a.get());
     this.addItem(this.T6.get());
     this.addItem(this.PHQ_15.get());
     this.addItem(this.PHQ_15_FU.get());
-
     this.addPageBreak();
 
     this.addItem(this.TicP.get());
     this.addPageBreak();
 
-    this.addItem(this.T10_F1.get());
-    this.addItem(this.T10_F3.get());
-    this.addItem(this.T11_F1.get());
-    this.addItem(this.T11_F3.get());
-    this.addItem(this.Q19_F1.get());
-    this.addItem(this.Q19_F2.get());
-    this.addItem(this.Q19_F3.get());
-    this.addItem(this.Q20_F1.get());
-    this.addItem(this.Q20_F2.get());
-    this.addItem(this.Q20_F3.get());
-
-    this.addItem(this.Q21_F1.get());
-    this.addItem(this.Q21_F2.get());
-    this.addItem(this.Q21_F3.get());
-    this.addItem(this.Q21_F4.get());
-
-    this.addItem(this.Q22_F1.get());
-    this.addItem(this.Q23_F1.get());
-    this.addItem(this.Q23_F2.get());
-    this.addItem(this.Q23_F3.get());
-
+    this.addItem(this.Pedsql_2_4.get());
+    this.addItem(this.Pedsql_5_7.get());
+    this.addItem(this.Pedsql_8_12.get());
+    this.addItem(this.Pedsql_13_18.get());
     this.addPageBreak();
+
     this.addItem(this.T12_G1.get());
     this.addItem(this.T12_G3.get());
     this.addItem(this.T13_G1.get());
@@ -298,8 +237,8 @@ class T12_KidsDef extends SurveyDefinition {
     this.addItem(this.Q25_G3.get());
     this.addItem(this.Q26_G1.get());
     this.addItem(this.Q26_G3.get());
-
     this.addPageBreak();
+
     this.addItem(this.T14_H1.get());
     this.addItem(this.T14_H2.get());
     this.addItem(this.Q27_H1.get());
@@ -310,13 +249,13 @@ class T12_KidsDef extends SurveyDefinition {
     this.addItem(this.Q29_H2.get());
     this.addItem(this.Q30_H1.get());
     this.addItem(this.Q30_H2.get());
-
     this.addPageBreak();
+
     this.addItem(this.T15.get());
     this.addItem(this.TicP_Comorbidity.get());
     this.addItem(this.Q32.get());
-
     this.addPageBreak();
+
     this.addItem(this.EndGroup.get());
   }
 }

@@ -2,13 +2,14 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Qualification, PHQ_15, PHQ_15_FU, AboutTekenradar, StandardText1, QuestionsKids1, QuestionsKids2, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { Residence, Gender } from './questions/demographie';
-import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3_Kids, PainTextH1_Kids, PainTextH2_Kids, BackgroundText_Kids } from './questions/standard_Kids';
+import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, PainH1_Kids, PainH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3_Kids, PainTextH1_Kids, PainTextH2_Kids, BackgroundText_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { TicP_Comorbidity, TicP_Group } from './questions/ticp';
 import { IPQ_Parents } from './questions/ipq_parents';
 import { IPQ } from './questions/ipq';
+import { Pedsql_13_18, Pedsql_2_4, Pedsql_5_7, Pedsql_8_12 } from './questions/pedsql';
 
 
 class Standardflow_KidsDef extends SurveyDefinition {
@@ -34,26 +35,10 @@ class Standardflow_KidsDef extends SurveyDefinition {
   //NOTE: Awareness group is for teens here and for their parents at end of question flow.
   IPQ: IPQ;
 
-  T8_F1: FunctioningText1F1_Kids;
-  T8_F3: FunctioningText1F3_Kids;
-  T9_F1: FunctioningText2F1_Kids;
-  T9_F3: FunctioningText2F3_Kids;
-  Q19_F1: Functioning1F1_Kids;
-  Q19_F2: Functioning1F2_Kids;
-  Q19_F3: Functioning1F3_Kids;
-  Q20_F1: Functioning2F1_Kids;
-  Q20_F2: Functioning2F2_Kids;
-  Q20_F3: Functioning2F3_Kids;
-  Q21_F1: Functioning3F1_Kids;
-  Q21_F2: Functioning3F2_Kids;
-  Q21_F3: Functioning3F3_Kids;
-  Q21_F4: Functioning3F4_Kids;
-
-  Q22_F1: Functioning4F1_Kids;
-
-  Q23_F1: Functioning5F1_Kids;
-  Q23_F2: Functioning5F2_Kids;
-  Q23_F3: Functioning5F3_Kids;
+  Pedsql_2_4: Pedsql_2_4;
+  Pedsql_5_7: Pedsql_5_7;
+  Pedsql_8_12: Pedsql_8_12;
+  Pedsql_13_18: Pedsql_13_18;
 
   T10_G1: FatigueText1G1_Kids;
   T10_G3: FatigueText1G3_Kids;
@@ -168,30 +153,10 @@ class Standardflow_KidsDef extends SurveyDefinition {
 
     this.IPQ = new IPQ(this.key, isRequired, cond_11younger18);
 
-    this.T8_F1 = new FunctioningText1F1_Kids(this.key, required, cond_2younger8);
-    this.T8_F3 = new FunctioningText1F3_Kids(this.key, required, cond_8younger18);
-    this.T9_F1 = new FunctioningText2F1_Kids(this.key, required, cond_2younger8);
-    this.T9_F3 = new FunctioningText2F3_Kids(this.key, required, cond_8younger18);
-
-    this.Q19_F1 = new Functioning1F1_Kids(this.key, required, cond_2younger5);
-    this.Q19_F2 = new Functioning1F2_Kids(this.key, required, cond_5younger8);
-    this.Q19_F3 = new Functioning1F3_Kids(this.key, required, cond_8younger18);
-
-    this.Q20_F1 = new Functioning2F1_Kids(this.key, required, cond_2younger5);
-    this.Q20_F2 = new Functioning2F2_Kids(this.key, required, cond_5younger8);
-    this.Q20_F3 = new Functioning2F3_Kids(this.key, required, cond_8younger18);
-
-    this.Q21_F1 = new Functioning3F1_Kids(this.key, required, cond_2younger5);
-    this.Q21_F2 = new Functioning3F2_Kids(this.key, required, cond_5younger8);
-    this.Q21_F3 = new Functioning3F3_Kids(this.key, required, cond_8younger13);
-    this.Q21_F4 = new Functioning3F4_Kids(this.key, required, cond_13younger18);
-
-    this.Q22_F1 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
-    const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.yes);
-
-    this.Q23_F1 = new Functioning5F1_Kids(this.key, required, Q22condition);
-    this.Q23_F2 = new Functioning5F2_Kids(this.key, required, cond_5younger8);
-    this.Q23_F3 = new Functioning5F3_Kids(this.key, required, cond_8younger18);
+    this.Pedsql_2_4 = new Pedsql_2_4(this.key, required, cond_2younger5);
+    this.Pedsql_5_7 = new Pedsql_5_7(this.key, required, cond_5younger8);
+    this.Pedsql_8_12 = new Pedsql_8_12(this.key, required, cond_8younger13);
+    this.Pedsql_13_18 = new Pedsql_13_18(this.key, required, cond_13younger18);
 
     this.T10_G1 = new FatigueText1G1_Kids(this.key, required, cond_2younger8);
     this.T10_G3 = new FatigueText1G3_Kids(this.key, required, cond_8younger18);
@@ -261,28 +226,12 @@ class Standardflow_KidsDef extends SurveyDefinition {
     this.addItem(this.IPQ.get());
     this.addPageBreak();
 
-    this.addItem(this.T8_F1.get());
-    this.addItem(this.T8_F3.get());
-    this.addItem(this.T9_F1.get());
-    this.addItem(this.T9_F3.get());
-    this.addItem(this.Q19_F1.get());
-    this.addItem(this.Q19_F2.get());
-    this.addItem(this.Q19_F3.get());
-    this.addItem(this.Q20_F1.get());
-    this.addItem(this.Q20_F2.get());
-    this.addItem(this.Q20_F3.get());
-
-    this.addItem(this.Q21_F1.get());
-    this.addItem(this.Q21_F2.get());
-    this.addItem(this.Q21_F3.get());
-    this.addItem(this.Q21_F4.get());
-
-    this.addItem(this.Q22_F1.get());
-    this.addItem(this.Q23_F1.get());
-    this.addItem(this.Q23_F2.get());
-    this.addItem(this.Q23_F3.get());
-
+    this.addItem(this.Pedsql_2_4.get());
+    this.addItem(this.Pedsql_5_7.get());
+    this.addItem(this.Pedsql_8_12.get());
+    this.addItem(this.Pedsql_13_18.get());
     this.addPageBreak();
+
     this.addItem(this.T10_G1.get());
     this.addItem(this.T10_G3.get());
     this.addItem(this.T11_G1.get());
