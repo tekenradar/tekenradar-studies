@@ -1,7 +1,7 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
-import { LymeFU, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, Text2FU } from './questions/followup';
+import { FU_LymeDiagGroup, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, Text1FU } from './questions/followup';
 import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Pregnant, PHQ_15, PHQ_15_FU, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
@@ -17,13 +17,7 @@ class T9_AdultsDef extends SurveyDefinition {
   Q2: ReportedTB2;
   Q3: PreviousTickBites3;
 
-  T2: Text2FU;
-  Q6: LymeFU;
-  Q7: LymeDiagnosis2;
-  Q8: LymeDiagnosis3;
-  Q9: LymeDiagnosis4;
-  Q10: LymeDiagnosis5;
-  Q11: LymeDiagnosis6;
+  FU_LymeDiag: FU_LymeDiagGroup;
   H1: MedicationHeader;
   Q12: MedicationFU1;
   Q13: MedicationFU2;
@@ -66,14 +60,7 @@ class T9_AdultsDef extends SurveyDefinition {
     const Q1_2condition = SurveyEngine.logic.and(Q1condition, Q2condition);
     this.Q3 = new PreviousTickBites3(this.key, required, Q1_2condition);
 
-    this.T2 = new Text2FU(this.key, required);
-    this.Q6 = new LymeFU(this.key, required);
-    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes);
-    this.Q7 = new LymeDiagnosis2(this.key, required, Q6condition);
-    this.Q8 = new LymeDiagnosis3(this.key, required, Q6condition);
-    this.Q9 = new LymeDiagnosis4(this.key, required, Q6condition);
-    this.Q10 = new LymeDiagnosis5(this.key, required, Q6condition);
-    this.Q11 = new LymeDiagnosis6(this.key, required, Q6condition);
+    this.FU_LymeDiag = new FU_LymeDiagGroup(this.key, required);
     this.H1 = new MedicationHeader(this.key, required);
     this.Q12 = new MedicationFU1(this.key, required);
     //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
@@ -108,13 +95,7 @@ class T9_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q3.get());
     this.addPageBreak();
 
-    this.addItem(this.T2.get());
-    this.addItem(this.Q6.get());
-    this.addItem(this.Q7.get());
-    this.addItem(this.Q8.get());
-    this.addItem(this.Q9.get());
-    this.addItem(this.Q10.get());
-    this.addItem(this.Q11.get());
+    this.addItem(this.FU_LymeDiag.get());
     this.addPageBreak();
 
     this.addItem(this.H1.get());

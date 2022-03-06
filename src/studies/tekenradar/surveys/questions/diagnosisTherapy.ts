@@ -207,7 +207,6 @@ export class LymeDiagnosis1 extends Item {
 
 
 export class LymeDiagnosis2 extends Item {
-
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LB_B2');
 
