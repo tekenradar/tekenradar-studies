@@ -176,7 +176,7 @@ export class LymeDiagnosis5 extends Item {
           key: 'a', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De arts heeft de uiting van ziekte van Lyme bij mij vastgesteld op "]]
+                [['en', "De arts heeft de uiting van de ziekte van Lyme bij mij vastgesteld op "]]
               )
             }),
             ClozeItemTypes.dateInput({
