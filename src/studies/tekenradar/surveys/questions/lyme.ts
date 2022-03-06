@@ -3,6 +3,7 @@ import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { surveyCategoryNames, SurveySuffix } from '../globalConstants';
 
 
 
@@ -60,14 +61,29 @@ export class LymeDiagnosis3 extends Item {
     this.isRequired = isRequired;
     this.condition = condition;
   }
+
   //TODO: size of text input field?
   buildItem() {
+    let text = this.qTextLyme;
+    if (
+      this.isPartOf(surveyCategoryNames.T3) ||
+      this.isPartOf(surveyCategoryNames.T6) ||
+      this.isPartOf(surveyCategoryNames.T9) ||
+      this.isPartOf(surveyCategoryNames.T12)
+    ) {
+      if (this.isPartOf(SurveySuffix.Kids)) {
+        text = this.qTextFollowUpKids;
+      } else {
+        text = this.qTextFollowUp;
+      }
+    }
+
     return SurveyItems.multilineTextInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
+      questionText: text,
     })
   }
 }
@@ -246,12 +262,26 @@ export class LymeDiagnosis6 extends Item {
   }
 
   buildItem() {
+    let text = this.qTextLyme;
+    if (
+      this.isPartOf(surveyCategoryNames.T3) ||
+      this.isPartOf(surveyCategoryNames.T6) ||
+      this.isPartOf(surveyCategoryNames.T9) ||
+      this.isPartOf(surveyCategoryNames.T12)
+    ) {
+      if (this.isPartOf(SurveySuffix.Kids)) {
+        text = this.qTextFollowUpKids;
+      } else {
+        text = this.qTextFollowUp;
+      }
+    }
+
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
+      questionText: text,
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
