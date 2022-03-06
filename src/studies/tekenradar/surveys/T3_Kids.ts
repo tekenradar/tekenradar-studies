@@ -4,12 +4,13 @@ import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from '
 import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, ThreeMonthsText_Kids, Text2FU, MedicationFUText_Kids } from './questions/followup';
 import { QuestionsKids1, QuestionsKids2, PHQ_15, PHQ_15_FU, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
+import { PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { TicP_Group } from './questions/ticp';
 import { Pedsql_13_18, Pedsql_2_4, Pedsql_5_7, Pedsql_8_12 } from './questions/pedsql';
+import { PedsqlFatigue_13_18, PedsqlFatigue_2_4, PedsqlFatigue_5_7, PedsqlFatigue_8_12 } from './questions/pedsqlFatigue';
 
 class T3_KidsDef extends SurveyDefinition {
 
@@ -45,19 +46,10 @@ class T3_KidsDef extends SurveyDefinition {
   Pedsql_8_12: Pedsql_8_12;
   Pedsql_13_18: Pedsql_13_18;
 
-
-  T12_G1: FatigueText1G1_Kids;
-  T12_G3: FatigueText1G3_Kids;
-  T13_G1: FatigueText2G1_Kids;
-  T13_G2: FatigueText2G2_Kids;
-  T13_G3: FatigueText2G3_Kids;
-
-  Q24_G1: Fatigue1G1_Kids;
-  Q24_G3: Fatigue1G3_Kids;
-  Q25_G1: Fatigue2G1_Kids;
-  Q25_G3: Fatigue2G3_Kids;
-  Q26_G1: Fatigue3G1_Kids;
-  Q26_G3: Fatigue3G3_Kids;
+  PedsqlFatigue_2_4: PedsqlFatigue_2_4;
+  PedsqlFatigue_5_7: PedsqlFatigue_5_7;
+  PedsqlFatigue_8_12: PedsqlFatigue_8_12;
+  PedsqlFatigue_13_18: PedsqlFatigue_13_18;
 
   T14_H1: PainTextH1_Kids;
   T14_H2: PainTextH2_Kids;
@@ -175,19 +167,10 @@ class T3_KidsDef extends SurveyDefinition {
     this.Pedsql_8_12 = new Pedsql_8_12(this.key, required, cond_8younger13);
     this.Pedsql_13_18 = new Pedsql_13_18(this.key, required, cond_13younger18);
 
-    this.T12_G1 = new FatigueText1G1_Kids(this.key, required, cond_2younger8);
-    this.T12_G3 = new FatigueText1G3_Kids(this.key, required, cond_8younger18);
-    this.T13_G1 = new FatigueText2G1_Kids(this.key, required, cond_2younger5);
-    this.T13_G2 = new FatigueText2G2_Kids(this.key, required, cond_5younger8);
-    this.T13_G3 = new FatigueText2G3_Kids(this.key, required, cond_8younger18);
-
-    this.Q24_G1 = new Fatigue1G1_Kids(this.key, required, cond_2younger8);
-    this.Q24_G3 = new Fatigue1G3_Kids(this.key, required, cond_8younger18);
-
-    this.Q25_G1 = new Fatigue2G1_Kids(this.key, required, cond_2younger8);
-    this.Q25_G3 = new Fatigue2G3_Kids(this.key, required, cond_8younger18);
-    this.Q26_G1 = new Fatigue3G1_Kids(this.key, required, cond_2younger8);
-    this.Q26_G3 = new Fatigue3G3_Kids(this.key, required, cond_8younger18);
+    this.PedsqlFatigue_2_4 = new PedsqlFatigue_2_4(this.key, required, cond_2younger5);
+    this.PedsqlFatigue_5_7 = new PedsqlFatigue_5_7(this.key, required, cond_5younger8);
+    this.PedsqlFatigue_8_12 = new PedsqlFatigue_8_12(this.key, required, cond_8younger13);
+    this.PedsqlFatigue_13_18 = new PedsqlFatigue_13_18(this.key, required, cond_13younger18);
 
     this.T14_H1 = new PainTextH1_Kids(this.key, required, cond_2younger8);
     this.T14_H2 = new PainTextH2_Kids(this.key, required, cond_8younger18);
@@ -256,19 +239,12 @@ class T3_KidsDef extends SurveyDefinition {
     this.addItem(this.Pedsql_13_18.get());
     this.addPageBreak();
 
-    this.addItem(this.T12_G1.get());
-    this.addItem(this.T12_G3.get());
-    this.addItem(this.T13_G1.get());
-    this.addItem(this.T13_G2.get());
-    this.addItem(this.T13_G3.get());
-    this.addItem(this.Q24_G1.get());
-    this.addItem(this.Q24_G3.get());
-    this.addItem(this.Q25_G1.get());
-    this.addItem(this.Q25_G3.get());
-    this.addItem(this.Q26_G1.get());
-    this.addItem(this.Q26_G3.get());
-
+    this.addItem(this.PedsqlFatigue_2_4.get());
+    this.addItem(this.PedsqlFatigue_5_7.get());
+    this.addItem(this.PedsqlFatigue_8_12.get());
+    this.addItem(this.PedsqlFatigue_13_18.get());
     this.addPageBreak();
+
     this.addItem(this.T14_H1.get());
     this.addItem(this.T14_H2.get());
     this.addItem(this.Q27_H1.get());
