@@ -1183,7 +1183,7 @@ export class QuestionsKids2 extends Item {
 export class TextQUKids extends Item {
 
   markdownContent = `
-##### Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet.
+##### Let op: bovenaan de pagina staat steeds wie de vragen kan beantwoorden (zie ook hierboven)! Soms is dat degene over/voor wie de vragenlijst wordt ingevuld, soms een ouder/verzorger, en soms maakt het niet uit.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
