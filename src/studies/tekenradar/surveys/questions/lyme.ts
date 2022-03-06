@@ -55,7 +55,7 @@ export class LymeDiagnosis3 extends Item {
   ])
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LB_B3');
+    super(parentKey, 'LD3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -75,7 +75,7 @@ export class LymeDiagnosis3 extends Item {
 export class LymeDiagnosis4 extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LB_B4');
+    super(parentKey, 'LD4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -176,7 +176,7 @@ export class LymeDiagnosis5 extends Item {
           key: 'a', items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De arts heeft de uiting van ziekte van Lyme bij mij vastgesteld op "]]
+                [['en', "De arts heeft de uiting van de ziekte van Lyme bij mij vastgesteld op "]]
               )
             }),
             ClozeItemTypes.dateInput({
