@@ -4,7 +4,8 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
 import { Gender, Residence } from './questions/demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
+import { Doctor, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
+import { FormerLymeGroup } from './questions/formerLymeGroup';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { ActivityTickBite, DateTickBite, DoctorTickBite, DurationTickBite, EnvironmentTickBite, IntroTB, LocationBodyTickBite, NumberTickBite, RemoveTick1, RemoveTick2, RemoveTick3, RemoveTick4, ReportedTickBites, TBGeneralHeader, TickBiteLocationGroup } from './questions/tickBite';
 
@@ -33,7 +34,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
   Q15: DoctorTickBite;
   Q16: Doctor;
 
-  G17_19: FormerLymeGroup;
+  FLG: FormerLymeGroup;
 
   Q20_a: GeneralTherapy1;
   Q20_b: GeneralTherapy2;
@@ -101,7 +102,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
     this.Q16 = new Doctor(this.key, required, q15Condition);
 
-    this.G17_19 = new FormerLymeGroup(this.key, required);
+    this.FLG = new FormerLymeGroup(this.key, required);
 
     this.Q20_a = new GeneralTherapy1(this.key, required);
     const Q20_a_number = SurveyEngine.getResponseValueAsNum(this.Q20_a.key, 'rg.scg.b');
@@ -134,7 +135,7 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q14.get());
     this.addItem(this.Q15.get());
     this.addItem(this.Q16.get());
-    this.addItem(this.G17_19.get());
+    this.addItem(this.FLG.get());
     this.addItem(this.Q20_a.get());
     this.addItem(this.Q20_b.get());
   }

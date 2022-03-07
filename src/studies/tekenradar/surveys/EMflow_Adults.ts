@@ -2,8 +2,9 @@ import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpre
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
-import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup } from './questions/diagnosisTherapy';
+import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5 } from './questions/diagnosisTherapy';
 import { DoctorEM, EM_B1, EM_B2, EM_B3, EM_B6, EMHeader, ReportHeader } from './questions/EM';
+import { FormerLymeGroup } from './questions/formerLymeGroup';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
@@ -27,7 +28,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
   Q18: LymeTherapy4;
   Q19: LymeTherapy5;
 
-  G20_22: FormerLymeGroup;
+  FLG: FormerLymeGroup;
   G23_24: PreviousTickBitesGroup;
 
 
@@ -74,7 +75,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.yes);
     this.Q19 = new LymeTherapy5(this.key, required, Q18condition);
 
-    this.G20_22 = new FormerLymeGroup(this.key, isRequired);
+    this.FLG = new FormerLymeGroup(this.key, isRequired);
     this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
 
     this.editor.setPrefillRules([
@@ -99,7 +100,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q17.get());
     this.addItem(this.Q18.get());
     this.addItem(this.Q19.get());
-    this.addItem(this.G20_22.get());
+    this.addItem(this.FLG.get());
     this.addItem(this.G23_24.get());
   }
 }

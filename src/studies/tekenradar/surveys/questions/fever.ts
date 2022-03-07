@@ -2,7 +2,7 @@ import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
-import { FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
+import { GeneralTherapy1 } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 

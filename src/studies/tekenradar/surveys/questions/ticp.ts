@@ -132,6 +132,14 @@ class MedCare1 extends Item {
           ])
         },
       ],
+      customValidations: [
+        {
+          key: 'Q1', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`),0),
+          ), type: 'hard'
+        }
+      ],
       topDisplayCompoments: [
         ComponentGenerators.markdown({
           content: new Map([
@@ -219,6 +227,350 @@ class MedCare2 extends Item {
           ]]),
           className: 'mb-2'
         })
+      ]
+    })
+  }
+}
+
+
+
+
+export class TicP_Comorbidity extends Item {
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke lichamelijke en psychische problemen heb je? Kruis aan welke problemen je nu hebt. Kruis ook aan welke problemen je nog meer hebt gehad in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 12 maanden"],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", ". Je kunt dus meer dan 1 hokje aankruisen."],
+      ]),
+    },
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TicP_Comorbidity');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 't1', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Longen en hoofdholten"],
+          ])
+        },
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Astma, chronische bronchitis of CARA"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Ontsteking van de neusbijholte, voorhoofdsholte of kaakholten"],
+          ])
+        },
+        {
+          key: 't2', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Hart en bloedvaten"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Ernstige hartkwaal of hartinfarct"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Hoge bloeddruk"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "Beroerte of gevolgen van beroerte"],
+          ])
+        },
+        {
+          key: 't3', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Maag en darmen"],
+          ])
+        },
+        {
+          key: 'f', role: 'option',
+          content: new Map([
+            ["nl", "Maagzweer of zweer aan de 12-vingerige darm"],
+          ])
+        },
+        {
+          key: 'g', role: 'option',
+          content: new Map([
+            ["nl", "Ernstige darmstoornissen, langer dan 3 maanden"],
+          ])
+        },
+        {
+          key: 't4', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Galblaas, lever en nieren"],
+          ])
+        },
+        {
+          key: 'h', role: 'option',
+          content: new Map([
+            ["nl", "Galstenen of galblaasontsteking"],
+          ])
+        },
+        {
+          key: 'i', role: 'option',
+          content: new Map([
+            ["nl", "Leverziekte of levercirrose"],
+          ])
+        },
+        {
+          key: 'j', role: 'option',
+          content: new Map([
+            ["nl", "Nierstenen"],
+          ])
+        },
+        {
+          key: 'k', role: 'option',
+          content: new Map([
+            ["nl", "Ernstige nierziekte"],
+          ])
+        },
+        {
+          key: 't5', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Blaas en baarmoeder"],
+          ])
+        },
+        {
+          key: 'l', role: 'option',
+          content: new Map([
+            ["nl", "Chronische blaasontsteking"],
+          ])
+        },
+        {
+          key: 'm', role: 'option',
+          content: new Map([
+            ["nl", "Verzakking"],
+          ]),
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+        },
+        //{
+        //key: 't6', role: 'text',
+        //style: [{ key: 'className', value: 'fw-bold mb-2' }],
+        //content: new Map([
+        //  ["nl", "Andere ziektes"],
+        //])
+        //},
+        {
+          key: 't7', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Rug en gewrichten"],
+          ])
+        },
+        {
+          key: 'p', role: 'option',
+          content: new Map([
+            ["nl", "Rugaandoening van hardnekkige aard, langer dan 3 maanden, of hernia"],
+          ])
+        },
+        {
+          key: 'q', role: 'option',
+          content: new Map([
+            ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
+          ]),
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+        },
+        {
+          key: 'r', role: 'option',
+          content: new Map([
+            ["nl", "Gewrichtsontsteking (reuma) van handen en/of voeten"],
+          ])
+        },
+        {
+          key: 's', role: 'option',
+          content: new Map([
+            ["nl", "Andere chronische reuma, langer dan 3 maanden"],
+          ])
+        },
+        {
+          key: 't8', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Zenuwstelsel"],
+          ])
+        },
+        {
+          key: 't', role: 'option',
+          content: new Map([
+            ["nl", "Epilepsie"],
+          ])
+        },
+        {
+          key: 'u_Adults', role: 'option',
+          content: new Map([
+            ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
+          ]),
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+        },
+        {
+          key: 'u_Kids', role: 'option',
+          content: new Map([
+            ["nl", "Andere ziekten van het zenuwstelsel"],
+          ]),
+          displayCondition: (!(this.isPartOf(SurveySuffix.Kids))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+        },
+        {
+          key: 'v', role: 'option',
+          content: new Map([
+            ["nl", "Multiple sclerose"],
+          ])
+        },
+        {
+          key: 'w', role: 'option',
+          content: new Map([
+            ["nl", "Duizeligheid met vallen"],
+          ])
+        },
+        {
+          key: 'x', role: 'option',
+          content: new Map([
+            ["nl", "Migraine"],
+          ])
+        },
+        {
+          key: 't9', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Andere lichamelijke of psychische problemen"],
+          ])
+        },
+        {//these two items n and o moved down by kees
+          key: 'n', role: 'option',
+          content: new Map([
+            ["nl", "Suikerziekte"],
+          ])
+        },
+        {
+          key: 'o', role: 'option',
+          content: new Map([
+            ["nl", "Schildklierafwijking"],
+          ])
+        },
+        {
+          key: 'y', role: 'option',
+          content: new Map([
+            ["nl", "Kwaadaardige aandoening of kanker"],
+          ])
+        },
+        {
+          key: 'z', role: 'option',
+          content: new Map([
+            ["nl", "Overspannen, depressie, ernstige nervositeit"],
+          ])
+        },
+        {
+          key: 'aa', role: 'option',
+          content: new Map([
+            ["nl", "Chronische huidziekte of eczeem"],
+          ])
+        },
+        {
+          key: 'ab', role: 'option',
+          content: new Map([
+            ["nl", "Letsel door ongeluk in en om huis, sport, school, werk of in het verkeer"],
+          ])
+        },
+        {
+          key: 'ac', role: 'option',
+          content: new Map([
+            ["nl", "Afweerstoornis"],
+          ])
+        },
+        {
+          key: 'ad', role: 'option',
+          content: new Map([
+            ["nl", "Ondergaan van transplantatie"],
+          ])
+        },
+        {
+          key: 'ae', role: 'option',
+          content: new Map([
+            ["nl", "Alcoholverslaving"],
+          ]),
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+        },
+        {
+          key: 'af', role: 'option',
+          content: new Map([
+            ["nl", "Drugsverslaving"],
+          ]),
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+        },
+        {
+          key: 'ag', role: 'option',
+          content: new Map([
+            ["nl", "Ernstige vermoeidheid, langer dan 3 maanden"],
+          ])
+        },
+        {
+          key: 'ah', role: 'option',
+          content: new Map([
+            ["nl", "Ernstige pijnklachten, langer dan 3 maanden"],
+          ])
+        },
+        {
+          key: 'ai', role: 'option',
+          content: new Map([
+            ["nl", "Ernstige concentratiestoornissen, langer dan 3 maanden"],
+          ])
+        },
+        {
+          key: 't6', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Vink hieronder aan als geen van bovenstaande geldt"],
+          ])
+        },
+
+        {
+          key: 'aj', role: 'option',
+          content: new Map([
+            ["nl", "Geen van bovenstaande"],
+          ])
+        },
       ]
     })
   }

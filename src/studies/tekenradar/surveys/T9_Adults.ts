@@ -1,13 +1,14 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
-import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, Text2FU } from './questions/followup';
-import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Functioning1, Functioning2, Functioning3, Functioning4, Functioning5, FunctioningText, GenHealthHeader, Pregnant, Symptoms1, Symptoms2, Symptoms3, SymptomsHeader } from './questions/standard';
+import { FU_LymeDiagGroup, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, Text1FU } from './questions/followup';
+import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Pregnant, PHQ_15, PHQ_15_FU, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { TicP_Group } from './questions/ticp';
+import { SF36 } from './questions/sf36';
 
 class T9_AdultsDef extends SurveyDefinition {
 
@@ -16,26 +17,15 @@ class T9_AdultsDef extends SurveyDefinition {
   Q2: ReportedTB2;
   Q3: PreviousTickBites3;
 
-  T2: Text2FU;
-  Q6: LymeFU;
-  Q7: LymeDiagnosis2;
-  Q8: LymeDiagnosis3;
-  Q9: LymeDiagnosis4;
-  Q10: LymeDiagnosis5;
-  Q11: LymeDiagnosis6;
+  FU_LymeDiag: FU_LymeDiagGroup;
   H1: MedicationHeader;
   Q12: MedicationFU1;
   Q13: MedicationFU2;
   H2: SymptomsHeader;
-  Q14: Symptoms2;
-  Q15: Symptoms3;
-  Q16: Pregnant;
-  T3: FunctioningText;
-  Q17: Functioning1;
-  Q18: Functioning2;
-  Q19: Functioning3;
-  Q20: Functioning4;
-  Q21: Functioning5;
+  PHQ_15: PHQ_15;
+  PHQ_15_FU: PHQ_15_FU;
+  Pregnant: Pregnant;
+  SF36: SF36;
   H3: FatigueHeader;
   Q22: Fatigue;
   H4: CognitionHeader;
@@ -70,33 +60,21 @@ class T9_AdultsDef extends SurveyDefinition {
     const Q1_2condition = SurveyEngine.logic.and(Q1condition, Q2condition);
     this.Q3 = new PreviousTickBites3(this.key, required, Q1_2condition);
 
-    this.T2 = new Text2FU(this.key, required);
-    this.Q6 = new LymeFU(this.key, required);
-    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes);
-    this.Q7 = new LymeDiagnosis2(this.key, required, Q6condition);
-    this.Q8 = new LymeDiagnosis3(this.key, required, Q6condition);
-    this.Q9 = new LymeDiagnosis4(this.key, required, Q6condition);
-    this.Q10 = new LymeDiagnosis5(this.key, required, Q6condition);
-    this.Q11 = new LymeDiagnosis6(this.key, required, Q6condition);
+    this.FU_LymeDiag = new FU_LymeDiagGroup(this.key, required);
     this.H1 = new MedicationHeader(this.key, required);
     this.Q12 = new MedicationFU1(this.key, required);
     //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
-    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.2');
+    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.number');
 
     this.Q13 = new MedicationFU2(this.key, required, Q12number);
 
     this.H2 = new SymptomsHeader(this.key, required);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.Q14 = new Symptoms2(this.key, required, isFemale);
-    this.Q15 = new Symptoms3(this.key, required);
+    this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
+    this.PHQ_15_FU = new PHQ_15_FU(this.key, required);
     const cond_woman = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.Q16 = new Pregnant(this.key, required, cond_woman);
-    this.T3 = new FunctioningText(this.key, required);
-    this.Q17 = new Functioning1(this.key, required);
-    this.Q18 = new Functioning2(this.key, required);
-    this.Q19 = new Functioning3(this.key, required);
-    this.Q20 = new Functioning4(this.key, required);
-    this.Q21 = new Functioning5(this.key, required);
+    this.Pregnant = new Pregnant(this.key, required, cond_woman);
+    this.SF36 = new SF36(this.key, required);
 
     this.H3 = new FatigueHeader(this.key, required);
     this.Q22 = new Fatigue(this.key, required);
@@ -117,13 +95,7 @@ class T9_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q3.get());
     this.addPageBreak();
 
-    this.addItem(this.T2.get());
-    this.addItem(this.Q6.get());
-    this.addItem(this.Q7.get());
-    this.addItem(this.Q8.get());
-    this.addItem(this.Q9.get());
-    this.addItem(this.Q10.get());
-    this.addItem(this.Q11.get());
+    this.addItem(this.FU_LymeDiag.get());
     this.addPageBreak();
 
     this.addItem(this.H1.get());
@@ -132,17 +104,12 @@ class T9_AdultsDef extends SurveyDefinition {
     this.addPageBreak();
 
     this.addItem(this.H2.get());
-    this.addItem(this.Q14.get());
-    this.addItem(this.Q15.get());
-    this.addItem(this.Q16.get());
+    this.addItem(this.PHQ_15.get());
+    this.addItem(this.PHQ_15_FU.get());
+    this.addItem(this.Pregnant.get());
     this.addPageBreak();
 
-    this.addItem(this.T3.get());
-    this.addItem(this.Q17.get());
-    this.addItem(this.Q18.get());
-    this.addItem(this.Q19.get());
-    this.addItem(this.Q20.get());
-    this.addItem(this.Q21.get());
+    this.addItem(this.SF36.get());
     this.addPageBreak();
 
     this.addItem(this.H3.get());

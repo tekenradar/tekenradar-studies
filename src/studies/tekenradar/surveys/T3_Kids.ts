@@ -1,14 +1,16 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
-import { FeverFU1, FeverFU2, LymeFU, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, SymptomsFU, Text1FU, ThreeMonthsText_Kids, Text2FU, MedicationFUText_Kids } from './questions/followup';
-import { QuestionsKids1, QuestionsKids2, Symptoms1, Symptoms2, Symptoms3, SymptomsText1_Kids, SymptomsText2_Kids, TextQUKids } from './questions/standard';
+import { FeverFU1, FeverFU2, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, ThreeMonthsText_Kids, MedicationFUText_Kids, FU_LymeDiagGroup } from './questions/followup';
+import { QuestionsKids1, QuestionsKids2, PHQ_15, PHQ_15_FU, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Fatigue1G1_Kids, Fatigue1G3_Kids, Fatigue2G1_Kids, Fatigue2G3_Kids, Fatigue3G1_Kids, Fatigue3G3_Kids, FatigueText1G1_Kids, FatigueText1G3_Kids, FatigueText2G1_Kids, FatigueText2G2_Kids, FatigueText2G3_Kids, Functioning1F1_Kids, Functioning1F2_Kids, Functioning1F3_Kids, Functioning2F1_Kids, Functioning2F2_Kids, Functioning2F3_Kids, Functioning3F1_Kids, Functioning3F2_Kids, Functioning3F3_Kids, Functioning3F4_Kids, Functioning4F1_Kids, Functioning5F1_Kids, Functioning5F2_Kids, Functioning5F3_Kids, FunctioningText1F1_Kids, FunctioningText1F3_Kids, FunctioningText2F1_Kids, FunctioningText2F3_Kids, PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
+import { PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids, Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { TicP_Group } from './questions/ticp';
+import { Pedsql_13_18, Pedsql_2_4, Pedsql_5_7, Pedsql_8_12 } from './questions/pedsql';
+import { PedsqlFatigue_13_18, PedsqlFatigue_2_4, PedsqlFatigue_5_7, PedsqlFatigue_8_12 } from './questions/pedsqlFatigue';
 
 class T3_KidsDef extends SurveyDefinition {
 
@@ -19,13 +21,7 @@ class T3_KidsDef extends SurveyDefinition {
   Q3: PreviousTickBites3;
   Q4: FeverFU1;
   Q5: FeverFU2;
-  T3: Text2FU;
-  Q6: LymeFU;
-  Q7: LymeDiagnosis2;
-  Q8: LymeDiagnosis3;
-  Q9: LymeDiagnosis4;
-  Q10: LymeDiagnosis5;
-  Q11: LymeDiagnosis6;
+  FU_LymeDiag: FU_LymeDiagGroup;
   T4: MedicationFUText_Kids;
   Q12: MedicationFU1;
   Q13: MedicationFU2;
@@ -34,45 +30,20 @@ class T3_KidsDef extends SurveyDefinition {
   Q14: QuestionsKids1;
   Q14_a: QuestionsKids2;
   T6: TextQUKids;
-  Q15: Symptoms2;
-  Q16: Symptoms3;
+  PHQ_15: PHQ_15;
+  PHQ_15_FU: PHQ_15_FU;
 
   TicP: TicP_Group;
 
-  T10_F1: FunctioningText1F1_Kids;
-  T10_F3: FunctioningText1F3_Kids;
-  T11_F1: FunctioningText2F1_Kids;
-  T11_F3: FunctioningText2F3_Kids;
-  Q19_F1: Functioning1F1_Kids;
-  Q19_F2: Functioning1F2_Kids;
-  Q19_F3: Functioning1F3_Kids;
-  Q20_F1: Functioning2F1_Kids;
-  Q20_F2: Functioning2F2_Kids;
-  Q20_F3: Functioning2F3_Kids;
+  Pedsql_2_4: Pedsql_2_4;
+  Pedsql_5_7: Pedsql_5_7;
+  Pedsql_8_12: Pedsql_8_12;
+  Pedsql_13_18: Pedsql_13_18;
 
-  Q21_F1: Functioning3F1_Kids;
-  Q21_F2: Functioning3F2_Kids;
-  Q21_F3: Functioning3F3_Kids;
-  Q21_F4: Functioning3F4_Kids;
-
-  Q22_F1: Functioning4F1_Kids;
-
-  Q23_F1: Functioning5F1_Kids;
-  Q23_F2: Functioning5F2_Kids;
-  Q23_F3: Functioning5F3_Kids;
-
-  T12_G1: FatigueText1G1_Kids;
-  T12_G3: FatigueText1G3_Kids;
-  T13_G1: FatigueText2G1_Kids;
-  T13_G2: FatigueText2G2_Kids;
-  T13_G3: FatigueText2G3_Kids;
-
-  Q24_G1: Fatigue1G1_Kids;
-  Q24_G3: Fatigue1G3_Kids;
-  Q25_G1: Fatigue2G1_Kids;
-  Q25_G3: Fatigue2G3_Kids;
-  Q26_G1: Fatigue3G1_Kids;
-  Q26_G3: Fatigue3G3_Kids;
+  PedsqlFatigue_2_4: PedsqlFatigue_2_4;
+  PedsqlFatigue_5_7: PedsqlFatigue_5_7;
+  PedsqlFatigue_8_12: PedsqlFatigue_8_12;
+  PedsqlFatigue_13_18: PedsqlFatigue_13_18;
 
   T14_H1: PainTextH1_Kids;
   T14_H2: PainTextH2_Kids;
@@ -128,20 +99,13 @@ class T3_KidsDef extends SurveyDefinition {
     const Q4condition = SurveyEngine.singleChoice.any(this.Q4.key, this.Q4.optionKeys.yes);
     this.Q5 = new FeverFU2(this.key, required, Q4condition);
 
-    this.T3 = new Text2FU(this.key, required);
-    this.Q6 = new LymeFU(this.key, required);
-    const Q6condition = SurveyEngine.singleChoice.any(this.Q6.key, this.Q6.optionKeys.yes);
-    this.Q7 = new LymeDiagnosis2(this.key, required, Q6condition);
-    this.Q8 = new LymeDiagnosis3(this.key, required, Q6condition);
-    this.Q9 = new LymeDiagnosis4(this.key, required, Q6condition);
-    this.Q10 = new LymeDiagnosis5(this.key, required, Q6condition);
-    this.Q11 = new LymeDiagnosis6(this.key, required, Q6condition);
+    this.FU_LymeDiag = new FU_LymeDiagGroup(this.key, required);
 
     this.T4 = new MedicationFUText_Kids(this.key, required);
     this.Q12 = new MedicationFU1(this.key, required);
 
     //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
-    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.2');
+    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.number');
     this.Q13 = new MedicationFU2(this.key, required, Q12number);
 
     this.T5 = new SymptomsText2_Kids(this.key, required);
@@ -151,8 +115,8 @@ class T3_KidsDef extends SurveyDefinition {
 
     this.T6 = new TextQUKids(this.key, required);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.Q15 = new Symptoms2(this.key, required, isFemale);
-    this.Q16 = new Symptoms3(this.key, required);
+    this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
+    this.PHQ_15_FU = new PHQ_15_FU(this.key, required);
 
     this.TicP = new TicP_Group(this.key, required);
 
@@ -185,45 +149,15 @@ class T3_KidsDef extends SurveyDefinition {
       SurveyEngine.compare.gte(AgeFromPDiff, 11),
       SurveyEngine.compare.lt(AgeFromPDiff, 18));
 
-    this.T10_F1 = new FunctioningText1F1_Kids(this.key, required, cond_2younger8);
-    this.T10_F3 = new FunctioningText1F3_Kids(this.key, required, cond_8younger18);
-    this.T11_F1 = new FunctioningText2F1_Kids(this.key, required, cond_2younger8);
-    this.T11_F3 = new FunctioningText2F3_Kids(this.key, required, cond_8younger18);
+    this.Pedsql_2_4 = new Pedsql_2_4(this.key, required, cond_2younger5);
+    this.Pedsql_5_7 = new Pedsql_5_7(this.key, required, cond_5younger8);
+    this.Pedsql_8_12 = new Pedsql_8_12(this.key, required, cond_8younger13);
+    this.Pedsql_13_18 = new Pedsql_13_18(this.key, required, cond_13younger18);
 
-
-    this.Q19_F1 = new Functioning1F1_Kids(this.key, required, cond_2younger5);
-    this.Q19_F2 = new Functioning1F2_Kids(this.key, required, cond_5younger8);
-    this.Q19_F3 = new Functioning1F3_Kids(this.key, required, cond_8younger18);
-
-    this.Q20_F1 = new Functioning2F1_Kids(this.key, required, cond_2younger5);
-    this.Q20_F2 = new Functioning2F2_Kids(this.key, required, cond_5younger8);
-    this.Q20_F3 = new Functioning2F3_Kids(this.key, required, cond_8younger18);
-
-    this.Q21_F1 = new Functioning3F1_Kids(this.key, required, cond_2younger5);
-    this.Q21_F2 = new Functioning3F2_Kids(this.key, required, cond_5younger8);
-    this.Q21_F3 = new Functioning3F3_Kids(this.key, required, cond_8younger13);
-    this.Q21_F4 = new Functioning3F4_Kids(this.key, required, cond_13younger18);
-
-    this.Q22_F1 = new Functioning4F1_Kids(this.key, required, cond_2younger5);
-    const Q22condition = SurveyEngine.singleChoice.any(this.Q22_F1.key, this.Q22_F1.optionKeys.yes);
-
-    this.Q23_F1 = new Functioning5F1_Kids(this.key, required, Q22condition);
-    this.Q23_F2 = new Functioning5F2_Kids(this.key, required, cond_5younger8);
-    this.Q23_F3 = new Functioning5F3_Kids(this.key, required, cond_8younger18);
-
-    this.T12_G1 = new FatigueText1G1_Kids(this.key, required, cond_2younger8);
-    this.T12_G3 = new FatigueText1G3_Kids(this.key, required, cond_8younger18);
-    this.T13_G1 = new FatigueText2G1_Kids(this.key, required, cond_2younger5);
-    this.T13_G2 = new FatigueText2G2_Kids(this.key, required, cond_5younger8);
-    this.T13_G3 = new FatigueText2G3_Kids(this.key, required, cond_8younger18);
-
-    this.Q24_G1 = new Fatigue1G1_Kids(this.key, required, cond_2younger8);
-    this.Q24_G3 = new Fatigue1G3_Kids(this.key, required, cond_8younger18);
-
-    this.Q25_G1 = new Fatigue2G1_Kids(this.key, required, cond_2younger8);
-    this.Q25_G3 = new Fatigue2G3_Kids(this.key, required, cond_8younger18);
-    this.Q26_G1 = new Fatigue3G1_Kids(this.key, required, cond_2younger8);
-    this.Q26_G3 = new Fatigue3G3_Kids(this.key, required, cond_8younger18);
+    this.PedsqlFatigue_2_4 = new PedsqlFatigue_2_4(this.key, required, cond_2younger5);
+    this.PedsqlFatigue_5_7 = new PedsqlFatigue_5_7(this.key, required, cond_5younger8);
+    this.PedsqlFatigue_8_12 = new PedsqlFatigue_8_12(this.key, required, cond_8younger13);
+    this.PedsqlFatigue_13_18 = new PedsqlFatigue_13_18(this.key, required, cond_13younger18);
 
     this.T14_H1 = new PainTextH1_Kids(this.key, required, cond_2younger8);
     this.T14_H2 = new PainTextH2_Kids(this.key, required, cond_8younger18);
@@ -259,68 +193,39 @@ class T3_KidsDef extends SurveyDefinition {
     this.addItem(this.Q3.get());
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
-
     this.addPageBreak();
-    this.addItem(this.T3.get());
-    this.addItem(this.Q6.get());
-    this.addItem(this.Q7.get());
-    this.addItem(this.Q8.get());
-    this.addItem(this.Q9.get());
-    this.addItem(this.Q10.get());
-    this.addItem(this.Q11.get());
 
+    this.addItem(this.FU_LymeDiag.get());
     this.addPageBreak();
+
     this.addItem(this.T4.get());
     this.addItem(this.Q12.get());
     this.addItem(this.Q13.get());
-
     this.addPageBreak();
+
     this.addItem(this.T5.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q14_a.get());
     this.addItem(this.T6.get());
-    this.addItem(this.Q15.get());
-    this.addItem(this.Q16.get());
+    this.addItem(this.PHQ_15.get());
+    this.addItem(this.PHQ_15_FU.get());
     this.addPageBreak();
 
     this.addItem(this.TicP.get());
     this.addPageBreak();
 
-    this.addItem(this.T10_F1.get());
-    this.addItem(this.T10_F3.get());
-    this.addItem(this.T11_F1.get());
-    this.addItem(this.T11_F3.get());
-    this.addItem(this.Q19_F1.get());
-    this.addItem(this.Q19_F2.get());
-    this.addItem(this.Q19_F3.get());
-    this.addItem(this.Q20_F1.get());
-    this.addItem(this.Q20_F2.get());
-    this.addItem(this.Q20_F3.get());
-
-    this.addItem(this.Q21_F1.get());
-    this.addItem(this.Q21_F2.get());
-    this.addItem(this.Q21_F3.get());
-    this.addItem(this.Q21_F4.get());
-
-    this.addItem(this.Q22_F1.get());
-    this.addItem(this.Q23_F1.get());
-    this.addItem(this.Q23_F2.get());
-    this.addItem(this.Q23_F3.get());
-
+    this.addItem(this.Pedsql_2_4.get());
+    this.addItem(this.Pedsql_5_7.get());
+    this.addItem(this.Pedsql_8_12.get());
+    this.addItem(this.Pedsql_13_18.get());
     this.addPageBreak();
-    this.addItem(this.T12_G1.get());
-    this.addItem(this.T12_G3.get());
-    this.addItem(this.T13_G1.get());
-    this.addItem(this.T13_G2.get());
-    this.addItem(this.T13_G3.get());
-    this.addItem(this.Q24_G1.get());
-    this.addItem(this.Q24_G3.get());
-    this.addItem(this.Q25_G1.get());
-    this.addItem(this.Q25_G3.get());
-    this.addItem(this.Q26_G1.get());
-    this.addItem(this.Q26_G3.get());
 
+    this.addItem(this.PedsqlFatigue_2_4.get());
+    this.addItem(this.PedsqlFatigue_5_7.get());
+    this.addItem(this.PedsqlFatigue_8_12.get());
+    this.addItem(this.PedsqlFatigue_13_18.get());
     this.addPageBreak();
+
     this.addItem(this.T14_H1.get());
     this.addItem(this.T14_H2.get());
     this.addItem(this.Q27_H1.get());

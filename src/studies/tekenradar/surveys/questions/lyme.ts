@@ -3,6 +3,7 @@ import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { surveyCategoryNames, SurveySuffix } from '../globalConstants';
 
 
 
@@ -55,27 +56,46 @@ export class LymeDiagnosis3 extends Item {
   ])
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LB_B3');
+    super(parentKey, 'LD3');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
+
   //TODO: size of text input field?
   buildItem() {
+    let text = this.qTextLyme;
+    if (
+      this.isPartOf(surveyCategoryNames.T3) ||
+      this.isPartOf(surveyCategoryNames.T6) ||
+      this.isPartOf(surveyCategoryNames.T9) ||
+      this.isPartOf(surveyCategoryNames.T12)
+    ) {
+      if (this.isPartOf(SurveySuffix.Kids)) {
+        text = this.qTextFollowUpKids;
+      } else {
+        text = this.qTextFollowUp;
+      }
+    }
+
     return SurveyItems.multilineTextInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
+      questionText: text,
     })
   }
 }
 
 export class LymeDiagnosis4 extends Item {
 
+  optionKeys = {
+    date: 'a'
+  }
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LB_B4');
+    super(parentKey, 'LD4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -92,7 +112,7 @@ export class LymeDiagnosis4 extends Item {
       ]),
       responseOptions: [
         MCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['en', "De klachten door de ziekte van Lyme zijn onstaan op "]]
@@ -139,6 +159,17 @@ export class LymeDiagnosis4 extends Item {
             ["nl", "Opmerkingen"],
           ])
         },
+      ],
+      customValidations: [
+        {
+          key: 'LD4', rule: SurveyEngine.logic.or(
+            SurveyEngine.multipleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.logic.and(
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.4`),
+            )
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -146,6 +177,10 @@ export class LymeDiagnosis4 extends Item {
 
 
 export class LymeDiagnosis5 extends Item {
+
+  optionKeys = {
+    date: 'a'
+  }
 
   qTextMain = new Map([
     ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
@@ -173,10 +208,10 @@ export class LymeDiagnosis5 extends Item {
       questionText: this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De arts heeft de uiting van ziekte van Lyme bij mij vastgesteld op "]]
+                [['en', "De arts heeft de uiting van de ziekte van Lyme bij mij vastgesteld op "]]
               )
             }),
             ClozeItemTypes.dateInput({
@@ -213,6 +248,17 @@ export class LymeDiagnosis5 extends Item {
             ["nl", "Weet ik niet"],
           ])
         },
+      ],
+      customValidations: [
+        {
+          key: 'LD5', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.logic.and(
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.date}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.date}.4`),
+            )
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -246,12 +292,26 @@ export class LymeDiagnosis6 extends Item {
   }
 
   buildItem() {
+    let text = this.qTextLyme;
+    if (
+      this.isPartOf(surveyCategoryNames.T3) ||
+      this.isPartOf(surveyCategoryNames.T6) ||
+      this.isPartOf(surveyCategoryNames.T9) ||
+      this.isPartOf(surveyCategoryNames.T12)
+    ) {
+      if (this.isPartOf(SurveySuffix.Kids)) {
+        text = this.qTextFollowUpKids;
+      } else {
+        text = this.qTextFollowUp;
+      }
+    }
+
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
+      questionText: text,
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',

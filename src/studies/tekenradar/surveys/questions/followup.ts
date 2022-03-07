@@ -4,6 +4,8 @@ import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { SurveySuffix } from '../globalConstants';
+import { LymeDiagnosis1, LymeDiagnosis2 } from './diagnosisTherapy';
+import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './lyme';
 
 
 
@@ -42,7 +44,7 @@ De volgende vragen gaan over mogelijke tekenbeten opgelopen sinds het invullen v
 export class ThreeMonthsText_Kids extends Item {
 
   markdownContent = `
-# 3 maanden
+## 3 maanden
 
 De vragen hieronder zijn voor een minderjarige.
 Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
@@ -272,11 +274,48 @@ export class FeverFU2 extends Item {
   }
 }
 
+export class FU_LymeDiagGroup extends Group {
+  Header: FU_LymeDiagHeader;
+  Q1: LymeFU;
+  Q2: LymeDiagnosis2;
+  Q3: LymeDiagnosis3;
+  Q4: LymeDiagnosis4;
+  Q5: LymeDiagnosis5;
+  Q6: LymeDiagnosis6;
 
-export class Text2FU extends Item {
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+    super(parentKey, 'FU_LD');
 
+    this.groupEditor.setCondition(condition);
+
+    const required = isRequired !== undefined ? isRequired : false;
+
+    this.Header = new FU_LymeDiagHeader(this.key);
+    this.Q1 = new LymeFU(this.key, required);
+    const LDcondition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
+    this.Q2 = new LymeDiagnosis2(this.key, required, LDcondition);
+    this.Q3 = new LymeDiagnosis3(this.key, required, LDcondition);
+    this.Q4 = new LymeDiagnosis4(this.key, required, LDcondition);
+    this.Q5 = new LymeDiagnosis5(this.key, required, LDcondition);
+    this.Q6 = new LymeDiagnosis6(this.key, required, LDcondition);
+  }
+
+  buildGroup() {
+    this.addItem(this.Header.get());
+
+    this.addItem(this.Q1.get());
+    this.addItem(this.Q2.get());
+    this.addItem(this.Q3.get());
+    this.addItem(this.Q4.get());
+    this.addItem(this.Q5.get());
+    this.addItem(this.Q6.get());
+  }
+}
+
+
+class FU_LymeDiagHeader extends Item {
   markdownContentKids = `
-# Diagnoses
+## Diagnoses
 
 De vragen hieronder zijn voor een minderjarige.
 Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
@@ -285,15 +324,14 @@ De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij 
     `
 
   markdownContentAdults = `
-# Diagnoses
+## Diagnoses
 
 De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij jou ontstaan zijn sinds het invullen van de vorige vragenlijst 3 maanden geleden.
         `
 
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Text2FU');
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'Header');
 
-    this.isRequired = isRequired;
     this.condition = condition;
   }
 
@@ -315,14 +353,13 @@ De volgende vragen gaan over **nieuwe** uitingen van de ziekte van Lyme die bij 
 }
 
 
-export class LymeFU extends Item {
-
+class LymeFU extends Item {
   optionKeys = {
     yes: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LFU');
+    super(parentKey, 'Q1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -421,6 +458,11 @@ Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
 export class MedicationFU1 extends Item {
 
+  optionKeys = {
+    yes_number: 'b'
+  }
+
+
   questionTextMain = [
     {
       content: new Map([
@@ -462,14 +504,14 @@ export class MedicationFU1 extends Item {
           ])
         },
         SCOptions.cloze({
-          key: 'b', items: [
+          key: this.optionKeys.yes_number, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['en', "Ja, aantal medicijnen "]]
               )
             }),
             ClozeItemTypes.numberInput({
-              key: '2',
+              key: 'number',
               inputLabel: new Map([["nl", ""],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
@@ -486,6 +528,14 @@ export class MedicationFU1 extends Item {
           ])
         },
       ],
+      customValidations: [
+        {
+          key: 'MedFU', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}.number`),0),
+          ), type: 'hard'
+        }
+      ]
     })
   }
 }
