@@ -205,12 +205,12 @@ export class PainH1_Kids extends Item {
       ]),
       className: "text-primary"
     },
-    {
+    //{
       //content: new Map([
       //  ["nl", "[REMARK: It is not possible to have 0 and 10 as well as Geen pijn - veel pijn written at the endings of the slider scale. Please add the explanation of slider scale steps in the question text here]"],
       //]),
       //className: "text-primary"
-    }
+    //}
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
