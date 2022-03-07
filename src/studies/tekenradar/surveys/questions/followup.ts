@@ -458,6 +458,11 @@ Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
 export class MedicationFU1 extends Item {
 
+  optionKeys = {
+    yes_number: 'b'
+  }
+
+
   questionTextMain = [
     {
       content: new Map([
@@ -499,14 +504,14 @@ export class MedicationFU1 extends Item {
           ])
         },
         SCOptions.cloze({
-          key: 'b', items: [
+          key: this.optionKeys.yes_number, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['en', "Ja, aantal medicijnen "]]
               )
             }),
             ClozeItemTypes.numberInput({
-              key: '2',
+              key: 'number',
               inputLabel: new Map([["nl", ""],]),
               labelBehindInput: true,
               inputMaxWidth: '80px',
@@ -523,6 +528,14 @@ export class MedicationFU1 extends Item {
           ])
         },
       ],
+      customValidations: [
+        {
+          key: 'MedFU', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}.number`),0),
+          ), type: 'hard'
+        }
+      ]
     })
   }
 }

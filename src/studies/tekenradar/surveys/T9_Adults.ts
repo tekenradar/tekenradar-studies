@@ -64,7 +64,7 @@ class T9_AdultsDef extends SurveyDefinition {
     this.H1 = new MedicationHeader(this.key, required);
     this.Q12 = new MedicationFU1(this.key, required);
     //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
-    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.2');
+    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.number');
 
     this.Q13 = new MedicationFU2(this.key, required, Q12number);
 

@@ -95,7 +95,7 @@ class T6_KidsDef extends SurveyDefinition {
     this.Q12 = new MedicationFU1(this.key, required);
 
     //TODO: I think this is not very elegant. Ask Peter how to do this in a better way (without hardcoding response key)
-    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.2');
+    const Q12number = SurveyEngine.getResponseValueAsNum(this.Q12.key, 'rg.scg.b.number');
     this.Q13 = new MedicationFU2(this.key, required, Q12number);
 
     this.T5 = new SymptomsText2_Kids(this.key, required);
