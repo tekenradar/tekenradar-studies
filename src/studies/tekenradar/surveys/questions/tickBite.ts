@@ -204,10 +204,10 @@ export class RecognisedTickBite extends Item {
   }
 
   qTextFever = new Map([[
-    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de koorts hebt gekregen, al gemeld?'
+    'nl', 'Heb je de tekenbeet al gemeld, die waarschijnlijk de koorts heeft veroorzaakt?'
   ]]);
   qTextOther = new Map([[
-    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de erythema migrans of andere ziekte van Lyme die je nu meldt hebt gekregen, opgemerkt?'
+    'nl', 'Heb je de tekenbeet opgemerkt, die waarschijnlijk de nu gemelde erythema migrans of andere ziekte van Lyme heeft veroorzaakt?'
   ]]);
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

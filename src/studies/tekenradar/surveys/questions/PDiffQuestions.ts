@@ -393,9 +393,9 @@ export class WeeklyFlowPretext extends Item {
   }
 
   markdownContent = `
-##### We willen graag meten of het aantal tekenbeten over de tijd verandert.
-##### Hiervoor zoeken we deelnemers die wekelijks aan ons door willen geven hoeveel tekenbeten zij gehad hebben.
-##### Dat duurt minder dan een minuut per keer. Ook als je meestal géén tekenbeten hebt is het heel nuttig om dat te melden.
+##### We willen graag weten hoeveel tekenbeten mensen oplopen.
+##### Daarom zoeken wij mensen die ons wekelijks laten weten of ze tekenbeten hebben gehad. Dit duurt minder dan een minuut.
+##### Ook als je géén tekenbeet hebt gehad is het nuttig voor ons om te weten.
 `
 
   buildItem(): SurveySingleItem {
@@ -475,28 +475,32 @@ export class FlowStartText extends Item {
 Een “erythema migrans” is een uitbreidende rode ring of vlek rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
 
 Klik hieronder op "Opslaan en verder gaan".
-Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   markdownContentFeverFlow = `
 ### Tekenbeet melden
 
 Klik hieronder op "Opslaan en verder gaan".
-Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   markdownContentLBFlow = `
 ### Ziekte van Lyme melden
 
 Klik hieronder op "Opslaan en verder gaan".
-Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   markdownContentChronicFlow = `
 ### Ziekte van Lyme melden
 
 Klik hieronder op "Opslaan en verder gaan".
-Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   buildItem(): SurveySingleItem {
@@ -560,7 +564,7 @@ export class WeeklyFlow extends Item {
         ['nl', 'Wil je wekelijks doorgeven hoeveel tekenbeten je hebt gehad?'],
       ]),
       questionSubText: new Map([
-        ['nl', 'TODO: weekly TB reporting requires an account'],
+        ['nl', 'Hiervoor kun je een account aanmaken na klikken op "Opslaan en verder gaan" onderaan deze pagina.'],
       ]),
       responseOptions: [
         {
