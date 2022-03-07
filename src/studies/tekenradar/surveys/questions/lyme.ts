@@ -90,6 +90,10 @@ export class LymeDiagnosis3 extends Item {
 
 export class LymeDiagnosis4 extends Item {
 
+  optionKeys = {
+    date: 'a'
+  }
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LD4');
 
@@ -108,7 +112,7 @@ export class LymeDiagnosis4 extends Item {
       ]),
       responseOptions: [
         MCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['en', "De klachten door de ziekte van Lyme zijn onstaan op "]]
@@ -155,6 +159,17 @@ export class LymeDiagnosis4 extends Item {
             ["nl", "Opmerkingen"],
           ])
         },
+      ],
+      customValidations: [
+        {
+          key: 'LD4', rule: SurveyEngine.logic.or(
+            SurveyEngine.multipleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.logic.and(
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.4`),
+            )
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -162,6 +177,10 @@ export class LymeDiagnosis4 extends Item {
 
 
 export class LymeDiagnosis5 extends Item {
+
+  optionKeys = {
+    date: 'a'
+  }
 
   qTextMain = new Map([
     ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
@@ -189,7 +208,7 @@ export class LymeDiagnosis5 extends Item {
       questionText: this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['en', "De arts heeft de uiting van de ziekte van Lyme bij mij vastgesteld op "]]
@@ -229,6 +248,17 @@ export class LymeDiagnosis5 extends Item {
             ["nl", "Weet ik niet"],
           ])
         },
+      ],
+      customValidations: [
+        {
+          key: 'LD5', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.logic.and(
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.date}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.date}.4`),
+            )
+          ), type: 'hard'
+        }
       ]
     })
   }
