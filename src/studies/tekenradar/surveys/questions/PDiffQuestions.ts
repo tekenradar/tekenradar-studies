@@ -12,7 +12,7 @@ export class IntroPDiff extends Item {
 
 Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
 
-Wat wil je precies melden? Wat is op jou van toepassing?
+Wat wil je precies melden? Vragen met een "*" zijn verplicht.
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -474,29 +474,29 @@ export class FlowStartText extends Item {
 
 Een “erythema migrans” is een uitbreidende rode ring of vlek rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
 
-Maak hieronder een account aan om verder te gaan met de melding.
-Je email adres wordt niet voor andere doeleinden gebruikt.
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   markdownContentFeverFlow = `
 ### Tekenbeet melden
 
-Maak hieronder een account aan om verder te gaan met de melding.
-Je email adres wordt niet voor andere doeleinden gebruikt.
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   markdownContentLBFlow = `
 ### Ziekte van Lyme melden
 
-Maak hieronder een account aan om verder te gaan met de melding.
-Je email adres wordt niet voor andere doeleinden gebruikt.
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   markdownContentChronicFlow = `
 ### Ziekte van Lyme melden
 
-Maak hieronder een account aan om verder te gaan met de melding.
-Je email adres wordt niet voor andere doeleinden gebruikt.
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account om verder te gaan met je melding. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
 `
 
   buildItem(): SurveySingleItem {
