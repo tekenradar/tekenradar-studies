@@ -559,6 +559,9 @@ export class WeeklyFlow extends Item {
       questionText: new Map([
         ['nl', 'Wil je wekelijks doorgeven hoeveel tekenbeten je hebt gehad?'],
       ]),
+      questionSubText: new Map([
+        ['nl', 'TODO: weekly TB reporting requires an account'],
+      ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
