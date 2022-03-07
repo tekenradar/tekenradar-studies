@@ -281,6 +281,36 @@ Er zijn geen goede of foute antwoorden.
   }
 }
 
+const optionHint = ComponentGenerators.markdown({
+  content: new Map([['nl', `
+1 = Nooit, 2 = Bijna nooit, 3 = Soms, 4 = Vaak, 5 = Bijna altijd
+        `]])
+});
+
+const scaleOptions = [
+  {
+    key: '0', content: new Map([
+      ["nl", "0"],
+    ])
+  }, {
+    key: '1', content: new Map([
+      ["nl", "1"],
+    ])
+  }, {
+    key: '2', content: new Map([
+      ["nl", "2"],
+    ])
+  }, {
+    key: '3', content: new Map([
+      ["nl", "3"],
+    ])
+  }, {
+    key: '4', content: new Map([
+      ["nl", "4"],
+    ])
+  }
+];
+
 
 class Q1_2_4 extends Item {
   questionTextMain = [
@@ -301,38 +331,13 @@ class Q1_2_4 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -394,38 +399,13 @@ class Q1_5_7 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -487,38 +467,13 @@ class Q1_8_12 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -580,38 +535,13 @@ class Q1_13_18 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -673,38 +603,13 @@ class Q2_2_4 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -766,38 +671,13 @@ class Q2_5_7 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -859,38 +739,13 @@ class Q2_8_12 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -952,38 +807,13 @@ class Q2_13_18 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -1046,38 +876,13 @@ class Q3_2_4 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -1140,38 +945,13 @@ class Q3_5_7 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -1233,38 +1013,13 @@ class Q3_8_12 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
@@ -1326,38 +1081,13 @@ class Q3_13_18 extends Item {
   buildItem() {
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
-      responsiveModes: {
-        md: 'table',
-        sm: 'horizontal'
-      },
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      scaleOptions: [
-        {
-          key: '0', content: new Map([
-            ["nl", "Nooit"],
-          ])
-        }, {
-          key: '1', content: new Map([
-            ["nl", "Bijna nooit"],
-          ])
-        }, {
-          key: '2', content: new Map([
-            ["nl", "Soms"],
-          ])
-        }, {
-          key: '3', content: new Map([
-            ["nl", "Vaak"],
-          ])
-        }, {
-          key: '4', content: new Map([
-            ["nl", "Bijna altijd"],
-          ])
-        }
-      ],
+      topDisplayCompoments: [optionHint],
+      scaleOptions: scaleOptions,
       rows: [
         {
           key: 'a', content: new Map([
