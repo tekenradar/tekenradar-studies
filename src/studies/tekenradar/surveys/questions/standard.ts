@@ -747,7 +747,7 @@ export class Fatigue extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      topDisplayCompoments: [//TODO: this is copied from longcovid survey and probably out of date. Update to latest syntax
+      topDisplayCompoments: [
         {
           role: 'text',
           style: [{ key: 'variant', value: 'p' }],
@@ -755,24 +755,20 @@ export class Fatigue extends Item {
             ["nl", 'Klik het hokje aan dat het meest overeenkomt met je gevoel.'],
           ]))
         },
-
-        {
-          role: 'text',
-          style: [{ key: 'variant', value: 'p' }],
-          content: generateLocStrings(new Map([
-            ["nl", 'Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt". Dus bijvoorbeeld als volgt: '],
-          ]))
-        },
         ComponentGenerators.markdown({
           content: new Map([
             ['nl', `
+Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen, kun je het kruisje in een van de hokjes zetten die in de buurt staan van de antwoordmogelijkheid "ja, dat klopt".
+
+Dus bijvoorbeeld als volgt:
+
 <img src="https://raw.githubusercontent.com/tekenradar/participant-webapp/content/public/assets/images/survey-content/CIS_fatigue_example.png" width="100%"/>
                 `]
           ])
         }),
         {
           role: 'text',
-          style: [{ key: 'className', value: 'mb-1 border-bottom border-1 border-grey-5 pt-1 mt-2 fw-bold' }],
+          style: [{ key: 'className', value: 'border-bottom border-1 border-grey-5 pt-1 my-2 fw-bold' }],
           content: generateLocStrings(new Map([
             ["nl", "Klik nu hieronder aan welk van de antwoorden het meest overeenkomt met je gevoel:"],
           ]))
