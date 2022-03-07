@@ -132,6 +132,14 @@ class MedCare1 extends Item {
           ])
         },
       ],
+      customValidations: [
+        {
+          key: 'Q1', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`),0),
+          ), type: 'hard'
+        }
+      ],
       topDisplayCompoments: [
         ComponentGenerators.markdown({
           content: new Map([
