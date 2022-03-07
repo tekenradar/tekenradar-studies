@@ -1,7 +1,7 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item, OptionDef } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions , ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SurveySuffix } from '../globalConstants';
 import { responseGroupKey, inputKey, dropDownKey } from 'case-editor-tools/constants/key-definitions';
@@ -32,6 +32,9 @@ export class LymeDiagnosisGroup extends Group {
 //TODO: maybe transfer to tickbite file
 export class GeneralTherapy1 extends Item {
 
+  optionKeys = {
+    yes_number: 'b'
+  }
 
   questionTextMain = [
     {
@@ -74,7 +77,7 @@ export class GeneralTherapy1 extends Item {
           ])
         },
         SingleChoiceOptionTypes.numberInput({
-          key: 'b',
+          key: this.optionKeys.yes_number,
           inputLabel: new Map([['nl', 'Ja, aantal medicijnen: ']]),
           labelBehindInput: false,
           inputMaxWidth: '80px',
@@ -83,11 +86,14 @@ export class GeneralTherapy1 extends Item {
             max: 30
           }
         }),
-        /*           ClozeItemTypes.text({ //inputMaxWidth: '80px',
-                     key: '2', content: new Map(
-                       [['nl', ",namelijk (bijvoorbeeld antibiotica, paracetemol, etc):"]]
-                     )
-                   }),*/
+      ],
+      customValidations: [
+        {
+          key: 'GenT1', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`),0),
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -292,6 +298,10 @@ export class LymeDiagnosis2 extends Item {
 
 export class Doctor extends Item {
 
+  optionKeys = {
+    other: 'c'
+  }
+
   questionTextMain_Adults = [
     {
       content: new Map([
@@ -347,12 +357,32 @@ export class Doctor extends Item {
             ["nl", "Bedrijfsarts"],
           ])
         },
+        MCOptions.cloze({
+          key: this.optionKeys.other,
+          items: [
+            ClozeItemTypes.text({
+              key: '1', content: new Map(
+                [['nl', "Ander soort arts, namelijk:"]]
+              )
+            }),
+            ClozeItemTypes.textInput({
+              key: 'input',
+            }),
+          ]
+        }),
+      ],
+      customValidations: [
         {
-          key: 'c', role: 'input',
-          content: new Map([
-            ["nl", "Ander soort arts, namelijk:"],
-          ])
-        },
+          key: 'Doc', rule:
+          SurveyEngine.logic.or(
+            SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
+            SurveyEngine.logic.and(
+              SurveyEngine.multipleChoice.any(this.key, this.optionKeys.other),
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.other}.input`),
+            )
+          ),
+          type: 'hard'
+        }
       ]
     })
   }

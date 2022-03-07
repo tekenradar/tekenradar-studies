@@ -122,6 +122,14 @@ class FormerLymeTherapyQ2 extends Item {
             ["nl", "Onbekend"],
           ])
         },
+      ],
+      customValidations: [
+        {
+          key: 'Q2', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes}.2`),0),
+          ), type: 'hard'
+        }
       ]
     })
   }
