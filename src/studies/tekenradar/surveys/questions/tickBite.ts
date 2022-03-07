@@ -762,6 +762,13 @@ export class RemoveTick2 extends Item {
 
 export class RemoveTick3 extends Item {
 
+  optionKeys = {
+    today: 'a',
+    yesterday: 'b',
+    ereyesterday: 'c',
+    other: 'd'
+  }
+
   questionTextMain = [
     {
       content: new Map([
@@ -793,7 +800,7 @@ export class RemoveTick3 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a',
+          key: this.optionKeys.today,
           items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
@@ -815,7 +822,7 @@ export class RemoveTick3 extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'b',
+          key: this.optionKeys.yesterday,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -838,7 +845,7 @@ export class RemoveTick3 extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'c',
+          key: this.optionKeys.ereyesterday,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -861,7 +868,7 @@ export class RemoveTick3 extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'd',
+          key: this.optionKeys.other,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -902,6 +909,33 @@ export class RemoveTick3 extends Item {
             }),
           ]
         }),
+      ],
+      customValidations: [
+        {
+          key: 'TB_A8', rule: SurveyEngine.logic.or(
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.today),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.3`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.yesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.3`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.ereyesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.3`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.other),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.5`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.6`),
+            ),
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -909,6 +943,7 @@ export class RemoveTick3 extends Item {
 
 
 export class RemoveTick4 extends Item {
+
 
 
   questionTextMain = [
@@ -1046,6 +1081,13 @@ export class ReportedTickBites extends Item {
 
 export class DateTickBite extends Item {
 
+  optionKeys = {
+    today: 'a',
+    yesterday: 'b',
+    ereyesterday: 'c',
+    other: 'd'
+  }
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'TB_B13');
 
@@ -1064,7 +1106,7 @@ export class DateTickBite extends Item {
       ]),
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.today, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Vandaag, tussen"]]
@@ -1085,7 +1127,7 @@ export class DateTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'b',
+          key: this.optionKeys.yesterday,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -1108,7 +1150,7 @@ export class DateTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'c',
+          key: this.optionKeys.ereyesterday,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -1131,7 +1173,7 @@ export class DateTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'd',
+          key: this.optionKeys.other,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -1172,13 +1214,50 @@ export class DateTickBite extends Item {
             }),
           ]
         }),
+      ],
+      customValidations: [
+        {
+          key: 'TB_B13', rule: SurveyEngine.logic.or(
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.today),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.3`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.yesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.3`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.ereyesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.3`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.other),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.5`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.6`),
+            ),
+          ), type: 'hard'
+        }
       ]
+
     })
   }
 }
 
 
 export class DurationTickBite extends Item {
+
+
+  optionKeys = {
+    shorter12: 'a',
+    between12and24: 'b',
+    longer24: 'c',
+    unknown: 'd'
+  }
+
 
   questionTextMain = [
     {
@@ -1211,7 +1290,7 @@ export class DurationTickBite extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a',
+          key: this.optionKeys.shorter12,
           items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
@@ -1231,7 +1310,7 @@ export class DurationTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'b',
+          key: this.optionKeys.between12and24,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -1252,7 +1331,7 @@ export class DurationTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'c',
+          key: this.optionKeys.longer24,
           className: TextBorderFormat,
           items: [
             ClozeItemTypes.text({
@@ -1280,11 +1359,31 @@ export class DurationTickBite extends Item {
           ]
         }),
         SCOptions.option(
-          'd', new Map([["nl", "Weet ik niet"]]),
+          this.optionKeys.unknown, new Map([["nl", "Weet ik niet"]]),
           {
             className: TextBorderFormat,
           }
         )
+      ],
+      customValidations: [
+        {
+          key: 'TB_B13', rule: SurveyEngine.logic.or(
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.shorter12),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.shorter12}.2`)
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.between12and24),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.between12and24}.2`)
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.longer24),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.longer24}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.longer24}.3`),
+            ),
+            SurveyEngine.singleChoice.any(this.key, this.optionKeys.unknown),
+          ), type: 'hard'
+        }
       ]
     })
   }
