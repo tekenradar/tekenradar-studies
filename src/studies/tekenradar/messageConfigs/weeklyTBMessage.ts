@@ -21,7 +21,7 @@ export const weeklyTBMessage: MessageConfig = {
   sendingTime: { hour: 1, minute: 0 },
   translations: [{
     lang: 'nl',
-    subject: 'De wekelijkse Tekenradarvragenlijst staat voor je klaar'
+    subject: 'De wekelijkse Tekenradar vragenlijst staat voor je klaar'
   }],
   headerOverrides: headerOverrides,
 }
