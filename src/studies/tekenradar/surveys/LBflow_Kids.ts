@@ -1,7 +1,10 @@
+import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
-import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
+import { applyRequiredQuestions } from './globalConstants';
+import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
+import { FormerLymeGroup } from './questions/formerLymeGroup';
 import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7, LymeHeader } from './questions/lyme';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
@@ -29,7 +32,7 @@ class LBflow_KidsDef extends SurveyDefinition {
   Q21: LymeTherapy5;
 
   //Previous Tick Bites and former lyme disease at the end
-  G22_24: FormerLymeGroup;
+  FLG: FormerLymeGroup;
   G25_26: PreviousTickBitesGroup;
 
   constructor(isRequired?: boolean) {
@@ -77,8 +80,12 @@ class LBflow_KidsDef extends SurveyDefinition {
     const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
     this.Q21 = new LymeTherapy5(this.key, required, Q20condition);
 
-    this.G22_24 = new FormerLymeGroup(this.key, isRequired);
+    this.FLG = new FormerLymeGroup(this.key, isRequired);
     this.G25_26 = new PreviousTickBitesGroup(this.key, isRequired);
+
+    this.editor.setPrefillRules([
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
+    ])
   }
 
   buildSurvey() {
@@ -102,11 +109,11 @@ class LBflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q20.get());
     this.addItem(this.Q21.get());
 
-    this.addItem(this.G22_24.get());
+    this.addItem(this.FLG.get());
     this.addItem(this.G25_26.get());
 
 
   }
 }
 
-export const LBflow_Kids = new LBflow_KidsDef();
+export const LBflow_Kids = new LBflow_KidsDef(applyRequiredQuestions);

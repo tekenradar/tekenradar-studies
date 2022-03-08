@@ -1,7 +1,11 @@
+import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ParticipantFlags } from '../participantFlags';
+import { applyRequiredQuestions } from './globalConstants';
 import { Gender, Residence } from './questions/demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
+import { Doctor, GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
+import { FormerLymeGroup } from './questions/formerLymeGroup';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { ActivityTickBite, DateTickBite, DoctorTickBite, DurationTickBite, EnvironmentTickBite, IntroTB, LocationBodyTickBite, NumberTickBite, RemoveTick1, RemoveTick2, RemoveTick3, RemoveTick4, ReportedTickBites, TBGeneralHeader, TickBiteLocationGroup } from './questions/tickBite';
 
@@ -28,7 +32,7 @@ class TBflow_KidsDef extends SurveyDefinition {
   Q15: DoctorTickBite;
   Q16: Doctor;
 
-  G17_19: FormerLymeGroup;
+  FLG: FormerLymeGroup;
 
   Q20_a: GeneralTherapy1;
   Q20_b: GeneralTherapy2;
@@ -68,11 +72,22 @@ class TBflow_KidsDef extends SurveyDefinition {
     this.Q12 = new ReportedTickBites(this.key, required);
 
     this.H1 = new TBGeneralHeader(this.key, required);
-    //TODO If the respondent is not logged in ask p1 and p2,
+
+    // If the respondent is not logged in ask p1 and p2,
     //if he is logged in, skip these two questions here as they
     //will be asked lateron in de questionaire (chapter S-A)
-    this.P1 = new Residence(this.key, required);
-    this.P2 = new Gender(this.key, required);
+    this.P1 = new Residence(this.key, required,
+      SurveyEngine.logic.or(
+        SurveyEngine.logic.not(SurveyEngine.isLoggedIn()),
+        SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.postalCode.key))
+      )
+    );
+    this.P2 = new Gender(this.key, required,
+      SurveyEngine.logic.or(
+        SurveyEngine.logic.not(SurveyEngine.isLoggedIn()),
+        SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key))
+      )
+    );
 
     this.Q13 = new DateTickBite(this.key, required);
     this.Q14 = new DurationTickBite(this.key, required);
@@ -80,11 +95,15 @@ class TBflow_KidsDef extends SurveyDefinition {
     const q15Condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
     this.Q16 = new Doctor(this.key, required, q15Condition);
 
-    this.G17_19 = new FormerLymeGroup(this.key, isRequired);
+    this.FLG = new FormerLymeGroup(this.key, isRequired);
 
     this.Q20_a = new GeneralTherapy1(this.key, required);
     const Q20_a_number = SurveyEngine.getResponseValueAsNum(this.Q20_a.key, 'rg.scg.b');
     this.Q20_b = new GeneralTherapy2(this.key, required, Q20_a_number);
+
+    this.editor.setPrefillRules([
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q4.key, 'rg.num', 1)
+    ])
   }
 
   buildSurvey() {
@@ -104,16 +123,16 @@ class TBflow_KidsDef extends SurveyDefinition {
 
     this.addPageBreak();
     this.addItem(this.H1.get());
-    this.addItem(this.P1.get());
-    this.addItem(this.P2.get());
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q15.get());
     this.addItem(this.Q16.get());
-    this.addItem(this.G17_19.get());
+    this.addItem(this.FLG.get());
     this.addItem(this.Q20_a.get());
     this.addItem(this.Q20_b.get());
+    this.addItem(this.P1.get());
+    this.addItem(this.P2.get());
   }
 }
 
-export const TBflow_Kids = new TBflow_KidsDef();
+export const TBflow_Kids = new TBflow_KidsDef(applyRequiredQuestions);

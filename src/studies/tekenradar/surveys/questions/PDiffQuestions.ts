@@ -8,11 +8,11 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 export class IntroPDiff extends Item {
 
   markdownContent = `
-# Melding doen
+### Melding doen
 
-##### Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
+Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
 
-###### Wat wil je precies melden? Wat is op jou van toepassing?
+Wat wil je precies melden? Vragen met een "*" zijn verplicht.
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -48,7 +48,7 @@ export class DetectTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DetTB');
+    super(parentKey, 'D1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -89,7 +89,7 @@ export class FeverTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FevTB');
+    super(parentKey, 'D2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -103,7 +103,7 @@ export class FeverTickBite extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Heb je binnen vier weken na de tekenbeet gemeten koorts boven 38,0 graden gehad?'],
+        ['nl', 'Heb je binnen vier weken na de tekenbeet gemeten koorts van 38,0 graden of hoger gehad?'],
       ]),
       responseOptions: [
         {
@@ -177,7 +177,7 @@ export class EMTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EMTB');
+    super(parentKey, 'D3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -220,7 +220,7 @@ export class LymeTickBite1 extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LTB1');
+    super(parentKey, 'D4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -263,7 +263,7 @@ export class LymeTickBite2 extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LTB2');
+    super(parentKey, 'D5');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -280,13 +280,13 @@ export class LymeTickBite2 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.fever, role: 'option',
           content: new Map([
             ["nl", "Koorts"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.posTest, role: 'option',
           content: new Map([
             ["nl", "Een positieve bloedtest voor de ziekte van Lyme"],
           ])
@@ -314,7 +314,7 @@ export class MedicationLyme extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'MedLyme');
+    super(parentKey, 'D6');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -349,7 +349,7 @@ export class MedicationLyme extends Item {
             }),
             ClozeItemTypes.text({
               key: '2', content: new Map(
-                [['nl', ". Dit is de "]]
+                [['nl', "Dit is de "]]
               )
             }),
             ClozeItemTypes.dropDown({
@@ -393,9 +393,9 @@ export class WeeklyFlowPretext extends Item {
   }
 
   markdownContent = `
-##### We willen graag meten of het aantal tekenbeten over de tijd verandert.
-##### Hiervoor zoeken we deelnemers die regelmatig aan ons door willen geven hoeveel tekenbeten zij gehad hebben.
-##### Dat duurt minder dan een minuut per keer. Ook als je meestal géén tekenbeten hebt is het heel nuttig om dat te melden.
+##### We willen graag weten hoeveel tekenbeten mensen oplopen.
+##### Daarom zoeken wij mensen die ons wekelijks laten weten of ze tekenbeten hebben gehad. Dit duurt minder dan een minuut.
+##### Ook als je géén tekenbeet hebt gehad is het nuttig om door te geven.
 `
 
   buildItem(): SurveySingleItem {
@@ -447,6 +447,97 @@ export class SurveyValidationText extends Item {
 
 }
 
+export class FlowStartText extends Item {
+  EMFlowActive: Expression;
+  FeverFlowActive: Expression;
+  LBFlowActive: Expression;
+  ChronicflowActive: Expression;
+
+  constructor(parentKey: string, conditions: {
+    showItem: Expression,
+    EMFlowActive: Expression,
+    FeverFlowActive: Expression,
+    LBFlowActive: Expression,
+    ChronicflowActive: Expression,
+  }) {
+    super(parentKey, 'StartText');
+    this.condition = conditions.showItem;
+
+    this.EMFlowActive = conditions.EMFlowActive;
+    this.FeverFlowActive = conditions.FeverFlowActive;
+    this.LBFlowActive = conditions.LBFlowActive;
+    this.ChronicflowActive = conditions.ChronicflowActive;
+  }
+
+  markdownContentEMFlow = `
+### Erythema migrans melden
+
+Een “erythema migrans” is een uitbreidende rode ring of vlek rond de plek van een tekenbeet. Het is vaak het eerste signaal van de ziekte van Lyme.
+
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+`
+
+  markdownContentFeverFlow = `
+### Tekenbeet melden
+
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+`
+
+  markdownContentLBFlow = `
+### Ziekte van Lyme melden
+
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+`
+
+  markdownContentChronicFlow = `
+### Ziekte van Lyme melden
+
+Klik hieronder op "Opslaan en verder gaan".
+Daarna kun je een account aanmaken of inloggen met een bestaande account.
+Met een account kun je deze melding afronden, en als je dat hierboven hebt aangegeven wekelijks aan ons melden of je tekenbeten hebt gehad. In je account krijg je een overzicht van je meldingen. Je e-mailadres wordt niet voor andere doeleinden gebruikt.
+`
+
+  buildItem(): SurveySingleItem {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentEMFlow],
+          ]),
+          displayCondition: this.EMFlowActive,
+        }),
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentFeverFlow],
+          ]),
+          displayCondition: this.FeverFlowActive,
+        }),
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentLBFlow],
+          ]),
+          displayCondition: this.LBFlowActive,
+        }),
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContentChronicFlow],
+          ]),
+          displayCondition: this.ChronicflowActive,
+        }),
+      ]
+    })
+  }
+}
+
 
 export class WeeklyFlow extends Item {
   optionKeys = {
@@ -457,7 +548,7 @@ export class WeeklyFlow extends Item {
   extraValidationRules: Expression[];
 
   constructor(parentKey: string, isRequired: boolean, extraValidationRules: Expression[]) {
-    super(parentKey, 'WFPDiff');
+    super(parentKey, 'D7');
 
     this.isRequired = isRequired;
     this.extraValidationRules = extraValidationRules;
@@ -470,7 +561,10 @@ export class WeeklyFlow extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wilt u wekelijks doorgeven hoeveel tekenbeten u heeft gehad?'],
+        ['nl', 'Wil je wekelijks doorgeven hoeveel tekenbeten je hebt gehad?'],
+      ]),
+      questionSubText: new Map([
+        ['nl', 'Hiervoor kun je een account aanmaken na klikken op "Opslaan en verder gaan" onderaan deze pagina.'],
       ]),
       responseOptions: [
         {

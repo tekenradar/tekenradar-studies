@@ -1,18 +1,19 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
-import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { PreviousTickBitesGroup } from './prevTickBites';
-import { Residence, Gender } from './demographie';
-import { Doctor, FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { Doctor } from './diagnosisTherapy';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
+import { surveyCategoryNames, SurveySuffix, TextBorderFormat } from '../globalConstants';
+import { clozeItemDropdownHours  } from './utils';
 
 
 export class TickBiteOtherGroup extends Group {
 
   Start: RecognisedTickBite;
+  SelectTickbiteReport: SelectTickbiteReport;
 
   T1: IntroTB;
   Q1: EnvironmentTickBite;
@@ -39,8 +40,11 @@ export class TickBiteOtherGroup extends Group {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.Start = new RecognisedTickBite(this.key, required);
-    const QStartcondition = SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes);
+    this.SelectTickbiteReport = new SelectTickbiteReport(this.key, required, SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yesOnTekenradar));
 
+    const QStartcondition = this.isPartOf(surveyCategoryNames.Feverflow) ?
+      SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes, this.Start.optionKeys.no)
+      : SurveyEngine.singleChoice.any(this.Start.key, this.Start.optionKeys.yes);
     this.T1 = new IntroTB(this.key, required, QStartcondition);
     this.Q1 = new EnvironmentTickBite(this.key, required, QStartcondition);
     this.Q2 = new ActivityTickBite(this.key, required, QStartcondition);
@@ -64,6 +68,7 @@ export class TickBiteOtherGroup extends Group {
   buildGroup() {
 
     this.addItem(this.Start.get());
+    this.addItem(this.SelectTickbiteReport.get());
 
     this.addPageBreak();
     this.addItem(this.T1.get());
@@ -77,13 +82,10 @@ export class TickBiteOtherGroup extends Group {
     this.addItem(this.Q8.get());
     this.addItem(this.Q9.get());
 
-    //TODO: is this the recommended way to add fever survey questions in this group?
-    if (this.isPartOf('Feverflow')) {
-      this.addItem(this.Q10F.get()),
-        this.addItem(this.Q11F.get())
+    if (this.isPartOf(surveyCategoryNames.Feverflow)) {
+      this.addItem(this.Q10F.get())
+      this.addItem(this.Q11F.get())
     }
-
-
   }
 }
 
@@ -91,46 +93,43 @@ export class TickBiteOtherGroup extends Group {
 export class IntroTB extends Item {
 
   markdownContentTBflow_Adults = `
-  # Melden tekenbeet
+### Melden tekenbeet
 
-  De volgende vragen gaan over de tekenbeet.
+De volgende vragen gaan over de tekenbeet.
 
-  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
 
   `
 
   markdownContentTBflow_Kids = `
-  # Melden tekenbeet
+### Melden tekenbeet
 
-  De volgende vragen gaan over de tekenbeet.
+De volgende vragen gaan over de tekenbeet.
 
-  Indien je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
-
+Indien je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
   `
 
 
   markdownContentEMflow_Kids = `
-  # Tekenbeet
+### Tekenbeet
 
-  De vragen hieronder zijn voor een minderjarige.
-  Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
+De vragen hieronder zijn voor een minderjarige.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
-  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
   `
 
   markdownContentOther = `
-  # Tekenbeet
+### Tekenbeet
 
-  De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
-
-  `
+De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+`
 
   markdownContentFever = `
-  # Melden tekenbeet
+### Melden tekenbeet
 
-  Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
-
-  `
+Als je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één tekenbeet melden.
+`
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'IntroTB');
@@ -167,7 +166,7 @@ export class IntroTB extends Item {
 export class TBGeneralHeader extends Item {
 
   markdownContentTBflow = `
-  # Tekenbeten algemeen
+### Tekenbeten algemeen
   `
 
 
@@ -200,14 +199,16 @@ export class TBGeneralHeader extends Item {
 
 export class RecognisedTickBite extends Item {
   optionKeys = {
+    no: 'a',
+    yesOnTekenradar: 'b',
     yes: 'c',
   }
 
   qTextFever = new Map([[
-    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de koorts hebt gekregen, al gemeld?'
+    'nl', 'Heb je de tekenbeet al gemeld, die waarschijnlijk de koorts heeft veroorzaakt?'
   ]]);
   qTextOther = new Map([[
-    'nl', 'Heb je de tekenbeet, waardoor je vermoedelijk de erythema migrans of andere ziekte van Lyme die je nu meldt hebt gekregen, opgemerkt?'
+    'nl', 'Heb je de tekenbeet opgemerkt, die waarschijnlijk de nu gemelde erythema migrans of andere ziekte van Lyme heeft veroorzaakt?'
   ]]);
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -224,17 +225,23 @@ export class RecognisedTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf('Feverflow') ? this.qTextFever : this.qTextOther,
+      questionText: this.isPartOf(surveyCategoryNames.Feverflow) ? this.qTextFever : this.qTextOther,
       //helpGroupContent: this.getHelpGroupContent(),
       responseOptions: [
         SCOptions.option(
-          'a', new Map([["nl", "Nee"]])
+          this.optionKeys.no, new Map([["nl", "Nee"]])
         ),
         SCOptions.option(
-          'b', new Map([["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"]])
+          this.optionKeys.yesOnTekenradar,
+          new Map([["nl", "Ja, deze heb ik eerder gemeld op Tekenradar.nl"]]),
+          {
+            className: TextBorderFormat,
+          },
         ),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: this.optionKeys.yes,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Ja, de datum dat ik de tekenbeet heb opgelopen is"]]
@@ -270,9 +277,37 @@ export class RecognisedTickBite extends Item {
           ]
         }),
         SCOptions.option(
-          'd', new Map([["nl", "Onbekend"]])
+          'd', new Map([["nl", "Onbekend"]]),
+          {
+            className: TextBorderFormat,
+          }
         ),
       ]
+    })
+  }
+}
+
+export class SelectTickbiteReport extends Item {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'A1b');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.customQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([["nl", "Selecteer hieronder de juiste tekenbeet"]]),
+      responseItemDefs: [
+        {
+          key: 'TBR', role: 'TBReportSelector', mapToRole: 'input'
+        }
+      ],
     })
   }
 }
@@ -296,7 +331,7 @@ export class EnvironmentTickBite extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'EnvTB');
+    super(parentKey, 'TB_A1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -386,7 +421,7 @@ export class ActivityTickBite extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'ActTB');
+    super(parentKey, 'TB_A2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -439,9 +474,9 @@ export class ActivityTickBite extends Item {
         {// show option g only if participant age > 12 years
           key: 'g', role: 'input',
           content: new Map([
-            ["nl", "Werk gerelateerde activiteit, namelijk:"],
+            ["nl", "Werkgerelateerde activiteit, namelijk:"],
           ]),
-          displayCondition: this.isPartOf("Adults") ? undefined :
+          displayCondition: this.isPartOf(SurveySuffix.Adults) ? undefined :
             SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 12)
         },
         {
@@ -468,6 +503,7 @@ class TickBiteLocationKnown extends Item {
     ongeveer: 'b',
     denkWeten: 'c',
     nee: 'd',
+    outsideNL: 'e'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -506,6 +542,12 @@ class TickBiteLocationKnown extends Item {
           ])
         },
         {
+          key: this.optionKeys.outsideNL, role: 'option',
+          content: new Map([
+            ["nl", "Ja, maar het is buiten Nederland"],
+          ])
+        },
+        {
           key: this.optionKeys.nee, role: 'option',
           content: new Map([
             ["nl", "Nee, ik weet het niet"],
@@ -536,7 +578,7 @@ class TickBiteMap extends Item {
       responseItemDefs: [
         {
           key: 'map', role: 'map', content: generateLocStrings(new Map([
-            ['nl', 'Klik op de kaart om (ongeveer) de locatie aan te geven waar u de tekenbeet heeft opgelopen.']
+            ['nl', 'Klik op de kaart en plaats de teek (ongeveer) op de locatie waar je de tekenbeet hebt opgelopen. Zoom in om de locatie preciezer aan te kunnen geven']
           ]))
         }
       ]
@@ -544,9 +586,32 @@ class TickBiteMap extends Item {
   }
 }
 
+class TBOutsideNL extends Item {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Q2b');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'In welk (buiten)land heb je de tekenbeet opgelopen?'],
+      ]),
+    })
+  }
+}
+
+
 export class TickBiteLocationGroup extends Group {
   Q1: TickBiteLocationKnown;
   Q2: TickBiteMap;
+  Q2b: TBOutsideNL;
 
   constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
     super(parentKey, 'TBLoc');
@@ -556,22 +621,42 @@ export class TickBiteLocationGroup extends Group {
 
 
     this.Q1 = new TickBiteLocationKnown(this.key, required);
-    const showMap = SurveyEngine.singleChoice.none(this.Q1.key, this.Q1.optionKeys.nee);
+    const showMap = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.precies, this.Q1.optionKeys.ongeveer, this.Q1.optionKeys.denkWeten);
     this.Q2 = new TickBiteMap(this.key, required, showMap);
+    const showOutsideNL = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.outsideNL);
+    this.Q2b = new TBOutsideNL(this.key, required, showOutsideNL);
 
   }
 
   buildGroup() {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
+    this.addItem(this.Q2b.get());
   }
 }
 
 
 export class NumberTickBite extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Door hoeveel teken ben je toen gebeten?'],
+      ]),
+    },
+  ]
+
+  questionTextMain_EMKids = [
+    {
+      content: new Map([
+        ["nl", 'Door hoeveel teken was je gebeten?'],
+      ]),
+    },
+  ]
+
+  //questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.questionTextMain_Kids,
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'NumTB');
+    super(parentKey, 'TB_A4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -582,9 +667,7 @@ export class NumberTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Door hoeveel teken ben je toen gebeten?'],
-      ]),
+      questionText: this.isPartOf("EMflow_Kids") ? this.questionTextMain_EMKids : this.questionTextMain,
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
       inputLabel: new Map([
@@ -593,7 +676,7 @@ export class NumberTickBite extends Item {
       //TODO: default preset to 1, not implemented yet
       componentProperties: {
         min: 1,
-        max: 20,
+        max: 100,
       }
     })
   }
@@ -616,7 +699,7 @@ export class LocationBodyTickBite extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LocTB');
+    super(parentKey, 'TB_A5');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -641,7 +724,7 @@ export class RemoveTick1 extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'RemT1');
+    super(parentKey, 'TB_A6');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -677,7 +760,7 @@ export class RemoveTick1 extends Item {
 
 export class RemoveTick2 extends Item {
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'RemT2');
+    super(parentKey, 'TB_A7');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -713,6 +796,13 @@ export class RemoveTick2 extends Item {
 
 export class RemoveTick3 extends Item {
 
+  optionKeys = {
+    today: 'a',
+    yesterday: 'b',
+    ereyesterday: 'c',
+    other: 'd'
+  }
+
   questionTextMain = [
     {
       content: new Map([
@@ -729,7 +819,7 @@ export class RemoveTick3 extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'RemT3');
+    super(parentKey, 'TB_A8');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -744,70 +834,84 @@ export class RemoveTick3 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.today,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
+            clozeItemDropdownHours('dropdown1'),
+            /*ClozeItemTypes.timeInput({
               key: '2',
-              defaultValue: '13:00',
+              defaultValue: '--:--',
               inputLabelText: new Map([["nl", " en"],]),
               labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            */
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
-          key: 'b', items: [
+          key: this.optionKeys.yesterday,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Gisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: this.optionKeys.ereyesterday,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eergisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
-          key: 'd', items: [
+          key: this.optionKeys.other,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eerder namelijk,"]]
@@ -832,20 +936,47 @@ export class RemoveTick3 extends Item {
                 [['nl', "tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '5',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '6',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '5', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '6', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
+      ],
+      customValidations: [
+        {
+          key: 'TB_A8', rule: SurveyEngine.logic.or(
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.today),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown2`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.yesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown2`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.ereyesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown2`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.other),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown2`),
+            ),
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -853,6 +984,7 @@ export class RemoveTick3 extends Item {
 
 
 export class RemoveTick4 extends Item {
+
 
 
   questionTextMain = [
@@ -870,7 +1002,7 @@ export class RemoveTick4 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'RemT4');
+    super(parentKey, 'TB_A9');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -924,7 +1056,7 @@ export class RemoveTick4 extends Item {
 export class ReportedTickBites extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Q12');
+    super(parentKey, 'TB_A12');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -955,31 +1087,31 @@ export class ReportedTickBites extends Item {
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "1 tekenbeet gemeld"],
+            ["nl", "1 tekenbeet gemeld dit jaar"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "2 tekenbeten gemeld"],
+            ["nl", "2 tekenbeten gemeld dit jaar"],
           ])
         },
         {
           key: 'e', role: 'option',
           content: new Map([
-            ["nl", "3-5 tekenbeten gemeld"],
+            ["nl", "3-5 tekenbeten gemeld dit jaar"],
           ])
         },
         {
           key: 'f', role: 'option',
           content: new Map([
-            ["nl", "5-10 tekenbeten gemeld"],
+            ["nl", "5-10 tekenbeten gemeld dit jaar"],
           ])
         },
         {
           key: 'g', role: 'option',
           content: new Map([
-            ["nl", "Meer dan 10 tekenbeten gemeld"],
+            ["nl", "Meer dan 10 tekenbeten gemeld dit jaar"],
           ])
         },
       ]
@@ -990,8 +1122,15 @@ export class ReportedTickBites extends Item {
 
 export class DateTickBite extends Item {
 
+  optionKeys = {
+    today: 'a',
+    yesterday: 'b',
+    ereyesterday: 'c',
+    other: 'd'
+  }
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DTB');
+    super(parentKey, 'TB_B13');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1008,70 +1147,76 @@ export class DateTickBite extends Item {
       ]),
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.today, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
-          key: 'b', items: [
+          key: this.optionKeys.yesterday,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Gisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: this.optionKeys.ereyesterday,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eergisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
-          key: 'd', items: [
+          key: this.optionKeys.other,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Eerder, op"]]
@@ -1096,27 +1241,64 @@ export class DateTickBite extends Item {
                 [['nl', "tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '5',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '6',
-              defaultValue: '13:00',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '5', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '6', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
+      ],
+      customValidations: [
+        {
+          key: 'TB_B13', rule: SurveyEngine.logic.or(
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.today),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown2`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.yesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown2`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.ereyesterday),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown2`),
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.other),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown2`),
+            ),
+          ), type: 'hard'
+        }
       ]
+
     })
   }
 }
 
 
 export class DurationTickBite extends Item {
+
+
+  optionKeys = {
+    shorter12: 'a',
+    between12and24: 'b',
+    longer24: 'c',
+    unknown: 'd'
+  }
+
 
   questionTextMain = [
     {
@@ -1134,7 +1316,7 @@ export class DurationTickBite extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DurTB');
+    super(parentKey, 'TB_B14');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1149,7 +1331,8 @@ export class DurationTickBite extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.shorter12,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Korter dan 12 uur, namelijk"]]
@@ -1168,7 +1351,9 @@ export class DurationTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'b', items: [
+          key: this.optionKeys.between12and24,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "12 - 24 uur, namelijk"]]
@@ -1187,7 +1372,9 @@ export class DurationTickBite extends Item {
           ]
         }),
         SCOptions.cloze({
-          key: 'c', items: [
+          key: this.optionKeys.longer24,
+          className: TextBorderFormat,
+          items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['nl', "Langer dan 24 uur, namelijk"]]
@@ -1203,19 +1390,41 @@ export class DurationTickBite extends Item {
               }
             }),
             ClozeItemTypes.dropDown({
-              key: '3', options: [
+              key: '3',
+              placeholder: new Map([['nl', '-- kies een optie --']]),
+              options: [
                 SCOptions.option('1', new Map([['nl', "uren"]])),
                 SCOptions.option('2', new Map([['nl', "dagen (rond af op hele dagen)"]]))
               ]
             }),
           ]
         }),
+        SCOptions.option(
+          this.optionKeys.unknown, new Map([["nl", "Weet ik niet"]]),
+          {
+            className: TextBorderFormat,
+          }
+        )
+      ],
+      customValidations: [
         {
-          key: 'd', role: 'option',
-          content: new Map([
-            ["nl", "Weet ik niet"],
-          ])
-        },
+          key: 'TB_B13', rule: SurveyEngine.logic.or(
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.shorter12),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.shorter12}.2`)
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.between12and24),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.between12and24}.2`)
+            ),
+            SurveyEngine.logic.and(
+              SurveyEngine.singleChoice.any(this.key, this.optionKeys.longer24),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.longer24}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.longer24}.3`),
+            ),
+            SurveyEngine.singleChoice.any(this.key, this.optionKeys.unknown),
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -1229,7 +1438,7 @@ export class DoctorTickBite extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'DocTB');
+    super(parentKey, 'TB_B15');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1246,7 +1455,7 @@ export class DoctorTickBite extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -1261,6 +1470,5 @@ export class DoctorTickBite extends Item {
     })
   }
 }
-
 
 

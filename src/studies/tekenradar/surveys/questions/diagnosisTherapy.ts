@@ -1,55 +1,17 @@
 import { Expression } from 'survey-engine/data_types';
-import { Group, Item } from 'case-editor-tools/surveys/types';
+import { Group, Item, OptionDef } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions , ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+import { SurveySuffix } from '../globalConstants';
+import { responseGroupKey, inputKey, dropDownKey } from 'case-editor-tools/constants/key-definitions';
+import { clozeItemDropdownHours  } from './utils';
 
-
-
-export class FormerLymeGroup extends Group {
-
-  Q1: FormerLymeDiagnosis;
-  Q2: FormerLymeTherapy1;
-  Q3: FormerLymeTherapy2;
-  Q4: FormerLymeTherapy3;
-  Q5: FormerLymeTherapy4;
-
-
-  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'FLG');
-
-    this.groupEditor.setCondition(condition);
-    const required = isRequired !== undefined ? isRequired : false;
-
-
-    this.Q1 = new FormerLymeDiagnosis(this.key, required);
-    const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
-    this.Q2 = new FormerLymeTherapy1(this.key, required, q1Condition);
-    const q2Condition = SurveyEngine.singleChoice.any(this.Q2.key, this.Q2.optionKeys.yes);
-    this.Q3 = new FormerLymeTherapy2(this.key, required, q2Condition);
-    const q3Condition = SurveyEngine.getResponseValueAsNum(this.Q3.key, 'rg.num');
-    this.Q4 = new FormerLymeTherapy3(this.key, required, q3Condition);
-    this.Q5 = new FormerLymeTherapy4(this.key, required, q1Condition);
-
-  }
-
-  buildGroup() {
-
-    this.addItem(this.Q1.get());
-    this.addItem(this.Q2.get());
-    this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
-    this.addItem(this.Q5.get());
-
-  }
-}
 
 
 export class LymeDiagnosisGroup extends Group {
-
   Q1: LymeDiagnosis1;
   Q2: LymeDiagnosis2;
-
 
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'LymeDiagG');
@@ -59,279 +21,11 @@ export class LymeDiagnosisGroup extends Group {
     this.Q1 = new LymeDiagnosis1(this.key, required);
     const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new LymeDiagnosis2(this.key, required, q1Condition);
-
   }
 
   buildGroup() {
-
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
-
-  }
-}
-
-
-
-
-class FormerLymeDiagnosis extends Item {
-
-  optionKeys = {
-    yes: 'a'
-  }
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLD');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Is er bij jou ooit eerder een erythema migrans of een andere vorm van de ziekte van Lyme vastgesteld?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Ja"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Nee"],
-          ])
-        },
-      ]
-    })
-  }
-}
-
-
-
-class FormerLymeTherapy1 extends Item {
-
-  optionKeys = {
-    yes: 'b'
-  }
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLTher1');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Heb je een antibiotica kuur gekregen voor deze eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Nee"],
-          ])
-        },
-        SCOptions.cloze({
-          key: 'b', items: [
-            ClozeItemTypes.text({
-              key: '1', content: new Map(
-                [['nl', "Ja; hoe vaak:"]]
-              )
-            }),
-            ClozeItemTypes.numberInput({
-              key: '2',
-              inputLabel: new Map([['nl', ' Antibioticakuren']]),
-              labelBehindInput: true,
-              inputMaxWidth: '60px'
-            }),
-          ]
-        }),
-        {
-          key: 'c', role: 'option',
-          content: new Map([
-            ["nl", "Onbekend"],
-          ])
-        },
-      ]
-    })
-  }
-}
-
-
-class FormerLymeTherapy2 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLTher2');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.numericInput({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Om hoeveel antiobioticakuren gaat het?'],
-      ]),
-      titleClassName: 'sticky-top',
-      inputMaxWidth: '80px',
-      inputLabel: new Map([
-        ['nl', 'kuren']
-      ]),
-      labelBehindInput: true,
-      //contentBehindInput: true,
-      componentProperties: {
-        min: 0,
-        max: 5
-      }
-    })
-  }
-}
-
-
-export class FormerLymeTherapy3 extends Item {
-
-  condition2: Expression;
-  condition3: Expression;
-  condition4: Expression;
-  condition5: Expression;
-
-
-  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
-    super(parentKey, 'FLTher3');
-
-    this.isRequired = isRequired;
-    this.condition = SurveyEngine.compare.gt(condition, 0);
-    this.condition2 = SurveyEngine.compare.gt(condition, 1);
-    this.condition3 = SurveyEngine.compare.gt(condition, 2);
-    this.condition4 = SurveyEngine.compare.gt(condition, 3);
-    this.condition5 = SurveyEngine.compare.gt(condition, 4);
-
-  }
-
-  buildItem() {
-    return SurveyItems.clozeQuestion({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', "Namelijk antibiotica:"],
-      ]),
-      items:
-        [
-          ClozeItemTypes.text({
-            key: '1', content: new Map(
-              [['nl', "Antibiotica 1:"]]
-            ),
-          }),
-          ClozeItemTypes.textInput({
-            key: '2',
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //2nd Medication:
-          ClozeItemTypes.text({
-            key: '3', content: new Map(
-              [['nl', "Antibiotica 2:"]]
-            ),
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.textInput({
-            key: '4',
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //3rd medication:
-          ClozeItemTypes.text({
-            key: '5', content: new Map(
-              [['nl', "Antibiotica 3:"]]
-            ),
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.textInput({
-            key: '6',
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //4th medication:
-          ClozeItemTypes.text({
-            key: '7', content: new Map(
-              [['nl', "Antibiotica 4:"]]
-            ),
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.textInput({
-            key: '8',
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //5th medication:
-          ClozeItemTypes.text({
-            key: '9', content: new Map(
-              [['nl', "Antibiotica 5:"]]
-            ),
-            displayCondition: this.condition5
-          }),
-          ClozeItemTypes.textInput({
-            key: '18',
-            displayCondition: this.condition5
-          }),
-        ],
-    })
-  }
-}
-
-
-
-class FormerLymeTherapy4 extends Item {
-
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'FLTher4');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.singleChoice({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van lyme?'],
-      ]),
-      responseOptions: [
-        {
-          key: 'a', role: 'option',
-          content: new Map([
-            ["nl", "Ja"],
-          ])
-        },
-        {
-          key: 'b', role: 'option',
-          content: new Map([
-            ["nl", "Nee, ik ben klachten blijven houden tot op heden"],
-          ])
-        },
-      ]
-    })
   }
 }
 
@@ -339,6 +33,9 @@ class FormerLymeTherapy4 extends Item {
 //TODO: maybe transfer to tickbite file
 export class GeneralTherapy1 extends Item {
 
+  optionKeys = {
+    yes_number: 'b'
+  }
 
   questionTextMain = [
     {
@@ -354,7 +51,7 @@ export class GeneralTherapy1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "medicijnen gebruikt? Bijvoorbeeld antibiotica, paracetamol, etc. Zo ja, welke medicijnen en tegen welke gezondheidsklachten?"],
+        ["nl", "medicijnen gebruikt? Bijvoorbeeld antibiotica, paracetamol, etc."],
       ]),
     },
   ]
@@ -381,20 +78,23 @@ export class GeneralTherapy1 extends Item {
           ])
         },
         SingleChoiceOptionTypes.numberInput({
-          key: 'b',
-              inputLabel: new Map([['nl', 'Ja, aantal medicijnen: ']]),
-              labelBehindInput: false,
-              inputMaxWidth: '80px',
-              componentProperties: {
-                min: 0,
-                max: 5
-              }
-            }),
-        /*           ClozeItemTypes.text({ //inputMaxWidth: '80px',
-                     key: '2', content: new Map(
-                       [['nl', ",namelijk (bijvoorbeeld antibiotica, paracetemol, etc):"]]
-                     )
-                   }),*/
+          key: this.optionKeys.yes_number,
+          inputLabel: new Map([['nl', 'Ja, aantal medicijnen: ']]),
+          labelBehindInput: false,
+          inputMaxWidth: '80px',
+          componentProperties: {
+            min: 0,
+            max: 30
+          }
+        }),
+      ],
+      customValidations: [
+        {
+          key: 'GenT1', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`),0),
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -402,11 +102,7 @@ export class GeneralTherapy1 extends Item {
 
 
 export class GeneralTherapy2 extends Item {
-
-  condition2: Expression;
-  condition3: Expression;
-  condition4: Expression;
-  condition5: Expression;
+  gtValue: Expression;
 
 
   constructor(parentKey: string, isRequired: boolean, condition: Expression) {
@@ -414,115 +110,61 @@ export class GeneralTherapy2 extends Item {
 
     this.isRequired = isRequired;
     this.condition = SurveyEngine.compare.gt(condition, 0);
-    this.condition2 = SurveyEngine.compare.gt(condition, 1);
-    this.condition3 = SurveyEngine.compare.gt(condition, 2);
-    this.condition4 = SurveyEngine.compare.gt(condition, 3);
-    this.condition5 = SurveyEngine.compare.gt(condition, 4);
-
+    this.gtValue = condition;
   }
 
   buildItem() {
+    const cItems: Array<OptionDef> = [];
+    Array.from({ length: 30 }).forEach((_, index) => {
+      cItems.push(ClozeItemTypes.text({
+        key: `row-${index + 1}-label`,
+        content: new Map(
+          [['nl', `Medicijn ${index + 1}:`]]
+        ),
+        displayCondition: SurveyEngine.compare.gt(this.gtValue, index),
+      }));
+      cItems.push(ClozeItemTypes.textInput({
+        key: `row-${index + 1}-input`,
+        displayCondition: SurveyEngine.compare.gt(this.gtValue, index),
+      }));
+      cItems.push(ClozeItemTypes.dropDown({
+        key: `row-${index + 1}-dropdown`, options: [
+          SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
+          SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
+        ],
+        displayCondition: SurveyEngine.compare.gt(this.gtValue, index),
+      }));
+      cItems.push(ClozeItemTypes.clozeLineBreak());
+    })
+
+
+    const cVal: Array<Expression> = [];
+    Array.from({ length: 30 }).forEach((_, index) => {
+      cVal.push(SurveyEngine.logic.or(
+        SurveyEngine.logic.and(
+          SurveyEngine.hasResponse(this.key, `rg.cloze.row-${index + 1}-input`),
+          SurveyEngine.hasResponse(this.key, `rg.cloze.row-${index + 1}-dropdown`)),
+        SurveyEngine.logic.not(SurveyEngine.compare.gt(this.gtValue, index)),
+      )
+      );
+    })
+
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', "Namelijk (bijvoorbeeld antibiotica, paracetemol, etc):"],
+        ['nl', "Welke medicijnen en tegen welke gezondheidsklachten? (bijvoorbeeld antibiotica, paracetemol, etc):"],
       ]),
-      items:
-        [
-          ClozeItemTypes.text({
-            key: '1', content: new Map(
-              [['nl', "Medicijn 1:"]]
-            ),
-          }),
-          ClozeItemTypes.textInput({
-            key: '2',
-          }),
-          ClozeItemTypes.dropDown({
-            key: '3', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ]
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //2nd Medication:
-          ClozeItemTypes.text({
-            key: '4', content: new Map(
-              [['nl', "Medicijn 2:"]]
-            ),
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.textInput({
-            key: '5',
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.dropDown({
-            key: '6', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition2
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //3rd medication:
-          ClozeItemTypes.text({
-            key: '7', content: new Map(
-              [['nl', "Medicijn 3:"]]
-            ),
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.textInput({
-            key: '8',
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.dropDown({
-            key: '9', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition3
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //4th medication:
-          ClozeItemTypes.text({
-            key: '10', content: new Map(
-              [['nl', "Medicijn 4:"]]
-            ),
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.textInput({
-            key: '11',
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.dropDown({
-            key: '12', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition4
-          }),
-          ClozeItemTypes.clozeLineBreak(),
-          //5th medication:
-          ClozeItemTypes.text({
-            key: '17', content: new Map(
-              [['nl', "Medicijn 5:"]]
-            ),
-            displayCondition: this.condition5
-          }),
-          ClozeItemTypes.textInput({
-            key: '18',
-            displayCondition: this.condition5
-          }),
-          ClozeItemTypes.dropDown({
-            key: '12', options: [
-              SCOptions.option('1', new Map([['nl', "Tegen erythema migrans/ziekte van Lyme "]])),
-              SCOptions.option('2', new Map([['nl', "Tegen iets anders dan de ziekte van Lyme"]]))
-            ],
-            displayCondition: this.condition5
-          }),
-        ],
+      items: cItems,
+      customValidations: [
+        {
+          key: 'GenT2', rule:
+            SurveyEngine.logic.and(...cVal),
+          type: 'hard'
+        }
+      ]
     })
   }
 }
@@ -553,7 +195,7 @@ export class LymeDiagnosis1 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -572,7 +214,6 @@ export class LymeDiagnosis1 extends Item {
 
 
 export class LymeDiagnosis2 extends Item {
-
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LD2');
 
@@ -658,10 +299,28 @@ export class LymeDiagnosis2 extends Item {
 
 export class Doctor extends Item {
 
-  questionTextMain = [
+  optionKeys = {
+    other: 'c'
+  }
+
+  questionTextMain_Adults = [
     {
       content: new Map([
         ["nl", 'Bij welke arts ben je toen geweest?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+  questionTextMain_Kids = [
+    {
+      content: new Map([
+        ["nl", 'Bij welke arts ben je geweest?'],
       ]),
     },
     {
@@ -685,7 +344,7 @@ export class Doctor extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.questionTextMain,
+      questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.questionTextMain_Kids,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -699,12 +358,32 @@ export class Doctor extends Item {
             ["nl", "Bedrijfsarts"],
           ])
         },
+        MCOptions.cloze({
+          key: this.optionKeys.other,
+          items: [
+            ClozeItemTypes.text({
+              key: '1', content: new Map(
+                [['nl', "Ander soort arts, namelijk:"]]
+              )
+            }),
+            ClozeItemTypes.textInput({
+              key: 'input',
+            }),
+          ]
+        }),
+      ],
+      customValidations: [
         {
-          key: 'c', role: 'input',
-          content: new Map([
-            ["nl", "Ander soort arts, namelijk:"],
-          ])
-        },
+          key: 'Doc', rule:
+          SurveyEngine.logic.or(
+            SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
+            SurveyEngine.logic.and(
+              SurveyEngine.multipleChoice.any(this.key, this.optionKeys.other),
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.other}.input`),
+            )
+          ),
+          type: 'hard'
+        }
       ]
     })
   }
@@ -721,13 +400,13 @@ export class LymeTherapy1 extends Item {
 
   responseOptionLyme = [
     {
-      key: 'a', role: 'option',
+      key: this.optionKeys.Tabletten, role: 'option',
       content: new Map([
         ["nl", "Ja, tabletten antibiotica"],
       ])
     },
     {
-      key: 'b', role: 'option',
+      key: this.optionKeys.Infuus, role: 'option',
       content: new Map([
         ["nl", "Ja, antibiotica via een infuus"],
       ])
@@ -756,7 +435,7 @@ export class LymeTherapy1 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher1');
+    super(parentKey, 'LT1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -778,6 +457,9 @@ export class LymeTherapy1 extends Item {
 
 
 export class LymeTherapy2 extends Item {
+  optionKeys = {
+    dayCount: '10',
+  }
 
   questionTextMain = [
     {
@@ -794,7 +476,7 @@ export class LymeTherapy2 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher2');
+    super(parentKey, 'LT2');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -806,7 +488,7 @@ export class LymeTherapy2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText:this.questionTextMain,
+      questionText: this.questionTextMain,
       items: [
         ClozeItemTypes.text({
           key: '1', content: new Map(
@@ -850,9 +532,12 @@ export class LymeTherapy2 extends Item {
           )
         }),
         ClozeItemTypes.numberInput({
-          key: '10',
+          key: this.optionKeys.dayCount,
           inputLabel: new Map([['nl', 'dagen']]),
           labelBehindInput: true,
+          componentProperties: {
+            min: 0
+          }
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
@@ -890,7 +575,7 @@ export class LymeTherapy3 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher3');
+    super(parentKey, 'LT3');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -944,11 +629,12 @@ export class LymeTherapy3 extends Item {
 export class LymeTherapy4 extends Item {
 
   optionKeys = {
-    yes: 'a'
+    yes: 'a',
+    no: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher4');
+    super(parentKey, 'LT4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -965,13 +651,13 @@ export class LymeTherapy4 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -993,13 +679,12 @@ export class LymeTherapy5 extends Item {
   ]]);
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeTher5');
+    super(parentKey, 'LT5');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
 
-  //TODO: insert date and time input
   buildItem() {
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
@@ -1020,26 +705,30 @@ export class LymeTherapy5 extends Item {
             reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
             delta: { seconds: 0 }
           }
-        }),//TODO: text direct after date Input (without Line break)??
+        }),
         ClozeItemTypes.text({
           key: '3', content: new Map(
             [['nl', "(dag/maand/jaar) tussen"]]
           )
         }),
-        ClozeItemTypes.timeInput({
-          key: '4',
-          defaultValue: '13:00',
-          inputLabelText: new Map([["nl", " en"],]),
-          labelBehindInput: true
-        }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-        ClozeItemTypes.timeInput({
-          key: '5',
-          defaultValue: '13:00',
-          inputLabelText: new Map([["nl", " uur"],]),
-          labelBehindInput: true,
+        clozeItemDropdownHours('dropdown1'),
+        ClozeItemTypes.text({
+          key: '2', content: new Map(
+            [['nl', " en"]]
+          )
         }),
+        clozeItemDropdownHours('dropdown2'),
+        ClozeItemTypes.text({
+          key: '3', content: new Map(
+            [['nl', " uur"]]
+          )
+        })
       ],
     })
   }
+}
+
+function expWithArgs(arg0: string, arg1: any): Expression {
+  throw new Error('Function not implemented.');
 }
 

@@ -1,104 +1,9 @@
 import { Expression } from 'survey-engine/data_types';
-import { Group, Item } from 'case-editor-tools/surveys/types';
+import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { TickBiteOtherGroup } from './tickBite';
-import { PreviousTickBitesGroup } from './prevTickBites'
-import { FormerLymeGroup, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy1, LymeTherapy2, LymeTherapy3, LymeTherapy4, LymeTherapy5 } from './diagnosisTherapy'
 import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
-
-
-
-export class LymeGroup extends Group {
-
-  G1_9: TickBiteOtherGroup;
-
-  //TODO: should header be shown?
-  //Lyme questions here
-  Q10: LymeDiagnosis1;
-  Q11: LymeDiagnosis2;
-  Q12: LymeDiagnosis3;
-  Q13: LymeDiagnosis4;
-  Q14: LymeDiagnosis5;
-  Q15: LymeDiagnosis6;
-  Q16: LymeDiagnosis7;
-
-  Q17: LymeTherapy1;
-  Q18: LymeTherapy2;
-  Q19: LymeTherapy3;
-  Q20: LymeTherapy4;
-  Q21: LymeTherapy5;
-
-  //Previous Tick Bites and former lyme disease at the end
-  G22_24: FormerLymeGroup;
-  G25_26: PreviousTickBitesGroup;
-
-
-
-  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'LymeG');
-
-    this.groupEditor.setCondition(condition);
-
-    const required = isRequired !== undefined ? isRequired : false;
-
-    this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
-
-    this.Q10 = new LymeDiagnosis1(this.key, required);
-    const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.yes);
-    this.Q11 = new LymeDiagnosis2(this.key, required, Q10condition);
-    this.Q12 = new LymeDiagnosis3(this.key, required);
-    this.Q13 = new LymeDiagnosis4(this.key, required);
-    this.Q14 = new LymeDiagnosis5(this.key, required, Q10condition);
-
-    this.Q15 = new LymeDiagnosis6(this.key, required);
-    const Q15condition = SurveyEngine.singleChoice.any(this.Q15.key, this.Q15.optionKeys.yes);
-    this.Q16 = new LymeDiagnosis7(this.key, required, Q15condition);
-
-    this.Q17 = new LymeTherapy1(this.key, required);
-    const Q17conditionTabletten = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Tabletten);
-    const Q17conditionInfuus = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Infuus);
-    const Q17conditionAnyMed = SurveyEngine.singleChoice.any(this.Q17.key, this.Q17.optionKeys.Tabletten, this.Q17.optionKeys.Infuus);
-    this.Q18 = new LymeTherapy2(this.key, required, Q17conditionTabletten);
-    this.Q19 = new LymeTherapy3(this.key, required, Q17conditionInfuus);
-
-
-    this.Q20 = new LymeTherapy4(this.key, required, Q17conditionAnyMed);
-    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
-    this.Q21 = new LymeTherapy5(this.key, required, Q20condition);
-
-    this.G22_24 = new FormerLymeGroup(this.key, isRequired);
-    this.G25_26 = new PreviousTickBitesGroup(this.key, isRequired);
-
-  }
-
-  buildGroup() {
-
-    this.addItem(this.G1_9.get());
-
-    this.addItem(this.Q10.get());
-    this.addItem(this.Q11.get());
-    this.addItem(this.Q12.get());
-    this.addItem(this.Q13.get());
-    this.addItem(this.Q14.get());
-    this.addItem(this.Q15.get());
-    this.addItem(this.Q16.get());
-    this.addPageBreak();
-
-    this.addItem(this.Q17.get());
-    this.addItem(this.Q18.get());
-    this.addItem(this.Q19.get());
-    this.addItem(this.Q20.get());
-    this.addItem(this.Q21.get());
-    this.addPageBreak();
-
-    this.addItem(this.G22_24.get());
-    this.addItem(this.G25_26.get());
-    this.addPageBreak();
-
-
-  }
-}
+import { surveyCategoryNames, SurveySuffix } from '../globalConstants';
 
 
 
@@ -156,19 +61,38 @@ export class LymeDiagnosis3 extends Item {
     this.isRequired = isRequired;
     this.condition = condition;
   }
+
   //TODO: size of text input field?
   buildItem() {
+    let text = this.qTextLyme;
+    if (
+      this.isPartOf(surveyCategoryNames.T3) ||
+      this.isPartOf(surveyCategoryNames.T6) ||
+      this.isPartOf(surveyCategoryNames.T9) ||
+      this.isPartOf(surveyCategoryNames.T12)
+    ) {
+      if (this.isPartOf(SurveySuffix.Kids)) {
+        text = this.qTextFollowUpKids;
+      } else {
+        text = this.qTextFollowUp;
+      }
+    }
+
     return SurveyItems.multilineTextInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
+      questionText: text,
     })
   }
 }
 
 export class LymeDiagnosis4 extends Item {
+
+  optionKeys = {
+    date: 'a'
+  }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LD4');
@@ -177,7 +101,7 @@ export class LymeDiagnosis4 extends Item {
     this.condition = condition;
   }
 
-  buildItem() {//TODO: check if it works woth MCOptions questions too!!
+  buildItem() {
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -188,7 +112,7 @@ export class LymeDiagnosis4 extends Item {
       ]),
       responseOptions: [
         MCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
                 [['en', "De klachten door de ziekte van Lyme zijn onstaan op "]]
@@ -209,7 +133,7 @@ export class LymeDiagnosis4 extends Item {
               )
             }),
             ClozeItemTypes.dropDown({
-              key: '4',options: [
+              key: '4', options: [
                 SCOptions.option('1', new Map([['nl', "exacte"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
@@ -221,8 +145,6 @@ export class LymeDiagnosis4 extends Item {
               )
             }),
           ],
-          //TODO: how to disable option of cloze type?
-          //disabled: SurveyEngine.multipleChoice.any(this.itemKey,'b'),
         }),
         {//disable b if a is selected and disable a if b is selected
           key: 'b', role: 'option',
@@ -237,6 +159,17 @@ export class LymeDiagnosis4 extends Item {
             ["nl", "Opmerkingen"],
           ])
         },
+      ],
+      customValidations: [
+        {
+          key: 'LD4', rule: SurveyEngine.logic.or(
+            SurveyEngine.multipleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.logic.and(
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.4`),
+            )
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -244,6 +177,10 @@ export class LymeDiagnosis4 extends Item {
 
 
 export class LymeDiagnosis5 extends Item {
+
+  optionKeys = {
+    date: 'a'
+  }
 
   qTextMain = new Map([
     ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
@@ -271,10 +208,10 @@ export class LymeDiagnosis5 extends Item {
       questionText: this.isPartOf("Followupflow_Kids") ? this.qTextKids : this.qTextMain,
       responseOptions: [
         SCOptions.cloze({
-          key: 'a', items: [
+          key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De arts heeft de uiting van ziekte van Lyme bij mij vastgesteld op "]]
+                [['en', "De arts heeft de uiting van de ziekte van Lyme bij mij vastgesteld op "]]
               )
             }),
             ClozeItemTypes.dateInput({
@@ -292,7 +229,7 @@ export class LymeDiagnosis5 extends Item {
               )
             }),
             ClozeItemTypes.dropDown({
-              key: '4',options: [
+              key: '4', options: [
                 SCOptions.option('1', new Map([['nl', "exacte"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
@@ -311,6 +248,17 @@ export class LymeDiagnosis5 extends Item {
             ["nl", "Weet ik niet"],
           ])
         },
+      ],
+      customValidations: [
+        {
+          key: 'LD5', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.logic.and(
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.date}.2`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.date}.4`),
+            )
+          ), type: 'hard'
+        }
       ]
     })
   }
@@ -344,15 +292,29 @@ export class LymeDiagnosis6 extends Item {
   }
 
   buildItem() {
+    let text = this.qTextLyme;
+    if (
+      this.isPartOf(surveyCategoryNames.T3) ||
+      this.isPartOf(surveyCategoryNames.T6) ||
+      this.isPartOf(surveyCategoryNames.T9) ||
+      this.isPartOf(surveyCategoryNames.T12)
+    ) {
+      if (this.isPartOf(SurveySuffix.Kids)) {
+        text = this.qTextFollowUpKids;
+      } else {
+        text = this.qTextFollowUp;
+      }
+    }
+
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf("Followupflow") ? (this.isPartOf("Followupflow_Kids") ? this.qTextFollowUpKids : this.qTextFollowUp) : this.qTextLyme,
+      questionText: text,
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])

@@ -1,76 +1,14 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
-import { SurveyItems, SurveyEngine } from 'case-editor-tools/surveys';
+import { SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
 import { PreviousTickBitesGroup } from './prevTickBites'
 import { LymeDiagnosisGroup } from './diagnosisTherapy'
 
 
 
-export class ChronicGroup extends Group {
-
-  G1_9: TickBiteOtherGroup
-
-  G10_11: LymeDiagnosisGroup;
-
-  //TODO: should header be shown?
-  //Lyme questions here
-  Q12: ChronicLymeDiagnosis1;
-  Q13: ChronicLymeDiagnosis2;
-  Q14: ChronicLymeTherapy1;
-  Q15: ChronicLymeTherapy2;
-
-  G16_17: PreviousTickBitesGroup;
-
-
-
-  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'CLG');
-
-    this.groupEditor.setCondition(condition);
-
-    const required = isRequired !== undefined ? isRequired : false;
-
-    this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
-
-    this.G10_11 = new LymeDiagnosisGroup(this.key, isRequired);
-
-    this.Q12 = new ChronicLymeDiagnosis1(this.key, required);
-    this.Q13 = new ChronicLymeDiagnosis2(this.key, required);
-    this.Q14 = new ChronicLymeTherapy1(this.key, required);
-    this.Q15 = new ChronicLymeTherapy2(this.key, required);
-
-    this.G16_17 = new PreviousTickBitesGroup(this.key, isRequired);
-
-  }
-
-  buildGroup() {
-
-    this.addItem(this.G1_9.get());
-
-    this.addItem(this.G10_11.get());
-    this.addItem(this.Q12.get());
-    this.addItem(this.Q13.get());
-    this.addItem(this.Q14.get());
-    this.addItem(this.Q15.get());
-    this.addPageBreak();
-
-    this.addItem(this.G16_17.get());
-    this.addPageBreak();
-
-
-  }
-}
-
-
-
 export class ChronicLymeDiagnosis1 extends Item {
 
-
-  //TODO bold text "in de afgelopen 5 jaar" or not (inconsistent in questionnaires --> ask RIVM)?
-  optionKeys = {
-    none: 'a'
-}
 
   questionTextMain = [
     {

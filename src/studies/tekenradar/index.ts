@@ -7,8 +7,6 @@ import { Chronicflow_Adults } from "./surveys/Chronicflow_Adults";
 import { Feverflow_Adults } from "./surveys/Feverflow_Adults";
 import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import { studyRules } from "./studyRules";
-import { ExampleSurvey } from "./surveys/ExampleSurvey";
-import { addExampleReminderMessage } from "./customRules/exampleReminder";
 import { TBflow_Kids } from "./surveys/TBflow_Kids";
 import { Chronicflow_Kids } from "./surveys/Chronicflow_Kids";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -24,19 +22,31 @@ import { T3_Kids } from "./surveys/T3_Kids";
 import { T6_Kids } from "./surveys/T6_Kids";
 import { T9_Kids } from "./surveys/T9_Kids";
 import { T12_Kids } from "./surveys/T12_Kids";
-import { ExitFollowUp } from "./surveys/ExitFollowUp";
+import { changeFollowupTimingToNow } from "./customRules/changeFollowupTiming";
+import { T0_Invites } from "./surveys/T0_Invites";
+import { participantMessages } from "./messageConfigs/participantMessages";
+import { weeklyTBMessage } from "./messageConfigs/weeklyTBMessage";
+import { QuitFollowUp } from "./surveys/QuitFollowUp";
+import { QuitWeeklyTB } from "./surveys/QuitWeekly";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
   studyRules: studyRules,
   surveys: [
-    PDiff, TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, Standardflow_Adults,
-    ExampleSurvey, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids, Standardflow_Kids,
+    PDiff,
+    TBflow_Adults, EMflow_Adults, LBflow_Adults, Chronicflow_Adults, Feverflow_Adults, TBflow_Kids, EMflow_Kids, LBflow_Kids, Chronicflow_Kids,
+    T0_Invites,
+    Standardflow_Kids, Standardflow_Adults,
     T3_Adults, T6_Adults, T9_Adults, T12_Adults,
     T3_Kids, T6_Kids, T9_Kids, T12_Kids,
-    WeeklyTB, EMfoto, ExitFollowUp
+    WeeklyTB, EMfoto,
+    QuitFollowUp, QuitWeeklyTB,
   ],
   customStudyRules: [
-    addExampleReminderMessage
+    changeFollowupTimingToNow,
+  ],
+  messageConfigs: [
+    participantMessages,
+    weeklyTBMessage,
   ]
 }

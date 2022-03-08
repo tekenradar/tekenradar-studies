@@ -2,8 +2,11 @@ import { SurveyEngine } from "case-editor-tools/surveys";
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Gender, Residence } from "./questions/demographie";
 import { PreviousTickBitesGroup } from "./questions/prevTickBites";
-import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly, OutroWeeklyTB, OutroWeeklyTBInit, RemarkWeeklyTB } from "./questions/weeklyTB";
+import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly } from "./questions/weeklyTB";
 import { ParticipantFlags } from '../participantFlags';
+import { applyRequiredQuestions } from "./globalConstants";
+import { SurveyEndGroup } from "./questions/surveyEnd";
+import { surveyKeys } from "./globalConstants";
 
 class WeeklyTB_Def extends SurveyDefinition {
 
@@ -17,17 +20,15 @@ class WeeklyTB_Def extends SurveyDefinition {
   Q2e: NumberTickBites2e;
   Q2f: NumberTickBites2f;
   Q2g: NumberTickBites2g;
-  Q3: Residence;
-  Q4: Gender;
+  P1: Residence;
+  P2: Gender;
   G5_6: PreviousTickBitesGroup;
-  T2_init: OutroWeeklyTBInit;
-  T2: OutroWeeklyTB;
-  Q7: RemarkWeeklyTB;
+  EndGroup: SurveyEndGroup;
 
 
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'WeeklyTB',
+      surveyKey: surveyKeys.WeeklyTB,
       name: new Map([
         ['nl', 'Wekelijkse tekenbeetvragenlijst']
       ]),
@@ -42,12 +43,12 @@ class WeeklyTB_Def extends SurveyDefinition {
     });
 
 
-    const InitCond = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key,ParticipantFlags.weeklyTBreporter.values.init);
+    const InitCond = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init);
     const required = isRequired !== undefined ? isRequired : false;
     this.T1_init = new IntroWeeklyTBInit(this.key, required, InitCond);
     this.T1 = new IntroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
     this.Q1 = new NumberTickBitesWeekly(this.key, required);
-    const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'),0);
+    const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'), 0);
     this.Q2a = new NumberTickBites2a(this.key, required, Q1cond);
     this.Q2b = new NumberTickBites2b(this.key, required, Q1cond);
     this.Q2c = new NumberTickBites2c(this.key, required, Q1cond);
@@ -56,17 +57,17 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.Q2f = new NumberTickBites2f(this.key, required, Q1cond);
     this.Q2g = new NumberTickBites2g(this.key, required, Q1cond);
 
-    const InitFlowCond = SurveyEngine.logic.and(
-      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.flow.key)),
-      InitCond);
+    this.P1 = new Residence(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.postalCode.key)
+    ));
+    this.P2 = new Gender(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.genderCategory.key)
+    ));
 
-    this.Q3 = new Residence(this.key, required, InitFlowCond);
-    this.Q4 = new Gender(this.key, required, InitFlowCond);
-    this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired);
-    this.T2_init = new OutroWeeklyTBInit(this.key, required, InitCond);
-    this.T2 = new OutroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
-    this.Q7 = new RemarkWeeklyTB(this.key, required);
+    // Show only in first weekly report:
+    this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init));
 
+    this.EndGroup = new SurveyEndGroup(this.key, false, undefined);
   }
 
   buildSurvey() {
@@ -81,13 +82,12 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.addItem(this.Q2e.get());
     this.addItem(this.Q2f.get());
     this.addItem(this.Q2g.get());
-    this.addItem(this.Q3.get());
-    this.addItem(this.Q4.get());
-    this.addItem(this. G5_6.get());
-    this.addItem(this.T2_init.get());
-    this.addItem(this.T2.get());
-    this.addItem(this.Q7.get());
+    this.addItem(this.P1.get());
+    this.addItem(this.P2.get());
+    this.addItem(this.G5_6.get());
+    this.addPageBreak();
+    this.addItem(this.EndGroup.get());
   }
 }
 
-export const WeeklyTB = new WeeklyTB_Def();
+export const WeeklyTB = new WeeklyTB_Def(applyRequiredQuestions);

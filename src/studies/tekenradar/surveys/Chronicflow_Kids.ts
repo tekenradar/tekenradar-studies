@@ -1,4 +1,6 @@
+import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { applyRequiredQuestions } from './globalConstants';
 import { ChronicLymeDiagnosis1, ChronicLymeDiagnosis2, ChronicLymeTherapy1, ChronicLymeTherapy2 } from './questions/chronic';
 import { LymeDiagnosisGroup } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
@@ -15,8 +17,6 @@ class Chronicflow_KidsDef extends SurveyDefinition {
   H2: LymeHeader;
   G10_11: LymeDiagnosisGroup;
 
-  //TODO: should header be shown?
-  //Lyme questions here
   Q12: ChronicLymeDiagnosis1;
   Q13: ChronicLymeDiagnosis2;
   Q14: ChronicLymeTherapy1;
@@ -56,6 +56,9 @@ class Chronicflow_KidsDef extends SurveyDefinition {
 
     this.G16_17 = new PreviousTickBitesGroup(this.key, isRequired);
 
+    this.editor.setPrefillRules([
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
+    ])
   }
 
   buildSurvey() {
@@ -75,4 +78,4 @@ class Chronicflow_KidsDef extends SurveyDefinition {
   }
 }
 
-export const Chronicflow_Kids = new Chronicflow_KidsDef();
+export const Chronicflow_Kids = new Chronicflow_KidsDef(applyRequiredQuestions);

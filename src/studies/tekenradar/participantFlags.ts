@@ -18,6 +18,12 @@ export const ParticipantFlags = {
       unknown: 'unknown'
     }
   },
+  postalCode: {
+    key: 'postalCode',
+    values: {
+      known: 'known'
+    }
+  },
   flow: {
     key: 'flow',
     values: {
@@ -32,7 +38,8 @@ export const ParticipantFlags = {
     key: 'followUp',
     values: {
       active: 'active',
-      finished: 'finished'
+      finished: 'finished',
+      quitted: 'quitted',
     }
   },
   weeklyTBreporter: {
@@ -41,6 +48,12 @@ export const ParticipantFlags = {
       init: 'init',
       true: 'true',
       false: 'false'
+    }
+  },
+  kEM: {
+    key: 'kEM',
+    values: {
+      likely: 'likely'
     }
   }
 }

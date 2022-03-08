@@ -2,106 +2,9 @@ import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { TickBiteOtherGroup } from './tickBite';
-import { FormerLymeGroup, GeneralTherapy1 } from './diagnosisTherapy';
+import { GeneralTherapy1 } from './diagnosisTherapy';
 import { PreviousTickBitesGroup } from './prevTickBites';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
-
-
-
-
-export class FeverGroup extends Group {
-
-  G1_11: TickBiteOtherGroup;
-  G12_14: FormerLymeGroup;
-  Q15: GeneralTherapy1;
-
-  T1: FeverText;
-  Q16: FeverSymptom1;
-  Q17: FeverSymptom2;
-  Q18: FeverSymptom3;
-  Q19: FeverSymptom4;
-  Q20: FeverSymptom5;
-  Q21: FeverSymptom6;
-  Q22: FeverSymptom7;
-  Q23: FeverTherapy;
-  Q24: FeverOtherCause1;
-  Q25: FeverOtherCause2;
-  Q26: FeverOtherCause3;
-  Q27: FeverOtherCause4;
-
-  G28_29: PreviousTickBitesGroup;
-
-
-
-  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
-    super(parentKey, 'FeverG');
-
-    this.groupEditor.setCondition(condition);
-
-    const required = isRequired !== undefined ? isRequired : false;
-
-    this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
-    //TODO: show this only if first answer is c
-    this.G12_14 = new FormerLymeGroup(this.key, isRequired);
-    this.Q15 = new GeneralTherapy1(this.key, required);
-
-    this.T1 = new FeverText(this.key, required);
-    this.Q16 = new FeverSymptom1(this.key, required);
-    const Q16condition = SurveyEngine.singleChoice.any(this.Q16.key, this.Q16.optionKeys.yes);
-    this.Q17 = new FeverSymptom2(this.key, required, Q16condition);
-    this.Q18 = new FeverSymptom3(this.key, required, Q16condition);
-    const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.no);
-    this.Q19 = new FeverSymptom4(this.key, required, Q18condition);
-    const Q19condition = SurveyEngine.singleChoice.any(this.Q19.key, this.Q19.optionKeys.yes);
-    this.Q20 = new FeverSymptom5(this.key, required, Q19condition);
-    const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
-
-
-    const Q18_20condition = SurveyEngine.logic.or(SurveyEngine.logic.not(Q18condition), Q20condition);
-
-    this.Q21 = new FeverSymptom6(this.key, required, Q18_20condition);
-    this.Q22 = new FeverSymptom7(this.key, required, Q18_20condition);
-
-    this.Q23 = new FeverTherapy(this.key, required, Q16condition);
-
-    this.Q24 = new FeverOtherCause1(this.key, required);
-    const Q24condition = SurveyEngine.multipleChoice.none(this.Q24.key, this.Q24.optionKeys.nothing);
-    this.Q25 = new FeverOtherCause2(this.key, required, Q24condition);
-    this.Q26 = new FeverOtherCause3(this.key, required, Q24condition);
-    this.Q27 = new FeverOtherCause4(this.key, required, Q24condition);
-
-    this.G28_29 = new PreviousTickBitesGroup(this.key, isRequired)
-
-  }
-
-
-  buildGroup() {
-
-    this.addItem(this.G1_11.get());
-    this.addItem(this.G12_14.get());
-    this.addItem(this.Q15.get());
-    this.addPageBreak();
-
-    this.addItem(this.Q16.get());
-    this.addItem(this.Q17.get());
-    this.addItem(this.Q18.get());
-    this.addItem(this.Q19.get());
-    this.addItem(this.Q20.get());
-    this.addItem(this.Q21.get());
-    this.addItem(this.Q22.get());
-    this.addItem(this.Q23.get());
-    this.addPageBreak();
-
-    this.addItem(this.Q24.get());
-    this.addItem(this.Q25.get());
-    this.addItem(this.Q26.get());
-    this.addItem(this.Q27.get());
-    this.addItem(this.G28_29.get());
-    this.addPageBreak();
-
-  }
-
-}
 
 
 
@@ -164,7 +67,7 @@ export class FeverSymptom1 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -216,12 +119,11 @@ export class FeverSymptom2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
-      //TODO: maybe "weken na de tekenbeet" as seperate text after dropbox
       responseOptions: [
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "1 weken na de tekenbeet"],
+            ["nl", "1 week na de tekenbeet"],
           ])
         },
         {
@@ -272,7 +174,7 @@ export class FeverSymptom2 extends Item {
         }, {
           key: '11', role: 'option',
           content: new Map([
-            ["nl", "10 of meer weken na de tekenbeet"],
+            ["nl", "11 of meer weken na de tekenbeet"],
           ]),
         },
       ],
@@ -311,7 +213,7 @@ export class FeverSymptom3 extends Item {
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.no, role: 'option',
           content: new Map([
             ["nl", "Nee"],
           ])
@@ -346,7 +248,7 @@ export class FeverSymptom4 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja"],
           ])
@@ -387,7 +289,7 @@ export class FeverSymptom5 extends Item {
       ]),
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.yes, role: 'option',
           content: new Map([
             ["nl", "Ja, ik ga nu meteen mijn temperatuur opmeten"],
           ])
@@ -536,7 +438,29 @@ export class FeverTherapy extends Item {
 
 export class FeverOtherCause1 extends Item {
 
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Is er in de afgelopen 4 weken één van de onderstaande ziektebeelden bij je vastgesteld? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
   optionKeys = {
+    a: 'a',
+    b: 'b',
+    c: 'c',
+    d: 'd',
+    e: 'e',
+    f: 'f',
+    g: 'g',
     nothing: 'h'
   }
 
@@ -553,56 +477,54 @@ export class FeverOtherCause1 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Is er in de afgelopen 4 weken één van de onderstaande ziektebeelden bij je vastgesteld? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: this.optionKeys.a, role: 'option',
           content: new Map([
             ["nl", "Longontsteking of andere luchtweginfectie (pneumonie, bronchitis)"],
           ])
         },
         {
-          key: 'b', role: 'option',
+          key: this.optionKeys.b, role: 'option',
           content: new Map([
             ["nl", "Bijholteontsteking of oorontsteking (sinusitis, otitis)"],
           ])
         },
         {
-          key: 'c', role: 'option',
+          key: this.optionKeys.c, role: 'option',
           content: new Map([
             ["nl", "Keelontsteking (tonsillitis, faryngitis, laryngitis)"],
           ])
         },
         {
-          key: 'd', role: 'option',
+          key: this.optionKeys.d, role: 'option',
           content: new Map([
             ["nl", "Buikgriep: misselijkheid, braken, diarree  (gastro-enteritis, gastritis, enteritis)"],
           ])
         },
         {
-          key: 'e', role: 'option',
+          key: this.optionKeys.e, role: 'option',
           content: new Map([
             ["nl", "Blaasontsteking, urineweginfectie of nierbekkenontsteking (cystitis, pyelonefritis)"],
           ])
         },
         {
-          key: 'f', role: 'option',
+          key: this.optionKeys.f, role: 'option',
           content: new Map([
             ["nl", "Huidinfectie (erysipelas, cellulitis)"],
           ])
         },
         //TODO: text field mandatory or not?
         {
-          key: 'g', role: 'input',
+          key: this.optionKeys.g, role: 'input',
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
         },
         //TODO: disable other option if h is selected?
         {
-          key: 'h', role: 'option',
+          key: this.optionKeys.nothing, role: 'option',
           content: new Map([
             ["nl", "Geen van bovenstaande"],
           ])
@@ -614,6 +536,21 @@ export class FeverOtherCause1 extends Item {
 
 
 export class FeverOtherCause2 extends Item {
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke arts(en) heeft/hebben bovenstaande ziektebeeld(en) vastgesteld? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FOC2');
@@ -628,9 +565,7 @@ export class FeverOtherCause2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke arts(en) heeft/hebben bovenstaande ziektebeeld(en) vastgesteld? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -700,6 +635,20 @@ export class FeverOtherCause2 extends Item {
 
 export class FeverOtherCause3 extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welk onderzoek is hiervoor bij jou gedaan in de afgelopen 4 weken? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FOC3');
 
@@ -713,9 +662,7 @@ export class FeverOtherCause3 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welk onderzoek is hiervoor bij jou gedaan in de afgelopen 4 weken? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         //TODO: disable other option if a is selected?
         {
@@ -781,6 +728,21 @@ export class FeverOtherCause3 extends Item {
 
 export class FeverOtherCause4 extends Item {
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke nieuwe klachten heb je sinds 4 weken (of heb je in de afgelopen 4 weken gehad)? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'FOC4');
 
@@ -794,9 +756,7 @@ export class FeverOtherCause4 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Welke nieuwe klachten heb je sinds 4 weken (of heb je in de afgelopen 4 weken gehad)? (meerdere antwoorden mogelijk)'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',

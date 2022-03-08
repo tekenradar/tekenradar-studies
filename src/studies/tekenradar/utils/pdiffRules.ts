@@ -57,7 +57,7 @@ export const hasLBflowCondition = () => StudyEngine.or(
     StudyEngine.or(
       StudyEngine.and(
         StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.yes.option),
-        StudyEngine.lte(
+        StudyEngine.gte(
           getQ6DateValue(),
           StudyEngine.timestampWithOffset({ days: -4 }),
         ),
@@ -67,12 +67,12 @@ export const hasLBflowCondition = () => StudyEngine.or(
   ),
   StudyEngine.and(
     StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
-    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.no),
+    StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
     // Q5 has no influence here
     StudyEngine.or(
       StudyEngine.and(
         StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.yes.option),
-        StudyEngine.lte(
+        StudyEngine.gte(
           getQ6DateValue(),
           StudyEngine.timestampWithOffset({ days: -4 }),
         ),
@@ -86,7 +86,7 @@ export const hasChronicflowCondition = () => {
   const Q6dateCondition = StudyEngine.and(
     StudyEngine.singleChoice.any(PDiff.Q6.key, PDiff.Q6.optionKeys.yes.option),
     StudyEngine.or(
-      StudyEngine.gt(
+      StudyEngine.lt(
         getQ6DateValue(),
         StudyEngine.timestampWithOffset({ days: -4 }),
       ),
@@ -108,7 +108,14 @@ export const hasChronicflowCondition = () => {
       Q6dateCondition
     ),
     StudyEngine.and(
+      StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.yes),
       StudyEngine.singleChoice.none(PDiff.Q2.key, PDiff.Q2.optionKeys.yes),
+      StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
+      StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
+      Q6dateCondition
+    ),
+    StudyEngine.and(
+      StudyEngine.singleChoice.any(PDiff.Q1.key, PDiff.Q1.optionKeys.no),
       StudyEngine.singleChoice.any(PDiff.Q3.key, PDiff.Q3.optionKeys.no),
       StudyEngine.singleChoice.any(PDiff.Q4.key, PDiff.Q4.optionKeys.yes),
       Q6dateCondition
