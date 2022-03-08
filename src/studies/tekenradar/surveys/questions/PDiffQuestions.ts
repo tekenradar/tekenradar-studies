@@ -349,7 +349,7 @@ export class MedicationLyme extends Item {
             }),
             ClozeItemTypes.text({
               key: '2', content: new Map(
-                [['nl', ". Dit is de "]]
+                [['nl', "Dit is de "]]
               )
             }),
             ClozeItemTypes.dropDown({
