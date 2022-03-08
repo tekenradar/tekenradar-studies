@@ -1,5 +1,7 @@
 import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
+import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
 import { ChronicLymeDiagnosis1, ChronicLymeDiagnosis2, ChronicLymeTherapy1, ChronicLymeTherapy2 } from './questions/chronic';
 import { LymeDiagnosisGroup } from './questions/diagnosisTherapy';
@@ -22,7 +24,7 @@ class Chronicflow_KidsDef extends SurveyDefinition {
   Q14: ChronicLymeTherapy1;
   Q15: ChronicLymeTherapy2;
 
-  G16_17: PreviousTickBitesGroup;
+  PTB: PreviousTickBitesGroup;
 
   constructor(isRequired?: boolean) {
     super({
@@ -54,7 +56,9 @@ class Chronicflow_KidsDef extends SurveyDefinition {
     this.Q14 = new ChronicLymeTherapy1(this.key, required);
     this.Q15 = new ChronicLymeTherapy2(this.key, required);
 
-    this.G16_17 = new PreviousTickBitesGroup(this.key, isRequired);
+    this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.tbExposure.key)
+    ));
 
     this.editor.setPrefillRules([
       StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
@@ -73,7 +77,7 @@ class Chronicflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q15.get());
-    this.addItem(this.G16_17.get());
+    this.addItem(this.PTB.get());
 
   }
 }

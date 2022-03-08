@@ -12,7 +12,7 @@ import {
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isSurveyExpired, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag
+  isSurveyExpired, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -92,7 +92,9 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
   handlePDiffRuleFor_WeeklyTB(),
 )
 
-
+/**
+ *
+ */
 const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(TBflow_Adults.key),
@@ -110,6 +112,7 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   ),
   // gender category:
   updateGenderFlag(TBflow_Adults.P2.key),
+  updateTbExposureFlag(TBflow_Adults.PTB.Q1.key),
   updatePostalCodeFlag(TBflow_Adults.P1.key),
   reAssignWeeklyToTheEndOfList(),
   // Report:
@@ -129,7 +132,9 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   ),
 )
 
-
+/**
+ *
+ */
 const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(TBflow_Kids.key),
@@ -148,6 +153,7 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   // Gender category:
   updateGenderFlag(TBflow_Kids.P2.key),
   updatePostalCodeFlag(TBflow_Kids.P1.key),
+  updateTbExposureFlag(TBflow_Kids.PTB.Q1.key),
   reAssignWeeklyToTheEndOfList(),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key),
@@ -191,6 +197,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
+  updateTbExposureFlag(EMflow_Adults.PTB.Q1.key),
   StudyEngine.participantActions.reports.init(reports.EMReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)
 );
@@ -214,6 +221,7 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   ),
   kEMflagLogic(),
   reAssignWeeklyToTheEndOfList(),
+  updateTbExposureFlag(EMflow_Kids.PTB.Q1.key),
   StudyEngine.participantActions.reports.init(reports.EMReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)
 );
@@ -235,10 +243,14 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
+  updateTbExposureFlag(Feverflow_Adults.PTB.Q1.key),
   StudyEngine.participantActions.reports.init(reports.FeverReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FeverReport.key, reports.FeverReport.key)
 );
 
+/**
+ *
+ */
 const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(LBflow_Adults.key),
@@ -257,13 +269,15 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
+  updateTbExposureFlag(LBflow_Adults.PTB.Q1.key),
   StudyEngine.participantActions.reports.init(reports.LBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.LBReport.key, reports.LBReport.key)
 );
 
 
-
-
+/**
+ *
+ */
 const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(LBflow_Kids.key),
@@ -282,11 +296,14 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
+  updateTbExposureFlag(LBflow_Kids.PTB.Q1.key),
   StudyEngine.participantActions.reports.init(reports.LBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.LBReport.key, reports.LBReport.key)
 );
 
-
+/**
+ *
+ */
 const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(Chronicflow_Adults.key),
@@ -304,11 +321,14 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
+  updateTbExposureFlag(Chronicflow_Adults.PTB.Q1.key),
   StudyEngine.participantActions.reports.init(reports.ChronicReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.ChronicReport.key, reports.ChronicReport.key)
 );
 
-
+/**
+ *
+ */
 const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(Chronicflow_Kids.key),
@@ -326,10 +346,14 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
+  updateTbExposureFlag(Chronicflow_Kids.PTB.Q1.key),
   StudyEngine.participantActions.reports.init(reports.ChronicReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.ChronicReport.key, reports.ChronicReport.key)
 );
 
+/**
+ *
+ */
 const handleSubmit_T0_Invites = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(T0_Invites.key),
@@ -358,6 +382,9 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   reAssignWeeklyToTheEndOfList(),
 );
 
+/**
+ *
+ */
 const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
   // If:
   StudyEngine.checkSurveyResponseKey(Standardflow_Adults.key),
@@ -407,6 +434,7 @@ const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   ),
   updateGenderFlag(WeeklyTB.P2.key),
   updatePostalCodeFlag(WeeklyTB.P1.key),
+  updateTbExposureFlag(WeeklyTB.PTB.Q1.key),
 );
 
 const handleSubmit_Emfoto = StudyEngine.ifThen(
@@ -734,6 +762,7 @@ const mergeRules: Expression[] = [
       takeOverFlagIfExist(ParticipantFlags.ageCategory.key),
       takeOverFlagIfExist(ParticipantFlags.genderCategory.key),
       takeOverFlagIfExist(ParticipantFlags.postalCode.key),
+      takeOverFlagIfExist(ParticipantFlags.tbExposure.key),
       StudyEngine.if(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(
           ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.false,

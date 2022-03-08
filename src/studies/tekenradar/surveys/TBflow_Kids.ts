@@ -20,7 +20,7 @@ class TBflow_KidsDef extends SurveyDefinition {
   Q7: RemoveTick2;
   Q8: RemoveTick3;
   Q9: RemoveTick4;
-  G10_11: PreviousTickBitesGroup;
+  PTB: PreviousTickBitesGroup;
   Q12: ReportedTickBites;
 
   H1: TBGeneralHeader;
@@ -67,7 +67,9 @@ class TBflow_KidsDef extends SurveyDefinition {
     this.Q8 = new RemoveTick3(this.key, required, q6Condition);
     this.Q9 = new RemoveTick4(this.key, required, q6Condition);
 
-    this.G10_11 = new PreviousTickBitesGroup(this.key, isRequired);
+    this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.tbExposure.key)
+    ));
 
     this.Q12 = new ReportedTickBites(this.key, required);
 
@@ -118,7 +120,7 @@ class TBflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q7.get());
     this.addItem(this.Q8.get());
     this.addItem(this.Q9.get());
-    this.addItem(this.G10_11.get());
+    this.addItem(this.PTB.get());
     this.addItem(this.Q12.get());
 
     this.addPageBreak();

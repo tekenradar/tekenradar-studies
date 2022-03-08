@@ -1,10 +1,6 @@
 import { Expression } from 'survey-engine/data_types';
-import { Group, Item } from 'case-editor-tools/surveys/types';
+import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { TickBiteOtherGroup } from './tickBite';
-import { PreviousTickBitesGroup } from './prevTickBites'
-import { LymeDiagnosisGroup } from './diagnosisTherapy'
-
 
 
 export class ChronicLymeDiagnosis1 extends Item {

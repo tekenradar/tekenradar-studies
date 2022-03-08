@@ -1,6 +1,7 @@
 import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { Doctor, LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5 } from './questions/diagnosisTherapy';
 import { DoctorEM, EM_B1, EM_B2, EM_B3, EM_B6, EMHeaderKids, EMTextKids } from './questions/EM';
@@ -29,7 +30,7 @@ class EMflow_KidsDef extends SurveyDefinition {
   LT5: LymeTherapy5;
 
   FLG: FormerLymeGroup;
-  G23_24: PreviousTickBitesGroup;
+  PTB: PreviousTickBitesGroup;
 
 
   constructor(isRequired?: boolean) {
@@ -75,7 +76,9 @@ class EMflow_KidsDef extends SurveyDefinition {
     this.LT5 = new LymeTherapy5(this.key, required, Q18condition);
 
     this.FLG = new FormerLymeGroup(this.key, isRequired);
-    this.G23_24 = new PreviousTickBitesGroup(this.key, isRequired);
+    this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.tbExposure.key)
+    ));
 
     this.editor.setPrefillRules([
       StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
@@ -102,7 +105,7 @@ class EMflow_KidsDef extends SurveyDefinition {
     this.addItem(this.LT5.get());
 
     this.addItem(this.FLG.get());
-    this.addItem(this.G23_24.get());
+    this.addItem(this.PTB.get());
   }
 }
 

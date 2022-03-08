@@ -22,7 +22,7 @@ class WeeklyTB_Def extends SurveyDefinition {
   Q2g: NumberTickBites2g;
   P1: Residence;
   P2: Gender;
-  G5_6: PreviousTickBitesGroup;
+  PTB: PreviousTickBitesGroup;
   EndGroup: SurveyEndGroup;
 
 
@@ -65,7 +65,9 @@ class WeeklyTB_Def extends SurveyDefinition {
     ));
 
     // Show only in first weekly report:
-    this.G5_6 = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init));
+    this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.tbExposure.key)
+    ));
 
     this.EndGroup = new SurveyEndGroup(this.key, false, undefined);
   }
@@ -84,7 +86,7 @@ class WeeklyTB_Def extends SurveyDefinition {
     this.addItem(this.Q2g.get());
     this.addItem(this.P1.get());
     this.addItem(this.P2.get());
-    this.addItem(this.G5_6.get());
+    this.addItem(this.PTB.get());
     this.addPageBreak();
     this.addItem(this.EndGroup.get());
   }

@@ -1,6 +1,7 @@
 import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
 import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
@@ -33,7 +34,7 @@ class LBflow_KidsDef extends SurveyDefinition {
 
   //Previous Tick Bites and former lyme disease at the end
   FLG: FormerLymeGroup;
-  G25_26: PreviousTickBitesGroup;
+  PTB: PreviousTickBitesGroup;
 
   constructor(isRequired?: boolean) {
     super({
@@ -81,7 +82,9 @@ class LBflow_KidsDef extends SurveyDefinition {
     this.Q21 = new LymeTherapy5(this.key, required, Q20condition);
 
     this.FLG = new FormerLymeGroup(this.key, isRequired);
-    this.G25_26 = new PreviousTickBitesGroup(this.key, isRequired);
+    this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.tbExposure.key)
+    ));
 
     this.editor.setPrefillRules([
       StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
@@ -110,9 +113,7 @@ class LBflow_KidsDef extends SurveyDefinition {
     this.addItem(this.Q21.get());
 
     this.addItem(this.FLG.get());
-    this.addItem(this.G25_26.get());
-
-
+    this.addItem(this.PTB.get());
   }
 }
 

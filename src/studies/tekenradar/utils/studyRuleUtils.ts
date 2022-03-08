@@ -212,10 +212,16 @@ export const updatePostalCodeFlag = (questionKey: string) => StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.postalCode.key, ParticipantFlags.postalCode.values.known)
 )
 
+export const updateTbExposureFlag = (questionKey: string) => StudyEngine.ifThen(
+  StudyEngine.hasResponseKey(questionKey, 'rg'),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.tbExposure.key, ParticipantFlags.tbExposure.values.known)
+)
+
 export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(QuitFollowUp.key, 'all'),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.tbExposure.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key)
 )
 
@@ -224,6 +230,7 @@ export const quitFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.messages.removeAll(),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.quitted),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.tbExposure.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.ifThen(
     StudyEngine.or(

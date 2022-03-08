@@ -1,6 +1,7 @@
 import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpressions';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
+import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { GeneralTherapy1, GeneralTherapy2 } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
@@ -32,7 +33,7 @@ class Feverflow_AdultsDef extends SurveyDefinition {
   Q26: FeverOtherCause3;
   Q27: FeverOtherCause4;
 
-  G28_29: PreviousTickBitesGroup;
+  PTB: PreviousTickBitesGroup;
 
   constructor(isRequired?: boolean) {
     super({
@@ -90,7 +91,9 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     this.Q26 = new FeverOtherCause3(this.key, required, Q24anycondition);
     this.Q27 = new FeverOtherCause4(this.key, required);
 
-    this.G28_29 = new PreviousTickBitesGroup(this.key, isRequired)
+    this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKey(ParticipantFlags.tbExposure.key)
+    ))
 
     this.editor.setPrefillRules([
       StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_11.Q4.key, 'rg.num', 1)
@@ -119,7 +122,7 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q25.get());
     this.addItem(this.Q26.get());
     this.addItem(this.Q27.get());
-    this.addItem(this.G28_29.get());
+    this.addItem(this.PTB.get());
 
   }
 }

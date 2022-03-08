@@ -24,6 +24,12 @@ export const ParticipantFlags = {
       known: 'known'
     }
   },
+  tbExposure: {
+    key: 'tbExposure',
+    values: {
+      known: 'known'
+    }
+  },
   flow: {
     key: 'flow',
     values: {
