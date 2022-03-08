@@ -49,7 +49,7 @@ class StandardflowEndText extends Item {
 
 **Hartelijk dank voor je melding op Tekenradar.nl.**
 
-Er is een email naar je verstuurd waarin staat hoe je je deelname aan Tekenradar.nl kunt bevestigen.
+Er is een e-mail naar je verstuurd waarin staat hoe je je deelname aan Tekenradar.nl kunt bevestigen.
 
 Als je een tekenbeet hebt gemeld, houdt dan de plek van de tekenbeet de komende drie maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans(?)) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
 
@@ -131,14 +131,14 @@ class WeeklyEndText extends Item {
 
 **Hartelijk dank voor het invullen van deze vragen.**
 
-Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
+Volgende week sturen we je weer een e-mail om te vragen hoeveel tekenbeten je hebt gehad.
 `
   markdownContentNormal = `
 ### Let op: klik onderaan nog op **"verzenden"** om je antwoorden op te sturen!
 
 **Hartelijk dank voor het invullen van deze vragen.**
 
-Volgende week sturen we je weer een email om te vragen hoeveel tekenbeten je hebt gehad.
+Volgende week sturen we je weer een e-mail om te vragen hoeveel tekenbeten je hebt gehad.
 
 Als je een tekenbeet hebt gehad, houd dan de plek van de tekenbeet de komende periode goed in de gaten en neem contact op met de huisarts als er een groeiende rode vlek of kring ontstaat of als je andere gezondheidsklachten krijgt die mogelijke met de ziekte van Lyme te maken kunnen hebben.
 `

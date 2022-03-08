@@ -399,7 +399,7 @@ class ContactGroupPretext extends Item {
   markdownContent = `
 **Vul hieronder je contactgegevens in.**
 
-We vragen opnieuw om je email adres en soms ook andere gegevens omdat we de eerder ingevulde gegevens vanwege regelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde email adres invullen.
+We vragen opnieuw om je e-mailadres en soms ook andere gegevens omdat we de eerder ingevulde gegevens vanwege regelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde e-mailadres invullen.
 Je contactgegevens worden alleen gebruikt voor het Tekenradar onderzoek en/of om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
 `
 
