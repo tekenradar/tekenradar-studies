@@ -129,8 +129,6 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q12.get());
     this.addPageBreak();
     this.addItem(this.H1.get());
-    this.addItem(this.P1.get());
-    this.addItem(this.P2.get());
     this.addItem(this.Q13.get());
     this.addItem(this.Q14.get());
     this.addItem(this.Q15.get());
@@ -138,6 +136,8 @@ class TBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.FLG.get());
     this.addItem(this.Q20_a.get());
     this.addItem(this.Q20_b.get());
+    this.addItem(this.P1.get());
+    this.addItem(this.P2.get());
   }
 }
 
