@@ -7,6 +7,7 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 import { surveyCategoryNames, SurveySuffix, TextBorderFormat } from '../globalConstants';
+import { clozeItemDropdownHours  } from './utils';
 
 
 export class TickBiteOtherGroup extends Group {
@@ -840,18 +841,25 @@ export class RemoveTick3 extends Item {
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
+            clozeItemDropdownHours('dropdown1'),
+            /*ClozeItemTypes.timeInput({
               key: '2',
               defaultValue: '--:--',
               inputLabelText: new Map([["nl", " en"],]),
               labelBehindInput: true
             }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            */
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
@@ -863,18 +871,18 @@ export class RemoveTick3 extends Item {
                 [['nl', "Gisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
@@ -886,18 +894,18 @@ export class RemoveTick3 extends Item {
                 [['nl', "Eergisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
@@ -928,18 +936,18 @@ export class RemoveTick3 extends Item {
                 [['nl', "tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '5',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '6',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '5', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '6', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
       ],
@@ -948,24 +956,24 @@ export class RemoveTick3 extends Item {
           key: 'TB_A8', rule: SurveyEngine.logic.or(
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.today),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.3`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown2`),
             ),
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.yesterday),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.3`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown2`),
             ),
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.ereyesterday),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.3`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown2`),
             ),
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.other),
               SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.5`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.6`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown2`),
             ),
           ), type: 'hard'
         }
@@ -1145,18 +1153,18 @@ export class DateTickBite extends Item {
                 [['nl', "Vandaag, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
@@ -1168,18 +1176,18 @@ export class DateTickBite extends Item {
                 [['nl', "Gisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
@@ -1191,18 +1199,18 @@ export class DateTickBite extends Item {
                 [['nl', "Eergisteren, tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '2',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '3',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '2', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
         SCOptions.cloze({
@@ -1233,18 +1241,18 @@ export class DateTickBite extends Item {
                 [['nl', "tussen"]]
               )
             }),
-            ClozeItemTypes.timeInput({
-              key: '5',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " en"],]),
-              labelBehindInput: true
-            }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-            ClozeItemTypes.timeInput({
-              key: '6',
-              defaultValue: '--:--',
-              inputLabelText: new Map([["nl", " uur"],]),
-              labelBehindInput: true,
+            clozeItemDropdownHours('dropdown1'),
+            ClozeItemTypes.text({
+              key: '5', content: new Map(
+                [['nl', " en"]]
+              )
             }),
+            clozeItemDropdownHours('dropdown2'),
+            ClozeItemTypes.text({
+              key: '6', content: new Map(
+                [['nl', " uur"]]
+              )
+            })
           ]
         }),
       ],
@@ -1253,24 +1261,24 @@ export class DateTickBite extends Item {
           key: 'TB_B13', rule: SurveyEngine.logic.or(
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.today),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.3`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.today}.dropdown2`),
             ),
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.yesterday),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.3`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.yesterday}.dropdown2`),
             ),
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.ereyesterday),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.3`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.ereyesterday}.dropdown2`),
             ),
             SurveyEngine.logic.and(
               SurveyEngine.singleChoice.any(this.key, this.optionKeys.other),
               SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.2`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.5`),
-              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.6`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown1`),
+              SurveyEngine.hasResponse(this.key, `rg.scg.${this.optionKeys.other}.dropdown2`),
             ),
           ), type: 'hard'
         }
@@ -1462,3 +1470,5 @@ export class DoctorTickBite extends Item {
     })
   }
 }
+
+

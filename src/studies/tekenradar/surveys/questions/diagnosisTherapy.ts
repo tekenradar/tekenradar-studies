@@ -5,6 +5,7 @@ import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOp
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SurveySuffix } from '../globalConstants';
 import { responseGroupKey, inputKey, dropDownKey } from 'case-editor-tools/constants/key-definitions';
+import { clozeItemDropdownHours  } from './utils';
 
 
 
@@ -710,18 +711,18 @@ export class LymeTherapy5 extends Item {
             [['nl', "(dag/maand/jaar) tussen"]]
           )
         }),
-        ClozeItemTypes.timeInput({
-          key: '4',
-          defaultValue: '--:--',
-          inputLabelText: new Map([["nl", " en"],]),
-          labelBehindInput: true
-        }),//TODO: strictly speaking, this number hast to be greater than or equal to the number above.
-        ClozeItemTypes.timeInput({
-          key: '5',
-          defaultValue: '--:--',
-          inputLabelText: new Map([["nl", " uur"],]),
-          labelBehindInput: true,
+        clozeItemDropdownHours('dropdown1'),
+        ClozeItemTypes.text({
+          key: '2', content: new Map(
+            [['nl', " en"]]
+          )
         }),
+        clozeItemDropdownHours('dropdown2'),
+        ClozeItemTypes.text({
+          key: '3', content: new Map(
+            [['nl', " uur"]]
+          )
+        })
       ],
     })
   }
