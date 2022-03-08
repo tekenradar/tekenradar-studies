@@ -66,7 +66,7 @@ Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
   markdownContentAdults = `
 # Klachten perceptie
 
-Omcirkel alsjeblieft bij elke vraag het getal dat je mening het beste weergeeft:
+Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -711,7 +711,7 @@ class Awareness8 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme invloed op je gemoedstoestand? (b.v. maakt het je boos,angstig, van streek, of somber?)'],
+        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme invloed op je gemoedstoestand? (b.v. maakt het je boos, angstig, van streek, of somber?)'],
       ]),
     }
   ]

@@ -103,7 +103,7 @@ export class FeverTickBite extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Heb je binnen vier weken na de tekenbeet gemeten koorts boven 38,0 graden gehad?'],
+        ['nl', 'Heb je binnen vier weken na de tekenbeet gemeten koorts van 38,0 graden of hoger gehad?'],
       ]),
       responseOptions: [
         {
@@ -395,7 +395,7 @@ export class WeeklyFlowPretext extends Item {
   markdownContent = `
 ##### We willen graag weten hoeveel tekenbeten mensen oplopen.
 ##### Daarom zoeken wij mensen die ons wekelijks laten weten of ze tekenbeten hebben gehad. Dit duurt minder dan een minuut.
-##### Ook als je géén tekenbeet hebt gehad is het nuttig voor ons om te weten.
+##### Ook als je géén tekenbeet hebt gehad is het nuttig om door te geven.
 `
 
   buildItem(): SurveySingleItem {
