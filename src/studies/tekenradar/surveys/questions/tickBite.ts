@@ -600,7 +600,7 @@ class TBOutsideNL extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Waar heb je de tekenbeet opgelopen?'],
+        ['nl', 'In welk (buiten)land heb je de tekenbeet opgelopen?'],
       ]),
     })
   }
