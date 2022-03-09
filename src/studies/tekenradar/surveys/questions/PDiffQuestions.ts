@@ -597,3 +597,31 @@ export class WeeklyFlow extends Item {
     })
   }
 }
+
+export class UserVerificationQuestion extends Item {
+  constructor(parentKey: string, isRequired: boolean, condition: Expression) {
+    super(parentKey, 'UV');
+    this.condition = condition;
+    this.isRequired = isRequired;
+  }
+
+  buildItem() {
+    return SurveyItems.customQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wil je wekelijks doorgeven hoeveel tekenbeten je hebt gehad?'],
+      ]),
+      questionSubText: new Map([
+        ['nl', 'Hiervoor kun je een account aanmaken na klikken op "Opslaan en verder gaan" onderaan deze pagina.'],
+      ]),
+      responseItemDefs: [
+        {
+          key: 'uv', role: 'userVerification', mapToRole: 'input',
+        }
+      ]
+    })
+  }
+}

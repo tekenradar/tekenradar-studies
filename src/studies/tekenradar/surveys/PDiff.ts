@@ -1,4 +1,4 @@
-import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, FlowStartText, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme, SurveyValidationText, WeeklyFlow, WeeklyFlowPretext } from './questions/PDiffQuestions'
+import { DetectTickBite, EMTextPDiff, EMTickBite, FeverTickBite, FlowStartText, IntroPDiff, LymeTickBite1, LymeTickBite2, MedicationLyme, SurveyValidationText, UserVerificationQuestion, WeeklyFlow, WeeklyFlowPretext } from './questions/PDiffQuestions'
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { Age } from './questions/demographie';
@@ -19,6 +19,7 @@ export class PDiffDef extends SurveyDefinition {
   Q8: WeeklyFlow;
   FS: FlowStartText;
   SV: SurveyValidationText;
+  UserVerification: UserVerificationQuestion;
 
 
   constructor(isRequired?: boolean) {
@@ -198,6 +199,13 @@ export class PDiffDef extends SurveyDefinition {
       ChronicflowActive: ChronicflowActive,
       FeverFlowActive: FeverFlowActive,
     })
+
+    this.UserVerification = new UserVerificationQuestion(this.key,
+      true,
+      SurveyEngine.logic.not(
+        SurveyEngine.isLoggedIn()
+      ),
+    )
   }
 
 
@@ -215,6 +223,7 @@ export class PDiffDef extends SurveyDefinition {
     this.addItem(this.SV.get());
     this.addItem(this.Q7.get());
     this.addItem(this.FS.get());
+    this.addItem(this.UserVerification.get());
   }
 }
 
