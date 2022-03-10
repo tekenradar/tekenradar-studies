@@ -612,10 +612,10 @@ export class UserVerificationQuestion extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wil je wekelijks doorgeven hoeveel tekenbeten je hebt gehad?'],
+        ['nl', 'Controlevraag'],
       ]),
       questionSubText: new Map([
-        ['nl', 'Hiervoor kun je een account aanmaken na klikken op "Opslaan en verder gaan" onderaan deze pagina.'],
+        ['nl', 'Dit is een controlevraag om te bevestigen dat je geen robot bent. Typ het juiste antwoord in het antwoordveld hieronder.'],
       ]),
       responseItemDefs: [
         {
