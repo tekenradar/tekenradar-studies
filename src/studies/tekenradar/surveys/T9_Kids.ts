@@ -2,13 +2,13 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, ThreeMonthsText_Kids, MedicationFUText_Kids, FU_LymeDiagGroup } from './questions/followup';
 import { QuestionsKids1, QuestionsKids2, PHQ_15, PHQ_15_FU, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { PainH1_Kids, PainH2_Kids, PainTextH1_Kids, PainTextH2_Kids, School1H1_Kids, School1H2_Kids, School2H1_Kids, School2H2_Kids, School3H1_Kids, School3H2_Kids } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
 import { TicP_Group } from './questions/ticp';
 import { Pedsql_13_18, Pedsql_2_4, Pedsql_5_7, Pedsql_8_12 } from './questions/pedsql';
 import { PedsqlFatigue_13_18, PedsqlFatigue_2_4, PedsqlFatigue_5_7, PedsqlFatigue_8_12 } from './questions/pedsqlFatigue';
+import { VasPain_Group_2_7, VasPain_Group_8_18 } from './questions/vasPain';
 
 class T9_KidsDef extends SurveyDefinition {
 
@@ -42,16 +42,8 @@ class T9_KidsDef extends SurveyDefinition {
   PedsqlFatigue_8_12: PedsqlFatigue_8_12;
   PedsqlFatigue_13_18: PedsqlFatigue_13_18;
 
-  T14_H1: PainTextH1_Kids;
-  T14_H2: PainTextH2_Kids;
-  Q27_H1: PainH1_Kids;
-  Q27_H2: PainH2_Kids;
-  Q28_H1: School1H1_Kids;
-  Q28_H2: School1H2_Kids;
-  Q29_H1: School2H1_Kids;
-  Q29_H2: School2H2_Kids;
-  Q30_H1: School3H1_Kids;
-  Q30_H2: School3H2_Kids;
+  VasPain_2_7: VasPain_Group_2_7;
+  VasPain_8_18: VasPain_Group_8_18;
 
   EndGroup: SurveyEndGroup;
 
@@ -141,16 +133,8 @@ class T9_KidsDef extends SurveyDefinition {
     this.PedsqlFatigue_8_12 = new PedsqlFatigue_8_12(this.key, required, cond_8younger13);
     this.PedsqlFatigue_13_18 = new PedsqlFatigue_13_18(this.key, required, cond_13younger18);
 
-    this.T14_H1 = new PainTextH1_Kids(this.key, required, cond_2younger8);
-    this.T14_H2 = new PainTextH2_Kids(this.key, required, cond_8younger18);
-    this.Q27_H1 = new PainH1_Kids(this.key, required, cond_2younger8);
-    this.Q27_H2 = new PainH2_Kids(this.key, required, cond_8younger18);
-    this.Q28_H1 = new School1H1_Kids(this.key, required, cond_2younger8);
-    this.Q28_H2 = new School1H2_Kids(this.key, required, cond_8younger18);
-    this.Q29_H1 = new School2H1_Kids(this.key, required, cond_2younger8);
-    this.Q29_H2 = new School2H2_Kids(this.key, required, cond_8younger18);
-    this.Q30_H1 = new School3H1_Kids(this.key, required, cond_2younger8);
-    this.Q30_H2 = new School3H2_Kids(this.key, required, cond_8younger18);
+    this.VasPain_2_7 = new VasPain_Group_2_7(this.key, required, cond_2younger8);
+    this.VasPain_8_18 = new VasPain_Group_8_18(this.key, required, cond_8younger18);
 
     this.EndGroup = new SurveyEndGroup(this.key, false);
   }
@@ -195,16 +179,8 @@ class T9_KidsDef extends SurveyDefinition {
     this.addItem(this.PedsqlFatigue_13_18.get());
     this.addPageBreak();
 
-    this.addItem(this.T14_H1.get());
-    this.addItem(this.T14_H2.get());
-    this.addItem(this.Q27_H1.get());
-    this.addItem(this.Q27_H2.get());
-    this.addItem(this.Q28_H1.get());
-    this.addItem(this.Q28_H2.get());
-    this.addItem(this.Q29_H1.get());
-    this.addItem(this.Q29_H2.get());
-    this.addItem(this.Q30_H1.get());
-    this.addItem(this.Q30_H2.get());
+    this.addItem(this.VasPain_2_7.get());
+    this.addItem(this.VasPain_8_18.get());
     this.addPageBreak();
 
     this.addItem(this.EndGroup.get());
