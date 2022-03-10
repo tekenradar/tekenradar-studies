@@ -216,7 +216,7 @@ Wil je alsjeblieft bij iedere vraag een antwoord kiezen door op het bolletje te 
 }
 
 
-export class Strength_WeaknessI1_Kids extends Item {
+export class SQD3_2_4 extends Item {
 
 
   questionTextMain = [
@@ -229,7 +229,7 @@ export class Strength_WeaknessI1_Kids extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'kS-I1-SDQ');
+    super(parentKey, 'SQD3_2_4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -418,7 +418,7 @@ export class Strength_WeaknessI1_Kids extends Item {
 }
 
 
-export class Strength_WeaknessI2_Kids extends Item {
+export class SQD3_5_11 extends Item {
 
 
   questionTextMain = [
@@ -431,7 +431,7 @@ export class Strength_WeaknessI2_Kids extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'SDQ_2');
+    super(parentKey, 'SQD3_5_11');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -620,7 +620,7 @@ export class Strength_WeaknessI2_Kids extends Item {
 }
 
 
-export class Strength_WeaknessI3_Kids extends Item {
+export class SQD3_11_18 extends Item {
   questionTextMain = [
     {
       content: new Map([
@@ -631,7 +631,7 @@ export class Strength_WeaknessI3_Kids extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'SDQ_3');
+    super(parentKey, 'SQD3_11_18');
 
     this.isRequired = isRequired;
     this.condition = condition;
