@@ -7,7 +7,7 @@ import { surveyCategoryNames, surveyKeys } from '../globalConstants';
 
 class T0_Invites_EndText extends Item {
   markdownContent = `
-### Let op: klik onderaan nog op **"verzenden"** om je antwoorden op te sturen!
+### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
 **Hartelijk dank voor je melding op Tekenradar.nl.**
 
@@ -45,7 +45,7 @@ Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die
 class StandardflowEndText extends Item {
 
   markdownContent = `
-### Let op: klik onderaan nog op **"verzenden"** om je antwoorden op te sturen!
+### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
 **Hartelijk dank voor je melding op Tekenradar.nl.**
 
@@ -86,7 +86,7 @@ Het kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die
 class FollowupEndText extends Item {
 
   markdownContent = `
-### Let op: klik onderaan nog op **"verzenden"** om je antwoorden op te sturen!
+### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
 **Hartelijk dank voor het invullen van de vragenlijst**
 
@@ -127,14 +127,14 @@ Dit was de laatste vragenlijst. Je hebt ons daardoor geholpen met onderzoek naar
 class WeeklyEndText extends Item {
 
   markdownContentFirstTime = `
-### Let op: klik onderaan nog op **"verzenden"** om je antwoorden op te sturen!
+### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
 **Hartelijk dank voor het invullen van deze vragen.**
 
 Volgende week sturen we je weer een e-mail om te vragen hoeveel tekenbeten je hebt gehad.
 `
   markdownContentNormal = `
-### Let op: klik onderaan nog op **"verzenden"** om je antwoorden op te sturen!
+### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
 **Hartelijk dank voor het invullen van deze vragen.**
 

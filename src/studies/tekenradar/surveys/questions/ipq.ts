@@ -58,7 +58,7 @@ export class Header extends Item {
 # Klachten perceptie
 
 De vragen hieronder zijn voor een minderjarige.
-Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
+Als een ouder/verzorger helpt met invullen laat dan **je kind zelf** de antwoorden kiezen.
 
 Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
 `

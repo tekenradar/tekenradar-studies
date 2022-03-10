@@ -36,7 +36,7 @@ class MedCareText1 extends Item {
 # Zorgconsumptie
 
 De vragen hieronder zijn voor een minderjarige.
-Bent u een ouder/verzorger dan kunt u de antwoorden invullen voor/over uw kind.
+Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
 Dit deel van de vragenlijst is bedoeld om in kaart te brengen met welke zorg- of hulpverleners je in de **afgelopen 3 maanden** contact hebt gehad.
     `
@@ -136,7 +136,7 @@ class MedCare1 extends Item {
         {
           key: 'Q1', rule: SurveyEngine.logic.or(
             SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
-            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`),0),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`), 0),
           ), type: 'hard'
         }
       ],

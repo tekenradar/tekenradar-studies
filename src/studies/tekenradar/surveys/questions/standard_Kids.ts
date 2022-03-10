@@ -118,7 +118,7 @@ export class Strength_WeaknessI1Text_Kids extends Item {
 
 De vragen hieronder zijn voor **een ouder/verzorger**.
 
-De volgende vragen gaan over gedragingen van kinderen. Wilt u bij iedere vraag aankruisen of dit ‘niet waar’, ‘een beetje waar’ of ‘zeker waar’ is voor uw kind. Wilt u uw antwoorden baseren op het gedrag van uw kind gedurende de laatste zes maanden. Het is van belang dat u alle vragen beantwoordt, ook als u niet helemaal zeker bent of als u de vraag niet geheel passend vindt voor uw kind.
+De volgende vragen gaan over gedragingen van kinderen. Wil je bij iedere vraag aankruisen of dit ‘niet waar’, ‘een beetje waar’ of ‘zeker waar’ is voor je kind. Wilt je je antwoorden baseren op het gedrag van je kind gedurende de laatste zes maanden. Het is van belang dat je alle vragen beantwoordt, ook als je niet helemaal zeker bent of als je de vraag niet geheel passend vindt voor je kind.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition1?: Expression) {
@@ -153,7 +153,7 @@ export class Strength_WeaknessI2Text_Kids extends Item {
 
 De vragen hieronder zijn voor **een ouder/verzorger**. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
 
-Wilt u alstublieft bij iedere vraag een antwoord kiezen door op het bolletje te klikken bij 'Niet waar', 'Een beetje waar' of 'Zeker waar'. Het is van belang dat u alle vragen zo goed mogelijk beantwoordt, ook als u niet helemaal zeker bent of als u de vraag raar vindt. Wilt u alstublieft uw antwoorden baseren op het gedrag van het kind de laatste zes maanden.
+Wil je alsjeblieft bij iedere vraag een antwoord kiezen door op het bolletje te klikken bij 'Niet waar', 'Een beetje waar' of 'Zeker waar'. Het is van belang dat je alle vragen zo goed mogelijk beantwoordt, ook als je niet helemaal zeker bent of als je de vraag raar vindt. Wil je alsjeblieft je antwoorden baseren op het gedrag van het kind de laatste zes maanden.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition1?: Expression) {
@@ -185,7 +185,7 @@ export class Strength_WeaknessI3Text_Kids extends Item {
   markdownContent_F3 = `
 # Sterke kanten en moeilijkheden
 
-De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf de** antwoorden kiezen.
+De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **je kind zelf de** antwoorden kiezen.
 
 Wil je alsjeblieft bij iedere vraag een antwoord kiezen door op het bolletje te klikken bij 'Niet waar', 'Een beetje waar' of 'Zeker waar'. Het is belangrijk dat je alle vragen zo goed mogelijk beantwoordt, ook als je niet helemaal zeker bent of als je de vraag raar vindt. Wil je alsjeblieft bij je antwoorden denken hoe dat bij jou de laatste zes maanden is geweest.
 

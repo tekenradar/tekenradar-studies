@@ -99,7 +99,7 @@ class PainTextH2_Kids extends Item {
   markdownContent_H2 = `
 ## Pijn en verzuim
 
-De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** het antwoord op de eerste vraag kiezen.
+De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **je kind zelf** het antwoord op de eerste vraag kiezen.
 
 Deze vraag gaat over of je de afgelopen week pijn hebt gehad:
 `
@@ -131,7 +131,7 @@ class PainH1_Kids extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoe veel pijn heeft uw kind gehad '],
+        ["nl", 'Hoe veel pijn heeft je kind gehad '],
       ]),
     },
     {
@@ -142,7 +142,7 @@ class PainH1_Kids extends Item {
     },
     {
       content: new Map([
-        ["nl", "? Plaats het blokje op de lijn waar die het best de ernst de pijn van uw kind"],
+        ["nl", "? Plaats het blokje op de lijn waar die het best de ernst de pijn van je kind"],
       ]),
     },
     {
@@ -247,7 +247,7 @@ class School1H1_Kids extends Item {
     },
     {
       content: new Map([
-        ["nl", "dat geroosterd is voor kinderen uit de klas van uw kind? Of als uw kind nog niet op school zit: het aantal uren dat uw kind op een kinderdagverblijf of speelzaal stond ingeroosterd."],
+        ["nl", "dat geroosterd is voor kinderen uit de klas van je kind? Of als je kind nog niet op school zit: het aantal uren dat je kind op een kinderdagverblijf of speelzaal stond ingeroosterd."],
       ]),
     }
   ]
@@ -326,7 +326,7 @@ class School2H1_Kids extends Item {
     },
     {
       content: new Map([
-        ["nl", "dat uw kind gevolgd heeft (of aantal uren aanwezig op kinderdagverblijf/speelzaal):"],
+        ["nl", "dat je kind gevolgd heeft (of aantal uren aanwezig op kinderdagverblijf/speelzaal):"],
       ]),
     }
   ]
@@ -389,7 +389,7 @@ class School3H1_Kids extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoeveel schoolverzuim (of kinderdagverblijf of speelzaal verzuim) heeft uw kind '],
+        ["nl", 'Hoeveel schoolverzuim (of kinderdagverblijf of speelzaal verzuim) heeft je kind '],
       ]),
     },
     {

@@ -108,7 +108,7 @@ Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hie
       ]),
       dialogContent: new Map([
         ["nl", `
-[**Scroll naar beneden** om de hele tekst te lezen, onderaan kun je wel of geen toestemming geven.]
+**Scroll naar beneden om de hele tekst te lezen, kies onderaan voor wel of geen toestemming.**
 
 Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
 
@@ -237,7 +237,8 @@ Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hie
       ]),
       dialogContent: new Map([
         ["nl", `
-[**Scroll naar beneden** om de hele tekst te lezen, onderaan kun je wel of geen toestemming geven.]
+**Scroll naar beneden om de hele tekst te lezen, kies onderaan voor wel of geen toestemming.**
+
 
 Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
 
@@ -371,7 +372,7 @@ Om je te benaderen voor aanvullend onderzoek hebben we ook je toestemming nodig.
       ]),
       dialogContent: new Map([
         ["nl", `
-[**Scroll naar beneden** om de hele tekst te lezen, onderaan kun je wel of geen toestemming geven.]
+**Scroll naar beneden om de hele tekst te lezen, kies onderaan voor wel of geen toestemming.**
 
 Door hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.
 Meer informatie over onder andere het doel van Tekenradar onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).

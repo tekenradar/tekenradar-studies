@@ -172,7 +172,7 @@ class FunctioningText1F1_Kids extends Item {
 # Functioneren
 De vragen hieronder zijn voor **een ouder/verzorger**.
 
-Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. Kunt u ons vertellen **hoe vaak** uw kind in de **afgelopen week** met elk van deze dingen problemen heeft gehad? Vink het cijfer aan dat het beste van toepassing is. U kunt kiezen uit:
+Hieronder staat een lijst van dingen die een probleem kunnen zijn voor je kind. Kun je ons vertellen **hoe vaak** je kind in de **afgelopen week** met elk van deze dingen problemen heeft gehad? Vink het cijfer aan dat het beste van toepassing is. Je kunt kiezen uit:
   - **0** als het **nooit** een probleem is
   - **1** als het **bijna nooit** een probleem is
   - **2** als het **soms** een probleem is
@@ -181,7 +181,7 @@ Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. 
 
 Er zijn geen goede of foute antwoorden.
 
-##### Hoe vaak heeft uw kind in de **afgelopen week** problemen gehad met ...
+##### Hoe vaak heeft je kind in de **afgelopen week** problemen gehad met ...
     `
   constructor(parentKey: string, condition?: Expression) {
     super(parentKey, 'Header');
@@ -212,7 +212,7 @@ class Q1F1 extends Item {
   questionTextMain = [
     /*{
         content: new Map([
-            ["nl", 'Hoe vaak heeft uw kind in de '],
+            ["nl", 'Hoe vaak heeft je kind in de '],
         ]),
     },
     {
@@ -496,7 +496,7 @@ class Q4preF1_Kids extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Gaat uw kind naar school, kinderdagverblijf of naar de peuterspeelzaal?'],
+        ['nl', 'Gaat je kind naar school, kinderdagverblijf of naar de peuterspeelzaal?'],
       ]),
       responseOptions: [
         {
@@ -893,7 +893,7 @@ class Q4F2 extends Item {
 class FunctioningText1F3_Kids extends Item {
   markdownContent_F3 = `
   # Functioneren
-  De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
+  De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **je kind zelf** de antwoorden kiezen.
 
   Op deze pagina staat een lijst van dingen die een probleem voor jou kunnen zijn. Kun je ons vertellen **hoe vaak** je in de **afgelopen week** met elk van deze dingen problemen hebt gehad?
   Klik het bolletje aan bij:

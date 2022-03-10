@@ -121,7 +121,7 @@ class Header_2_4 extends Item {
 # Vermoeidheid
 De vragen hieronder zijn voor **een ouder/verzorger**.
 
-Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. Kunt u ons vertellen **hoe vaak** uw kind in de **afgelopen week** met elk van deze dingen problemen heeft gehad? Vink het cijfer aan dat het beste van toepassing is. U kunt kiezen uit:
+Hieronder staat een lijst van dingen die een probleem kunnen zijn voor je kind. Kun je ons vertellen **hoe vaak** je kind in de **afgelopen week** met elk van deze dingen problemen heeft gehad? Vink het cijfer aan dat het beste van toepassing is. Je kunt kiezen uit:
   - **0** als het **nooit** een probleem is
   - **1** als het **bijna nooit** een probleem is
   - **2** als het **soms** een probleem is
@@ -130,7 +130,7 @@ Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. 
 
 Er zijn geen goede of foute antwoorden.
 
-##### Hoe vaak heeft uw kind in de **afgelopen week** problemen gehad met:
+##### Hoe vaak heeft je kind in de **afgelopen week** problemen gehad met:
     `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -162,7 +162,7 @@ class Header_5_7 extends Item {
 # Vermoeidheid
 De vragen hieronder zijn voor **een ouder/verzorger**.
 
-Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. Kunt u ons vertellen **hoe vaak** uw kind in de **afgelopen week** met elk van deze dingen problemen heeft gehad? Vink het cijfer aan dat het beste van toepassing is. U kunt kiezen uit:
+Hieronder staat een lijst van dingen die een probleem kunnen zijn voor je kind. Kun je ons vertellen **hoe vaak** je kind in de **afgelopen week** met elk van deze dingen problemen heeft gehad? Vink het cijfer aan dat het beste van toepassing is. Je kunt kiezen uit:
   - **0** als het **nooit** een probleem is
   - **1** als het **bijna nooit** een probleem is
   - **2** als het **soms** een probleem is
@@ -171,7 +171,7 @@ Hieronder staat een lijst van dingen die een probleem kunnen zijn voor uw kind. 
 
 Er zijn geen goede of foute antwoorden.
 
-##### Hoezeer heeft uw kind in de **afgelopen week** een probleem gehad met:
+##### Hoezeer heeft je kind in de **afgelopen week** een probleem gehad met:
     `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -201,7 +201,7 @@ Er zijn geen goede of foute antwoorden.
 class Header_8_12 extends Item {
   markdownContent = `
 # Vermoeidheid
-De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
+De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **je kind zelf** de antwoorden kiezen.
 
 Op deze pagina staat een lijst van dingen die een probleem voor jou kunnen zijn. Kun je ons vertellen **hoe vaak** je in de **afgelopen week** met elk van deze dingen problemen hebt gehad?
 Klik het bolletje aan bij:
@@ -243,7 +243,7 @@ Er zijn geen goede of foute antwoorden.
 class Header_13_18 extends Item {
   markdownContent = `
 # Vermoeidheid
-De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **uw kind zelf** de antwoorden kiezen.
+De vragen hieronder zijn voor een minderjarige. Als een ouder/verzorger helpt met invullen laat dan **je kind zelf** de antwoorden kiezen.
 
 Op deze pagina staat een lijst van dingen die een probleem voor jou kunnen zijn. Kun je ons vertellen **hoe vaak** je in de **afgelopen week** met elk van deze dingen problemen hebt gehad?
 Klik het bolletje aan bij:
