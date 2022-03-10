@@ -2,7 +2,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { FeverFU1, FeverFU2, MedicationFU1, MedicationFU2, NewTB, PreviousTickBites3, ReportedTB2, Text1FU, ThreeMonthsText_Kids, MedicationFUText_Kids, FU_LymeDiagGroup } from './questions/followup';
 import { QuestionsKids1, QuestionsKids2, PHQ_15, PHQ_15_FU, SymptomsText2_Kids, TextQUKids } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
-import { Strength_WeaknessI1Text_Kids, Strength_WeaknessI1_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI2_Kids, Strength_WeaknessI3Text_Kids, Strength_WeaknessI3_Kids } from './questions/standard_Kids';
+import { SQD3_11_18, SQD3_2_4, SQD3_5_11, Strength_WeaknessI1Text_Kids, Strength_WeaknessI2Text_Kids, Strength_WeaknessI3Text_Kids, } from './questions/standard_Kids';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { SurveyEndGroup } from './questions/surveyEnd';
@@ -51,9 +51,9 @@ class T3_KidsDef extends SurveyDefinition {
   T15_I1: Strength_WeaknessI1Text_Kids;
   T15_I2: Strength_WeaknessI2Text_Kids;
   T15_I3: Strength_WeaknessI3Text_Kids;
-  Q31_I1: Strength_WeaknessI1_Kids;
-  Q31_I2: Strength_WeaknessI2_Kids;
-  Q31_I3: Strength_WeaknessI3_Kids;
+  SQD3_2_4: SQD3_2_4;
+  SQD3_5_11: SQD3_5_11;
+  SQD3_11_18: SQD3_11_18;
   EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
@@ -160,9 +160,9 @@ class T3_KidsDef extends SurveyDefinition {
     this.T15_I1 = new Strength_WeaknessI1Text_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_2younger5));
     this.T15_I2 = new Strength_WeaknessI2Text_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_5younger11));
     this.T15_I3 = new Strength_WeaknessI3Text_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_11younger18));
-    this.Q31_I1 = new Strength_WeaknessI1_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_2younger5));
-    this.Q31_I2 = new Strength_WeaknessI2_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_5younger11));
-    this.Q31_I3 = new Strength_WeaknessI3_Kids(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_11younger18));
+    this.SQD3_2_4 = new SQD3_2_4(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_2younger5));
+    this.SQD3_5_11 = new SQD3_5_11(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_5younger11));
+    this.SQD3_11_18 = new SQD3_11_18(this.key, required, SurveyEngine.logic.and(cond_notTBflow, cond_11younger18));
     this.EndGroup = new SurveyEndGroup(this.key, false);
 
   }
@@ -216,9 +216,9 @@ class T3_KidsDef extends SurveyDefinition {
     this.addItem(this.T15_I1.get());
     this.addItem(this.T15_I2.get());
     this.addItem(this.T15_I3.get());
-    this.addItem(this.Q31_I1.get());
-    this.addItem(this.Q31_I2.get());
-    this.addItem(this.Q31_I3.get());
+    this.addItem(this.SQD3_2_4.get());
+    this.addItem(this.SQD3_5_11.get());
+    this.addItem(this.SQD3_11_18.get());
     this.addPageBreak();
 
     this.addItem(this.EndGroup.get());
