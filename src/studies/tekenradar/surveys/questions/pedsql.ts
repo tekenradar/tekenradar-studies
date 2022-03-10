@@ -138,7 +138,7 @@ export class Pedsql_13_18 extends Group {
 
 const optionHint = ComponentGenerators.markdown({
   content: new Map([['nl', `
-1 = Nooit, 2 = Bijna nooit, 3 = Soms, 4 = Vaak, 5 = Bijna altijd
+0 = Nooit, 1 = Bijna nooit, 2 = Soms, 3 = Vaak, 4 = Bijna altijd
         `]])
 });
 
