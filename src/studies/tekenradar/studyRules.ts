@@ -125,7 +125,7 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
     StudyEngine.getSelectedKeys(TBflow_Adults.Q2.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.count,
-    StudyEngine.getResponseValueAsStr(TBflow_Adults.Q4.key, `${responseGroupKey}.${numericInputKey}`), 'int'
+    StudyEngine.getResponseValueAsNum(TBflow_Adults.Q4.key, `${responseGroupKey}.${numericInputKey}`), 'int'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.location,
     StudyEngine.getResponseValueAsStr(TBflow_Adults.Q5.key, `${responseGroupKey}.${inputKey}`), 'string'
