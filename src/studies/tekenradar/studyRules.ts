@@ -68,6 +68,7 @@ export const emailKeys = {
   FlowReminder: 'Flow_reminder',
   StandardflowReminder: 'Standardflow_reminder',
   EMfotoReminder: 'EMfoto_reminder',
+  EMcheckReminder: 'EMcheck_reminder',
 }
 
 const handleSubmit_PDiff = StudyEngine.ifThen(
@@ -173,6 +174,7 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
 )
 
 const addEMfotoReminderEmail = () => StudyEngine.participantActions.messages.add(emailKeys.EMfotoReminder, StudyEngine.timestampWithOffset({ days: 2 }));
+const addEMcheckReminderEmail = () => StudyEngine.participantActions.messages.add(emailKeys.EMcheckReminder, StudyEngine.timestampWithOffset({ days: 21 }));
 
 const assignEMfotoSurvey = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
@@ -400,6 +402,11 @@ const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
   ),
   updateGenderFlag(Standardflow_Adults.P2.key),
   updatePostalCodeFlag(Standardflow_Adults.P1.key),
+  // Add reminder email to check for EM later
+  StudyEngine.ifThen(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+    addEMcheckReminderEmail(),
+  ),
 );
 
 
@@ -419,6 +426,11 @@ const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
   // Gender category:
   updateGenderFlag(Standardflow_Kids.P2.key),
   updatePostalCodeFlag(Standardflow_Kids.P1.key),
+  // Add reminder email to check for EM later
+  StudyEngine.ifThen(
+    StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
+    addEMcheckReminderEmail(),
+  ),
 );
 
 const handleSubmit_WeeklyTB = StudyEngine.ifThen(
