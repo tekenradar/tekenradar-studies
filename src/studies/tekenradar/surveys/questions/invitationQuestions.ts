@@ -468,6 +468,15 @@ class GP extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 't7', content: new Map([['nl', 'Telefoonnummer praktijk: ']]) }),
         ClozeItemTypes.textInput({ key: 'tel', className: 'w-100' }),
+      ],
+      customValidations: [
+        {
+          key: 'DocAddress', rule: SurveyEngine.logic.and(
+            SurveyEngine.hasResponse(this.key, `rg.cloze.pn`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.nh`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.plaats`),
+          ), type: 'hard'
+        }
       ]
     })
   }
