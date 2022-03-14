@@ -458,6 +458,9 @@ export class LymeTherapy1 extends Item {
 
 export class LymeTherapy2 extends Item {
   optionKeys = {
+    name: '2',
+    dose: '4',
+    numberPerDay: '6',
     dayCount: '10',
   }
 
@@ -496,7 +499,7 @@ export class LymeTherapy2 extends Item {
           )
         }),
         ClozeItemTypes.textInput({
-          key: '2',
+          key: this.optionKeys.name,
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
@@ -505,7 +508,7 @@ export class LymeTherapy2 extends Item {
           )
         }),
         ClozeItemTypes.textInput({
-          key: '4',
+          key: this.optionKeys.dose,
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
@@ -514,7 +517,7 @@ export class LymeTherapy2 extends Item {
           )
         }),
         ClozeItemTypes.textInput({
-          key: '6',
+          key: this.optionKeys.numberPerDay,
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
@@ -552,9 +555,9 @@ export class LymeTherapy2 extends Item {
       customValidations: [
         {
           key: 'MedInfo', rule: SurveyEngine.logic.and(
-            SurveyEngine.hasResponse(this.key, `rg.cloze.2`),
-            SurveyEngine.hasResponse(this.key, `rg.cloze.4`),
-            SurveyEngine.hasResponse(this.key, `rg.cloze.6`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.name}`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.dose}`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.numberPerDay}`),
             SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.dayCount}`)
           ), type: 'hard'
         }
