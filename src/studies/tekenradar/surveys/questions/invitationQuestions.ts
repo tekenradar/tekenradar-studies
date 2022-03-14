@@ -497,6 +497,14 @@ class Name extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 't2', content: new Map([['nl', 'Achternaam: ']]) }),
         ClozeItemTypes.textInput({ key: 'an', className: 'flex-grow-1', alignText: 'start' }),
+      ],
+      customValidations: [
+        {
+          key: 'Name', rule: SurveyEngine.logic.and(
+            SurveyEngine.hasResponse(this.key, `rg.cloze.vn`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.an`),
+          ), type: 'hard'
+        }
       ]
     })
   }
