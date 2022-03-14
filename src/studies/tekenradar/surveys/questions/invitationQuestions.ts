@@ -428,6 +428,12 @@ Je contactgegevens worden alleen gebruikt voor het Tekenradar onderzoek en/of om
 }
 
 class GP extends Item {
+  optionKeys = {
+    nameOffice: 'pn',
+    nameDoc: 'nh',
+    place: 'plaats'
+  }
+
   constructor(parentKey: string, required: boolean, condition?: Expression) {
     super(parentKey, 'GP');
 
@@ -447,10 +453,10 @@ class GP extends Item {
       confidentialMode: "add",
       items: [
         ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Praktijknaam: ']]) }),
-        ClozeItemTypes.textInput({ key: 'pn', className: 'w-100' }),
+        ClozeItemTypes.textInput({ key: this.optionKeys.nameOffice, className: 'w-100' }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 't2', content: new Map([['nl', 'Naam huisarts: ']]) }),
-        ClozeItemTypes.textInput({ key: 'nh', className: 'w-100' }),
+        ClozeItemTypes.textInput({ key: this.optionKeys.nameDoc, className: 'w-100' }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 'taddr', className: 'fw-bold mt-2', content: new Map([['nl', 'Adres: ']]) }),
         ClozeItemTypes.clozeLineBreak(),
@@ -462,7 +468,7 @@ class GP extends Item {
         ClozeItemTypes.text({ key: 't5', content: new Map([['nl', 'Postcode: ']]) }),
         ClozeItemTypes.textInput({ key: 'pc', className: '' }),
         ClozeItemTypes.text({ key: 't6', content: new Map([['nl', 'Plaats: ']]) }),
-        ClozeItemTypes.textInput({ key: 'plaats', className: 'flex-grow-1' }),
+        ClozeItemTypes.textInput({ key: this.optionKeys.place, className: 'flex-grow-1' }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 'tcont', className: 'fw-bold mt-2', content: new Map([['nl', 'Contact: ']]) }),
         ClozeItemTypes.clozeLineBreak(),
@@ -472,9 +478,9 @@ class GP extends Item {
       customValidations: [
         {
           key: 'DocAddress', rule: SurveyEngine.logic.and(
-            SurveyEngine.hasResponse(this.key, `rg.cloze.pn`),
-            SurveyEngine.hasResponse(this.key, `rg.cloze.nh`),
-            SurveyEngine.hasResponse(this.key, `rg.cloze.plaats`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.nameOffice}`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.nameDoc}`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.place}`),
           ), type: 'hard'
         }
       ]
@@ -483,6 +489,13 @@ class GP extends Item {
 }
 
 class Name extends Item {
+
+  optionKeys = {
+    forename: 'vn',
+    surname: 'an'
+  }
+
+
   constructor(parentKey: string, required: boolean, condition?: Expression) {
     super(parentKey, 'Naam');
 
@@ -502,16 +515,16 @@ class Name extends Item {
       confidentialMode: "replace",
       items: [
         ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Voornaam: ']]) }),
-        ClozeItemTypes.textInput({ key: 'vn', className: 'flex-grow-1', alignText: 'start' }),
+        ClozeItemTypes.textInput({ key: this.optionKeys.forename, className: 'flex-grow-1', alignText: 'start' }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({ key: 't2', content: new Map([['nl', 'Achternaam: ']]) }),
-        ClozeItemTypes.textInput({ key: 'an', className: 'flex-grow-1', alignText: 'start' }),
+        ClozeItemTypes.textInput({ key: this.optionKeys.surname, className: 'flex-grow-1', alignText: 'start' }),
       ],
       customValidations: [
         {
           key: 'Name', rule: SurveyEngine.logic.and(
-            SurveyEngine.hasResponse(this.key, `rg.cloze.vn`),
-            SurveyEngine.hasResponse(this.key, `rg.cloze.an`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.forename}`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.surname}`),
           ), type: 'hard'
         }
       ]
