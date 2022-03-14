@@ -222,8 +222,8 @@ export class PDiffDef extends SurveyDefinition {
     this.addItem(this.Q8.get());
     this.addItem(this.SV.get());
     this.addItem(this.Q7.get());
-    this.addItem(this.FS.get());
     this.addItem(this.UserVerification.get());
+    this.addItem(this.FS.get());
   }
 }
 

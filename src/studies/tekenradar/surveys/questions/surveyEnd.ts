@@ -9,7 +9,8 @@ class T0_Invites_EndText extends Item {
   markdownContent = `
 ### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
-**Hartelijk dank voor je melding op Tekenradar.nl.**
+
+##### Hartelijk dank voor je melding op Tekenradar.nl.
 
 Houdt de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
 
@@ -47,7 +48,8 @@ class StandardflowEndText extends Item {
   markdownContent = `
 ### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
-**Hartelijk dank voor je melding op Tekenradar.nl.**
+
+##### Hartelijk dank voor je melding op Tekenradar.nl.
 
 Er is een e-mail naar je verstuurd waarin staat hoe je je deelname aan Tekenradar.nl kunt bevestigen.
 
@@ -88,7 +90,8 @@ class FollowupEndText extends Item {
   markdownContent = `
 ### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
-**Hartelijk dank voor het invullen van de vragenlijst**
+
+##### Hartelijk dank voor het invullen van de vragenlijst
 
 Je helpt ons daardoor met onderzoek naar tekenbeten en de ziekte van Lyme, ook als je zelf geen klachten (meer) hebt. Over 3 maanden ontvang je weer een nieuwe vragenlijst per e-mail.
 `
@@ -96,7 +99,8 @@ Je helpt ons daardoor met onderzoek naar tekenbeten en de ziekte van Lyme, ook a
   markdownContentT12 = `
 ### Let op: klik onderaan nog op **"verzenden"** om je antwoorden op te sturen!
 
-**Hartelijk dank voor het invullen van de vragenlijst**
+
+##### Hartelijk dank voor het invullen van de vragenlijst
 
 Dit was de laatste vragenlijst. Je hebt ons daardoor geholpen met onderzoek naar tekenbeten en de ziekte van Lyme.
 `
@@ -129,14 +133,16 @@ class WeeklyEndText extends Item {
   markdownContentFirstTime = `
 ### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
-**Hartelijk dank voor het invullen van deze vragen.**
+
+##### Hartelijk dank voor het invullen van deze vragen.
 
 Volgende week sturen we je weer een e-mail om te vragen hoeveel tekenbeten je hebt gehad.
 `
   markdownContentNormal = `
 ### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
-**Hartelijk dank voor het invullen van deze vragen.**
+
+##### Hartelijk dank voor het invullen van deze vragen.
 
 Volgende week sturen we je weer een e-mail om te vragen hoeveel tekenbeten je hebt gehad.
 
