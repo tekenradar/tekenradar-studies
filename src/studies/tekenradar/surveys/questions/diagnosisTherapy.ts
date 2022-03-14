@@ -549,6 +549,17 @@ export class LymeTherapy2 extends Item {
           key: '14',
         })
       ],
+      customValidations: [
+        {
+          key: 'MedInfo', rule: SurveyEngine.logic.and(
+            SurveyEngine.hasResponse(this.key, `rg.cloze.2`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.4`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.6`),
+            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.dayCount}`)
+          ), type: 'hard'
+        }
+      ]
+
     })
   }
 }
