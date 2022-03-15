@@ -7,7 +7,7 @@ import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-edito
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 import { surveyCategoryNames, SurveySuffix, TextBorderFormat } from '../globalConstants';
-import { clozeItemDropdownHours  } from './utils';
+import { clozeItemDropdownHours } from './utils';
 
 
 export class TickBiteOtherGroup extends Group {
@@ -503,7 +503,6 @@ class TickBiteLocationKnown extends Item {
     ongeveer: 'b',
     denkWeten: 'c',
     nee: 'd',
-    outsideNL: 'e'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -539,12 +538,6 @@ class TickBiteLocationKnown extends Item {
           key: this.optionKeys.denkWeten, role: 'option',
           content: new Map([
             ["nl", "Ja, ik denk het te weten"],
-          ])
-        },
-        {
-          key: this.optionKeys.outsideNL, role: 'option',
-          content: new Map([
-            ["nl", "Ja, maar het is buiten Nederland"],
           ])
         },
         {
@@ -586,32 +579,10 @@ class TickBiteMap extends Item {
   }
 }
 
-class TBOutsideNL extends Item {
-  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Q2b');
-
-    this.isRequired = isRequired;
-    this.condition = condition;
-  }
-
-  buildItem() {
-    return SurveyItems.textInput({
-      parentKey: this.parentKey,
-      itemKey: this.itemKey,
-      isRequired: this.isRequired,
-      condition: this.condition,
-      questionText: new Map([
-        ['nl', 'In welk (buiten)land heb je de tekenbeet opgelopen?'],
-      ]),
-    })
-  }
-}
-
 
 export class TickBiteLocationGroup extends Group {
   Q1: TickBiteLocationKnown;
   Q2: TickBiteMap;
-  Q2b: TBOutsideNL;
 
   constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
     super(parentKey, 'TBLoc');
@@ -623,15 +594,11 @@ export class TickBiteLocationGroup extends Group {
     this.Q1 = new TickBiteLocationKnown(this.key, required);
     const showMap = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.precies, this.Q1.optionKeys.ongeveer, this.Q1.optionKeys.denkWeten);
     this.Q2 = new TickBiteMap(this.key, required, showMap);
-    const showOutsideNL = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.outsideNL);
-    this.Q2b = new TBOutsideNL(this.key, required, showOutsideNL);
-
   }
 
   buildGroup() {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
-    this.addItem(this.Q2b.get());
   }
 }
 
