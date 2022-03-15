@@ -7,6 +7,7 @@ import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from "./globalConstants";
 import { SurveyEndGroup } from "./questions/surveyEnd";
 import { surveyKeys } from "./globalConstants";
+import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 class WeeklyTB_Def extends SurveyDefinition {
 
@@ -70,10 +71,20 @@ class WeeklyTB_Def extends SurveyDefinition {
     ));
 
     this.EndGroup = new SurveyEndGroup(this.key, false, undefined);
+
+    this.editor.setPrefillRules([
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q1.key, 'rg.num', 0),
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q2a.key, 'rg.num', 0),
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q2b.key, 'rg.num', 0),
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q2c.key, 'rg.num', 0),
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q2d.key, 'rg.num', 0),
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q2e.key, 'rg.num', 0),
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q2f.key, 'rg.num', 0),
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.Q2g.key, 'rg.num', 0),
+    ])
   }
 
   buildSurvey() {
-
     this.addItem(this.T1_init.get());
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());

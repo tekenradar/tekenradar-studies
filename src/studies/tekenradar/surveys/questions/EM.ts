@@ -420,15 +420,14 @@ Om een goed beeld te krijgen van de schaal van de foto stellen wij het zeer op p
 }
 
 
-//TODO Peter: upload function photo here
 export class UploadPhotoEM extends Item {
-
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'PhotoEM');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
+
   buildItem() {
     return SurveyItems.customQuestion({
       parentKey: this.parentKey,
