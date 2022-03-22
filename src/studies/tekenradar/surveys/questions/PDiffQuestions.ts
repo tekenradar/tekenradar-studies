@@ -10,7 +10,11 @@ export class IntroPDiff extends Item {
   markdownContent = `
 ### Melding doen
 
-Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet (of vul de vragen in voor/over je kind).
+Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet.
+
+Je kunt je hieronder ook aanmelden om voortaan elke week door te geven of je tekenbeten hebt gehad.
+
+Je kunt de vragen ook invullen over je kind.
 
 Wat wil je precies melden? Vragen met een "*" zijn verplicht.
 `

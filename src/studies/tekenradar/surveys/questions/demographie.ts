@@ -24,7 +24,7 @@ export class Age extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wat is de leeftijd van degene voor wie deze melding wordt gedaan?'],
+        ['nl', 'Wat is de leeftijd van de persoon voor wie je deze melding doet?'],
       ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
