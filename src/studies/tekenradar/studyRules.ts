@@ -62,6 +62,9 @@ const reports = {
   ChronicReport: {
     key: 'chronic'
   },
+  WeeklyTBReport: {
+    key: 'weeklyTB'
+  },
 }
 
 export const emailKeys = {
@@ -447,6 +450,8 @@ const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   updateGenderFlag(WeeklyTB.P2.key),
   updatePostalCodeFlag(WeeklyTB.P1.key),
   updateTbExposureFlag(WeeklyTB.PTB.Q1.key),
+  // Add report:
+  StudyEngine.participantActions.reports.init(reports.WeeklyTBReport.key),
 );
 
 const handleSubmit_Emfoto = StudyEngine.ifThen(
