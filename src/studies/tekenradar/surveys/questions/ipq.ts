@@ -731,6 +731,9 @@ class Awareness8 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      footnoteText: new Map([
+        ["nl", "© A.A. Kaptein, I.M. van Korlaar, M. Scharloo. Medische Psychologie, LUMC, 2004."]
+      ]),
       scaleOptions: [
         {
           key: '0', content: new Map([
