@@ -6,10 +6,10 @@ import { ParticipantFlags } from "../../participantFlags";
 
 export class UitnodigingOnderzoekText extends Item {
   markdownContent = `
-## Uitnodiging Tekenradar vragenlijst onderzoek
+## Uitnodiging Tekenradar-vragenlijstonderzoek
 
-Wij vragen je of je mee wilt doen aan onderzoek, omdat je een tekenbeet of de ziekte van Lyme hebt gemeld. Je vult direct hierna dan nog een aantal extra vragen in, en het komende jaar iedere 3 maanden een nieuwe vragenlijst over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per mail een herinnering via noreply@tekenradar.nl.
-    `
+Wij willen je vragen om mee te doen aan het Tekenradar-vragenlijstonderzoek onderzoek, omdat je een tekenbeet of de ziekte van Lyme hebt gemeld. Door mee te doen draag je bij aan kennis over tekenbeten en de ziekte van Lyme, en de gezondheidsgevolgen. Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid. Ook krijg je het komende jaar iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
+`
 
   constructor(parentKey: string, condition?: Expression) {
     super(parentKey, 'UitnTR_Pretext');
@@ -99,8 +99,9 @@ export class UitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen. We vragen ook toestemming bij het aanmaken van een account, omdat meerdere personen gebruik kunnen maken van 1 account.
-        `]]),
+Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+We vragen ook om toestemming bij het aanmaken van een account, omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account.
+`]]),
         })
       ],
       dialogTitle: new Map([
@@ -136,9 +137,8 @@ export class kEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek ziekte van Lyme
 
-Wij vragen je of je mee wilt doen aan Tekenradar onderzoek, omdat je een erythema migrans (rode ring of vlek na een tekenbeet als een vroege vorm van ziekte van Lyme) hebt gemeld. Je vult direct hierna dan nog een aantal extra vragen in, en het komende jaar iedere 3 maanden een nieuwe vragenlijst over je gezondheid. Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, dit is vanzelfsprekend geheel vrijwillig. Voor het invullen van de vervolgvragenlijsten ontvang je per mail een herinnering via noreply@tekenradar.nl.
-
-    `
+Wij willen je vragen of je mee wilt doen aan Tekenradar onderzoek, omdat je een erythema migrans (rode ring of vlek na een tekenbeet als een vroege vorm van ziekte van Lyme) hebt gemeld. Door mee te doen draag je bij aan kennis over de ziekte van Lyme, en de gezondheidsgevolgen. Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid. Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
+`
 
   constructor(parentKey: string, condition?: Expression) {
     super(parentKey, 'kEMUitnTR_Pretext');
@@ -228,7 +228,9 @@ export class kEMUitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om aan het onderzoek mee te kunnen doen hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen. We vragen ook toestemming bij het aanmaken van een account, omdat meerdere personen gebruik kunnen maken van 1 account.
+Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+We vragen ook om toestemming bij het aanmaken van een account, omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account.
+
         `]]),
         })
       ],

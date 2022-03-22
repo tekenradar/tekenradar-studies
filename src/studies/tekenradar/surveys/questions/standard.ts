@@ -11,6 +11,8 @@ export class BackgroundHeader extends Item {
 
   markdownContent = `
 # Achtergrond
+
+Hieronder volgen vragen over je achtergrond en je gezondheid.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
