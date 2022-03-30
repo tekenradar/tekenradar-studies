@@ -1,9 +1,8 @@
 import { Expression } from 'survey-engine/data_types';
-import { Item, Group } from 'case-editor-tools/surveys/types';
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { Item } from 'case-editor-tools/surveys/types';
+import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
-import { ParticipantFlags } from '../../participantFlags';
+
 
 
 
@@ -215,10 +214,12 @@ Wil je alsjeblieft bij iedere vraag een antwoord kiezen door op het bolletje te 
   }
 }
 
+const sqd_copyright_footnote = new Map([
+  ["nl", "Copyright © Robert Goodman, 2005"]
+]);
+
 
 export class SQD3_2_4 extends Item {
-
-
   questionTextMain = [
     {
       content: new Map([
@@ -247,6 +248,7 @@ export class SQD3_2_4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      footnoteText: sqd_copyright_footnote,
       scaleOptions: [
         {
           key: '1', content: new Map([
@@ -449,6 +451,7 @@ export class SQD3_5_11 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      footnoteText: sqd_copyright_footnote,
       scaleOptions: [
         {
           key: '1', content: new Map([
@@ -649,6 +652,7 @@ export class SQD3_11_18 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      footnoteText: sqd_copyright_footnote,
       scaleOptions: [
         {
           key: '1', content: new Map([

@@ -3,6 +3,10 @@ import { Item, Group } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
+const pedSQL_fatigue_copyright_footnote = new Map([
+  ["nl", "Copyright © 1998 JW Varni, Ph.D."]
+]);
+
 
 export class PedsqlFatigue_2_4 extends Group {
   Header: Header_2_4;
@@ -883,6 +887,7 @@ class Q3_2_4 extends Item {
       questionText: this.questionTextMain,
       topDisplayCompoments: [optionHint],
       scaleOptions: scaleOptions,
+      footnoteText: pedSQL_fatigue_copyright_footnote,
       rows: [
         {
           key: 'a', content: new Map([
@@ -952,6 +957,7 @@ class Q3_5_7 extends Item {
       questionText: this.questionTextMain,
       topDisplayCompoments: [optionHint],
       scaleOptions: scaleOptions,
+      footnoteText: pedSQL_fatigue_copyright_footnote,
       rows: [
         {
           key: 'a', content: new Map([

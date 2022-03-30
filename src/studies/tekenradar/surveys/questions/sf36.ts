@@ -452,6 +452,9 @@ class Functioning5 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      footnoteText: new Map([
+        ["nl", "Copyright © Van der Zee & Sanderman, 1993"]
+      ]),
       responseOptions: [
         {
           key: 'a', role: 'option',
