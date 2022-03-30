@@ -3,8 +3,6 @@ import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
-import { EMSizeExample } from './images';
-
 
 
 export class ReportHeader extends Item {
@@ -289,7 +287,7 @@ export class EM_B3 extends Item {
           className: 'mt-2',
           content: new Map([
             ['nl', `
-<img src="${EMSizeExample}" width="100%" style="max-width: 500px"/>
+<img src="https://www.tekenradar.nl/assets/images/survey-content/em_example.png" width="100%" style="max-width: 500px"/>
             `]
           ])
         })
@@ -392,7 +390,7 @@ Wij willen je vragen om een foto van je erythema migrans of andere huidafwijking
 
 Om een goed beeld te krijgen van de schaal van de foto stellen wij het zeer op prijs als er een lineaal of meetlint (of een voorwerp met een standaard grootte zoals bijvoorbeeld een muntstuk) naast de huidafwijking op de foto staat. Zie de voorbeeld foto.
 
-<img src="${EMSizeExample}" width="100%" style="max-width: 500px"/>
+<img src="https://www.tekenradar.nl/assets/images/survey-content/em_example.png" width="100%" style="max-width: 500px"/>
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
