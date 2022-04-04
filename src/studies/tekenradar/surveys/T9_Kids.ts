@@ -52,13 +52,13 @@ class T9_KidsDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.T9_Kids,
       name: new Map([
-        ['nl', 'Vervolgvragenlijst']
+        ['nl', 'Nieuwe Tekenradar-vragenlijst: 9 maanden']
       ]),
       description: new Map([
-        ['nl', 'Klik hier om naar de vragenlijst te gaan']
+        ['nl', 'Negen maanden geleden ben je met het Tekenradar-onderzoek begonnen. Klik hier om naar de vervolgvragenlijst te gaan.']
       ]),
       durationText: new Map([
-        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
+        ['nl', 'Invullen duurt ongeveer 10 tot 20 minuten.']
       ]),
     });
 

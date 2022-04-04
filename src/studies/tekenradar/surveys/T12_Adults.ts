@@ -44,13 +44,13 @@ class T12_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.T12_Adults,
       name: new Map([
-        ['nl', 'Vervolgvragenlijst']
+        ['nl', 'Laatste Tekenradar-vragenlijst: 12 maanden']
       ]),
       description: new Map([
-        ['nl', 'Klik hier om naar de vragenlijst te gaan']
+        ['nl', 'Twaalf maanden geleden ben je met het Tekenradar-onderzoek begonnen. Klik hier om naar de laatste vervolgvragenlijst te gaan.']
       ]),
       durationText: new Map([
-        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
+        ['nl', 'Invullen duurt ongeveer 10 tot 20 minuten.']
       ]),
     });
 

@@ -40,13 +40,13 @@ class T3_AdultsDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.T3_Adults,
       name: new Map([
-        ['nl', 'Vervolgvragenlijst']
+        ['nl', 'Nieuwe Tekenradar-vragenlijst: 3 maanden']
       ]),
       description: new Map([
-        ['nl', 'Klik hier om naar de vragenlijst te gaan']
+        ['nl', 'Drie maanden geleden ben je met het Tekenradar-onderzoek begonnen. Klik hier om naar de vervolgvragenlijst te gaan.']
       ]),
       durationText: new Map([
-        ['nl', 'Invullen duurt ongeveer 10-20 minuten.']
+        ['nl', 'Invullen duurt ongeveer 10 tot 20 minuten.']
       ]),
     });
 

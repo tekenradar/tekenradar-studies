@@ -34,7 +34,7 @@ class WeeklyTB_Def extends SurveyDefinition {
         ['nl', 'Wekelijkse tekenbeetvragenlijst']
       ]),
       description: new Map([
-        ['nl', 'Klik hier om wekelijks je aantal tekenbeten door te geven.']
+        ['nl', 'Klik hier om elke week je aantal tekenbeten door te geven.']
       ]),
       durationText: new Map([
         ['nl', 'Invullen duurt ongeveer 1 minuut.']
