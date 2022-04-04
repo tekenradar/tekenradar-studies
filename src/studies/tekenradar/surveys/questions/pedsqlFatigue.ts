@@ -1024,6 +1024,7 @@ class Q3_8_12 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      footnoteText: pedSQL_fatigue_copyright_footnote,
       topDisplayCompoments: [optionHint],
       scaleOptions: scaleOptions,
       rows: [
@@ -1092,6 +1093,7 @@ class Q3_13_18 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      footnoteText: pedSQL_fatigue_copyright_footnote,
       topDisplayCompoments: [optionHint],
       scaleOptions: scaleOptions,
       rows: [
