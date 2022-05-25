@@ -34,6 +34,7 @@ export const surveyKeys = {
   T12_Adults: `${surveyCategoryNames.T12}_${SurveySuffix.Adults}`,
   QuitWeeklyTB: 'QuitWeekly',
   QuitFollowUp: 'QuitFU',
+  DeleteContactData: 'DelContactData',
 }
 
 
