@@ -3,7 +3,7 @@ import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpre
 import { Duration } from "case-editor-tools/types/duration";
 import { Expression } from "survey-engine/data_types";
 import { ParticipantFlags } from "../participantFlags";
-import { emailKeys } from "../studyRules";
+import { emailKeys, researcherNotificationTypes } from "../studyRules";
 import { Chronicflow_Adults } from "../surveys/Chronicflow_Adults";
 import { Chronicflow_Kids } from "../surveys/Chronicflow_Kids";
 import { EMflow_Adults } from "../surveys/EMflow_Adults";
@@ -186,6 +186,10 @@ export const kEMflagLogic = () => StudyEngine.ifThen(
   ),
   // Then:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
+  StudyEngine.notifyResearcher(researcherNotificationTypes.participantFound.messageType,
+    researcherNotificationTypes.participantFound.categoryFlag.key,
+    researcherNotificationTypes.participantFound.categoryFlag.values.kEM
+  )
 )
 
 export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(

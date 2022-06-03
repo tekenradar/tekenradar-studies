@@ -74,6 +74,18 @@ export const emailKeys = {
   EMcheckReminder: 'EMcheck_reminder',
 }
 
+export const researcherNotificationTypes = {
+  participantFound: {
+    messageType: 'participantFound',
+    categoryFlag: {
+      key: 'categoryFlag',
+      values: {
+        kEM: 'kEM'
+      }
+    }
+  }
+}
+
 const handleSubmit_PDiff = StudyEngine.ifThen(
   // IF:
   StudyEngine.checkSurveyResponseKey(PDiff.key),
