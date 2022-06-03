@@ -29,6 +29,7 @@ import { weeklyTBMessage } from "./messageConfigs/weeklyTBMessage";
 import { QuitFollowUp } from "./surveys/QuitFollowUp";
 import { QuitWeeklyTB } from "./surveys/QuitWeekly";
 import { DeleteContactData } from "./surveys/DeleteContactData";
+import { researcherNotificationMessages } from "./messageConfigs/researcherNotifications";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
@@ -48,6 +49,7 @@ export const TekenradarStudy: Study = {
   ],
   messageConfigs: [
     participantMessages,
+    researcherNotificationMessages,
     weeklyTBMessage,
   ]
 }
