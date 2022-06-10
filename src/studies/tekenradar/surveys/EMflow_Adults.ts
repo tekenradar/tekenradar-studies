@@ -13,7 +13,7 @@ import { TickBiteOtherGroup } from './questions/tickBite';
 class EMflow_AdultsDef extends SurveyDefinition {
 
   H1: ReportHeader;
-  G1_9: TickBiteOtherGroup;
+  TBOtherG: TickBiteOtherGroup;
 
   H2: EMHeader;
   EM_B1: EM_B1;
@@ -52,7 +52,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.H1 = new ReportHeader(this.key, required);
-    this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
+    this.TBOtherG = new TickBiteOtherGroup(this.key, isRequired);
 
     this.H2 = new EMHeader(this.key, required);
     this.EM_B1 = new EM_B1(this.key, required);
@@ -82,14 +82,14 @@ class EMflow_AdultsDef extends SurveyDefinition {
     ));
 
     this.editor.setPrefillRules([
-      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.TBOtherG.Q4.key, 'rg.num', 1)
     ])
   }
 
   buildSurvey() {
 
     this.addItem(this.H1.get());
-    this.addItem(this.G1_9.get());
+    this.addItem(this.TBOtherG.get());
 
     this.addPageBreak();
     this.addItem(this.H2.get());

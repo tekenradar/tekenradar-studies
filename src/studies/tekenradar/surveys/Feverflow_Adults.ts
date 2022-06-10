@@ -14,7 +14,7 @@ import { TickBiteOtherGroup } from './questions/tickBite';
 class Feverflow_AdultsDef extends SurveyDefinition {
 
   H1: ReportHeader;
-  G1_11: TickBiteOtherGroup;
+  TBOtherG: TickBiteOtherGroup;
   FLG: FormerLymeGroup;
   Q15_a: GeneralTherapy1;
   Q15_b: GeneralTherapy2;
@@ -56,8 +56,8 @@ class Feverflow_AdultsDef extends SurveyDefinition {
 
 
     this.H1 = new ReportHeader(this.key, required);
-    this.G1_11 = new TickBiteOtherGroup(this.key, isRequired);
-    const Qstartcondition = SurveyEngine.singleChoice.any(this.G1_11.Start.key, this.G1_11.Start.optionKeys.yes);
+    this.TBOtherG = new TickBiteOtherGroup(this.key, isRequired);
+    const Qstartcondition = SurveyEngine.singleChoice.any(this.TBOtherG.Start.key, this.TBOtherG.Start.optionKeys.yes);
     this.FLG = new FormerLymeGroup(this.key, isRequired, Qstartcondition);
     this.Q15_a = new GeneralTherapy1(this.key, required, Qstartcondition);
     const Q15_a_number = SurveyEngine.getResponseValueAsNum(this.Q15_a.key, 'rg.scg.b');
@@ -96,14 +96,14 @@ class Feverflow_AdultsDef extends SurveyDefinition {
     ))
 
     this.editor.setPrefillRules([
-      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_11.Q4.key, 'rg.num', 1)
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.TBOtherG.Q4.key, 'rg.num', 1)
     ])
   }
 
   buildSurvey() {
 
     this.addItem(this.H1.get());
-    this.addItem(this.G1_11.get());
+    this.addItem(this.TBOtherG.get());
     this.addItem(this.FLG.get());
     this.addItem(this.Q15_a.get());
     this.addItem(this.Q15_b.get());

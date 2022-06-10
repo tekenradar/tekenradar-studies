@@ -13,7 +13,7 @@ import { TickBiteOtherGroup } from './questions/tickBite';
 class EMflow_KidsDef extends SurveyDefinition {
 
   H1: EMTextKids;
-  G1_9: TickBiteOtherGroup;
+  TBOtherG: TickBiteOtherGroup;
 
   H2: EMHeaderKids;
   EM_B1: EM_B1;
@@ -52,7 +52,7 @@ class EMflow_KidsDef extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
 
     this.H1 = new EMTextKids(this.key, required);
-    this.G1_9 = new TickBiteOtherGroup(this.key, isRequired);
+    this.TBOtherG = new TickBiteOtherGroup(this.key, isRequired);
     this.H2 = new EMHeaderKids(this.key, required);
     this.EM_B1 = new EM_B1(this.key, required);
     //TODO: if date more than 3 months ago, exclusion from lyme studies by setting flag
@@ -81,7 +81,7 @@ class EMflow_KidsDef extends SurveyDefinition {
     ));
 
     this.editor.setPrefillRules([
-      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.G1_9.Q4.key, 'rg.num', 1)
+      StudyEngine.prefillRules.PREFILL_SLOT_WITH_VALUE(this.TBOtherG.Q4.key, 'rg.num', 1)
     ])
   }
 
@@ -89,7 +89,7 @@ class EMflow_KidsDef extends SurveyDefinition {
 
 
     this.addItem(this.H1.get());
-    this.addItem(this.G1_9.get());
+    this.addItem(this.TBOtherG.get());
 
     this.addPageBreak();
     this.addItem(this.H2.get());

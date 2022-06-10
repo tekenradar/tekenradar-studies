@@ -67,6 +67,8 @@ const reports = {
   },
 }
 
+const contentServiceName = 'content-service';
+
 export const emailKeys = {
   FlowReminder: 'Flow_reminder',
   StandardflowReminder: 'Standardflow_reminder',
@@ -131,6 +133,11 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   updateTbExposureFlag(TBflow_Adults.PTB.Q1.key),
   updatePostalCodeFlag(TBflow_Adults.P1.key),
   reAssignWeeklyToTheEndOfList(),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(TBflow_Adults.Q3.Q1.key, TBflow_Adults.Q3.Q1.optionKeys.precies, TBflow_Adults.Q3.Q1.optionKeys.ongeveer, TBflow_Adults.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key),
@@ -171,6 +178,11 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   updatePostalCodeFlag(TBflow_Kids.P1.key),
   updateTbExposureFlag(TBflow_Kids.PTB.Q1.key),
   reAssignWeeklyToTheEndOfList(),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(TBflow_Kids.Q3.Q1.key, TBflow_Kids.Q3.Q1.optionKeys.precies, TBflow_Kids.Q3.Q1.optionKeys.ongeveer, TBflow_Kids.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key),
@@ -215,6 +227,12 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   ),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(EMflow_Adults.PTB.Q1.key),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(EMflow_Adults.TBOtherG.Q3.Q1.key, EMflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, EMflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, EMflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.EMReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)
 );
@@ -239,6 +257,12 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   kEMflagLogic(),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(EMflow_Kids.PTB.Q1.key),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(EMflow_Kids.TBOtherG.Q3.Q1.key, EMflow_Kids.TBOtherG.Q3.Q1.optionKeys.precies, EMflow_Kids.TBOtherG.Q3.Q1.optionKeys.ongeveer, EMflow_Kids.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.EMReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.EMReport.key, reports.EMReport.key)
 );
@@ -261,6 +285,12 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
   ),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(Feverflow_Adults.PTB.Q1.key),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Feverflow_Adults.TBOtherG.Q3.Q1.key, Feverflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, Feverflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, Feverflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.FeverReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FeverReport.key, reports.FeverReport.key)
 );
@@ -287,6 +317,12 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   ),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(LBflow_Adults.PTB.Q1.key),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(LBflow_Adults.TBOtherG.Q3.Q1.key, LBflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, LBflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, LBflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.LBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.LBReport.key, reports.LBReport.key)
 );
@@ -314,6 +350,12 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   ),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(LBflow_Kids.PTB.Q1.key),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(LBflow_Kids.TBOtherG.Q3.Q1.key, LBflow_Kids.TBOtherG.Q3.Q1.optionKeys.precies, LBflow_Kids.TBOtherG.Q3.Q1.optionKeys.ongeveer, LBflow_Kids.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.LBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.LBReport.key, reports.LBReport.key)
 );
@@ -339,6 +381,12 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
   ),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(Chronicflow_Adults.PTB.Q1.key),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Chronicflow_Adults.TBOtherG.Q3.Q1.key, Chronicflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, Chronicflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, Chronicflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.ChronicReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.ChronicReport.key, reports.ChronicReport.key)
 );
@@ -364,6 +412,12 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
   ),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(Chronicflow_Kids.PTB.Q1.key),
+  // Map data aggregation:
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(Chronicflow_Kids.TBOtherG.Q3.Q1.key, Chronicflow_Kids.TBOtherG.Q3.Q1.optionKeys.precies, Chronicflow_Kids.TBOtherG.Q3.Q1.optionKeys.ongeveer, Chronicflow_Kids.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.participantActions.externalEventHandler(contentServiceName)
+  ),
+  // Report:
   StudyEngine.participantActions.reports.init(reports.ChronicReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.ChronicReport.key, reports.ChronicReport.key)
 );
