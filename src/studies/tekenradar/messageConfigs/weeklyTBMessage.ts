@@ -13,7 +13,7 @@ export const weeklyTBMessage: MessageConfig = {
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init),
     ),
-    StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: -7 }), surveyKeys.WeeklyTB)
+    StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: -1 }), surveyKeys.WeeklyTB)
   ),
   defaultLanguage: 'nl',
   label: 'Reminder message for weekly TB reporter cohort',
