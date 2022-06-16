@@ -38,6 +38,8 @@ import { T0_Invites } from "./surveys/T0_Invites";
 import { inputKey, multipleChoiceKey, numericInputKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { QuitWeeklyTB } from "./surveys/QuitWeekly";
 import { QuitFollowUp } from "./surveys/QuitFollowUp";
+import { surveyKeys } from "./surveys/globalConstants";
+import { DeleteContactData } from "./surveys/DeleteContactData";
 
 const reports = {
   FollowUpReport: {
@@ -396,6 +398,15 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
       assignStandardFlow('adults'),
     )
   ),
+  // Update flag for contact info
+  StudyEngine.ifThen(
+    StudyEngine.or(
+      StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
+      StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.UitnodigingOnderzoekConsent.key),
+    ),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.contactData.key, ParticipantFlags.contactData.values.active),
+    StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 }))
+  ),
   reAssignWeeklyToTheEndOfList(),
 );
 
@@ -593,6 +604,23 @@ const handleSubmit_QuitWeeklyTB = StudyEngine.ifThen(
 );
 
 
+const handleSubmit_DeleteContactData = StudyEngine.ifThen(
+  // If:
+  StudyEngine.checkSurveyResponseKey(surveyKeys.DeleteContactData),
+  // Then:
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(DeleteContactData.Confirm.key, DeleteContactData.Confirm.optionKeys.yes),
+    // Then
+    StudyEngine.participantActions.confidentialResponses.removeAll(),
+    StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.DeleteContactData, 'all'),
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.contactData.key,
+      ParticipantFlags.contactData.values.manual
+    )
+  )
+)
+
+
 // -----------------------------------------------
 const handleExpired_T0_Invites = StudyEngine.ifThen(
   isSurveyExpired(T0_Invites.key),
@@ -625,6 +653,22 @@ const handleExpired_T12_Kids = StudyEngine.ifThen(
   // Then:
   StudyEngine.participantActions.assignedSurveys.remove(T12_Kids.key, 'all'),
   finishFollowUp(),
+)
+
+
+const handleAutoContactDataDeletion = () => StudyEngine.ifThen(
+  isSurveyExpired(surveyKeys.DeleteContactData),
+  /*StudyEngine.and(
+    StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: 12 * 7 }), surveyKeys.T0_Invites),
+    StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.DeleteContactData),
+  ),*/
+  // Then:
+  StudyEngine.participantActions.confidentialResponses.removeAll(),
+  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.DeleteContactData, 'all'),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.contactData.key,
+    ParticipantFlags.contactData.values.autoRemove
+  )
 )
 
 
@@ -667,6 +711,7 @@ const submitRules: Expression[] = [
   handleSubmit_T12_Kids,
   handleSubmit_QuitFollowUp,
   handleSubmit_QuitWeeklyTB,
+  handleSubmit_DeleteContactData,
 ]
 
 
@@ -684,6 +729,7 @@ const timerRules: Expression[] = [
   handleExpired_removeSurvey(T6_Kids.key),
   handleExpired_removeSurvey(T9_Kids.key),
   handleExpired_T12_Kids,
+  handleAutoContactDataDeletion(),
 ]
 
 
