@@ -9,6 +9,14 @@ export const ParticipantFlags = {
       adult: 'adult'
     }
   },
+  contactData: {
+    key: 'contactData',
+    values: {
+      active: 'active',
+      autoRemove: 'removedAfter12Weeks',
+      manual: 'deletedByUser'
+    }
+  },
   genderCategory: {
     key: 'gender',
     values: {
