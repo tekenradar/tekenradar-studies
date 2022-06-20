@@ -2,7 +2,7 @@ import { SurveyEngine } from "case-editor-tools/surveys";
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Gender, Residence } from "./questions/demographie";
 import { PreviousTickBitesGroup } from "./questions/prevTickBites";
-import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly } from "./questions/weeklyTB";
+import { IntroWeeklyTB, IntroWeeklyTBInit, NewStudies, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly, WeeklyTBConsent } from "./questions/weeklyTB";
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from "./globalConstants";
 import { SurveyEndGroup } from "./questions/surveyEnd";
@@ -13,6 +13,8 @@ class WeeklyTB_Def extends SurveyDefinition {
 
   T1_init: IntroWeeklyTBInit;
   T1: IntroWeeklyTB;
+  WeeklyTBConsent: WeeklyTBConsent;
+  NewStudies: NewStudies;
   Q1: NumberTickBitesWeekly;
   Q2a: NumberTickBites2a;
   Q2b: NumberTickBites2b;
@@ -48,6 +50,9 @@ class WeeklyTB_Def extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
     this.T1_init = new IntroWeeklyTBInit(this.key, required, InitCond);
     this.T1 = new IntroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
+    this.WeeklyTBConsent = new WeeklyTBConsent(this.key, required, InitCond);
+    this.NewStudies = new NewStudies(this.key, required, InitCond)
+
     this.Q1 = new NumberTickBitesWeekly(this.key, required);
     const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'), 0);
     this.Q2a = new NumberTickBites2a(this.key, required, Q1cond);
@@ -87,6 +92,8 @@ class WeeklyTB_Def extends SurveyDefinition {
   buildSurvey() {
     this.addItem(this.T1_init.get());
     this.addItem(this.T1.get());
+    this.addItem(this.WeeklyTBConsent.get());
+    this.addItem(this.NewStudies.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2a.get());
     this.addItem(this.Q2b.get());

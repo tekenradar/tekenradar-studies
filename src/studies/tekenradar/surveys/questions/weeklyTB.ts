@@ -1,12 +1,10 @@
-import { Expression, SurveySingleItem } from 'survey-engine/data_types';
+import { Expression } from 'survey-engine/data_types';
 import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
-import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 
 
 export class IntroWeeklyTBInit extends Item {
-
   markdownContent = `
 # Wekelijkse tekenbeetmeldingen
 
@@ -68,6 +66,95 @@ Geef het daadwerkelijke aantal tekenbeten op, ook als je meerdere tekenbeten op 
           ]),
           className: ''
         })
+      ]
+    })
+  }
+}
+
+
+export class WeeklyTBConsent extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'WeeklyTBConsent');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.consent({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'TODO: consent for weekly tb cohort - only in first one'],
+      ]),
+      checkBoxLabel: new Map([
+        ["nl", "Toestemming geven"],
+      ]),
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", `
+TODO: add text
+`]]),
+        })
+      ],
+      dialogTitle: new Map([
+        ["nl", "Toestemmingsformulier"],
+      ]),
+      dialogContent: new Map([
+        ["nl", `
+**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
+
+TODO: add consent text
+        `]]),
+      acceptBtn: new Map([
+        ["nl", "Ja, ik geef toestemming"],
+      ]),
+      rejectBtn: new Map([
+        ["nl", "Ik doe toch niet mee"],
+      ]),
+    })
+  }
+}
+
+
+export class NewStudies extends Item {
+  optionKeys = {
+    yes: 'a'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'NewStudies');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'TODO: can we contact you for additional studies in future? (appears only at first)'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
       ]
     })
   }
