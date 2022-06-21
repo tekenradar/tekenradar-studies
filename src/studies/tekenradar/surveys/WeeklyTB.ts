@@ -2,7 +2,7 @@ import { SurveyEngine } from "case-editor-tools/surveys";
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Gender, Residence } from "./questions/demographie";
 import { PreviousTickBitesGroup } from "./questions/prevTickBites";
-import { IntroWeeklyTB, IntroWeeklyTBInit, NewStudies, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly, WeeklyTBConsent } from "./questions/weeklyTB";
+import { ConsentGroup, IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly } from "./questions/weeklyTB";
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from "./globalConstants";
 import { SurveyEndGroup } from "./questions/surveyEnd";
@@ -10,9 +10,8 @@ import { surveyKeys } from "./globalConstants";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 class WeeklyTB_Def extends SurveyDefinition {
+  ConsentGroup: ConsentGroup;
 
-  WeeklyTBConsent: WeeklyTBConsent;
-  NewStudies: NewStudies;
   T1_init: IntroWeeklyTBInit;
   T1: IntroWeeklyTB;
   Q1: NumberTickBitesWeekly;
@@ -50,8 +49,7 @@ class WeeklyTB_Def extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
     this.T1_init = new IntroWeeklyTBInit(this.key, required, InitCond);
     this.T1 = new IntroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
-    this.WeeklyTBConsent = new WeeklyTBConsent(this.key, required, InitCond);
-    this.NewStudies = new NewStudies(this.key, required, InitCond)
+    this.ConsentGroup = new ConsentGroup(this.key, required, InitCond);
 
     this.Q1 = new NumberTickBitesWeekly(this.key, required);
     const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'), 0);
@@ -90,9 +88,7 @@ class WeeklyTB_Def extends SurveyDefinition {
   }
 
   buildSurvey() {
-    this.addItem(this.WeeklyTBConsent.get());
-    this.addItem(this.NewStudies.get());
-    this.addPageBreak();
+    this.addItem(this.ConsentGroup.get());
     this.addItem(this.T1_init.get());
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());

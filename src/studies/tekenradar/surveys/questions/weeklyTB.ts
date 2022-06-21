@@ -1,5 +1,5 @@
 import { Expression } from 'survey-engine/data_types';
-import { Item } from 'case-editor-tools/surveys/types';
+import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
@@ -72,10 +72,68 @@ Geef het daadwerkelijke aantal tekenbeten op, ook als je meerdere tekenbeten op 
 }
 
 
-export class WeeklyTBConsent extends Item {
+export class ConsentGroup extends Group {
+  Intro: ConsentIntro;
+  Consent: Consent;
+  NewStudies: NewStudies;
 
+  constructor(parentKey: string, isRequired?: boolean, condition?: Expression) {
+    super(parentKey, 'ConsentGroup');
+
+    const required = isRequired !== undefined ? isRequired : false;
+
+    this.groupEditor.setCondition(condition);
+
+    this.Intro = new ConsentIntro(this.key);
+    this.Consent = new Consent(this.key, required);
+    this.NewStudies = new NewStudies(this.key, required);
+  }
+
+  buildGroup(): void {
+    this.addItem(this.Intro.get());
+    this.addItem(this.Consent.get());
+    this.addItem(this.NewStudies.get());
+    this.addPageBreak();
+  }
+}
+
+
+
+class ConsentIntro extends Item {
+  markdownContent = `
+# TODO: text for consent
+
+intro: this whole page is only displayed of first weekly, and no consent given yet through other flows
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'ConsentIntro');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
+
+class Consent extends Item {
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'WeeklyTBConsent');
+    super(parentKey, 'Consent');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -135,7 +193,7 @@ Ook:
 }
 
 
-export class NewStudies extends Item {
+class NewStudies extends Item {
   optionKeys = {
     yes: 'a'
   }
