@@ -47,9 +47,14 @@ class WeeklyTB_Def extends SurveyDefinition {
 
     const InitCond = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init);
     const required = isRequired !== undefined ? isRequired : false;
+
     this.T1_init = new IntroWeeklyTBInit(this.key, required, InitCond);
     this.T1 = new IntroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
-    this.ConsentGroup = new ConsentGroup(this.key, required, InitCond);
+
+    this.ConsentGroup = new ConsentGroup(this.key, required, SurveyEngine.logic.and(
+      InitCond,
+      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.consents.defaultStudy.key)),
+    ));
 
     this.Q1 = new NumberTickBitesWeekly(this.key, required);
     const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'), 0);

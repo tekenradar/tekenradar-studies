@@ -396,16 +396,23 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
       assignStandardFlow('kids'),
       // else:
       assignStandardFlow('adults'),
-    )
+    ),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.defaultStudy.key, ParticipantFlags.consents.defaultStudy.values.accepted)
   ),
   // Update flag for contact info
-  StudyEngine.ifThen(
+  StudyEngine.if(
     StudyEngine.or(
       StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
       StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.UitnodigingOnderzoekConsent.key),
     ),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.contactData.key, ParticipantFlags.contactData.values.active),
-    StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 }))
+    // Then:
+    StudyEngine.do(
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.contactData.key, ParticipantFlags.contactData.values.active),
+      StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.accepted),
+      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 }))
+    ),
+    // Else:
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.rejected)
   ),
   reAssignWeeklyToTheEndOfList(),
 );
@@ -469,6 +476,16 @@ const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   StudyEngine.ifThen(
     StudyEngine.not(StudyEngine.participantState.hasSurveyKeyAssigned(QuitWeeklyTB.key)),
     StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
+  ),
+  // Consent through weekly TB
+  StudyEngine.ifThen(
+    StudyEngine.consent.accepted(WeeklyTB.ConsentGroup.Consent.key),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.defaultStudy.key, ParticipantFlags.consents.defaultStudy.values.accepted),
+  ),
+  // Additional studies consent through weekly TB
+  StudyEngine.ifThen(
+    StudyEngine.singleChoice.any(WeeklyTB.ConsentGroup.NewStudies.key, WeeklyTB.ConsentGroup.NewStudies.optionKeys.yes),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.accepted),
   ),
   updateGenderFlag(WeeklyTB.P2.key),
   updatePostalCodeFlag(WeeklyTB.P1.key),

@@ -69,5 +69,20 @@ export const ParticipantFlags = {
     values: {
       likely: 'likely'
     }
+  },
+  consents: {
+    defaultStudy: {
+      key: 'consentDefaultStudy',
+      values: {
+        accepted: 'true',
+      }
+    },
+    additionalStudies: {
+      key: 'consentAdditionalStudies',
+      values: {
+        accepted: 'true',
+        rejected: 'false'
+      }
+    },
   }
 }
