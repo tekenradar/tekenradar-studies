@@ -11,10 +11,10 @@ import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpre
 
 class WeeklyTB_Def extends SurveyDefinition {
 
-  T1_init: IntroWeeklyTBInit;
-  T1: IntroWeeklyTB;
   WeeklyTBConsent: WeeklyTBConsent;
   NewStudies: NewStudies;
+  T1_init: IntroWeeklyTBInit;
+  T1: IntroWeeklyTB;
   Q1: NumberTickBitesWeekly;
   Q2a: NumberTickBites2a;
   Q2b: NumberTickBites2b;
@@ -90,10 +90,11 @@ class WeeklyTB_Def extends SurveyDefinition {
   }
 
   buildSurvey() {
-    this.addItem(this.T1_init.get());
-    this.addItem(this.T1.get());
     this.addItem(this.WeeklyTBConsent.get());
     this.addItem(this.NewStudies.get());
+    this.addPageBreak();
+    this.addItem(this.T1_init.get());
+    this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
     this.addItem(this.Q2a.get());
     this.addItem(this.Q2b.get());

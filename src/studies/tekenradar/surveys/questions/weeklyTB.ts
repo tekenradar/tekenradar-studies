@@ -88,7 +88,7 @@ export class WeeklyTBConsent extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'TODO: consent for weekly tb cohort - only in first one'],
+        ['nl', 'Toestemming'],
       ]),
       checkBoxLabel: new Map([
         ["nl", "Toestemming geven"],
@@ -97,7 +97,9 @@ export class WeeklyTBConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-TODO: add text
+Om met dit profiel mee te doen aan het Tekenradar vragenlijst onderzoek hebben we eerst je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+*We vragen ook om toestemming bij het aanmaken van een account. Omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account, is het nodig om hier voor dit profiel apart toestemming te geven.*
+
 `]]),
         })
       ],
@@ -108,8 +110,20 @@ TODO: add text
         ["nl", `
 **Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
 
-TODO: add consent text
-        `]]),
+Via Tekenradar.nl wordt onderzocht hoe vaak mensen een tekenbeet krijgen, en/of hoe vaak dat leidt tot een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
+
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken.
+
+Ook:
+- Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
+- Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
+- Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.
+- Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
+- Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).
+- Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.
+- Geef ik hierna in de vragenlijst aan of mijn emailadres in de toekomst ook gebruikt mogen worden om mij te benaderen voor aanvullend (deel)onderzoek via Tekenradar.
+- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).
+       `]]),
       acceptBtn: new Map([
         ["nl", "Ja, ik geef toestemming"],
       ]),
@@ -140,7 +154,7 @@ export class NewStudies extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'TODO: can we contact you for additional studies in future? (appears only at first)'],
+        ['nl', 'Soms benaderen we deelnemers aan tekenradar voor aanvullend onderzoek. Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat we je niet benaderen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek?'],
       ]),
       responseOptions: [
         {
