@@ -186,10 +186,6 @@ export const kEMflagLogic = () => StudyEngine.ifThen(
   ),
   // Then:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
-  StudyEngine.notifyResearcher(researcherNotificationTypes.participantFound.messageType,
-    researcherNotificationTypes.participantFound.categoryFlag.key,
-    researcherNotificationTypes.participantFound.categoryFlag.values.kEM
-  )
 )
 
 export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(

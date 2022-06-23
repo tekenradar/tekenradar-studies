@@ -409,7 +409,18 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     StudyEngine.do(
       StudyEngine.participantActions.updateFlag(ParticipantFlags.contactData.key, ParticipantFlags.contactData.values.active),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.accepted),
-      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 }))
+      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 })),
+      // if kEM - send notification:
+      StudyEngine.ifThen(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
+          ParticipantFlags.kEM.key,
+          ParticipantFlags.kEM.values.likely
+        ),
+        StudyEngine.notifyResearcher(researcherNotificationTypes.participantFound.messageType,
+          researcherNotificationTypes.participantFound.categoryFlag.key,
+          researcherNotificationTypes.participantFound.categoryFlag.values.kEM
+        )
+      )
     ),
     // Else:
     StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.rejected)
