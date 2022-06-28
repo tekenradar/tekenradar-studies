@@ -100,7 +100,7 @@ export class UitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
 *We vragen ook om toestemming bij het aanmaken van een account. Omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account, is het nodig om hier voor dit profiel apart toestemming te geven.*
 `]]),
         })
@@ -231,7 +231,7 @@ export class kEMUitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
 *We vragen ook om toestemming bij het aanmaken van een account. Omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account, is het nodig om hier voor dit profiel apart toestemming te geven.*
 
         `]]),
@@ -369,7 +369,7 @@ export class UitnodigingAanvullendOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om je te benaderen voor aanvullend onderzoek hebben we ook je toestemming nodig. Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+Om je te benaderen voor aanvullend onderzoek hebben we ook je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
         `]]),
         })
       ],

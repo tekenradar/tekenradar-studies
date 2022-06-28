@@ -103,7 +103,9 @@ class ConsentIntro extends Item {
   markdownContent = `
 # Toestemmingsverklaring
 
-Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we eerst je toestemming nodig. *We vragen ook om toestemming bij het aanmaken van een account. Omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account, is het nodig om hier voor dit profiel apart toestemming te geven.*
+Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we eerst je toestemming nodig.
+
+*We vragen ook om toestemming bij het aanmaken van een account. Omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account, is het nodig om nu voor dit profiel apart toestemming te geven voor deelname aan het onderzoek.*
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -146,16 +148,16 @@ class Consent extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Toestemmingsverklaring'],
+        ['nl', 'Toestemming'],
       ]),
       checkBoxLabel: new Map([
-        ["nl", "Toestemming geven"],
+        ["nl", "Toestemmingsformulier"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Vink hieronder "Toestemming geven" aan om de toestemmingsverklaring te kunnen lezen.
+Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
 `]]),
         })
       ],
