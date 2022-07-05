@@ -2,7 +2,7 @@ import { SurveyEngine } from "case-editor-tools/surveys";
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Gender, Residence } from "./questions/demographie";
 import { PreviousTickBitesGroup } from "./questions/prevTickBites";
-import { IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly } from "./questions/weeklyTB";
+import { ConsentGroup, IntroWeeklyTB, IntroWeeklyTBInit, NumberTickBites2a, NumberTickBites2b, NumberTickBites2c, NumberTickBites2d, NumberTickBites2e, NumberTickBites2f, NumberTickBites2g, NumberTickBitesWeekly } from "./questions/weeklyTB";
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from "./globalConstants";
 import { SurveyEndGroup } from "./questions/surveyEnd";
@@ -10,6 +10,7 @@ import { surveyKeys } from "./globalConstants";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 class WeeklyTB_Def extends SurveyDefinition {
+  ConsentGroup: ConsentGroup;
 
   T1_init: IntroWeeklyTBInit;
   T1: IntroWeeklyTB;
@@ -46,8 +47,15 @@ class WeeklyTB_Def extends SurveyDefinition {
 
     const InitCond = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.init);
     const required = isRequired !== undefined ? isRequired : false;
+
     this.T1_init = new IntroWeeklyTBInit(this.key, required, InitCond);
     this.T1 = new IntroWeeklyTB(this.key, required, SurveyEngine.logic.not(InitCond));
+
+    this.ConsentGroup = new ConsentGroup(this.key, required, SurveyEngine.logic.and(
+      InitCond,
+      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKey(ParticipantFlags.consents.defaultStudy.key)),
+    ));
+
     this.Q1 = new NumberTickBitesWeekly(this.key, required);
     const Q1cond = SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.Q1.key, 'rg.num'), 0);
     this.Q2a = new NumberTickBites2a(this.key, required, Q1cond);
@@ -85,6 +93,7 @@ class WeeklyTB_Def extends SurveyDefinition {
   }
 
   buildSurvey() {
+    this.addItem(this.ConsentGroup.get());
     this.addItem(this.T1_init.get());
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
