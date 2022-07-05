@@ -128,23 +128,21 @@ export const updateAgeFlags = () => StudyEngine.do(
     // IF:
     isChildParticipant(),
     // THEN:
-    StudyEngine.do(
-      StudyEngine.participantActions.updateFlag(
-        ParticipantFlags.ageCategory.key,
-        ParticipantFlags.ageCategory.values.child
-      ),
-      // Also store the actual age into a flag for children:
-      StudyEngine.participantActions.updateFlag(
-        ParticipantFlags.ageFromPDiff.key,
-        StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
-      ),
+    StudyEngine.participantActions.updateFlag(
+      ParticipantFlags.ageCategory.key,
+      ParticipantFlags.ageCategory.values.child
     ),
     // ELSE:
     StudyEngine.participantActions.updateFlag(
       ParticipantFlags.ageCategory.key,
       ParticipantFlags.ageCategory.values.adult
     )
-  )
+  ),
+  // Also store the actual age into a flag:
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.ageFromPDiff.key,
+    StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
+  ),
 )
 
 export const kEMflagLogic = () => StudyEngine.ifThen(

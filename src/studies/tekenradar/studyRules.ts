@@ -70,6 +70,9 @@ const reports = {
 }
 
 const contentServiceName = 'content-service';
+const researcherBackendNames = {
+  T0_Invites: 'researcher-backend-t0-invites'
+};
 
 export const emailKeys = {
   FlowReminder: 'Flow_reminder',
@@ -479,6 +482,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     // Else:
     StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.rejected)
   ),
+  StudyEngine.participantActions.externalEventHandler(researcherBackendNames.T0_Invites),
   reAssignWeeklyToTheEndOfList(),
 );
 
