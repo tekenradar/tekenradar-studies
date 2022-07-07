@@ -35,6 +35,9 @@ export const surveyKeys = {
   QuitWeeklyTB: 'QuitWeekly',
   QuitFollowUp: 'QuitFU',
   DeleteContactData: 'DelContactData',
+  WorkshopEntry: 'WorkshopEntry',
+  WorkshopFU1a: 'WorkshopFU1a',
+  WorkshopFU1b: 'WorkshopFU1b',
 }
 
 

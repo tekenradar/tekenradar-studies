@@ -30,6 +30,9 @@ import { QuitFollowUp } from "./surveys/QuitFollowUp";
 import { QuitWeeklyTB } from "./surveys/QuitWeekly";
 import { DeleteContactData } from "./surveys/DeleteContactData";
 import { researcherNotificationMessages } from "./messageConfigs/researcherNotifications";
+import { WorkshopEntry } from "./surveys/WorkshopEntry";
+import { WorkshopFU1a } from "./surveys/WorkshopFU1a";
+import { WorkshopFU1b } from "./surveys/WorkshopFU1b";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
@@ -43,6 +46,7 @@ export const TekenradarStudy: Study = {
     T3_Kids, T6_Kids, T9_Kids, T12_Kids,
     WeeklyTB, EMfoto,
     QuitFollowUp, QuitWeeklyTB, DeleteContactData,
+    WorkshopEntry, WorkshopFU1a, WorkshopFU1b,
   ],
   customStudyRules: [
     changeFollowupTimingToNow,
