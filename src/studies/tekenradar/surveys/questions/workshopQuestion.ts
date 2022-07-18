@@ -22,7 +22,7 @@ export class EntryQ1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Question 1 of the entry survey?'],
+        ['nl', 'Do you want to participate in the workshop study?'],
       ]),
       responseOptions: [
         {
@@ -48,9 +48,9 @@ export class EntryQ2 extends Item {
     no: 'b',
   }
 
-  constructor(parentKey: string, isRequired: boolean) {
+  constructor(parentKey: string, condition: Expression, isRequired: boolean) {
     super(parentKey, 'Q2');
-
+    this.condition = condition;
     this.isRequired = isRequired;
   }
 
@@ -61,19 +61,19 @@ export class EntryQ2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Question 2 of the entry survey?'],
+        ['nl', 'Which study track you want to enter?'],
       ]),
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja"],
+            ["nl", "A"],
           ])
         },
         {
           key: this.optionKeys.no, role: 'option',
           content: new Map([
-            ["nl", "Nee"],
+            ["nl", "B"],
           ])
         }
       ]
@@ -258,9 +258,12 @@ export class FU1bQ1 extends Item {
       ],
       customValidations: [{
         key: 'v1',
-        rule: SurveyEngine.logic.and(
-          SurveyEngine.multipleChoice.any(this.key, this.optionKeys.d),
-          SurveyEngine.getResponseValueAsStr(this.key, `rg.mcg.${this.optionKeys.d}`),
+        rule: SurveyEngine.logic.or(
+          SurveyEngine.logic.and(
+            SurveyEngine.multipleChoice.any(this.key, this.optionKeys.d),
+            SurveyEngine.getResponseValueAsStr(this.key, `rg.mcg.${this.optionKeys.d}`),
+          ),
+          SurveyEngine.multipleChoice.none(this.key, this.optionKeys.d)
         ),
         type: 'hard'
       }]

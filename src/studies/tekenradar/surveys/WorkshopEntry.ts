@@ -1,3 +1,4 @@
+import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { EntryQ1, EntryQ2 } from './questions/workshopQuestion';
@@ -24,8 +25,11 @@ class WorkshopEntryDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
-    this.Q2 = new EntryQ2(this.key, required);
     this.Q1 = new EntryQ1(this.key, required);
+    this.Q2 = new EntryQ2(this.key, SurveyEngine.singleChoice.any(
+      this.Q1.key,
+      this.Q1.optionKeys.yes
+    ), required);
   }
 
   buildSurvey() {
