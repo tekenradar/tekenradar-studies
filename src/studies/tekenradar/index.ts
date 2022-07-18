@@ -33,6 +33,7 @@ import { researcherNotificationMessages } from "./messageConfigs/researcherNotif
 import { WorkshopEntry } from "./surveys/WorkshopEntry";
 import { WorkshopFU1a } from "./surveys/WorkshopFU1a";
 import { WorkshopFU1b } from "./surveys/WorkshopFU1b";
+import { workshopStudyInvite } from "./customRules/workshopStudyInvite";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
@@ -50,6 +51,7 @@ export const TekenradarStudy: Study = {
   ],
   customStudyRules: [
     changeFollowupTimingToNow,
+    workshopStudyInvite,
   ],
   messageConfigs: [
     participantMessages,
