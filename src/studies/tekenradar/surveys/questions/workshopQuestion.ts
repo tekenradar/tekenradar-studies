@@ -1,4 +1,4 @@
-import { SurveyItems } from "case-editor-tools/surveys";
+import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
 import { Expression } from 'survey-engine/data_types';
 import { Item } from "case-editor-tools/surveys/types";
 
@@ -256,14 +256,14 @@ export class FU1bQ1 extends Item {
           ])
         }
       ],
-      /*customValidations: [{
+      customValidations: [{
         key: 'v1',
         rule: SurveyEngine.logic.and(
           SurveyEngine.multipleChoice.any(this.key, this.optionKeys.d),
-          SurveyEngine.hasResponse(this.key, 'rg.mcg.d.input'),
+          SurveyEngine.getResponseValueAsStr(this.key, `rg.mcg.${this.optionKeys.d}`),
         ),
         type: 'hard'
-      }]*/
+      }]
     })
   }
 }
