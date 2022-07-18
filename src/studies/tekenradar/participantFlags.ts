@@ -84,5 +84,12 @@ export const ParticipantFlags = {
         rejected: 'false'
       }
     },
+  },
+  workshop: {
+    key: 'workshop',
+    values: {
+      active: 'active',
+      rejected: 'rejected',
+    }
   }
 }

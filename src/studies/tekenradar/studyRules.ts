@@ -40,6 +40,9 @@ import { QuitWeeklyTB } from "./surveys/QuitWeekly";
 import { QuitFollowUp } from "./surveys/QuitFollowUp";
 import { surveyKeys } from "./surveys/globalConstants";
 import { DeleteContactData } from "./surveys/DeleteContactData";
+import { WorkshopEntry } from "./surveys/WorkshopEntry";
+import { WorkshopFU1a } from "./surveys/WorkshopFU1a";
+import { WorkshopFU1b } from "./surveys/WorkshopFU1b";
 
 const reports = {
   FollowUpReport: {
@@ -757,6 +760,75 @@ const handleAutoContactDataDeletion = () => StudyEngine.ifThen(
   )
 )
 
+// Workshop:
+const handleSubmit_WorkshopEntry = StudyEngine.ifThen(
+  // If:
+  StudyEngine.checkSurveyResponseKey(WorkshopEntry.key),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(WorkshopEntry.key, 'all'),
+
+  StudyEngine.if(
+    StudyEngine.singleChoice.any(
+      WorkshopEntry.Q1.key,
+      WorkshopEntry.Q1.optionKeys.yes,
+    ),
+    // Then:
+    StudyEngine.do(
+      StudyEngine.participantActions.updateFlag(
+        ParticipantFlags.workshop.key,
+        ParticipantFlags.workshop.values.active
+      ),
+      // Which study track:
+      StudyEngine.if(
+        // if:
+        StudyEngine.singleChoice.any(
+          WorkshopEntry.Q2.key,
+          WorkshopEntry.Q2.optionKeys.yes,
+        ),
+        // then:
+        StudyEngine.participantActions.assignedSurveys.add(WorkshopFU1a.key, 'prio',
+          StudyEngine.timestampWithOffset({ days: 0 }),
+          StudyEngine.timestampWithOffset(
+            { days: 30 }
+          ),
+        ),
+        // else:
+        StudyEngine.participantActions.assignedSurveys.add(WorkshopFU1b.key, 'prio',
+          StudyEngine.timestampWithOffset({ days: 0 }),
+          StudyEngine.timestampWithOffset(
+            { days: 30 }
+          ),
+        )
+      )
+    ),
+    // Else:
+    StudyEngine.do(
+      StudyEngine.participantActions.updateFlag(
+        ParticipantFlags.workshop.key,
+        ParticipantFlags.workshop.values.rejected
+      ),
+    )
+  ),
+
+  // StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
+  // StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
+  // removeFollowUpMessagesForSurvey(T3_Adults.key)
+);
+
+const handleSubmit_WorkshopFU1a = StudyEngine.ifThen(
+  // If:
+  StudyEngine.checkSurveyResponseKey(WorkshopFU1a.key),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(WorkshopFU1a.key, 'all'),
+);
+
+const handleSubmit_WorkshopFU1b = StudyEngine.ifThen(
+  // If:
+  StudyEngine.checkSurveyResponseKey(WorkshopFU1b.key),
+  // Then:
+  StudyEngine.participantActions.assignedSurveys.remove(WorkshopFU1b.key, 'all'),
+);
+
 
 /**
  * SUBMIT RULE LIST
@@ -798,6 +870,10 @@ const submitRules: Expression[] = [
   handleSubmit_QuitFollowUp,
   handleSubmit_QuitWeeklyTB,
   handleSubmit_DeleteContactData,
+  // Workshop:
+  handleSubmit_WorkshopEntry,
+  handleSubmit_WorkshopFU1a,
+  handleSubmit_WorkshopFU1b,
 ]
 
 
@@ -816,6 +892,9 @@ const timerRules: Expression[] = [
   handleExpired_removeSurvey(T9_Kids.key),
   handleExpired_T12_Kids,
   handleAutoContactDataDeletion(),
+  // workshop:
+  handleExpired_removeSurvey(WorkshopFU1a.key),
+  handleExpired_removeSurvey(WorkshopFU1b.key),
 ]
 
 
