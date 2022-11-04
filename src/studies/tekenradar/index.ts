@@ -31,6 +31,7 @@ import { QuitWeeklyTB } from "./surveys/QuitWeekly";
 import { DeleteContactData } from "./surveys/DeleteContactData";
 import { researcherNotificationMessages } from "./messageConfigs/researcherNotifications";
 import { assignDeleteContactDataSurvey } from "./customRules/assignDeleteContactDataSurvey";
+import { removeConfidentialData } from "./customRules/removeConfidentialData";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
@@ -48,6 +49,7 @@ export const TekenradarStudy: Study = {
   customStudyRules: [
     changeFollowupTimingToNow,
     assignDeleteContactDataSurvey,
+    removeConfidentialData,
   ],
   messageConfigs: [
     participantMessages,
