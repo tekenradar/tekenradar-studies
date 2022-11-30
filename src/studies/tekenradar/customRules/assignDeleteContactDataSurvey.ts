@@ -7,6 +7,12 @@ export const assignDeleteContactDataSurvey = {
   name: 'assignDeleteContactDataSurvey',
   rules: [
     StudyEngine.ifThen(
+      StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.DeleteContactData),
+      StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.DeleteContactData, 'all'),
+      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined,
+        StudyEngine.timestampWithOffset({ minutes: 30 }))
+    ),/*
+    StudyEngine.ifThen(
       StudyEngine.checkConditionForOldResponses(
         StudyEngine.or(
           StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
@@ -40,6 +46,6 @@ export const assignDeleteContactDataSurvey = {
           StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 })),
         )
       )
-    )
+    )*/
   ]
 }
