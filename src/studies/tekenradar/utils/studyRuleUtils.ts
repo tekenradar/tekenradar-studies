@@ -257,11 +257,18 @@ export const updateTbExposureFlag = (questionKey: string) => StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.tbExposure.key, ParticipantFlags.tbExposure.values.known)
 )
 
+//LT 11-05-23
+export const updateNMGFlag = (questionKey: string) => StudyEngine.ifThen(
+  StudyEngine.hasResponseKey(questionKey, 'rg'),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true)
+)
+
 export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(QuitFollowUp.key, 'all'),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.tbExposure.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.NMG.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key)
 )
@@ -272,6 +279,7 @@ export const quitFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.quitted),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.tbExposure.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.NMG.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
   StudyEngine.ifThen(

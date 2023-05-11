@@ -14,7 +14,7 @@ import {
   initFollowUpFlow_Kids,
   isSurveyExpired, aEMflagLogic, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
   removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned,
-  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag
+  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, updateNMGFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -946,6 +946,7 @@ const mergeRules: Expression[] = [
       takeOverFlagIfExist(ParticipantFlags.genderCategory.key),
       takeOverFlagIfExist(ParticipantFlags.postalCode.key),
       takeOverFlagIfExist(ParticipantFlags.tbExposure.key),
+      takeOverFlagIfExist(ParticipantFlags.NMG.key),
       StudyEngine.if(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(
           ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.false,
