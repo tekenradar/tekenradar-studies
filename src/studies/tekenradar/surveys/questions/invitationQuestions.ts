@@ -972,7 +972,7 @@ export class kEMInviteGroup extends Group {
 }
 
   //kvdw LE:
-  export class aEMInviteGroup extends Group {
+export class aEMInviteGroup extends Group {
     T0: aEMUitnodigingOnderzoekText;
     aEMUitnodigingOnderzoek: aEMUitnodigingOnderzoek;
     aEMUitnodigingOnderzoekConsent: aEMUitnodigingOnderzoekConsent;
