@@ -69,6 +69,12 @@ export const ParticipantFlags = {
     values: {
       likely: 'likely'
     }
+  }, //LT 11-05-23
+  aEM: {
+    key: 'aEM',
+    values: {
+      likely: 'likely'
+    }
   },
   consents: {
     defaultStudy: {
