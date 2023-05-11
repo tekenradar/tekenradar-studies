@@ -12,7 +12,9 @@ import {
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isSurveyExpired, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys, removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned, updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag
+  isSurveyExpired, aEMflagLogic, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
+  removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned,
+  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -87,11 +89,15 @@ export const researcherNotificationTypes = {
     categoryFlag: {
       key: 'categoryFlag',
       values: {
-        kEM: 'kEM'
+        kEM: 'kEM',
+        aEM: 'aEM'
       }
     }
   }
 }
+
+
+
 
 const handleSubmit_PDiff = StudyEngine.ifThen(
   // IF:
@@ -105,6 +111,7 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
     updateAgeFlags(),
     resetToPDiffStart(),
     StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
     StudyEngine.participantActions.startNewStudySession(),
   ),
   handlePDiffRuleFor_TBflow(),
@@ -230,6 +237,7 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
+  aEMflagLogic(),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(EMflow_Adults.PTB.Q1.key),
   // Map data aggregation:
@@ -440,6 +448,8 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     StudyEngine.and(
       StudyEngine.or(
         StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingOnderzoekConsent.key),
+        StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.UitnodigingOnderzoekConsent.key),
+        StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
         StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.UitnodigingOnderzoekConsent.key),
         StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
       ),
@@ -460,6 +470,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   StudyEngine.if(
     StudyEngine.or(
       StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
+      StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
       StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
     ),
     // Then:
@@ -467,7 +478,18 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
       StudyEngine.participantActions.updateFlag(ParticipantFlags.contactData.key, ParticipantFlags.contactData.values.active),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.accepted),
       StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 })),
-      // if kEM - send notification:
+      // if aEM - send notification
+      StudyEngine.ifThen(
+        StudyEngine.participantState.hasParticipantFlagKeyAndValue(
+          ParticipantFlags.aEM.key,
+          ParticipantFlags.aEM.values.likely
+        ),
+        StudyEngine.notifyResearcher(researcherNotificationTypes.participantFound.messageType,
+          researcherNotificationTypes.participantFound.categoryFlag.key,
+          researcherNotificationTypes.participantFound.categoryFlag.values.aEM
+        )
+      )
+        // if kEM - send notification:
       StudyEngine.ifThen(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(
           ParticipantFlags.kEM.key,
