@@ -499,7 +499,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
           researcherNotificationTypes.participantFound.categoryFlag.key,
           researcherNotificationTypes.participantFound.categoryFlag.values.kEM
         )
-      )
+      ),
     ),
     // Else:
     StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.rejected)
