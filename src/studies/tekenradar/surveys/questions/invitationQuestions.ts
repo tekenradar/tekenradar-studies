@@ -816,29 +816,17 @@ export class ContactgegevensGroup extends Group {
     this.Name = new Name(this.key, isRequired)
     this.Email = new Email(this.key, isRequired)
 
-    const showTelQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely);
-    this.Telephone = new Telephone(this.key, isRequired, showTelQ)
-
-    const showGenderQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely);
-    this.Gender = new GenderForContact(this.key, isRequired, showGenderQ)
-
-    const showBirthdayQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely);
-    this.Birthday = new Birthday(this.key, isRequired, showBirthdayQ)
-
     //kvdw LE:
-    const showGPq = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
-    this.GP = new GP(this.key, isRequired, showGPq)
-
-    const showTelQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
+    const showTelQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) or SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.Telephone = new Telephone(this.key, isRequired, showTelQ)
 
-    const showGenderQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
+    const showGenderQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) or SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.Gender = new GenderForContact(this.key, isRequired, showGenderQ)
 
-    const showBirthdayQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
+    const showBirthdayQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) or SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.Birthday = new Birthday(this.key, isRequired, showBirthdayQ)
 
-    const showGPq = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+    const showGPq = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely) or SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.GP = new GP(this.key, isRequired, showGPq)
   }
 
