@@ -1054,38 +1054,43 @@ export class kEMInviteGroup extends Group {
   }
 }
 
-  //kvdw LE:
+//kvdw LE:
 export class aEMInviteGroup extends Group {
-    T0: aEMUitnodigingOnderzoekText;
-    aEMUitnodigingOnderzoek: aEMUitnodigingOnderzoek;
-    aEMUitnodigingOnderzoekConsent: aEMUitnodigingOnderzoekConsent;
+  T0: aEMUitnodigingOnderzoekText;
+  aEMUitnodigingOnderzoek: aEMUitnodigingOnderzoek;
+  aEMUitnodigingOnderzoekConsent: aEMUitnodigingOnderzoekConsent;
 
-    Contactgegevens: ContactgegevensGroup;
-    FutureStudies: FutureStudies;
-    NijmegenReis: NijmegenReis;
+  Contactgegevens: ContactgegevensGroup;
+  FutureStudies: FutureStudies;
+  NijmegenReis: NijmegenReis;
 
-    // Standard Tekenradar
-    T1: UitnodigingOnderzoekText;
-    UitnodigingOnderzoek: UitnodigingOnderzoek;
-    UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
+  // Standard Tekenradar
+  T1: UitnodigingOnderzoekText;
+  UitnodigingOnderzoek: UitnodigingOnderzoek;
+  UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
 
-    constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-      super(parentKey, 'aEM');
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'aEM');
 
-      this.groupEditor.setCondition(condition);
+    this.groupEditor.setCondition(condition);
 
-      this.T0 = new aEMUitnodigingOnderzoekText(this.key);
-      this.aEMUitnodigingOnderzoek = new aEMUitnodigingOnderzoek(this.key, isRequired);
-      this.aEMUitnodigingOnderzoekConsent = new aEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
+    this.T0 = new aEMUitnodigingOnderzoekText(this.key);
+    this.aEMUitnodigingOnderzoek = new aEMUitnodigingOnderzoek(this.key, isRequired);
+    this.aEMUitnodigingOnderzoekConsent = new aEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
 
-      this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
-      this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
-      this.NijmegenReis = new NijmegenReis(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
+    this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
+    this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
 
-      this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
-      this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
-      this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
-    }
+    const showNijmegenReis = SurveyEngine.logic.and(
+      SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes),
+      SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), '^(?!65(11|12|21|22)).*$')
+    )
+    this.NijmegenReis = new NijmegenReis(this.key, isRequired, showNijmegenReis);
+
+    this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
+    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
+    this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
+  }
 
   buildGroup(): void {
     this.addItem(this.T0.get());
