@@ -470,7 +470,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   StudyEngine.if(
     StudyEngine.or(
       StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
-      StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
+      StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
       StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
     ),
     // Then:
