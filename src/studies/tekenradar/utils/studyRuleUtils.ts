@@ -186,6 +186,48 @@ export const kEMflagLogic = () => StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
 )
 
+// LT 11-05-23
+export const aEMflagLogic = () => StudyEngine.ifThen(
+  // if:
+  StudyEngine.and(
+    StudyEngine.singleChoice.any(EMflow_Adults.EM_B2.key, EMflow_Adults.EM_B2.optionKeys.yes),
+    StudyEngine.gte(
+      StudyEngine.getResponseValueAsNum(EMflow_Adults.EM_B3.key, `${responseGroupKey}.${numericInputKey}`),
+      5
+    ),
+    StudyEngine.or(
+      StudyEngine.and(
+        StudyEngine.singleChoice.any(EMflow_Adults.EM_B1.key, EMflow_Adults.EM_B1.optionKeys.period.key),
+        StudyEngine.gt(
+          StudyEngine.getResponseValueAsNum(EMflow_Adults.EM_B1.key, `${responseGroupKey}.${singleChoiceKey}.${EMflow_Adults.EM_B1.optionKeys.period.key}.${EMflow_Adults.EM_B1.optionKeys.period.dateValue}`),
+          StudyEngine.timestampWithOffset({ days: -90 })
+        ),
+      ),
+      StudyEngine.singleChoice.any(EMflow_Adults.EM_B1.key, EMflow_Adults.EM_B1.optionKeys.unknown),
+    ),
+    StudyEngine.and(
+      StudyEngine.singleChoice.any(EMflow_Adults.EM_B6.key, EMflow_Adults.EM_B6.optionKeys.yes),
+      StudyEngine.gte(
+        StudyEngine.getResponseValueAsNum(EMflow_Adults.Q17.key, `${responseGroupKey}.${clozeKey}.${EMflow_Adults.Q17.optionKeys.dayCount}`),
+        3
+      )
+    ),
+    StudyEngine.or(
+      StudyEngine.singleChoice.any(EMflow_Adults.Q18.key, EMflow_Adults.Q18.optionKeys.no),
+      StudyEngine.gte(
+        StudyEngine.getResponseValueAsNum(EMflow_Adults.Q19.key, `${responseGroupKey}.${clozeKey}.2`),
+        StudyEngine.timestampWithOffset({ days: -4 })
+      )
+    ),
+    StudyEngine.or(
+      StudyEngine.singleChoice.any(EMflow_Adults.FLG.FLD.key, EMflow_Adults.FLG.FLD.optionKeys.no),
+      StudyEngine.singleChoice.any(EMflow_Adults.FLG.Q3.key, EMflow_Adults.FLG.Q3.optionKeys.yes)
+    )
+  ),
+  // Then:
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely),
+)
+
 export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(
   StudyEngine.ifThen(
     StudyEngine.singleChoice.any(genderQuestionKey, Standardflow_Adults.P2.optionKeys.male),
@@ -220,7 +262,8 @@ export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.tbExposure.key),
-  StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key)
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key)
 )
 
 export const quitFollowUp = () => StudyEngine.do(
@@ -230,6 +273,7 @@ export const quitFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.removeFlag(ParticipantFlags.postalCode.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.tbExposure.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
   StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
