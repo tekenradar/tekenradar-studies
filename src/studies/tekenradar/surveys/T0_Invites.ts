@@ -3,12 +3,14 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { kEMInviteGroup, StandardInviteGroup } from './questions/invitationQuestions';
+import { aEMInviteGroup, StandardInviteGroup } from './questions/invitationQuestions';//kvdw LE
 import { SurveyEndGroup } from './questions/surveyEnd';
 
 
 export class T0_InvitesDef extends SurveyDefinition {
   StandardInviteGroup: StandardInviteGroup;
   kEMInviteGroup: kEMInviteGroup;
+  aEMInviteGroup: aEMInviteGroup; //kvdw LE
   EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
@@ -33,17 +35,28 @@ export class T0_InvitesDef extends SurveyDefinition {
     ));
     this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely));
 
+    //kvdw LE:
+    this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+    ));
+    this.aEMInviteGroup = new aEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely));
+
+
     this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.and(
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.StandardInviteGroup.UitnodigingOnderzoek.key, this.StandardInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.kEMInviteGroup.kEMUitnodigingOnderzoek.key, this.kEMInviteGroup.kEMUitnodigingOnderzoek.optionKeys.yes)),
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.kEMInviteGroup.UitnodigingOnderzoek.key, this.kEMInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
-    ))
+      //kvdw LE:
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.aEMUitnodigingOnderzoek.key, this.aEMInviteGroup.aEMUitnodigingOnderzoek.optionKeys.yes)),
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.UitnodigingOnderzoek.key, this.aEMInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
+      ))
   }
 
 
   buildSurvey() {
     this.addItem(this.StandardInviteGroup.get());
     this.addItem(this.kEMInviteGroup.get());
+    this.addItem(this.aEMInviteGroup.get());//kvdw LE
     this.addPageBreak();
     this.addItem(this.EndGroup.get());
   }
