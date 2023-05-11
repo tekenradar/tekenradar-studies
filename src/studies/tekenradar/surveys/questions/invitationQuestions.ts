@@ -933,7 +933,7 @@ export class NijmegenReis extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'NmgReis');
+    super(parentKey, 'NijmegenReis');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -1062,6 +1062,7 @@ export class aEMInviteGroup extends Group {
 
     Contactgegevens: ContactgegevensGroup;
     FutureStudies: FutureStudies;
+    NijmegenReis: NijmegenReis;
 
     // Standard Tekenradar
     T1: UitnodigingOnderzoekText;
@@ -1079,6 +1080,7 @@ export class aEMInviteGroup extends Group {
 
       this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
       this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
+      this.NijmegenReis = new NijmegenReis(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
 
       this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
       this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
@@ -1092,6 +1094,7 @@ export class aEMInviteGroup extends Group {
     this.addPageBreak()
     this.addItem(this.Contactgegevens.get());
     this.addItem(this.FutureStudies.get());
+    this.addItem(this.NijmegenReis.get());
     this.addPageBreak()
 
     this.addItem(this.T1.get());
