@@ -488,8 +488,8 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
           researcherNotificationTypes.participantFound.categoryFlag.key,
           researcherNotificationTypes.participantFound.categoryFlag.values.aEM
         )
-      )
-        // if kEM - send notification:
+      ),
+      // if kEM - send notification:
       StudyEngine.ifThen(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(
           ParticipantFlags.kEM.key,
