@@ -3,6 +3,10 @@ import { Group, Item } from "case-editor-tools/surveys/types";
 import { Expression } from 'survey-engine/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { ParticipantFlags } from "../../participantFlags";
+import { expWithArgs, generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
+import { inputKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+
+
 
 export class UitnodigingOnderzoekText extends Item {
   markdownContent = `
@@ -678,6 +682,50 @@ class Name extends Item {
   }
 }
 
+class PC4contact extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PC4contact');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    return SurveyItems.textInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wat zijn de 4 cijfers van je postcode?'],
+      ]),
+      titleClassName: 'sticky-top',
+      customValidations: [
+        {
+          key: 'r2',
+          type: 'hard',
+          rule: SurveyEngine.logic.or(
+            expWithArgs('not', expWithArgs('hasResponse', this.key, responseGroupKey)),
+            expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, inputKey].join('.'), '^[0-9][0-9][0-9][0-9]$'),
+          )
+        }
+      ],
+      bottomDisplayCompoments: [
+        {
+          role: 'error',
+          content: generateLocStrings(new Map([
+            ["nl", "Voer de eerste vier cijfers van je postcode in"],
+          ])),
+          displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
+        }
+      ]
+    })
+  }
+}
+
+
 class Birthday extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
     super(parentKey, 'Birthday');
@@ -802,6 +850,7 @@ export class ContactgegevensGroup extends Group {
   PreText: ContactGroupPretext;
   Name: Name;
   Email: Email;
+  PC4contact: PC4contact;
   Telephone: Telephone;
   Gender: GenderForContact;
   Birthday: Birthday;
@@ -817,6 +866,9 @@ export class ContactgegevensGroup extends Group {
     this.Email = new Email(this.key, isRequired)
 
     //kvdw LE:
+    const showPC4contact = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) || SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
+    this.PC4contact = new PC4contact(this.key, isRequired, PC4contact)
+
     const showTelQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) || SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.Telephone = new Telephone(this.key, isRequired, showTelQ)
 
@@ -835,6 +887,7 @@ export class ContactgegevensGroup extends Group {
     this.addItem(this.Name.get())
     this.addItem(this.Email.get())
 
+    this.addItem(this.PC4contact.get())
     this.addItem(this.Telephone.get())
     this.addItem(this.Birthday.get())
     this.addItem(this.Gender.get())
@@ -871,6 +924,48 @@ class FutureStudies extends Item {
     })
   }
 }
+
+//kvdw LE:
+export class NijmegenReis extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'NmgReis');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Zou je voor aanvullend wetenschappelijk onderzoek bereid zijn om naar Nijmegen te reizen voor bloedafname?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
 
 export class StandardInviteGroup extends Group {
   // Standard Tekenradar
