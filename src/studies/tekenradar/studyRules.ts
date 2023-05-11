@@ -504,6 +504,16 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     // Else:
     StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.rejected)
   ),
+  StudyEngine.if(
+    StudyEngine.or(
+      StudyEngine.hasResponseKeyWithValue(T0_Invites.aEMInviteGroup.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), '6511'),
+      StudyEngine.hasResponseKeyWithValue(T0_Invites.aEMInviteGroup.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), '6512'),
+      StudyEngine.hasResponseKeyWithValue(T0_Invites.aEMInviteGroup.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), '6521'),
+      StudyEngine.hasResponseKeyWithValue(T0_Invites.aEMInviteGroup.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), '6522'),
+      StudyEngine.singleChoice.any(T0_Invites.aEMInviteGroup.NijmegenReis.key, T0_Invites.aEMInviteGroup.NijmegenReis.optionKeys.yes)
+    ),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true),
+  ),
   StudyEngine.participantActions.externalEventHandler(researcherBackendNames.T0_Invites),
   reAssignWeeklyToTheEndOfList(),
 );
