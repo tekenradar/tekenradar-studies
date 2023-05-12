@@ -257,11 +257,6 @@ export const updateTbExposureFlag = (questionKey: string) => StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.tbExposure.key, ParticipantFlags.tbExposure.values.known)
 )
 
-//LT 11-05-23
-export const updateNMGFlag = (questionKey: string) => StudyEngine.ifThen(
-  StudyEngine.hasResponseKey(questionKey, 'rg'),
-  StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true)
-)
 
 export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.assignedSurveys.remove(QuitFollowUp.key, 'all'),

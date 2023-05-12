@@ -867,7 +867,7 @@ export class ContactgegevensGroup extends Group {
 
     //kvdw LE:
     const showPC4contact = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) || SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
-    this.PC4contact = new PC4contact(this.key, isRequired, PC4contact)
+    this.PC4contact = new PC4contact(this.key, isRequired, showPC4contact)
 
     const showTelQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) || SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.Telephone = new Telephone(this.key, isRequired, showTelQ)
@@ -878,7 +878,7 @@ export class ContactgegevensGroup extends Group {
     const showBirthdayQ = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) || SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.Birthday = new Birthday(this.key, isRequired, showBirthdayQ)
 
-    const showGPq = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely) || SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
+    const showGPq = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely) || SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely);
     this.GP = new GP(this.key, isRequired, showGPq)
   }
 
