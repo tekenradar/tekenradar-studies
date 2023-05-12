@@ -14,7 +14,7 @@ import {
   initFollowUpFlow_Kids,
   isSurveyExpired, aEMflagLogic, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
   removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned,
-  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, updateNMGFlag
+  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
