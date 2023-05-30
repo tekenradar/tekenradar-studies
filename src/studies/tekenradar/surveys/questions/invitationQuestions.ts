@@ -175,8 +175,8 @@ export class aEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek ziekte van Lyme
 
-Wij willen je vragen of je mee wilt doen aan onderzoek naar de ziekte van Lyme, omdat je een erythema migrans (rode ring of vlek na een tekenbeet als een vroege vorm van ziekte van Lyme) hebt gemeld. Door mee te doen draag je bij aan kennis over de ziekte van Lyme, en de gezondheidsgevolgen hiervan.
-Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid, en vragen we om je contactgegevens. Als uit de ingevulde gegevens blijkt dat je in aanmerking komt voor aanvullend onderzoek waarvoor ook bloed kan worden afgenomen dan nemen we nog contact met je op. Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
+Wij willen je vragen of je mee wilt doen aan Tekenradar onderzoek naar de ziekte van Lyme, omdat je een erythema migrans (rode ring of vlek na een tekenbeet als een vroege vorm van ziekte van Lyme) hebt gemeld. Door mee te doen draag je bij aan kennis over de ziekte van Lyme, en de gezondheidsgevolgen hiervan.
+Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid, en vragen we om je contactgegevens. Het kan zijn dat uit de ingevulde gegevens blijkt dat je ook in aanmerking komt voor aanvullend onderzoek waarvoor ook bloed kan worden afgenomen. Als dat zo is, en je ons daarvoor toestemming geeft, kan het zijn dat we nog contact met je opnemen. Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, ook dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -400,7 +400,7 @@ Ook:
 - Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
 - Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).
 - Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin onder mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.
-- Geef ik hierna in de vragenlijst aan of mijn persoonsgegevens in de toekomst ook gebruikt mogen worden om mij te benaderen voor aanvullend (deel)onderzoek via Tekenradar.
+- Geef ik hierna in de vragenlijst aan of mijn persoonsgegevens nu en in de toekomst ook gebruikt mogen worden om mij te benaderen voor aanvullend (deel)onderzoek via Tekenradar.
 - Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.
 - Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners ingezien te worden.
 - Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).
@@ -550,7 +550,7 @@ class ContactGroupPretext extends Item {
   markdownContent = `
 **Vul hieronder je contactgegevens in.**
 
-We vragen opnieuw om je e-mailadres en soms ook andere gegevens omdat we de eerder ingevulde gegevens vanwege privacyregelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde e-mailadres invullen.
+We vragen hieronder opnieuw om je e-mailadres en verderop soms ook andere gegevens omdat we de eerder en verderop ingevulde gegevens vanwege privacyregelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde e-mailadres invullen.
 Je contactgegevens worden alleen gebruikt voor het Tekenradar onderzoek en/of om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
 `
 
@@ -926,7 +926,7 @@ class FutureStudies extends Item {
       condition: this.condition,
       isRequired: this.isRequired,
       questionText: new Map([[
-        'nl', 'Het kan zijn dat je in de toekomst nog in aanmerking komt voor aanvullend of vervolgonderzoek naar tekenbeten of infectieziekten. Mogen we je dan eventueel ook benaderen voor die onderzoeken?'
+        'nl', 'Het kan zijn dat je in de toekomst nog in aanmerking komt voor ander aanvullend of vervolgonderzoek naar tekenbeten of infectieziekten. Mogen we je dan eventueel ook benaderen voor die onderzoeken?'
       ]]),
       responseOptions: [
         {
@@ -961,7 +961,7 @@ export class NijmegenReis extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Zou je voor aanvullend wetenschappelijk onderzoek bereid zijn om naar Nijmegen te reizen voor bloedafname?'],
+        ['nl', 'Zou je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek bereid zijn om naar Nijmegen te reizen voor bloedafname?'],
       ]),
       responseOptions: [
         {

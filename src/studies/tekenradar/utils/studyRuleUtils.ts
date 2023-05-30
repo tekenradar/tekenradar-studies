@@ -174,7 +174,7 @@ export const kEMflagLogic = () => StudyEngine.ifThen(
       StudyEngine.singleChoice.any(EMflow_Kids.LT4.key, EMflow_Kids.LT4.optionKeys.no),
       StudyEngine.gte(
         StudyEngine.getResponseValueAsNum(EMflow_Kids.LT5.key, `${responseGroupKey}.${clozeKey}.2`),
-        StudyEngine.timestampWithOffset({ days: -7 })
+        StudyEngine.timestampWithOffset({ days: -8 })
       )
     ),
     StudyEngine.or(
@@ -216,7 +216,7 @@ export const aEMflagLogic = () => StudyEngine.ifThen(
       StudyEngine.singleChoice.any(EMflow_Adults.Q18.key, EMflow_Adults.Q18.optionKeys.no),
       StudyEngine.gte(
         StudyEngine.getResponseValueAsNum(EMflow_Adults.Q19.key, `${responseGroupKey}.${clozeKey}.2`),
-        StudyEngine.timestampWithOffset({ days: -4 })
+        StudyEngine.timestampWithOffset({ days: -5 })
       )
     ),
     StudyEngine.or(
