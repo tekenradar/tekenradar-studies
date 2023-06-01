@@ -30,16 +30,24 @@ export class T0_InvitesDef extends SurveyDefinition {
 
     const required = isRequired !== undefined ? isRequired : false;
 
-    this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)
-    ));
+    this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.and(
+      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)),
+      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)))
+    );
     this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely));
+    this.aEMInviteGroup = new aEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely));
+
+
+    //this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
+    //  SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)
+    //));
+    //this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely));
 
     //kvdw LE:
-    this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
-    ));
-    this.aEMInviteGroup = new aEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely));
+    //this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
+    //  SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+    //));
+    //this.aEMInviteGroup = new aEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely));
 
 
     this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.and(
