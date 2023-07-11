@@ -5,7 +5,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { ParticipantFlags } from "../../participantFlags";
 import { expWithArgs, generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
 import { inputKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
-
+import { postalCodesForNMGStudy } from "../globalConstants";
 
 
 export class UitnodigingOnderzoekText extends Item {
@@ -1098,9 +1098,11 @@ export class aEMInviteGroup extends Group {
 
     const showNijmegenReis = SurveyEngine.logic.and(
       SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes),
-      SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), '^(?!65(11|12|21|22)).*$')
+      SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), `^(?!${postalCodesForNMGStudy.join('|')}).*$`)
     )
     this.NijmegenReis = new NijmegenReis(this.key, isRequired, showNijmegenReis);
+
+
 
     this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
     this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
