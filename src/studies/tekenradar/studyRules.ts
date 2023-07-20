@@ -516,7 +516,10 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     StudyEngine.or(...postalCodesForNMGStudy.map(postalCode => StudyEngine.hasResponseKeyWithValue(T0_Invites.aEMInviteGroup.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), postalCode)),
       StudyEngine.singleChoice.any(T0_Invites.aEMInviteGroup.NijmegenReis.key, T0_Invites.aEMInviteGroup.NijmegenReis.optionKeys.yes)),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true),
-  ))
+  ),
+  StudyEngine.participantActions.externalEventHandler(researcherBackendNames.T0_Invites),
+  reAssignWeeklyToTheEndOfList(),
+)
 
 
 //I think this might work. Explained:
