@@ -961,7 +961,7 @@ export class NijmegenReis extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Zou je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek bereid zijn om naar Nijmegen te reizen voor bloedafname?'],
+        ['nl', 'Wil je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek **de komende drie maanden 4 keer naar Nijmegen** reizen voor bloedafnames?'],
       ]),
       responseOptions: [
         {
