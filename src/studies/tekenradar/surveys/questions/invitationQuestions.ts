@@ -940,7 +940,49 @@ class FutureStudies extends Item {
   }
 }
 
-//kvdw LE:
+//kvdw LE: orignal version
+//export class NijmegenReis extends Item {
+//  optionKeys = {
+//    yes: 'a',
+//    no: 'b'
+//  }
+//
+//  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+//    super(parentKey, 'NijmegenReis');
+//
+//    this.isRequired = isRequired;
+//    this.condition = condition;
+//  }
+//
+//  buildItem() {
+//    return SurveyItems.singleChoice({
+//      parentKey: this.parentKey,
+//      itemKey: this.itemKey,
+//      isRequired: this.isRequired,
+//      condition: this.condition,
+//      questionText: new Map([
+//        ['nl', 'Wil je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek **de komende drie maanden 4 keer naar Nijmegen** reizen voor bloedafnames?'],
+//      ]),
+//      responseOptions: [
+//        {
+//          key: this.optionKeys.yes, role: 'option',
+//          content: new Map([
+//            ["nl", "Ja"],
+//          ])
+//        },
+//        {
+//          key: this.optionKeys.no, role: 'option',
+//          content: new Map([
+//            ["nl", "Nee"],
+//          ])
+//        },
+//      ]
+//    })
+//  }
+//}
+
+
+//mh LE:  version with color change in question
 export class NijmegenReis extends Item {
   optionKeys = {
     yes: 'a',
@@ -954,15 +996,32 @@ export class NijmegenReis extends Item {
     this.condition = condition;
   }
 
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wil je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " de komende drie maanden 4 keer naar Nijmegen"],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", " reizen voor bloedafnames?"],
+      ]),
+    }
+  ]
+
   buildItem() {
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Wil je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek **de komende drie maanden 4 keer naar Nijmegen** reizen voor bloedafnames?'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',
@@ -980,6 +1039,7 @@ export class NijmegenReis extends Item {
     })
   }
 }
+
 
 
 export class StandardInviteGroup extends Group {
