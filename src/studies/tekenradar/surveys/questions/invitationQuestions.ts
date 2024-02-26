@@ -961,7 +961,7 @@ class FutureStudies extends Item {
 //      isRequired: this.isRequired,
 //      condition: this.condition,
 //      questionText: new Map([
-//        ['nl', 'Wil je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek **de komende drie maanden 4 keer naar Nijmegen** reizen voor bloedafnames?'],
+//        ['nl', 'Wil je voor het eerdergenoemde aanvullend wetenschappelijk onderzoek de komende drie maanden 4 keer naar Nijmegen reizen voor bloedafnames?'],
 //      ]),
 //      responseOptions: [
 //        {
