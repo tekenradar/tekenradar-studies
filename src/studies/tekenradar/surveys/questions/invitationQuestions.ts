@@ -1341,6 +1341,35 @@ export class LPplusContactgegevensGroup extends Group {
   }
 }
 
+//LT LPplus
+export class BiobankContactgegevensGroup extends Group {
+  PreText: BiobankContactGroupPretext;
+  Name: Name;
+  Email: Email;
+  Telephone: Telephone;
+  GP: GP;
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'Contactgegevens');
+
+    this.groupEditor.setCondition(condition);
+
+    this.PreText = new BiobankContactGroupPretext(this.key)
+    this.Name = new Name(this.key, isRequired)
+    this.Email = new Email(this.key, isRequired)
+    this.Telephone = new Telephone(this.key, isRequired)
+    this.GP = new GP(this.key, isRequired)
+  }
+
+  buildGroup(): void {
+    this.addItem(this.PreText.get())
+    this.addItem(this.Name.get())
+    this.addItem(this.Email.get())
+    this.addItem(this.GP.get())
+
+  }
+}
+
 class FutureStudies extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
     super(parentKey, 'FS');
