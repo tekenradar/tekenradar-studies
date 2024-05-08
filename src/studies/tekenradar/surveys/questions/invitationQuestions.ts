@@ -1357,7 +1357,7 @@ export class BiobankContactgegevensGroup extends Group {
     this.PreText = new BiobankContactGroupPretext(this.key)
     this.Name = new Name(this.key, isRequired)
     this.Email = new Email(this.key, isRequired)
-    this.Telephone = new Telephone(this.key, isRequired)
+    this.Telephone = new Telephone(this.key, false)
     this.GP = new GP(this.key, isRequired)
   }
 
@@ -1365,6 +1365,7 @@ export class BiobankContactgegevensGroup extends Group {
     this.addItem(this.PreText.get())
     this.addItem(this.Name.get())
     this.addItem(this.Email.get())
+    this.addItem(this.Telephone.get())
     this.addItem(this.GP.get())
 
   }
@@ -1606,44 +1607,41 @@ export class aEMInviteGroup extends Group {
 
 //LT LPplus
 export class LPplusInviteGroup extends Group {
-  T0: LPplusUitnodigingOnderzoekText;
+  // Standard LPplus
+  T1: LPplusUitnodigingOnderzoekText;
   LPplusUitnodigingOnderzoek: LPplusUitnodigingOnderzoek;
   LPplusUitnodigingOnderzoekConsent: LPplusUitnodigingOnderzoekConsent;
 
-  Contactgegevens: LPplusContactgegevensGroup;
-
-  // Standard Tekenradar
-  T1: UitnodigingOnderzoekText;
-  UitnodigingOnderzoek: UitnodigingOnderzoek;
-  UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
+  // Other studies
+  T2: BiobankUitnodigingAanvullendOnderzoekText;
+  BiobankUitnodigingAanvullendOnderzoek: BiobankUitnodigingAanvullendOnderzoek;
+  BiobankUitnodigingAanvullendOnderzoekConsent: BiobankUitnodigingAanvullendOnderzoekConsent;
+  BiobankContactgegevens: BiobankContactgegevensGroup;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'aEM');
+    super(parentKey, 'LPplus');
 
     this.groupEditor.setCondition(condition);
 
-    this.T0 = new LPplusUitnodigingOnderzoekText(this.key);
+    this.T1 = new LPplusUitnodigingOnderzoekText(this.key);
     this.LPplusUitnodigingOnderzoek = new LPplusUitnodigingOnderzoek(this.key, isRequired);
     this.LPplusUitnodigingOnderzoekConsent = new LPplusUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes));
 
-    this.Contactgegevens = new LPplusContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes));
-
-    this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.no));
-    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.no));
-    this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
+    const showBiobankAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes);
+    this.T2 = new BiobankUitnodigingAanvullendOnderzoekText(this.key, showBiobankAdditionalStudyInvite);
+    this.BiobankUitnodigingAanvullendOnderzoek = new BiobankUitnodigingAanvullendOnderzoek(this.key, isRequired, showBiobankAdditionalStudyInvite);
+    this.BiobankUitnodigingAanvullendOnderzoekConsent = new BiobankUitnodigingAanvullendOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
+    this.BiobankContactgegevens = new BiobankContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
   }
 
   buildGroup(): void {
-    this.addItem(this.T0.get());
+    this.addItem(this.T1.get());
     this.addItem(this.LPplusUitnodigingOnderzoek.get());
     this.addItem(this.LPplusUitnodigingOnderzoekConsent.get());
     this.addPageBreak()
-    this.addItem(this.Contactgegevens.get());
-    this.addPageBreak()
-
-    this.addItem(this.T1.get());
-    this.addItem(this.UitnodigingOnderzoek.get());
-    this.addItem(this.UitnodigingOnderzoekConsent.get());
-    this.addPageBreak()
+    this.addItem(this.T2.get());
+    this.addItem(this.BiobankUitnodigingAanvullendOnderzoek.get());
+    this.addItem(this.BiobankUitnodigingAanvullendOnderzoekConsent.get());
+    this.addItem(this.BiobankContactgegevens.get())
   }
 }
