@@ -44,7 +44,7 @@ export const TekenradarStudy: Study = {
     T3_Adults, T6_Adults, T9_Adults, T12_Adults,
     T3_Kids, T6_Kids, T9_Kids, T12_Kids,
     WeeklyTB, EMfoto,
-    QuitFollowUp, QuitWeeklyTB, DeleteContactData,
+    QuitFollowUp, QuitWeeklyTB, DeleteContactData, LPplus_part1
   ],
   customStudyRules: [
     changeFollowupTimingToNow,
