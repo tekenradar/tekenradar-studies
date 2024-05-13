@@ -32,6 +32,7 @@ import { DeleteContactData } from "./surveys/DeleteContactData";
 import { researcherNotificationMessages } from "./messageConfigs/researcherNotifications";
 import { assignDeleteContactDataSurvey } from "./customRules/assignDeleteContactDataSurvey";
 import { removeConfidentialData } from "./customRules/removeConfidentialData";
+import { LPplus_part1 } from "./surveys/LPplus_part1";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
