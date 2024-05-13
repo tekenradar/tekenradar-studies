@@ -106,6 +106,20 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.PTB.get());
     this.addPageBreak();
     this.addItem(this.NELH.get());
+    this.addItem(this.NEL1.get());
+    this.addItem(this.NEL2.get());
+    this.addItem(this.NEL3.get());
+    this.addItem(this.NEL4.get());
+    this.addItem(this.NEL5.get());
+    this.addItem(this.NEL6.get());
+    this.addItem(this.NEL7.get());
+    this.addItem(this.NEL8.get());
+    this.addItem(this.COVH.get());
+    this.addItem(this.COV1.get());
+    this.addItem(this.COV2.get());
+    this.addItem(this.COV3.get());
+    this.addItem(this.COV4.get());
+    this.addItem(this.COV5.get());
   }
 }
 
