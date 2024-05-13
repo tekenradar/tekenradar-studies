@@ -605,6 +605,78 @@ export class PHQ_15 extends Item {
             ["nl", "Blaasjes, uitslag in het gezicht"],
           ])
         },
+        {
+          key: 'y1',
+          content: new Map([
+            ["nl", "Verspringende spierpijn"],
+          ])
+        },
+        {
+          key: 'y2',
+          content: new Map([
+            ["nl", "Verspringende pijn in gewrichten"],
+          ])
+        },
+        {
+          key: 'y3',
+          content: new Map([
+            ["nl", "Een tintelend, brandend gevoel en/of gevoelloosheid, dat zich verplaatst of komt en gaat"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+export class PHQ_15_cause extends Item {
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Klik hieronder aan wat volgens jou mogelijk de oorzaak kan zijn van je lichamelijke of psychische klachten'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " (meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PHQ_15_cause');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "tekenbeet, erythema migrans of andere ziekte van Lyme"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "coronavirus infectie (COVID-19)"],
+          ])
+        },
+        {
+          key: 'c', role: 'input',
+          content: new Map([
+            ["nl", "andere oorzaak, namelijk:"],
+          ])
+        },
+
       ]
     })
   }
@@ -665,7 +737,113 @@ export class PHQ_15_FU extends Item {
   }
 }
 
+export class PHQ_15_FU2 extends Item {
 
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PHQ_15_FU2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'In hoeverre hebben je lichamelijke of psychische klachten volgens jou met een coronavirus infectie te maken?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Zeer veel"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Veel"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Een beetje"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Niet"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "Ik heb geen klachten"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+export class PHQ_15_FU3 extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PHQ_15_FU3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'In hoeverre hebben je lichamelijke of psychische klachten volgens jou met deze andere oorzaak te maken?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Zeer veel"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Veel"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Een beetje"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Niet"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "Ik heb geen klachten"],
+          ])
+        },
+      ]
+    })
+  }
+}
 
 export class Pregnant extends Item {
 
