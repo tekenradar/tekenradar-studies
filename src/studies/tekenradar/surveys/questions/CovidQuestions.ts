@@ -37,6 +37,27 @@ export class CovidHeader extends Item {
 
 export class Covid1 extends Item {
 
+  optionKeys = {
+    yes: 'a'
+  }
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Heb je in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 5 jaar "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "last gehad van langdurige klachten na een infectie met het coronavirus (COVID19)? "],
+      ])
+    }]
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'COV1');
 
@@ -50,9 +71,7 @@ export class Covid1 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Heb je in de afgelopen 5 jaar last gehad van langdurige klachten na een infectie met het coronavirus (COVID19)?'],
-      ]),
+      questionText: this.questionTextMain,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -75,9 +94,23 @@ export class Covid2 extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
     super(parentKey, 'COV2');
 
+
     this.condition = condition;
     this.isRequired = required;
   }
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wanneer kreeg je de coronaviros infectie, waarna je langdurig klachten hield? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "(je mag de datum schatten)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
 
   buildItem() {
     return SurveyItems.dateInput({
@@ -85,10 +118,7 @@ export class Covid2 extends Item {
       itemKey: this.itemKey,
       condition: this.condition,
       isRequired: this.isRequired,
-      questionText: new Map([[
-        'nl', 'Wanneer kreeg je de coronaviros infectie, waarna je langdurig klachten hield? (je mag de datum schatten)'
-      ]]),
-      confidentialMode: "replace",
+      questionText: this.questionTextMain,
       dateInputMode: 'YMD',
       maxRelativeDate: { delta: { days: 0 } },
       // minRelativeDate: { delta: { years: -19 } },
@@ -135,6 +165,10 @@ export class Covid3 extends Item {
 
 export class Covid4 extends Item {
 
+  optionKeys = {
+    no: 'b'
+  }
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'COV4');
 
@@ -177,6 +211,19 @@ export class Covid5 extends Item {
     this.condition = condition;
     this.isRequired = required;
   }
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Vanaf wanneer waren de langdurige klachten na het coronavirus weg? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "(je mag de datum schatten)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
 
   buildItem() {
     return SurveyItems.dateInput({
@@ -184,10 +231,7 @@ export class Covid5 extends Item {
       itemKey: this.itemKey,
       condition: this.condition,
       isRequired: this.isRequired,
-      questionText: new Map([[
-        'nl', 'Vanaf wanneer waren de langdurige klachten na het coronavirus weg? (je mag de datum schatten)'
-      ]]),
-      confidentialMode: "replace",
+      questionText: this.questionTextMain,
       dateInputMode: 'YMD',
       maxRelativeDate: { delta: { days: 0 } },
       // minRelativeDate: { delta: { years: -19 } },

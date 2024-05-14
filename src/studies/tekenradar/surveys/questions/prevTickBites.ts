@@ -1,6 +1,7 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
 export class PreviousTickBitesGroup extends Group {
@@ -291,6 +292,38 @@ class PreviousTickBites2 extends Item {
             ["nl", "Meer dan 50 tekenbeten"],
           ])
         },
+      ]
+    })
+  }
+}
+
+
+export class PrevTBHeader extends Item {
+
+  markdownContent = `
+# Afgelopen jaren
+
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'PrevTB');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
       ]
     })
   }
