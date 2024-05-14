@@ -2,7 +2,7 @@ import { Expression } from 'survey-engine/data_types';
 import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
-import { MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { SurveyEngine } from 'case-editor-tools/surveys';
 
 
@@ -123,7 +123,7 @@ export class NwEMLyme2 extends Item {
   }
 
   buildItem() {
-    return SurveyItems.multipleChoice({
+    return SurveyItems.singleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -132,7 +132,7 @@ export class NwEMLyme2 extends Item {
         ['nl', 'Wanneer ontwikkelde deze vorm van de ziekte van Lyme zich?'],
       ]),
       responseOptions: [
-        MCOptions.cloze({
+        SCOptions.cloze({
           key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
@@ -159,13 +159,13 @@ export class NwEMLyme2 extends Item {
           content: new Map([
             ["nl", "Weet ik niet"],
           ]),
-          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'a')
+          disabled: SurveyEngine.singleChoice.any(this.itemKey, 'a')
         },
       ],
       customValidations: [
         {
           key: 'NEL2', rule: SurveyEngine.logic.or(
-            SurveyEngine.multipleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.date),
             SurveyEngine.logic.and(
               SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.2`)
             )
