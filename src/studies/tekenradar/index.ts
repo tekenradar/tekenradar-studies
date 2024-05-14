@@ -33,6 +33,7 @@ import { researcherNotificationMessages } from "./messageConfigs/researcherNotif
 import { assignDeleteContactDataSurvey } from "./customRules/assignDeleteContactDataSurvey";
 import { removeConfidentialData } from "./customRules/removeConfidentialData";
 import { LPplus_part1 } from "./surveys/LPplus_part1";
+import { LPplus_part3 } from "./surveys/LPplus_part3";
 
 export const TekenradarStudy: Study = {
   studyKey: 'tekenradar',
@@ -45,7 +46,7 @@ export const TekenradarStudy: Study = {
     T3_Adults, T6_Adults, T9_Adults, T12_Adults,
     T3_Kids, T6_Kids, T9_Kids, T12_Kids,
     WeeklyTB, EMfoto,
-    QuitFollowUp, QuitWeeklyTB, DeleteContactData, LPplus_part1
+    QuitFollowUp, QuitWeeklyTB, DeleteContactData, LPplus_part1, LPplus_part3
   ],
   customStudyRules: [
     changeFollowupTimingToNow,
