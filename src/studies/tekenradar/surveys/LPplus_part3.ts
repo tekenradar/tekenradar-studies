@@ -4,12 +4,13 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
 import { TicP_Group } from './questions/ticp';
-
+import { IPAQ } from './questions/ipaq';
 
 
 class LPplus_part3Def extends SurveyDefinition {
 
   TicP: TicP_Group;
+  IPAQ: IPAQ;
   //zorgconsumptie
   //werk
   //opvattingen over klachten
@@ -44,6 +45,7 @@ class LPplus_part3Def extends SurveyDefinition {
     const required = isRequired !== undefined ? isRequired : false;
     //this.LPP1 = new IntroLPplus(this.key, required);
     this.TicP = new TicP_Group(this.key, required);
+    this.IPAQ = new IPAQ(this.key, required);
 
   }
 
@@ -55,6 +57,7 @@ class LPplus_part3Def extends SurveyDefinition {
 
     this.addItem(this.TicP.get());
     this.addPageBreak();
+    this.addItem(this.IPAQ.get());
   }
 }
 
