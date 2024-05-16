@@ -618,7 +618,7 @@ export class TicP_werk1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Wat doe je in het dagelijk leven? '],
+        ["nl", 'Wat doe je in het dagelijks leven? '],
       ]),
     },
     {

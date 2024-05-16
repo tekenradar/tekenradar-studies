@@ -8,7 +8,7 @@ export class CBRQ_Header extends Item {
   markdownContent1 = `
 # Opvattingen over klachten
 
-n de voorgaande vragen heeft u aangegeven dat u lichamelijke of psychische klachten heeft. Wij willen graag meer weten over deze klachten. Ook willen we meer weten over de gevolgen van deze klachten voor uw leven. De volgende vragen gaan over hoe u met de klachten omgaat en wat de gevolgen van deze klachten zijn voor uw lichamelijke gezondheid en psychisch welbevinden.
+In de voorgaande vragen heeft u aangegeven dat u lichamelijke of psychische klachten heeft. Wij willen graag meer weten over deze klachten. Ook willen we meer weten over de gevolgen van deze klachten voor uw leven. De volgende vragen gaan over hoe u met de klachten omgaat en wat de gevolgen van deze klachten zijn voor uw lichamelijke gezondheid en psychisch welbevinden.
 
 
 Er zijn geen goede of foute antwoorden.  We zijn geïnteresseerd in uw opvattingen en niet in die van uw naasten of van hulpverleners.
