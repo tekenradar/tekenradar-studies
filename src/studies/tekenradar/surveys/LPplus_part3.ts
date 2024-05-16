@@ -3,7 +3,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
-import { TicP_Group } from './questions/ticp';
+import { TicP_Group, TicP_werk1, TicP_werk2, TicP_werk3, TicP_werk4, TicP_werk5, TicP_werk6, TicP_werkHeader } from './questions/ticp';
 import { IPAQ } from './questions/ipaq';
 
 
@@ -13,6 +13,13 @@ class LPplus_part3Def extends SurveyDefinition {
   IPAQ: IPAQ;
   //zorgconsumptie
   //werk
+  TWHeader: TicP_werkHeader;
+  TW1: TicP_werk1;
+  TW2: TicP_werk2;
+  TW3: TicP_werk3;
+  TW4: TicP_werk4;
+  TW5: TicP_werk5;
+  TW6: TicP_werk6;
   //opvattingen over klachten
   //angst en depressie
   //lichamelijke activiteit
@@ -46,6 +53,16 @@ class LPplus_part3Def extends SurveyDefinition {
     //this.LPP1 = new IntroLPplus(this.key, required);
     this.TicP = new TicP_Group(this.key, required);
     this.IPAQ = new IPAQ(this.key, required);
+    this.TWHeader = new TicP_werkHeader(this.key, required);
+    this.TW1 = new TicP_werk1(this.key, required);
+    const TW1werktCondition = SurveyEngine.singleChoice.any(this.TW1.key, this.TW1.optionKeys.loon, this.TW1.optionKeys.zzp);
+    this.TW2 = new TicP_werk2(this.key, required, TW1werktCondition);
+    this.TW3 = new TicP_werk3(this.key, required, TW1werktCondition);
+    this.TW4 = new TicP_werk4(this.key, required, TW1werktCondition);
+    this.TW5 = new TicP_werk5(this.key, required, TW1werktCondition)
+    const TW5Condition = SurveyEngine.singleChoice.any(this.TW5.key, this.TW5.optionKeys.yes);
+    this.TW6 = new TicP_werk6(this.key, required, TW5Condition)
+
 
   }
 
@@ -58,6 +75,14 @@ class LPplus_part3Def extends SurveyDefinition {
     this.addItem(this.TicP.get());
     this.addPageBreak();
     this.addItem(this.IPAQ.get());
+    this.addItem(this.TWHeader.get());
+    this.addItem(this.TW1.get());
+    this.addItem(this.TW2.get());
+    this.addItem(this.TW3.get());
+    this.addItem(this.TW4.get());
+    this.addItem(this.TW5.get());
+    this.addItem(this.TW6.get());
+
   }
 }
 

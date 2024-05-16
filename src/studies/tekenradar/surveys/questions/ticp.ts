@@ -575,3 +575,412 @@ export class TicP_Comorbidity extends Item {
     })
   }
 }
+
+
+
+export class TicP_werkHeader extends Item {
+
+  markdownContent1 = `
+# Werk
+
+De volgende vragen gaan over **de afgelopen 3 maanden**`
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TWHeader');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent1],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+export class TicP_werk1 extends Item {
+  optionKeys = {
+    loon: 'b',
+    zzp: 'c'
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wat doe je in het dagelijk leven? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "Kruis aan wat je de meeste tijd doet"],
+      ]),
+      className: "fw-normal"
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TW1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [{
+        key: 'a', role: 'option',
+        content: new Map([['nl', 'Ik zit op school, ik studeer']])
+      }, {
+        key: 'b', role: 'option',
+        content: new Map([['nl', 'Ik werk in loondienst']])
+      }, {
+        key: 'c', role: 'option',
+        content: new Map([['nl', 'Ik ben zelfstandig ondernemer']])
+      }, {
+        key: 'd', role: 'option',
+        content: new Map([['nl', 'Ik ben huisvrouw, huisman']])
+      }, {
+        key: 'e', role: 'option',
+        content: new Map([['nl', 'Ik ben werkloos']])
+      }, {
+        key: 'f', role: 'option',
+        content: new Map([['nl', 'Ik ben arbeidsongeschikt, voor ... %']])//TODO hier moet een percentage ongevuld kunne worden
+      }, {
+        key: 'g', role: 'option',
+        content: new Map([['nl', 'Ik ben met pensioen of prepensioen']])
+      },
+      {
+        key: 'h', role: 'option',
+        content: new Map([['nl', 'Ik doe iets anders namelijk ....']])// TODO hier moet nog een invulveld komen
+      }
+      ]
+    })
+  }
+}
+
+export class TicP_werk2 extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TW2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.numericInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Hoeveel uur per week werkt u? Tel alleen de uren waarvoor u betaald wordt'],
+      ]),
+      titleClassName: 'sticky-top',
+      inputMaxWidth: '80px',
+      inputLabel: new Map([
+        ['nl', 'uren']
+      ]),
+      labelBehindInput: true,
+      componentProperties: {
+        min: 0,
+        max: 168
+      }
+    })
+  }
+}
+
+export class TicP_werk3 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Op hoeveel dagen in de week werk je'],
+      ]),
+    },
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TW3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.dropDown({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "1 dag in de week"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "2 dagen in de week"],
+          ]),
+        }, {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "3 dagen in de week"],
+          ]),
+        }, {
+          key: '4', role: 'option',
+          content: new Map([
+            ["nl", "4 dagen in de week"],
+          ]),
+        }, {
+          key: '5', role: 'option',
+          content: new Map([
+            ["nl", "5 dagen in de week"],
+          ]),
+        }, {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "6 dagen in de week"],
+          ]),
+        }, {
+          key: '7', role: 'option',
+          content: new Map([
+            ["nl", "7 dagen in de week"],
+          ]),
+        },
+      ],
+    })
+  }
+}
+
+export class TicP_werk4 extends Item {
+  optionKeys = {
+    yes_number: 'b'
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Ben je in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 3 maanden "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "afwezig geweest van van je werk omdat je ziek was?"],
+      ])
+    }]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TW3');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    const markdownContent = `
+*(Tel alle dagen die je verzuimd heebt in de afgelopen 3 maanden) *
+    `
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+        {
+          key: this.optionKeys.yes_number, role: 'numberInput',
+          content: new Map([
+            ["nl", "Ja, ik ben "], ///TODO hier moet de dagen afweziggeweest tekst nog achter
+          ]),
+          optionProps: {
+            min: 0,
+            max: 92,
+          }
+        },
+      ],
+      customValidations: [
+        {
+          key: 'TW4', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`), 0),
+          ), type: 'hard'
+        }
+      ],
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", markdownContent],
+          ]),
+          className: 'mb-2'
+        })
+      ]
+    })
+  }
+}
+
+export class TicP_werk5 extends Item {
+
+  optionKeys = {
+    yes: 'b'
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Waren er in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 3 maanden "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", 'dagen waarop je wel gewerkt hebt, maar tijdens het werk last had van lichamelijke of psychische problemen?'],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TW5');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+export class TicP_werk6 extends Item {
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Op hoeveel werkdagen had je tijdens het werk last van uw lichamelijke of psychische problemen? Tel alleen de werkdagen in'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "de afgelopen 3 maanden "],
+      ]),
+      className: "text-primary"
+    }
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'TW6');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.dropDown({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: '1', role: 'option',
+          content: new Map([
+            ["nl", "1 werkdag"],
+          ])
+        },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "2 werkdagen"],
+          ]),
+        }, {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "3 werkdagen"],
+          ]),
+        }, {
+          key: '4', role: 'option',
+          content: new Map([
+            ["nl", "4 werkdagen"],
+          ]),
+        }, {
+          key: '5', role: 'option',
+          content: new Map([
+            ["nl", "5 werkdagen"],
+          ]),
+        }, {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "6 werkdagen"],
+          ]),
+        }, {
+          key: '7', role: 'option',
+          content: new Map([
+            ["nl", "7 werkdagen"],
+          ]),
+        },
+      ],
+    })
+  }
+}
+
+
+
