@@ -797,7 +797,7 @@ export class TicP_werk4 extends Item {
     }]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'TW3');
+    super(parentKey, 'TW4');
 
     this.isRequired = isRequired;
     this.condition = condition;
