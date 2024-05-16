@@ -78,7 +78,7 @@ class CBRQItem extends Item {
 
   constructor(parentKey: string, itemKey: string, question: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, itemKey);
-    this.questionText = new Map([["nl", "Geef aan in hoeverre u het eens of oneens bent met de volgende uitspraken over uw huidige klachten door een bolletje aan te klikken in de kolom. "]]);
+    this.questionText = new Map([["nl", question]]);
     this.isRequired = isRequired;
     this.condition = condition;
   }
@@ -165,7 +165,7 @@ class CBRQItem2 extends Item {
 
   constructor(parentKey: string, itemKey: string, question: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, itemKey);
-    this.questionText = new Map([["nl", "Geef aan hoe vaak u op de volgende manieren met klachten omgaat door een kruisje te zetten in het hokje wat op u van toepassing is. Kies het antwoord wat het beste bij U past, niet wat u denkt dat de meeste mensen zouden doen. "]]);
+    this.questionText = new Map([["nl", question]]);
     this.isRequired = isRequired;
     this.condition = condition;
   }
