@@ -11,7 +11,7 @@ export class IPAQ extends Item {
     },
     {
       content: new Map([
-        ["nl", "Bij deze tijd mag zitten achter een bureau, tijd die zittend wordt doorgebracht met vrienden, werk, zittend lezen, studeren of tv kijken worden gerekend."],
+        ["nl", " Bij deze tijd mag zitten achter een bureau, tijd die zittend wordt doorgebracht met vrienden, werk, zittend lezen, studeren of tv kijken worden gerekend."],
       ]),
       role: 'text',
       style: [{ key: 'variant', value: 'p' }],
