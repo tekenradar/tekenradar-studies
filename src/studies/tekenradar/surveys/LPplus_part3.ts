@@ -84,6 +84,8 @@ class LPplus_part3Def extends SurveyDefinition {
 
     this.addItem(this.TicP.get());
     this.addPageBreak();
+    this.addItem(this.IPAQ.get());
+    this.addPageBreak();
     this.addItem(this.TWHeader.get());
     this.addItem(this.TW1.get());
     this.addItem(this.TW2.get());
