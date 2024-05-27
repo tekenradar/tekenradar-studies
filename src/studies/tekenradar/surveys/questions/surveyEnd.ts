@@ -216,12 +216,46 @@ class Comment extends Item {
   }
 }
 
+class LPPlusEndText extends Item {
+
+  markdownContent = `
+### Hartelijk dank voor het meedoen aan het onderzoek.
+
+
+Als je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
+
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'LPPlusEndText');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        }),
+      ]
+    })
+  }
+}
+
 export class SurveyEndGroup extends Group {
 
   T0_Invites_EndText: T0_Invites_EndText;
   StandardflowEndText: StandardflowEndText;
   FollowupEndText: FollowupEndText;
   WeeklyEndText: WeeklyEndText;
+  LPPlusEndText: LPPlusEndText;
   Comment: Comment;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -232,6 +266,7 @@ export class SurveyEndGroup extends Group {
     this.StandardflowEndText = new T0_Invites_EndText(this.key);
     this.FollowupEndText = new FollowupEndText(this.key);
     this.WeeklyEndText = new WeeklyEndText(this.key);
+    this.LPPlusEndText = new LPPlusEndText(this.key);
     this.Comment = new Comment(this.key, isRequired);
   }
 
@@ -247,6 +282,9 @@ export class SurveyEndGroup extends Group {
     }
     if (this.isPartOf(surveyKeys.WeeklyTB)) {
       this.addItem(this.WeeklyEndText.get())
+    }
+    if (this.isPartOf(surveyKeys.LPplus_part3)) {
+      this.addItem(this.LPPlusEndText.get())
     }
     this.addItem(this.Comment.get())
   }

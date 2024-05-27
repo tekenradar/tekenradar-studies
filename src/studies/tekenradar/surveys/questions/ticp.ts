@@ -690,7 +690,7 @@ export class TicP_werk2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Hoeveel uur per week werkt u? Tel alleen de uren waarvoor u betaald wordt'],
+        ['nl', 'Hoeveel uur per week werk je? Tel alleen de uren waarvoor je betaald wordt'],
       ]),
       titleClassName: 'sticky-top',
       inputMaxWidth: '80px',
@@ -711,7 +711,7 @@ export class TicP_werk3 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Op hoeveel dagen in de week werk je'],
+        ["nl", 'Op hoeveel dagen in de week werk je?'],
       ]),
     },
   ]
@@ -805,7 +805,7 @@ export class TicP_werk4 extends Item {
 
   buildItem() {
     const markdownContent = `
-*(Tel alle dagen die je verzuimd heebt in de afgelopen 3 maanden) *
+*Tel alle dagen die je verzuimd hebt in de afgelopen 3 maanden*
     `
     return SurveyItems.singleChoice({
       parentKey: this.parentKey,
@@ -914,7 +914,7 @@ export class TicP_werk6 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Op hoeveel werkdagen had je tijdens het werk last van uw lichamelijke of psychische problemen? Tel alleen de werkdagen in'],
+        ["nl", 'Op hoeveel werkdagen had je tijdens het werk last van je lichamelijke of psychische problemen? Tel alleen de werkdagen in '],
       ]),
     },
     {

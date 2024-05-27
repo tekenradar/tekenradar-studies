@@ -7,6 +7,7 @@ import { TicP_Group, TicP_werk1, TicP_werk2, TicP_werk3, TicP_werk4, TicP_werk5,
 import { IPAQ } from './questions/ipaq';
 import { HADSGroup } from './questions/hads';
 import { CBRQ_Header, CBRQGroup1, CBRQ_Header2, CBRQGroup2 } from './questions/cbrq';
+import { SurveyEndGroup } from './questions/surveyEnd';
 
 
 class LPplus_part3Def extends SurveyDefinition {
@@ -30,6 +31,7 @@ class LPplus_part3Def extends SurveyDefinition {
   //lichamelijke activiteit
   IPAQ: IPAQ;
   //eind part 3
+  EndGroup: SurveyEndGroup;
 
 
 
@@ -72,7 +74,8 @@ class LPplus_part3Def extends SurveyDefinition {
     this.CBRQ_Header2 = new CBRQ_Header2(this.key, required);
     this.CBRQ2 = new CBRQGroup2(this.key);
     this.HADS = new HADSGroup(this.key, required);
-    this.IPAQ = new IPAQ(this.key, required)
+    this.IPAQ = new IPAQ(this.key, required);
+    this.EndGroup = new SurveyEndGroup(this.key, false)
 
   }
 
@@ -83,8 +86,6 @@ class LPplus_part3Def extends SurveyDefinition {
     //this.addItem(this.LPP1.get());
 
     this.addItem(this.TicP.get());
-    this.addPageBreak();
-    this.addItem(this.IPAQ.get());
     this.addPageBreak();
     this.addItem(this.TWHeader.get());
     this.addItem(this.TW1.get());
@@ -104,6 +105,7 @@ class LPplus_part3Def extends SurveyDefinition {
     this.addPageBreak();
     this.addItem(this.IPAQ.get());
     this.addPageBreak();
+    this.addItem(this.EndGroup.get());
 
   }
 }

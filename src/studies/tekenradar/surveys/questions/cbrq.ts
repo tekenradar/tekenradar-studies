@@ -14,7 +14,9 @@ In de voorgaande vragen heeft u aangegeven dat u lichamelijke of psychische klac
 Er zijn geen goede of foute antwoorden.  We zijn geïnteresseerd in uw opvattingen en niet in die van uw naasten of van hulpverleners.
 
 
-Beantwoord de vragen eerlijk en denk niet te lang na over uw antwoorden `
+Beantwoord de vragen eerlijk en denk niet te lang na over uw antwoorden.
+
+Geef aan in hoeverre u het eens of oneens bent met de volgende uitspraken over uw huidige klachten door een bolletje aan te klikken in de kolom.  `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'CBRQ_Header');
@@ -103,7 +105,9 @@ class CBRQItem extends Item {
 export class CBRQ_Header2 extends Item {
 
   markdownContent2 = `
-# We willen graag weten hoe u op dit moment omgaat met uw klachten. Hieronder worden een aantal verschillende manieren van omgaan met klachten genoemd. `
+We willen graag weten hoe u op dit moment omgaat met uw klachten. Hieronder worden een aantal verschillende manieren van omgaan met klachten genoemd.
+
+Geef aan hoe vaak u op de volgende manieren met klachten omgaat door het bolletje aan te klikken in het vakje wat op u van toepassing is. Kies het antwoord wat het beste bij U past, niet wat u denkt dat de meeste mensen zouden doen. `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'CBRQ_Header2');

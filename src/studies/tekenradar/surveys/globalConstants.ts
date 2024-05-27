@@ -1,3 +1,5 @@
+import { LPplus_part3 } from "./LPplus_part3";
+
 export const applyRequiredQuestions = true;
 
 export const SurveySuffix = {
@@ -51,6 +53,7 @@ export const postalCodesForNMGStudy = ['3771', '3772', '3773', '3774', '3775', '
 
 
 export const surveyKeys = {
+  LPplus_part3: "LPplus_part3",
   WeeklyTB: "WeeklyTB",
   T0_Invites: "T0_Invites",
   EMflow_Adults: `${surveyCategoryNames.EMflow}_${SurveySuffix.Adults}`,

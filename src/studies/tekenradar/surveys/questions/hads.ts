@@ -68,7 +68,9 @@ export class HADSGroup extends Group {
 
 class Q_instructions extends Item {
   markdownContent_F1 = `
-# Het is bekend dat emoties bij de meeste ziektes een belangrijke rol spelen.
+# Angst en depressie
+
+Het is bekend dat emoties bij de meeste ziektes een belangrijke rol spelen.
 
 Met deze vragenlijst willen wij te weten te komen hoe u zich voelt. Lees iedere vraag goed door en geef uw antwoord aan met een kruisje in het hokje dat het beste weergeeft hoe u zich gedurende de **afgelopen week** gevoeld heeft.
 
