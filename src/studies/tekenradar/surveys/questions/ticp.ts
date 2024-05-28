@@ -659,15 +659,19 @@ export class TicP_werk1 extends Item {
         key: 'e', role: 'option',
         content: new Map([['nl', 'Ik ben werkloos']])
       }, {
-        key: 'f', role: 'option',
-        content: new Map([['nl', 'Ik ben arbeidsongeschikt, voor ... %']])//TODO hier moet een percentage ongevuld kunne worden
+        key: 'f', role: 'numberInput',
+        content: new Map([['nl', 'Ik ben arbeidsongeschikt voor aantal procent:']]), //TODO %erachter
+        optionProps: {
+          min: 0,
+          max: 100
+        }
       }, {
         key: 'g', role: 'option',
         content: new Map([['nl', 'Ik ben met pensioen of prepensioen']])
       },
       {
-        key: 'h', role: 'option',
-        content: new Map([['nl', 'Ik doe iets anders namelijk ....']])// TODO hier moet nog een invulveld komen
+        key: 'h', role: 'input',
+        content: new Map([['nl', 'Ik doe iets anders, namelijk ']])
       }
       ]
     })
