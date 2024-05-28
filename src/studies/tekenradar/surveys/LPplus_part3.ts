@@ -6,7 +6,7 @@ import { applyRequiredQuestions } from './globalConstants';
 import { TicP_Group, TicP_werk1, TicP_werk2, TicP_werk3, TicP_werk4, TicP_werk5, TicP_werk6, TicP_werkHeader } from './questions/ticp';
 import { IPAQ } from './questions/ipaq';
 import { HADSGroup } from './questions/hads';
-import { CBRQ_Header, CBRQGroup1, CBRQ_Header2, CBRQGroup2 } from './questions/cbrq';
+import { CBRQ_Header, CBRQ1, CBRQ_Header2, CBRQ2 } from './questions/cbrq';
 import { SurveyEndGroup } from './questions/surveyEnd';
 
 
@@ -23,9 +23,9 @@ class LPplus_part3Def extends SurveyDefinition {
   TW6: TicP_werk6;
   //opvattingen over klachten
   CBRQ_Header: CBRQ_Header
-  CBRQ1: CBRQGroup1
+  CBRQ1: CBRQ1
   CBRQ_Header2: CBRQ_Header2
-  CBRQ2: CBRQGroup2
+  CBRQ2: CBRQ2
   //angst en depressie
   HADS: HADSGroup;
   //lichamelijke activiteit
@@ -70,9 +70,9 @@ class LPplus_part3Def extends SurveyDefinition {
     const TW5Condition = SurveyEngine.singleChoice.any(this.TW5.key, this.TW5.optionKeys.yes);
     this.TW6 = new TicP_werk6(this.key, required, TW5Condition);
     this.CBRQ_Header = new CBRQ_Header(this.key, required);
-    this.CBRQ1 = new CBRQGroup1(this.key);
+    this.CBRQ1 = new CBRQ1(this.key, required);
     this.CBRQ_Header2 = new CBRQ_Header2(this.key, required);
-    this.CBRQ2 = new CBRQGroup2(this.key);
+    this.CBRQ2 = new CBRQ2(this.key, required);
     this.HADS = new HADSGroup(this.key, required);
     this.IPAQ = new IPAQ(this.key, required);
     this.EndGroup = new SurveyEndGroup(this.key, false)
