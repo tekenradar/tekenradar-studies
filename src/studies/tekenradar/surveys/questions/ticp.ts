@@ -660,7 +660,7 @@ export class TicP_werk1 extends Item {
         content: new Map([['nl', 'Ik ben werkloos']])
       }, {
         key: 'f', role: 'numberInput',
-        content: new Map([['nl', 'Ik ben arbeidsongeschikt voor aantal procent:']]), //TODO %erachter
+        content: new Map([['nl', 'Ik ben arbeidsongeschikt, voor aantal procent:']]),//TODO hier moet een percentage er nog achter
         optionProps: {
           min: 0,
           max: 100
@@ -671,7 +671,7 @@ export class TicP_werk1 extends Item {
       },
       {
         key: 'h', role: 'input',
-        content: new Map([['nl', 'Ik doe iets anders, namelijk ']])
+        content: new Map([['nl', 'Ik doe iets anders, namelijk:']])
       }
       ]
     })
@@ -811,7 +811,7 @@ export class TicP_werk4 extends Item {
     const markdownContent = `
 *Tel alle dagen die je verzuimd hebt in de afgelopen 3 maanden*
     `
-    return SurveyItems.singleChoice({
+    return SurveyItems.dropDown({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
@@ -819,21 +819,604 @@ export class TicP_werk4 extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         {
-          key: 'a', role: 'option',
+          key: '0', role: 'option',
           content: new Map([
-            ["nl", "Nee"],
+            ["nl", "Ik ben de afgelopen 3 maanden niet afwezig geweest"],
           ])
         },
         {
-          key: this.optionKeys.yes_number, role: 'numberInput',
+          key: '1', role: 'option',
           content: new Map([
-            ["nl", "Ja, ik ben "], ///TODO hier moet de dagen afweziggeweest tekst nog achter
-          ]),
-          optionProps: {
-            min: 0,
-            max: 92,
-          }
+            ["nl", "Ik ben 1 dag afwezig geweest"],
+          ])
         },
+        {
+          key: '2', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 2 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '3', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 3 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '4', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 4 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '5', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 5 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '6', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 6 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '7', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 7 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '8', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 8 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '9', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 9 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '10', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 10 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '11', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 11 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '12', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 12 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '13', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 13 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '14', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 14 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '15', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 15 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '16', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 16 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '17', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 17 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '18', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 18 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '19', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 19 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '20', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 20 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '21', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 21 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '22', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 22 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '23', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 23 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '24', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 24 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '25', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 25 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '26', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 26 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '27', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 27 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '28', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 28 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '29', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 29 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '30', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 30 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '31', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 31 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '32', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 32 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '33', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 33 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '34', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 34 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '35', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 35 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '36', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 36 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '37', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 37 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '38', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 38 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '39', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 39 dagen afwezig geweest"],
+          ])
+        },
+
+        {
+          key: '40', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 40 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '41', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 41 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '42', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 42 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '43', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 43 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '44', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 44 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '45', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 45 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '46', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 46 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '47', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 47 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '48', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 48 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '49', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 49 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '50', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 50 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '51', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 51 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '52', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 52 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '53', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 53 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '54', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 54 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '55', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 55 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '56', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 56 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '57', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 57 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '58', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 58 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '59', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 59 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '60', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 60 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '61', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 61 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '62', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 62 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '63', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 63 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '64', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 64 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '65', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 65 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '66', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 66 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '67', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 67 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '68', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 68 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '69', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 69 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '70', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 70 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '71', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 71 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '72', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 72 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '73', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 73 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '74', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 74 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '75', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 75 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '76', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 76 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '77', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 77 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '78', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 78 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '79', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 79 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '80', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 80 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '81', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 81 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '82', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 82 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '83', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 83 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '84', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 84 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '85', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 85 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '86', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 86 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '87', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 87 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '88', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 88 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '89', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 89 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '90', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 90 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '91', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 91 dagen afwezig geweest"],
+          ])
+        },
+        {
+          key: '92', role: 'option',
+          content: new Map([
+            ["nl", "Ik ben 92 dagen afwezig geweest"],
+          ])
+        },
+
+
+
+
+
       ],
       customValidations: [
         {
@@ -918,7 +1501,7 @@ export class TicP_werk6 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Op hoeveel werkdagen had je tijdens het werk last van je lichamelijke of psychische problemen? Tel alleen de werkdagen in '],
+        ["nl", 'Op hoeveel werkdagen had je tijdens het werk last van uw lichamelijke of psychische problemen? Tel alleen de werkdagen in'],
       ]),
     },
     {
