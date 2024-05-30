@@ -629,6 +629,11 @@ export class PHQ_15 extends Item {
 }
 
 export class PHQ_15_cause extends Item {
+  optionKeys = {
+    lyme: 'a',
+    covid: 'b',
+    other: 'c'
+  }
   questionTextMain = [
     {
       content: new Map([
@@ -676,7 +681,12 @@ export class PHQ_15_cause extends Item {
             ["nl", "andere oorzaak, namelijk:"],
           ])
         },
-
+        {
+          key: 'd', role: 'input',
+          content: new Map([
+            ["nl", "ik heb geen klachten"],
+          ])
+        }
       ]
     })
   }

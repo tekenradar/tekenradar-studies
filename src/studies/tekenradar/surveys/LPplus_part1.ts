@@ -7,24 +7,25 @@ import { PreviousTickBitesGroup, PrevTBHeader } from './questions/prevTickBites'
 import { CovidHeader, Covid1, Covid2, Covid3, Covid4, Covid5 } from './questions/CovidQuestions';
 import {
   NwEMLymeHeader, NwEMLyme1, NwEMLyme2, NwEMLyme3, NwEMLyme4,
-  NwEMLyme5, NwEMLyme6, NwEMLyme7, NwEMLyme8, NwEMLyme9, NwEMLyme10, NwEMLyme11, NwEMLyme12
+  NwEMLyme5, NwEMLyme6, NwEMLyme7, NwEMLyme8, NwEMLyme9, NwEMLyme10, NwEMLyme11, NwEMLyme12, NwEMLyme13, NwEMLyme14
 } from './questions/NwEMLyme';
 import {
-  PHQ_15, Qualification, StandardText1, BackgroundHeader, PHQ_15_FU, Pregnant,
+  PHQ_15, PHQ_15_cause, PHQ_15_FU2, PHQ_15_FU3, Qualification, StandardText1, BackgroundHeader, PHQ_15_FU, Pregnant,
   SymptomsHeader, Fatigue, FatigueHeader, Cognition, CognitionHeader,
 } from './questions/standard';
 import { TicP_Comorbidity } from './questions/ticp';
 import { Medication1, Medication2 } from './questions/medication';
 import { SF36 } from './questions/sf36';
 
-
+//Todo: there are some questins dependent on certain flags: sex, age, participant type, the flags need still be set and then the questions checked.
+// the PHQ questionaire is not really pretty at the moment in the sense that in the PHQ_cause question has the option "geen klachten",
+// it would be prettier to get this from the questionaire itself, or if not possible using a thing to make "geen" a "single" choice option.
 
 class LPplus_part1Def extends SurveyDefinition {
   PTBT: PrevTBHeader;
   PTB: PreviousTickBitesGroup;
   NELH: NwEMLymeHeader;
   NEL1: NwEMLyme1;
-  //TODO in de multiplechoice van NEL1 moet nog een afhankelijkheid komen om te zorgen dat als men NEE aanvinkt, dat de andere twee dan uitgevinkt worden en andersom
   NEL2: NwEMLyme2;
   NEL3: NwEMLyme3;
   NEL4: NwEMLyme4;
@@ -36,6 +37,9 @@ class LPplus_part1Def extends SurveyDefinition {
   NEL10: NwEMLyme10;
   NEL11: NwEMLyme11;
   NEL12: NwEMLyme12;
+  NEL13: NwEMLyme13;
+  NEL14: NwEMLyme14;
+
   COVH: CovidHeader;
   COV1: Covid1;
   COV2: Covid2;
@@ -50,8 +54,10 @@ class LPplus_part1Def extends SurveyDefinition {
   Med2: Medication2;
   H3: SymptomsHeader;
   PHQ_15: PHQ_15;
+  PHQ_15_cause: PHQ_15_cause
   PHQ_15_FU: PHQ_15_FU;
-  //TODO hier moeten ook de vragenover corona etc toegevoegd worden
+  PHQ_15_FU2: PHQ_15_FU2;
+  PHQ_15_FU3: PHQ_15_FU3;
   Pregnancy: Pregnant;
   H4: FatigueHeader;
   Q14: Fatigue;
@@ -92,10 +98,9 @@ class LPplus_part1Def extends SurveyDefinition {
 
     this.NELH = new NwEMLymeHeader(this.key, required);
     this.NEL1 = new NwEMLyme1(this.key, required);
-    const NEL1notnoCondition = SurveyEngine.multipleChoice.any(this.NEL1.key, this.NEL1.optionKeys.em, this.NEL1.optionKeys.lyme);
-    const NEL1emCondition = SurveyEngine.multipleChoice.any(this.NEL1.key, this.NEL1.optionKeys.em);
-    const NEL1lyCondition = SurveyEngine.multipleChoice.any(this.NEL1.key, this.NEL1.optionKeys.lyme);
-    this.NEL2 = new NwEMLyme2(this.key, required, NEL1notnoCondition);
+    const NEL1emCondition = SurveyEngine.singleChoice.any(this.NEL1.key, this.NEL1.optionKeys.em);
+    const NEL1lyCondition = SurveyEngine.singleChoice.any(this.NEL1.key, this.NEL1.optionKeys.lyme);
+    this.NEL2 = new NwEMLyme2(this.key, required, NEL1emCondition);
     this.NEL3 = new NwEMLyme3(this.key, required, NEL1emCondition);
     this.NEL4 = new NwEMLyme4(this.key, required, NEL1emCondition);
     const NEL4Condition = SurveyEngine.singleChoice.any(this.NEL4.key, this.NEL4.optionKeys.yes);
@@ -105,11 +110,15 @@ class LPplus_part1Def extends SurveyDefinition {
     const NEL7Condition = SurveyEngine.singleChoice.any(this.NEL7.key, this.NEL7.optionKeys.yes);
     this.NEL8 = new NwEMLyme8(this.key, required, NEL7Condition);
     this.NEL9 = new NwEMLyme9(this.key, required, NEL1lyCondition);
-    const NEL9Condition = SurveyEngine.singleChoice.any(this.NEL9.key, this.NEL9.optionKeys.yes);
-    this.NEL10 = new NwEMLyme10(this.key, required, NEL9Condition);
-    this.NEL11 = new NwEMLyme11(this.key, required, NEL9Condition);
-    const NEL11Condition = SurveyEngine.singleChoice.any(this.NEL11.key, this.NEL11.optionKeys.yes)
-    this.NEL12 = new NwEMLyme12(this.key, required, NEL11Condition);
+    this.NEL10 = new NwEMLyme10(this.key, required, NEL1lyCondition);
+    const NEL10Condition = SurveyEngine.singleChoice.any(this.NEL10.key, this.NEL10.optionKeys.yes);
+    this.NEL11 = new NwEMLyme11(this.key, required, NEL10Condition);
+    this.NEL12 = new NwEMLyme12(this.key, required, NEL10Condition);
+    const NEL12Condition = SurveyEngine.singleChoice.any(this.NEL12.key, this.NEL12.optionKeys.yes)
+    this.NEL13 = new NwEMLyme13(this.key, required, NEL12Condition);
+    const NEL1number = SurveyEngine.getResponseValueAsNum(this.NEL1.key, `rg.scg.${this.NEL1.optionKeys.yes_number}`);
+    this.NEL14 = new NwEMLyme14(this.key, required, NEL1number);
+
 
     this.COVH = new CovidHeader(this.key, required);
     this.COV1 = new Covid1(this.key, required);
@@ -132,7 +141,13 @@ class LPplus_part1Def extends SurveyDefinition {
     this.H3 = new SymptomsHeader(this.key, required);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
     this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
-    this.PHQ_15_FU = new PHQ_15_FU(this.key, required);
+    this.PHQ_15_cause = new PHQ_15_cause(this.key, required);
+    const PHQ15causeLymeCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.lyme)
+    const PHQ15causeCovidCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.covid)
+    const PHQ15causeOtherCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.other)
+    this.PHQ_15_FU = new PHQ_15_FU(this.key, required, PHQ15causeLymeCondition);
+    this.PHQ_15_FU2 = new PHQ_15_FU2(this.key, required, PHQ15causeCovidCondition);
+    this.PHQ_15_FU3 = new PHQ_15_FU3(this.key, required, PHQ15causeOtherCondition);
     this.Pregnancy = new Pregnant(this.key, required, isFemale);
 
     this.H4 = new FatigueHeader(this.key, required);
@@ -166,6 +181,9 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.NEL10.get());
     this.addItem(this.NEL11.get());
     this.addItem(this.NEL12.get());
+    this.addItem(this.NEL13.get());
+    this.addItem(this.NEL14.get());
+
     this.addPageBreak();
 
     this.addItem(this.COVH.get());
@@ -185,7 +203,10 @@ class LPplus_part1Def extends SurveyDefinition {
 
     this.addItem(this.H3.get());
     this.addItem(this.PHQ_15.get());
+    this.addItem(this.PHQ_15_cause.get());
     this.addItem(this.PHQ_15_FU.get());
+    this.addItem(this.PHQ_15_FU2.get());
+    this.addItem(this.PHQ_15_FU3.get());
     this.addItem(this.Pregnancy.get());
     this.addPageBreak();
 
@@ -199,11 +220,6 @@ class LPplus_part1Def extends SurveyDefinition {
 
     this.addItem(this.SF36.get());
     this.addPageBreak();
-
-    //CIS fatigue
-    //CFQ
-    //SF36
-    //eind part 1
   }
 }
 

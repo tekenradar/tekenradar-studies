@@ -1,5 +1,5 @@
 import { Expression } from 'survey-engine/data_types';
-import { Item } from 'case-editor-tools/surveys/types';
+import { Item, OptionDef } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
@@ -38,6 +38,103 @@ export class NwEMLymeHeader extends Item {
   }
 }
 
+export class NwEMLyme1 extends Item {
+  optionKeys = {
+    yes_number: 'c',
+    no: 'd',
+    em: 'a',
+    lyme: 'b'
+  }
+
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Heb je in de afgelopen jaren een (nieuwe) erythema migrans '],
+      ])
+    },
+    {
+      content: new Map([
+        ["nl", '(een steeds groter wordende rode ring of vlek na een tekenbeet) ']
+      ]),
+      className: "fw-normal"
+    },
+    {
+      content: new Map([
+        ["nl", 'of andere vorm van de ziekte van Lyme gehad? ']
+      ])
+    }]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'NEL1');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    const markdownContent = `
+*misschien subtext nog toevoegen??*
+    `
+
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Ja, één erythema migrans"],
+          ])
+        },
+        {
+          key: 'b', role: 'input',
+          content: new Map([
+            ["nl", "Ja, één andere vorm van de ziekte van Lyme, namelijk:"],
+          ])
+        },
+        {
+          key: this.optionKeys.yes_number, role: 'numberInput',
+          content: new Map([
+            ["nl", "Ja, meerdere episodes van lymeziekte, aantal episodes:"],
+          ]),
+          optionProps: {
+            min: 0,
+            max: 5,
+          }
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Nee"],
+          ])
+        },
+      ],
+      customValidations: [
+        {
+          key: 'NEL1', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`), 0),
+          ), type: 'hard'
+        }
+      ],
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", markdownContent],
+          ]),
+          className: 'mb-2'
+        })
+      ]
+    })
+  }
+}
+
+/*
 export class NwEMLyme1 extends Item {
   optionKeys = {
     no: 'c',
@@ -107,8 +204,9 @@ export class NwEMLyme1 extends Item {
     })
   }
 }
+*/
 
-
+//eerst set voor EM
 export class NwEMLyme2 extends Item {
 
   optionKeys = {
@@ -129,14 +227,14 @@ export class NwEMLyme2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wanneer ontwikkelde deze vorm van de ziekte van Lyme zich?'],
+        ['nl', 'Wanneer ontwikkelde deze erythema migrans zich?'],
       ]),
       responseOptions: [
         SCOptions.cloze({
           key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De klachten door de ziekte van Lyme zijn onstaan op "]]
+                [['en', "De rode ring of vlek is onstaan op "]]
               )
             }),
             ClozeItemTypes.dateInput({
@@ -185,7 +283,7 @@ export class NwEMLyme3 extends Item {
     this.condition = condition;
   }
 
-  buildItem() {//NOTE: input instead of dropdown
+  buildItem() {
     return SurveyItems.numericInput({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -261,7 +359,6 @@ export class NwEMLyme4 extends Item {
     })
   }
 }
-
 
 export class NwEMLyme5 extends Item {
 
@@ -421,7 +518,6 @@ export class NwEMLyme7 extends Item {
   }
 }
 
-
 export class NwEMLyme8 extends Item {
   optionKeys = {
     name: '2',
@@ -486,7 +582,7 @@ export class NwEMLyme8 extends Item {
       customValidations: [
         {
           key: 'MedInfo', rule: SurveyEngine.logic.and(
-            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.name}`),
+            //SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.name}`),
             SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.dayCount}`)
           ), type: 'hard'
         }
@@ -498,15 +594,82 @@ export class NwEMLyme8 extends Item {
 
 
 
-//9
+//tweede set is voor Lyme
 export class NwEMLyme9 extends Item {
+
+  optionKeys = {
+    date: 'a'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'NEL9');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Wanneer ontwikkelde de manifestatie van de ziekte van Lyme zich?'],
+      ]),
+      responseOptions: [
+        SCOptions.cloze({
+          key: this.optionKeys.date, items: [
+            ClozeItemTypes.text({
+              key: '1', content: new Map(
+                [['en', "De ziekte van Lyme is begonnen op "]]
+              )
+            }),
+            ClozeItemTypes.dateInput({
+              dateInputMode: 'YMD',
+              key: '2',
+              maxRelativeDate: {
+                reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
+                delta: { seconds: 0 }
+              }
+            }),
+            ClozeItemTypes.text({
+              key: '3', content: new Map(
+                [['en', "Je mag de datum schatten"]]
+              )
+            }),
+          ],
+        }),
+        {//disable b if a is selected and disable a if b is selected
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Weet ik niet"],
+          ]),
+          disabled: SurveyEngine.singleChoice.any(this.itemKey, 'a')
+        },
+      ],
+      customValidations: [
+        {
+          key: 'NEL9', rule: SurveyEngine.logic.or(
+            SurveyEngine.singleChoice.none(this.key, this.optionKeys.date),
+            SurveyEngine.logic.and(
+              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.2`)
+            )
+          ), type: 'hard'
+        }
+      ]
+    })
+  }
+}
+
+export class NwEMLyme10 extends Item {
 
   optionKeys = {
     yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'NEL9');
+    super(parentKey, 'NEL10');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -539,8 +702,7 @@ export class NwEMLyme9 extends Item {
   }
 }
 
-//10
-export class NwEMLyme10 extends Item {
+export class NwEMLyme11 extends Item {
 
   optionKeys = {
     other: 'c'
@@ -561,7 +723,7 @@ export class NwEMLyme10 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'NEL10');
+    super(parentKey, 'NEL11');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -603,7 +765,7 @@ export class NwEMLyme10 extends Item {
       ],
       customValidations: [
         {
-          key: 'NEL10', rule:
+          key: 'NEL11', rule:
             SurveyEngine.logic.or(
               SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
               SurveyEngine.logic.and(
@@ -618,15 +780,14 @@ export class NwEMLyme10 extends Item {
   }
 }
 
-//11
-export class NwEMLyme11 extends Item {
+export class NwEMLyme12 extends Item {
 
   optionKeys = {
     yes: 'a'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'NEL11');
+    super(parentKey, 'NEL12');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -659,10 +820,7 @@ export class NwEMLyme11 extends Item {
   }
 }
 
-
-//12
-
-export class NwEMLyme12 extends Item {
+export class NwEMLyme13 extends Item {
   optionKeys = {
     name: '2',
     dayCount: '3',
@@ -677,7 +835,7 @@ export class NwEMLyme12 extends Item {
   ]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'NEL12');
+    super(parentKey, 'NEL13');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -736,6 +894,99 @@ export class NwEMLyme12 extends Item {
   }
 }
 
+//derde set is voor multiple lyme
+export class NwEMLyme14 extends Item {
+  numberRef: Expression;
+
+  constructor(parentKey: string, isRequired: boolean, NEL1NumberRef: Expression) {
+    super(parentKey, 'NEL14');
+
+    this.isRequired = isRequired;
+    this.condition = SurveyEngine.compare.gt(NEL1NumberRef, 0);
+    this.numberRef = NEL1NumberRef;
+  }
+
+  buildItem() {
+    const cItems: Array<OptionDef> = [];
+    Array.from({ length: 5 }).forEach((_, index) => {
+      const rowCondition = SurveyEngine.compare.gt(this.numberRef, index);
+      cItems.push(ClozeItemTypes.text({
+        key: `row_${index + 1}_label`,
+        content: new Map(
+          [['nl', `${index + 1}. Manifestatie:`]]
+        ),
+        displayCondition: rowCondition,
+      }));
+      cItems.push(ClozeItemTypes.textInput({
+        key: `row_${index + 1}_input`,
+        displayCondition: rowCondition,
+        className: 'flex-grow-1',
+        alignText: 'start',
+      }));
+      cItems.push(ClozeItemTypes.clozeLineBreak());
+      cItems.push(ClozeItemTypes.text({
+        key: `row_${index + 1}_label`,
+        content: new Map(
+          [['nl', `${index + 1}. Ontstaansdatum (geschat):`]]
+        ),
+        displayCondition: rowCondition,
+      }));
+      cItems.push(ClozeItemTypes.textInput({
+        key: `row_${index + 1}_input`,
+        displayCondition: rowCondition,
+        className: 'flex-grow-1',
+        alignText: 'start',
+      }));
+      cItems.push(ClozeItemTypes.clozeLineBreak());
+      cItems.push(ClozeItemTypes.text({
+        key: `row_${index + 1}_label2`,
+        content: new Map(
+          [['nl', `${index + 1}. Aantal dagen behandeld met antibiotica:`]]
+        ),
+        displayCondition: rowCondition,
+        className: 'ps-2'
+      }));
+      cItems.push(ClozeItemTypes.numberInput({
+        key: `row_${index + 1}_number`,
+        inputMaxWidth: '80px',
+        inputLabel: new Map([["nl", " "],]),
+        componentProperties: {
+          min: 0,
+          max: 100
+        },
+        displayCondition: rowCondition,
+      }));
+      cItems.push(ClozeItemTypes.text({
+        className: 'border-top border-grey-2 my-2 w-100 ',
+        displayCondition: rowCondition,
+      }));
+      //cItems.push(ClozeItemTypes.clozeLineBreak());
+    })
+
+    const markdownContent = `
+*Heeft u geen antibiotica behandeling gekregen, vul dan 0 in.*
+    `
+
+    return SurveyItems.clozeQuestion({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', "Welke manifestaties van de ziekte van Lyme heb je gehad? Wanneer waren deze? En hoe zijn ze behandeld?"],
+      ]),
+      items: cItems,
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([[
+            'nl', markdownContent
+          ]]),
+          className: 'mb-2'
+        })
+      ]
+    })
+  }
+}
 
 
 
