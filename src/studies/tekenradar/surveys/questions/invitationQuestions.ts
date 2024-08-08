@@ -39,7 +39,6 @@ Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je g
   }
 }
 
-
 export class UitnodigingOnderzoek extends Item {
   optionKeys = {
     yes: 'a',
@@ -79,6 +78,7 @@ export class UitnodigingOnderzoek extends Item {
     })
   }
 }
+
 export class UitnodigingOnderzoekConsent extends Item {
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -170,7 +170,7 @@ Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je g
   }
 }
 
-//kvdw LE:
+//kvdw LymeEscape:
 export class aEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek ziekte van Lyme
@@ -355,6 +355,7 @@ export class LPplusUitnodigingOnderzoek extends Item {
     })
   }
 }
+
 
 export class kEMUitnodigingOnderzoekConsent extends Item {
 
@@ -1214,8 +1215,6 @@ class BirthMonth extends Item {
   }
 }
 
-
-
 //LT LPplus
 class BirthYear extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
@@ -1645,3 +1644,4 @@ export class LPplusInviteGroup extends Group {
     this.addItem(this.BiobankContactgegevens.get())
   }
 }
+

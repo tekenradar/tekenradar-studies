@@ -22,6 +22,8 @@ import { SF36 } from './questions/sf36';
 // it would be prettier to get this from the questionaire itself, or if not possible using a thing to make "geen" a "single" choice option.
 
 class LPplus_part1Def extends SurveyDefinition {
+  // hier moet de IC verklaring voor geplakt worden
+  //LPplusIC: LPplusUitnodigingOnderzoekText;
   PTBT: PrevTBHeader;
   PTB: PreviousTickBitesGroup;
   NELH: NwEMLymeHeader;
@@ -93,6 +95,7 @@ class LPplus_part1Def extends SurveyDefinition {
 
     //flow informatie van de vragenlijst inclusief afhankelijkheden van de vragenlijst
     const required = isRequired !== undefined ? isRequired : false;
+    // MH hier moet de IC ook toegevoegs worden
     this.PTBT = new PrevTBHeader(this.key, required);
     this.PTB = new PreviousTickBitesGroup(this.key, required);
 
@@ -164,6 +167,7 @@ class LPplus_part1Def extends SurveyDefinition {
 
   /// paginering en volgorde van de vragenlijst inclusief pagebreaks
   buildSurvey() {
+    //MH IC verklaring hier ook toevoegen
     this.addItem(this.PTBT.get());
     this.addItem(this.PTB.get());
     this.addPageBreak();

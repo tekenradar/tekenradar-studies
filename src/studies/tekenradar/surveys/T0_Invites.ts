@@ -2,7 +2,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
-import { kEMInviteGroup, StandardInviteGroup, aEMInviteGroup } from './questions/invitationQuestions';
+import { kEMInviteGroup, StandardInviteGroup, aEMInviteGroup, LPplusInviteGroup } from './questions/invitationQuestions';
 //import { aEMInviteGroup, StandardInviteGroup } from './questions/invitationQuestions';//kvdw LE
 import { SurveyEndGroup } from './questions/surveyEnd';
 
@@ -11,6 +11,7 @@ export class T0_InvitesDef extends SurveyDefinition {
   StandardInviteGroup: StandardInviteGroup;
   kEMInviteGroup: kEMInviteGroup;
   aEMInviteGroup: aEMInviteGroup; //kvdw LE
+  LPplusInviteGroup: LPplusInviteGroup; //MH LPplus
   EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
@@ -32,10 +33,12 @@ export class T0_InvitesDef extends SurveyDefinition {
 
     this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.and(
       SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)),
-      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)))
+      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)),
+      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LPplus.key, ParticipantFlags.LPplus.values.likely))), //MH
     );
     this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely));
     this.aEMInviteGroup = new aEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely));
+    this.LPplusInviteGroup = new LPplusInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LPplus.key, ParticipantFlags.LPplus.values.likely)); //MH
 
 
     //this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.not(
@@ -57,7 +60,11 @@ export class T0_InvitesDef extends SurveyDefinition {
       //kvdw LE:
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.aEMUitnodigingOnderzoek.key, this.aEMInviteGroup.aEMUitnodigingOnderzoek.optionKeys.yes)),
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.UitnodigingOnderzoek.key, this.aEMInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
-      ))
+      //MH LPplus:
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.LPplusUitnodigingOnderzoek.key, this.LPplusInviteGroup.LPplusUitnodigingOnderzoek.optionKeys.yes)),
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.LPplusUitnodigingOnderzoek.key, this.LPplusInviteGroup.LPplusUitnodigingOnderzoek.optionKeys.yes)),
+
+    ))
   }
 
 
@@ -65,6 +72,7 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.addItem(this.StandardInviteGroup.get());
     this.addItem(this.kEMInviteGroup.get());
     this.addItem(this.aEMInviteGroup.get());//kvdw LE
+    this.addItem(this.LPplusInviteGroup.get());//MH LPplus
     this.addPageBreak();
     this.addItem(this.EndGroup.get());
   }

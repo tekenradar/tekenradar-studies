@@ -81,6 +81,18 @@ export const ParticipantFlags = {
     values: {
       true: 'true'
     }
+  }, //MH 08-08-2024
+  LPplus: {
+    key: 'LPplus',
+    values: {
+      likely: 'likely'
+    }
+  }, //MH 08-08-2024
+  LPbio: {
+    key: 'BioB',
+    values: {
+      true: 'true'
+    }
   },
   consents: {
     defaultStudy: {
