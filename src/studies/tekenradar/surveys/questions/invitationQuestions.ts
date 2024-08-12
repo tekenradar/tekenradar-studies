@@ -377,9 +377,29 @@ export class LPplusUitnodigingOnderzoek_q2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: new Map([
-        ['nl', 'Ben jij de persoon die tussen 2014 en 2020 heeft deelgenomen aan het LymeProspect of Tekenradar vragenlijstonderzoek met de voornaam {name}?'],
-      ]),
+      questionText: [
+        {
+          content: new Map([
+            ['nl', `Ben jij de persoon die tussen 2014 en 2020 heeft deelgenomen aan het LymeProspect of Tekenradar vragenlijstonderzoek met de voornaam `],
+          ])
+        },
+        {
+          expression: SurveyEngine.getters.getAttribute(
+            SurveyEngine.getters.getAttribute(
+              SurveyEngine.getters.getContext(),
+              'participantFlags'
+            ),
+            'name'
+          ),
+          className: 'text-primary',
+          languageCodes: ['nl']
+        },
+        {
+          content: new Map([
+            ['nl', `?`],
+          ])
+        }
+      ],
       responseOptions: [
         {
           key: this.optionKeys.yes, role: 'option',

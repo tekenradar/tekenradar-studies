@@ -1,6 +1,7 @@
 {
   "isLoggedIn": false,
   "participantFlags": {
-    "LPplus": "likely"
+    "LPplus": "likely",
+    "name": "Nick"
   }
 }
