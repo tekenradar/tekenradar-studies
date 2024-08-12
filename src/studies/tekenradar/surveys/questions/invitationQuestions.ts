@@ -356,6 +356,59 @@ export class LPplusUitnodigingOnderzoek extends Item {
   }
 }
 
+//LT LPplus Q2
+export class LPplusUitnodigingOnderzoek_q2 extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'c'
+
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LPplusUitnTR2');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Ben jij de persoon die tussen 2014 en 2020 heeft deelgenomen aan het LymeProspect of Tekenradar vragenlijstonderzoek met de voornaam {name}?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja, ik ben degene die eerder aan het onderzoek heeft deelgenomen"],
+          ])
+        },
+        {
+          key: 'b', role: 'input',
+          content: new Map([
+            ["nl", "Nee, ik ben iemand anders die de vragenlijst namens deze persoon invult, namelijk:"],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee, ik heb niet eerder aan het onderzoek deelgenomen, maar ik vul de vragenlijst toch in."],
+          ])
+        },
+        {
+          key: 'd', role: 'input',
+          content: new Map([
+            ["nl", "Anders, namelijk:"],
+          ])
+        },
+      ]
+    })
+  }
+}
 
 export class kEMUitnodigingOnderzoekConsent extends Item {
 
@@ -1609,6 +1662,7 @@ export class LPplusInviteGroup extends Group {
   // Standard LPplus
   T1: LPplusUitnodigingOnderzoekText;
   LPplusUitnodigingOnderzoek: LPplusUitnodigingOnderzoek;
+  LPplusUitnodigingOnderzoek_q2: LPplusUitnodigingOnderzoek_q2;
   LPplusUitnodigingOnderzoekConsent: LPplusUitnodigingOnderzoekConsent;
 
   // Other studies
@@ -1624,6 +1678,7 @@ export class LPplusInviteGroup extends Group {
 
     this.T1 = new LPplusUitnodigingOnderzoekText(this.key);
     this.LPplusUitnodigingOnderzoek = new LPplusUitnodigingOnderzoek(this.key, isRequired);
+    this.LPplusUitnodigingOnderzoek_q2 = new LPplusUitnodigingOnderzoek_q2(this.key, isRequired);
     this.LPplusUitnodigingOnderzoekConsent = new LPplusUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes));
 
     const showBiobankAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes);
@@ -1636,6 +1691,7 @@ export class LPplusInviteGroup extends Group {
   buildGroup(): void {
     this.addItem(this.T1.get());
     this.addItem(this.LPplusUitnodigingOnderzoek.get());
+    this.addItem(this.LPplusUitnodigingOnderzoek_q2.get());
     this.addItem(this.LPplusUitnodigingOnderzoekConsent.get());
     this.addPageBreak()
     this.addItem(this.T2.get());
