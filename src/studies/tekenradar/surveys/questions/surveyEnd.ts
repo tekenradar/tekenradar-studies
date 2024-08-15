@@ -182,6 +182,41 @@ Als je een tekenbeet hebt gehad, houd dan de plek van de tekenbeet de komende pe
   }
 }
 
+class T0_Invites_EndText_LPPlus extends Item {
+  markdownContent = `
+### U heeft aangegeven niet mee te willen doen aan ons vervolgonderzoek.
+
+Hartelijk dank dat u dit in het verleden wel heeft gedaan, bent u nog geïnteresseerd in de resultaten van het onderzoek destijds dan kunt u deze vinden bij de nieuwsberichten op Tekenradar.nl
+
+
+##### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoord op te sturen!
+
+
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'T0_Invites_EndText_LPPlus');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        }),
+      ]
+    })
+  }
+}
+
 
 class Comment extends Item {
 
@@ -255,6 +290,7 @@ export class SurveyEndGroup extends Group {
   StandardflowEndText: StandardflowEndText;
   FollowupEndText: FollowupEndText;
   WeeklyEndText: WeeklyEndText;
+  T0_Invites_EndText_LPPlus: T0_Invites_EndText_LPPlus;
   LPPlusEndText: LPPlusEndText;
   Comment: Comment;
 
@@ -266,6 +302,7 @@ export class SurveyEndGroup extends Group {
     this.StandardflowEndText = new T0_Invites_EndText(this.key);
     this.FollowupEndText = new FollowupEndText(this.key);
     this.WeeklyEndText = new WeeklyEndText(this.key);
+    this.T0_Invites_EndText_LPPlus = new T0_Invites_EndText_LPPlus(this.key);
     this.LPPlusEndText = new LPPlusEndText(this.key);
     this.Comment = new Comment(this.key, isRequired);
   }
@@ -273,6 +310,9 @@ export class SurveyEndGroup extends Group {
   buildGroup(): void {
     if (this.isPartOf(surveyKeys.T0_Invites)) {
       this.addItem(this.T0_Invites_EndText.get())
+    }
+    if (this.isPartOf(surveyKeys.T0_Invites)) {
+      this.addItem(this.T0_Invites_EndText_LPPlus.get())
     }
     if (this.isPartOf(surveyCategoryNames.Standardflow)) {
       this.addItem(this.StandardflowEndText.get())
