@@ -73,6 +73,7 @@ const reports = {
 }
 
 const contentServiceName = 'content-service';
+const lppSubmissionHandler = 'lpp-submission-handler';
 const researcherBackendNames = {
   T0_Invites: 'researcher-backend-t0-invites'
 };
@@ -518,6 +519,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true),
   ),
   StudyEngine.participantActions.externalEventHandler(researcherBackendNames.T0_Invites),
+  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
   reAssignWeeklyToTheEndOfList(),
 )
 
@@ -762,6 +764,24 @@ const handleSubmit_DeleteContactData = StudyEngine.ifThen(
   )
 )
 
+const handleSubmit_LPPlus_part1 = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey('LPplus_part1'),
+  // Then:
+  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
+)
+
+const handleSubmit_LPPlus_part2 = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey('LPplus_part2'),
+  // Then:
+  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
+)
+
+const handleSubmit_LPPlus_part3 = StudyEngine.ifThen(
+  StudyEngine.checkSurveyResponseKey('LPplus_part3'),
+  // Then:
+  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
+)
+
 
 // -----------------------------------------------
 const handleExpired_T0_Invites = StudyEngine.ifThen(
@@ -854,6 +874,10 @@ const submitRules: Expression[] = [
   handleSubmit_QuitFollowUp,
   handleSubmit_QuitWeeklyTB,
   handleSubmit_DeleteContactData,
+  // LPplus:
+  handleSubmit_LPPlus_part1,
+  handleSubmit_LPPlus_part2,
+  handleSubmit_LPPlus_part3,
 ]
 
 
