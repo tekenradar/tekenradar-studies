@@ -298,11 +298,15 @@ export class SurveyEndGroup extends Group {
     super(parentKey, 'END');
     this.groupEditor.setCondition(condition);
 
-    this.T0_Invites_EndText = new T0_Invites_EndText(this.key);
+    this.T0_Invites_EndText = new T0_Invites_EndText(this.key, SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue('LPplus', 'likely')
+    ));
     this.StandardflowEndText = new T0_Invites_EndText(this.key);
     this.FollowupEndText = new FollowupEndText(this.key);
     this.WeeklyEndText = new WeeklyEndText(this.key);
-    this.T0_Invites_EndText_LPPlus = new T0_Invites_EndText_LPPlus(this.key);
+    this.T0_Invites_EndText_LPPlus = new T0_Invites_EndText_LPPlus(this.key,
+      SurveyEngine.participantFlags.hasKeyAndValue('LPplus', 'likely')
+    );
     this.LPPlusEndText = new LPPlusEndText(this.key);
     this.Comment = new Comment(this.key, isRequired);
   }
