@@ -2,7 +2,7 @@ import { StudyEngine } from 'case-editor-tools/expression-utils/studyEngineExpre
 import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
-import { applyRequiredQuestions } from './globalConstants';
+import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { PreviousTickBitesGroup, PrevTBHeader } from './questions/prevTickBites';
 import { CovidHeader, Covid1, Covid2, Covid3, Covid4, Covid5 } from './questions/CovidQuestions';
 import {
@@ -16,6 +16,8 @@ import {
 import { TicP_Comorbidity } from './questions/ticp';
 import { Medication1, Medication2 } from './questions/medication';
 import { SF36 } from './questions/sf36';
+import { LPplusUitnodigingOnderzoek, LPplusUitnodigingOnderzoekConsent, LPplusUitnodigingOnderzoekText, LPplusUitnodigingOnderzoek_q2, UitnodigingOnderzoekText } from './questions/invitationQuestions'
+import { SurveyEndGroup } from './questions/surveyEnd';
 
 //Todo: there are some questins dependent on certain flags: sex, age, participant type, the flags need still be set and then the questions checked.
 // the PHQ questionaire is not really pretty at the moment in the sense that in the PHQ_cause question has the option "geen klachten",
@@ -23,7 +25,13 @@ import { SF36 } from './questions/sf36';
 
 class LPplus_part1Def extends SurveyDefinition {
   // hier moet de IC verklaring voor geplakt worden
-  //LPplusIC: LPplusUitnodigingOnderzoekText;
+  //LPplusInviteGroup: LPplusInviteGroup; //MH LPplus
+  //EndGroup: SurveyEndGroup;
+  InvitationHeader: LPplusUitnodigingOnderzoekText;
+  LPplusUitnodigingOnderzoek: LPplusUitnodigingOnderzoek;
+  LPplusUitnodigingOnderzoek_q2: LPplusUitnodigingOnderzoek_q2;
+  LPplusUitnodigingOnderzoekConsent: LPplusUitnodigingOnderzoekConsent;
+  EndGroup: SurveyEndGroup;
   PTBT: PrevTBHeader;
   PTB: PreviousTickBitesGroup;
   NELH: NwEMLymeHeader;
@@ -79,7 +87,7 @@ class LPplus_part1Def extends SurveyDefinition {
   //eerst het ticket
   constructor(isRequired?: boolean) {
     super({
-      surveyKey: 'LPplus_part1',
+      surveyKey: surveyKeys.LPplus_part1,
       name: new Map([
         ['nl', 'Lyme Prospect Plus Vragenlijst deel 1']
       ]),
@@ -96,11 +104,29 @@ class LPplus_part1Def extends SurveyDefinition {
     //flow informatie van de vragenlijst inclusief afhankelijkheden van de vragenlijst
     const required = isRequired !== undefined ? isRequired : false;
     // MH hier moet de IC ook toegevoegs worden
-    this.PTBT = new PrevTBHeader(this.key, required);
-    this.PTB = new PreviousTickBitesGroup(this.key, required);
+    this.InvitationHeader = new LPplusUitnodigingOnderzoekText(this.key);
+    this.LPplusUitnodigingOnderzoek = new LPplusUitnodigingOnderzoek(this.key, required);
+    const LPPCondition = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes);
+    const LPPgeendeelname = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.no);
+    this.LPplusUitnodigingOnderzoek_q2 = new LPplusUitnodigingOnderzoek_q2(this.key, required);
+    this.LPplusUitnodigingOnderzoekConsent = new LPplusUitnodigingOnderzoekConsent(this.key, required, LPPCondition);
+    this.EndGroup = new SurveyEndGroup(this.key, false, LPPgeendeelname);
+    //    this.LPplusInviteGroup = new LPplusInviteGroup(this.key, required, SurveyEngine.logic.and(
+    //      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LPplus.key, ParticipantFlags.LPplus.values.likely))), //MH
+    //    );
+    //    this.LPplusInviteGroup = new LPplusInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LPplus.key, ParticipantFlags.LPplus.values.likely)); //MH
 
-    this.NELH = new NwEMLymeHeader(this.key, required);
-    this.NEL1 = new NwEMLyme1(this.key, required);
+    //    this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.and(
+    //MH LPplus:
+    //      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.LPplusUitnodigingOnderzoek.key, this.LPplusInviteGroup.LPplusUitnodigingOnderzoek.optionKeys.yes)),
+    //SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key, this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes)),
+    //   ));
+
+    this.PTBT = new PrevTBHeader(this.key, required, LPPCondition);
+    this.PTB = new PreviousTickBitesGroup(this.key, required, LPPCondition);
+
+    this.NELH = new NwEMLymeHeader(this.key, required, LPPCondition);
+    this.NEL1 = new NwEMLyme1(this.key, required, LPPCondition);
     const NEL1emCondition = SurveyEngine.singleChoice.any(this.NEL1.key, this.NEL1.optionKeys.em);
     const NEL1lyCondition = SurveyEngine.singleChoice.any(this.NEL1.key, this.NEL1.optionKeys.lyme);
     this.NEL2 = new NwEMLyme2(this.key, required, NEL1emCondition);
@@ -123,8 +149,8 @@ class LPplus_part1Def extends SurveyDefinition {
     this.NEL14 = new NwEMLyme14(this.key, required, NEL1number);
 
 
-    this.COVH = new CovidHeader(this.key, required);
-    this.COV1 = new Covid1(this.key, required);
+    this.COVH = new CovidHeader(this.key, required, LPPCondition);
+    this.COV1 = new Covid1(this.key, required, LPPCondition);
     const COV1Condition = SurveyEngine.singleChoice.any(this.COV1.key, this.COV1.optionKeys.yes);
     this.COV2 = new Covid2(this.key, required, COV1Condition);
     this.COV3 = new Covid3(this.key, required, COV1Condition);
@@ -132,19 +158,19 @@ class LPplus_part1Def extends SurveyDefinition {
     const COV4Condition = SurveyEngine.singleChoice.any(this.COV4.key, this.COV4.optionKeys.no);
     this.COV5 = new Covid5(this.key, required, COV4Condition);
 
-    this.H1 = new BackgroundHeader(this.key, required);
-    this.T1 = new StandardText1(this.key, required);
-    this.Qualification = new Qualification(this.key, required);
+    this.H1 = new BackgroundHeader(this.key, required, LPPCondition);
+    this.T1 = new StandardText1(this.key, required, LPPCondition);
+    this.Qualification = new Qualification(this.key, required, LPPCondition);
 
-    this.TicP_comorbidity = new TicP_Comorbidity(this.key, required);
-    this.Med1 = new Medication1(this.key, required)
+    this.TicP_comorbidity = new TicP_Comorbidity(this.key, required, LPPCondition);
+    this.Med1 = new Medication1(this.key, required, LPPCondition)
     const Med1Condition = SurveyEngine.singleChoice.any(this.Med1.key, this.Med1.optionKeys.yes);
     this.Med2 = new Medication2(this.key, required, Med1Condition)
 
-    this.H3 = new SymptomsHeader(this.key, required);
+    this.H3 = new SymptomsHeader(this.key, required, LPPCondition);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.PHQ_15 = new PHQ_15(this.key, required, isFemale);
-    this.PHQ_15_cause = new PHQ_15_cause(this.key, required);
+    this.PHQ_15 = new PHQ_15(this.key, required, LPPCondition);
+    this.PHQ_15_cause = new PHQ_15_cause(this.key, required, LPPCondition);
     const PHQ15causeLymeCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.lyme)
     const PHQ15causeCovidCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.covid)
     const PHQ15causeOtherCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.other)
@@ -153,13 +179,13 @@ class LPplus_part1Def extends SurveyDefinition {
     this.PHQ_15_FU3 = new PHQ_15_FU3(this.key, required, PHQ15causeOtherCondition);
     this.Pregnancy = new Pregnant(this.key, required, isFemale);
 
-    this.H4 = new FatigueHeader(this.key, required);
-    this.Q14 = new Fatigue(this.key, required);
+    this.H4 = new FatigueHeader(this.key, required, LPPCondition);
+    this.Q14 = new Fatigue(this.key, required, LPPCondition);
 
-    this.H5 = new CognitionHeader(this.key, required);
-    this.Q15 = new Cognition(this.key, required);
+    this.H5 = new CognitionHeader(this.key, required, LPPCondition);
+    this.Q15 = new Cognition(this.key, required, LPPCondition);
 
-    this.SF36 = new SF36(this.key, required);
+    this.SF36 = new SF36(this.key, required, LPPCondition);
 
     //eind part 1
 
@@ -168,6 +194,14 @@ class LPplus_part1Def extends SurveyDefinition {
   /// paginering en volgorde van de vragenlijst inclusief pagebreaks
   buildSurvey() {
     //MH IC verklaring hier ook toevoegen
+    this.addItem(this.InvitationHeader.get())
+    this.addItem(this.LPplusUitnodigingOnderzoek.get());//MH LPplus
+    this.addItem(this.LPplusUitnodigingOnderzoek_q2.get());//MH LPplus
+    this.addPageBreak();
+
+    this.addItem(this.EndGroup.get());
+    this.addPageBreak();
+
     this.addItem(this.PTBT.get());
     this.addItem(this.PTB.get());
     this.addPageBreak();

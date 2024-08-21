@@ -1677,19 +1677,19 @@ export class aEMInviteGroup extends Group {
   }
 }
 
-//LT LPplus
+//LT LPplusStandaard
 export class LPplusInviteGroup extends Group {
-  // Standard LPplus
+  // Standard LPplus -> MH moved this bit to part 1
   T1: LPplusUitnodigingOnderzoekText;
   LPplusUitnodigingOnderzoek: LPplusUitnodigingOnderzoek;
   LPplusUitnodigingOnderzoek_q2: LPplusUitnodigingOnderzoek_q2;
   LPplusUitnodigingOnderzoekConsent: LPplusUitnodigingOnderzoekConsent;
 
   // Other studies
-  T2: BiobankUitnodigingAanvullendOnderzoekText;
-  BiobankUitnodigingAanvullendOnderzoek: BiobankUitnodigingAanvullendOnderzoek;
-  BiobankUitnodigingAanvullendOnderzoekConsent: BiobankUitnodigingAanvullendOnderzoekConsent;
-  BiobankContactgegevens: BiobankContactgegevensGroup;
+  //T2: BiobankUitnodigingAanvullendOnderzoekText;
+  //BiobankUitnodigingAanvullendOnderzoek: BiobankUitnodigingAanvullendOnderzoek;
+  //BiobankUitnodigingAanvullendOnderzoekConsent: BiobankUitnodigingAanvullendOnderzoekConsent;
+  //BiobankContactgegevens: BiobankContactgegevensGroup;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LPplus');
@@ -1701,11 +1701,11 @@ export class LPplusInviteGroup extends Group {
     this.LPplusUitnodigingOnderzoek_q2 = new LPplusUitnodigingOnderzoek_q2(this.key, isRequired);
     this.LPplusUitnodigingOnderzoekConsent = new LPplusUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes));
 
-    const showBiobankAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes);
-    this.T2 = new BiobankUitnodigingAanvullendOnderzoekText(this.key, showBiobankAdditionalStudyInvite);
-    this.BiobankUitnodigingAanvullendOnderzoek = new BiobankUitnodigingAanvullendOnderzoek(this.key, isRequired, showBiobankAdditionalStudyInvite);
-    this.BiobankUitnodigingAanvullendOnderzoekConsent = new BiobankUitnodigingAanvullendOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
-    this.BiobankContactgegevens = new BiobankContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
+    //const showBiobankAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes);
+    //this.T2 = new BiobankUitnodigingAanvullendOnderzoekText(this.key, showBiobankAdditionalStudyInvite);
+    //this.BiobankUitnodigingAanvullendOnderzoek = new BiobankUitnodigingAanvullendOnderzoek(this.key, isRequired, showBiobankAdditionalStudyInvite);
+    //this.BiobankUitnodigingAanvullendOnderzoekConsent = new BiobankUitnodigingAanvullendOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
+    //this.BiobankContactgegevens = new BiobankContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
   }
 
   buildGroup(): void {
@@ -1713,11 +1713,54 @@ export class LPplusInviteGroup extends Group {
     this.addItem(this.LPplusUitnodigingOnderzoek.get());
     this.addItem(this.LPplusUitnodigingOnderzoek_q2.get());
     this.addItem(this.LPplusUitnodigingOnderzoekConsent.get());
-    this.addPageBreak()
+    //this.addPageBreak()
+    //this.addItem(this.T2.get());
+    //this.addItem(this.BiobankUitnodigingAanvullendOnderzoek.get());
+    //this.addItem(this.BiobankUitnodigingAanvullendOnderzoekConsent.get());
+    //this.addItem(this.BiobankContactgegevens.get())
+  }
+}
+
+//MH LPplusBiobank
+export class LPplusBBInviteGroup extends Group {
+  // Standard LPplus -> MH moved this bit to part 1
+  //T1: LPplusUitnodigingOnderzoekText;
+  //LPplusUitnodigingOnderzoek: LPplusUitnodigingOnderzoek;
+  //LPplusUitnodigingOnderzoek_q2: LPplusUitnodigingOnderzoek_q2;
+  //LPplusUitnodigingOnderzoekConsent: LPplusUitnodigingOnderzoekConsent;
+
+  // Other studies
+  T2: BiobankUitnodigingAanvullendOnderzoekText;
+  BiobankUitnodigingAanvullendOnderzoek: BiobankUitnodigingAanvullendOnderzoek;
+  BiobankUitnodigingAanvullendOnderzoekConsent: BiobankUitnodigingAanvullendOnderzoekConsent;
+  BiobankContactgegevens: BiobankContactgegevensGroup;
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LPplusBB');
+
+    this.groupEditor.setCondition(condition);
+
+    //this.T1 = new LPplusUitnodigingOnderzoekText(this.key);
+    //this.LPplusUitnodigingOnderzoek = new LPplusUitnodigingOnderzoek(this.key, isRequired);
+    //this.LPplusUitnodigingOnderzoek_q2 = new LPplusUitnodigingOnderzoek_q2(this.key, isRequired);
+    //this.LPplusUitnodigingOnderzoekConsent = new LPplusUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes));
+
+    //const showBiobankAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.yes);
+    this.T2 = new BiobankUitnodigingAanvullendOnderzoekText(this.key);
+    this.BiobankUitnodigingAanvullendOnderzoek = new BiobankUitnodigingAanvullendOnderzoek(this.key, isRequired);
+    this.BiobankUitnodigingAanvullendOnderzoekConsent = new BiobankUitnodigingAanvullendOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
+    this.BiobankContactgegevens = new BiobankContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
+  }
+
+  buildGroup(): void {
+    //this.addItem(this.T1.get());
+    //this.addItem(this.LPplusUitnodigingOnderzoek.get());
+    //this.addItem(this.LPplusUitnodigingOnderzoek_q2.get());
+    //this.addItem(this.LPplusUitnodigingOnderzoekConsent.get());
+    //this.addPageBreak()
     this.addItem(this.T2.get());
     this.addItem(this.BiobankUitnodigingAanvullendOnderzoek.get());
     this.addItem(this.BiobankUitnodigingAanvullendOnderzoekConsent.get());
     this.addItem(this.BiobankContactgegevens.get())
   }
 }
-

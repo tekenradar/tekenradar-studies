@@ -53,6 +53,7 @@ export const postalCodesForNMGStudy = ['3771', '3772', '3773', '3774', '3775', '
 
 
 export const surveyKeys = {
+  LPplus_part1: "LPplus_part1",
   LPplus_part3: "LPplus_part3",
   WeeklyTB: "WeeklyTB",
   T0_Invites: "T0_Invites",
