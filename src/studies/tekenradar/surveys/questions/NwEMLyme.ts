@@ -75,7 +75,7 @@ export class NwEMLyme1 extends Item {
 
   buildItem() {
     const markdownContent = `
-*misschien subtext nog toevoegen??*
+*Een andere vorm van de ziekte van Lyme wordt meestal vastgesteld met laboratoriumonderzoek, vaak via een medisch specialist en/of ziekenhuis.*
     `
 
     return SurveyItems.singleChoice({
@@ -100,7 +100,7 @@ export class NwEMLyme1 extends Item {
         {
           key: this.optionKeys.yes_number, role: 'numberInput',
           content: new Map([
-            ["nl", "Ja, meerdere episodes van lymeziekte, aantal episodes:"],
+            ["nl", "Ja, meerdere keren lymeziekte, aantal keer:"],
           ]),
           optionProps: {
             min: 0,
@@ -234,7 +234,7 @@ export class NwEMLyme2 extends Item {
           key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De rode ring of vlek is onstaan op "]]
+                [['en', "De rode ring of vlek is ontstaan op "]]
               )
             }),
             ClozeItemTypes.dateInput({
