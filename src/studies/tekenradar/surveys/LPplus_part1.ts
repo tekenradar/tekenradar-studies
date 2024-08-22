@@ -17,7 +17,7 @@ import { TicP_Comorbidity } from './questions/ticp';
 import { Medication1, Medication2 } from './questions/medication';
 import { SF36 } from './questions/sf36';
 import { LPplusUitnodigingOnderzoek, LPplusUitnodigingOnderzoekConsent, LPplusUitnodigingOnderzoekText, LPplusUitnodigingOnderzoek_q2, UitnodigingOnderzoekText } from './questions/invitationQuestions'
-import { SurveyEndGroup } from './questions/surveyEnd';
+import { EndGroup_LPPlusNP } from './questions/surveyEnd';
 
 //Todo: there are some questins dependent on certain flags: sex, age, participant type, the flags need still be set and then the questions checked.
 // the PHQ questionaire is not really pretty at the moment in the sense that in the PHQ_cause question has the option "geen klachten",
@@ -31,7 +31,7 @@ class LPplus_part1Def extends SurveyDefinition {
   LPplusUitnodigingOnderzoek: LPplusUitnodigingOnderzoek;
   LPplusUitnodigingOnderzoek_q2: LPplusUitnodigingOnderzoek_q2;
   LPplusUitnodigingOnderzoekConsent: LPplusUitnodigingOnderzoekConsent;
-  EndGroup: SurveyEndGroup;
+  EndGroup_LPPlusNP: EndGroup_LPPlusNP;
   PTBT: PrevTBHeader;
   PTB: PreviousTickBitesGroup;
   NELH: NwEMLymeHeader;
@@ -110,7 +110,7 @@ class LPplus_part1Def extends SurveyDefinition {
     const LPPgeendeelname = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.no);
     this.LPplusUitnodigingOnderzoek_q2 = new LPplusUitnodigingOnderzoek_q2(this.key, required);
     this.LPplusUitnodigingOnderzoekConsent = new LPplusUitnodigingOnderzoekConsent(this.key, required, LPPCondition);
-    this.EndGroup = new SurveyEndGroup(this.key, false, LPPgeendeelname);
+    this.EndGroup_LPPlusNP = new EndGroup_LPPlusNP(this.key, false, LPPgeendeelname);
     //    this.LPplusInviteGroup = new LPplusInviteGroup(this.key, required, SurveyEngine.logic.and(
     //      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LPplus.key, ParticipantFlags.LPplus.values.likely))), //MH
     //    );
@@ -199,7 +199,7 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.LPplusUitnodigingOnderzoek_q2.get());//MH LPplus
     this.addPageBreak();
 
-    this.addItem(this.EndGroup.get());
+    this.addItem(this.EndGroup_LPPlusNP.get());
     this.addPageBreak();
 
     this.addItem(this.PTBT.get());
