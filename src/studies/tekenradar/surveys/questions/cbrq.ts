@@ -8,13 +8,13 @@ export class CBRQ_Header extends Item {
   markdownContent1 = `
 # Opvattingen over klachten
 
-In de voorgaande vragen heeft u aangegeven dat u lichamelijke of psychische klachten heeft. Wij willen graag meer weten over deze klachten. Ook willen we meer weten over de gevolgen van deze klachten voor uw leven. De volgende vragen gaan over hoe u met de klachten omgaat en wat de gevolgen van deze klachten zijn voor uw lichamelijke gezondheid en psychisch welbevinden.
+In de voorgaande vragen heb je aangegeven dat je lichamelijke of psychische klachten hebt. Wij willen graag meer weten over deze klachten. Ook willen we meer weten over de gevolgen van deze klachten voor je leven. De volgende vragen gaan over hoe je met de klachten omgaat en wat de gevolgen van deze klachten zijn voor je lichamelijke gezondheid en psychisch welbevinden.
 
 
-Er zijn geen goede of foute antwoorden.  We zijn geïnteresseerd in uw opvattingen en niet in die van uw naasten of van hulpverleners.
+Er zijn geen goede of foute antwoorden.  We zijn geïnteresseerd in jouw opvattingen en niet in die van je naasten of van hulpverleners.
 
 
-Beantwoord de vragen eerlijk en denk niet te lang na over uw antwoorden.  `
+Beantwoord de vragen eerlijk en denk niet te lang na over je antwoorden.  `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'CBRQ_Header');
@@ -46,7 +46,7 @@ export class CBRQ1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Geef aan in hoeverre u het eens of oneens bent met de volgende uitspraken over uw huidige klachten door een bolletje aan te klikken in de kolom. '],
+        ["nl", 'Geef aan in hoeverre je het eens of oneens bent met de volgende uitspraken over je huidige klachten door een bolletje aan te klikken in de kolom. '],
       ]),
     },
   ]
@@ -197,7 +197,7 @@ export class CBRQ1 extends Item {
 export class CBRQ_Header2 extends Item {
 
   markdownContent2 = `
-We willen graag weten hoe u op dit moment omgaat met uw klachten. Hieronder worden een aantal verschillende manieren van omgaan met klachten genoemd. `
+We willen graag weten hoe je op dit moment omgaat met je klachten. Hieronder worden een aantal verschillende manieren van omgaan met klachten genoemd. `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'CBRQ_Header2');
@@ -229,7 +229,7 @@ export class CBRQ2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Geef aan hoe vaak u op de volgende manieren met klachten omgaat door het bolletje aan te klikken in het vakje wat op u van toepassing is. Kies het antwoord wat het beste bij U past, niet wat u denkt dat de meeste mensen zouden doen. '],
+        ["nl", 'Geef aan hoe vaak je op de volgende manieren met klachten omgaat door het bolletje aan te klikken in het vakje wat op jou van toepassing is. Kies het antwoord wat het beste bij jou past, niet wat je denkt dat de meeste mensen zouden doen. '],
       ]),
     },
   ]

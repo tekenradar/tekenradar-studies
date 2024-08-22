@@ -105,7 +105,7 @@ class MedCare1 extends Item {
 
   buildItem() {
     const markdownContent = `
-*Met zorgverleners bedoelen wij je huisarts, specialist, fysiotherapeut, psycholoog, maatschappelijkwerker, homeopaat, logopedist of andere arts, therapeut of zorgconsulent.*
+*Met zorgverleners bedoelen wij je huisarts, specialist, fysiotherapeut, psycholoog, maatschappelijk werker, homeopaat, logopedist of andere arts, therapeut of zorgconsulent.*
     `
 
     return SurveyItems.singleChoice({
@@ -796,7 +796,7 @@ export class TicP_werk4 extends Item {
     },
     {
       content: new Map([
-        ["nl", "afwezig geweest van van je werk omdat je ziek was?"],
+        ["nl", "afwezig geweest van je werk omdat je ziek was?"],
       ])
     }]
 
@@ -1501,7 +1501,7 @@ export class TicP_werk6 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Op hoeveel werkdagen had je tijdens het werk last van uw lichamelijke of psychische problemen? Tel alleen de werkdagen in'],
+        ["nl", 'Op hoeveel werkdagen had je tijdens het werk last van je lichamelijke of psychische problemen? Tel alleen de werkdagen in '],
       ]),
     },
     {

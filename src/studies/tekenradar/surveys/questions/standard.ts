@@ -682,7 +682,7 @@ export class PHQ_15_cause extends Item {
           ])
         },
         {
-          key: 'd', role: 'input',
+          key: 'd', role: 'option',
           content: new Map([
             ["nl", "ik heb geen klachten"],
           ])
@@ -1155,7 +1155,7 @@ export class Cognition extends Item {
         {
           key: 'g',
           content: new Map([
-            ["nl", "Niet luisteren naar de naam van een persoon op het moment dat deze persoon zich aan je voorstelt."],
+            ["nl", "Niet luisteren naar de naam van een persoon op het moment dat deze persoon zich aan je voorstelt"],
           ])
         },
         {
@@ -1167,13 +1167,13 @@ export class Cognition extends Item {
         {
           key: 'i',
           content: new Map([
-            ["nl", "Niet merken dat iemand iets tegen je zegt als je met iets anders bezig bent."],
+            ["nl", "Niet merken dat iemand iets tegen je zegt als je met iets anders bezig bent"],
           ])
         },
         {
           key: 'j',
           content: new Map([
-            ["nl", "Boos worden en daar later spijt van hebben."],
+            ["nl", "Boos worden en daar later spijt van hebben"],
           ])
         },
         {
@@ -1185,7 +1185,7 @@ export class Cognition extends Item {
         {
           key: 'l',
           content: new Map([
-            ["nl", "Vergeten welke straat je moet inslaan als je een route kiest die je goed kent, maar die je zelden gebruikt."],
+            ["nl", "Vergeten welke straat je moet inslaan als je een route kiest die je goed kent, maar die je zelden gebruikt"],
           ])
         },
         {
@@ -1263,7 +1263,7 @@ export class Cognition extends Item {
         {
           key: 'y',
           content: new Map([
-            ["nl", "In een gesprek niets meer weten om over te praten."],
+            ["nl", "In een gesprek niets meer weten om over te praten"],
           ])
         },
       ]

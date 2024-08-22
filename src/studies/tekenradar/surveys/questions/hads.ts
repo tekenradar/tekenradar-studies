@@ -72,9 +72,9 @@ class Q_instructions extends Item {
 
 Het is bekend dat emoties bij de meeste ziektes een belangrijke rol spelen.
 
-Met deze vragenlijst willen wij te weten te komen hoe u zich voelt. Lees iedere vraag goed door en geef uw antwoord aan met een kruisje in het hokje dat het beste weergeeft hoe u zich gedurende de **afgelopen week** gevoeld heeft.
+Met deze vragenlijst willen wij te weten te komen hoe je je voelt. Lees iedere vraag goed door en geef je antwoord aan met een kruisje in het hokje dat het beste weergeeft hoe je je gedurende de **afgelopen week** gevoeld hebt.
 
-Denk niet te lang na over een antwoord. Het gaat bij deze uitspraken om uw eigen indruk. Er bestaan geen foute antwoorden, elk antwoord is goed, zolang het maar uw eigen indruk weergeeft.
+Denk niet te lang na over een antwoord. Het gaat bij deze uitspraken om je eigen indruk. Er bestaan geen foute antwoorden, elk antwoord is goed, zolang het maar je eigen indruk weergeeft.
     `
   constructor(parentKey: string, condition?: Expression) {
     super(parentKey, 'Header');
