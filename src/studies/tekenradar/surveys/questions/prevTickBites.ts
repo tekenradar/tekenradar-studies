@@ -127,7 +127,7 @@ class PreviousTickBites1 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf('Chronicflow') ? this.questionTextMain_Chronic : (this.isPartOf('WeeklyTB') ? this.questionTextMainWeekly : this.questionTextMain1),
+      questionText: this.isPartOf('Chronicflow') ? this.questionTextMain_Chronic : this.isPartOf('LPplus_part1') ? this.questionTextMain_Chronic : (this.isPartOf('WeeklyTB') ? this.questionTextMainWeekly : this.questionTextMain1),
       responseOptions: [
         {
           key: this.optionKeys.none, role: 'option',
@@ -260,7 +260,7 @@ class PreviousTickBites2 extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf('Chronicflow') ? this.questionTextMain_Chronic : (this.isPartOf('WeeklyTB') ? this.questionTextMainWeekly : this.questionTextMain1),
+      questionText: this.isPartOf('Chronicflow') ? this.questionTextMain_Chronic : this.isPartOf('LPplus_part1') ? this.questionTextMain_Chronic : (this.isPartOf('WeeklyTB') ? this.questionTextMainWeekly : this.questionTextMain1),
       responseOptions: [
         {
           key: 'a', role: 'option',
