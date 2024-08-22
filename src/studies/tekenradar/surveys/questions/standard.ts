@@ -292,7 +292,7 @@ export class Qualification extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.questionTextMain_Kids,
+      questionText: this.isPartOf(SurveySuffix.Adults) ? this.questionTextMain_Adults : this.isPartOf('LPplus_part1') ? this.questionTextMain_Adults : this.questionTextMain_Kids,
       responseOptions: [
         {
           key: 'a', role: 'option',
@@ -327,7 +327,7 @@ export class Qualification extends Item {
         {
           key: 'f', role: 'option',
           content: new Map([
-            ["nl", "Hoger algemeen en voorbereidend wetenschappelijk onderwijs (zoals HAVO, VWO, Atheneum, Gymnasium, HBS,MMS)"],
+            ["nl", "Hoger algemeen en voorbereidend wetenschappelijk onderwijs (zoals HAVO, VWO, Atheneum, Gymnasium, HBS, MMS)"],
           ])
         },
         {

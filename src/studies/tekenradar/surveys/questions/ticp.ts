@@ -250,7 +250,7 @@ export class TicP_Comorbidity extends Item {
     },
     {
       content: new Map([
-        ["nl", ". Je kunt dus meer dan 1 hokje aankruisen."],
+        ["nl", ". Je kunt dus meer dan 1 hokje aanklikken."],
       ]),
     },
   ]

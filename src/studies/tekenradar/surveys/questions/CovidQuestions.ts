@@ -101,7 +101,7 @@ export class Covid2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Wanneer kreeg je de coronaviros infectie, waarna je langdurig klachten hield? '],
+        ["nl", 'Wanneer kreeg je de coronavirus infectie, waarna je langdurig klachten hield? '],
       ]),
     },
     {
