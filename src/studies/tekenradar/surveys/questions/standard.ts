@@ -740,7 +740,8 @@ export class PHQ_15_FU extends Item {
           key: 'e', role: 'option',
           content: new Map([
             ["nl", "Ik heb geen klachten"],
-          ])
+          ]),
+          displayCondition: this.isPartOf('LPplus_part1') ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
       ]
     })
@@ -790,12 +791,6 @@ export class PHQ_15_FU2 extends Item {
             ["nl", "Niet"],
           ])
         },
-        {
-          key: 'e', role: 'option',
-          content: new Map([
-            ["nl", "Ik heb geen klachten"],
-          ])
-        },
       ]
     })
   }
@@ -842,12 +837,6 @@ export class PHQ_15_FU3 extends Item {
           key: 'd', role: 'option',
           content: new Map([
             ["nl", "Niet"],
-          ])
-        },
-        {
-          key: 'e', role: 'option',
-          content: new Map([
-            ["nl", "Ik heb geen klachten"],
           ])
         },
       ]
