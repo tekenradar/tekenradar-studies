@@ -4,7 +4,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
 import { TicP_Group, TicP_werk1, TicP_werk2, TicP_werk3, TicP_werk4, TicP_werk5, TicP_werk6, TicP_werkHeader } from './questions/ticp';
-import { IPAQ } from './questions/ipaq';
+import { IPAQ_Header, IPAQ } from './questions/ipaq';
 import { HADSGroup } from './questions/hads';
 import { CBRQ_Header, CBRQ1, CBRQ_Header2, CBRQ2 } from './questions/cbrq';
 import { SurveyEndGroup } from './questions/surveyEnd';
@@ -29,6 +29,7 @@ class LPplus_part3Def extends SurveyDefinition {
   //angst en depressie
   HADS: HADSGroup;
   //lichamelijke activiteit
+  IPAQ_Header: IPAQ_Header
   IPAQ: IPAQ;
   //eind part 3
   EndGroup: SurveyEndGroup;
@@ -44,7 +45,7 @@ class LPplus_part3Def extends SurveyDefinition {
     super({
       surveyKey: 'LPplus_part3',
       name: new Map([
-        ['nl', 'Lyme Prospect Plus Vragenlijst deel 3']
+        ['nl', 'LymeProspect Plus Vragenlijst deel 3']
       ]),
       description: new Map([
         ['nl', 'Klik hier om deze vragenlijst af te ronden.']
@@ -74,6 +75,7 @@ class LPplus_part3Def extends SurveyDefinition {
     this.CBRQ_Header2 = new CBRQ_Header2(this.key, required);
     this.CBRQ2 = new CBRQ2(this.key, required);
     this.HADS = new HADSGroup(this.key, required);
+    this.IPAQ_Header = new IPAQ_Header(this.key, required);
     this.IPAQ = new IPAQ(this.key, required);
     this.EndGroup = new SurveyEndGroup(this.key, false)
 
@@ -103,6 +105,7 @@ class LPplus_part3Def extends SurveyDefinition {
     this.addPageBreak();
     this.addItem(this.HADS.get());
     this.addPageBreak();
+    this.addItem(this.IPAQ_Header.get());
     this.addItem(this.IPAQ.get());
     this.addPageBreak();
     this.addItem(this.EndGroup.get());

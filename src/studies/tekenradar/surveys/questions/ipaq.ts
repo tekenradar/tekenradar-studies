@@ -1,6 +1,38 @@
 import { Expression } from 'survey-engine/data_types';
 import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyItems } from 'case-editor-tools/surveys';
+import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
+
+export class IPAQ_Header extends Item {
+
+  markdownContent1 = `
+# Lichamelijke activiteit
+ `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'IPAQ_Header');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent1],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 export class IPAQ extends Item {
   questionTextMain = [
