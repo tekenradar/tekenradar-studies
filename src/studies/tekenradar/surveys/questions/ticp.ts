@@ -384,7 +384,7 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Verzakking"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         //{
         //key: 't6', role: 'text',
@@ -411,7 +411,7 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'r', role: 'option',
@@ -443,7 +443,7 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'u_Kids', role: 'option',
@@ -530,14 +530,14 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Alcoholverslaving"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'af', role: 'option',
           content: new Map([
             ["nl", "Drugsverslaving"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'ag', role: 'option',
