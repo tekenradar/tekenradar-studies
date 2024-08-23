@@ -210,7 +210,8 @@ export class NwEMLyme1 extends Item {
 export class NwEMLyme2 extends Item {
 
   optionKeys = {
-    date: 'a'
+    date: 'a',
+    unknown: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -231,11 +232,13 @@ export class NwEMLyme2 extends Item {
       ]),
       responseOptions: [
         SCOptions.cloze({
-          key: this.optionKeys.date, items: [
+          key: this.optionKeys.date,
+          items: [
             ClozeItemTypes.text({
-              key: '1', content: new Map(
-                [['en', "De rode ring of vlek is ontstaan op "]]
-              )
+              key: '1',
+              content: new Map([
+                ['nl', "De rode ring of vlek is ontstaan op "]
+              ])
             }),
             ClozeItemTypes.dateInput({
               dateInputMode: 'YMD',
@@ -246,29 +249,20 @@ export class NwEMLyme2 extends Item {
               }
             }),
             ClozeItemTypes.text({
-              key: '3', content: new Map(
-                [['en', "Je mag de datum schatten"]]
-              )
+              key: '3',
+              content: new Map([
+                ['nl', "Je mag de datum schatten"]
+              ])
             }),
           ],
         }),
-        {//disable b if a is selected and disable a if b is selected
-          key: 'b', role: 'option',
+        {
+          key: this.optionKeys.unknown, role: 'option',
           content: new Map([
             ["nl", "Weet ik niet"],
           ]),
-          disabled: SurveyEngine.singleChoice.any(this.itemKey, 'a')
+          disabled: SurveyEngine.singleChoice.any(this.itemKey, this.optionKeys.date)
         },
-      ],
-      customValidations: [
-        {
-          key: 'NEL2', rule: SurveyEngine.logic.or(
-            SurveyEngine.singleChoice.none(this.key, this.optionKeys.date),
-            SurveyEngine.logic.and(
-              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.2`)
-            )
-          ), type: 'hard'
-        }
       ]
     })
   }
@@ -647,16 +641,6 @@ export class NwEMLyme9 extends Item {
           ]),
           disabled: SurveyEngine.singleChoice.any(this.itemKey, 'a')
         },
-      ],
-      customValidations: [
-        {
-          key: 'NEL9', rule: SurveyEngine.logic.or(
-            SurveyEngine.singleChoice.none(this.key, this.optionKeys.date),
-            SurveyEngine.logic.and(
-              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.date}.2`)
-            )
-          ), type: 'hard'
-        }
       ]
     })
   }
