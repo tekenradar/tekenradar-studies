@@ -1412,19 +1412,6 @@ export class TicP_werk4 extends Item {
             ["nl", "Ik ben 92 dagen afwezig geweest"],
           ])
         },
-
-
-
-
-
-      ],
-      customValidations: [
-        {
-          key: 'TW4', rule: SurveyEngine.logic.or(
-            SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
-            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`), 0),
-          ), type: 'hard'
-        }
       ],
       topDisplayCompoments: [
         ComponentGenerators.markdown({
