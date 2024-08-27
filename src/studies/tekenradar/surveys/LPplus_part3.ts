@@ -70,6 +70,9 @@ class LPplus_part3Def extends SurveyDefinition {
     this.TW5 = new TicP_werk5(this.key, required, TW1werktCondition)
     const TW5Condition = SurveyEngine.singleChoice.any(this.TW5.key, this.TW5.optionKeys.yes);
     this.TW6 = new TicP_werk6(this.key, required, TW5Condition);
+    //Add condition to only show CBRQ if any of the PHQ questions is not 1(geen last)
+    //this.CBRQCondition = SurveyEngine.singleChoice.any()
+
     this.CBRQ_Header = new CBRQ_Header(this.key, required);
     this.CBRQ1 = new CBRQ1(this.key, required);
     this.CBRQ_Header2 = new CBRQ_Header2(this.key, required);

@@ -587,7 +587,7 @@ export class LPplusUitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om mee te doen aan het LymeProspect-PLUS vragenlijstonderzoek via Tekenradar hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
+            Om mee te doen aan het LymeProspect-PLUS vragenlijstonderzoek via Tekenradar hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
         `]]),
         })
       ],
@@ -1471,6 +1471,7 @@ class FutureStudies extends Item {
     })
   }
 }
+
 
 //mh LE:  version with color change in question
 export class NijmegenReis extends Item {
