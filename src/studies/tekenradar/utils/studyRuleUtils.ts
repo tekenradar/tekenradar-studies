@@ -29,6 +29,7 @@ import { TBflow_Adults } from "../surveys/TBflow_Adults";
 import { TBflow_Kids } from "../surveys/TBflow_Kids";
 import { WeeklyTB } from "../surveys/WeeklyTB";
 import { hasChronicflowCondition, hasEMFlowCondition, hasFEflowCondition, hasLBflowCondition, hasTBFlowCondition, hasWeeklyTBCondition } from "./pdiffRules";
+import { LPplus_part1 } from "../surveys/LPplus_part1";
 
 const isChildParticipant = () => StudyEngine.lt(
   StudyEngine.getResponseValueAsNum(PDiff.Q7.key, 'rg.num'),
@@ -265,7 +266,8 @@ export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.removeFlag(ParticipantFlags.tbExposure.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.NMG.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
-  StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key)
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.PHQ_15_none.key)
 )
 
 export const quitFollowUp = () => StudyEngine.do(
@@ -277,6 +279,7 @@ export const quitFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.removeFlag(ParticipantFlags.NMG.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.PHQ_15_none.key),
   StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
@@ -287,6 +290,12 @@ export const quitFollowUp = () => StudyEngine.do(
   ),
 )
 
+//LT PHQ_15_none flag
+export const PHQ_15_noneflagLogic = () => StudyEngine.ifThen(
+  // if:
+  StudyEngine.multipleChoice.any(LPplus_part1.PHQ_15_cause.key, LPplus_part1.PHQ_15_cause.optionKeys.none),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.PHQ_15_none.key, ParticipantFlags.PHQ_15_none.values.true),
+)
 
 /**
  * PDIFF - TB FLOW

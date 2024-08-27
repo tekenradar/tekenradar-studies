@@ -72,11 +72,16 @@ class LPplus_part3Def extends SurveyDefinition {
     this.TW6 = new TicP_werk6(this.key, required, TW5Condition);
     //Add condition to only show CBRQ if any of the PHQ questions is not 1(geen last)
     //this.CBRQCondition = SurveyEngine.singleChoice.any()
-
-    this.CBRQ_Header = new CBRQ_Header(this.key, required);
-    this.CBRQ1 = new CBRQ1(this.key, required);
-    this.CBRQ_Header2 = new CBRQ_Header2(this.key, required);
-    this.CBRQ2 = new CBRQ2(this.key, required);
+    const showCBRQ = SurveyEngine.logic.not(
+      SurveyEngine.participantFlags.hasKeyAndValue(
+        ParticipantFlags.PHQ_15_none.key,
+        ParticipantFlags.PHQ_15_none.values.true
+      )
+    );
+    this.CBRQ_Header = new CBRQ_Header(this.key, required, showCBRQ);
+    this.CBRQ1 = new CBRQ1(this.key, required, showCBRQ);
+    this.CBRQ_Header2 = new CBRQ_Header2(this.key, required, showCBRQ);
+    this.CBRQ2 = new CBRQ2(this.key, required, showCBRQ);
     this.HADS = new HADSGroup(this.key, required);
     this.IPAQ_Header = new IPAQ_Header(this.key, required);
     this.IPAQ = new IPAQ(this.key, required);

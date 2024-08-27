@@ -14,7 +14,7 @@ import {
   initFollowUpFlow_Kids,
   isSurveyExpired, aEMflagLogic, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
   removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned,
-  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag
+  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, PHQ_15_noneflagLogic
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -768,6 +768,7 @@ const handleSubmit_LPPlus_part1 = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey('LPplus_part1'),
   // Then:
   StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
+  PHQ_15_noneflagLogic(),
 )
 
 const handleSubmit_LPPlus_part2 = StudyEngine.ifThen(

@@ -633,7 +633,8 @@ export class PHQ_15_cause extends Item {
   optionKeys = {
     lyme: 'a',
     covid: 'b',
-    other: 'c'
+    other: 'c',
+    none: 'd'
   }
   questionTextMain = [
     {

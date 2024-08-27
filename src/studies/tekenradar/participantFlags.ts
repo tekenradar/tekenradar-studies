@@ -87,6 +87,12 @@ export const ParticipantFlags = {
     values: {
       likely: 'likely'
     }
+  }, //LT 27-08-2024
+  PHQ_15_none: {
+    key: 'PHQ_15_none',
+    values: {
+      true: 'true'
+    }
   }, //MH 08-08-2024
   LPbio: {
     key: 'BioB',
