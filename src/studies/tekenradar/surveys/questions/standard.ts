@@ -417,12 +417,12 @@ Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
 
 export class PHQ_15 extends Item {
-
   isFemaleCondition: Expression;
 
-  constructor(parentKey: string, isRequired: boolean, isFemaleCondition: Expression) {
+  constructor(parentKey: string, isRequired: boolean, isFemaleCondition: Expression, condition?: Expression) {
     super(parentKey, 'PHQ_15');
 
+    this.condition = condition;
     this.isRequired = isRequired;
     this.isFemaleCondition = isFemaleCondition;
   }
@@ -628,8 +628,6 @@ export class PHQ_15 extends Item {
     })
   }
 }
-
-
 
 export class PHQ_15_cause extends Item {
   optionKeys = {

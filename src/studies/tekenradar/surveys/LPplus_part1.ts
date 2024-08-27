@@ -11,11 +11,11 @@ import {
 } from './questions/NwEMLyme';
 import {
   PHQ_15, PHQ_15_cause, PHQ_15_FU2, PHQ_15_FU3, Qualification, StandardText1, BackgroundHeader, PHQ_15_FU, Pregnant,
+  SymptomsHeader, Fatigue, FatigueHeader, Cognition, CognitionHeader, GenHealthHeader,
 } from './questions/standard';
 import { TicP_Comorbidity } from './questions/ticp';
 import { Medication1, Medication2 } from './questions/medication';
 import { SF36 } from './questions/sf36';
-import { LPplusUitnodigingOnderzoek, LPplusUitnodigingOnderzoekConsent, LPplusUitnodigingOnderzoekText, LPplusUitnodigingOnderzoek_q2, UitnodigingOnderzoekText } from './questions/invitationQuestions'
 import { LPplusUitnodigingOnderzoek, LPplusUitnodigingOnderzoekConsent, LPplusUitnodigingOnderzoekText, LPplusUitnodigingOnderzoek_q2, LPplusContactgegevensGroup } from './questions/invitationQuestions'
 import { EndGroup_LPPlusNP } from './questions/surveyEnd';
 
@@ -64,6 +64,7 @@ class LPplus_part1Def extends SurveyDefinition {
   Med1: Medication1;
   Med2: Medication2;
   H3: SymptomsHeader;
+  GenH_Header: GenHealthHeader;
   PHQ_15: PHQ_15;
   PHQ_15_cause: PHQ_15_cause
   PHQ_15_FU: PHQ_15_FU;
@@ -90,6 +91,7 @@ class LPplus_part1Def extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.LPplus_part1,
       name: new Map([
+        ['nl', 'LymeProspect Plus Vragenlijst deel 1']
       ]),
       description: new Map([
         ['nl', 'Klik hier om deze vragenlijst af te ronden.']
@@ -163,6 +165,7 @@ class LPplus_part1Def extends SurveyDefinition {
     this.T1 = new StandardText1(this.key, required, LPPCondition);
     this.Qualification = new Qualification(this.key, required, LPPCondition);
 
+    this.GenH_Header = new GenHealthHeader(this.key, required, LPPCondition);
     this.TicP_comorbidity = new TicP_Comorbidity(this.key, required, LPPCondition);
     this.Med1 = new Medication1(this.key, required, LPPCondition)
     const Med1Condition = SurveyEngine.singleChoice.any(this.Med1.key, this.Med1.optionKeys.yes);
@@ -171,7 +174,6 @@ class LPplus_part1Def extends SurveyDefinition {
     this.H3 = new SymptomsHeader(this.key, required, LPPCondition);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
     this.PHQ_15 = new PHQ_15(this.key, required, isFemale, LPPCondition);
-    this.PHQ_15 = new PHQ_15(this.key, required, LPPCondition);
     this.PHQ_15_cause = new PHQ_15_cause(this.key, required, LPPCondition);
     const PHQ15causeLymeCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.lyme)
     const PHQ15causeCovidCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.covid)
@@ -234,8 +236,11 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.COV5.get());
     this.addPageBreak();
 
+    this.addItem(this.H1.get())
+    this.addItem(this.T1.get())
     this.addItem(this.Qualification.get());
     this.addPageBreak();
+    this.addItem(this.GenH_Header.get())
     this.addItem(this.TicP_comorbidity.get());
     this.addItem(this.Med1.get());
     this.addItem(this.Med2.get());

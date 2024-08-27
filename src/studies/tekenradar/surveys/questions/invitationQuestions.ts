@@ -1472,7 +1472,6 @@ class FutureStudies extends Item {
   }
 }
 
-
 //mh LE:  version with color change in question
 export class NijmegenReis extends Item {
   optionKeys = {
