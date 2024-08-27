@@ -296,6 +296,7 @@ export class SurveyEndGroup extends Group {
 
 //LPplus make entext for non-prticipants
 class EndText_LPPlusNP extends Item {
+
   markdownContent = `
 ### U heeft aangegeven niet mee te willen doen aan ons vervolgonderzoek.
 

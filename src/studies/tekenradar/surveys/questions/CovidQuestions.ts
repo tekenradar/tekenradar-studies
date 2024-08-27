@@ -7,7 +7,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 export class CovidHeader extends Item {
 
   markdownContent = `
-# Covid 19
+# Coronavirus (COVID-19)
 
     `
 
@@ -54,7 +54,7 @@ export class Covid1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "last gehad van langdurige klachten na een infectie met het coronavirus (COVID19)? "],
+        ["nl", "last gehad van langdurige klachten na een infectie met het coronavirus (COVID-19)? "],
       ])
     }]
 

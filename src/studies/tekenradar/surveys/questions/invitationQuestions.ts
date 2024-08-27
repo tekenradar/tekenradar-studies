@@ -1301,7 +1301,7 @@ class BirthYear extends Item {
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 120 }, (v, k) => ({ key: (currentYear - k).toString(), role: 'option', content: new Map([['nl', (currentYear - k).toString()]]) }));
 
-    return SurveyItems.singleChoice({
+    return SurveyItems.dropDown({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       condition: this.condition,
@@ -1472,7 +1472,6 @@ class FutureStudies extends Item {
   }
 }
 
-
 //mh LE:  version with color change in question
 export class NijmegenReis extends Item {
   optionKeys = {
@@ -1531,8 +1530,6 @@ export class NijmegenReis extends Item {
   }
 }
 
-
-
 export class StandardInviteGroup extends Group {
   // Standard Tekenradar
   T1: UitnodigingOnderzoekText;
@@ -1572,7 +1569,6 @@ export class StandardInviteGroup extends Group {
     this.addItem(this.Contactgegevens.get())
   }
 }
-
 
 export class kEMInviteGroup extends Group {
   T0: kEMUitnodigingOnderzoekText;
