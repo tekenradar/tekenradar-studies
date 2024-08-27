@@ -171,7 +171,7 @@ class LPplus_part1Def extends SurveyDefinition {
 
     this.H3 = new SymptomsHeader(this.key, required, LPPCondition);
     const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.PHQ_15 = new PHQ_15(this.key, required, LPPCondition);
+    this.PHQ_15 = new PHQ_15(this.key, required, isFemale, LPPCondition);
     this.PHQ_15_cause = new PHQ_15_cause(this.key, required, LPPCondition);
     const PHQ15causeLymeCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.lyme)
     const PHQ15causeCovidCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.covid)
