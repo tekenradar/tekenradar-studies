@@ -581,7 +581,7 @@ export class LPplusUitnodigingOnderzoekConsent extends Item {
         ['nl', ''],
       ]),
       checkBoxLabel: new Map([
-        ["nl", "Toestemming geven"],
+        ["nl", "Toestemmingsformulier"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({
@@ -845,7 +845,7 @@ export class BiobankUitnodigingAanvullendOnderzoekConsent extends Item {
         ['nl', ''],
       ]),
       checkBoxLabel: new Map([
-        ["nl", "Toestemming geven"],
+        ["nl", "Toestemmingsformulier"],
       ]),
       topDisplayCompoments: [
         ComponentGenerators.markdown({

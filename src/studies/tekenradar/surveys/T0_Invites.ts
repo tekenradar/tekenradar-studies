@@ -62,6 +62,7 @@ export class T0_InvitesDef extends SurveyDefinition {
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.UitnodigingOnderzoek.key, this.aEMInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
       //MH LPplus:
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.key, this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes)),
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.key, this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.optionKeys.no)),
       //SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key, this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes)),
 
     ))
