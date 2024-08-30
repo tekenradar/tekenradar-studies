@@ -479,7 +479,7 @@ export class PHQ_15 extends Item {
           content: new Map([
             ["nl", "Menstruatiepijn of andere problemen tijdens de menstruatie"],
           ]),
-          displayCondition: this.isPartOf(SurveySuffix.Adults) ? this.isFemaleCondition :
+          displayCondition: this.isPartOf(SurveySuffix.Adults) ? this.isFemaleCondition : this.isPartOf('LPplus_part1') ? this.isFemaleCondition :
             SurveyEngine.logic.and(
               this.isFemaleCondition,
               SurveyEngine.compare.gt(SurveyEngine.participantFlags.getAsNum(ParticipantFlags.ageFromPDiff.key), 10)
@@ -490,7 +490,7 @@ export class PHQ_15 extends Item {
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
         },
         {
           key: 'f',

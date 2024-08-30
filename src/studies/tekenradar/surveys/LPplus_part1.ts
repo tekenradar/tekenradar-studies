@@ -20,8 +20,6 @@ import { LPplusUitnodigingOnderzoek, LPplusUitnodigingOnderzoekConsent, LPplusUi
 import { EndGroup_LPPlusNP } from './questions/surveyEnd';
 
 //Todo: there are some questins dependent on certain flags: sex, age, participant type, the flags need still be set and then the questions checked.
-// the PHQ questionaire is not really pretty at the moment in the sense that in the PHQ_cause question has the option "geen klachten",
-// it would be prettier to get this from the questionaire itself, or if not possible using a thing to make "geen" a "single" choice option.
 
 class LPplus_part1Def extends SurveyDefinition {
   // hier moet de IC verklaring voor geplakt worden
@@ -172,8 +170,8 @@ class LPplus_part1Def extends SurveyDefinition {
     this.Med2 = new Medication2(this.key, required, Med1Condition)
 
     this.H3 = new SymptomsHeader(this.key, required, LPPCondition);
-    const isFemale = SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.genderCategory.key, ParticipantFlags.genderCategory.values.female);
-    this.PHQ_15 = new PHQ_15(this.key, required, isFemale, LPPCondition);
+    const isFemaleCondition = SurveyEngine.singleChoice.any(this.LPplusContactgegevens.Gender.key, this.LPplusContactgegevens.Gender.optionKeys.female);
+    this.PHQ_15 = new PHQ_15(this.key, required, isFemaleCondition, LPPCondition);
     this.PHQ_15_cause = new PHQ_15_cause(this.key, required, LPPCondition);
     const PHQ15causeLymeCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.lyme)
     const PHQ15causeCovidCondition = SurveyEngine.multipleChoice.any(this.PHQ_15_cause.key, this.PHQ_15_cause.optionKeys.covid)
@@ -181,7 +179,7 @@ class LPplus_part1Def extends SurveyDefinition {
     this.PHQ_15_FU = new PHQ_15_FU(this.key, required, PHQ15causeLymeCondition);
     this.PHQ_15_FU2 = new PHQ_15_FU2(this.key, required, PHQ15causeCovidCondition);
     this.PHQ_15_FU3 = new PHQ_15_FU3(this.key, required, PHQ15causeOtherCondition);
-    this.Pregnancy = new Pregnant(this.key, required, isFemale);
+    this.Pregnancy = new Pregnant(this.key, required, isFemaleCondition);
 
     this.H4 = new FatigueHeader(this.key, required, LPPCondition);
     this.Q14 = new Fatigue(this.key, required, LPPCondition);
