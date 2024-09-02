@@ -94,10 +94,11 @@ export const ParticipantFlags = {
       true: 'true'
     }
   }, //MH 08-08-2024
-  LPbio: {
+  BioB: {
     key: 'BioB',
     values: {
-      true: 'true'
+      accepted: 'true',
+      rejected: 'false'
     }
   },
   consents: {

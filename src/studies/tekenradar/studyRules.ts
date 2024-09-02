@@ -475,6 +475,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
       StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
       StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
       StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
+      StudyEngine.consent.accepted(T0_Invites.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key)
     ),
     // Then:
     StudyEngine.do(
