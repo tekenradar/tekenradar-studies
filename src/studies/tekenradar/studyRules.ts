@@ -519,6 +519,10 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
       StudyEngine.singleChoice.any(T0_Invites.aEMInviteGroup.NijmegenReis.key, T0_Invites.aEMInviteGroup.NijmegenReis.optionKeys.yes)),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true),
   ),
+  StudyEngine.if(
+    StudyEngine.consent.accepted(T0_Invites.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key),
+    StudyEngine.participantActions.updateFlag(ParticipantFlags.BioB.key, ParticipantFlags.BioB.values.true),
+  ),
   StudyEngine.participantActions.externalEventHandler(researcherBackendNames.T0_Invites),
   StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
   reAssignWeeklyToTheEndOfList(),

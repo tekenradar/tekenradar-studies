@@ -97,8 +97,7 @@ export const ParticipantFlags = {
   BioB: {
     key: 'BioB',
     values: {
-      accepted: 'true',
-      rejected: 'false'
+      true: 'true'
     }
   },
   consents: {
