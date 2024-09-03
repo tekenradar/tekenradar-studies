@@ -686,7 +686,7 @@ export class PHQ_15_cause extends Item {
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "ik heb geen klachten"],
+            ["nl", "ik heb helemaal geen klachten"],
           ])
         }
       ]

@@ -1419,7 +1419,6 @@ export class BiobankContactgegevensGroup extends Group {
   Name: Name;
   Email: Email;
   Telephone: Telephone;
-  GP: GP;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Contactgegevens');
@@ -1430,7 +1429,6 @@ export class BiobankContactgegevensGroup extends Group {
     this.Name = new Name(this.key, isRequired)
     this.Email = new Email(this.key, isRequired)
     this.Telephone = new Telephone(this.key, false)
-    this.GP = new GP(this.key, isRequired)
   }
 
   buildGroup(): void {
@@ -1438,7 +1436,6 @@ export class BiobankContactgegevensGroup extends Group {
     this.addItem(this.Name.get())
     this.addItem(this.Email.get())
     this.addItem(this.Telephone.get())
-    this.addItem(this.GP.get())
 
   }
 }
