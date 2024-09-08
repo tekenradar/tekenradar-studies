@@ -100,7 +100,7 @@ export class NwEMLyme1 extends Item {
         {
           key: this.optionKeys.yes_number, role: 'numberInput',
           content: new Map([
-            ["nl", "Ja, meerdere keren lymeziekte, aantal keer:"],
+            ["nl", "Ja, meerdere keren erythema migrans/lymeziekte, aantal keer:"],
           ]),
           optionProps: {
             min: 0,
@@ -948,7 +948,7 @@ export class NwEMLyme14 extends Item {
     })
 
     const markdownContent = `
-*Heeft u geen antibiotica behandeling gekregen, vul dan 0 in.*
+*Vul hieronder steeds in welke vorm van de ziekte van Lyme (erythema migrans en/of andere vorm) je hebt gehad. Heeft u geen antibiotica behandeling gekregen, vul dan 0 in.*
     `
 
     return SurveyItems.clozeQuestion({
@@ -957,7 +957,7 @@ export class NwEMLyme14 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', "Welke manifestaties van de ziekte van Lyme heb je gehad? Wanneer waren deze? En hoe zijn ze behandeld?"],
+        ['nl', "Welke vormen van de ziekte van Lyme heb je gehad? Wanneer waren deze? En hoe zijn ze behandeld?"],
       ]),
       items: cItems,
       topDisplayCompoments: [

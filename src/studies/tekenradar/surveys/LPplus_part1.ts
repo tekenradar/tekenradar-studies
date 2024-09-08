@@ -11,7 +11,7 @@ import {
 } from './questions/NwEMLyme';
 import {
   PHQ_15, PHQ_15_cause, PHQ_15_FU2, PHQ_15_FU3, Qualification, StandardText1, BackgroundHeader, PHQ_15_FU, Pregnant,
-  SymptomsHeader, Fatigue, FatigueHeader, Cognition, CognitionHeader, GenHealthHeader,
+  SymptomsHeader, Fatigue, FatigueHeader, Cognition, CognitionHeader, GenHealthHeader, Gen_Info_Header
 } from './questions/standard';
 import { TicP_Comorbidity } from './questions/ticp';
 import { Medication1, Medication2 } from './questions/medication';
@@ -29,6 +29,7 @@ class LPplus_part1Def extends SurveyDefinition {
   LPplusUitnodigingOnderzoek: LPplusUitnodigingOnderzoek;
   LPplusUitnodigingOnderzoek_q2: LPplusUitnodigingOnderzoek_q2;
   LPplusUitnodigingOnderzoekConsent: LPplusUitnodigingOnderzoekConsent;
+  Gen_Info_Header: Gen_Info_Header;
   LPplusContactgegevens: LPplusContactgegevensGroup;
   EndGroup_LPPlusNP: EndGroup_LPPlusNP;
   PTBT: PrevTBHeader;
@@ -89,7 +90,7 @@ class LPplus_part1Def extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.LPplus_part1,
       name: new Map([
-        ['nl', 'LymeProspect Plus Vragenlijst deel 1']
+        ['nl', 'LymeProspect-Plus Vragenlijst deel 1']
       ]),
       description: new Map([
         ['nl', 'Klik hier om deze vragenlijst af te ronden.']
@@ -110,6 +111,7 @@ class LPplus_part1Def extends SurveyDefinition {
     const LPPgeendeelname = SurveyEngine.singleChoice.any(this.LPplusUitnodigingOnderzoek.key, this.LPplusUitnodigingOnderzoek.optionKeys.no);
     this.LPplusUitnodigingOnderzoek_q2 = new LPplusUitnodigingOnderzoek_q2(this.key, required);
     this.LPplusUitnodigingOnderzoekConsent = new LPplusUitnodigingOnderzoekConsent(this.key, required, LPPCondition);
+    this.Gen_Info_Header = new Gen_Info_Header(this.key, required, LPPCondition);
     this.LPplusContactgegevens = new LPplusContactgegevensGroup(this.key, required, LPPCondition)
     this.EndGroup_LPPlusNP = new EndGroup_LPPlusNP(this.key, false, LPPgeendeelname);
     //    this.LPplusInviteGroup = new LPplusInviteGroup(this.key, required, SurveyEngine.logic.and(
@@ -201,6 +203,7 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.LPplusUitnodigingOnderzoek_q2.get());//MH LPplus
     this.addItem(this.LPplusUitnodigingOnderzoekConsent.get())
     this.addPageBreak();
+    this.addItem(this.Gen_Info_Header.get())
     this.addItem(this.LPplusContactgegevens.get());
     this.addPageBreak();
 

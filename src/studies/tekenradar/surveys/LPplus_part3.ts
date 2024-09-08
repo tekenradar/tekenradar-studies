@@ -45,7 +45,7 @@ class LPplus_part3Def extends SurveyDefinition {
     super({
       surveyKey: 'LPplus_part3',
       name: new Map([
-        ['nl', 'LymeProspect Plus Vragenlijst deel 3']
+        ['nl', 'LymeProspect-Plus Vragenlijst deel 3']
       ]),
       description: new Map([
         ['nl', 'Klik hier om deze vragenlijst af te ronden.']

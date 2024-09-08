@@ -12,7 +12,6 @@ export class BackgroundHeader extends Item {
   markdownContent = `
 # Achtergrond
 
-Hieronder volgen vragen over je achtergrond en je gezondheid.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -38,6 +37,37 @@ Hieronder volgen vragen over je achtergrond en je gezondheid.
     })
   }
 }
+
+export class Gen_Info_Header extends Item {
+
+  markdownContent = `
+# Algemene gegevens
+    `
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'GenIH');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 
 export class GenHealthHeader extends Item {

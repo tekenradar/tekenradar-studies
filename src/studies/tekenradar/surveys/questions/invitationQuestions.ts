@@ -206,8 +206,8 @@ export class LPplusUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek
 
-Wij vragen je of je mee wilt doen aan het LymeProspect Plus vragenlijst onderzoek via Tekenradar, omdat je enkele jaren terug mee hebt gedaan aan onderzoek via tekenradar. Je vult direct hierna dan een vragenlijst in over je gezondheid.
-Dit kost je eenmalig ongeveer 20 minuten en je helpt hiermee onderzoek naar het verloop van langdurige klachten na de ziekte van Lyme.
+Wij vragen je of je mee wilt doen aan het LymeProspect-Plus vragenlijst onderzoek via Tekenradar, omdat je enkele jaren terug mee hebt gedaan aan onderzoek via tekenradar. Je vult direct hierna dan een vragenlijst in over je gezondheid.
+Dit kost je eenmalig ongeveer 20 minuten en je helpt hiermee onderzoek naar het verloop van langdurige klachten na de ziekte van Lyme. Ook als je deze klachten zelf niet of niet meer hebt is het heel nuttig als je meedoet.
 Voor dit onderzoek worden mensen uitgenodigd die tussen 2014 en 2020 aan het LymeProspect onderzoek of het Tekenradarvragenlijst onderzoek hebben meegedaan, en toestemming hebben gegeven om benaderd te mogen worden voor nieuw onderzoek. Het kan zijn dat je toen hebt meegedaan nadat je een tekenbeet of ziekte van Lyme had gehad, of je bent toen uitgenodigd als controle persoon.
 `
 
@@ -336,7 +336,7 @@ export class LPplusUitnodigingOnderzoek extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wil je meedoen aan het LymeProspect Plus vragenlijst onderzoek via Tekenradar.nl?'],
+        ['nl', 'Wil je meedoen aan het LymeProspect-Plus vragenlijst onderzoek via Tekenradar.nl?'],
       ]),
       responseOptions: [
         {
@@ -587,7 +587,7 @@ export class LPplusUitnodigingOnderzoekConsent extends Item {
         ComponentGenerators.markdown({
           content: new Map([
             ["nl", `
-Om mee te doen aan het LymeProspect-PLUS vragenlijstonderzoek via Tekenradar hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
+Om mee te doen aan het LymeProspect-Plus vragenlijstonderzoek via Tekenradar hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
 `]]),
         })
       ],
