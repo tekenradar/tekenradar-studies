@@ -897,7 +897,7 @@ export class NwEMLyme14 extends Item {
       cItems.push(ClozeItemTypes.text({
         key: `row_${index + 1}_label`,
         content: new Map(
-          [['nl', `${index + 1}. Manifestatie:`]]
+          [['nl', `${index + 1}. Vorm:`]]
         ),
         displayCondition: rowCondition,
       }));
@@ -948,7 +948,7 @@ export class NwEMLyme14 extends Item {
     })
 
     const markdownContent = `
-*Vul hieronder steeds in welke vorm van de ziekte van Lyme (erythema migrans en/of andere vorm) je hebt gehad. Heeft u geen antibiotica behandeling gekregen, vul dan 0 in.*
+*Vul hieronder steeds in welke vorm van de ziekte van Lyme (erythema migrans en/of andere vorm) je hebt gehad. Heb je geen antibiotica behandeling gekregen, vul dan 0 in.*
     `
 
     return SurveyItems.clozeQuestion({
