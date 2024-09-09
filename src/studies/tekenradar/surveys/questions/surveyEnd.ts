@@ -1,5 +1,5 @@
 import { Expression } from 'survey-engine/data_types';
-import { SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
+import { SurveyEngine, SurveyItems, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from "case-editor-tools/surveys";
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
@@ -331,9 +331,130 @@ Hartelijk dank dat u dit in het verleden wel heeft gedaan, bent u nog geïnteres
   }
 }
 
+class StopReden extends Item {
+
+  optionKeys = {
+    other: 'i'
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wat is de reden dat je de vragenlijst niet wilt invullen?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", " Er zijn meerdere antwoorden mogelijk. Waarom vragen we dit? We willen kijken waarom deelnemers stoppen omdat dit onze bevindingen kan beïnvloeden. Hiermee kunnen we uitzoeken waarom sommige mensen wél klachten blijven houden en sommige mensen niet."],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'SR');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Ik heb geen klachten of ik heb geen klachten meer"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Ik wil stoppen vanwege (lymeziekte) klachten"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Ik denk dat mijn klachten niet door lymeziekte komen"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Het invullen van de vragenlijst kost me teveel tijd"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "Het invullen van de vragenlijst is te lastig via een website"],
+          ])
+        },
+        {
+          key: 'f', role: 'option',
+          content: new Map([
+            ["nl", "De website werkt niet goed"],
+          ])
+        },
+        {
+          key: 'g', role: 'option',
+          content: new Map([
+            ["nl", "De vragen van het onderzoek zijn niet duidelijk"],
+          ])
+        },
+        {
+          key: 'h', role: 'option',
+          content: new Map([
+            ["nl", "Ik zie het nut van het onderzoek niet in"],
+          ])
+        },
+        {
+          key: 'h', role: 'option',
+          content: new Map([
+            ["nl", "Dat wil ik niet zeggen"],
+          ])
+        },
+        MCOptions.cloze({
+          key: this.optionKeys.other,
+          items: [
+            ClozeItemTypes.text({
+              key: 'i', content: new Map(
+                [['nl', "Een andere reden, namelijk:"]]
+              )
+            }),
+            ClozeItemTypes.textInput({
+              key: 'input',
+            }),
+          ]
+        }),
+      ],
+      customValidations: [
+        {
+          key: 'SR', rule:
+            SurveyEngine.logic.or(
+              SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
+              SurveyEngine.logic.and(
+                SurveyEngine.multipleChoice.any(this.key, this.optionKeys.other),
+                SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.other}.input`),
+              )
+            ),
+          type: 'hard'
+        }
+      ]
+    })
+  }
+}
+
 export class EndGroup_LPPlusNP extends Group {
 
   EndText_LPPlusNP: EndText_LPPlusNP;
+  StopReden: StopReden;
   Comment: Comment;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -343,11 +464,13 @@ export class EndGroup_LPPlusNP extends Group {
     this.EndText_LPPlusNP = new EndText_LPPlusNP(this.key,
       SurveyEngine.participantFlags.hasKeyAndValue('LPplus', 'likely')
     );
+    this.StopReden = new StopReden(this.key, isRequired);
     this.Comment = new Comment(this.key, isRequired);
   }
 
   buildGroup(): void {
     this.addItem(this.EndText_LPPlusNP.get())
+    this.addItem(this.StopReden.get())
     this.addItem(this.Comment.get())
   }
 }
