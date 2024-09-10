@@ -772,6 +772,7 @@ const handleSubmit_DeleteContactData = StudyEngine.ifThen(
 const handleSubmit_LPPlus_part1 = StudyEngine.ifThen(
   StudyEngine.checkSurveyResponseKey('LPplus_part1'),
   // Then:
+  StudyEngine.participantActions.updateFlag('LPplus', 'likely'),
   StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
   PHQ_15_noneflagLogic(),
 )
