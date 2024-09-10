@@ -302,6 +302,7 @@ class EndText_LPPlusNP extends Item {
 
 Hartelijk dank dat u dit in het verleden wel heeft gedaan, bent u nog geïnteresseerd in de resultaten van het onderzoek destijds dan kunt u deze vinden bij de nieuwsberichten op Tekenradar.nl
 
+Zouden we je hieronder nog één korte laatste vraag mogen stellen?
 
 ##### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoord op te sturen!
 
@@ -345,7 +346,7 @@ class StopReden extends Item {
     },
     {
       content: new Map([
-        ["nl", " Er zijn meerdere antwoorden mogelijk. Waarom vragen we dit? We willen kijken waarom deelnemers stoppen omdat dit onze bevindingen kan beïnvloeden. Hiermee kunnen we uitzoeken waarom sommige mensen wél klachten blijven houden en sommige mensen niet."],
+        ["nl", " Er zijn meerdere antwoorden mogelijk. Waarom vragen we dit? We willen kijken waarom deelnemers niet meedoen omdat dit onze bevindingen kan beïnvloeden. Hiermee kunnen we uitzoeken waarom sommige mensen wél klachten blijven houden en sommige mensen niet."],
       ]),
       className: "fw-normal"
     },
@@ -375,7 +376,7 @@ class StopReden extends Item {
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "Ik wil stoppen vanwege (lymeziekte) klachten"],
+            ["nl", "Ik wil niet meedoen omdat ik teveel last heb van klachten (door lymeziekte)"],
           ])
         },
         {
