@@ -1221,7 +1221,6 @@ class GenderForContact extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      confidentialMode: 'replace',
       questionText: new Map([
         ['nl', 'Wat is je geslacht?'],
       ]),
@@ -1282,7 +1281,6 @@ class BirthMonth extends Item {
       questionText: new Map([
         ['nl', 'Mijn geboortemaand:']
       ]),
-      confidentialMode: "replace",
       responseOptions: months
     });
   }
@@ -1309,7 +1307,6 @@ class BirthYear extends Item {
       questionText: new Map([[
         'nl', 'Mijn geboortejaar:'
       ]]),
-      confidentialMode: "replace",
       responseOptions: years
     });
   }
