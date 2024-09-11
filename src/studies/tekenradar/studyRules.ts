@@ -43,6 +43,7 @@ import { QuitFollowUp } from "./surveys/QuitFollowUp";
 import { surveyKeys } from "./surveys/globalConstants";
 import { DeleteContactData } from "./surveys/DeleteContactData";
 import { postalCodesForNMGStudy } from "./surveys/globalConstants";
+import { LPplus_part1 } from "./surveys/LPplus_part1";
 
 const reports = {
   FollowUpReport: {
@@ -775,6 +776,11 @@ const handleSubmit_LPPlus_part1 = StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag('LPplus', 'likely'),
   StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
   PHQ_15_noneflagLogic(),
+  updateGenderFlag(LPplus_part1.LPplusContactgegevens.Gender.key),
+  StudyEngine.participantActions.updateFlag(
+    ParticipantFlags.ageFromPDiff.key,
+    StudyEngine.getSelectedKeys(LPplus_part1.LPplusContactgegevens.BirthYear.key, 'rg.ddg'),
+  ),
 )
 
 const handleSubmit_LPPlus_part2 = StudyEngine.ifThen(
