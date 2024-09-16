@@ -915,11 +915,14 @@ export class NwEMLyme14 extends Item {
         ),
         displayCondition: rowCondition,
       }));
-      cItems.push(ClozeItemTypes.textInput({
-        key: `row_${index + 1}_input`,
+      cItems.push(ClozeItemTypes.dateInput({
+        key: `row_${index + 1}_date`,
         displayCondition: rowCondition,
-        className: 'flex-grow-1',
-        alignText: 'start',
+        dateInputMode: 'YMD',
+        maxRelativeDate: {
+          reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
+          delta: { seconds: 0 }
+        }
       }));
       cItems.push(ClozeItemTypes.clozeLineBreak());
       cItems.push(ClozeItemTypes.text({
