@@ -1637,12 +1637,13 @@ export class aEMInviteGroup extends Group {
     this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
     this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
 
-    const showNijmegenReis = SurveyEngine.logic.and(
-      SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes),
-      SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), `^(?!${postalCodesForNMGStudy.join('|')}).*$`)
-    )
+    //per 01-10-2024 LE removed by adjusting const for showing this question
+    //    const showNijmegenReis = SurveyEngine.logic.and(
+    //      SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes),
+    //      SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), `^(?!${postalCodesForNMGStudy.join('|')}).*$`)
+    //    )
+    const showNijmegenReis = SurveyEngine.compare.eq(1, 0); // This will always be false
     this.NijmegenReis = new NijmegenReis(this.key, isRequired, showNijmegenReis);
-
 
 
     this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.no));
