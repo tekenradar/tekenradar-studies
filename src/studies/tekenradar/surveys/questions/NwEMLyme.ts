@@ -50,7 +50,7 @@ export class NwEMLyme1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Heb je in de afgelopen jaren na het vorige onderzoek een (nieuwe) erythema migrans '],
+        ["nl", 'Heb je in de afgelopen jaren na het voorgaande LymeProspect of Tekenradar vragenlijstonderzoek een (nieuwe) erythema migrans '],
       ])
     },
     {
