@@ -4,7 +4,7 @@ import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { PreviousTickBitesGroup, PrevTBHeader } from './questions/prevTickBites';
-import { CovidHeader, Covid1, Covid2, Covid3, Covid4, Covid5 } from './questions/CovidQuestions';
+import { CovidHeader, Covid1, Covid2, Covid3a, Covid3b, Covid3c, Covid4, Covid5 } from './questions/CovidQuestions';
 import {
   NwEMLymeHeader, NwEMLyme1, NwEMLyme2, NwEMLyme3, NwEMLyme4,
   NwEMLyme5, NwEMLyme6, NwEMLyme7, NwEMLyme8, NwEMLyme9, NwEMLyme10, NwEMLyme11, NwEMLyme12, NwEMLyme13, NwEMLyme14
@@ -53,7 +53,9 @@ class LPplus_part1Def extends SurveyDefinition {
   COVH: CovidHeader;
   COV1: Covid1;
   COV2: Covid2;
-  COV3: Covid3;
+  COV3a: Covid3a;
+  COV3b: Covid3b;
+  COV3c: Covid3c;
   COV4: Covid4;
   COV5: Covid5;
   H1: BackgroundHeader;
@@ -156,7 +158,9 @@ class LPplus_part1Def extends SurveyDefinition {
     this.COV1 = new Covid1(this.key, required, LPPCondition);
     const COV1Condition = SurveyEngine.singleChoice.any(this.COV1.key, this.COV1.optionKeys.yes);
     this.COV2 = new Covid2(this.key, required, COV1Condition);
-    this.COV3 = new Covid3(this.key, required, COV1Condition);
+    this.COV3a = new Covid3a(this.key, required, COV1Condition);
+    this.COV3b = new Covid3b(this.key, required, COV1Condition);
+    this.COV3c = new Covid3c(this.key, required, COV1Condition);
     this.COV4 = new Covid4(this.key, required, COV1Condition);
     const COV4Condition = SurveyEngine.singleChoice.any(this.COV4.key, this.COV4.optionKeys.no);
     this.COV5 = new Covid5(this.key, required, COV4Condition);
@@ -232,7 +236,9 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.COVH.get());
     this.addItem(this.COV1.get());
     this.addItem(this.COV2.get());
-    this.addItem(this.COV3.get());
+    this.addItem(this.COV3a.get());
+    this.addItem(this.COV3b.get());
+    this.addItem(this.COV3c.get());
     this.addItem(this.COV4.get());
     this.addItem(this.COV5.get());
     this.addPageBreak();

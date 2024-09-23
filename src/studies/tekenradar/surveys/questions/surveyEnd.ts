@@ -222,6 +222,7 @@ class LPPlusEndText extends Item {
   markdownContent = `
 ### Hartelijk dank voor het meedoen aan het onderzoek.
 
+##### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
 Als je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 

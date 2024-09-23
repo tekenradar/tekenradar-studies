@@ -54,7 +54,7 @@ export class Covid1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "last gehad van langdurige klachten na een infectie met het coronavirus (COVID-19)? "],
+        ["nl", "last gehad van langdurige klachten na een infectie met het coronavirus (post-COVID of Long COVID)? "],
       ])
     }]
 
@@ -126,38 +126,191 @@ export class Covid2 extends Item {
   }
 }
 
-export class Covid3 extends Item {
 
+export class Covid3a extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'COV3a');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Sinds wanneer heb je last van langdurige klachten na de coronavirus infectie? '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "(je mag de datum schatten)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+  buildItem() {
+    return SurveyItems.dateInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: this.questionTextMain,
+      dateInputMode: 'YMD',
+      maxRelativeDate: { delta: { days: 0 } },
+      // minRelativeDate: { delta: { years: -19 } },
+    })
+  }
+}
+
+export class Covid3b extends Item {
 
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Welke langdurige klachten had of heb je?'],
+        ["nl", 'Welke langdurige klachten na de coronavirus infectie had of heb je? '],
       ]),
-      className: "row"
     },
     {
       content: new Map([
-        ["nl", "Geef hier een beknopte beschrijving van je  klachten, sinds wanneer je hier last van hebt en of dit dagelijks of periodiek is."],
+        ["nl", " (meerdere antwoorden mogelijk)"],
       ]),
-      className: "row"
+      className: "fw-normal"
     },
   ]
 
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'COV3');
+    super(parentKey, 'COV3b');
 
     this.isRequired = isRequired;
     this.condition = condition;
   }
-  //TODO: size of text input field?
+
   buildItem() {
-    return SurveyItems.multilineTextInput({
+    return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.questionTextMain
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Vermoeidheid"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Concentratieproblemen"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Slaapproblemen"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Hoofdpijn"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "Spierpijn/gewrichtspijn (niet sportgerelateerd)"],
+          ])
+        },
+        {
+          key: 'f', role: 'option',
+          content: new Map([
+            ["nl", "Zenuwpijn"],
+          ])
+        },
+        {
+          key: 'g', role: 'option',
+          content: new Map([
+            ["nl", "Kortademig (snel buiten adem) of benauwd"],
+          ])
+        },
+        {
+          key: 'h', role: 'option',
+          content: new Map([
+            ["nl", "Verergering van klachten bij inspanning (PEM, post-exertionele malaise)"],
+          ])
+        },
+        {
+          key: 'i', role: 'option',
+          content: new Map([
+            ["nl", "Duizeligheid en hartkloppingen bij opstaan of oprichten (POTS, posturaal orthostatische tachycardiesydroom)"],
+          ])
+        },
+        {
+          key: 'j', role: 'option',
+          content: new Map([
+            ["nl", "Reuk- of smaakverlies"],
+          ])
+        },
+        //TODO: text field mandatory or not?
+        {
+          key: 'k', role: 'input',
+          content: new Map([
+            ["nl", "Andere klachten, namelijk:"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+export class Covid3c extends Item {
+
+  optionKeys = {
+    daily: 'a',
+    recurring: 'b',
+    other: 'c'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'COV3c');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Ervaar je deze klachten dagelijks of periodiek?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Dagelijks"],
+          ])
+        },
+        {
+          key: 'b', role: 'input',
+          content: new Map([
+            ["nl", "Periodiek, namelijk:"],
+          ])
+        },
+        {
+          key: 'c', role: 'input',
+          content: new Map([
+            ["nl", "Anders, namelijk:"],
+          ])
+        },
+      ]
     })
   }
 }

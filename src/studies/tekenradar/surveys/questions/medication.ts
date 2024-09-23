@@ -60,7 +60,7 @@ export class Medication2 extends Item {
     },
     {
       content: new Map([
-        ["nl", " Er zijn meerdere antwoorden mogelijk. Als je niet weet onder welke categorie een medicijn valt kun je het ook onderaan invullen bij 'andere medicijnen'"],
+        ["nl", " Er zijn meerdere antwoorden mogelijk. Als je niet weet onder welke categorie een medicijn valt kun je de naam van de medicatie ook onderaan invullen bij 'andere medicijnen'"],
       ]),
       className: "fw-normal"
     },

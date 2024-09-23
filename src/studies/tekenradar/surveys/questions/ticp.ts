@@ -122,7 +122,7 @@ class MedCare1 extends Item {
           ]),
           optionProps: {
             min: 0,
-            max: 5,
+            max: 8,
           }
         },
         {
@@ -166,7 +166,7 @@ class MedCare2 extends Item {
 
   buildItem() {
     const cItems: Array<OptionDef> = [];
-    Array.from({ length: 5 }).forEach((_, index) => {
+    Array.from({ length: 8 }).forEach((_, index) => {
       const rowCondition = SurveyEngine.compare.gt(this.numberRef, index);
       cItems.push(ClozeItemTypes.text({
         key: `row_${index + 1}_label`,

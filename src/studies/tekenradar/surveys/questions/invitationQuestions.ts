@@ -206,9 +206,10 @@ export class LPplusUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek
 
-Wij vragen je of je mee wilt doen aan het LymeProspect-Plus vragenlijst onderzoek via Tekenradar, omdat je enkele jaren terug mee hebt gedaan aan onderzoek via tekenradar. Je vult direct hierna dan een vragenlijst in over je gezondheid.
-Dit kost je eenmalig ongeveer 20 minuten en je helpt hiermee onderzoek naar het verloop van langdurige klachten na de ziekte van Lyme. Ook als je deze klachten zelf niet of niet meer hebt is het heel nuttig als je meedoet.
-Voor dit onderzoek worden mensen uitgenodigd die tussen 2014 en 2020 aan het LymeProspect onderzoek of het Tekenradarvragenlijst onderzoek hebben meegedaan, en toestemming hebben gegeven om benaderd te mogen worden voor nieuw onderzoek. Het kan zijn dat je toen hebt meegedaan nadat je een tekenbeet of ziekte van Lyme had gehad, of je bent toen uitgenodigd als controle persoon.
+Wij nodigen je uit om deel te nemen aan het LymeProspect-Plus vragenlijstonderzoek via Tekenradar, omdat je enkele jaren geleden hebt meegedaan aan een onderzoek via Tekenradar.
+Het kan zijn dat je toen hebt meegedaan nadat je een tekenbeet of ziekte van Lyme had gehad, of je bent toen uitgenodigd als controlepersoon.
+Voor dit onderzoek vragen we je om éénmalig een vragenlijst in te vullen over je gezondheid, wat ongeveer 20 minuten kost.
+Je draagt hiermee bij aan onderzoek naar het verloop van langdurige klachten na de ziekte van Lyme. Ook als je geen klachten (meer) hebt, is je deelname zeer waardevol.
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -380,7 +381,7 @@ export class LPplusUitnodigingOnderzoek_q2 extends Item {
       questionText: [
         {
           content: new Map([
-            ['nl', `Ben jij de persoon die tussen 2014 en 2020 heeft deelgenomen aan het LymeProspect of Tekenradar vragenlijstonderzoek met de voornaam `],
+            ['nl', `Heb jij, `],
           ])
         },
         {
@@ -396,6 +397,11 @@ export class LPplusUitnodigingOnderzoek_q2 extends Item {
         },
         {
           content: new Map([
+            ['nl', `, tussen 2014 en 2020 deelgenomen aan het LymeProspect of Tekenradar vragenlijstonderzoek `],
+          ])
+        },
+        {
+          content: new Map([
             ['nl', `?`],
           ])
         }
@@ -404,7 +410,7 @@ export class LPplusUitnodigingOnderzoek_q2 extends Item {
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja, ik ben degene die eerder aan het onderzoek heeft deelgenomen"],
+            ["nl", "Ja, ik heb eerder aan het onderzoek deelgenomen."],
           ])
         },
         {
@@ -1238,9 +1244,9 @@ class GenderForContact extends Item {
           ])
         },
         {
-          key: this.optionKeys.other, role: 'option',
+          key: this.optionKeys.other, role: 'input',
           content: new Map([
-            ["nl", "Geen van bovenstaande"],
+            ["nl", "Anders, namelijk:"],
           ])
         },
         {
@@ -1524,6 +1530,36 @@ export class NijmegenReis extends Item {
   }
 }
 
+class BiobankUitnodigingAanvullendOnderzoekText2 extends Item {
+
+  markdownContent = `
+
+Hierna volgen nog een aantal vragen.
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'BiobankAOAfterText');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 export class StandardInviteGroup extends Group {
   // Standard Tekenradar
   T1: UitnodigingOnderzoekText;
@@ -1725,6 +1761,7 @@ export class LPplusBBInviteGroup extends Group {
   BiobankUitnodigingAanvullendOnderzoek: BiobankUitnodigingAanvullendOnderzoek;
   BiobankUitnodigingAanvullendOnderzoekConsent: BiobankUitnodigingAanvullendOnderzoekConsent;
   BiobankContactgegevens: BiobankContactgegevensGroup;
+  BiobankUitnodigingAanvullendOnderzoekText2: BiobankUitnodigingAanvullendOnderzoekText2
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'LPplusBB');
@@ -1741,6 +1778,7 @@ export class LPplusBBInviteGroup extends Group {
     this.BiobankUitnodigingAanvullendOnderzoek = new BiobankUitnodigingAanvullendOnderzoek(this.key, isRequired);
     this.BiobankUitnodigingAanvullendOnderzoekConsent = new BiobankUitnodigingAanvullendOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
     this.BiobankContactgegevens = new BiobankContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.BiobankUitnodigingAanvullendOnderzoek.key, this.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes));
+    this.BiobankUitnodigingAanvullendOnderzoekText2 = new BiobankUitnodigingAanvullendOnderzoekText2(this.key);
   }
 
   buildGroup(): void {
@@ -1752,6 +1790,7 @@ export class LPplusBBInviteGroup extends Group {
     this.addItem(this.T2.get());
     this.addItem(this.BiobankUitnodigingAanvullendOnderzoek.get());
     this.addItem(this.BiobankUitnodigingAanvullendOnderzoekConsent.get());
-    this.addItem(this.BiobankContactgegevens.get())
+    this.addItem(this.BiobankContactgegevens.get());
+    this.addItem(this.BiobankUitnodigingAanvullendOnderzoekText2.get())
   }
 }
