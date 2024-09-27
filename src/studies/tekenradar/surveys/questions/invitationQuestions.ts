@@ -958,7 +958,7 @@ class BiobankContactGroupPretext extends Item {
   markdownContent = `
 **Uw contactgegevens**
 
-Vul hieronder je gegevens in zodat we je kunnen benaderen. We vragen opnieuw om je email adres omdat we de eerdere gegevens vanwege privacyregelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde e-mailadres invullen. Je contactgegevens worden alleen gebruikt om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
+Vul hieronder je gegevens in zodat we je kunnen benaderen. We vragen opnieuw om je e-mailadres omdat we de eerdere gegevens vanwege privacyregelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde e-mailadres invullen. Je contactgegevens worden alleen gebruikt om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
 Je contactgegevens worden alleen gebruikt voor het Tekenradar onderzoek en/of om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
 `
 

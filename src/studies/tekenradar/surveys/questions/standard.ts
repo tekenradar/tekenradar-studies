@@ -698,25 +698,25 @@ export class PHQ_15_cause extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "tekenbeet, erythema migrans of andere ziekte van Lyme"],
+            ["nl", "Tekenbeet, erythema migrans of andere ziekte van Lyme"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "coronavirus infectie (COVID-19)"],
+            ["nl", "Coronavirus infectie (COVID-19)"],
           ])
         },
         {
           key: 'c', role: 'input',
           content: new Map([
-            ["nl", "andere oorzaak, namelijk:"],
+            ["nl", "Andere oorzaak, namelijk:"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "ik heb helemaal geen klachten"],
+            ["nl", "Ik heb helemaal geen klachten"],
           ])
         }
       ]
@@ -1182,7 +1182,7 @@ export class Cognition extends Item {
         {
           key: 'h',
           content: new Map([
-            ["nl", "Iets er uitflappen en achteraf bedenken dat dat wel eens beledigend voor iemand zou kunnen zijn"],
+            ["nl", "Iets eruit flappen en achteraf bedenken dat dat wel eens beledigend voor iemand zou kunnen zijn"],
           ])
         },
         {

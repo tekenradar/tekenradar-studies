@@ -120,25 +120,25 @@ export class Q_a extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "meestal"],
+            ["nl", "Meestal"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "vaak"],
+            ["nl", "Vaak"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "af en toe, soms"],
+            ["nl", "Af en toe, soms"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
       ]
@@ -167,25 +167,25 @@ export class Q_b extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "zeker zo veel"],
+            ["nl", "Zeker zo veel"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "wel wat minder"],
+            ["nl", "Wel wat minder"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "duidelijk minder"],
+            ["nl", "Duidelijk minder"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "eigenlijk nauwelijks nog"],
+            ["nl", "Eigenlijk nauwelijks nog"],
           ])
         },
       ]
@@ -214,25 +214,25 @@ export class Q_c extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "jazeker, en vrij erg"],
+            ["nl", "Jazeker, en vrij erg"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "ja, maar niet zo erg"],
+            ["nl", "Ja, maar niet zo erg"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "een beetje, maar het hindert me niet"],
+            ["nl", "Een beetje, maar het hindert me niet"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
       ]
@@ -261,25 +261,25 @@ export class Q_d extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "net zoveel als vroeger"],
+            ["nl", "Net zoveel als vroeger"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "nu wel wat minder"],
+            ["nl", "Nu wel wat minder"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "duidelijk minder"],
+            ["nl", "Duidelijk minder"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
       ]
@@ -308,25 +308,25 @@ export class Q_e extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "heel erg vaak"],
+            ["nl", "Heel erg vaak"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "vaak"],
+            ["nl", "Vaak"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "af en toe, maar niet zo vaak"],
+            ["nl", "Af en toe, maar niet zo vaak"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "heel soms"],
+            ["nl", "Heel soms"],
           ])
         },
       ]
@@ -355,25 +355,25 @@ export class Q_f extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "heel af en toe"],
+            ["nl", "Heel af en toe"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "soms"],
+            ["nl", "Soms"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "meestal"],
+            ["nl", "Meestal"],
           ])
         },
       ]
@@ -402,25 +402,25 @@ export class Q_g extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "jazeker"],
+            ["nl", "Jazeker"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "meestal"],
+            ["nl", "Meestal"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "af en toe"],
+            ["nl", "Af en toe"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
       ]
@@ -449,25 +449,25 @@ export class Q_h extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "bijna altijd"],
+            ["nl", "Bijna altijd"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "heel vaak"],
+            ["nl", "Heel vaak"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "soms"],
+            ["nl", "Soms"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
       ]
@@ -496,25 +496,25 @@ export class Q_i extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "soms"],
+            ["nl", "Soms"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "vrij vaak"],
+            ["nl", "Vrij vaak"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "heel vaak"],
+            ["nl", "Heel vaak"],
           ])
         },
 
@@ -544,25 +544,25 @@ export class Q_j extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "inderdaad, helemaal niet meer"],
+            ["nl", "Inderdaad, helemaal niet meer"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "niet meer zoveel als eigenlijk zou moeten"],
+            ["nl", "Niet meer zoveel als eigenlijk zou moeten"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "het interesseert me wel, maar iets minder dan vroeger"],
+            ["nl", "Het interesseert me wel, maar iets minder dan vroeger"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "het interesseert me nog net zoveel als vroeger"],
+            ["nl", "Het interesseert me nog net zoveel als vroeger"],
           ])
         },
       ]
@@ -591,25 +591,25 @@ export class Q_k extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "inderdaad, heel duidelijk"],
+            ["nl", "Inderdaad, heel duidelijk"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "duidelijk"],
+            ["nl", "Duidelijk"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "enigszins"],
+            ["nl", "Enigszins"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "helemaal niet"],
+            ["nl", "Helemaal niet"],
           ])
         },
       ]
@@ -638,25 +638,25 @@ export class Q_l extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "net zoveel als vroeger"],
+            ["nl", "Net zoveel als vroeger"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "een beetje minder dan vroeger"],
+            ["nl", "Een beetje minder dan vroeger"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "veel minder dan vroeger"],
+            ["nl", "Veel minder dan vroeger"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "bijna nooit"],
+            ["nl", "Bijna nooit"],
           ])
         },
       ]
@@ -685,25 +685,25 @@ export class Q_m extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "inderdaad, zeer vaak"],
+            ["nl", "Inderdaad, zeer vaak"],
           ])
         },
         {
           key: 'b', role: 'option',
           content: new Map([
-            ["nl", "tamelijk vaak"],
+            ["nl", "Tamelijk vaak"],
           ])
         },
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "soms"],
+            ["nl", "Soms"],
           ])
         },
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "helemaal nooit"],
+            ["nl", "Helemaal nooit"],
           ])
         },
       ]
@@ -732,25 +732,25 @@ export class Q_n extends Item {
         {
           key: '1', role: 'option',
           content: new Map([
-            ["nl", "vaak"],
+            ["nl", "Vaak"],
           ])
         },
         {
           key: '2', role: 'option',
           content: new Map([
-            ["nl", "tamelijk vaak"],
+            ["nl", "Tamelijk vaak"],
           ])
         },
         {
           key: '3', role: 'option',
           content: new Map([
-            ["nl", "af en toe"],
+            ["nl", "Af en toe"],
           ])
         },
         {
           key: '4', role: 'option',
           content: new Map([
-            ["nl", "heel zelden"],
+            ["nl", "Heel zelden"],
           ])
         },
 

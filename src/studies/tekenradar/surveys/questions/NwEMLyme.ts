@@ -100,7 +100,7 @@ export class NwEMLyme1 extends Item {
         {
           key: this.optionKeys.yes_number, role: 'numberInput',
           content: new Map([
-            ["nl", "Ja, meerdere keren erythema migrans/lymeziekte, aantal keer:"],
+            ["nl", "Ja, meerdere keren erythema migrans en/of andere vormen van lymeziekte, aantal keer:"],
           ]),
           optionProps: {
             min: 0,
