@@ -567,9 +567,9 @@ export class TicP_Comorbidity extends Item {
 
         {
           key: 'aj', role: 'option',
-          content: new Map([
-            ["nl", "Geen van bovenstaande"],
-          ])
+          content: new Map([["nl", "Geen van bovenstaande"],
+          ]),
+          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'a') // Disable if any of the specified options are selected
         },
       ]
     })

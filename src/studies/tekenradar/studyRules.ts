@@ -516,12 +516,12 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   //      StudyEngine.singleChoice.any(T0_Invites.aEMInviteGroup.NijmegenReis.key, T0_Invites.aEMInviteGroup.NijmegenReis.optionKeys.yes)
   //    ),
 
-  //per 01-10-2024 LE stopped by removing updating of the NMG flag (Lola per 1-10 dit stukje code uitscripten)
-  StudyEngine.if(
-    StudyEngine.or(...postalCodesForNMGStudy.map(postalCode => StudyEngine.hasResponseKeyWithValue(T0_Invites.aEMInviteGroup.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), postalCode)),
-      StudyEngine.singleChoice.any(T0_Invites.aEMInviteGroup.NijmegenReis.key, T0_Invites.aEMInviteGroup.NijmegenReis.optionKeys.yes)),
-    StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true),
-  ),
+  //per 01-10-2024 LE stopped by removing updating of the NMG flag (Lola per 1-10 dit stukje code uitgescript)
+  //StudyEngine.if(
+  //  StudyEngine.or(...postalCodesForNMGStudy.map(postalCode => StudyEngine.hasResponseKeyWithValue(T0_Invites.aEMInviteGroup.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), postalCode)),
+  //    StudyEngine.singleChoice.any(T0_Invites.aEMInviteGroup.NijmegenReis.key, T0_Invites.aEMInviteGroup.NijmegenReis.optionKeys.yes)),
+  //  StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true),
+  //),
   StudyEngine.if(
     StudyEngine.consent.accepted(T0_Invites.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.BioB.key, ParticipantFlags.BioB.values.true),

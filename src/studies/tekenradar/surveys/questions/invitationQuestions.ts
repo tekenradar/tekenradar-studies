@@ -1392,6 +1392,7 @@ export class LPplusContactgegevensGroup extends Group {
   BirthYear: BirthYear;
   Gender: GenderForContact;
   PC4contact: PC4contact;
+  GP: GP;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Uw gegevens');
@@ -1403,6 +1404,7 @@ export class LPplusContactgegevensGroup extends Group {
     this.BirthYear = new BirthYear(this.key, isRequired)
     this.Gender = new GenderForContact(this.key, isRequired)
     this.PC4contact = new PC4contact(this.key, isRequired)
+    this.GP = new GP(this.key, isRequired)
 
   }
 
@@ -1412,6 +1414,8 @@ export class LPplusContactgegevensGroup extends Group {
     this.addItem(this.BirthYear.get())
     this.addItem(this.Gender.get())
     this.addItem(this.PC4contact.get())
+    this.addItem(this.GP.get())
+
 
   }
 }
@@ -1673,12 +1677,12 @@ export class aEMInviteGroup extends Group {
     this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
     this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
 
-    //per 01-10-2024 LE removed by adjusting const for showing this question (Lola per 1-10 deze const uit en onderste aan)
-    const showNijmegenReis = SurveyEngine.logic.and(
-      SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes),
-      SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), `^(?!${postalCodesForNMGStudy.join('|')}).*$`)
-    )
-    //const showNijmegenReis = SurveyEngine.compare.eq(1, 0); // This will always be false
+    //per 01-10-2024 LE removed by adjusting const for showing this question (Lola per 1-10 deze const uitgezet en de const hieronder aan)
+    //const showNijmegenReis = SurveyEngine.logic.and(
+    //  SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes),
+    //  SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), `^(?!${postalCodesForNMGStudy.join('|')}).*$`)
+    //)
+    const showNijmegenReis = SurveyEngine.compare.eq(1, 0);
     this.NijmegenReis = new NijmegenReis(this.key, isRequired, showNijmegenReis);
 
 

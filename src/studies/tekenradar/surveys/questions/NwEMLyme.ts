@@ -50,7 +50,7 @@ export class NwEMLyme1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Heb je in de afgelopen jaren na het voorgaande LymeProspect of Tekenradar vragenlijstonderzoek een (nieuwe) erythema migrans '],
+        ["nl", 'Heb je in de afgelopen jaren —na het voorgaande LymeProspect of Tekenradar vragenlijstonderzoek— een (nieuwe) erythema migrans '],
       ])
     },
     {
@@ -76,6 +76,7 @@ export class NwEMLyme1 extends Item {
   buildItem() {
     const markdownContent = `
 *Een andere vorm van de ziekte van Lyme wordt meestal vastgesteld met laboratoriumonderzoek, vaak via een medisch specialist en/of ziekenhuis.*
+*Als je niet meer precies weet wanneer je de erythema migrans of andere vorm van de ziekte van Lyme hebt gehad, vul deze dan toch in en schat de datum.*
     `
 
     return SurveyItems.singleChoice({

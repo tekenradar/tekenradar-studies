@@ -271,8 +271,10 @@ export class Covid3c extends Item {
 
   optionKeys = {
     daily: 'a',
-    recurring: 'b',
-    other: 'c'
+    weekly: 'b',
+    monthly: 'c',
+    sometimes: 'd',
+    other: 'e'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -299,13 +301,25 @@ export class Covid3c extends Item {
           ])
         },
         {
-          key: 'b', role: 'input',
+          key: 'b', role: 'option',
           content: new Map([
-            ["nl", "Periodiek, namelijk:"],
+            ["nl", "Wekelijks"],
           ])
         },
         {
-          key: 'c', role: 'input',
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Elke maand"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Minder dan een keer per maand"],
+          ])
+        },
+        {
+          key: 'e', role: 'input',
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
