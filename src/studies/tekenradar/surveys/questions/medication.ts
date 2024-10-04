@@ -148,6 +148,30 @@ export class Medication2 extends Item {
             ["nl", "Pijnstillers anders dan paracetamol"],
           ])
         },
+        {
+          key: 'l', role: 'option',
+          content: new Map([
+            ["nl", "Anti-epileptica"],
+          ])
+        },
+        {
+          key: 'm', role: 'option',
+          content: new Map([
+            ["nl", "Slaap- en kalmeringsmiddelen"],
+          ])
+        },
+        {
+          key: 'n', role: 'option',
+          content: new Map([
+            ["nl", "Antidepressiva"],
+          ])
+        },
+        {
+          key: 'o', role: 'option',
+          content: new Map([
+            ["nl", "Anti-allergiemedicijnen (antihistaminica)"],
+          ])
+        },
         MCOptions.cloze({
           key: this.optionKeys.other,
           items: [

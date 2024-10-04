@@ -5,6 +5,7 @@ import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
 import { PreviousTickBitesGroup, PrevTBHeader } from './questions/prevTickBites';
 import { CovidHeader, Covid1, Covid2, Covid3a, Covid3b, Covid3c, Covid4, Covid5 } from './questions/CovidQuestions';
+import { LonglymeHeader, Longlyme1, Longlyme2, Longlyme3a, Longlyme3b, Longlyme3c, Longlyme4, Longlyme5 } from './questions/LonglymeQuestions';
 import {
   NwEMLymeHeader, NwEMLyme1, NwEMLyme2, NwEMLyme3, NwEMLyme4,
   NwEMLyme5, NwEMLyme6, NwEMLyme7, NwEMLyme8, NwEMLyme9, NwEMLyme10, NwEMLyme11, NwEMLyme12, NwEMLyme13, NwEMLyme14
@@ -49,7 +50,14 @@ class LPplus_part1Def extends SurveyDefinition {
   NEL12: NwEMLyme12;
   NEL13: NwEMLyme13;
   NEL14: NwEMLyme14;
-
+  LLH: LonglymeHeader;
+  LL1: Longlyme1;
+  LL2: Longlyme2;
+  LL3a: Longlyme3a;
+  LL3b: Longlyme3b;
+  LL3c: Longlyme3c;
+  LL4: Longlyme4;
+  LL5: Longlyme5;
   COVH: CovidHeader;
   COV1: Covid1;
   COV2: Covid2;
@@ -153,6 +161,16 @@ class LPplus_part1Def extends SurveyDefinition {
     const NEL1number = SurveyEngine.getResponseValueAsNum(this.NEL1.key, `rg.scg.${this.NEL1.optionKeys.yes_number}`);
     this.NEL14 = new NwEMLyme14(this.key, required, NEL1number);
 
+    this.LLH = new LonglymeHeader(this.key, required, LPPCondition);
+    this.LL1 = new Longlyme1(this.key, required, LPPCondition);
+    const LL1Condition = SurveyEngine.singleChoice.any(this.LL1.key, this.LL1.optionKeys.yes);
+    this.LL2 = new Longlyme2(this.key, required, LL1Condition);
+    this.LL3a = new Longlyme3a(this.key, required, LL1Condition);
+    this.LL3b = new Longlyme3b(this.key, required, LL1Condition);
+    this.LL3c = new Longlyme3c(this.key, required, LL1Condition);
+    this.LL4 = new Longlyme4(this.key, required, LL1Condition);
+    const LL4Condition = SurveyEngine.singleChoice.any(this.LL4.key, this.LL4.optionKeys.no);
+    this.LL5 = new Longlyme5(this.key, required, LL4Condition);
 
     this.COVH = new CovidHeader(this.key, required, LPPCondition);
     this.COV1 = new Covid1(this.key, required, LPPCondition);
@@ -231,6 +249,16 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.NEL13.get());
     this.addItem(this.NEL14.get());
 
+    this.addPageBreak();
+
+    this.addItem(this.LLH.get());
+    this.addItem(this.LL1.get());
+    this.addItem(this.LL2.get());
+    this.addItem(this.LL3a.get());
+    this.addItem(this.LL3b.get());
+    this.addItem(this.LL3c.get());
+    this.addItem(this.LL4.get());
+    this.addItem(this.LL5.get());
     this.addPageBreak();
 
     this.addItem(this.COVH.get());

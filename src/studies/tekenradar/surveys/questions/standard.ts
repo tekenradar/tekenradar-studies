@@ -651,7 +651,7 @@ export class PHQ_15 extends Item {
         {
           key: 'y3',
           content: new Map([
-            ["nl", "Een tintelend, brandend gevoel en/of gevoelloosheid, dat zich verplaatst of komt en gaat"],
+            ["nl", "Een tintelend, brandend gevoel en/of gevoelloosheid, dat zich verplaatst of komt en gaat, of voortdurend aanwezig is"],
           ])
         },
       ]
@@ -669,12 +669,12 @@ export class PHQ_15_cause extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Klik hieronder aan wat volgens jou mogelijk de oorzaak kan zijn van je lichamelijke of psychische klachten'],
+        ["nl", 'Het kan zijn dat je lichamelijke of psychische klachten hebt, waaronder klachten die je mogelijk hierboven hebt aangeklikt. Klik hieronder aan wat volgens jou mogelijk de oorzaak kan zijn van deze klachten'],
       ]),
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " (meerdere antwoorden mogelijk)."],
       ]),
       className: "fw-normal"
     },
@@ -694,6 +694,9 @@ export class PHQ_15_cause extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: this.questionTextMain,
+      questionSubText: new Map([
+        ['nl', 'Als je geen lichamelijke of psychische klachten hebt, klik dan "ik heb helemaal geen klachten" aan.'],
+      ]),
       responseOptions: [
         {
           key: 'a', role: 'option',

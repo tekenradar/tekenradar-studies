@@ -4,15 +4,15 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
-export class CovidHeader extends Item {
+export class LonglymeHeader extends Item {
 
   markdownContent = `
-# Coronavirus (COVID-19)
+# Langdurige klachten na de ziekte van Lyme
 
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Covid19');
+    super(parentKey, 'LLH');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -35,7 +35,7 @@ export class CovidHeader extends Item {
   }
 }
 
-export class Covid1 extends Item {
+export class Longlyme1 extends Item {
 
   optionKeys = {
     yes: 'a'
@@ -43,23 +43,12 @@ export class Covid1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Heb je in de '],
-      ]),
-    },
-    {
-      content: new Map([
-        ["nl", "afgelopen 5 jaar "],
-      ]),
-      className: "text-primary"
-    },
-    {
-      content: new Map([
-        ["nl", "last gehad van langdurige klachten na een infectie met het coronavirus (post-COVID of Long COVID)? "],
+        ["nl", 'Heb je in de afgelopen jaren —sinds deelname aan het voorgaande LymeProspect of Tekenradar vragenlijstonderzoek— last gehad van langdurige klachten na een erythema migrans of andere vorm van de ziekte van Lyme? '],
       ])
     }]
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'COV1');
+    super(parentKey, 'LL1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -74,7 +63,7 @@ export class Covid1 extends Item {
       questionText: this.questionTextMain,
       questionSubText: new Map([
         ['nl',
-          'Met langdurige klachten bedoelen we klachten die langer dan twee maanden aanhouden en binnen drie maanden na coronavirusinfectie ontstaan zijn.'],
+          'Met langdurige klachten bedoelen we klachten die langer dan zes maanden aanhouden en binnen zes maanden na behandeling voor de erythema migrans of andere vorm van de ziekte van Lyme ontstaan zijn. Klik ook op "Ja" als je langdurige klachten had of hebt door een erythema migrans of andere vorm van ziekte van Lyme die je reeds in het voorgaande onderzoek gemeld hebt. '],
       ]),
       responseOptions: [
         {
@@ -89,14 +78,20 @@ export class Covid1 extends Item {
             ["nl", "Nee"],
           ])
         },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Niet van toepassing, ik heb geen erythema migrans of andere vorm van de ziekte van Lyme gehad"],
+          ])
+        },
       ]
     })
   }
 }
 
-export class Covid2 extends Item {
+export class Longlyme2 extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
-    super(parentKey, 'COV2');
+    super(parentKey, 'LL2');
 
 
     this.condition = condition;
@@ -105,7 +100,7 @@ export class Covid2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Wanneer kreeg je de coronavirus infectie, waarna je langdurig klachten hield? '],
+        ["nl", 'Wanneer kreeg je de erythema migrans of andere vorm van de ziekte van Lyme, waarna je langdurig klachten hield? '],
       ]),
     },
     {
@@ -131,9 +126,9 @@ export class Covid2 extends Item {
 }
 
 
-export class Covid3a extends Item {
+export class Longlyme3a extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
-    super(parentKey, 'COV3a');
+    super(parentKey, 'LL3a');
 
     this.condition = condition;
     this.isRequired = required;
@@ -141,7 +136,7 @@ export class Covid3a extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Sinds wanneer heb je last van langdurige klachten na de coronavirus infectie? '],
+        ["nl", 'Sinds wanneer heb je last van langdurige klachten na de erythema migrans of andere vorm van de ziekte van Lyme? '],
       ]),
     },
     {
@@ -166,12 +161,12 @@ export class Covid3a extends Item {
   }
 }
 
-export class Covid3b extends Item {
+export class Longlyme3b extends Item {
 
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Welke langdurige klachten na de coronavirus infectie had of heb je? '],
+        ["nl", 'Welke langdurige klachten na de erythema migrans of andere vorm van ziekte van Lyme had of heb je? '],
       ]),
     },
     {
@@ -184,7 +179,7 @@ export class Covid3b extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'COV3b');
+    super(parentKey, 'LL3b');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -271,7 +266,7 @@ export class Covid3b extends Item {
 }
 
 
-export class Covid3c extends Item {
+export class Longlyme3c extends Item {
 
   optionKeys = {
     daily: 'a',
@@ -282,7 +277,7 @@ export class Covid3c extends Item {
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'COV3c');
+    super(parentKey, 'LL3c');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -334,14 +329,14 @@ export class Covid3c extends Item {
 }
 
 
-export class Covid4 extends Item {
+export class Longlyme4 extends Item {
 
   optionKeys = {
     no: 'b'
   }
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'COV4');
+    super(parentKey, 'LL4');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -354,7 +349,7 @@ export class Covid4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Heb je nog steeds langdurige klachten na een infectie met het coronavirus?'],
+        ['nl', 'Heb je nog steeds langdurige klachten na een erythema migrans of andere vorm van de ziekte van Lyme?'],
       ]),
       responseOptions: [
         {
@@ -375,9 +370,9 @@ export class Covid4 extends Item {
 }
 
 
-export class Covid5 extends Item {
+export class Longlyme5 extends Item {
   constructor(parentKey: string, required: boolean, condition?: Expression) {
-    super(parentKey, 'COV5');
+    super(parentKey, 'LL5');
 
     this.condition = condition;
     this.isRequired = required;
@@ -385,7 +380,7 @@ export class Covid5 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Vanaf wanneer waren de langdurige klachten na het coronavirus weg? '],
+        ["nl", 'Vanaf wanneer waren de langdurige klachten na de erythema migrans of andere vorm van de ziekte van Lyme weg? '],
       ]),
     },
     {
