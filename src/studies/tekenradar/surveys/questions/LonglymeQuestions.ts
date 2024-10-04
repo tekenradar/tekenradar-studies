@@ -81,7 +81,7 @@ export class Longlyme1 extends Item {
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "Niet van toepassing, ik heb geen erythema migrans of andere vorm van de ziekte van Lyme gehad"],
+            ["nl", "Niet van toepassing, ik heb geen erythema migrans of andere vorm van de ziekte van Lyme gehad."],
           ])
         },
       ]
