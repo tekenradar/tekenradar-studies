@@ -985,7 +985,7 @@ Je contactgegevens worden alleen gebruikt voor het Tekenradar onderzoek en/of om
   }
 }
 
-class GP extends Item {
+export class GP extends Item {
   optionKeys = {
     nameOffice: 'pn',
     nameDoc: 'nh',
@@ -996,10 +996,14 @@ class GP extends Item {
     super(parentKey, 'GP');
 
     this.condition = condition;
-    this.isRequired = required;
+    //    this.isRequired = required;
   }
 
   buildItem() {
+    const markdownContent = `
+*De gegevens van je huisarts worden alleen gebruikt om eventueel medische informatie op te vragen die relevant kan zijn voor het onderzoek, zoals een melding van de ziekte van Lyme of andere melding in deze Tekenradar vragenlijst. Als je dat niet wilt, vul dan hieronder niks in.*
+    `
+
     return SurveyItems.clozeQuestion({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -1008,7 +1012,6 @@ class GP extends Item {
       questionText: new Map([[
         'nl', 'De gegevens van mijn huisarts:'
       ]]),
-      confidentialMode: "add",
       items: [
         ClozeItemTypes.text({ key: 't1', content: new Map([['nl', 'Praktijknaam: ']]) }),
         ClozeItemTypes.textInput({ key: this.optionKeys.nameOffice, className: 'w-100', alignText: 'start' }),
@@ -1033,14 +1036,22 @@ class GP extends Item {
         ClozeItemTypes.text({ key: 't7', content: new Map([['nl', 'Telefoonnummer praktijk: ']]) }),
         ClozeItemTypes.textInput({ key: 'tel', className: 'w-100', alignText: 'start' }),
       ],
-      customValidations: [
-        {
-          key: 'DocAddress', rule: SurveyEngine.logic.and(
-            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.nameOffice}`),
-            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.nameDoc}`),
-            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.place}`),
-          ), type: 'hard'
-        }
+      //      customValidations: [
+      //        {
+      //          key: 'DocAddress', rule: SurveyEngine.logic.and(
+      //            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.nameOffice}`),
+      //            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.nameDoc}`),
+      //            SurveyEngine.hasResponse(this.key, `rg.cloze.${this.optionKeys.place}`),
+      //          ), type: 'hard'
+      //        }
+      //      ]
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", markdownContent],
+          ]),
+          className: 'mb-2'
+        })
       ]
     })
   }
@@ -1392,7 +1403,6 @@ export class LPplusContactgegevensGroup extends Group {
   BirthYear: BirthYear;
   Gender: GenderForContact;
   PC4contact: PC4contact;
-  GP: GP;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'Uw gegevens');
@@ -1404,7 +1414,6 @@ export class LPplusContactgegevensGroup extends Group {
     this.BirthYear = new BirthYear(this.key, isRequired)
     this.Gender = new GenderForContact(this.key, isRequired)
     this.PC4contact = new PC4contact(this.key, isRequired)
-    this.GP = new GP(this.key, isRequired)
 
   }
 
@@ -1414,7 +1423,6 @@ export class LPplusContactgegevensGroup extends Group {
     this.addItem(this.BirthYear.get())
     this.addItem(this.Gender.get())
     this.addItem(this.PC4contact.get())
-    this.addItem(this.GP.get())
 
 
   }

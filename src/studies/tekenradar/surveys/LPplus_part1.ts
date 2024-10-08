@@ -17,7 +17,7 @@ import {
 import { TicP_Comorbidity } from './questions/ticp';
 import { Medication1, Medication2 } from './questions/medication';
 import { SF36 } from './questions/sf36';
-import { LPplusUitnodigingOnderzoek, LPplusUitnodigingOnderzoekConsent, LPplusUitnodigingOnderzoekText, LPplusUitnodigingOnderzoek_q2, LPplusContactgegevensGroup } from './questions/invitationQuestions'
+import { LPplusUitnodigingOnderzoek, LPplusUitnodigingOnderzoekConsent, LPplusUitnodigingOnderzoekText, LPplusUitnodigingOnderzoek_q2, LPplusContactgegevensGroup, GP } from './questions/invitationQuestions'
 import { EndGroup_LPPlusNP } from './questions/surveyEnd';
 
 //Todo: there are some questins dependent on certain flags: sex, age, participant type, the flags need still be set and then the questions checked.
@@ -67,6 +67,7 @@ class LPplus_part1Def extends SurveyDefinition {
   COV4: Covid4;
   COV5: Covid5;
   H1: BackgroundHeader;
+  GP: GP;
   T1: StandardText1;
   Qualification: Qualification;
   TicP_comorbidity: TicP_Comorbidity;
@@ -184,6 +185,7 @@ class LPplus_part1Def extends SurveyDefinition {
     this.COV5 = new Covid5(this.key, required, COV4Condition);
 
     this.H1 = new BackgroundHeader(this.key, required, LPPCondition);
+    this.GP = new GP(this.key, required, LPPCondition);
     this.T1 = new StandardText1(this.key, required, LPPCondition);
     this.Qualification = new Qualification(this.key, required, LPPCondition);
 
@@ -272,6 +274,7 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addPageBreak();
 
     this.addItem(this.H1.get())
+    this.addItem(this.GP.get())
     this.addItem(this.T1.get())
     this.addItem(this.Qualification.get());
     this.addPageBreak();

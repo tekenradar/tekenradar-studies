@@ -43,7 +43,18 @@ export class Longlyme1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Heb je in de afgelopen jaren —sinds deelname aan het voorgaande LymeProspect of Tekenradar vragenlijstonderzoek— last gehad van langdurige klachten na een erythema migrans of andere vorm van de ziekte van Lyme? '],
+        ["nl", 'Heb je in de '],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen jaren "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", '—sinds start van deelname aan het voorgaande LymeProspect of Tekenradar vragenlijstonderzoek— last gehad van langdurige klachten na een erythema migrans of andere vorm van de ziekte van Lyme? '],
       ])
     }]
 
@@ -63,13 +74,13 @@ export class Longlyme1 extends Item {
       questionText: this.questionTextMain,
       questionSubText: new Map([
         ['nl',
-          'Met langdurige klachten bedoelen we klachten die langer dan zes maanden aanhouden en binnen zes maanden na behandeling voor de erythema migrans of andere vorm van de ziekte van Lyme ontstaan zijn. Klik ook op "Ja" als je langdurige klachten had of hebt door een erythema migrans of andere vorm van ziekte van Lyme die je reeds in het voorgaande onderzoek gemeld hebt. '],
+          'Met langdurige klachten bedoelen we klachten die langer dan zes maanden aanhouden en binnen zes maanden na behandeling voor de erythema migrans of andere vorm van de ziekte van Lyme ontstaan zijn. '],
       ]),
       responseOptions: [
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "Ja"],
+            ["nl", "Ja, ik heb last (gehad) van langdurige klachten na een erythema migrans of andere vorm van de ziekte van Lyme."],
           ])
         },
         {

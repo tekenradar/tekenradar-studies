@@ -38,8 +38,25 @@ export class IPAQ extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", "Hoeveel tijd bracht je gewoonlijk zittend door gedurende een doordeweekse dag in de afgelopen 7 dagen?"],
+        ["nl", "Hoeveel tijd bracht je gewoonlijk zittend door "],
       ]),
+    },
+    {
+      content: new Map([
+        ["nl", "gedurende een doordeweekse dag "],
+      ]),
+      className: "text-primary"
+    },
+    {
+      content: new Map([
+        ["nl", "in de "],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "afgelopen 7 dagen?"],
+      ]),
+      className: "text-primary"
     },
     {
       content: new Map([

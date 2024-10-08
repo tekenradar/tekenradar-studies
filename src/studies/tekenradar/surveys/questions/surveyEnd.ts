@@ -336,7 +336,7 @@ Zouden we je hieronder nog één korte laatste vraag mogen stellen?
 class StopReden extends Item {
 
   optionKeys = {
-    other: 'i'
+    other: 'j'
   }
 
   questionTextMain = [
@@ -417,7 +417,7 @@ class StopReden extends Item {
           ])
         },
         {
-          key: 'h', role: 'option',
+          key: 'i', role: 'option',
           content: new Map([
             ["nl", "Dat wil ik niet zeggen"],
           ])
@@ -426,7 +426,7 @@ class StopReden extends Item {
           key: this.optionKeys.other,
           items: [
             ClozeItemTypes.text({
-              key: 'i', content: new Map(
+              key: 'j', content: new Map(
                 [['nl', "Een andere reden, namelijk:"]]
               )
             }),

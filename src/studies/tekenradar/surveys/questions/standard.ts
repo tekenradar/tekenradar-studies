@@ -688,6 +688,10 @@ export class PHQ_15_cause extends Item {
   }
 
   buildItem() {
+    const markdownContent = `
+**De (waarschijnlijke) oorzaak van mijn klachten is:**
+    `
+
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -702,19 +706,22 @@ export class PHQ_15_cause extends Item {
           key: 'a', role: 'option',
           content: new Map([
             ["nl", "Tekenbeet, erythema migrans of andere ziekte van Lyme"],
-          ])
+          ]),
+          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'd')
         },
         {
           key: 'b', role: 'option',
           content: new Map([
             ["nl", "Coronavirus infectie (COVID-19)"],
-          ])
+          ]),
+          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'd')
         },
         {
           key: 'c', role: 'input',
           content: new Map([
             ["nl", "Andere oorzaak, namelijk:"],
-          ])
+          ]),
+          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'd')
         },
         {
           key: 'd', role: 'option',
@@ -722,10 +729,19 @@ export class PHQ_15_cause extends Item {
             ["nl", "Ik heb helemaal geen klachten"],
           ])
         }
+      ],
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", markdownContent],
+          ]),
+          className: 'mb-2'
+        })
       ]
     })
   }
 }
+
 
 
 export class PHQ_15_FU extends Item {
@@ -744,7 +760,7 @@ export class PHQ_15_FU extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'In hoeverre hebben je lichamelijke of psychische klachten volgens jou met je tekenbeet, erythema migrans of andere ziekte van Lyme te maken?'],
+        ['nl', 'Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met je tekenbeet, erythema migrans of andere ziekte van Lyme te maken hebben?'],
       ]),
       responseOptions: [
         {
@@ -799,7 +815,7 @@ export class PHQ_15_FU2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'In hoeverre hebben je lichamelijke of psychische klachten volgens jou met een coronavirus infectie te maken?'],
+        ['nl', 'Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met een coronavirus infectie te maken hebben?'],
       ]),
       responseOptions: [
         {
@@ -847,7 +863,7 @@ export class PHQ_15_FU3 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'In hoeverre hebben je lichamelijke of psychische klachten volgens jou met deze andere oorzaak te maken?'],
+        ['nl', 'Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met deze andere oorzaak te maken hebben?'],
       ]),
       responseOptions: [
         {
