@@ -1,11 +1,11 @@
 import { Expression } from 'survey-engine/data_types';
 import { Group, Item, OptionDef } from 'case-editor-tools/surveys/types';
 import { SingleChoiceOptionTypes, SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
-import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions , ClozeItemTypes } from 'case-editor-tools/surveys';
+import { SingleChoiceOptionTypes as SCOptions, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SurveySuffix } from '../globalConstants';
 import { responseGroupKey, inputKey, dropDownKey } from 'case-editor-tools/constants/key-definitions';
-import { clozeItemDropdownHours  } from './utils';
+import { clozeItemDropdownHours } from './utils';
 
 
 
@@ -92,7 +92,7 @@ export class GeneralTherapy1 extends Item {
         {
           key: 'GenT1', rule: SurveyEngine.logic.or(
             SurveyEngine.singleChoice.none(this.key, this.optionKeys.yes_number),
-            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`),0),
+            SurveyEngine.compare.gt(SurveyEngine.getResponseValueAsNum(this.key, `rg.scg.${this.optionKeys.yes_number}`), 0),
           ), type: 'hard'
         }
       ]
@@ -375,13 +375,13 @@ export class Doctor extends Item {
       customValidations: [
         {
           key: 'Doc', rule:
-          SurveyEngine.logic.or(
-            SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
-            SurveyEngine.logic.and(
-              SurveyEngine.multipleChoice.any(this.key, this.optionKeys.other),
-              SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.other}.input`),
-            )
-          ),
+            SurveyEngine.logic.or(
+              SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
+              SurveyEngine.logic.and(
+                SurveyEngine.multipleChoice.any(this.key, this.optionKeys.other),
+                SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.other}.input`),
+              )
+            ),
           type: 'hard'
         }
       ]

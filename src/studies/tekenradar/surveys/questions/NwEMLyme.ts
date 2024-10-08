@@ -258,7 +258,8 @@ export class NwEMLyme2 extends Item {
               maxRelativeDate: {
                 reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
                 delta: { seconds: 0 }
-              }
+              },
+              minRelativeDate: { delta: { years: -100 } },
             }),
             ClozeItemTypes.text({
               key: '3',
@@ -564,7 +565,7 @@ export class NwEMLyme8 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '2', content: new Map(
-            [['nl', "aantal dagen innemen (als je dit niet precies weet mag je dit schatten):"]]
+            [['nl', "Aantal dagen innemen (als je dit niet precies weet mag je dit schatten):"]]
           )
         }),
         ClozeItemTypes.numberInput({
@@ -572,13 +573,14 @@ export class NwEMLyme8 extends Item {
           inputLabel: new Map([['nl', 'dagen']]),
           labelBehindInput: true,
           componentProperties: {
-            min: 0
+            min: 0,
+            max: 1000
           }
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '4', content: new Map(
-            [['nl', "overige informatie:"]]
+            [['nl', "Overige informatie:"]]
           )
         }),
         ClozeItemTypes.textInput({
@@ -637,7 +639,8 @@ export class NwEMLyme9 extends Item {
               maxRelativeDate: {
                 reference: SurveyEngine.timestampWithOffset({ seconds: 0 }),
                 delta: { seconds: 0 }
-              }
+              },
+              minRelativeDate: { delta: { years: -100 } },
             }),
             ClozeItemTypes.text({
               key: '3', content: new Map(

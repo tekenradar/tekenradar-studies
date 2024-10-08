@@ -213,6 +213,7 @@ class Comment extends Item {
       inputLabelText: new Map([
         ['nl', ''],
       ]),
+      maxLength: 2000
     })
   }
 }
