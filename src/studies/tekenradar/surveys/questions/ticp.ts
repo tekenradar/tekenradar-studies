@@ -236,6 +236,10 @@ class MedCare2 extends Item {
 
 
 export class TicP_Comorbidity extends Item {
+  optionKeys = {
+    none: 'aj',
+  }
+
   questionTextMain = [
     {
       content: new Map([
@@ -265,6 +269,8 @@ export class TicP_Comorbidity extends Item {
   }
 
   buildItem() {
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.none);
+
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -281,12 +287,14 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'a', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Astma, chronische bronchitis of CARA"],
           ])
         },
         {
           key: 'b', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ontsteking van de neusbijholte, voorhoofdsholte of kaakholten"],
           ])
@@ -300,18 +308,21 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'c', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ernstige hartkwaal of hartinfarct"],
           ])
         },
         {
           key: 'd', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Hoge bloeddruk"],
           ])
         },
         {
           key: 'e', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Beroerte of gevolgen van beroerte"],
           ])
@@ -325,12 +336,14 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'f', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Maagzweer of zweer aan de 12-vingerige darm"],
           ])
         },
         {
           key: 'g', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ernstige darmstoornissen, langer dan 3 maanden"],
           ])
@@ -344,24 +357,28 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'h', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Galstenen of galblaasontsteking"],
           ])
         },
         {
           key: 'i', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Leverziekte of levercirrose"],
           ])
         },
         {
           key: 'j', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Nierstenen"],
           ])
         },
         {
           key: 'k', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ernstige nierziekte"],
           ])
@@ -375,12 +392,14 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'l', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Chronische blaasontsteking"],
           ])
         },
         {
           key: 'm', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Verzakking"],
           ]),
@@ -402,12 +421,14 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'p', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Rugaandoening van hardnekkige aard, langer dan 3 maanden, of hernia"],
           ])
         },
         {
           key: 'q', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
           ]),
@@ -415,12 +436,14 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'r', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Gewrichtsontsteking (reuma) van handen en/of voeten"],
           ])
         },
         {
           key: 's', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Andere chronische reuma, langer dan 3 maanden"],
           ])
@@ -434,12 +457,14 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 't', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Epilepsie"],
           ])
         },
         {
           key: 'u_Adults', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
           ]),
@@ -447,6 +472,7 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'u_Kids', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel"],
           ]),
@@ -454,18 +480,21 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'v', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Multiple sclerose"],
           ])
         },
         {
           key: 'w', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Duizeligheid met vallen"],
           ])
         },
         {
           key: 'x', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Migraine"],
           ])
@@ -479,54 +508,63 @@ export class TicP_Comorbidity extends Item {
         },
         {//these two items n and o moved down by kees
           key: 'n', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Suikerziekte"],
           ])
         },
         {
           key: 'o', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Schildklierafwijking"],
           ])
         },
         {
           key: 'y', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Kwaadaardige aandoening of kanker"],
           ])
         },
         {
           key: 'z', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Overspannen, depressie, ernstige nervositeit"],
           ])
         },
         {
           key: 'aa', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Chronische huidziekte of eczeem"],
           ])
         },
         {
           key: 'ab', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Letsel door ongeluk in en om huis, sport, school, werk of in het verkeer"],
           ])
         },
         {
           key: 'ac', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Afweerstoornis"],
           ])
         },
         {
           key: 'ad', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ondergaan van transplantatie"],
           ])
         },
         {
           key: 'ae', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Alcoholverslaving"],
           ]),
@@ -534,6 +572,7 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'af', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Drugsverslaving"],
           ]),
@@ -541,18 +580,21 @@ export class TicP_Comorbidity extends Item {
         },
         {
           key: 'ag', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ernstige vermoeidheid, langer dan 3 maanden"],
           ])
         },
         {
           key: 'ah', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ernstige pijnklachten, langer dan 3 maanden"],
           ])
         },
         {
           key: 'ai', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Ernstige concentratiestoornissen, langer dan 3 maanden"],
           ])
@@ -568,8 +610,7 @@ export class TicP_Comorbidity extends Item {
         {
           key: 'aj', role: 'option',
           content: new Map([["nl", "Geen van bovenstaande"],
-          ]),
-          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'a') // Disable if any of the specified options are selected
+          ])
         },
       ]
     })

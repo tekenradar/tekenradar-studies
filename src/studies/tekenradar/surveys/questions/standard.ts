@@ -688,6 +688,7 @@ export class PHQ_15_cause extends Item {
   }
 
   buildItem() {
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.none);
     const markdownContent = `
 **De (waarschijnlijke) oorzaak van mijn klachten is:**
     `
@@ -704,24 +705,24 @@ export class PHQ_15_cause extends Item {
       responseOptions: [
         {
           key: 'a', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Tekenbeet, erythema migrans of andere ziekte van Lyme"],
-          ]),
-          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'd')
+          ])
         },
         {
           key: 'b', role: 'option',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Coronavirus infectie (COVID-19)"],
-          ]),
-          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'd')
+          ])
         },
         {
           key: 'c', role: 'input',
+          disabled: optionDisabled,
           content: new Map([
             ["nl", "Andere oorzaak, namelijk:"],
-          ]),
-          disabled: SurveyEngine.multipleChoice.any(this.itemKey, 'd')
+          ])
         },
         {
           key: 'd', role: 'option',
