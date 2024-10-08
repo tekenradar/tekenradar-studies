@@ -405,7 +405,7 @@ export class Covid5 extends Item {
       questionText: this.questionTextMain,
       dateInputMode: 'YMD',
       maxRelativeDate: { delta: { days: 0 } },
-      // minRelativeDate: { delta: { years: -19 } },
+      minRelativeDate: { delta: { years: -19 } },
     })
   }
 }
