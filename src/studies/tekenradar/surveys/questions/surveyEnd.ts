@@ -300,9 +300,9 @@ export class SurveyEndGroup extends Group {
 class EndText_LPPlusNP extends Item {
 
   markdownContent = `
-### U heeft aangegeven niet mee te willen doen aan ons vervolgonderzoek.
+### Je hebt aangegeven niet mee te willen doen aan ons vervolgonderzoek.
 
-Hartelijk dank dat u dit in het verleden wel heeft gedaan, bent u nog geïnteresseerd in de resultaten van het onderzoek destijds dan kunt u deze vinden bij de nieuwsberichten op Tekenradar.nl
+Hartelijk dank dat je dit in het verleden wel hebt gedaan, ben je nog geïnteresseerd in de resultaten van het onderzoek destijds dan kun je deze vinden bij de nieuwsberichten op Tekenradar.nl.
 
 Zouden we je hieronder nog één korte laatste vraag mogen stellen?
 

@@ -325,7 +325,7 @@ export class Longlyme3c extends Item {
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "Minder dan een keer per maand"],
+            ["nl", "Minder dan één keer per maand"],
           ])
         },
         {

@@ -956,7 +956,7 @@ class LPplusContactGroupPretext extends Item {
 class BiobankContactGroupPretext extends Item {
 
   markdownContent = `
-**Uw contactgegevens**
+**Je contactgegevens**
 
 Vul hieronder je gegevens in zodat we je kunnen benaderen. We vragen opnieuw om je e-mailadres omdat we de eerdere gegevens vanwege privacyregelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde e-mailadres invullen. Je contactgegevens worden alleen gebruikt om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
 Je contactgegevens worden alleen gebruikt voor het Tekenradar onderzoek en/of om informatie te geven over aanvullende onderzoeken naar tekenbeten, ziekte van Lyme, of andere (tekenoverdraagbare) infectieziekten.
@@ -1405,7 +1405,7 @@ export class LPplusContactgegevensGroup extends Group {
   PC4contact: PC4contact;
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'Uw gegevens');
+    super(parentKey, 'Je gegevens');
 
     this.groupEditor.setCondition(condition);
 
