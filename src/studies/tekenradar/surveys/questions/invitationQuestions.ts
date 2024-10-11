@@ -1,4 +1,4 @@
-import { ClozeItemTypes, SurveyEngine, SurveyItems } from "case-editor-tools/surveys";
+import { ClozeItemTypes, SurveyEngine, SurveyItems, MultipleChoiceOptionTypes as MCOptions } from "case-editor-tools/surveys";
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { Expression } from 'survey-engine/data_types';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
@@ -361,7 +361,9 @@ export class LPplusUitnodigingOnderzoek extends Item {
 export class LPplusUitnodigingOnderzoek_q2 extends Item {
   optionKeys = {
     yes: 'a',
-    no: 'c'
+    otherperson: 'b',
+    no: 'c',
+    other: 'd'
 
   }
 
@@ -414,7 +416,7 @@ export class LPplusUitnodigingOnderzoek_q2 extends Item {
           ])
         },
         {
-          key: 'b', role: 'input',
+          key: this.optionKeys.otherperson, role: 'input',
           content: new Map([
             ["nl", "Nee, ik ben iemand anders die de vragenlijst namens deze persoon invult, namelijk:"],
           ])

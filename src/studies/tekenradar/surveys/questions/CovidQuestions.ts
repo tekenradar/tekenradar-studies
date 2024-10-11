@@ -1,6 +1,6 @@
 import { Expression } from 'survey-engine/data_types';
 import { Item } from 'case-editor-tools/surveys/types';
-import { SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyEngine, SurveyItems, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 
 
@@ -168,6 +168,10 @@ export class Covid3a extends Item {
 
 export class Covid3b extends Item {
 
+  optionKeys = {
+    other: 'k',
+  }
+
   questionTextMain = [
     {
       content: new Map([
@@ -258,13 +262,32 @@ export class Covid3b extends Item {
             ["nl", "Reuk- of smaakverlies"],
           ])
         },
-        //TODO: text field mandatory or not?
+        MCOptions.cloze({
+          key: this.optionKeys.other,
+          items: [
+            ClozeItemTypes.text({
+              key: 'k', content: new Map(
+                [['nl', "Andere klachten, namelijk:"]]
+              )
+            }),
+            ClozeItemTypes.textInput({
+              key: 'input',
+            }),
+          ]
+        }),
+      ],
+      customValidations: [
         {
-          key: 'k', role: 'input',
-          content: new Map([
-            ["nl", "Andere klachten, namelijk:"],
-          ])
-        },
+          key: 'COV3c', rule:
+            SurveyEngine.logic.or(
+              SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
+              SurveyEngine.logic.and(
+                SurveyEngine.multipleChoice.any(this.key, this.optionKeys.other),
+                SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.other}.input`),
+              )
+            ),
+          type: 'hard'
+        }
       ]
     })
   }

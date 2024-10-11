@@ -1,6 +1,6 @@
 import { Expression } from 'survey-engine/data_types';
 import { Item } from 'case-editor-tools/surveys/types';
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyEngine, SurveyItems, MultipleChoiceOptionTypes as MCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { ParticipantFlags } from '../../participantFlags';
 import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
@@ -717,13 +717,19 @@ export class PHQ_15_cause extends Item {
             ["nl", "Coronavirus infectie (COVID-19)"],
           ])
         },
-        {
-          key: 'c', role: 'input',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Andere oorzaak, namelijk:"],
-          ])
-        },
+        MCOptions.cloze({
+          key: this.optionKeys.other,
+          items: [
+            ClozeItemTypes.text({
+              key: 'c', content: new Map(
+                [['nl', "Andere oorzaak, namelijk:"]]
+              )
+            }),
+            ClozeItemTypes.textInput({
+              key: 'input',
+            }),
+          ]
+        }),
         {
           key: 'd', role: 'option',
           content: new Map([
@@ -738,6 +744,19 @@ export class PHQ_15_cause extends Item {
           ]),
           className: 'mb-2'
         })
+      ],
+      customValidations: [
+        {
+          key: 'PHQ_15_cause', rule:
+            SurveyEngine.logic.or(
+              SurveyEngine.multipleChoice.none(this.key, this.optionKeys.other),
+              SurveyEngine.logic.and(
+                SurveyEngine.multipleChoice.any(this.key, this.optionKeys.other),
+                SurveyEngine.hasResponse(this.key, `rg.mcg.${this.optionKeys.other}.input`),
+              )
+            ),
+          type: 'hard'
+        }
       ]
     })
   }
