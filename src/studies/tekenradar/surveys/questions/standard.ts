@@ -728,7 +728,8 @@ export class PHQ_15_cause extends Item {
             ClozeItemTypes.textInput({
               key: 'input',
             }),
-          ]
+          ],
+          displayCondition: SurveyEngine.logic.not(optionDisabled)
         }),
         {
           key: 'd', role: 'option',

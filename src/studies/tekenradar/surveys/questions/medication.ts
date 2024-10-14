@@ -49,7 +49,7 @@ export class Medication1 extends Item {
 export class Medication2 extends Item {
 
   optionKeys = {
-    other: 'l'
+    other: 'p'
   }
 
   questionTextMain_LPplus = [
@@ -176,7 +176,7 @@ export class Medication2 extends Item {
           key: this.optionKeys.other,
           items: [
             ClozeItemTypes.text({
-              key: '1', content: new Map(
+              key: 'p', content: new Map(
                 [['nl', "Andere medicijnen, namelijk:"]]
               )
             }),
