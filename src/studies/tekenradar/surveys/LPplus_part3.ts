@@ -55,38 +55,52 @@ class LPplus_part3Def extends SurveyDefinition {
       ]),
       availableFor: 'temporary_participants',
     });
-    // @Peter: the availableFor value just above most likely needs to be different I gues??
 
-    //flow informatie van de vragenlijst inclusief afhankelijkheden van de vragenlijst
+    // Define the skip condition: Check if ageFromPDiff exists and is greater than 2007
+    const skipSurveyCondition = SurveyEngine.compare.lt(
+      SurveyEngine.participantFlags.getAsNum('ageFromPDiff'),
+      2007 // Skip if birth year is greater than 2006 (younger than 18 in 2024)
+    );
+
+    // Flow information for the survey with conditions
     const required = isRequired !== undefined ? isRequired : false;
-    //this.LPP1 = new IntroLPplus(this.key, required);
+
     this.TicP = new TicP_Group(this.key, required);
-    this.TWHeader = new TicP_werkHeader(this.key, required);
-    this.TW1 = new TicP_werk1(this.key, required);
-    const TW1werktCondition = SurveyEngine.singleChoice.any(this.TW1.key, this.TW1.optionKeys.loon, this.TW1.optionKeys.zzp);
+    this.TWHeader = new TicP_werkHeader(this.key, required, skipSurveyCondition);
+    this.TW1 = new TicP_werk1(this.key, required, skipSurveyCondition);
+    const TW1werktCondition = SurveyEngine.logic.and(
+      skipSurveyCondition,
+      SurveyEngine.singleChoice.any(this.TW1.key, this.TW1.optionKeys.loon, this.TW1.optionKeys.zzp)
+    );
     this.TW2 = new TicP_werk2(this.key, required, TW1werktCondition);
     this.TW3 = new TicP_werk3(this.key, required, TW1werktCondition);
     this.TW4 = new TicP_werk4(this.key, required, TW1werktCondition);
-    this.TW5 = new TicP_werk5(this.key, required, TW1werktCondition)
-    const TW5Condition = SurveyEngine.singleChoice.any(this.TW5.key, this.TW5.optionKeys.yes);
+    this.TW5 = new TicP_werk5(this.key, required, TW1werktCondition);
+    const TW5Condition = SurveyEngine.logic.and(
+      skipSurveyCondition,
+      SurveyEngine.singleChoice.any(this.TW5.key, this.TW5.optionKeys.yes)
+    );
     this.TW6 = new TicP_werk6(this.key, required, TW5Condition);
-    //Add condition to only show CBRQ if any of the PHQ questions is not 1(geen last)
-    //this.CBRQCondition = SurveyEngine.singleChoice.any()
-    const showCBRQ = SurveyEngine.logic.not(
-      SurveyEngine.participantFlags.hasKeyAndValue(
-        ParticipantFlags.PHQ_15_none.key,
-        ParticipantFlags.PHQ_15_none.values.true
+
+    const showCBRQ = SurveyEngine.logic.and(
+      skipSurveyCondition,
+      SurveyEngine.logic.not(
+        SurveyEngine.participantFlags.hasKeyAndValue(
+          ParticipantFlags.PHQ_15_none.key,
+          ParticipantFlags.PHQ_15_none.values.true
+        )
       )
     );
+
     this.CBRQ_Header = new CBRQ_Header(this.key, required, showCBRQ);
     this.CBRQ1 = new CBRQ1(this.key, required, showCBRQ);
     this.CBRQ_Header2 = new CBRQ_Header2(this.key, required, showCBRQ);
     this.CBRQ2 = new CBRQ2(this.key, required, showCBRQ);
-    this.HADS = new HADSGroup(this.key, required);
-    this.IPAQ_Header = new IPAQ_Header(this.key, required);
-    this.IPAQ = new IPAQ(this.key, required);
-    this.EndGroup = new SurveyEndGroup(this.key, false)
 
+    this.HADS = new HADSGroup(this.key, required, skipSurveyCondition);
+    this.IPAQ_Header = new IPAQ_Header(this.key, required, skipSurveyCondition);
+    this.IPAQ = new IPAQ(this.key, required, skipSurveyCondition);
+    this.EndGroup = new SurveyEndGroup(this.key, false);
   }
 
 
@@ -94,6 +108,8 @@ class LPplus_part3Def extends SurveyDefinition {
   /// paginering en volgorde van de vragenlijst inclusief pagebreaks
   buildSurvey() {
     //this.addItem(this.LPP1.get());
+
+
 
     this.addItem(this.TicP.get());
     this.addPageBreak();
