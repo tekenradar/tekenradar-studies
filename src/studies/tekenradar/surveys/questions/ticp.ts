@@ -415,7 +415,13 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Verzakking"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: this.isPartOf(SurveySuffix.Adults)
+            ? undefined
+            : this.isPartOf('LPplus_part1')
+              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+                'rg.ddg',
+                ...years)
+              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
         },
         //{
         //key: 't6', role: 'text',
@@ -444,7 +450,13 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Gewrichtsslijtage (artrose) van knieën, heupen of handen"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: this.isPartOf(SurveySuffix.Adults)
+            ? undefined
+            : this.isPartOf('LPplus_part1')
+              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+                'rg.ddg',
+                ...years)
+              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
         },
         {
           key: 'r', role: 'option',
@@ -480,7 +492,13 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel, zoals ziekte van Parkinson"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: this.isPartOf(SurveySuffix.Adults)
+            ? undefined
+            : this.isPartOf('LPplus_part1')
+              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+                'rg.ddg',
+                ...years)
+              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
         },
         {
           key: 'u_Kids', role: 'option',
@@ -488,7 +506,13 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Andere ziekten van het zenuwstelsel"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Kids))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: this.isPartOf(SurveySuffix.Kids)
+            ? undefined
+            : this.isPartOf('LPplus_part1')
+              ? SurveyEngine.responseHasKeysAny('LPplus_part1.Je gegevens.BirthYear',
+                'rg.ddg',
+                ...years)
+              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
         },
         {
           key: 'v', role: 'option',
@@ -583,7 +607,7 @@ export class TicP_Comorbidity extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Adults)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.LPplusContactgegevensGroup.BirthYear',
+              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
                 ...years)
               : SurveyEngine.logic.not(SurveyEngine.logic.and()),
@@ -594,7 +618,13 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Drugsverslaving"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: this.isPartOf(SurveySuffix.Adults)
+            ? undefined
+            : this.isPartOf('LPplus_part1')
+              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+                'rg.ddg',
+                ...years)
+              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
         },
         {
           key: 'ag', role: 'option',

@@ -458,6 +458,18 @@ export class PHQ_15 extends Item {
   }
 
   buildItem() {
+
+    const currentYear = new Date().getFullYear(); // Get the current year dynamically
+    const
+      years =
+        Array.from({
+          length:
+            17
+        }, (v,
+          k) => (currentYear
+            -
+            k).toString());
+
     return SurveyItems.responsiveSingleChoiceArray({
       defaultMode: 'horizontal',
       responsiveModes: {
@@ -520,7 +532,13 @@ export class PHQ_15 extends Item {
           content: new Map([
             ["nl", "Pijn of problemen bij seksuele gemeenschap"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: this.isPartOf(SurveySuffix.Adults)
+            ? undefined
+            : this.isPartOf('LPplus_part1')
+              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+                'rg.ddg',
+                ...years)
+              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
         },
         {
           key: 'f',
