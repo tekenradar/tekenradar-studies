@@ -271,6 +271,18 @@ export class TicP_Comorbidity extends Item {
   buildItem() {
     const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.none);
 
+    const currentYear = new Date().getFullYear(); // Get the current year dynamically
+    const
+      years =
+        Array.from({
+          length:
+            17
+        }, (v,
+          k) => (currentYear
+            -
+            k).toString());
+
+
     return SurveyItems.multipleChoice({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
@@ -568,7 +580,13 @@ export class TicP_Comorbidity extends Item {
           content: new Map([
             ["nl", "Alcoholverslaving"],
           ]),
-          displayCondition: (!(this.isPartOf(SurveySuffix.Adults)) && !(this.isPartOf('LPplus_part1'))) ? SurveyEngine.compare.gt(1, 2) : undefined,
+          displayCondition: this.isPartOf(SurveySuffix.Adults)
+            ? undefined
+            : this.isPartOf('LPplus_part1')
+              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.LPplusContactgegevensGroup.BirthYear',
+                'rg.ddg',
+                ...years)
+              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
         },
         {
           key: 'af', role: 'option',
