@@ -11,7 +11,7 @@ import {
   NwEMLyme5, NwEMLyme6, NwEMLyme7, NwEMLyme8, NwEMLyme9, NwEMLyme10, NwEMLyme11, NwEMLyme12, NwEMLyme13, NwEMLyme14
 } from './questions/NwEMLyme';
 import {
-  PHQ_15, PHQ_15_cause, PHQ_15_FU2, PHQ_15_FU3, Qualification, StandardText1, BackgroundHeader, PHQ_15_FU, Pregnant,
+  PHQ_15, PHQ_15_cause, PHQ_15_FU2, PHQ_15_FU3, Qualification, Qualification_parent, StandardText1, BackgroundHeader, PHQ_15_FU, Pregnant,
   SymptomsHeader, Fatigue, FatigueHeader, Cognition, CognitionHeader, GenHealthHeader, Gen_Info_Header
 } from './questions/standard';
 import { TicP_Comorbidity } from './questions/ticp';
@@ -70,6 +70,7 @@ class LPplus_part1Def extends SurveyDefinition {
   GP: GP;
   T1: StandardText1;
   Qualification: Qualification;
+  Qualification_parent: Qualification_parent;
   TicP_comorbidity: TicP_Comorbidity;
   Med1: Medication1;
   Med2: Medication2;
@@ -115,6 +116,19 @@ class LPplus_part1Def extends SurveyDefinition {
 
     //flow informatie van de vragenlijst inclusief afhankelijkheden van de vragenlijst
     const required = isRequired !== undefined ? isRequired : false;
+    // Generate restricted years
+    const currentYear = new Date().getFullYear(); // Get the current year dynamically
+    const
+      years =
+        Array.from({
+          length:
+            17
+        }, (v,
+          k) => (currentYear
+            -
+            k).toString());
+
+
     // MH hier moet de IC ook toegevoegs worden
     this.InvitationHeader = new LPplusUitnodigingOnderzoekText(this.key);
     this.LPplusUitnodigingOnderzoek = new LPplusUitnodigingOnderzoek(this.key, required);
@@ -187,7 +201,25 @@ class LPplus_part1Def extends SurveyDefinition {
     this.H1 = new BackgroundHeader(this.key, required, LPPCondition);
     this.GP = new GP(this.key, required, LPPCondition);
     this.T1 = new StandardText1(this.key, required, LPPCondition);
-    this.Qualification = new Qualification(this.key, required, LPPCondition);
+    this.Qualification = new Qualification(this.key, required, SurveyEngine.logic.and(
+      LPPCondition,
+      SurveyEngine.logic.not(
+        SurveyEngine.responseHasKeysAny(
+          'LPplus_part1.Je gegevens.BirthYear',
+          'rg.ddg',
+          ...years
+        )
+      )
+    ));
+    this.Qualification_parent = new Qualification_parent(this.key, required, SurveyEngine.logic.and(
+      LPPCondition,
+      SurveyEngine.responseHasKeysAny(
+        'LPplus_part1.Je gegevens.BirthYear',
+        'rg.ddg',
+        ...years
+      )
+    )
+    );
 
     this.GenH_Header = new GenHealthHeader(this.key, required, LPPCondition);
     this.TicP_comorbidity = new TicP_Comorbidity(this.key, required, LPPCondition);
@@ -205,7 +237,16 @@ class LPplus_part1Def extends SurveyDefinition {
     this.PHQ_15_FU = new PHQ_15_FU(this.key, required, PHQ15causeLymeCondition);
     this.PHQ_15_FU2 = new PHQ_15_FU2(this.key, required, PHQ15causeCovidCondition);
     this.PHQ_15_FU3 = new PHQ_15_FU3(this.key, required, PHQ15causeOtherCondition);
-    this.Pregnancy = new Pregnant(this.key, required, isFemaleCondition);
+    this.Pregnancy = new Pregnant(this.key, required, SurveyEngine.logic.and(
+      isFemaleCondition,
+      SurveyEngine.logic.not(
+        SurveyEngine.responseHasKeysAny(
+          'LPplus_part1.Je gegevens.BirthYear',
+          'rg.ddg',
+          ...years
+        )
+      )
+    ));
 
     this.H4 = new FatigueHeader(this.key, required, LPPCondition);
     this.Q14 = new Fatigue(this.key, required, LPPCondition);
@@ -277,6 +318,7 @@ class LPplus_part1Def extends SurveyDefinition {
     this.addItem(this.GP.get())
     this.addItem(this.T1.get())
     this.addItem(this.Qualification.get());
+    this.addItem(this.Qualification_parent.get());
     this.addPageBreak();
     this.addItem(this.GenH_Header.get())
     this.addItem(this.TicP_comorbidity.get());

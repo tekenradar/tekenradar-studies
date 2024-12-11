@@ -378,6 +378,87 @@ export class Qualification extends Item {
 }
 
 
+///Voor LP Plus
+export class Qualification_parent extends Item {
+
+  questionTextMain_Kids = [
+    {
+      content: new Map([
+        ["nl", 'Wat is de hoogst voltooide opleiding van je moeder /verzorgster (of van je vader/verzorger, als er geen moeder/verzorgster is)?'],
+      ]),
+    }
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'QUALP');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain_Kids,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Geen voltooide opleiding (lager onderwijs niet afgemaakt)"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Lager onderwijs (basisschool, speciaal basisonderwijs)"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Lager of voorbereidend beroepsonderwijs (zoals LTS, LEAO, LHNO, VMBO)"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Middelbaar algemeen voortgezet onderwijs (zoals MAVO, (M)ULO, MBO-kort, VMBO-t)"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "Middelbaar beroepsonderwijs en beroepsbegeleidend onderwijs (zoals MBO-lang, MTS, MEAO, BOL, BBL, INAS)"],
+          ])
+        },
+        {
+          key: 'f', role: 'option',
+          content: new Map([
+            ["nl", "Hoger algemeen en voorbereidend wetenschappelijk onderwijs (zoals HAVO, VWO, Atheneum, Gymnasium, HBS, MMS)"],
+          ])
+        },
+        {
+          key: 'g', role: 'option',
+          content: new Map([
+            ["nl", "Hoger beroepsonderwijs (zoals HBO, HTS, HEAO, kandidaatswetenschappelijk onderwijs)"],
+          ])
+        },
+        {
+          key: 'h', role: 'option',
+          content: new Map([
+            ["nl", "Wetenschappelijk onderwijs (universiteit)"],
+          ])
+        }
+      ]
+    })
+  }
+}
+
+
 export class SymptomsText1_Kids extends Item {
 
   markdownContent = `
