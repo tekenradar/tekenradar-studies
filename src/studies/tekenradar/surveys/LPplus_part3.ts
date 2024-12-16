@@ -38,7 +38,7 @@ class LPplus_part3Def extends SurveyDefinition {
 
 
   //start vragenlijst opzet ==DIT STUKJE IS HET VOORBEELD
-  //lijst met achter elkaarv volgende objecten in text =t1 tm ... en vragen Q1 tm...
+  //lijst met achter elkaarv volgende objecten in text =t1 tm ... en vragen Q1 tm..
 
   //afsluiting van de vragenlijst
   constructor(isRequired?: boolean) {
