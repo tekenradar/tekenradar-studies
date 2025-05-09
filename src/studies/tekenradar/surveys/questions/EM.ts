@@ -443,3 +443,38 @@ export class UploadPhotoEM extends Item {
     })
   }
 }
+
+export class DatePhotoEM extends Item {
+  constructor(parentKey: string, required: boolean, condition?: Expression) {
+    super(parentKey, 'DatePhotoEM');
+
+    this.condition = condition;
+    this.isRequired = required;
+  }
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Wanneer is deze foto genomen?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "(je mag de datum schatten)"],
+      ]),
+      className: "fw-normal"
+    },
+  ]
+
+  buildItem() {
+    return SurveyItems.dateInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      isRequired: this.isRequired,
+      questionText: this.questionTextMain,
+      dateInputMode: 'YMD',
+      maxRelativeDate: { delta: { days: 0 } },
+      minRelativeDate: { delta: { years: -19 } },
+    })
+  }
+}

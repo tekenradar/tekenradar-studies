@@ -122,7 +122,7 @@ De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest r
   markdownContentOther = `
 ### Tekenbeet
 
-De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+De volgende vragen gaan over de tekenbeet die vermoedelijk erythema migrans of andere vorm van lymeziekte van dit moment veroorzaakt heeft.
 `
 
   markdownContentFever = `
@@ -208,7 +208,7 @@ export class RecognisedTickBite extends Item {
     'nl', 'Heb je de tekenbeet al gemeld, die waarschijnlijk de koorts heeft veroorzaakt?'
   ]]);
   qTextOther = new Map([[
-    'nl', 'Heb je de tekenbeet opgemerkt, die waarschijnlijk de nu gemelde erythema migrans of andere ziekte van Lyme heeft veroorzaakt?'
+    'nl', 'Heb je de tekenbeet opgemerkt, die waarschijnlijk de erythema migrans of andere vorm van lymeziekte  van dit moment heeft veroorzaakt?'
   ]]);
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -264,7 +264,7 @@ export class RecognisedTickBite extends Item {
             }),
             ClozeItemTypes.dropDown({
               key: '4', options: [
-                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('1', new Map([['nl', "precieze"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
             }),
@@ -389,6 +389,7 @@ export class EnvironmentTickBite extends Item {
         },
         {
           key: 'h', role: 'input',
+          style: [{ key: 'maxLength', value: '500' }],
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
@@ -481,6 +482,7 @@ export class ActivityTickBite extends Item {
         },
         {
           key: 'h', role: 'input',
+          style: [{ key: 'maxLength', value: '500' }],
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
@@ -654,7 +656,7 @@ export class LocationBodyTickBite extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Wat was de locatie van de tekenbeet op je  lichaam?'],
+        ["nl", 'Wat was de locatie van de tekenbeet op je lichaam?'],
       ]),
     },
     {
@@ -998,11 +1000,12 @@ export class RemoveTick4 extends Item {
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "Ik zelf"],
+            ["nl", "Ikzelf"],
           ])
         },
         {
           key: 'd', role: 'input',
+          style: [{ key: 'maxLength', value: '500' }],
           content: new Map([
             ["nl", "Iemand anders, namelijk:"],
           ])

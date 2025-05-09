@@ -1,11 +1,12 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { applyRequiredQuestions } from './globalConstants';
 import { PhotoEM_Text, UploadPhotoEM } from './questions/EM';
-
+import { DatePhotoEM } from './questions/EM';
 
 class EMfoto_Def extends SurveyDefinition {
   T1: PhotoEM_Text;
   Q1: UploadPhotoEM;
+  Q2: DatePhotoEM;
 
   constructor(isRequired?: boolean) {
     super({
@@ -25,12 +26,14 @@ class EMfoto_Def extends SurveyDefinition {
 
     this.T1 = new PhotoEM_Text(this.key, required);
     this.Q1 = new UploadPhotoEM(this.key, false);
+    this.Q2 = new DatePhotoEM(this.key, false);
 
   }
 
   buildSurvey() {
     this.addItem(this.T1.get());
     this.addItem(this.Q1.get());
+    this.addItem(this.Q2.get());
   }
 }
 
