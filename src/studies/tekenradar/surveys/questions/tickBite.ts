@@ -208,7 +208,7 @@ export class RecognisedTickBite extends Item {
     'nl', 'Heb je de tekenbeet al gemeld, die waarschijnlijk de koorts heeft veroorzaakt?'
   ]]);
   qTextOther = new Map([[
-    'nl', 'Heb je de tekenbeet opgemerkt, die waarschijnlijk de erythema migrans of andere vorm van lymeziekte  van dit moment heeft veroorzaakt?'
+    'nl', 'Heb je de tekenbeet opgemerkt, die waarschijnlijk de erythema migrans of andere vorm van lymeziekte van dit moment heeft veroorzaakt?'
   ]]);
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

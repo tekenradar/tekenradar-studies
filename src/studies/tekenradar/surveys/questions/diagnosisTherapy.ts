@@ -12,6 +12,7 @@ import { clozeItemDropdownHours } from './utils';
 export class LymeDiagnosisGroup extends Group {
   Q1: LymeDiagnosis1;
   Q2: LymeDiagnosis2;
+  Q2extra: LymeDiagnosis2extra;
 
   constructor(parentKey: string, isRequired?: boolean) {
     super(parentKey, 'LymeDiagG');
@@ -21,11 +22,14 @@ export class LymeDiagnosisGroup extends Group {
     this.Q1 = new LymeDiagnosis1(this.key, required);
     const q1Condition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new LymeDiagnosis2(this.key, required, q1Condition);
+    this.Q2extra = new LymeDiagnosis2extra(this.key, required, q1Condition);
+ 
   }
 
   buildGroup() {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
+    this.addItem(this.Q2extra.get());
   }
 }
 
@@ -282,7 +286,7 @@ export class LymeDiagnosis2 extends Item {
         {
           key: 'i', role: 'input',
           content: new Map([
-            ["nl", "Andere arts namelijk "],
+            ["nl", "Andere arts, namelijk "],
           ])
         },
         {
@@ -295,6 +299,80 @@ export class LymeDiagnosis2 extends Item {
     })
   }
 }
+
+
+export class LymeDiagnosis2extra extends Item {
+    questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Welke onderzoeken zijn er bij je gedaan?'],
+      ]),
+    },
+    {
+      content: new Map([
+        ["nl", "(meerdere antwoorden mogelijk)"],
+      ]),
+      className: "fw-normal"
+    },
+
+  ]
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LD2extra');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Bloedafname om te testen op lymeziekte (aantonen van antistoffen)"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Gewrichtspunctie  (afname van gewrichtsvloeistof met een prik in het gewricht)"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Lumbaalpunctie (afname van hersenvocht met een prik in de rug)"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Huidbiopt (afname van stukje huid voor onderzoek)"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "ECG (hartfilmpje)"],
+          ])
+        },
+        {
+          key: 'f', role: 'input',
+          style: [{ key: 'maxLength', value: '500' }],
+          content: new Map([
+            ["nl", "Andere, namelijk "],
+          ])
+        },
+      ]
+    })
+  }
+}
+
 
 
 export class Doctor extends Item {
@@ -388,6 +466,7 @@ export class Doctor extends Item {
     })
   }
 }
+
 
 
 

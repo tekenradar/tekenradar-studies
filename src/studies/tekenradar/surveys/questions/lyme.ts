@@ -88,6 +88,9 @@ export class LymeDiagnosis3 extends Item {
   }
 }
 
+
+
+
 export class LymeDiagnosis4 extends Item {
 
   optionKeys = {
@@ -134,7 +137,7 @@ export class LymeDiagnosis4 extends Item {
             }),
             ClozeItemTypes.dropDown({
               key: '4', options: [
-                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('1', new Map([['nl', "precieze"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
             }),
