@@ -97,7 +97,7 @@ class PreviousTickBites1 extends Item {
     },
     {
       content: new Map([
-        ["nl", "opgemerkt? Als je in de afgelopen week tekenbeten hebt gehad, tel die dan "],
+        ["nl", "opgemerkt? (Tel de tekenbeet die je nu meldt "],
       ]),
     },
     {
@@ -108,7 +108,7 @@ class PreviousTickBites1 extends Item {
     },
     {
       content: new Map([
-        ["nl", " mee!"],
+        ["nl", " mee)"],
       ]),
     },
   ]
@@ -230,7 +230,7 @@ class PreviousTickBites2 extends Item {
     },
     {
       content: new Map([
-        ["nl", "opgemerkt? Als je in de afgelopen week tekenbeten hebt gehad, tel die dan "],
+        ["nl", "opgemerkt? (Tel de tekenbeet die je nu meldt "],
       ]),
     },
     {
@@ -241,7 +241,7 @@ class PreviousTickBites2 extends Item {
     },
     {
       content: new Map([
-        ["nl", "mee!"],
+        ["nl", "mee.)"],
       ]),
     },
   ]

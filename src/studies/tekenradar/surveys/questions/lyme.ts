@@ -40,7 +40,7 @@ De volgende vragen gaan over je melding van de ziekte van Lyme.
 }
 
 
-export class LymeDiagnosis3 extends Item {
+/* export class LymeDiagnosis3 extends Item {
 
   qTextLyme = new Map([
     ['nl', 'Welke klachten door de ziekte van Lyme heb/had je? Geef hier een uitgebreide beschrijving van je klachten en vermeld hierbij ook hoe dit bij jou is vastgesteld, bijvoorbeeld door middel van een ruggeprik, huidbiopt of bloedafname.'],
@@ -87,7 +87,86 @@ export class LymeDiagnosis3 extends Item {
     })
   }
 }
+*/
 
+
+export class LymeDiagnosis3alt extends Item {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LD3alt');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      helpGroupContent: this.getHelpGroupContent(),
+      questionText: new Map([
+        ['nl', 'Geef aan of u één of meer van de volgende klachten heeft (meerdere antwoorden mogelijk):'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Een dik, warm, pijnlijk of rood gewricht, bijvoorbeeld de knie? (Lymeartritis)"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Krachtsverlies of verlamming in uw gezicht, krachtsverlies of verlamming van een arm of been of uitstralende pijn in een arm of been (Neuroborreliose)"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Een lang bestaande huidafwijking aan bijvoorbeeld een arm of been, waarbij de huid rood of paars is verkleurd en mogelijk ook dunner is geworden (Acrodermatitis chronica atrophicans (ACA))"],
+          ])
+        },
+        {
+          key: 'd', role: 'option',
+          content: new Map([
+            ["nl", "Meerdere rode ringen of vlekken op de huid (Multiple erythema migrans)"],
+          ])
+        },
+        {
+          key: 'e', role: 'option',
+          content: new Map([
+            ["nl", "Een andere kenmerkende vorm van Lymeziekte die door een medisch specialist is vastgesteld (andere vormen, klik op de knop met een vraagteken voor meer info)"],
+          ])
+        },
+        {
+          key: 'f', role: 'option',
+          content: new Map([
+            ["nl", "Dit heb ik allemaal niet"],
+          ])
+        },
+      ]
+    })
+  }
+
+
+getHelpGroupContent() {
+    return [
+      {
+        content: new Map([
+           ["nl", "Vormen van klachten"],
+          ]),
+        style: [{ key: 'variant', value: 'h5' }],
+      },
+      {
+        content: new Map([
+          ["nl", "Andere vormen/manifestaties: zoals Borrelia-lymfocytoom, lymecarditis, uveïtis, panophthalmitis, hepatitis, myositis en orchitis (uit de CBO richtlijn 2013)"],
+        ]),
+        style: [{ key: 'variant', value: 'p' }],
+      },
+    ]
+  }
+}
 
 
 

@@ -5,7 +5,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { SurveySuffix } from '../globalConstants';
 import { LymeDiagnosis1, LymeDiagnosis2 } from './diagnosisTherapy';
-import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './lyme';
+import { LymeDiagnosis3alt, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './lyme';
 
 
 
@@ -278,7 +278,7 @@ export class FU_LymeDiagGroup extends Group {
   Header: FU_LymeDiagHeader;
   Q1: LymeFU;
   Q2: LymeDiagnosis2;
-  Q3: LymeDiagnosis3;
+  Q3: LymeDiagnosis3alt;
   Q4: LymeDiagnosis4;
   Q5: LymeDiagnosis5;
   Q6: LymeDiagnosis6;
@@ -294,7 +294,7 @@ export class FU_LymeDiagGroup extends Group {
     this.Q1 = new LymeFU(this.key, required);
     const LDcondition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new LymeDiagnosis2(this.key, required, LDcondition);
-    this.Q3 = new LymeDiagnosis3(this.key, required, LDcondition);
+    this.Q3 = new LymeDiagnosis3alt(this.key, required, LDcondition);
     this.Q4 = new LymeDiagnosis4(this.key, required, LDcondition);
     this.Q5 = new LymeDiagnosis5(this.key, required, LDcondition);
     this.Q6 = new LymeDiagnosis6(this.key, required, LDcondition);

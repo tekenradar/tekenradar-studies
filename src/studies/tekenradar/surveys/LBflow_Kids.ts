@@ -6,7 +6,7 @@ import { applyRequiredQuestions } from './globalConstants';
 import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
 import { FormerLymeGroup } from './questions/formerLymeGroup';
-import { LymeDiagnosis3, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7, LymeHeader } from './questions/lyme';
+import { LymeDiagnosis3alt, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7, LymeHeader } from './questions/lyme';
 import { PreviousTickBitesGroup } from './questions/prevTickBites';
 import { TickBiteOtherGroup } from './questions/tickBite';
 
@@ -20,7 +20,7 @@ class LBflow_KidsDef extends SurveyDefinition {
   H2: LymeHeader;
   Q10: LymeDiagnosis1;
   Q11: LymeDiagnosis2;
-  Q12: LymeDiagnosis3;
+  Q12: LymeDiagnosis3alt;
   Q13: LymeDiagnosis4;
   Q14: LymeDiagnosis5;
   Q15: LymeDiagnosis6;
@@ -61,7 +61,7 @@ class LBflow_KidsDef extends SurveyDefinition {
     this.Q10 = new LymeDiagnosis1(this.key, required);
     const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.yes);
     this.Q11 = new LymeDiagnosis2(this.key, required, Q10condition);
-    this.Q12 = new LymeDiagnosis3(this.key, required);
+    this.Q12 = new LymeDiagnosis3alt(this.key, required);
     this.Q13 = new LymeDiagnosis4(this.key, required);
     this.Q14 = new LymeDiagnosis5(this.key, required, Q10condition);
 
