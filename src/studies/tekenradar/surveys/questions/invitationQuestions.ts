@@ -59,7 +59,7 @@ export class UitnodigingOnderzoek extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en de ziekte van Lyme?'],
+        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en lymeziekte?'],
       ]),
       responseOptions: [
         {
@@ -178,7 +178,7 @@ export class aEMUitnodigingOnderzoekText extends Item {
 Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
 Het is voor ons waardevol om verder onderzoek te kunnen doen naar deze huidafwijking. We nodigen daarom een deel van de patiënten met een rode ring of vlek uit om naar de Lymepoli’s van Amsterdam UMC of Radboudumc (Nijmegen) te komen. Vind je het goed dat we je hiervoor benaderen? Zo kunnen we uitleggen wat dit verdere onderzoek inhoudt. Je reiskosten worden natuurlijk vergoed.
 Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, ook dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vragenlijst met vragen over je gezondheid op dat moment. Voor het invullen van de vragenlijsten ontvang je per e-mail een herinnering via 
-noreply@tekenradar.nl.
+noreply@tekenradar.nl. (Niet iedereen met een rode ring of vlek kan deelnemen aan dit verdere onderzoek. Het is dus mogelijk dat we je niet benaderen.)
 `
 
   constructor(parentKey: string, condition?: Expression) {
