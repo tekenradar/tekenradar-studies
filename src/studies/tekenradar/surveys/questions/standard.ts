@@ -295,7 +295,7 @@ export class Qualification extends Item {
   questionTextMain_Adults = [
     {
       content: new Map([
-        ["nl", 'Wat is je hoogst voltooide opleiding?'],
+        ["nl", 'Wat is de opleiding die je hebt afgemaakt?'],
       ]),
     }
   ]
