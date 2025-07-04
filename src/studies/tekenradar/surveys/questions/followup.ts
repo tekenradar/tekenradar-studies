@@ -5,7 +5,7 @@ import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGe
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
 import { SurveySuffix } from '../globalConstants';
 import { LymeDiagnosis1, LymeDiagnosis2 } from './diagnosisTherapy';
-import { LymeDiagnosis3alt, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './lyme';
+import { LymeDiagnosis3alt1, LymeDiagnosis3alt2a, LymeDiagnosis3alt2b, LymeDiagnosis3alt2c, LymeDiagnosis3alt2d, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './lyme';
 
 
 
@@ -278,7 +278,11 @@ export class FU_LymeDiagGroup extends Group {
   Header: FU_LymeDiagHeader;
   Q1: LymeFU;
   Q2: LymeDiagnosis2;
-  Q3: LymeDiagnosis3alt;
+  Q3: LymeDiagnosis3alt1;
+  Q3a: LymeDiagnosis3alt2a;
+  Q3b: LymeDiagnosis3alt2b;
+  Q3c: LymeDiagnosis3alt2c;
+  Q3d: LymeDiagnosis3alt2d;
   Q4: LymeDiagnosis4;
   Q5: LymeDiagnosis5;
   Q6: LymeDiagnosis6;
@@ -294,7 +298,11 @@ export class FU_LymeDiagGroup extends Group {
     this.Q1 = new LymeFU(this.key, required);
     const LDcondition = SurveyEngine.singleChoice.any(this.Q1.key, this.Q1.optionKeys.yes);
     this.Q2 = new LymeDiagnosis2(this.key, required, LDcondition);
-    this.Q3 = new LymeDiagnosis3alt(this.key, required, LDcondition);
+    this.Q3 = new LymeDiagnosis3alt1(this.key, required, LDcondition);
+    this.Q3a = new LymeDiagnosis3alt2a(this.key,required, SurveyEngine.multipleChoice.any(this.Q3.key, 'a'));
+    this.Q3b = new LymeDiagnosis3alt2b(this.key,required, SurveyEngine.multipleChoice.any(this.Q3.key, 'b'));
+    this.Q3c = new LymeDiagnosis3alt2c(this.key,required, SurveyEngine.multipleChoice.any(this.Q3.key, 'c'));
+    this.Q3d = new LymeDiagnosis3alt2d(this.key,required, SurveyEngine.multipleChoice.any(this.Q3.key, 'd'));
     this.Q4 = new LymeDiagnosis4(this.key, required, LDcondition);
     this.Q5 = new LymeDiagnosis5(this.key, required, LDcondition);
     this.Q6 = new LymeDiagnosis6(this.key, required, LDcondition);
@@ -306,6 +314,10 @@ export class FU_LymeDiagGroup extends Group {
     this.addItem(this.Q1.get());
     this.addItem(this.Q2.get());
     this.addItem(this.Q3.get());
+    this.addItem(this.Q3a.get());
+    this.addItem(this.Q3b.get());
+    this.addItem(this.Q3c.get());
+    this.addItem(this.Q3d.get());
     this.addItem(this.Q4.get());
     this.addItem(this.Q5.get());
     this.addItem(this.Q6.get());

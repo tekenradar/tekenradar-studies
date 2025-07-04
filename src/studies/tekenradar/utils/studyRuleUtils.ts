@@ -267,6 +267,7 @@ export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.removeFlag(ParticipantFlags.NMG.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.LDexcluded.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.PHQ_15_none.key)
 )
 
@@ -279,6 +280,7 @@ export const quitFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.removeFlag(ParticipantFlags.NMG.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.LDexcluded.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.PHQ_15_none.key),
   StudyEngine.ifThen(
     StudyEngine.or(
@@ -295,6 +297,13 @@ export const PHQ_15_noneflagLogic = () => StudyEngine.ifThen(
   // if:
   StudyEngine.multipleChoice.any(LPplus_part1.PHQ_15_cause.key, LPplus_part1.PHQ_15_cause.optionKeys.none),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.PHQ_15_none.key, ParticipantFlags.PHQ_15_none.values.true),
+)
+
+//DW LDexcluded
+export const LDexcluded_flagLogic = () => StudyEngine.ifThen(
+  // if:
+  StudyEngine.multipleChoice.any(LBflow_Adults.Q12.key, LBflow_Adults.Q12.optionKeys.none),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.LDexcluded.key, ParticipantFlags.LDexcluded.values.true),
 )
 
 /**

@@ -14,7 +14,7 @@ import {
   initFollowUpFlow_Kids,
   isSurveyExpired, aEMflagLogic, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
   removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned,
-  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, PHQ_15_noneflagLogic
+  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, PHQ_15_noneflagLogic, LDexcluded_flagLogic
 } from "./utils/studyRuleUtils";
 import { EMflow_Adults } from "./surveys/EMflow_Adults";
 import { EMflow_Kids } from "./surveys/EMflow_Kids";
@@ -321,6 +321,7 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(LBflow_Adults.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
+  LDexcluded_flagLogic(),
   StudyEngine.ifThen(
     // if not in a follow up yet:
     StudyEngine.not(
@@ -354,6 +355,7 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(LBflow_Kids.key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
+  LDexcluded_flagLogic(),
   StudyEngine.ifThen(
     // if not in a follow up yet:
     StudyEngine.not(

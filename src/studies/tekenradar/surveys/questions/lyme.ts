@@ -169,20 +169,20 @@ getHelpGroupContent() {
 }
 */
 
-export class LymeDiagnosis3alt extends Item {
+export class LymeDiagnosis3alt1 extends Item {
   optionKeys = {
-    none: 'x',
+    none: 'f',
   }
 
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Welk lichaamsdeel is aangedaan door lymeziekte? Je kunt per lichaamsdeel meerdere antwoorden aanklikken. '],
+        ["nl", 'Aan welk deel van je lichaam heb je klachten door de ziekte van Lyme? Je kunt meerdere antwoorden aanklikken. '],
       ]),
     },
         {
       content: new Map([
-        ["nl", "(Als het juiste lichaamsdeel er voor jou niet tussen staat, kun je dit ook aangeven.)"],
+        ["nl", "(Als het juiste lichaamsdeel er voor jou niet tussen staat, kies dan 'Anders, namelijk' en vul jouw antwoord in.)"],
       ]),
       className: "fw-normal"
     },
@@ -190,7 +190,7 @@ export class LymeDiagnosis3alt extends Item {
 
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LymeDiagnosis3alt');
+    super(parentKey, 'LymeDiagnosis3alt1');
 
     this.isRequired = isRequired;
     this.condition = condition;
@@ -220,12 +220,98 @@ export class LymeDiagnosis3alt extends Item {
       questionText: this.questionTextMain,
       responseOptions: [
         {
-          key: 't1', role: 'text',
+          key: 'a', role: 'option',
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
           content: new Map([
-            ["nl", "Arm of been (meerdere antwoorden mogelijk)"],
+            ["nl", "Arm of been"],
           ])
         },
+        {
+          key: 'b', role: 'option',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Huid"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Gezicht"],
+          ])
+        },
+         {
+          key: 'd', role: 'option',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Hart"],
+          ])
+        },
+        {
+          key: 'e', role: 'input',
+          disabled: optionDisabled,
+          style: [{ key: 'maxLength', value: '500' }],
+          content: new Map([
+            ["nl", "Anders, namelijk"],
+          ])
+        },
+        {
+          key: 'f', role: 'option',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Dit heb ik allemaal niet"],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
+export class LymeDiagnosis3alt2a extends Item {
+  optionKeys = {
+    none: 'x',
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Je hebt aangegeven dat je arm of been is aangedaan. Kun je aangeven welk(e) onderdeel/-delen van je arm of been zijn getroffen? '],
+      ]),
+    },
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeDiagnosis3alt2a');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.none);
+
+    /*const currentYear = new Date().getFullYear(); // Get the current year dynamically
+    const
+      years =
+        Array.from({
+          length:
+            17
+        }, (v,
+          k) => (currentYear
+            -
+            k).toString());*/
+
+
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
         {
           key: 'aa', role: 'option',
           disabled: optionDisabled,
@@ -311,6 +397,55 @@ export class LymeDiagnosis3alt extends Item {
             ["nl", "Anders, namelijk"],
           ])
         },
+       ]
+    })
+  }
+}
+
+export class LymeDiagnosis3alt2b extends Item {
+  optionKeys = {
+    none: 'x',
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Je hebt aangegeven dat je huid is aangedaan. Kun je aangeven welk(e) onderdeel/-delen van je huid zijn getroffen? '],
+      ]),
+    },
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeDiagnosis3alt2b');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.none);
+
+    /*const currentYear = new Date().getFullYear(); // Get the current year dynamically
+    const
+      years =
+        Array.from({
+          length:
+            17
+        }, (v,
+          k) => (currentYear
+            -
+            k).toString());*/
+
+
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
         {
           key: 't2', role: 'text',
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
@@ -354,6 +489,55 @@ export class LymeDiagnosis3alt extends Item {
             ["nl", "Anders, namelijk"],
           ])
         },
+       ]
+    })
+  }
+}
+
+export class LymeDiagnosis3alt2c extends Item {
+  optionKeys = {
+    none: 'x',
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Je hebt aangegeven dat je gezicht is aangedaan. Kun je aangeven welk(e) onderdeel/-delen van je gezicht zijn getroffen? '],
+      ]),
+    },
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeDiagnosis3alt2c');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.none);
+
+    /*const currentYear = new Date().getFullYear(); // Get the current year dynamically
+    const
+      years =
+        Array.from({
+          length:
+            17
+        }, (v,
+          k) => (currentYear
+            -
+            k).toString());*/
+
+
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
         {
           key: 't3', role: 'text',
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
@@ -473,6 +657,104 @@ export class LymeDiagnosis3alt extends Item {
   }
 }
 
+export class LymeDiagnosis3alt2d extends Item {
+  optionKeys = {
+    none: 'x',
+  }
+
+  questionTextMain = [
+    {
+      content: new Map([
+        ["nl", 'Je hebt aangegeven dat je hart is aangedaan. Kun je aangeven welk(e) onderdeel/-delen van je hart zijn getroffen? '],
+      ]),
+    },
+  ]
+
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LymeDiagnosis3alt2d');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+
+  }
+
+  buildItem() {
+    const optionDisabled = SurveyEngine.multipleChoice.any(this.key, this.optionKeys.none);
+
+    /*const currentYear = new Date().getFullYear(); // Get the current year dynamically
+    const
+      years =
+        Array.from({
+          length:
+            17
+        }, (v,
+          k) => (currentYear
+            -
+            k).toString());*/
+
+
+    return SurveyItems.multipleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: this.questionTextMain,
+      responseOptions: [
+        {
+          key: 't4', role: 'text',
+          style: [{ key: 'className', value: 'fw-bold mb-2' }],
+          content: new Map([
+            ["nl", "Hart (meerdere antwoorden mogelijk)"],
+          ])
+        },
+        {
+          key: 'da', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ik heb last van duizeligheid en een arts denkt dat dit door lymeziekte komt."],
+          ])
+        },
+        {
+          key: 'db', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ik heb last van het gevoel dat ik bijna flauwval of ik val ook echt flauw. Een arts denkt dat dit door lymeziekte komt."],
+          ])
+        },
+        {
+          key: 'dc', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ik heb last van kortademigheid en een arts denkt dat dit door lymeziekte komt."],
+          ])
+        },
+        {
+          key: 'dd', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ik heb last van hartkloppingen en een arts denkt dat dit door lymeziekte komt."],
+          ])
+        },
+        {
+          key: 'de', role: 'option',
+          disabled: optionDisabled,
+          content: new Map([
+            ["nl", "Ik heb soms pijn op de borst en een arts denkt dat dit door lymeziekte komt."],
+          ])
+        },
+        {
+          key: 'df', role: 'input',
+          disabled: optionDisabled,
+          style: [{ key: 'maxLength', value: '500' }],
+          content: new Map([
+            ["nl", "Anders, namelijk"],
+          ])
+        },
+      ]
+    })
+  }
+}
 
 
 export class LymeDiagnosis4 extends Item {

@@ -1,6 +1,6 @@
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { LymeDiagnosis2 } from './questions/diagnosisTherapy';
-import { LymeDiagnosis3alt, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
+import { LymeDiagnosis3alt1, LymeDiagnosis3alt2a, LymeDiagnosis3alt2b, LymeDiagnosis3alt2c, LymeDiagnosis3alt2d, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6 } from './questions/lyme';
 import { FeverFU1, FeverFU2, FU_LymeDiagGroup, MedicationFU1, MedicationFU2, MedicationHeader, NewTB, PreviousTickBites3, ReportedTB2, Text1FU } from './questions/followup';
 import { Cognition, CognitionHeader, Fatigue, FatigueHeader, Pregnant, PHQ_15, PHQ_15_FU, SymptomsHeader } from './questions/standard';
 import { SurveyEngine } from 'case-editor-tools/surveys';
