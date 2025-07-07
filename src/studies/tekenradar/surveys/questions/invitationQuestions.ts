@@ -177,7 +177,7 @@ export class aEMUitnodigingOnderzoekText extends Item {
 
 Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
 Het is voor ons waardevol om verder onderzoek te kunnen doen naar deze huidafwijking. We nodigen daarom een deel van de patiënten met een rode ring of vlek uit om naar de Lymepoli’s van Amsterdam UMC of Radboudumc (Nijmegen) te komen. Vind je het goed dat we je hiervoor benaderen? Zo kunnen we uitleggen wat dit verdere onderzoek inhoudt. Je reiskosten worden natuurlijk vergoed.
-Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, ook dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vragenlijst met vragen over je gezondheid op dat moment. Voor het invullen van de vragenlijsten ontvang je per e-mail een herinnering via 
+Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, ook dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vragenlijst met vragen over je gezondheid op dat moment. Voor het invullen van de vragenlijsten ontvang je per e-mail een herinnering via
 noreply@tekenradar.nl. (Niet iedereen met een rode ring of vlek kan deelnemen aan dit verdere onderzoek. Het is dus mogelijk dat we je niet benaderen.)
 `
 
@@ -1621,7 +1621,7 @@ export class kEMInviteGroup extends Group {
   kEMUitnodigingOnderzoek: kEMUitnodigingOnderzoek;
   kEMUitnodigingOnderzoekConsent: kEMUitnodigingOnderzoekConsent;
 
-  Contactgegevens: ContactgegevensGroup;
+  //Contactgegevens: ContactgegevensGroup; LT per 7-7-2025 contactgegevens vragen voor kinderen stopgezet
   FutureStudies: FutureStudies;
 
   // Standard Tekenradar
@@ -1638,7 +1638,7 @@ export class kEMInviteGroup extends Group {
     this.kEMUitnodigingOnderzoek = new kEMUitnodigingOnderzoek(this.key, isRequired);
     this.kEMUitnodigingOnderzoekConsent = new kEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
 
-    this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+    //this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes)); //LT per 7-7-25 contactgegevens vragen voor kinderen stopgezet
     this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
 
     this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.no));
@@ -1651,7 +1651,7 @@ export class kEMInviteGroup extends Group {
     this.addItem(this.kEMUitnodigingOnderzoek.get());
     this.addItem(this.kEMUitnodigingOnderzoekConsent.get());
     this.addPageBreak()
-    this.addItem(this.Contactgegevens.get());
+    //this.addItem(this.Contactgegevens.get()); //LT per 7-7-25 contactgegevens vragen voor kinderen stopgezet
     this.addItem(this.FutureStudies.get());
     this.addPageBreak()
 
