@@ -184,7 +184,7 @@ export class EM_B1 extends Item {
             }),
             ClozeItemTypes.dropDown({
               key: '4', options: [
-                SCOptions.option('1', new Map([['nl', "exacte"]])),
+                SCOptions.option('1', new Map([['nl', "precieze"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
             }),
