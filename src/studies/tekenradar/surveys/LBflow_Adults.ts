@@ -89,7 +89,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
     this.Q20 = new LymeTherapy4(this.key, required, Q17conditionAnyMed);
     const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
     this.Q21 = new LymeTherapy5(this.key, required, Q20condition);
-    this.Q22 = new LymeTherapy6(this.key, required, SurveyEngine.singleChoice.any(this.Q20.optionKeys.yes));
+    this.Q22 = new LymeTherapy6(this.key, required, Q20condition);
 
     this.FLG = new FormerLymeGroup(this.key, isRequired);
     this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(

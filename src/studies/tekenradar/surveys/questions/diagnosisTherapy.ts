@@ -828,7 +828,7 @@ function expWithArgs(arg0: string, arg1: any): Expression {
 
 export class LymeTherapy6 extends Item {
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
-    super(parentKey, 'LD6');
+    super(parentKey, 'LT6');
 
     this.isRequired = isRequired;
     this.condition = condition;

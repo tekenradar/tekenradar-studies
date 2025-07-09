@@ -710,7 +710,10 @@ export class LymeDiagnosis4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wanneer zijn deze klachten door de ziekte van Lyme ontstaan? In het opmerkingenveld kun je aanvullende gegevens over je klachten invullen.'],
+        ['nl', 'Wanneer zijn deze klachten door de ziekte van Lyme ontstaan? '],
+      ]),
+            questionSubText: new Map([
+      ['nl', 'In het opmerkingenveld kun je aanvullende gegevens over je klachten invullen.'],
       ]),
       responseOptions: [
         MCOptions.cloze({

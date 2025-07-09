@@ -76,7 +76,7 @@ class EMflow_AdultsDef extends SurveyDefinition {
     this.Q18 = new LymeTherapy4(this.key, required, Q16condition);
     const Q18condition = SurveyEngine.singleChoice.any(this.Q18.key, this.Q18.optionKeys.yes);
     this.Q19 = new LymeTherapy5(this.key, required, Q18condition);
-    this.Q20 = new LymeTherapy6(this.key, required, SurveyEngine.singleChoice.any(this.Q18.optionKeys.yes));
+    this.Q20 = new LymeTherapy6(this.key, required, Q18condition);
 
     this.FLG = new FormerLymeGroup(this.key, isRequired);
     this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
