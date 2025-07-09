@@ -107,7 +107,10 @@ export class Gender extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wat was je geslacht bij geboorte? Hiermee bedoelen we je biologische geslacht, niet hoe je je nu voelt of identificeert.'],
+        ['nl', 'Wat was je geslacht bij geboorte? '],
+      ]),
+      questionSubText: new Map([
+        ['nl', 'Hiermee bedoelen we je biologische geslacht, niet hoe je je nu voelt of identificeert.'],
       ]),
       responseOptions: [
         {

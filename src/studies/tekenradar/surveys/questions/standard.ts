@@ -244,7 +244,7 @@ export class AboutTekenradar extends Item {
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "Via google of een andere internet zoekmachine"],
+            ["nl", "Via Google of een andere internet zoekmachine"],
           ])
         },
         {
@@ -295,7 +295,7 @@ export class Qualification extends Item {
   questionTextMain_Adults = [
     {
       content: new Map([
-        ["nl", 'Wat is de opleiding die je hebt afgemaakt?'],
+        ["nl", 'Wat is de hoogste opleiding die je hebt afgemaakt?'],
       ]),
     }
   ]
@@ -384,7 +384,7 @@ export class Qualification_parent extends Item {
   questionTextMain_Kids = [
     {
       content: new Map([
-        ["nl", 'Wat is de hoogst voltooide opleiding van je moeder /verzorgster (of van je vader/verzorger, als er geen moeder/verzorgster is)?'],
+        ["nl", 'Wat is de hoogst voltooide opleiding van je moeder/verzorgster (of van je vader/verzorger, als er geen moeder/verzorgster is)?'],
       ]),
     }
   ]
