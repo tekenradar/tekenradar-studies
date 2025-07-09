@@ -3,7 +3,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
-import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
+import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, LymeTherapy6, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
 import { FormerLymeGroup } from './questions/formerLymeGroup';
 import { LymeDiagnosis3alt1, LymeDiagnosis3alt2a, LymeDiagnosis3alt2b, LymeDiagnosis3alt2c, LymeDiagnosis3alt2d, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7, LymeHeader } from './questions/lyme';
@@ -35,6 +35,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
   Q19: LymeTherapy3;
   Q20: LymeTherapy4;
   Q21: LymeTherapy5;
+  Q22: LymeTherapy6;
 
   //Previous Tick Bites and former lyme disease at the end
   FLG: FormerLymeGroup;
@@ -88,6 +89,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
     this.Q20 = new LymeTherapy4(this.key, required, Q17conditionAnyMed);
     const Q20condition = SurveyEngine.singleChoice.any(this.Q20.key, this.Q20.optionKeys.yes);
     this.Q21 = new LymeTherapy5(this.key, required, Q20condition);
+    this.Q22 = new LymeTherapy6(this.key, required, SurveyEngine.singleChoice.any(this.Q20.optionKeys.yes));
 
     this.FLG = new FormerLymeGroup(this.key, isRequired);
     this.PTB = new PreviousTickBitesGroup(this.key, isRequired, SurveyEngine.logic.not(
@@ -123,6 +125,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.Q19.get());
     this.addItem(this.Q20.get());
     this.addItem(this.Q21.get());
+    this.addItem(this.Q22.get());
 
     this.addItem(this.FLG.get());
     this.addItem(this.PTB.get());

@@ -825,3 +825,44 @@ function expWithArgs(arg0: string, arg1: any): Expression {
   throw new Error('Function not implemented.');
 }
 
+
+export class LymeTherapy6 extends Item {
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LD6');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Heb je de antibioticakuur afgerond?'],
+      ]),
+      responseOptions: [
+        {
+          key: 'a', role: 'option',
+          content: new Map([
+            ["nl", "Ja, ik heb het net zo lang ingenomen als voorgeschreven werd door mijn arts"],
+          ])
+        },
+        {
+          key: 'b', role: 'option',
+          content: new Map([
+            ["nl", "Nee, ik ben eerder gestopt"],
+          ])
+        },
+        {
+          key: 'c', role: 'option',
+          content: new Map([
+            ["nl", "Nee, want ik slik op dit moment nog antibiotica"],
+          ])
+        },
+      ]
+    })
+  }
+}

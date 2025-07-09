@@ -446,13 +446,7 @@ export class LymeDiagnosis3alt2b extends Item {
       condition: this.condition,
       questionText: this.questionTextMain,
       responseOptions: [
-        {
-          key: 't2', role: 'text',
-          style: [{ key: 'className', value: 'fw-bold mb-2' }],
-          content: new Map([
-            ["nl", "Huid (meerdere antwoorden mogelijk)"],
-          ])
-        },
+
         {
           key: 'ba', role: 'option',
           disabled: optionDisabled,
@@ -538,13 +532,7 @@ export class LymeDiagnosis3alt2c extends Item {
       condition: this.condition,
       questionText: this.questionTextMain,
       responseOptions: [
-        {
-          key: 't3', role: 'text',
-          style: [{ key: 'className', value: 'fw-bold mb-2' }],
-          content: new Map([
-            ["nl", "Gezicht (meerdere antwoorden mogelijk)"],
-          ])
-        },
+        
         {
           key: 'ca', role: 'option',
           disabled: optionDisabled,
@@ -602,56 +590,7 @@ export class LymeDiagnosis3alt2c extends Item {
             ["nl", "Anders, namelijk"],
           ])
         },
-        {
-          key: 't4', role: 'text',
-          style: [{ key: 'className', value: 'fw-bold mb-2' }],
-          content: new Map([
-            ["nl", "Hart (meerdere antwoorden mogelijk)"],
-          ])
-        },
-        {
-          key: 'da', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb last van duizeligheid en een arts denkt dat dit door lymeziekte komt."],
-          ])
-        },
-        {
-          key: 'db', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb last van het gevoel dat ik bijna flauwval of ik val ook echt flauw. Een arts denkt dat dit door lymeziekte komt."],
-          ])
-        },
-        {
-          key: 'dc', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb last van kortademigheid en een arts denkt dat dit door lymeziekte komt."],
-          ])
-        },
-        {
-          key: 'dd', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb last van hartkloppingen en een arts denkt dat dit door lymeziekte komt."],
-          ])
-        },
-        {
-          key: 'de', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb soms pijn op de borst en een arts denkt dat dit door lymeziekte komt."],
-          ])
-        },
-        {
-          key: 'df', role: 'input',
-          disabled: optionDisabled,
-          style: [{ key: 'maxLength', value: '500' }],
-          content: new Map([
-            ["nl", "Anders, namelijk"],
-          ])
-        },
+
       ]
     })
   }
@@ -701,13 +640,7 @@ export class LymeDiagnosis3alt2d extends Item {
       condition: this.condition,
       questionText: this.questionTextMain,
       responseOptions: [
-        {
-          key: 't4', role: 'text',
-          style: [{ key: 'className', value: 'fw-bold mb-2' }],
-          content: new Map([
-            ["nl", "Hart (meerdere antwoorden mogelijk)"],
-          ])
-        },
+
         {
           key: 'da', role: 'option',
           disabled: optionDisabled,
@@ -777,7 +710,7 @@ export class LymeDiagnosis4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wanneer zijn deze klachten door de ziekte van Lyme ontstaan?'],
+        ['nl', 'Wanneer zijn deze klachten door de ziekte van Lyme ontstaan? In het opmerkingenveld kun je aanvullende gegevens over je klachten invullen.'],
       ]),
       responseOptions: [
         MCOptions.cloze({
