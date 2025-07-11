@@ -457,7 +457,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
         StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.UitnodigingOnderzoekConsent.key),
         StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
         StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.UitnodigingOnderzoekConsent.key),
-        StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
+        //StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key), //LT uitgezet per 11-07-2025
       ),
       StudyEngine.not(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
@@ -477,7 +477,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
       StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
-      StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key),
+      //StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key), //LT uitgezet per 11-07-2025
       StudyEngine.consent.accepted(T0_Invites.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key)
     ),
     // Then:

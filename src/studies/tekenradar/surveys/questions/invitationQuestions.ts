@@ -139,6 +139,7 @@ Ook:
   }
 }
 
+
 export class kEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek ziekte van Lyme
@@ -1356,31 +1357,31 @@ export class ContactgegevensGroup extends Group {
 
     //kvdw LE:
     const showPC4contact = SurveyEngine.logic.or(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
+      //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
       SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
     );
     this.PC4contact = new PC4contact(this.key, isRequired, showPC4contact)
 
     const showTelQ = SurveyEngine.logic.or(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
+      //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
       SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
     );
     this.Telephone = new Telephone(this.key, isRequired, showTelQ)
 
     const showGenderQ = SurveyEngine.logic.or(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
+      //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
       SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
     );
     this.Gender = new GenderForContact(this.key, isRequired, showGenderQ)
 
     const showBirthdayQ = SurveyEngine.logic.or(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
+      //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
       SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
     );
     this.Birthday = new Birthday(this.key, isRequired, showBirthdayQ)
 
     const showGPq = SurveyEngine.logic.or(
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely),
+      //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
       SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
     );
     this.GP = new GP(this.key, isRequired, showGPq)
@@ -1617,48 +1618,65 @@ export class StandardInviteGroup extends Group {
 }
 
 export class kEMInviteGroup extends Group {
-  T0: kEMUitnodigingOnderzoekText;
-  kEMUitnodigingOnderzoek: kEMUitnodigingOnderzoek;
-  kEMUitnodigingOnderzoekConsent: kEMUitnodigingOnderzoekConsent;
-
-  //Contactgegevens: ContactgegevensGroup; LT per 7-7-2025 contactgegevens vragen voor kinderen stopgezet
-  FutureStudies: FutureStudies;
+  //T0: kEMUitnodigingOnderzoekText; //LT per 11-07-2025 dit blok uitgezet om het automatisch verzamelen van contactgegevens vragen te stoppen
+  //kEMUitnodigingOnderzoek: kEMUitnodigingOnderzoek;
+  //kEMUitnodigingOnderzoekConsent: kEMUitnodigingOnderzoekConsent;
+  //Contactgegevens: ContactgegevensGroup;
+  //FutureStudies: FutureStudies;
 
   // Standard Tekenradar
   T1: UitnodigingOnderzoekText;
   UitnodigingOnderzoek: UitnodigingOnderzoek;
   UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
 
+  // Other studies //LT per 11-07-2025 dit blok toegevoegd alleen nog beperkte contactgegevens te verzamelen bij toestemming aanvullend onderzoek
+  T2: UitnodigingAanvullendOnderzoekText;
+  UitnodigingAanvullendOnderzoek: UitnodigingAanvullendOnderzoek;
+  UitnodigingAanvullendOnderzoekConsent: UitnodigingAanvullendOnderzoekConsent;
+  Contactgegevens: ContactgegevensGroup;
+
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
     super(parentKey, 'kEM');
 
     this.groupEditor.setCondition(condition);
 
-    this.T0 = new kEMUitnodigingOnderzoekText(this.key);
-    this.kEMUitnodigingOnderzoek = new kEMUitnodigingOnderzoek(this.key, isRequired);
-    this.kEMUitnodigingOnderzoekConsent = new kEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+    //this.T0 = new kEMUitnodigingOnderzoekText(this.key); //LT per 11-07-2025 dit blok uitgezet om het automatisch verzamelen van contactgegevens vragen te stoppen
+    //this.kEMUitnodigingOnderzoek = new kEMUitnodigingOnderzoek(this.key, isRequired);
+    //this.kEMUitnodigingOnderzoekConsent = new kEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+    //this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+    //this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
 
-    //this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes)); //LT per 7-7-25 contactgegevens vragen voor kinderen stopgezet
-    this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.yes));
+    //this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.no)); //LT per 11-07-2025 dit blok uitgezet om het automatisch verzamelen van contactgegevens vragen te stoppen
+    //this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.no));
+    //this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
 
-    this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.no));
-    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.kEMUitnodigingOnderzoek.key, this.kEMUitnodigingOnderzoek.optionKeys.no));
+    this.T1 = new UitnodigingOnderzoekText(this.key); //LT per 11-07-2025 dit blok toegevoegd alleen nog beperkte contactgegevens te verzamelen bij toestemming aanvullend onderzoek
+    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired);
     this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
+
+    const showAdditionalStudyInvite = SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes); //LT per 11-07-2025 dit blok toegevoegd alleen nog beperkte contactgegevens te verzamelen bij toestemming aanvullend onderzoek
+    this.T2 = new UitnodigingAanvullendOnderzoekText(this.key, showAdditionalStudyInvite);
+    this.UitnodigingAanvullendOnderzoek = new UitnodigingAanvullendOnderzoek(this.key, isRequired, showAdditionalStudyInvite);
+    this.UitnodigingAanvullendOnderzoekConsent = new UitnodigingAanvullendOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingAanvullendOnderzoek.key, this.UitnodigingAanvullendOnderzoek.optionKeys.yes));
+    this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingAanvullendOnderzoek.key, this.UitnodigingAanvullendOnderzoek.optionKeys.yes));
   }
 
   buildGroup(): void {
-    this.addItem(this.T0.get());
-    this.addItem(this.kEMUitnodigingOnderzoek.get());
-    this.addItem(this.kEMUitnodigingOnderzoekConsent.get());
-    this.addPageBreak()
-    //this.addItem(this.Contactgegevens.get()); //LT per 7-7-25 contactgegevens vragen voor kinderen stopgezet
-    this.addItem(this.FutureStudies.get());
-    this.addPageBreak()
-
+    //this.addItem(this.T0.get()); //LT per 11-07-2025 dit blok uitgezet
+    //this.addItem(this.kEMUitnodigingOnderzoek.get());
+    //this.addItem(this.kEMUitnodigingOnderzoekConsent.get());
+    //this.addPageBreak()
+    //this.addItem(this.Contactgegevens.get());
+    //this.addItem(this.FutureStudies.get());
+    //this.addPageBreak()
     this.addItem(this.T1.get());
     this.addItem(this.UitnodigingOnderzoek.get());
     this.addItem(this.UitnodigingOnderzoekConsent.get());
     this.addPageBreak()
+    this.addItem(this.T2.get()); //LT per 11-07-2025 dit blok toegevoegd
+    this.addItem(this.UitnodigingAanvullendOnderzoek.get());
+    this.addItem(this.UitnodigingAanvullendOnderzoekConsent.get());
+    this.addItem(this.Contactgegevens.get())
   }
 }
 

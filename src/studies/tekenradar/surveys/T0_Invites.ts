@@ -55,7 +55,7 @@ export class T0_InvitesDef extends SurveyDefinition {
 
     this.EndGroup = new SurveyEndGroup(this.key, false, SurveyEngine.logic.and(
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.StandardInviteGroup.UitnodigingOnderzoek.key, this.StandardInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
-      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.kEMInviteGroup.kEMUitnodigingOnderzoek.key, this.kEMInviteGroup.kEMUitnodigingOnderzoek.optionKeys.yes)),
+      //SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.kEMInviteGroup.kEMUitnodigingOnderzoek.key, this.kEMInviteGroup.kEMUitnodigingOnderzoek.optionKeys.yes)), //LT uitgezet per 11-07-2025
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.kEMInviteGroup.UitnodigingOnderzoek.key, this.kEMInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
       //kvdw LE:
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.aEMUitnodigingOnderzoek.key, this.aEMInviteGroup.aEMUitnodigingOnderzoek.optionKeys.yes)),
