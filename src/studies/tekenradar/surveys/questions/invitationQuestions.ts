@@ -12,7 +12,7 @@ export class UitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging Tekenradar-vragenlijstonderzoek
 
-Wij willen je vragen om mee te doen aan het Tekenradar-vragenlijstonderzoek onderzoek, omdat je een tekenbeet of lymeziekte hebt gemeld. Zo draag je bij aan kennis over tekenbeten en lymeziekte, en de gezondheidsgevolgen hiervan.
+Wij vragen je om mee te doen aan het Tekenradar-vragenlijstonderzoek onderzoek, omdat je een tekenbeet of lymeziekte hebt gemeld. Zo draag je bij aan kennis over tekenbeten en lymeziekte, en de gezondheidsgevolgen hiervan.
 Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid. Ook krijg je het komende jaar iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
 `
 
@@ -118,7 +118,7 @@ Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we
 
 Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
 
-Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik er mee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik ermee in dat mijn huisarts of medisch specialist en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
 
 Ook:
 - Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
@@ -177,7 +177,9 @@ export class aEMUitnodigingOnderzoekText extends Item {
 ## Uitnodiging onderzoek ziekte van Lyme
 
 Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
+
 Het is voor ons waardevol om verder onderzoek te kunnen doen naar deze huidafwijking. We nodigen daarom een deel van de patiënten met een rode ring of vlek uit om naar de Lymepoli’s van Amsterdam UMC of Radboudumc (Nijmegen) te komen. Vind je het goed dat we je hiervoor benaderen? Zo kunnen we uitleggen wat dit verdere onderzoek inhoudt. Je reiskosten worden natuurlijk vergoed.
+
 Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, ook dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vragenlijst met vragen over je gezondheid op dat moment. Voor het invullen van de vragenlijsten ontvang je per e-mail een herinnering via
 noreply@tekenradar.nl. (Niet iedereen met een rode ring of vlek kan deelnemen aan dit verdere onderzoek. Het is dus mogelijk dat we je niet benaderen.)
 `
@@ -482,7 +484,7 @@ Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we
 
 Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
 
-Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik er mee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik ermee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
 
 Ook:
 - Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
@@ -548,7 +550,7 @@ Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we
 
 Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
 
-Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik er mee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik ermee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
 
 Ook:
 - Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
@@ -612,7 +614,7 @@ Om mee te doen aan het LymeProspect-Plus vragenlijstonderzoek via Tekenradar heb
 
 Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
 
-Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “LymeProspect-PLUS via Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik er mee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “LymeProspect-PLUS via Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik ermee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
 
 Ook:
 - Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
@@ -1261,6 +1263,7 @@ class GenderForContact extends Item {
         },
         {
           key: this.optionKeys.other, role: 'input',
+          style: [{ key: 'maxLength', value: '100' }],
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])

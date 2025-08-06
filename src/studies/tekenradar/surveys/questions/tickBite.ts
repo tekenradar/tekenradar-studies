@@ -122,7 +122,7 @@ De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest r
   markdownContentOther = `
 ### Tekenbeet
 
-De volgende vragen gaan over de tekenbeet die vermoedelijk erythema migrans of andere vorm van lymeziekte van dit moment veroorzaakt heeft.
+De volgende vragen gaan over de tekenbeet die vermoedelijk de erythema migrans of andere vorm van lymeziekte van dit moment veroorzaakt heeft.
 `
 
   markdownContentFever = `

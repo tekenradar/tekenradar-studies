@@ -3,7 +3,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions } from './globalConstants';
-import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, LymeTherapy6, LymeDiagnosis1, LymeDiagnosis2, LymeTherapy3 } from './questions/diagnosisTherapy';
+import { LymeTherapy1, LymeTherapy2, LymeTherapy4, LymeTherapy5, LymeTherapy6, LymeDiagnosis1, LymeDiagnosis2, LymeDiagnosis2extra, LymeTherapy3 } from './questions/diagnosisTherapy';
 import { ReportHeader } from './questions/EM';
 import { FormerLymeGroup } from './questions/formerLymeGroup';
 import { LymeDiagnosis3alt1, LymeDiagnosis3alt2a, LymeDiagnosis3alt2b, LymeDiagnosis3alt2c, LymeDiagnosis3alt2d, LymeDiagnosis4, LymeDiagnosis5, LymeDiagnosis6, LymeDiagnosis7, LymeHeader } from './questions/lyme';
@@ -20,6 +20,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
   H2: LymeHeader;
   Q10: LymeDiagnosis1;
   Q11: LymeDiagnosis2;
+  Q11a: LymeDiagnosis2extra;
   Q12: LymeDiagnosis3alt1;
   Q12a: LymeDiagnosis3alt2a;
   Q12b: LymeDiagnosis3alt2b;
@@ -66,6 +67,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
     this.Q10 = new LymeDiagnosis1(this.key, required);
     const Q10condition = SurveyEngine.singleChoice.any(this.Q10.key, this.Q10.optionKeys.yes);
     this.Q11 = new LymeDiagnosis2(this.key, required, Q10condition);
+    this.Q11a = new LymeDiagnosis2extra(this.key, required, Q10condition);
     this.Q12 = new LymeDiagnosis3alt1(this.key, required);
     this.Q12a = new LymeDiagnosis3alt2a(this.key,required, SurveyEngine.multipleChoice.any(this.Q12.key, 'a'));
     this.Q12b = new LymeDiagnosis3alt2b(this.key,required, SurveyEngine.multipleChoice.any(this.Q12.key, 'b'));
@@ -110,6 +112,7 @@ class LBflow_AdultsDef extends SurveyDefinition {
     this.addItem(this.H2.get());
     this.addItem(this.Q10.get());
     this.addItem(this.Q11.get());
+    this.addItem(this.Q11a.get());
     this.addItem(this.Q12.get());
     this.addItem(this.Q12a.get());
     this.addItem(this.Q12b.get());

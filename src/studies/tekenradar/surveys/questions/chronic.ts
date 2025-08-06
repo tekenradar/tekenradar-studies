@@ -119,7 +119,7 @@ export class ChronicLymeTherapy2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Is er bij jou ooit eerder een erythema migrans of een andere vorm van de ziekte van Lyme vastgesteld?'],
+        ["nl", 'Is er bij jou ooit eerder een erythema migrans of een andere vorm van lymeziekte vastgesteld?'],
       ]),
       className: "row"
     },

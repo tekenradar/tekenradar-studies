@@ -876,7 +876,7 @@ export class PHQ_15_FU extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met je tekenbeet, erythema migrans of andere ziekte van Lyme te maken hebben?'],
+        ['nl', 'Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met je tekenbeet, erythema migrans of andere vormen van lymeziekte te maken hebben?'],
       ]),
       responseOptions: [
         {

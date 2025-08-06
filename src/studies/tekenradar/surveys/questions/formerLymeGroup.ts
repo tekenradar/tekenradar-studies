@@ -89,7 +89,7 @@ class FormerLymeTherapyQ2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Heb je een antibiotica kuur gekregen voor deze eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
+        ['nl', 'Heb je een antibioticakuur gekregen voor deze eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
       ]),
       responseOptions: [
         {
@@ -155,7 +155,7 @@ class FormerLymeTherapyQ3 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van de ziekte van Lyme?'],
+        ['nl', 'Ben je toen hersteld van de eerdere erythema migrans of andere vorm van lymeziekte?'],
       ]),
       responseOptions: [
         {
