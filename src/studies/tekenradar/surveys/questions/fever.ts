@@ -604,7 +604,7 @@ export class FeverOtherCause2 extends Item {
         {
           key: 'g', role: 'input',
           content: new Map([
-            ["nl", "Andere arts namelijk"],
+            ["nl", "Andere arts, namelijk"],
           ])
         },
         //TODO: disable other option if h is selected?

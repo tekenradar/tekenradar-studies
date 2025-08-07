@@ -116,7 +116,7 @@ Indien je meerdere tekenbeten tegelijk hebt opgelopen, kun je dit als één teke
 De vragen hieronder zijn voor een minderjarige.
 Ben je een ouder/verzorger dan kun je de antwoorden invullen voor/over je kind.
 
-De volgende vragen gaan over de tekenbeet die vermoedelijk de huidige of meest recente erythema migrans of andere uiting van de ziekte van Lyme veroorzaakt heeft.
+De volgende vragen gaan over de tekenbeet die vermoedelijk de erythema migrans of andere vorm van lymeziekte van dit moment veroorzaakt heeft.
   `
 
   markdownContentOther = `
@@ -883,7 +883,7 @@ export class RemoveTick3 extends Item {
           items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['nl', "Eerder namelijk,"]]
+                [['nl', "Eerder, namelijk,"]]
               )
             }),
             ClozeItemTypes.dateInput({

@@ -764,6 +764,7 @@ export class LymeDiagnosis4 extends Item {
         },
         {
           key: 'c', role: 'input',
+          style: [{ key: 'maxLength', value: '500' }],
           content: new Map([
             ["nl", "Opmerkingen"],
           ])

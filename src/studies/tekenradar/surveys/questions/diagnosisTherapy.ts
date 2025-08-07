@@ -692,7 +692,7 @@ export class LymeTherapy3 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '3', content: new Map(
-            [['nl', "aantal dagen infuus:"]]
+            [['nl', "aantal dagen antibiotica via infuus:"]]
           )
         }),
         ClozeItemTypes.numberInput({
