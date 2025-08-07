@@ -221,6 +221,7 @@ export class LymeDiagnosis3alt1 extends Item {
       responseOptions: [
         {
           key: 'a', role: 'option',
+          disabled: optionDisabled,
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
           content: new Map([
             ["nl", "Arm of been"],
@@ -228,6 +229,7 @@ export class LymeDiagnosis3alt1 extends Item {
         },
         {
           key: 'b', role: 'option',
+          disabled: optionDisabled,
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
           content: new Map([
             ["nl", "Huid"],
@@ -235,6 +237,7 @@ export class LymeDiagnosis3alt1 extends Item {
         },
         {
           key: 'c', role: 'option',
+          disabled: optionDisabled,
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
           content: new Map([
             ["nl", "Gezicht"],
@@ -242,6 +245,7 @@ export class LymeDiagnosis3alt1 extends Item {
         },
          {
           key: 'd', role: 'option',
+          disabled: optionDisabled,
           style: [{ key: 'className', value: 'fw-bold mb-2' }],
           content: new Map([
             ["nl", "Hart"],

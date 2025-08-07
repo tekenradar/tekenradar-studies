@@ -727,7 +727,7 @@ export class UitnodigingAanvullendOnderzoek extends Item {
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja, ik wil benaderd worden voor aanvullend onderzoek"],
+            ["nl", "Ja, ik wil benaderd worden voor aanvullend onderzoek."],
           ])
         },
         {
@@ -768,7 +768,7 @@ export class BiobankUitnodigingAanvullendOnderzoek extends Item {
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja, ik wil benaderd worden voor aanvullend onderzoek"],
+            ["nl", "Ja, ik wil benaderd worden voor aanvullend onderzoek."],
           ])
         },
         {

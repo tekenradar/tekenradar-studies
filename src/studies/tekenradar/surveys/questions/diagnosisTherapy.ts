@@ -310,7 +310,7 @@ export class LymeDiagnosis2extra extends Item {
     },
     {
       content: new Map([
-        ["nl", "(meerdere antwoorden mogelijk)"],
+        ["nl", " (meerdere antwoorden mogelijk)"],
       ]),
       className: "fw-normal"
     },
