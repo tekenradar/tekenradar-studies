@@ -107,10 +107,7 @@ export class Gender extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wat was je geslacht bij geboorte? '],
-      ]),
-      questionSubText: new Map([
-        ['nl', 'Hiermee bedoelen we je biologische geslacht, niet hoe je je nu voelt of identificeert.'],
+        ['nl', 'Wat was je geslacht?'],
       ]),
       responseOptions: [
         {
@@ -127,6 +124,7 @@ export class Gender extends Item {
         },
         {
           key: this.optionKeys.other, role: 'input',
+          style: [{ key: 'maxLength', value: '100' }],
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])

@@ -459,7 +459,7 @@ class Awareness5 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre ervaar je lichamelijke klachten van de tekenbeet, erythema migrans of andere ziekte van Lyme ziekte?'],
+        ["nl", 'In hoeverre ervaar je lichamelijke klachten van de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
       ]),
     }
   ]
