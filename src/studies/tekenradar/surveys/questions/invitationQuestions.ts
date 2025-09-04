@@ -171,7 +171,7 @@ Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je g
   }
 }
 
-//kvdw LymeEscape:
+//kvdw LymeEscape, update dw GGG-AUMC:
 export class aEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek ziekte van Lyme
@@ -181,7 +181,7 @@ Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, o
 Het is voor ons waardevol om verder onderzoek te kunnen doen naar deze huidafwijking. We nodigen daarom een deel van de patiënten met een rode ring of vlek uit om naar de Lymepoli’s van Amsterdam UMC of Radboudumc (Nijmegen) te komen. Vind je het goed dat we je hiervoor benaderen? Zo kunnen we uitleggen wat dit verdere onderzoek inhoudt. Je reiskosten worden natuurlijk vergoed.
 
 Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, ook dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vragenlijst met vragen over je gezondheid op dat moment. Voor het invullen van de vragenlijsten ontvang je per e-mail een herinnering via
-noreply@tekenradar.nl. (Niet iedereen met een rode ring of vlek kan deelnemen aan dit verdere onderzoek. Het is dus mogelijk dat we je niet benaderen.)
+noreply@tekenradar.nl. Niet iedereen met een rode ring of vlek kan deelnemen aan dit verdere onderzoek. Het is dus mogelijk dat we je niet benaderen.
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -206,6 +206,7 @@ noreply@tekenradar.nl. (Niet iedereen met een rode ring of vlek kan deelnemen aa
     })
   }
 }
+
 //LT LPplus
 export class LPplusUitnodigingOnderzoekText extends Item {
   markdownContent = `
@@ -307,7 +308,7 @@ export class aEMUitnodigingOnderzoek extends Item {
         {
           key: this.optionKeys.yes, role: 'option',
           content: new Map([
-            ["nl", "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor verder onderzoek. "],
+            ["nl", "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor verder onderzoek."],
           ])
         },
         {
@@ -320,6 +321,39 @@ export class aEMUitnodigingOnderzoek extends Item {
     })
   }
 }
+
+// dw 4-9-2025: added post question text
+export class aEMUitnTR_Posttext extends Item {
+
+  markdownContent = `
+Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waar misschien ook bloed voor wordt afgenomen. 
+Klik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek.
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'aEMUitnTR_Posttext');
+
+    this.condition = condition;
+   
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
 
 //LT LPplus
 export class LPplusUitnodigingOnderzoek extends Item {
@@ -1686,9 +1720,10 @@ export class kEMInviteGroup extends Group {
 //kvdw LE:
 export class aEMInviteGroup extends Group {
   T0: aEMUitnodigingOnderzoekText;
+  aEMUitnTR_Posttext: aEMUitnTR_Posttext;
   aEMUitnodigingOnderzoek: aEMUitnodigingOnderzoek;
   aEMUitnodigingOnderzoekConsent: aEMUitnodigingOnderzoekConsent;
-
+  
   Contactgegevens: ContactgegevensGroup;
   FutureStudies: FutureStudies;
   NijmegenReis: NijmegenReis;
@@ -1706,6 +1741,10 @@ export class aEMInviteGroup extends Group {
     this.T0 = new aEMUitnodigingOnderzoekText(this.key);
     this.aEMUitnodigingOnderzoek = new aEMUitnodigingOnderzoek(this.key, isRequired);
     this.aEMUitnodigingOnderzoekConsent = new aEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
+    this.aEMUitnTR_Posttext = new aEMUitnTR_Posttext(this.key, SurveyEngine.singleChoice.any(
+      this.aEMUitnodigingOnderzoek.key, 
+      this.aEMUitnodigingOnderzoek.optionKeys.no // Toon als het antwoord "Nee" is
+    ));
 
     this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
     this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
@@ -1728,6 +1767,7 @@ export class aEMInviteGroup extends Group {
     this.addItem(this.T0.get());
     this.addItem(this.aEMUitnodigingOnderzoek.get());
     this.addItem(this.aEMUitnodigingOnderzoekConsent.get());
+    this.addItem(this.aEMUitnTR_Posttext.get());
     this.addPageBreak()
     this.addItem(this.Contactgegevens.get());
     this.addItem(this.FutureStudies.get());
