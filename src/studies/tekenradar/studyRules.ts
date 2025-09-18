@@ -12,7 +12,7 @@ import {
   handlePDiffRuleFor_LBflow, handlePDiffRuleFor_TBflow, handlePDiffRuleFor_WeeklyTB,
   initFollowUpFlow_Adults,
   initFollowUpFlow_Kids,
-  isSurveyExpired, aEMflagLogic, kEMflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
+  isSurveyExpired, aEMflagLogic, kEMflagLogic, LBotherflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
   removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned,
   updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, PHQ_15_noneflagLogic, LDexcluded_flagLogic
 } from "./utils/studyRuleUtils";
@@ -115,6 +115,7 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
     resetToPDiffStart(),
     StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
     StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
+    StudyEngine.participantActions.removeFlag(ParticipantFlags.LBother.key),
     StudyEngine.participantActions.startNewStudySession(),
   ),
   handlePDiffRuleFor_TBflow(),
@@ -332,6 +333,7 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
     // Then:
     assignT0Invite(),
   ),
+  LBotherflagLogic(),
   reAssignWeeklyToTheEndOfList(),
   updateTbExposureFlag(LBflow_Adults.PTB.Q1.key),
   // Map data aggregation:
@@ -458,6 +460,8 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
         StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
         StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.UitnodigingOnderzoekConsent.key),
         //StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key), //LT uitgezet per 11-07-2025
+        StudyEngine.consent.accepted(T0_Invites.LBotherInviteGroup.UitnodigingOnderzoekConsent.key),
+        StudyEngine.consent.accepted(T0_Invites.LBotherInviteGroup.LBotherUitnodigingOnderzoekConsent.key),
       ),
       StudyEngine.not(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
@@ -477,6 +481,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     StudyEngine.or(
       StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
       StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
+      StudyEngine.consent.accepted(T0_Invites.LBotherInviteGroup.LBotherUitnodigingOnderzoekConsent.key),
       //StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key), //LT uitgezet per 11-07-2025
       StudyEngine.consent.accepted(T0_Invites.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key)
     ),

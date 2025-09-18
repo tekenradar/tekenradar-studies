@@ -2,7 +2,7 @@ import { SurveyEngine } from 'case-editor-tools/surveys';
 import { SurveyDefinition } from 'case-editor-tools/surveys/types';
 import { ParticipantFlags } from '../participantFlags';
 import { applyRequiredQuestions, surveyKeys } from './globalConstants';
-import { kEMInviteGroup, StandardInviteGroup, aEMInviteGroup, LPplusBBInviteGroup } from './questions/invitationQuestions';
+import { kEMInviteGroup, StandardInviteGroup, aEMInviteGroup, LPplusBBInviteGroup, LBotherInviteGroup } from './questions/invitationQuestions';
 //import { aEMInviteGroup, StandardInviteGroup } from './questions/invitationQuestions';//kvdw LE
 import { SurveyEndGroup } from './questions/surveyEnd';
 
@@ -12,6 +12,7 @@ export class T0_InvitesDef extends SurveyDefinition {
   kEMInviteGroup: kEMInviteGroup;
   aEMInviteGroup: aEMInviteGroup; //kvdw LE
   LPplusInviteGroup: LPplusBBInviteGroup; //MH LPplus
+  LBotherInviteGroup: LBotherInviteGroup; //LT ggg-amc 18-09-25
   EndGroup: SurveyEndGroup;
 
   constructor(isRequired?: boolean) {
@@ -34,10 +35,13 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.StandardInviteGroup = new StandardInviteGroup(this.key, required, SurveyEngine.logic.and(
       SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely)),
       SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)),
+      SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely)), //LT ggg-amc 18-09-2025
       SurveyEngine.logic.not(SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LPplus.key, ParticipantFlags.LPplus.values.likely))), //MH
+
     );
     this.kEMInviteGroup = new kEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely));
     this.aEMInviteGroup = new aEMInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely));
+    this.LBotherInviteGroup = new LBotherInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely));
     this.LPplusInviteGroup = new LPplusBBInviteGroup(this.key, required, SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LPplus.key, ParticipantFlags.LPplus.values.likely)); //MH
 
 
@@ -60,6 +64,9 @@ export class T0_InvitesDef extends SurveyDefinition {
       //kvdw LE:
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.aEMUitnodigingOnderzoek.key, this.aEMInviteGroup.aEMUitnodigingOnderzoek.optionKeys.yes)),
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.aEMInviteGroup.UitnodigingOnderzoek.key, this.aEMInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
+      //LT ggg-amc:
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LBotherInviteGroup.LBotherUitnodigingOnderzoek.key, this.LBotherInviteGroup.LBotherUitnodigingOnderzoek.optionKeys.yes)),
+      SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LBotherInviteGroup.UitnodigingOnderzoek.key, this.LBotherInviteGroup.UitnodigingOnderzoek.optionKeys.yes)),
       //MH LPplus:
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.key, this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.optionKeys.yes)),
       SurveyEngine.logic.not(SurveyEngine.singleChoice.any(this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.key, this.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoek.optionKeys.no)),
@@ -73,6 +80,7 @@ export class T0_InvitesDef extends SurveyDefinition {
     this.addItem(this.StandardInviteGroup.get());
     this.addItem(this.kEMInviteGroup.get());
     this.addItem(this.aEMInviteGroup.get());//kvdw LE
+    this.addItem(this.LBotherInviteGroup.get());//kvdw LE
     this.addItem(this.LPplusInviteGroup.get());//MH LPplus
     this.addPageBreak();
     this.addItem(this.EndGroup.get());

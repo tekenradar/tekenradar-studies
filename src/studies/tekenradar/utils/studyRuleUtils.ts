@@ -229,6 +229,12 @@ export const aEMflagLogic = () => StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely),
 )
 
+// LT 18-09-2025 adding flag for LB flow gebasseerd op de vraag is de ziekte van lyme vastgesteld door een arts (LD1= a(ja))
+export const LBotherflagLogic = () => StudyEngine.ifThen(
+  StudyEngine.singleChoice.any(LBflow_Adults.Q10.key, LBflow_Adults.Q10.optionKeys.yes),
+  StudyEngine.participantActions.updateFlag(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely),
+)
+
 export const updateGenderFlag = (genderQuestionKey: string) => StudyEngine.do(
   StudyEngine.ifThen(
     StudyEngine.singleChoice.any(genderQuestionKey, Standardflow_Adults.P2.optionKeys.male),
@@ -268,6 +274,7 @@ export const finishFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.LDexcluded.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.LBother.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.PHQ_15_none.key)
 )
 
@@ -281,6 +288,7 @@ export const quitFollowUp = () => StudyEngine.do(
   StudyEngine.participantActions.removeFlag(ParticipantFlags.kEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.aEM.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.LDexcluded.key),
+  StudyEngine.participantActions.removeFlag(ParticipantFlags.LBother.key),
   StudyEngine.participantActions.removeFlag(ParticipantFlags.PHQ_15_none.key),
   StudyEngine.ifThen(
     StudyEngine.or(

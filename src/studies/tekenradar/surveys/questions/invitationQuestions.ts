@@ -207,6 +207,43 @@ noreply@tekenradar.nl. Niet iedereen met een rode ring of vlek kan deelnemen aan
   }
 }
 
+//LT LB-flow GGG-AUMC 18-09-2025
+export class LBotherUitnodigingOnderzoekText extends Item {
+  markdownContent = `
+## Uitnodiging onderzoek ziekte van Lyme
+
+Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
+
+Het is voor ons waardevol om verder onderzoek te kunnen doen naar deze huidafwijking. We nodigen daarom een deel van de patiënten met een rode ring of vlek uit om naar de Lymepoli’s van Amsterdam UMC of Radboudumc (Nijmegen) te komen. Vind je het goed dat we je hiervoor benaderen? Zo kunnen we uitleggen wat dit verdere onderzoek inhoudt. Je reiskosten worden natuurlijk vergoed.
+
+Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, ook dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vragenlijst met vragen over je gezondheid op dat moment. Voor het invullen van de vragenlijsten ontvang je per e-mail een herinnering via
+noreply@tekenradar.nl. Niet iedereen met een rode ring of vlek kan deelnemen aan dit verdere onderzoek. Het is dus mogelijk dat we je niet benaderen.
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'LBotherUitnTR_Pretext');
+
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+
 //LT LPplus
 export class LPplusUitnodigingOnderzoekText extends Item {
   markdownContent = `
@@ -322,11 +359,53 @@ export class aEMUitnodigingOnderzoek extends Item {
   }
 }
 
+//kvdw: LE
+export class LBotherUitnodigingOnderzoek extends Item {
+  optionKeys = {
+    yes: 'a',
+    no: 'b'
+  }
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LBotherUitnTR');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', 'Mogen we je benaderen voor verder onderzoek?'],
+      ]),
+      responseOptions: [
+        {
+          key: this.optionKeys.yes, role: 'option',
+          content: new Map([
+            ["nl", "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor verder onderzoek."],
+          ])
+        },
+        {
+          key: this.optionKeys.no, role: 'option',
+          content: new Map([
+            ["nl", "Nee, ik wil niet benaderd worden voor verder onderzoek."],
+          ])
+        },
+      ]
+    })
+  }
+}
+
+
 // dw 4-9-2025: added post question text
 export class aEMUitnTR_Posttext extends Item {
 
   markdownContent = `
-Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waar misschien ook bloed voor wordt afgenomen. 
+Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waar misschien ook bloed voor wordt afgenomen.
 Klik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek.
 `
 
@@ -334,7 +413,39 @@ Klik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen
     super(parentKey, 'aEMUitnTR_Posttext');
 
     this.condition = condition;
-   
+
+  }
+
+  buildItem() {
+    return SurveyItems.display({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      condition: this.condition,
+      content: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", this.markdownContent],
+          ]),
+          className: ''
+        })
+      ]
+    })
+  }
+}
+
+// LT ggg-amc 18-09-2025: added post question text
+export class LBotherUitnTR_Posttext extends Item {
+
+  markdownContent = `
+Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waar misschien ook bloed voor wordt afgenomen.
+Klik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek.
+`
+
+  constructor(parentKey: string, condition?: Expression) {
+    super(parentKey, 'LBotherUitnTR_Posttext');
+
+    this.condition = condition;
+
   }
 
   buildItem() {
@@ -607,6 +718,74 @@ Ook:
     })
   }
 }
+
+//LB flow ggg-amc
+export class LBotherUitnodigingOnderzoekConsent extends Item {
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LBotherUitnTR_Consent');
+
+    this.isRequired = isRequired;
+    this.condition = condition;
+  }
+
+  buildItem() {
+    return SurveyItems.consent({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      condition: this.condition,
+      questionText: new Map([
+        ['nl', ''],
+      ]),
+      checkBoxLabel: new Map([
+        ["nl", "Toestemming geven"],
+      ]),
+      topDisplayCompoments: [
+        ComponentGenerators.markdown({
+          content: new Map([
+            ["nl", `
+Om met dit profiel mee te doen aan het Tekenradar-vragenlijstonderzoek hebben we je toestemming nodig. Vink hieronder "Toestemmingsformulier" aan om de toestemmingsverklaring te kunnen lezen.
+*We vragen ook om toestemming bij het aanmaken van een account. Omdat meerdere personen/profielen gebruik kunnen maken van hetzelfde account, is het nodig om hier voor dit profiel apart toestemming te geven.*
+
+        `]]),
+        })
+      ],
+      dialogTitle: new Map([
+        ["nl", "Toestemmingsformulier"],
+      ]),
+      dialogContent: new Map([
+        ["nl", `
+**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**
+
+
+Via Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).
+
+Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik ermee in dat mijn huisarts en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.
+
+Ook:
+- Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
+- Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
+- Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.
+- Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
+- Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).
+- Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin onder mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.
+- Geef ik hierna in de vragenlijst aan of mijn persoonsgegevens nu en in de toekomst ook gebruikt mogen worden om mij te benaderen voor aanvullend (deel)onderzoek via Tekenradar.
+- Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.
+- Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners ingezien te worden.
+- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).
+        `]]),
+      acceptBtn: new Map([
+        ["nl", "Ja, ik geef toestemming"],
+      ]),
+      rejectBtn: new Map([
+        ["nl", "Ik doe toch niet mee"],
+      ]),
+    })
+  }
+}
+
+
 
 //LT LPplus
 export class LPplusUitnodigingOnderzoekConsent extends Item {
@@ -1395,31 +1574,36 @@ export class ContactgegevensGroup extends Group {
     //kvdw LE:
     const showPC4contact = SurveyEngine.logic.or(
       //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely),
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely)
     );
     this.PC4contact = new PC4contact(this.key, isRequired, showPC4contact)
 
     const showTelQ = SurveyEngine.logic.or(
       //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely),
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely)
     );
     this.Telephone = new Telephone(this.key, isRequired, showTelQ)
 
     const showGenderQ = SurveyEngine.logic.or(
       //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely),
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely)
     );
     this.Gender = new GenderForContact(this.key, isRequired, showGenderQ)
 
     const showBirthdayQ = SurveyEngine.logic.or(
       //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely),
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely)
     );
     this.Birthday = new Birthday(this.key, isRequired, showBirthdayQ)
 
     const showGPq = SurveyEngine.logic.or(
       //SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.kEM.key, ParticipantFlags.kEM.values.likely), //LT uitgezet per 11-07-2025
-      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely)
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.aEM.key, ParticipantFlags.aEM.values.likely),
+      SurveyEngine.participantFlags.hasKeyAndValue(ParticipantFlags.LBother.key, ParticipantFlags.LBother.values.likely)
     );
     this.GP = new GP(this.key, isRequired, showGPq)
   }
@@ -1723,7 +1907,7 @@ export class aEMInviteGroup extends Group {
   aEMUitnTR_Posttext: aEMUitnTR_Posttext;
   aEMUitnodigingOnderzoek: aEMUitnodigingOnderzoek;
   aEMUitnodigingOnderzoekConsent: aEMUitnodigingOnderzoekConsent;
-  
+
   Contactgegevens: ContactgegevensGroup;
   FutureStudies: FutureStudies;
   NijmegenReis: NijmegenReis;
@@ -1742,7 +1926,7 @@ export class aEMInviteGroup extends Group {
     this.aEMUitnodigingOnderzoek = new aEMUitnodigingOnderzoek(this.key, isRequired);
     this.aEMUitnodigingOnderzoekConsent = new aEMUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes));
     this.aEMUitnTR_Posttext = new aEMUitnTR_Posttext(this.key, SurveyEngine.singleChoice.any(
-      this.aEMUitnodigingOnderzoek.key, 
+      this.aEMUitnodigingOnderzoek.key,
       this.aEMUitnodigingOnderzoek.optionKeys.no // Toon als het antwoord "Nee" is
     ));
 
@@ -1768,6 +1952,70 @@ export class aEMInviteGroup extends Group {
     this.addItem(this.aEMUitnodigingOnderzoek.get());
     this.addItem(this.aEMUitnodigingOnderzoekConsent.get());
     this.addItem(this.aEMUitnTR_Posttext.get());
+    this.addPageBreak()
+    this.addItem(this.Contactgegevens.get());
+    this.addItem(this.FutureStudies.get());
+    this.addItem(this.NijmegenReis.get());
+    this.addPageBreak()
+
+    this.addItem(this.T1.get());
+    this.addItem(this.UitnodigingOnderzoek.get());
+    this.addItem(this.UitnodigingOnderzoekConsent.get());
+    this.addPageBreak()
+  }
+}
+
+//ggg-amc LB-flow 18-09-25
+export class LBotherInviteGroup extends Group {
+  T0: LBotherUitnodigingOnderzoekText;
+  LBotherUitnTR_Posttext: LBotherUitnTR_Posttext;
+  LBotherUitnodigingOnderzoek: LBotherUitnodigingOnderzoek;
+  LBotherUitnodigingOnderzoekConsent: LBotherUitnodigingOnderzoekConsent;
+
+  Contactgegevens: ContactgegevensGroup;
+  FutureStudies: FutureStudies;
+  NijmegenReis: NijmegenReis;
+
+  // Standard Tekenradar
+  T1: UitnodigingOnderzoekText;
+  UitnodigingOnderzoek: UitnodigingOnderzoek;
+  UitnodigingOnderzoekConsent: UitnodigingOnderzoekConsent;
+
+  constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
+    super(parentKey, 'LBother');
+
+    this.groupEditor.setCondition(condition);
+
+    this.T0 = new LBotherUitnodigingOnderzoekText(this.key);
+    this.LBotherUitnodigingOnderzoek = new LBotherUitnodigingOnderzoek(this.key, isRequired);
+    this.LBotherUitnodigingOnderzoekConsent = new LBotherUitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.LBotherUitnodigingOnderzoek.key, this.LBotherUitnodigingOnderzoek.optionKeys.yes));
+    this.LBotherUitnTR_Posttext = new LBotherUitnTR_Posttext(this.key, SurveyEngine.singleChoice.any(
+      this.LBotherUitnodigingOnderzoek.key,
+      this.LBotherUitnodigingOnderzoek.optionKeys.no // Toon als het antwoord "Nee" is
+    ));
+
+    this.Contactgegevens = new ContactgegevensGroup(this.key, isRequired, SurveyEngine.singleChoice.any(this.LBotherUitnodigingOnderzoek.key, this.LBotherUitnodigingOnderzoek.optionKeys.yes));
+    this.FutureStudies = new FutureStudies(this.key, isRequired, SurveyEngine.singleChoice.any(this.LBotherUitnodigingOnderzoek.key, this.LBotherUitnodigingOnderzoek.optionKeys.yes));
+
+    //per 01-10-2024 LE removed by adjusting const for showing this question (Lola per 1-10 deze const uitgezet en de const hieronder aan)
+    //const showNijmegenReis = SurveyEngine.logic.and(
+    //  SurveyEngine.singleChoice.any(this.aEMUitnodigingOnderzoek.key, this.aEMUitnodigingOnderzoek.optionKeys.yes),
+    //  SurveyEngine.checkResponseValueWithRegex(this.Contactgegevens.PC4contact.key, [responseGroupKey, inputKey].join('.'), `^(?!${postalCodesForNMGStudy.join('|')}).*$`)
+    //)
+    const showNijmegenReis = SurveyEngine.compare.eq(1, 0);
+    this.NijmegenReis = new NijmegenReis(this.key, isRequired, showNijmegenReis);
+
+
+    this.T1 = new UitnodigingOnderzoekText(this.key, SurveyEngine.singleChoice.any(this.LBotherUitnodigingOnderzoek.key, this.LBotherUitnodigingOnderzoek.optionKeys.no));
+    this.UitnodigingOnderzoek = new UitnodigingOnderzoek(this.key, isRequired, SurveyEngine.singleChoice.any(this.LBotherUitnodigingOnderzoek.key, this.LBotherUitnodigingOnderzoek.optionKeys.no));
+    this.UitnodigingOnderzoekConsent = new UitnodigingOnderzoekConsent(this.key, isRequired, SurveyEngine.singleChoice.any(this.UitnodigingOnderzoek.key, this.UitnodigingOnderzoek.optionKeys.yes));
+  }
+
+  buildGroup(): void {
+    this.addItem(this.T0.get());
+    this.addItem(this.LBotherUitnodigingOnderzoek.get());
+    this.addItem(this.LBotherUitnodigingOnderzoekConsent.get());
+    this.addItem(this.LBotherUitnTR_Posttext.get());
     this.addPageBreak()
     this.addItem(this.Contactgegevens.get());
     this.addItem(this.FutureStudies.get());
