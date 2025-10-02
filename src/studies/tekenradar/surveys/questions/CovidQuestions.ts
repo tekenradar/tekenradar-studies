@@ -180,7 +180,7 @@ export class Covid3b extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },

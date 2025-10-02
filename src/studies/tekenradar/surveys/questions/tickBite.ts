@@ -322,7 +322,7 @@ export class EnvironmentTickBite extends Item {
     },
     {
       content: new Map([
-        ["nl", "(meerdere antwoorden mogelijk)"],
+        ["nl", "Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -415,7 +415,7 @@ export class ActivityTickBite extends Item {
     },
     {
       content: new Map([
-        ["nl", "(meerdere antwoorden mogelijk)"],
+        ["nl", "Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -680,7 +680,8 @@ export class LocationBodyTickBite extends Item {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       condition: this.condition,
-      questionText: this.questionTextMain
+      questionText: this.questionTextMain,
+      maxLength: 1500
     })
   }
 }
@@ -780,7 +781,7 @@ export class RemoveTick3 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (als je het niet meer precies weet, maak dan een schatting)"],
+        ["nl", " Als je het niet meer precies weet, maak dan een schatting."],
       ]),
       className: "fw-normal"
     },
@@ -964,7 +965,7 @@ export class RemoveTick4 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -1278,7 +1279,7 @@ export class DurationTickBite extends Item {
     },
     {
       content: new Map([
-        ["nl", " (als je het niet meer precies weet, maak dan een schatting)"],
+        ["nl", " Als je het niet meer precies weet, maak dan een schatting."],
       ]),
       className: "fw-normal"
     },

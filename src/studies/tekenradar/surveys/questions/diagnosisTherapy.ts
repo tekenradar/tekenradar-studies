@@ -195,7 +195,7 @@ export class LymeDiagnosis1 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Is de ziekte van Lyme vastgesteld door een arts?'],
+        ['nl', 'Is de lymeziekte vastgesteld door een arts?'],
       ]),
       responseOptions: [
         {
@@ -232,7 +232,7 @@ export class LymeDiagnosis2 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Welke arts heeft de ziekte van Lyme bij je vastgesteld?'],
+        ['nl', 'Welke arts heeft lymeziekte bij je vastgesteld?'],
       ]),
       responseOptions: [
         {
@@ -310,7 +310,7 @@ export class LymeDiagnosis2extra extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -389,7 +389,7 @@ export class Doctor extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -403,7 +403,7 @@ export class Doctor extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -583,7 +583,7 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '3', content: new Map(
-            [['nl', "dosis (mg per pil):"]]
+            [['nl', "Dosis (mg per pil):"]]
           )
         }),
         ClozeItemTypes.textInput({
@@ -592,7 +592,7 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '5', content: new Map(
-            [['nl', "aantal pillen per dag"]]
+            [['nl', "Aantal pillen per dag"]]
           )
         }),
         ClozeItemTypes.textInput({
@@ -610,7 +610,7 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '9', content: new Map(
-            [['nl', "aantal dagen innemen:"]]
+            [['nl', "Aantal dagen innemen:"]]
           )
         }),
         ClozeItemTypes.numberInput({
@@ -624,11 +624,12 @@ export class LymeTherapy2 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '13', content: new Map(
-            [['nl', "overige informatie:"]]
-          )
+            [['nl', "Overige informatie:"]]
+          )          
         }),
         ClozeItemTypes.textInput({
           key: '14',
+          maxLength: 500
         })
       ],
       customValidations: [
@@ -692,7 +693,7 @@ export class LymeTherapy3 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '3', content: new Map(
-            [['nl', "aantal dagen antibiotica via infuus:"]]
+            [['nl', "Aantal dagen antibiotica via infuus:"]]
           )
         }),
         ClozeItemTypes.numberInput({
@@ -707,7 +708,7 @@ export class LymeTherapy3 extends Item {
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '5', content: new Map(
-            [['nl', "overige informatie:"]]
+            [['nl', "Overige informatie:"]]
           )
         }),
         ClozeItemTypes.textInput({

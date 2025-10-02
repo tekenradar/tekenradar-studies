@@ -10,9 +10,9 @@ import { surveyCategoryNames, SurveySuffix } from '../globalConstants';
 export class LymeHeader extends Item {
 
   markdownContent = `
-# Ziekte van Lyme
+# Lymeziekte
 
-De volgende vragen gaan over je melding van de ziekte van Lyme.
+De volgende vragen gaan over je melding van lymeziekte.
     `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
@@ -106,7 +106,7 @@ export class LymeDiagnosis3alt extends Item {
       condition: this.condition,
       helpGroupContent: this.getHelpGroupContent(),
       questionText: new Map([
-        ['nl', 'Geef aan of u één of meer van de volgende klachten heeft (meerdere antwoorden mogelijk):'],
+        ['nl', 'Geef aan of u één of meer van de volgende klachten heeft Meerdere antwoorden mogelijk.:'],
       ]),
       responseOptions: [
         {
@@ -177,12 +177,12 @@ export class LymeDiagnosis3alt1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Aan welk deel van je lichaam heb je klachten door de ziekte van Lyme? Je kunt meerdere antwoorden aanklikken. '],
+        ["nl", 'Aan welk deel van je lichaam heb je klachten door lymeziekte? Je kunt meerdere antwoorden aanklikken. '],
       ]),
     },
         {
       content: new Map([
-        ["nl", "(Als het juiste lichaamsdeel er voor jou niet tussen staat, kies dan 'Anders, namelijk' en vul jouw antwoord in.)"],
+        ["nl", "Als het juiste lichaamsdeel er voor jou niet tussen staat, kies dan 'Anders, namelijk' en vul jouw antwoord in."],
       ]),
       className: "fw-normal"
     },
@@ -320,81 +320,60 @@ export class LymeDiagnosis3alt2a extends Item {
           key: 'aa', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb een rode of paarse vlek die geleidelijk groter wordt."],
+            ["nl", "Een gewricht (zoals knie, enkel, elleboog of pols) voelt warmer aan dan andere gewrichten."],
           ])
         },
         {
           key: 'ab', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb rode of paarse vlek die er al langere tijd zit. Soms wordt de huid ook dun en kwetsbaar, of begint deze te schilferen."],
+            ["nl", "Een gewricht is dik en gezwollen in vergelijking met normaal."],
           ])
         },
         {
           key: 'ac', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb verschillende rode of paarse vlekken en een arts denkt dat deze door lymeziekte komen."],
+            ["nl", "Een gewricht ziet er rood uit."],
           ])
         },
         {
           key: 'ad', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Een gewricht (zoals knie, enkel, elleboog of pols) voelt warmer aan dan andere gewrichten."],
+            ["nl", "Een gewricht doet pijn."],
           ])
         },
         {
           key: 'ae', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Een gewricht is dik en gezwollen in vergelijking met normaal."],
+            ["nl", "Ik heb schietende pijn door mijn arm of been heen."],
           ])
         },
         {
           key: 'af', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Een gewricht ziet er rood uit."],
+            ["nl", "Ik heb minder kracht dan normaal in mijn arm of been (gedeelte verlamming)."],
           ])
         },
         {
           key: 'ag', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Een gewricht doet pijn."],
+            ["nl", "Ik kan mijn arm of been helemaal niet meer bewegen (complete verlamming). "],
           ])
         },
         {
           key: 'ah', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb schietende pijn door mijn arm of been heen."],
-          ])
-        },
-        {
-          key: 'ai', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb minder kracht dan normaal in mijn arm of been."],
-          ])
-        },
-        {
-          key: 'aj', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik kan mijn arm of been helemaal niet meer bewegen (verlamming). "],
-          ])
-        },
-        {
-          key: 'ak', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
             ["nl", "Ik heb een doof of tintelend gevoel in een arm of been."],
           ])
         },
         {
-          key: 'al', role: 'input',
+          key: 'ai', role: 'input',
           disabled: optionDisabled,
           style: [{ key: 'maxLength', value: '500' }],
           content: new Map([
@@ -455,7 +434,7 @@ export class LymeDiagnosis3alt2b extends Item {
           key: 'ba', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb een rode of paarse vlek die geleidelijk groter wordt."],
+            ["nl", "Ik heb een rode of blauwrode vlek die geleidelijk groter wordt."],
           ])
         },
         {
@@ -469,7 +448,7 @@ export class LymeDiagnosis3alt2b extends Item {
           key: 'bc', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb verschillende rode of paarse vlekken en een arts denkt dat deze door lymeziekte komen."],
+            ["nl", "Ik heb meerdere rode of blauwrode vlekken en een arts denkt dat deze door lymeziekte komen."],
           ])
         },
         {
@@ -541,7 +520,7 @@ export class LymeDiagnosis3alt2c extends Item {
           key: 'ca', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb minder kracht in één helft van mijn gezicht. Ik kan bijvoorbeeld mijn oog niet goed sluiten aan één kant, of één mondhoek hangt naar beneden."],
+            ["nl", "Ik heb minder kracht in één of beide helften van mijn gezicht. Ik kan bijvoorbeeld mijn oog/ogen niet goed sluiten, of één of beide mondhoek(en) hangt/hangen naar beneden."],
           ])
         },
         {
@@ -557,37 +536,9 @@ export class LymeDiagnosis3alt2c extends Item {
           content: new Map([
             ["nl", "Mijn oog is rood en ontstoken, of doet pijn."],
           ])
-        },
+        },        
         {
-          key: 'cd', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb een rode of paarse vlek die geleidelijk groter wordt."],
-          ])
-        },
-        {
-          key: 'ce', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb een rode of paarse vlek die er al langere tijd zit. Soms wordt de huid ook dun en kwetsbaar, of begint deze te schilferen."],
-          ])
-        },
-        {
-          key: 'cf', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb verschillende rode of paarse vlekken en een arts denkt dat deze door lymeziekte komen."],
-          ])
-        },
-        {
-          key: 'cg', role: 'option',
-          disabled: optionDisabled,
-          content: new Map([
-            ["nl", "Ik heb een paars, blauw of rood knobbeltje op mijn oor."],
-          ])
-        },
-        {
-          key: 'ch', role: 'input',
+          key: 'cd', role: 'input',
           disabled: optionDisabled,
           style: [{ key: 'maxLength', value: '500' }],
           content: new Map([
@@ -714,7 +665,7 @@ export class LymeDiagnosis4 extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wanneer zijn deze klachten door de ziekte van Lyme ontstaan? '],
+        ['nl', 'Wanneer zijn deze klachten door de lymeziekte ontstaan? '],
       ]),
             questionSubText: new Map([
       ['nl', 'In het opmerkingenveld kun je aanvullende gegevens over je klachten invullen.'],
@@ -724,7 +675,7 @@ export class LymeDiagnosis4 extends Item {
           key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De klachten door de ziekte van Lyme zijn onstaan op "]]
+                [['en', "De klachten door de lymeziekte zijn onstaan op "]]
               )
             }),
             ClozeItemTypes.dateInput({
@@ -793,12 +744,12 @@ export class LymeDiagnosis5 extends Item {
   }
 
   qTextMain = new Map([
-    ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme bij jou vastgesteld?'],
+    ['nl', 'Wanneer heeft de arts deze uiting van lymeziekte bij jou vastgesteld?'],
   ])
 
 
   qTextKids = new Map([
-    ['nl', 'Wanneer heeft de arts deze uiting van de ziekte van Lyme vastgesteld?'],
+    ['nl', 'Wanneer heeft de arts deze uiting van lymeziekte vastgesteld?'],
   ])
 
 
@@ -821,7 +772,7 @@ export class LymeDiagnosis5 extends Item {
           key: this.optionKeys.date, items: [
             ClozeItemTypes.text({
               key: '1', content: new Map(
-                [['en', "De arts heeft de uiting van de ziekte van Lyme bij mij vastgesteld op "]]
+                [['en', "De arts heeft de uiting van lymeziekte bij mij vastgesteld op "]]
               )
             }),
             ClozeItemTypes.dateInput({
@@ -879,15 +830,15 @@ export class LymeDiagnosis6 extends Item {
 
 
   qTextLyme = new Map([
-    ['nl', 'Heb je op dit moment nog klachten door de ziekte van Lyme?'],
+    ['nl', 'Heb je op dit moment nog klachten door lymeziekte?'],
   ])
 
   qTextFollowUp = new Map([
-    ['nl', 'Heb je op dit moment nog klachten door deze nieuwe uiting van de ziekte van Lyme?'],
+    ['nl', 'Heb je op dit moment nog klachten door deze nieuwe uiting van lymeziekte?'],
   ])
 
   qTextFollowUpKids = new Map([
-    ['nl', 'Zijn er op dit moment nog klachten door deze nieuwe uiting van de ziekte van Lyme?'],
+    ['nl', 'Zijn er op dit moment nog klachten door deze nieuwe uiting van lymeziekte?'],
   ])
 
   optionKeys = {

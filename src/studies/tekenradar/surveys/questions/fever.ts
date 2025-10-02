@@ -444,7 +444,7 @@ export class FeverOtherCause1 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -543,7 +543,7 @@ export class FeverOtherCause2 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -640,7 +640,7 @@ export class FeverOtherCause3 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -733,7 +733,7 @@ export class FeverOtherCause4 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },

@@ -172,7 +172,7 @@ export class NwEMLyme1 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -381,7 +381,7 @@ export class NwEMLyme5 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -715,7 +715,7 @@ export class NwEMLyme11 extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },

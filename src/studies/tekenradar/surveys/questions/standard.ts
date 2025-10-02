@@ -202,7 +202,7 @@ export class AboutTekenradar extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)"],
+        ["nl", " Meerdere antwoorden mogelijk."],
       ]),
       className: "fw-normal"
     },
@@ -773,7 +773,7 @@ export class PHQ_15_cause extends Item {
     },
     {
       content: new Map([
-        ["nl", " (meerdere antwoorden mogelijk)."],
+        ["nl", " Meerdere antwoorden mogelijk.."],
       ]),
       className: "fw-normal"
     },
