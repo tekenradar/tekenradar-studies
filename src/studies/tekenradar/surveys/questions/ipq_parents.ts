@@ -680,7 +680,7 @@ class Awareness_Kids8 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme van je kind invloed op je gemoedstoestand? (b.v. maakt het je boos, angstig, van streek, of somber?)'],
+        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme van je kind invloed op je gemoedstoestand? (bijv. maakt het je boos, angstig, van streek, of somber?)'],
       ]),
     }
   ]
