@@ -174,7 +174,7 @@ Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je g
 //kvdw LymeEscape, update dw GGG-AUMC:
 export class aEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
-## Uitnodiging onderzoek ziekte van Lyme
+## Uitnodiging onderzoek lymeziekte
 
 Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
 
@@ -210,7 +210,7 @@ noreply@tekenradar.nl. Niet iedereen met een rode ring of vlek kan deelnemen aan
 //LT LB-flow GGG-AUMC 18-09-2025
 export class LBotherUitnodigingOnderzoekText extends Item {
   markdownContent = `
-## Uitnodiging onderzoek ziekte van Lyme
+## Uitnodiging onderzoek lymeziekte
 
 Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
 
