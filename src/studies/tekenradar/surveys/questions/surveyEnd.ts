@@ -12,7 +12,7 @@ class T0_Invites_EndText extends Item {
 
 ##### Let op: klik op **"Opslaan en verder gaan"** onderaan de pagina om je antwoorden op te sturen!
 
-Houd de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
+Houd de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door lymeziekte, dan adviseren wij je contact op te nemen met je huisarts.
 
 Als je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 
@@ -53,7 +53,7 @@ class StandardflowEndText extends Item {
 
 Er is een e-mail naar je verstuurd waarin staat hoe je je deelname aan Tekenradar.nl kunt bevestigen.
 
-Als je een tekenbeet hebt gemeld, houdt dan de plek van de tekenbeet de komende drie maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans(?)) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.
+Als je een tekenbeet hebt gemeld, houdt dan de plek van de tekenbeet de komende drie maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans(?)) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door lymeziekte, dan adviseren wij je contact op te nemen met je huisarts.
 
 Als je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.
 

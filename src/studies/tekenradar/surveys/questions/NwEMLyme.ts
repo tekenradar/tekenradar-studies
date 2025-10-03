@@ -585,6 +585,7 @@ export class NwEMLyme8 extends Item {
         }),
         ClozeItemTypes.textInput({
           key: '5',
+          maxLength: 500
         })
       ],
       customValidations: [
@@ -854,6 +855,10 @@ export class NwEMLyme13 extends Item {
           )
         }),
         ClozeItemTypes.textInput({
+        key: this.optionKeys.name,
+        maxLength: 200
+        }),
+        ClozeItemTypes.textInput({
           key: this.optionKeys.name,
         }),
         ClozeItemTypes.clozeLineBreak(),
@@ -877,7 +882,8 @@ export class NwEMLyme13 extends Item {
           )
         }),
         ClozeItemTypes.textInput({
-          key: '5',
+          key: '5',   
+          maxLength: 500
         })
       ],
       customValidations: [

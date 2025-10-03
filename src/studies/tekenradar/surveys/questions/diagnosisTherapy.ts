@@ -285,6 +285,7 @@ export class LymeDiagnosis2 extends Item {
         },
         {
           key: 'i', role: 'input',
+          style: [{ key: 'maxLength', value: '200' }],
           content: new Map([
             ["nl", "Andere arts, namelijk "],
           ])
@@ -446,6 +447,7 @@ export class Doctor extends Item {
             }),
             ClozeItemTypes.textInput({
               key: 'input',
+              maxLength: 200
             }),
           ]
         }),
@@ -579,6 +581,7 @@ export class LymeTherapy2 extends Item {
         }),
         ClozeItemTypes.textInput({
           key: this.optionKeys.name,
+          maxLength: 200
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
@@ -588,11 +591,12 @@ export class LymeTherapy2 extends Item {
         }),
         ClozeItemTypes.textInput({
           key: this.optionKeys.dose,
+          maxLength: 200
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
           key: '5', content: new Map(
-            [['nl', "Aantal pillen per dag"]]
+            [['nl', "Aantal pillen per dag:"]]
           )
         }),
         ClozeItemTypes.textInput({
@@ -606,6 +610,7 @@ export class LymeTherapy2 extends Item {
         }),
         ClozeItemTypes.textInput({
           key: '8',
+          maxLength: 200
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
@@ -686,9 +691,10 @@ export class LymeTherapy3 extends Item {
           key: '1', content: new Map(
             [['nl', "Naam van het middel:"]]
           )
-        }),
+        }),     
         ClozeItemTypes.textInput({
           key: '2',
+          maxLength: 200
         }),
         ClozeItemTypes.clozeLineBreak(),
         ClozeItemTypes.text({
@@ -713,6 +719,7 @@ export class LymeTherapy3 extends Item {
         }),
         ClozeItemTypes.textInput({
           key: '6',
+          maxLength: 500
         })
       ],
     })

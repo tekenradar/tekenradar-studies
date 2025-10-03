@@ -362,7 +362,7 @@ export class LymeDiagnosis3alt2a extends Item {
           key: 'ag', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik kan mijn arm of been helemaal niet meer bewegen (complete verlamming). "],
+            ["nl", "Ik kan mijn arm of been helemaal niet meer bewegen (complete verlamming)."],
           ])
         },
         {

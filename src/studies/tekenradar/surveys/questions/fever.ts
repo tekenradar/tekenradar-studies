@@ -603,6 +603,7 @@ export class FeverOtherCause2 extends Item {
         //TODO: text field mandatory or not?
         {
           key: 'g', role: 'input',
+          style: [{ key: 'maxLength', value: '200' }],
           content: new Map([
             ["nl", "Andere arts, namelijk"],
           ])

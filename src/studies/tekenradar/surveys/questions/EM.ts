@@ -386,8 +386,8 @@ export class PhotoEM_Text extends Item {
   markdownContent = `
 ## Uploaden foto
 
-Wij vragen je om een foto van je erythema migrans of andere huidafwijking door de ziekte van Lyme. Mocht je nu geen foto kunnen uploaden, dan ontvang je een herinnering per e-mail om dat later alsnog te doen. 
-Heb je geen huidafwijking door de ziekte van Lyme dan kun je deze vraag overslaan.
+Wij vragen je om een foto te uploaden van je erythema migrans of andere huidafwijking door lymeziekte. Mocht je nu geen foto kunnen uploaden, dan ontvang je een herinnering per e-mail om dat later alsnog te doen. 
+Heb je geen huidafwijking door lymeziekte dan kun je deze vraag overslaan.
 
 Om een goed beeld te krijgen van de schaal van de foto vragen wij het een lineaal of meetlint (of een voorwerp met een standaardgrootte zoals een muntstuk) naast de huidafwijking op de foto te zetten. Zie de voorbeeldfoto.
 
@@ -460,7 +460,7 @@ export class DatePhotoEM extends Item {
     },
     {
       content: new Map([
-        ["nl", "(je mag de datum schatten)"],
+        ["nl", " Als je het niet meer precies weet, maak dan een schatting."],
       ]),
       className: "fw-normal"
     },

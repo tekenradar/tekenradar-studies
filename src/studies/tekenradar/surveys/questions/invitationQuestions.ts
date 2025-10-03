@@ -12,7 +12,7 @@ export class UitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging Tekenradar-vragenlijstonderzoek
 
-Wij vragen je om mee te doen aan het Tekenradar-vragenlijstonderzoek onderzoek, omdat je een tekenbeet of lymeziekte hebt gemeld. Zo draag je bij aan kennis over tekenbeten en lymeziekte, en de gezondheidsgevolgen hiervan.
+Wij vragen je om mee te doen aan het Tekenradar-vragenlijstonderzoek, omdat je een tekenbeet of lymeziekte hebt gemeld. Zo draag je bij aan kennis over tekenbeten en lymeziekte, en de gezondheidsgevolgen hiervan.
 Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid. Ook krijg je het komende jaar iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
 `
 
@@ -59,7 +59,7 @@ export class UitnodigingOnderzoek extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Wil je meedoen aan het Tekenradar onderzoek naar tekenbeten en lymeziekte?'],
+        ['nl', 'Wil je meedoen aan het Tekenradaronderzoek naar tekenbeten en lymeziekte?'],
       ]),
       responseOptions: [
         {
@@ -142,10 +142,10 @@ Ook:
 
 export class kEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
-## Uitnodiging onderzoek ziekte van Lyme
+## Uitnodiging onderzoek lymeziekte
 
-Wij willen je vragen of je mee wilt doen aan Tekenradar onderzoek, omdat je een erythema migrans (rode ring of vlek na een tekenbeet als een vroege vorm van ziekte van Lyme) hebt gemeld. Door mee te doen draag je bij aan kennis over de ziekte van Lyme, en de gezondheidsgevolgen hiervan.
-Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid. Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je daarna iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
+Wij willen je vragen of je mee wilt doen aan Tekenradaronderzoek, omdat je een erythema migrans (rode ring of vlek na een tekenbeet als een vroege vorm van ziekte van Lyme) hebt gemeld. Door mee te doen draag je bij aan kennis over de ziekte van Lyme, en de gezondheidsgevolgen hiervan.
+Als je mee wilt doen, volgen hierna direct nog een aantal extra vragen over je gezondheid. Ook vragen we je toestemming om je huisarts te mogen benaderen voor aanvullende gegevens over je erythema migrans, dit is vanzelfsprekend geheel vrijwillig. Het komende jaar krijg je iedere 3 maanden een vervolgvragenlijst met vragen over je gezondheid. Voor het invullen van de vervolgvragenlijsten ontvang je per e-mail een herinnering via noreply@tekenradar.nl.
 `
 
   constructor(parentKey: string, condition?: Expression) {
@@ -1475,10 +1475,9 @@ class GenderForContact extends Item {
           ])
         },
         {
-          key: this.optionKeys.other, role: 'input',
-          style: [{ key: 'maxLength', value: '100' }],
+          key: this.optionKeys.other, role: 'option',
           content: new Map([
-            ["nl", "Anders, namelijk:"],
+            ["nl", "Geen van bovenstaande"],
           ])
         },
         {

@@ -123,12 +123,18 @@ export class Gender extends Item {
           ])
         },
         {
+          key: this.optionKeys.other, role: 'option',
+          content: new Map([
+            ["nl", "Geen van bovenstaande"],
+          ])
+        },
+        /*{
           key: this.optionKeys.other, role: 'input',
           style: [{ key: 'maxLength', value: '100' }],
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
-        },
+        },*/
         {
           key: this.optionKeys.unknown, role: 'option',
           content: new Map([

@@ -474,6 +474,7 @@ export class ActivityTickBite extends Item {
         },
         {// show option g only if participant age > 12 years
           key: 'g', role: 'input',
+          style: [{ key: 'maxLength', value: '500' }],
           content: new Map([
             ["nl", "Werkgerelateerde activiteit, namelijk:"],
           ]),

@@ -202,7 +202,7 @@ export class AboutTekenradar extends Item {
     },
     {
       content: new Map([
-        ["nl", " Meerdere antwoorden mogelijk."],
+        ["nl", " (meerdere antwoorden mogelijk)"],
       ]),
       className: "fw-normal"
     },
@@ -231,6 +231,7 @@ export class AboutTekenradar extends Item {
         },
         {
           key: 'b', role: 'input',
+          style: [{ key: 'maxLength', value: '200' }],
           content: new Map([
             ["nl", "Via de media, namelijk:"],
           ])
@@ -249,6 +250,7 @@ export class AboutTekenradar extends Item {
         },
         {
           key: 'e', role: 'input',
+          style: [{ key: 'maxLength', value: '200' }],
           content: new Map([
             ["nl", "Anders, namelijk:"],
           ])
@@ -773,7 +775,7 @@ export class PHQ_15_cause extends Item {
     },
     {
       content: new Map([
-        ["nl", " Meerdere antwoorden mogelijk.."],
+        ["nl", " (meerdere antwoorden mogelijk)."],
       ]),
       className: "fw-normal"
     },
