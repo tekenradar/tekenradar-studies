@@ -19,7 +19,7 @@ export class T0_InvitesDef extends SurveyDefinition {
     super({
       surveyKey: surveyKeys.T0_Invites,
       name: new Map([
-        ['nl', 'Uitnodiging tekenradar onderzoek']
+        ['nl', 'Uitnodiging Tekenradaronderzoek']
       ]),
       description: new Map([
         ['nl', 'Klik hier om je melding af te ronden.']

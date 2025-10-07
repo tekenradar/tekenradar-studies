@@ -173,7 +173,7 @@ Via Tekenradar.nl wordt onderzocht hoe vaak mensen een tekenbeet krijgen, en/of 
 Door onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken.
 
 Ook:
-- Heb ik de informatie op de website van het Tekenradar onderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
+- Heb ik de informatie op de website van het Tekenradaronderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.
 - Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.
 - Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.
 - Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.
@@ -212,7 +212,7 @@ class NewStudies extends Item {
       isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
-        ['nl', 'Soms benaderen we deelnemers aan tekenradar voor aanvullend onderzoek. Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat we je niet benaderen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek?'],
+        ['nl', 'Soms benaderen we deelnemers aan Tekenradar voor aanvullend onderzoek. Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat we je niet benaderen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek?'],
       ]),
       responseOptions: [
         {

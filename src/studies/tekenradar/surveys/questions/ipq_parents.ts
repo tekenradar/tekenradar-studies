@@ -54,7 +54,7 @@ export class IPQ_Parents extends Group {
 class Header extends Item {
 
   markdownContent = `
-# Klachten perceptie
+# Klachtenperceptie
 LET OP: De vragen hieronder zijn voor een **ouder/verzorger**. Als je deze vragenlijst voor jezelf invult, vraag dan je ouder/verzorger de antwoorden op onderstaande vragen te geven.
 
 Klik alsjeblieft bij elke vraag het getal aan dat je mening het beste weergeeft:
