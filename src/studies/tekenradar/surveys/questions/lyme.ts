@@ -355,7 +355,7 @@ export class LymeDiagnosis3alt2a extends Item {
           key: 'af', role: 'option',
           disabled: optionDisabled,
           content: new Map([
-            ["nl", "Ik heb minder kracht dan normaal in mijn arm of been (gedeelte verlamming)."],
+            ["nl", "Ik heb minder kracht dan normaal in mijn arm of been (gedeeltelijke verlamming)."],
           ])
         },
         {
