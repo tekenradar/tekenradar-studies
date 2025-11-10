@@ -99,7 +99,7 @@ class Awareness1 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoeveel invloed heeft de tekenbeet, erythema migrans of andere ziekte van Lyme op je leven?'],
+        ["nl", 'Hoeveel invloed heeft de tekenbeet, erythema migrans of andere vorm van lymeziekte op je leven?'],
       ]),
     }
   ]
@@ -185,7 +185,7 @@ class Awareness2 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'Hoe lang denk je dat de tekenbeet, erythema migrans of andere ziekte van Lyme zal duren?'],
+        ["nl", 'Hoe lang denk je dat de tekenbeet, erythema migrans of andere vorm van lymeziekte zal duren?'],
       ]),
     }
   ]
@@ -282,7 +282,7 @@ class Awareness3 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre meen je de tekenbeet, erythema migrans of andere ziekte van Lyme zelf te kunnen beheersen?'],
+        ["nl", 'In hoeverre meen je de tekenbeet, erythema migrans of andere vorm van lymeziekte zelf te kunnen beheersen?'],
       ]),
     }
   ]
@@ -367,7 +367,7 @@ class Awareness4 extends Item {
   questionTextMain_Adults = [
     {
       content: new Map([
-        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
+        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of aandere vorm van lymeziekte?'],
       ]),
     }
   ]
@@ -375,7 +375,7 @@ class Awareness4 extends Item {
   questionTextMain_Kids = [
     {
       content: new Map([
-        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
+        ["nl", 'In hoeverre denk je dat behandeling helpt bij de tekenbeet, erythema migrans of andere vorm van lymeziekte?'],
       ]),
     }
   ]
@@ -459,7 +459,7 @@ class Awareness5 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre ervaar je lichamelijke klachten van de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
+        ["nl", 'In hoeverre ervaar je lichamelijke klachten van de tekenbeet, erythema migrans of andere vorm van lymeziekte?'],
       ]),
     }
   ]
@@ -543,7 +543,7 @@ class Awareness6 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre ben je bezorgd over de tekenbeet, erythema migrans of andere ziekte van Lyme?'],
+        ["nl", 'In hoeverre ben je bezorgd over de tekenbeet, erythema migrans of andere vorm van lymeziekte?'],
       ]),
     }
   ]
@@ -627,7 +627,7 @@ class Awareness7 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre heb je het gevoel dat je de tekenbeet, erythema migrans of andere ziekte van Lyme begrijpt?'],
+        ["nl", 'In hoeverre heb je het gevoel dat je de tekenbeet, erythema migrans of andere vorm van lymeziekte begrijpt?'],
       ]),
     }
   ]
@@ -711,7 +711,7 @@ class Awareness8 extends Item {
   questionTextMain = [
     {
       content: new Map([
-        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere ziekte van Lyme invloed op je gemoedstoestand? (bijv. maakt het je boos, angstig, van streek, of somber?)'],
+        ["nl", 'In hoeverre heeft de tekenbeet, erythema migrans of andere vorm van lymeziekte invloed op je gemoedstoestand? (bijv. maakt het je boos, angstig, van streek, of somber?)'],
       ]),
     }
   ]

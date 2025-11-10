@@ -245,7 +245,7 @@ export class AboutTekenradar extends Item {
         {
           key: 'd', role: 'option',
           content: new Map([
-            ["nl", "Via Google of een andere internet zoekmachine"],
+            ["nl", "Via Google of een andere internetzoekmachine"],
           ])
         },
         {
@@ -806,7 +806,7 @@ export class PHQ_15_cause extends Item {
         {
           key: 'a', role: 'option',
           content: new Map([
-            ["nl", "Tekenbeet, erythema migrans of andere ziekte van Lyme"],
+            ["nl", "Tekenbeet, erythema migrans of andere vorm van lymeziekte"],
           ])
         },
         {

@@ -867,7 +867,7 @@ export class LymeTherapy6 extends Item {
         {
           key: 'c', role: 'option',
           content: new Map([
-            ["nl", "Nee, want ik slik op dit moment nog antibiotica"],
+            ["nl", "Nee, want ik gebruik op dit moment nog antibiotica"],
           ])
         },
       ]
