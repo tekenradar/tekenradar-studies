@@ -176,7 +176,7 @@ export class aEMUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek lymeziekte
 
-Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
+Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm van lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
 
 Het is voor ons waardevol om verder onderzoek te kunnen doen naar deze huidafwijking. We nodigen daarom een deel van de patiënten met een rode ring of vlek uit om naar de Lymepoli’s van Amsterdam UMC of Radboudumc (Nijmegen) te komen. Vind je het goed dat we je hiervoor benaderen? Zo kunnen we uitleggen wat dit verdere onderzoek inhoudt. Je reiskosten worden natuurlijk vergoed.
 
@@ -212,7 +212,7 @@ export class LBotherUitnodigingOnderzoekText extends Item {
   markdownContent = `
 ## Uitnodiging onderzoek lymeziekte
 
-Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte, en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
+Wij vragen je mee te doen aan Tekenradar-vragenlijstonderzoek naar lymeziekte, omdat je een erythema migrans (rode ring of vlek als een vroege vorm van lymeziekte) of andere vorm van lymeziekte hebt gemeld. Door mee te doen draag je bij aan kennis over lymeziekte en de gezondheidsgevolgen hiervan. Als je mee wilt doen, beantwoord je hierna direct nog een aantal extra vragen over je gezondheid.
 
 Het is voor ons waardevol om verder onderzoek te kunnen doen naar deze huidafwijking. We nodigen daarom een deel van de patiënten met een rode ring of vlek uit om naar de Lymepoli’s van Amsterdam UMC of Radboudumc (Nijmegen) te komen. Vind je het goed dat we je hiervoor benaderen? Zo kunnen we uitleggen wat dit verdere onderzoek inhoudt. Je reiskosten worden natuurlijk vergoed.
 

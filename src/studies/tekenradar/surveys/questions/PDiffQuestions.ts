@@ -10,7 +10,7 @@ export class IntroPDiff extends Item {
   markdownContent = `
 ### Melding doen
 
-Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van de ziekte van Lyme, of koorts na een tekenbeet.
+Vul onderstaande vragen in over je tekenbeet, rode ring of vlek, andere vorm van lymeziekte, of koorts na een tekenbeet.
 
 Je kunt je hieronder ook aanmelden om voortaan elke week door te geven of je tekenbeten hebt gehad.
 
