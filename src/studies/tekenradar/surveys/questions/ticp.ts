@@ -418,10 +418,12 @@ export class TicP_Comorbidity extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Adults)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+              ? SurveyEngine.responseHasOnlyKeysOtherThan(
+                'LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
-                ...years)
-              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
+                ...years
+              )
+              : SurveyEngine.compare.gt(1, 2),
         },
         //{
         //key: 't6', role: 'text',
@@ -453,10 +455,12 @@ export class TicP_Comorbidity extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Adults)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+              ? SurveyEngine.responseHasOnlyKeysOtherThan(
+                'LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
-                ...years)
-              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
+                ...years
+              )
+              : SurveyEngine.compare.gt(1, 2),
         },
         {
           key: 'r', role: 'option',
@@ -495,10 +499,12 @@ export class TicP_Comorbidity extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Adults)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+              ? SurveyEngine.responseHasOnlyKeysOtherThan(
+                'LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
-                ...years)
-              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
+                ...years
+              )
+              : SurveyEngine.compare.gt(1, 2),
         },
         {
           key: 'u_Kids', role: 'option',
@@ -509,10 +515,12 @@ export class TicP_Comorbidity extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Kids)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasKeysAny('LPplus_part1.Je gegevens.BirthYear',
+              ? SurveyEngine.responseHasKeysAny(
+                'LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
-                ...years)
-              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
+                ...years
+              )
+              : SurveyEngine.compare.gt(1, 2),
         },
         {
           key: 'v', role: 'option',
@@ -607,10 +615,12 @@ export class TicP_Comorbidity extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Adults)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+              ? SurveyEngine.responseHasOnlyKeysOtherThan(
+                'LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
-                ...years)
-              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
+                ...years
+              )
+              : SurveyEngine.compare.gt(1, 2),
         },
         {
           key: 'af', role: 'option',
@@ -621,10 +631,12 @@ export class TicP_Comorbidity extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Adults)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+              ? SurveyEngine.responseHasOnlyKeysOtherThan(
+                'LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
-                ...years)
-              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
+                ...years
+              )
+              : SurveyEngine.compare.gt(1, 2),
         },
         {
           key: 'ag', role: 'option',

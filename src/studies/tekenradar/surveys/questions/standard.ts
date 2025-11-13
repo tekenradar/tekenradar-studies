@@ -618,10 +618,12 @@ export class PHQ_15 extends Item {
           displayCondition: this.isPartOf(SurveySuffix.Adults)
             ? undefined
             : this.isPartOf('LPplus_part1')
-              ? SurveyEngine.responseHasOnlyKeysOtherThan('LPplus_part1.Je gegevens.BirthYear',
+              ? SurveyEngine.responseHasOnlyKeysOtherThan(
+                'LPplus_part1.Je gegevens.BirthYear',
                 'rg.ddg',
-                ...years)
-              : SurveyEngine.logic.not(SurveyEngine.logic.and()),
+                ...years
+              )
+              : SurveyEngine.compare.gt(1, 2),
         },
         {
           key: 'f',
