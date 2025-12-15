@@ -3,6 +3,8 @@ import { Item } from 'case-editor-tools/surveys/types';
 import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from 'case-editor-tools/surveys/utils/componentGenerators';
 import { SingleChoiceOptionTypes as SCOptions, ClozeItemTypes } from 'case-editor-tools/surveys';
+import { generateLocStrings } from 'case-editor-tools/surveys/utils/simple-generators';
+import { createValidatedRandomQuestionItem } from '../../utils/surveyItemUtils';
 
 
 export class IntroPDiff extends Item {
@@ -603,17 +605,134 @@ export class WeeklyFlow extends Item {
 }
 
 export class UserVerificationQuestion extends Item {
+  private questionPool: any[];
+
   constructor(parentKey: string, isRequired: boolean, condition: Expression) {
     super(parentKey, 'UV');
     this.condition = condition;
     this.isRequired = isRequired;
+
+    // Initialize question pool with math verification questions
+    // Questions use role "question" and answers use role "answer"
+    this.questionPool = [
+      {
+        key: '0',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is drie plus drie?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '6']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'zes']])) },
+        ]
+      },
+      {
+        key: '1',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is acht plus twee?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '10']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'tien']])) },
+        ]
+      },
+      {
+        key: '2',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is tien min zes?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '4']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'vier']])) },
+        ]
+      },
+      {
+        key: '3',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is twee keer vier?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '8']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'acht']])) },
+        ]
+      },
+      {
+        key: '4',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is twaalf gedeeld door vier?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '3']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'drie']])) },
+        ]
+      },
+      {
+        key: '5',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is negen gedeeld door drie?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '3']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'drie']])) },
+        ]
+      },
+      {
+        key: '6',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is twee keer vijf?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '10']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'tien']])) },
+        ]
+      },
+      {
+        key: '7',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is twee min een?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '1']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'een']])) },
+          { key: '2', role: 'answer', content: generateLocStrings(new Map([['nl', 'eén']])) },
+          { key: '3', role: 'answer', content: generateLocStrings(new Map([['nl', 'éen']])) },
+          { key: '4', role: 'answer', content: generateLocStrings(new Map([['nl', 'één']])) },
+        ]
+      },
+      {
+        key: '8',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is acht min een?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '7']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'zeven']])) },
+        ]
+      },
+      {
+        key: '9',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is elf min twee?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '9']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'negen']])) },
+        ]
+      },
+      {
+        key: '10',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is tien gedeeld door twee?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '5']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'vijf']])) },
+        ]
+      },
+      {
+        key: '11',
+        role: 'question',
+        content: generateLocStrings(new Map([['nl', 'Hoeveel is drie plus vijf?']])),
+        items: [
+          { key: '0', role: 'answer', content: generateLocStrings(new Map([['nl', '8']])) },
+          { key: '1', role: 'answer', content: generateLocStrings(new Map([['nl', 'acht']])) },
+        ]
+      },
+    ];
   }
 
   buildItem() {
-    return SurveyItems.customQuestion({
+    return createValidatedRandomQuestionItem({
       parentKey: this.parentKey,
       itemKey: this.itemKey,
-      isRequired: this.isRequired,
       condition: this.condition,
       questionText: new Map([
         ['nl', 'Controlevraag'],
@@ -621,11 +740,7 @@ export class UserVerificationQuestion extends Item {
       questionSubText: new Map([
         ['nl', 'Dit is een controlevraag om te bevestigen dat je geen robot bent. Typ het juiste antwoord in het antwoordveld hieronder.'],
       ]),
-      responseItemDefs: [
-        {
-          key: 'uv', role: 'userVerification', mapToRole: 'input',
-        }
-      ]
-    })
+      questionPool: this.questionPool,
+    });
   }
 }
