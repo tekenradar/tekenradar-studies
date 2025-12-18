@@ -386,12 +386,12 @@ export class PhotoEM_Text extends Item {
   markdownContent = `
 ## Uploaden foto
 
-Wij vragen je om een foto te uploaden van je erythema migrans of andere huidafwijking door lymeziekte. Mocht je nu geen foto kunnen uploaden, dan ontvang je een herinnering per e-mail om dat later alsnog te doen. 
+Wij vragen je om een foto te uploaden van je erythema migrans of andere huidafwijking door lymeziekte. Mocht je nu geen foto kunnen uploaden, dan ontvang je een herinnering per e-mail om dat later alsnog te doen.
 Heb je geen huidafwijking door lymeziekte dan kun je deze vraag overslaan.
 
 Om een goed beeld te krijgen van de schaal van de foto vragen wij het een lineaal of meetlint (of een voorwerp met een standaardgrootte zoals een muntstuk) naast de huidafwijking op de foto te zetten. Zie de voorbeeldfoto.
 
-<img src="https://www.tekenradar.nl/assets/images/survey-content/em_example.png" width="100%" style="max-width: 500px"/>
+<img src="/static/images/survey-content/em_example.png" width="100%" style="max-width: 500px"/>
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {

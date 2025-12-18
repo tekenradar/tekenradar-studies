@@ -1112,7 +1112,7 @@ Bijvoorbeeld als je jezelf wel wat ontspannen voelt, maar niet zo erg ontspannen
 
 Dus bijvoorbeeld als volgt:
 
-<img src="https://www.tekenradar.nl/assets/images/survey-content/CIS_fatigue_example.png" width="100%"/>
+<img src="/static/images/survey-content/CIS_fatigue_example.png" width="100%"/>
                 `]
           ])
         }),
