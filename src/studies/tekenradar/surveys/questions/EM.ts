@@ -391,7 +391,7 @@ Heb je geen huidafwijking door lymeziekte dan kun je deze vraag overslaan.
 
 Om een goed beeld te krijgen van de schaal van de foto vragen wij het een lineaal of meetlint (of een voorwerp met een standaardgrootte zoals een muntstuk) naast de huidafwijking op de foto te zetten. Zie de voorbeeldfoto.
 
-<img src="/static/images/survey-content/em_example.png" width="100%" style="max-width: 500px"/>
+<img src="/static/images/survey-content/em_example.png" width="100%" style="max-width: 500px; margin-top: 10px; margin-left: auto; margin-right: auto;"/>
 `
 
   constructor(parentKey: string, isRequired: boolean, condition?: Expression) {
