@@ -359,7 +359,9 @@ export class MedicationLyme extends Item {
               )
             }),
             ClozeItemTypes.dropDown({
-              key: 'dropdown', options: [
+              key: 'dropdown',
+              placeholder: new Map([['nl', "-- kies een optie --"]]),
+              options: [
                 SCOptions.option('1', new Map([['nl', "precieze"]])),
                 SCOptions.option('2', new Map([['nl', "geschatte"]]))
               ]
