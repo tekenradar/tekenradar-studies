@@ -181,7 +181,6 @@ class MedCare2 extends Item {
         className: 'flex-grow-1',
         alignText: 'start',
       }));
-      cItems.push(ClozeItemTypes.clozeLineBreak());
       cItems.push(ClozeItemTypes.text({
         key: `row_${index + 1}_label2`,
         content: new Map(
@@ -204,7 +203,7 @@ class MedCare2 extends Item {
         className: 'border-top border-grey-2 my-2 w-100 ',
         displayCondition: rowCondition,
       }));
-      //cItems.push(ClozeItemTypes.clozeLineBreak());
+      cItems.push(ClozeItemTypes.clozeLineBreak());
     })
 
     const markdownContent = `
