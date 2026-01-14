@@ -1118,7 +1118,7 @@ Dus bijvoorbeeld als volgt:
         }),
         {
           role: 'text',
-          style: [{ key: 'className', value: 'border-bottom border-1 border-grey-5 pt-1 my-2 fw-bold' }],
+          style: [{ key: 'className', value: 'border-b border-border pt-1 my-2 fw-bold' }],
           content: generateLocStrings(new Map([
             ["nl", "Klik nu hieronder aan welk van de antwoorden het meest overeenkomt met je gevoel:"],
           ]))

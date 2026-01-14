@@ -76,4 +76,4 @@ export const surveyKeys = {
 }
 
 
-export const TextBorderFormat = 'border-top border-grey-2 pt-2'
+export const TextBorderFormat = 'border-t border-border pt-2'

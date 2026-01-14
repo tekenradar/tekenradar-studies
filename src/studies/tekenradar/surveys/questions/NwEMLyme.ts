@@ -855,8 +855,8 @@ export class NwEMLyme13 extends Item {
           )
         }),
         ClozeItemTypes.textInput({
-        key: this.optionKeys.name,
-        maxLength: 200
+          key: this.optionKeys.name,
+          maxLength: 200
         }),
         ClozeItemTypes.textInput({
           key: this.optionKeys.name,
@@ -882,7 +882,7 @@ export class NwEMLyme13 extends Item {
           )
         }),
         ClozeItemTypes.textInput({
-          key: '5',   
+          key: '5',
           maxLength: 500
         })
       ],
@@ -965,7 +965,7 @@ export class NwEMLyme14 extends Item {
         displayCondition: rowCondition,
       }));
       cItems.push(ClozeItemTypes.text({
-        className: 'border-top border-grey-2 my-2 w-100 ',
+        className: 'border-t border-border my-2 w-100 ',
         displayCondition: rowCondition,
       }));
       //cItems.push(ClozeItemTypes.clozeLineBreak());

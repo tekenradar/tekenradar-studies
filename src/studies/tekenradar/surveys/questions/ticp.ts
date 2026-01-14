@@ -200,7 +200,7 @@ class MedCare2 extends Item {
         displayCondition: rowCondition,
       }));
       cItems.push(ClozeItemTypes.text({
-        className: 'border-top border-grey-2 my-2 w-100 ',
+        className: 'border-t border-border my-2 w-100 ',
         displayCondition: rowCondition,
       }));
       cItems.push(ClozeItemTypes.clozeLineBreak());
