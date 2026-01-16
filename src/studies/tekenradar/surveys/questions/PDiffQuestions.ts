@@ -447,7 +447,7 @@ export class SurveyValidationText extends Item {
           content: new Map([
             ["nl", this.markdownContent],
           ]),
-          className: 'text-danger'
+          className: 'text-descructive'
         })
       ]
     })
