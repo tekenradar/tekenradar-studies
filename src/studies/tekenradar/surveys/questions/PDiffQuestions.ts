@@ -447,7 +447,7 @@ export class SurveyValidationText extends Item {
           content: new Map([
             ["nl", this.markdownContent],
           ]),
-          className: 'text-descructive'
+          className: 'text-[--survey-error-text-color]'
         })
       ]
     })
