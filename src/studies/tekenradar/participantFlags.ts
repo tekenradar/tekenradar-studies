@@ -99,6 +99,18 @@ export const ParticipantFlags = {
     values: {
       true: 'true'
     }
+  }, //DW 04-07-2025
+  LDexcluded: {
+    key: 'LDexcluded',
+    values: {
+      true: 'true'
+    }
+  }, //LT 18-09-2025
+  LBother: {
+    key: 'LBother',
+    values: {
+      likely: 'likely'
+    }
   },
   consents: {
     defaultStudy: {

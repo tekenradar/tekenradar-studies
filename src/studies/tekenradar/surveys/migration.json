@@ -1,0 +1,70 @@
+{
+  "id": "637f847858d48810044ac6ad",
+  "props": {
+    "name": [
+      {
+        "code": "en",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Migration"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "code": "en",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Containing reference to the old data."
+          }
+        ]
+      }
+    ]
+  },
+  "published": 50,
+  "surveyDefinition": {
+    "id": "000000000000000000000000",
+    "key": "migration",
+    "metadata": {
+      "version": "1"
+    },
+    "items": [
+      {
+        "id": "000000000000000000000000",
+        "key": "migration.OldID",
+        "metadata": {
+          "version": "1"
+        },
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": [],
+          "items": [
+            {
+              "role": "responseGroup",
+              "key": "rg",
+              "content": [],
+              "items": [
+                {
+                  "role": "input",
+                  "key": "ic",
+                  "content": [],
+                  "description": []
+                }
+              ],
+              "description": []
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": []
+        }
+      }
+    ]
+  },
+  "versionId": "22-03-1"
+}

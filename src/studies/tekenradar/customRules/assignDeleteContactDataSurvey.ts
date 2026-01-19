@@ -1,15 +1,13 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { ParticipantFlags } from "../participantFlags";
-import { surveyKeys } from "../surveys/globalConstants";
-import { T0_Invites } from "../surveys/T0_Invites";
+import { DeleteContactData_key } from "../utils/studyRuleUtils";
 
 export const assignDeleteContactDataSurvey = {
   name: 'assignDeleteContactDataSurvey',
   rules: [
     StudyEngine.ifThen(
-      StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.DeleteContactData),
-      StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.DeleteContactData, 'all'),
-      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined,
+      StudyEngine.participantState.hasSurveyKeyAssigned(DeleteContactData_key),
+      StudyEngine.participantActions.assignedSurveys.remove(DeleteContactData_key, 'all'),
+      StudyEngine.participantActions.assignedSurveys.add(DeleteContactData_key, 'optional', undefined,
         StudyEngine.timestampWithOffset({ minutes: 30 }))
     ),/*
     StudyEngine.ifThen(

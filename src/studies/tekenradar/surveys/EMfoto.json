@@ -1,0 +1,236 @@
+{
+  "id": "69526ca4f48bfcff08f1ca01",
+  "surveyKey": "EMfoto",
+  "props": {
+    "name": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Foto van rode ring of vlek (erythema migrans) uploaden"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Klik hier om je foto te uploaden"
+          }
+        ]
+      }
+    ],
+    "typicalDuration": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Uploaden duurt minder dan 1 minuut"
+          }
+        ]
+      }
+    ]
+  },
+  "published": 1767009444,
+  "surveyDefinition": {
+    "id": "000000000000000000000000",
+    "key": "EMfoto",
+    "items": [
+      {
+        "id": "000000000000000000000000",
+        "key": "EMfoto.PhotoEMT",
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": null,
+          "items": [
+            {
+              "role": "markdown",
+              "key": "qA4",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "\n## Uploaden foto\n\nWij vragen je om een foto te uploaden van je erythema migrans of andere huidafwijking door lymeziekte. Mocht je nu geen foto kunnen uploaden, dan ontvang je een herinnering per e-mail om dat later alsnog te doen.\nHeb je geen huidafwijking door lymeziekte dan kun je deze vraag overslaan.\n\nOm een goed beeld te krijgen van de schaal van de foto vragen wij het een lineaal of meetlint (of een voorwerp met een standaardgrootte zoals een muntstuk) naast de huidafwijking op de foto te zetten. Zie de voorbeeldfoto.\n\n<img src=\"/static/images/survey-content/em_example.png\" width=\"100%\" style=\"max-width: 500px; margin-top: 10px; margin-left: auto; margin-right: auto;\"/>\n"
+                    }
+                  ]
+                }
+              ],
+              "style": [
+                {
+                  "key": "className",
+                  "value": ""
+                }
+              ],
+              "description": null
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": null
+        }
+      },
+      {
+        "id": "000000000000000000000000",
+        "key": "EMfoto.PhotoEM",
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": null,
+          "items": [
+            {
+              "role": "title",
+              "key": "",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "Selecteer hier de foto van je erythema migrans of andere huidafwijking"
+                    }
+                  ]
+                }
+              ],
+              "description": null
+            },
+            {
+              "role": "responseGroup",
+              "key": "rg",
+              "content": null,
+              "items": [
+                {
+                  "role": "input:file",
+                  "key": "file",
+                  "content": null,
+                  "description": null
+                }
+              ],
+              "description": null
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": null
+        }
+      },
+      {
+        "id": "000000000000000000000000",
+        "key": "EMfoto.DatePhotoEM",
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": null,
+          "items": [
+            {
+              "role": "title",
+              "key": "",
+              "content": null,
+              "items": [
+                {
+                  "role": "text",
+                  "key": "0",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": "",
+                          "str": "Wanneer is deze foto genomen?"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": null
+                },
+                {
+                  "role": "text",
+                  "key": "1",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": "",
+                          "str": " Als je het niet meer precies weet, maak dan een schatting."
+                        }
+                      ]
+                    }
+                  ],
+                  "style": [
+                    {
+                      "key": "className",
+                      "value": "fw-normal"
+                    }
+                  ],
+                  "description": null
+                }
+              ],
+              "description": null
+            },
+            {
+              "role": "responseGroup",
+              "key": "rg",
+              "content": null,
+              "items": [
+                {
+                  "role": "dateInput",
+                  "key": "date",
+                  "content": null,
+                  "properties": {
+                    "min": {
+                      "dtype": "exp",
+                      "exp": {
+                        "name": "timestampWithOffset",
+                        "data": [
+                          {
+                            "dtype": "num",
+                            "num": -599184000
+                          }
+                        ]
+                      }
+                    },
+                    "max": {
+                      "dtype": "exp",
+                      "exp": {
+                        "name": "timestampWithOffset",
+                        "data": [
+                          {
+                            "dtype": "num"
+                          }
+                        ]
+                      }
+                    },
+                    "dateInputMode": {
+                      "dtype": "",
+                      "str": "YMD"
+                    }
+                  },
+                  "description": null
+                }
+              ],
+              "description": null
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": null
+        }
+      }
+    ],
+    "selectionMethod": {
+      "name": "sequential"
+    }
+  },
+  "versionId": "25-12-1"
+}
