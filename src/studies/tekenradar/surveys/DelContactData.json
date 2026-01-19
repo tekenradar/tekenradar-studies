@@ -1,0 +1,275 @@
+{
+  "id": "637f847858d48810044ac6ae",
+  "props": {
+    "name": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Intrekken toestemming contactgegevens"
+          }
+        ]
+      }
+    ],
+    "description": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Klink hier om je toestemming in te trekken voor het bewaren van contactgevens"
+          }
+        ]
+      }
+    ],
+    "typicalDuration": [
+      {
+        "code": "nl",
+        "parts": [
+          {
+            "dtype": "",
+            "str": "Invullen duurt minder dan 1 minuut"
+          }
+        ]
+      }
+    ]
+  },
+  "published": 1667985821,
+  "surveyDefinition": {
+    "id": "000000000000000000000000",
+    "key": "DelContactData",
+    "metadata": {
+      "version": "1"
+    },
+    "items": [
+      {
+        "id": "000000000000000000000000",
+        "key": "DelContactData.Info",
+        "metadata": {
+          "version": "1"
+        },
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": [],
+          "items": [
+            {
+              "role": "markdown",
+              "key": "DQl",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "\nJe hebt eerder toestemming gegeven om je contactgegevens 12 weken lang te bewaren om te kunnen worden benaderd voor aanvullend onderzoek. Als je wilt kun je hieronder die toestemming weer intrekken. Je contactgegevens worden dan direct verwijderd, en zullen dus niet meer gebruikt worden om je te benaderen voor aanvullend onderzoek.\n"
+                    }
+                  ]
+                }
+              ],
+              "style": [
+                {
+                  "key": "className",
+                  "value": ""
+                }
+              ],
+              "description": []
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": []
+        }
+      },
+      {
+        "id": "000000000000000000000000",
+        "key": "DelContactData.DeleteContactData",
+        "metadata": {
+          "version": "1"
+        },
+        "components": {
+          "role": "root",
+          "key": "",
+          "content": [],
+          "items": [
+            {
+              "role": "title",
+              "key": "",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": "",
+                      "str": "Wil je je toestemming om je contactgegevens te bewaren intrekken?"
+                    }
+                  ]
+                }
+              ],
+              "description": []
+            },
+            {
+              "role": "responseGroup",
+              "key": "rg",
+              "content": [],
+              "items": [
+                {
+                  "role": "singleChoiceGroup",
+                  "key": "scg",
+                  "content": [],
+                  "items": [
+                    {
+                      "role": "option",
+                      "key": "a",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Ja"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": []
+                    },
+                    {
+                      "role": "option",
+                      "key": "b",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Nee"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": []
+                    }
+                  ],
+                  "order": {
+                    "name": "sequential"
+                  },
+                  "description": []
+                }
+              ],
+              "description": []
+            }
+          ],
+          "order": {
+            "name": "sequential"
+          },
+          "description": []
+        },
+        "validations": [
+          {
+            "key": "r1",
+            "type": "hard",
+            "rule": {
+              "name": "hasResponse",
+              "data": [
+                {
+                  "dtype": "str",
+                  "str": "DelContactData.DeleteContactData"
+                },
+                {
+                  "dtype": "str",
+                  "str": "rg"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "000000000000000000000000",
+        "key": "DelContactData.END",
+        "metadata": {
+          "version": "1"
+        },
+        "items": [
+          {
+            "id": "000000000000000000000000",
+            "key": "DelContactData.END.Comment",
+            "metadata": {
+              "version": "1"
+            },
+            "components": {
+              "role": "root",
+              "key": "",
+              "content": [],
+              "items": [
+                {
+                  "role": "title",
+                  "key": "",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": "",
+                          "str": "Als je nog feedback voor ons hebt, kun je dat hieronder invullen"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": "",
+                          "str": "Let op: deze informatie wordt eerst opgeslagen en niet direct door de onderzoekers bekeken."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "role": "responseGroup",
+                  "key": "rg",
+                  "content": [],
+                  "items": [
+                    {
+                      "role": "multilineTextInput",
+                      "key": "ic",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": ""
+                            }
+                          ]
+                        }
+                      ],
+                      "description": []
+                    }
+                  ],
+                  "description": []
+                }
+              ],
+              "order": {
+                "name": "sequential"
+              },
+              "description": []
+            }
+          }
+        ],
+        "selectionMethod": {
+          "name": "sequential"
+        }
+      }
+    ],
+    "selectionMethod": {
+      "name": "sequential"
+    }
+  },
+  "versionId": "22-11-1"
+}
