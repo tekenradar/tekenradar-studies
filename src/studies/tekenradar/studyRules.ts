@@ -1,9 +1,6 @@
 import { StudyRules } from "case-editor-tools/types/studyRules";
 import { Expression } from "survey-engine/data_types";
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { PDiff } from "./surveys/PDiff";
-import { TBflow_Adults } from "./surveys/TBflow_Adults";
-import { Standardflow_Adults } from "./surveys/Standardflow_Adults";
 import {
   assignStandardFlow,
   assignT0Invite,
@@ -14,36 +11,20 @@ import {
   initFollowUpFlow_Kids,
   isSurveyExpired, aEMflagLogic, kEMflagLogic, LBotherflagLogic, quitFollowUp, reAssignWeeklyToTheEndOfList, removeAllT0Surveys,
   removeFollowUpMessagesForSurvey, resetToPDiffStart, takeOverFlagIfExist, takeOverSurveyIfAssigned,
-  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, PHQ_15_noneflagLogic, LDexcluded_flagLogic
+  updateAgeFlags, updateGenderFlag, updatePostalCodeFlag, updateTbExposureFlag, PHQ_15_noneflagLogic, LDexcluded_flagLogic,
+  Standardflow_Adults_key,
+  Standardflow_Kids_key,
+  DeleteContactData_key,
+  WeeklyTB_key,
+  QuitWeeklyTB_key
 } from "./utils/studyRuleUtils";
-import { EMflow_Adults } from "./surveys/EMflow_Adults";
-import { EMflow_Kids } from "./surveys/EMflow_Kids";
-import { LBflow_Adults } from "./surveys/LBflow_Adults";
-import { LBflow_Kids } from "./surveys/LBflow_Kids";
-import { Feverflow_Adults } from "./surveys/Feverflow_Adults";
-import { Chronicflow_Adults } from "./surveys/Chronicflow_Adults";
-import { Chronicflow_Kids } from "./surveys/Chronicflow_Kids";
-import { WeeklyTB } from "./surveys/WeeklyTB";
-import { Standardflow_Kids } from "./surveys/Standardflow_Kids";
-import { EMfoto } from "./surveys/EMfoto";
-import { T3_Adults } from "./surveys/T3_Adults";
-import { T6_Adults } from "./surveys/T6_Adults";
-import { T9_Adults } from "./surveys/T9_Adults";
-import { T12_Adults } from "./surveys/T12_Adults";
-import { T12_Kids } from "./surveys/T12_Kids";
-import { T9_Kids } from "./surveys/T9_Kids";
-import { T6_Kids } from "./surveys/T6_Kids";
-import { T3_Kids } from "./surveys/T3_Kids";
 import { ParticipantFlags } from "./participantFlags";
-import { TBflow_Kids } from "./surveys/TBflow_Kids";
-import { T0_Invites } from "./surveys/T0_Invites";
 import { inputKey, multipleChoiceKey, numericInputKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
-import { QuitWeeklyTB } from "./surveys/QuitWeekly";
-import { QuitFollowUp } from "./surveys/QuitFollowUp";
-import { surveyKeys } from "./surveys/globalConstants";
-import { DeleteContactData } from "./surveys/DeleteContactData";
-import { postalCodesForNMGStudy } from "./surveys/globalConstants";
-import { LPplus_part1 } from "./surveys/LPplus_part1";
+
+
+import { PDiff_key, TBflow_Adults_key, TBflow_Kids_key, EMfoto_key, EMflow_Adults_key, EMflow_Kids_key, Feverflow_Adults_key, LBflow_Adults_key, LBflow_Kids_key, Chronicflow_Adults_key, Chronicflow_Kids_key, T0_Invites_key, QuitFollowUp_key, T3_Adults_key, T6_Adults_key, T9_Adults_key, T12_Adults_key, T3_Kids_key, T6_Kids_key, T9_Kids_key, T12_Kids_key, LPplus_part1_key } from "./utils/studyRuleUtils";
+
+
 
 const reports = {
   FollowUpReport: {
@@ -100,11 +81,15 @@ export const researcherNotificationTypes = {
 }
 
 
-
+const TBLoc_Q1_optionKeys = {
+  precise: 'a',
+  approximate: 'b',
+  dontKnow: 'c',
+}
 
 const handleSubmit_PDiff = StudyEngine.ifThen(
   // IF:
-  StudyEngine.checkSurveyResponseKey(PDiff.key),
+  StudyEngine.checkSurveyResponseKey(PDiff_key),
   // THEN:
   removeAllT0Surveys(),
   StudyEngine.ifThen(
@@ -131,9 +116,9 @@ const handleSubmit_PDiff = StudyEngine.ifThen(
  */
 const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(TBflow_Adults.key),
+  StudyEngine.checkSurveyResponseKey(TBflow_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(TBflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(TBflow_Adults_key, 'all'),
   StudyEngine.ifThen(
     // If not in an active follow up:
     StudyEngine.not(
@@ -145,29 +130,34 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   // gender category:
-  updateGenderFlag(TBflow_Adults.P2.key),
-  updateTbExposureFlag(TBflow_Adults.PTB.Q1.key),
-  updatePostalCodeFlag(TBflow_Adults.P1.key),
+  updateGenderFlag(`${TBflow_Adults_key}.P2`),
+  updateTbExposureFlag(`${TBflow_Adults_key}.PTBG.PTB1`),
+  updatePostalCodeFlag(`${TBflow_Adults_key}.P1`),
   reAssignWeeklyToTheEndOfList(),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(TBflow_Adults.Q3.Q1.key, TBflow_Adults.Q3.Q1.optionKeys.precies, TBflow_Adults.Q3.Q1.optionKeys.ongeveer, TBflow_Adults.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${TBflow_Adults_key}.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.environment,
-    StudyEngine.getSelectedKeys(TBflow_Adults.Q1.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+    StudyEngine.getSelectedKeys(`${TBflow_Adults_key}.TB_A1`, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.activity,
-    StudyEngine.getSelectedKeys(TBflow_Adults.Q2.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+    StudyEngine.getSelectedKeys(`${TBflow_Adults_key}.TB_A2`, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.count,
-    StudyEngine.getResponseValueAsNum(TBflow_Adults.Q4.key, `${responseGroupKey}.${numericInputKey}`), 'int'
+    StudyEngine.getResponseValueAsNum(`${TBflow_Adults_key}.TB_A4`, `${responseGroupKey}.${numericInputKey}`), 'int'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.location,
-    StudyEngine.getResponseValueAsStr(TBflow_Adults.Q5.key, `${responseGroupKey}.${inputKey}`), 'string'
+    StudyEngine.getResponseValueAsStr(`${TBflow_Adults_key}.TB_A5`, `${responseGroupKey}.${inputKey}`), 'string'
   ),
 )
 
@@ -176,9 +166,9 @@ const handleSubmit_TBflow_Adults = StudyEngine.ifThen(
  */
 const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(TBflow_Kids.key),
+  StudyEngine.checkSurveyResponseKey(TBflow_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(TBflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(TBflow_Kids_key, 'all'),
   StudyEngine.ifThen(
     // If not in an active follow up:
     StudyEngine.not(
@@ -190,29 +180,34 @@ const handleSubmit_TBflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   // Gender category:
-  updateGenderFlag(TBflow_Kids.P2.key),
-  updatePostalCodeFlag(TBflow_Kids.P1.key),
-  updateTbExposureFlag(TBflow_Kids.PTB.Q1.key),
+  updateGenderFlag(`${TBflow_Kids_key}.P2`),
+  updatePostalCodeFlag(`${TBflow_Kids_key}.P1`),
+  updateTbExposureFlag(`${TBflow_Kids_key}.PTBG.PTB1`),
   reAssignWeeklyToTheEndOfList(),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(TBflow_Kids.Q3.Q1.key, TBflow_Kids.Q3.Q1.optionKeys.precies, TBflow_Kids.Q3.Q1.optionKeys.ongeveer, TBflow_Kids.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${TBflow_Kids_key}.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
   StudyEngine.participantActions.reports.init(reports.TBReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.TBReport.key, reports.TBReport.key),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.environment,
-    StudyEngine.getSelectedKeys(TBflow_Kids.Q1.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+    StudyEngine.getSelectedKeys(`${TBflow_Kids_key}.TB_A1`, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.activity,
-    StudyEngine.getSelectedKeys(TBflow_Kids.Q2.key, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
+    StudyEngine.getSelectedKeys(`${TBflow_Kids_key}.TB_A2`, `${responseGroupKey}.${multipleChoiceKey}`), 'keyList'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.count,
-    StudyEngine.getResponseValueAsStr(TBflow_Kids.Q4.key, `${responseGroupKey}.${numericInputKey}`), 'int'
+    StudyEngine.getResponseValueAsStr(`${TBflow_Kids_key}.TB_A4`, `${responseGroupKey}.${numericInputKey}`), 'int'
   ),
   StudyEngine.participantActions.reports.updateData(reports.TBReport.key, reports.TBReport.location,
-    StudyEngine.getResponseValueAsStr(TBflow_Kids.Q5.key, `${responseGroupKey}.${inputKey}`), 'string'
+    StudyEngine.getResponseValueAsStr(`${TBflow_Kids_key}.TB_A5`, `${responseGroupKey}.${inputKey}`), 'string'
   ),
 )
 
@@ -220,15 +215,15 @@ const addEMfotoReminderEmail = () => StudyEngine.participantActions.messages.add
 const addEMcheckReminderEmail = () => StudyEngine.participantActions.messages.add(emailKeys.EMcheckReminder, StudyEngine.timestampWithOffset({ days: 21 }));
 
 const assignEMfotoSurvey = () => StudyEngine.do(
-  StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
+  StudyEngine.participantActions.assignedSurveys.add(EMfoto_key, 'immediate', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
   addEMfotoReminderEmail(),
 )
 
 const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(EMflow_Adults.key),
+  StudyEngine.checkSurveyResponseKey(EMflow_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(EMflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(EMflow_Adults_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
@@ -243,10 +238,15 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
   ),
   aEMflagLogic(),
   reAssignWeeklyToTheEndOfList(),
-  updateTbExposureFlag(EMflow_Adults.PTB.Q1.key),
+  updateTbExposureFlag(`${EMflow_Adults_key}.PTBG.PTB1`),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(EMflow_Adults.TBOtherG.Q3.Q1.key, EMflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, EMflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, EMflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${EMflow_Adults_key}.TBOtherG.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
@@ -256,9 +256,9 @@ const handleSubmit_EMflow_Adults = StudyEngine.ifThen(
 
 const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(EMflow_Kids.key),
+  StudyEngine.checkSurveyResponseKey(EMflow_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(EMflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(EMflow_Kids_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   StudyEngine.ifThen(
@@ -273,10 +273,15 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
   ),
   kEMflagLogic(),
   reAssignWeeklyToTheEndOfList(),
-  updateTbExposureFlag(EMflow_Kids.PTB.Q1.key),
+  updateTbExposureFlag(`${EMflow_Kids_key}.PTBG.PTB1`),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(EMflow_Kids.TBOtherG.Q3.Q1.key, EMflow_Kids.TBOtherG.Q3.Q1.optionKeys.precies, EMflow_Kids.TBOtherG.Q3.Q1.optionKeys.ongeveer, EMflow_Kids.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${EMflow_Kids_key}.TBOtherG.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
@@ -286,9 +291,9 @@ const handleSubmit_EMflow_Kids = StudyEngine.ifThen(
 
 const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(Feverflow_Adults.key),
+  StudyEngine.checkSurveyResponseKey(Feverflow_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(Feverflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Feverflow_Adults_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     // if not in a follow up yet:
@@ -301,10 +306,15 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  updateTbExposureFlag(Feverflow_Adults.PTB.Q1.key),
+  updateTbExposureFlag(`${Feverflow_Adults_key}.PTBG.PTB1`),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(Feverflow_Adults.TBOtherG.Q3.Q1.key, Feverflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, Feverflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, Feverflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${Feverflow_Adults_key}.TBOtherG.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
@@ -317,9 +327,9 @@ const handleSubmit_Feverflow_Adults = StudyEngine.ifThen(
  */
 const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(LBflow_Adults.key),
+  StudyEngine.checkSurveyResponseKey(LBflow_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(LBflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(LBflow_Adults_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   LDexcluded_flagLogic(),
@@ -335,10 +345,15 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
   ),
   LBotherflagLogic(),
   reAssignWeeklyToTheEndOfList(),
-  updateTbExposureFlag(LBflow_Adults.PTB.Q1.key),
+  updateTbExposureFlag(`${LBflow_Adults_key}.PTBG.PTB1`),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(LBflow_Adults.TBOtherG.Q3.Q1.key, LBflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, LBflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, LBflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${LBflow_Adults_key}.TBOtherG.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
@@ -352,9 +367,9 @@ const handleSubmit_LBflow_Adults = StudyEngine.ifThen(
  */
 const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(LBflow_Kids.key),
+  StudyEngine.checkSurveyResponseKey(LBflow_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(LBflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(LBflow_Kids_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
   LDexcluded_flagLogic(),
@@ -369,10 +384,15 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  updateTbExposureFlag(LBflow_Kids.PTB.Q1.key),
+  updateTbExposureFlag(`${LBflow_Kids_key}.PTBG.PTB1`),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(LBflow_Kids.TBOtherG.Q3.Q1.key, LBflow_Kids.TBOtherG.Q3.Q1.optionKeys.precies, LBflow_Kids.TBOtherG.Q3.Q1.optionKeys.ongeveer, LBflow_Kids.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${LBflow_Kids_key}.TBOtherG.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
@@ -385,9 +405,9 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
  */
 const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(Chronicflow_Adults.key),
+  StudyEngine.checkSurveyResponseKey(Chronicflow_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Adults_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     // if not in a follow up yet:
@@ -400,10 +420,15 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  updateTbExposureFlag(Chronicflow_Adults.PTB.Q1.key),
+  updateTbExposureFlag(`${Chronicflow_Adults_key}.PTBG.PTB1`),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(Chronicflow_Adults.TBOtherG.Q3.Q1.key, Chronicflow_Adults.TBOtherG.Q3.Q1.optionKeys.precies, Chronicflow_Adults.TBOtherG.Q3.Q1.optionKeys.ongeveer, Chronicflow_Adults.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${Chronicflow_Adults_key}.TBOtherG.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
@@ -416,9 +441,9 @@ const handleSubmit_Chronicflow_Adults = StudyEngine.ifThen(
  */
 const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(Chronicflow_Kids.key),
+  StudyEngine.checkSurveyResponseKey(Chronicflow_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Chronicflow_Kids_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   StudyEngine.ifThen(
     // if not in a follow up yet:
@@ -431,10 +456,15 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
     assignT0Invite(),
   ),
   reAssignWeeklyToTheEndOfList(),
-  updateTbExposureFlag(Chronicflow_Kids.PTB.Q1.key),
+  updateTbExposureFlag(`${Chronicflow_Kids_key}.PTBG.PTB1`),
   // Map data aggregation:
   StudyEngine.if(
-    StudyEngine.singleChoice.any(Chronicflow_Kids.TBOtherG.Q3.Q1.key, Chronicflow_Kids.TBOtherG.Q3.Q1.optionKeys.precies, Chronicflow_Kids.TBOtherG.Q3.Q1.optionKeys.ongeveer, Chronicflow_Kids.TBOtherG.Q3.Q1.optionKeys.denkWeten),
+    StudyEngine.singleChoice.any(
+      `${Chronicflow_Kids_key}.TBOtherG.TBLoc.Q1`,
+      TBLoc_Q1_optionKeys.precise,
+      TBLoc_Q1_optionKeys.approximate,
+      TBLoc_Q1_optionKeys.dontKnow,
+    ),
     StudyEngine.participantActions.externalEventHandler(contentServiceName)
   ),
   // Report:
@@ -448,20 +478,20 @@ const handleSubmit_Chronicflow_Kids = StudyEngine.ifThen(
  */
 const handleSubmit_T0_Invites = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T0_Invites.key),
+  StudyEngine.checkSurveyResponseKey(T0_Invites_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites_key, 'all'),
   StudyEngine.ifThen(
     // If want to participate in follow up: (and not yet in follow up)
     StudyEngine.and(
       StudyEngine.or(
-        StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingOnderzoekConsent.key),
-        StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.UitnodigingOnderzoekConsent.key),
-        StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
-        StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.UitnodigingOnderzoekConsent.key),
+        StudyEngine.consent.accepted(`${T0_Invites_key}.STD.UitnTR_Consent`),
+        StudyEngine.consent.accepted(`${T0_Invites_key}.aEM.UitnTR_Consent`),
+        StudyEngine.consent.accepted(`${T0_Invites_key}.aEM.aEMUitnTR_Consent`),
+        StudyEngine.consent.accepted(`${T0_Invites_key}.kEM.UitnTR_Consent`),
         //StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key), //LT uitgezet per 11-07-2025
-        StudyEngine.consent.accepted(T0_Invites.LBotherInviteGroup.UitnodigingOnderzoekConsent.key),
-        StudyEngine.consent.accepted(T0_Invites.LBotherInviteGroup.LBotherUitnodigingOnderzoekConsent.key),
+        StudyEngine.consent.accepted(`${T0_Invites_key}.LBother.UitnTR_Consent`),
+        StudyEngine.consent.accepted(`${T0_Invites_key}.LBother.LBotherUitnTR_Consent`),
       ),
       StudyEngine.not(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
@@ -479,17 +509,17 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   // Update flag for contact info
   StudyEngine.if(
     StudyEngine.or(
-      StudyEngine.consent.accepted(T0_Invites.StandardInviteGroup.UitnodigingAanvullendOnderzoekConsent.key),
-      StudyEngine.consent.accepted(T0_Invites.aEMInviteGroup.aEMUitnodigingOnderzoekConsent.key),
-      StudyEngine.consent.accepted(T0_Invites.LBotherInviteGroup.LBotherUitnodigingOnderzoekConsent.key),
+      StudyEngine.consent.accepted(`${T0_Invites_key}.STD.UitnAO_Consent`),
+      StudyEngine.consent.accepted(`${T0_Invites_key}.aEM.aEMUitnTR_Consent`),
+      StudyEngine.consent.accepted(`${T0_Invites_key}.LBother.LBotherUitnTR_Consent`),
       //StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key), //LT uitgezet per 11-07-2025
-      StudyEngine.consent.accepted(T0_Invites.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key)
+      StudyEngine.consent.accepted(`${T0_Invites_key}.LPplusBB.UitnBiobankAO_Consent`)
     ),
     // Then:
     StudyEngine.do(
       StudyEngine.participantActions.updateFlag(ParticipantFlags.contactData.key, ParticipantFlags.contactData.values.active),
       StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.accepted),
-      StudyEngine.participantActions.assignedSurveys.add(surveyKeys.DeleteContactData, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 })),
+      StudyEngine.participantActions.assignedSurveys.add(DeleteContactData_key, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 12 * 7 })),
       // if aEM - send notification
       StudyEngine.ifThen(
         StudyEngine.participantState.hasParticipantFlagKeyAndValue(
@@ -530,7 +560,7 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   //  StudyEngine.participantActions.updateFlag(ParticipantFlags.NMG.key, ParticipantFlags.NMG.values.true),
   //),
   StudyEngine.if(
-    StudyEngine.consent.accepted(T0_Invites.LPplusInviteGroup.BiobankUitnodigingAanvullendOnderzoekConsent.key),
+    StudyEngine.consent.accepted(`${T0_Invites_key}.LPplusBB.UitnBiobankAO_Consent`),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.BioB.key, ParticipantFlags.BioB.values.true),
   ),
   StudyEngine.participantActions.externalEventHandler(researcherBackendNames.T0_Invites),
@@ -564,9 +594,9 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
  */
 const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(Standardflow_Adults.key),
+  StudyEngine.checkSurveyResponseKey(Standardflow_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.StandardflowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
@@ -575,8 +605,8 @@ const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
     initFollowUpFlow_Adults(),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
   ),
-  updateGenderFlag(Standardflow_Adults.P2.key),
-  updatePostalCodeFlag(Standardflow_Adults.P1.key),
+  updateGenderFlag(`${Standardflow_Adults_key}.P2`),
+  updatePostalCodeFlag(`${Standardflow_Adults_key}.P1`),
   // Add reminder email to check for EM later
   StudyEngine.ifThen(
     StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
@@ -587,9 +617,9 @@ const handleSubmit_Standardflow_Adults = StudyEngine.ifThen(
 
 const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(Standardflow_Kids.key),
+  StudyEngine.checkSurveyResponseKey(Standardflow_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Kids_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.StandardflowReminder),
   StudyEngine.ifThen(
     StudyEngine.not(
@@ -599,8 +629,8 @@ const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
     StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.active)
   ),
   // Gender category:
-  updateGenderFlag(Standardflow_Kids.P2.key),
-  updatePostalCodeFlag(Standardflow_Kids.P1.key),
+  updateGenderFlag(`${Standardflow_Kids_key}.P2`),
+  updatePostalCodeFlag(`${Standardflow_Kids_key}.P1`),
   // Add reminder email to check for EM later
   StudyEngine.ifThen(
     StudyEngine.participantState.hasParticipantFlagKeyAndValue(ParticipantFlags.flow.key, ParticipantFlags.flow.values.TBflow),
@@ -610,46 +640,46 @@ const handleSubmit_Standardflow_Kids = StudyEngine.ifThen(
 
 const handleSubmit_WeeklyTB = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(WeeklyTB.key),
+  StudyEngine.checkSurveyResponseKey(WeeklyTB_key),
   // Then:
   StudyEngine.participantActions.updateFlag(ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.true),
-  StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.add(WeeklyTB.key, 'normal', StudyEngine.timestampWithOffset({ hours: 1 })),
+  StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB_key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.add(WeeklyTB_key, 'normal', StudyEngine.timestampWithOffset({ hours: 1 })),
   StudyEngine.ifThen(
-    StudyEngine.not(StudyEngine.participantState.hasSurveyKeyAssigned(QuitWeeklyTB.key)),
-    StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB.key, 'optional'),
+    StudyEngine.not(StudyEngine.participantState.hasSurveyKeyAssigned(QuitWeeklyTB_key)),
+    StudyEngine.participantActions.assignedSurveys.add(QuitWeeklyTB_key, 'optional'),
   ),
   // Consent through weekly TB
   StudyEngine.ifThen(
-    StudyEngine.consent.accepted(WeeklyTB.ConsentGroup.Consent.key),
+    StudyEngine.consent.accepted(`${WeeklyTB_key}.ConsentGroup.Consent`),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.defaultStudy.key, ParticipantFlags.consents.defaultStudy.values.accepted),
   ),
   // Additional studies consent through weekly TB
   StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(WeeklyTB.ConsentGroup.NewStudies.key, WeeklyTB.ConsentGroup.NewStudies.optionKeys.yes),
+    StudyEngine.singleChoice.any(`${WeeklyTB_key}.ConsentGroup.NewStudies`, 'a'),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.consents.additionalStudies.key, ParticipantFlags.consents.additionalStudies.values.accepted),
   ),
-  updateGenderFlag(WeeklyTB.P2.key),
-  updatePostalCodeFlag(WeeklyTB.P1.key),
-  updateTbExposureFlag(WeeklyTB.PTB.Q1.key),
+  updateGenderFlag(`${WeeklyTB_key}.P2`),
+  updatePostalCodeFlag(`${WeeklyTB_key}.P1`),
+  updateTbExposureFlag(`${WeeklyTB_key}.PTBG.PTB1`),
   // Add report:
   StudyEngine.participantActions.reports.init(reports.WeeklyTBReport.key),
 );
 
 const handleSubmit_Emfoto = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(EMfoto.key),
+  StudyEngine.checkSurveyResponseKey(EMfoto_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(EMfoto.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(EMfoto_key, 'all'),
   StudyEngine.if(
-    StudyEngine.hasResponseKey(EMfoto.Q1.key, 'rg'),
+    StudyEngine.hasResponseKey(`${EMfoto_key}.PhotoEM`, 'rg'),
     // Then:
     StudyEngine.do(
       StudyEngine.participantActions.messages.remove(emailKeys.EMfotoReminder),
       // StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'optional', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
     ),
     // Else: add again for later
-    StudyEngine.participantActions.assignedSurveys.add(EMfoto.key, 'prio', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
+    StudyEngine.participantActions.assignedSurveys.add(EMfoto_key, 'prio', undefined, StudyEngine.timestampWithOffset({ days: 222 })),
   )
 );
 
@@ -657,93 +687,93 @@ const handleSubmit_Emfoto = StudyEngine.ifThen(
 // -----------------------------------------------
 const handleSubmit_T3_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T3_Adults.key),
+  StudyEngine.checkSurveyResponseKey(T3_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T3_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T3_Adults_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
-  removeFollowUpMessagesForSurvey(T3_Adults.key)
+  removeFollowUpMessagesForSurvey(T3_Adults_key)
 );
 
 const handleSubmit_T6_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T6_Adults.key),
+  StudyEngine.checkSurveyResponseKey(T6_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T6_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T6_Adults_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
-  removeFollowUpMessagesForSurvey(T6_Adults.key)
+  removeFollowUpMessagesForSurvey(T6_Adults_key)
 );
 
 const handleSubmit_T9_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T9_Adults.key),
+  StudyEngine.checkSurveyResponseKey(T9_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T9_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T9_Adults_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
-  removeFollowUpMessagesForSurvey(T9_Adults.key)
+  removeFollowUpMessagesForSurvey(T9_Adults_key)
 );
 
 const handleSubmit_T12_Adults = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T12_Adults.key),
+  StudyEngine.checkSurveyResponseKey(T12_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T12_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T12_Adults_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
-  removeFollowUpMessagesForSurvey(T12_Adults.key)
+  removeFollowUpMessagesForSurvey(T12_Adults_key)
 );
 
 const handleSubmit_T3_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T3_Kids.key),
+  StudyEngine.checkSurveyResponseKey(T3_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T3_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T3_Kids_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
-  removeFollowUpMessagesForSurvey(T3_Kids.key)
+  removeFollowUpMessagesForSurvey(T3_Kids_key)
 );
 
 const handleSubmit_T6_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T6_Kids.key),
+  StudyEngine.checkSurveyResponseKey(T6_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T6_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T6_Kids_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
-  removeFollowUpMessagesForSurvey(T6_Kids.key)
+  removeFollowUpMessagesForSurvey(T6_Kids_key)
 );
 
 const handleSubmit_T9_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T9_Kids.key),
+  StudyEngine.checkSurveyResponseKey(T9_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T9_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T9_Kids_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
-  removeFollowUpMessagesForSurvey(T9_Kids.key)
+  removeFollowUpMessagesForSurvey(T9_Kids_key)
 );
 
 const handleSubmit_T12_Kids = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(T12_Kids.key),
+  StudyEngine.checkSurveyResponseKey(T12_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T12_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T12_Kids_key, 'all'),
   StudyEngine.participantActions.reports.init(reports.FollowUpReport.key),
   StudyEngine.participantActions.reports.setReportIcon(reports.FollowUpReport.key, reports.FollowUpReport.key),
   StudyEngine.participantActions.updateFlag(ParticipantFlags.followUp.key, ParticipantFlags.followUp.values.finished),
-  removeFollowUpMessagesForSurvey(T12_Kids.key)
+  removeFollowUpMessagesForSurvey(T12_Kids_key)
 );
 
 const handleSubmit_QuitFollowUp = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(QuitFollowUp.key),
+  StudyEngine.checkSurveyResponseKey(QuitFollowUp_key),
   // Then:
   StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(QuitFollowUp.Confirm.key, QuitFollowUp.Confirm.optionKeys.yes),
+    StudyEngine.singleChoice.any(`${QuitFollowUp_key}.QuitFU`, 'a'),
     // Then
     quitFollowUp(),
   ),
@@ -751,27 +781,27 @@ const handleSubmit_QuitFollowUp = StudyEngine.ifThen(
 
 const handleSubmit_QuitWeeklyTB = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(QuitWeeklyTB.key),
+  StudyEngine.checkSurveyResponseKey(QuitWeeklyTB_key),
   // Then:
   StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(QuitWeeklyTB.Confirm.key, QuitWeeklyTB.Confirm.optionKeys.yes),
+    StudyEngine.singleChoice.any(`${QuitWeeklyTB_key}.QuitWeekyTB`, 'a'),
     // Then
-    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB.key, 'all'),
+    StudyEngine.participantActions.assignedSurveys.remove(WeeklyTB_key, 'all'),
     StudyEngine.participantActions.removeFlag(ParticipantFlags.weeklyTBreporter.key),
-    StudyEngine.participantActions.assignedSurveys.remove(QuitWeeklyTB.key, 'all'),
+    StudyEngine.participantActions.assignedSurveys.remove(QuitWeeklyTB_key, 'all'),
   )
 );
 
 
 const handleSubmit_DeleteContactData = StudyEngine.ifThen(
   // If:
-  StudyEngine.checkSurveyResponseKey(surveyKeys.DeleteContactData),
+  StudyEngine.checkSurveyResponseKey(DeleteContactData_key),
   // Then:
   StudyEngine.ifThen(
-    StudyEngine.singleChoice.any(DeleteContactData.Confirm.key, DeleteContactData.Confirm.optionKeys.yes),
+    StudyEngine.singleChoice.any(`${DeleteContactData_key}.DeleteContactData`, 'a'),
     // Then
     StudyEngine.participantActions.confidentialResponses.removeAll(),
-    StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.DeleteContactData, 'all'),
+    StudyEngine.participantActions.assignedSurveys.remove(DeleteContactData_key, 'all'),
     StudyEngine.participantActions.updateFlag(
       ParticipantFlags.contactData.key,
       ParticipantFlags.contactData.values.manual
@@ -780,15 +810,15 @@ const handleSubmit_DeleteContactData = StudyEngine.ifThen(
 )
 
 const handleSubmit_LPPlus_part1 = StudyEngine.ifThen(
-  StudyEngine.checkSurveyResponseKey('LPplus_part1'),
+  StudyEngine.checkSurveyResponseKey(LPplus_part1_key),
   // Then:
   StudyEngine.participantActions.updateFlag('LPplus', 'likely'),
   StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
   PHQ_15_noneflagLogic(),
-  updateGenderFlag(LPplus_part1.LPplusContactgegevens.Gender.key),
+  updateGenderFlag(`${LPplus_part1_key}.Je gegevens.GENDER`),
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.ageFromPDiff.key,
-    StudyEngine.getSelectedKeys(LPplus_part1.LPplusContactgegevens.BirthYear.key, 'rg.ddg'),
+    StudyEngine.getSelectedKeys(`${LPplus_part1_key}.Je gegevens.BirthYear`, 'rg.ddg'),
   ),
 )
 
@@ -807,48 +837,48 @@ const handleSubmit_LPPlus_part3 = StudyEngine.ifThen(
 
 // -----------------------------------------------
 const handleExpired_T0_Invites = StudyEngine.ifThen(
-  isSurveyExpired(T0_Invites.key),
+  isSurveyExpired(T0_Invites_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T0_Invites_key, 'all'),
 )
 
 const handleExpired_Standardflow = () => StudyEngine.do(
   StudyEngine.ifThen(
-    isSurveyExpired(Standardflow_Kids.key),
+    isSurveyExpired(Standardflow_Kids_key),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Kids.key, 'all'),
+    StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Kids_key, 'all'),
   ),
   StudyEngine.ifThen(
-    isSurveyExpired(Standardflow_Adults.key),
+    isSurveyExpired(Standardflow_Adults_key),
     // Then:
-    StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults.key, 'all'),
+    StudyEngine.participantActions.assignedSurveys.remove(Standardflow_Adults_key, 'all'),
   ),
 )
 
 const handleExpired_T12_Adults = StudyEngine.ifThen(
-  isSurveyExpired(T12_Adults.key),
+  isSurveyExpired(T12_Adults_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T12_Adults.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T12_Adults_key, 'all'),
   finishFollowUp(),
 )
 
 const handleExpired_T12_Kids = StudyEngine.ifThen(
-  isSurveyExpired(T12_Kids.key),
+  isSurveyExpired(T12_Kids_key),
   // Then:
-  StudyEngine.participantActions.assignedSurveys.remove(T12_Kids.key, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(T12_Kids_key, 'all'),
   finishFollowUp(),
 )
 
 
 const handleAutoContactDataDeletion = () => StudyEngine.ifThen(
-  isSurveyExpired(surveyKeys.DeleteContactData),
+  isSurveyExpired(DeleteContactData_key),
   /*StudyEngine.and(
     StudyEngine.participantState.lastSubmissionDateOlderThan(StudyEngine.timestampWithOffset({ days: 12 * 7 }), surveyKeys.T0_Invites),
     StudyEngine.participantState.hasSurveyKeyAssigned(surveyKeys.DeleteContactData),
   ),*/
   // Then:
   StudyEngine.participantActions.confidentialResponses.removeAll(),
-  StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.DeleteContactData, 'all'),
+  StudyEngine.participantActions.assignedSurveys.remove(DeleteContactData_key, 'all'),
   StudyEngine.participantActions.updateFlag(
     ParticipantFlags.contactData.key,
     ParticipantFlags.contactData.values.autoRemove
@@ -909,13 +939,13 @@ const submitRules: Expression[] = [
 const timerRules: Expression[] = [
   handleExpired_T0_Invites,
   handleExpired_Standardflow(),
-  handleExpired_removeSurvey(T3_Adults.key),
-  handleExpired_removeSurvey(T6_Adults.key),
-  handleExpired_removeSurvey(T9_Adults.key),
+  handleExpired_removeSurvey(T3_Adults_key),
+  handleExpired_removeSurvey(T6_Adults_key),
+  handleExpired_removeSurvey(T9_Adults_key),
   handleExpired_T12_Adults,
-  handleExpired_removeSurvey(T3_Kids.key),
-  handleExpired_removeSurvey(T6_Kids.key),
-  handleExpired_removeSurvey(T9_Kids.key),
+  handleExpired_removeSurvey(T3_Kids_key),
+  handleExpired_removeSurvey(T6_Kids_key),
+  handleExpired_removeSurvey(T9_Kids_key),
   handleExpired_T12_Kids,
   handleAutoContactDataDeletion(),
 ]
@@ -1033,15 +1063,15 @@ const mergeRules: Expression[] = [
         ),
         takeOverFlagIfExist(ParticipantFlags.weeklyTBreporter.key),
       ),
-      takeOverSurveyIfAssigned(Standardflow_Adults.key),
-      takeOverSurveyIfAssigned(Standardflow_Kids.key),
-      takeOverSurveyIfAssigned(EMflow_Adults.key),
-      takeOverSurveyIfAssigned(EMflow_Kids.key),
-      takeOverSurveyIfAssigned(Feverflow_Adults.key),
-      takeOverSurveyIfAssigned(LBflow_Adults.key),
-      takeOverSurveyIfAssigned(LBflow_Kids.key),
-      takeOverSurveyIfAssigned(Chronicflow_Adults.key),
-      takeOverSurveyIfAssigned(Chronicflow_Kids.key),
+      takeOverSurveyIfAssigned(Standardflow_Adults_key),
+      takeOverSurveyIfAssigned(Standardflow_Kids_key),
+      takeOverSurveyIfAssigned(EMflow_Adults_key),
+      takeOverSurveyIfAssigned(EMflow_Kids_key),
+      takeOverSurveyIfAssigned(Feverflow_Adults_key),
+      takeOverSurveyIfAssigned(LBflow_Adults_key),
+      takeOverSurveyIfAssigned(LBflow_Kids_key),
+      takeOverSurveyIfAssigned(Chronicflow_Adults_key),
+      takeOverSurveyIfAssigned(Chronicflow_Kids_key),
     )
   )
 ]

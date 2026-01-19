@@ -1,6 +1,6 @@
 import { StudyEngine } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { ParticipantFlags } from "../participantFlags";
-import { surveyKeys } from "../surveys/globalConstants";
+import { DeleteContactData_key } from "../utils/studyRuleUtils";
 
 
 export const removeConfidentialData = {
@@ -8,7 +8,7 @@ export const removeConfidentialData = {
   rules: [
     StudyEngine.do(
       StudyEngine.participantActions.confidentialResponses.removeAll(),
-      StudyEngine.participantActions.assignedSurveys.remove(surveyKeys.DeleteContactData, 'all'),
+      StudyEngine.participantActions.assignedSurveys.remove(DeleteContactData_key, 'all'),
       StudyEngine.participantActions.updateFlag(
         ParticipantFlags.contactData.key,
         ParticipantFlags.contactData.values.autoRemove
