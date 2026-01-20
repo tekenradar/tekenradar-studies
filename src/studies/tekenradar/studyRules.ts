@@ -372,7 +372,6 @@ const handleSubmit_LBflow_Kids = StudyEngine.ifThen(
   StudyEngine.participantActions.assignedSurveys.remove(LBflow_Kids_key, 'all'),
   StudyEngine.participantActions.messages.remove(emailKeys.FlowReminder),
   assignEMfotoSurvey(),
-  LDexcluded_flagLogic(),
   StudyEngine.ifThen(
     // if not in a follow up yet:
     StudyEngine.not(

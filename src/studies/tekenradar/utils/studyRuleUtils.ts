@@ -392,7 +392,7 @@ export const PHQ_15_noneflagLogic = () => StudyEngine.ifThen(
   StudyEngine.participantActions.updateFlag(ParticipantFlags.PHQ_15_none.key, ParticipantFlags.PHQ_15_none.values.true),
 )
 
-//DW LDexcluded
+//DW LDexcluded (flag intended for Adults flow only)
 export const LDexcluded_flagLogic = () => StudyEngine.ifThen(
   // if:
   StudyEngine.multipleChoice.any(`${LBflow_Adults_key}.LymeDiagnosis3alt1`, 'f'),
