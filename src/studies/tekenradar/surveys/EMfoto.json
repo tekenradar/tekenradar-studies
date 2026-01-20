@@ -115,13 +115,45 @@
                 }
               ],
               "description": null
+            },
+            {
+              "key": "lqoh5o",
+              "role": "error",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "str": "Upload een geldige afbeelding voordat u verdergaat."
+                    }
+                  ]
+                }
+              ],
+              "style": []
             }
           ],
           "order": {
             "name": "sequential"
           },
           "description": null
-        }
+        },
+        "validations": [
+          {
+            "key": "valid",
+            "type": "hard",
+            "rule": {
+              "name": "hasResponse",
+              "data": [
+                {
+                  "str": "EMfoto.PhotoEM"
+                },
+                {
+                  "str": "rg"
+                }
+              ]
+            }
+          }
+        ]
       },
       {
         "id": "000000000000000000000000",
