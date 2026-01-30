@@ -1,5 +1,5 @@
 {
-  "id": "696a3ce3e626ca1e04c20586",
+  "id": "697caefd778d49b28a9981ca",
   "surveyKey": "Standardflow_Kids",
   "props": {
     "name": [
@@ -38,7 +38,7 @@
   },
   "availableFor": "temporary_participants",
   "requireLoginBeforeSubmission": true,
-  "published": 1768570083,
+  "published": 1769778941,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "Standardflow_Kids",
@@ -4730,7 +4730,7 @@
                   "parts": [
                     {
                       "dtype": "",
-                      "str": "Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met je tekenbeet, erythema migrans of andere vormen van lymeziekte te maken hebben?"
+                      "str": "In hoeverre hebben je lichamelijke of psychische klachten volgens jou met je tekenbeet, erythema migrans of andere lymeziekte te maken?"
                     }
                   ]
                 }
@@ -37132,7 +37132,7 @@
                       "parts": [
                         {
                           "dtype": "",
-                          "str": "\n### Hartelijk dank voor je melding op Tekenradar.nl.\n\n\n##### Let op: klik op **\"Opslaan en verder gaan\"** onderaan de pagina om je antwoorden op te sturen!\n\nHoud de plek van de tekenbeet de komende 3 maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door lymeziekte, dan adviseren wij je contact op te nemen met je huisarts.\n\nAls je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.\n\nHet kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die nog niet hebt). De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.\n"
+                          "str": "\n### Hartelijk dank voor het meedoen aan het Tekenradar onderzoek.\n\n\n##### Let op: klik op **\"Opslaan en verder gaan\"** onderaan de pagina om je antwoorden op te sturen!\n\nOver 3 maanden ontvang je een nieuwe vragenlijst per e-mail. \n\nAls je een tekenbeet hebt gemeld, houdt dan de plek van de tekenbeet de komende drie maanden goed in de gaten. Mocht hier een (nieuwe) rode ring (erythema migrans) verschijnen of mocht je andere klachten hebben of krijgen die kunnen komen door de ziekte van Lyme, dan adviseren wij je contact op te nemen met je huisarts.\n\nAls je een (nieuwe) rode ring of vlek (erythema migrans) krijgt kun je die ook melden op Tekenradar.\n\nHet kan ook zijn dat je koorts krijgt binnen 4 weken na de tekenbeet (als je die nog niet hebt). De kans daarop is klein, maar als je toch koorts krijgt kun je dat ook melden op Tekenradar.\n"
                         }
                       ]
                     }
@@ -37232,5 +37232,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-01-4"
+  "versionId": "26-01-6"
 }

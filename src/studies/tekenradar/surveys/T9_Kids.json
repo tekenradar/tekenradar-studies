@@ -1,5 +1,5 @@
 {
-  "id": "696a2950e626ca1e04c2055a",
+  "id": "697caff7778d49b28a9981d2",
   "surveyKey": "T9_Kids",
   "props": {
     "name": [
@@ -36,7 +36,7 @@
       }
     ]
   },
-  "published": 1768565072,
+  "published": 1769779191,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "T9_Kids",
@@ -3308,7 +3308,7 @@
                       "parts": [
                         {
                           "dtype": "",
-                          "str": "medicijnen gebruikt?  (De anti conceptie pil niet meerekenen.) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "
+                          "str": "medicijnen gebruikt?  (Bij pubers: gebruik van de anticonceptiepil hoeft niet meegerekend te worden.) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "
                         }
                       ]
                     }
@@ -8577,7 +8577,7 @@
                   "parts": [
                     {
                       "dtype": "",
-                      "str": "Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met je tekenbeet, erythema migrans of andere vormen van lymeziekte te maken hebben?"
+                      "str": "In hoeverre hebben je lichamelijke of psychische klachten volgens jou met je tekenbeet, erythema migrans of andere lymeziekte te maken?"
                     }
                   ]
                 }
@@ -29559,5 +29559,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-01-1"
+  "versionId": "26-01-3"
 }
