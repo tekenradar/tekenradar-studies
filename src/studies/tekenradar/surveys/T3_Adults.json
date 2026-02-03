@@ -1205,12 +1205,6 @@
                               }
                             ]
                           },
-                          "style": [
-                            {
-                              "key": "className",
-                              "value": "fw-bold mb-2"
-                            }
-                          ],
                           "description": null
                         },
                         {
@@ -1244,12 +1238,6 @@
                               }
                             ]
                           },
-                          "style": [
-                            {
-                              "key": "className",
-                              "value": "fw-bold mb-2"
-                            }
-                          ],
                           "description": null
                         },
                         {
@@ -1283,12 +1271,6 @@
                               }
                             ]
                           },
-                          "style": [
-                            {
-                              "key": "className",
-                              "value": "fw-bold mb-2"
-                            }
-                          ],
                           "description": null
                         },
                         {
@@ -1322,12 +1304,6 @@
                               }
                             ]
                           },
-                          "style": [
-                            {
-                              "key": "className",
-                              "value": "fw-bold mb-2"
-                            }
-                          ],
                           "description": null
                         },
                         {
@@ -1381,12 +1357,6 @@
                                   "str": "Dit heb ik allemaal niet"
                                 }
                               ]
-                            }
-                          ],
-                          "style": [
-                            {
-                              "key": "className",
-                              "value": "fw-bold mb-2"
                             }
                           ],
                           "description": null
