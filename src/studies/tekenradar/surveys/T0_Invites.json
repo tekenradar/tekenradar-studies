@@ -1,5 +1,5 @@
 {
-  "id": "698eebf5d7b2d6e8991b68f9",
+  "id": "698eefafd7b2d6e8991b68fb",
   "surveyKey": "T0_Invites",
   "props": {
     "name": [
@@ -37,7 +37,7 @@
     ]
   },
   "availableFor": "public",
-  "published": 1770974197,
+  "published": 1770975151,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "T0_Invites",
@@ -4244,8 +4244,7 @@
                       "code": "nl",
                       "parts": [
                         {
-                          "dtype": "",
-                          "str": "Mogen we je benaderen voor verder onderzoek?"
+                          "str": "Mogen we je benaderen voor de bovengenoemde onderzoeken?"
                         }
                       ]
                     }
@@ -4270,8 +4269,7 @@
                               "code": "nl",
                               "parts": [
                                 {
-                                  "dtype": "",
-                                  "str": "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor verder onderzoek. Ik geef daarom hieronder twee keer toestemming."
+                                  "str": "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor het onderzoek via de ziekenhuizen. Ik geef daarom hieronder twee keer toestemming."
                                 }
                               ]
                             }
@@ -4286,8 +4284,7 @@
                               "code": "nl",
                               "parts": [
                                 {
-                                  "dtype": "",
-                                  "str": "Nee, ik wil niet benaderd worden voor verder onderzoek."
+                                  "str": "Nee, ik wil niet benaderd worden."
                                 }
                               ]
                             }
@@ -4302,6 +4299,19 @@
                     }
                   ],
                   "description": null
+                },
+                {
+                  "role": "subtitle",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "str": ""
+                        }
+                      ]
+                    }
+                  ]
                 }
               ],
               "order": {
@@ -4733,8 +4743,7 @@
                       "code": "nl",
                       "parts": [
                         {
-                          "dtype": "",
-                          "str": "Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waarvoor je naar een ziekenhuis komt. Klik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek."
+                          "str": "Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waarvoor je naar een ziekenhuis komt. Klik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek, of misschien ook ander aanvullend onderzoek."
                         }
                       ]
                     }
@@ -6758,8 +6767,7 @@
                       "code": "nl",
                       "parts": [
                         {
-                          "dtype": "",
-                          "str": "\n## Aanvullend onderzoek\n\nMensen die meedoen aan Tekenradaronderzoek kunnen in aanmerking komen voor aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen.\n"
+                          "str": "## Ander aanvullend onderzoek\n\nMensen die meedoen aan Tekenradaronderzoek kunnen ook in aanmerking komen voor ander aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen."
                         }
                       ]
                     }
@@ -7486,8 +7494,7 @@
                       "code": "nl",
                       "parts": [
                         {
-                          "dtype": "",
-                          "str": "Mogen we je benaderen voor verder onderzoek?"
+                          "str": "Mogen we je benaderen voor de bovengenoemde onderzoeken?"
                         }
                       ]
                     }
@@ -7512,8 +7519,7 @@
                               "code": "nl",
                               "parts": [
                                 {
-                                  "dtype": "",
-                                  "str": "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor verder onderzoek. Ik geef daarom hieronder twee keer toestemming."
+                                  "str": "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor het onderzoek via de ziekenhuizen. Ik geef daarom hieronder twee keer toestemming."
                                 }
                               ]
                             }
@@ -7528,8 +7534,7 @@
                               "code": "nl",
                               "parts": [
                                 {
-                                  "dtype": "",
-                                  "str": "Nee, ik wil niet benaderd worden voor verder onderzoek."
+                                  "str": "Nee, ik wil niet benaderd worden."
                                 }
                               ]
                             }
@@ -7960,8 +7965,7 @@
                       "code": "nl",
                       "parts": [
                         {
-                          "dtype": "",
-                          "str": "Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waarvoor je naar een ziekenhuis komt.\nKlik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek."
+                          "str": "Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waarvoor je naar een ziekenhuis komt.\nKlik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek, of misschien ook ander aanvullend onderzoek."
                         }
                       ]
                     }
@@ -9954,16 +9958,16 @@
               "name": "responseHasKeysAny",
               "data": [
                 {
-                  "str": "T0_Invites.LBother.UitnTR",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "T0_Invites.LBother.UitnTR"
                 },
                 {
-                  "str": "rg.scg",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "rg.scg"
                 },
                 {
-                  "str": "a",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "a"
                 }
               ],
               "metadata": {
@@ -9985,8 +9989,7 @@
                       "code": "nl",
                       "parts": [
                         {
-                          "dtype": "",
-                          "str": "\n## Aanvullend onderzoek\n\nMensen die meedoen aan Tekenradaronderzoek kunnen in aanmerking komen voor aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen.\n"
+                          "str": "## Ander aanvullend onderzoek\n\nMensen die meedoen aan Tekenradaronderzoek kunnen ook in aanmerking komen voor ander aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen."
                         }
                       ]
                     }
@@ -10013,16 +10016,16 @@
               "name": "responseHasKeysAny",
               "data": [
                 {
-                  "str": "T0_Invites.LBother.UitnTR",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "T0_Invites.LBother.UitnTR"
                 },
                 {
-                  "str": "rg.scg",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "rg.scg"
                 },
                 {
-                  "str": "a",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "a"
                 }
               ],
               "metadata": {
@@ -10136,16 +10139,16 @@
               "name": "responseHasKeysAny",
               "data": [
                 {
-                  "str": "T0_Invites.LBother.UitnAO",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "T0_Invites.LBother.UitnAO"
                 },
                 {
-                  "str": "rg.scg",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "rg.scg"
                 },
                 {
-                  "str": "a",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "a"
                 }
               ],
               "metadata": {
@@ -10324,16 +10327,16 @@
               "name": "responseHasKeysAny",
               "data": [
                 {
-                  "str": "T0_Invites.LBother.UitnAO",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "T0_Invites.LBother.UitnAO"
                 },
                 {
-                  "str": "rg.scg",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "rg.scg"
                 },
                 {
-                  "str": "a",
-                  "dtype": "str"
+                  "dtype": "str",
+                  "str": "a"
                 }
               ],
               "metadata": {
@@ -10904,6 +10907,7 @@
                               "code": "nl",
                               "parts": [
                                 {
+                                  "dtype": "",
                                   "str": "**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nDoor hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.\nMeer informatie over onder andere het doel van Tekenradaronderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nOok:\n\n* Weet ik dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n* Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n* Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.\n* Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners verwerkt te worden.\n* Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek)."
                                 }
                               ]
@@ -11765,5 +11769,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-02-1"
+  "versionId": "26-02-2"
 }
