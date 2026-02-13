@@ -1,5 +1,5 @@
 {
-  "id": "698eefafd7b2d6e8991b68fb",
+  "id": "698efdf8d7b2d6e8991b68fe",
   "surveyKey": "T0_Invites",
   "props": {
     "name": [
@@ -37,7 +37,7 @@
     ]
   },
   "availableFor": "public",
-  "published": 1770975151,
+  "published": 1770978808,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "T0_Invites",
@@ -2140,7 +2140,8 @@
                     "name": "sequential"
                   },
                   "description": null
-                }
+                },
+                "confidentialMode": "replace"
               }
             ],
             "selectionMethod": {
@@ -4162,7 +4163,8 @@
                     "name": "sequential"
                   },
                   "description": null
-                }
+                },
+                "confidentialMode": "replace"
               }
             ],
             "selectionMethod": {
@@ -4244,6 +4246,7 @@
                       "code": "nl",
                       "parts": [
                         {
+                          "dtype": "",
                           "str": "Mogen we je benaderen voor de bovengenoemde onderzoeken?"
                         }
                       ]
@@ -4269,6 +4272,7 @@
                               "code": "nl",
                               "parts": [
                                 {
+                                  "dtype": "",
                                   "str": "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor het onderzoek via de ziekenhuizen. Ik geef daarom hieronder twee keer toestemming."
                                 }
                               ]
@@ -4284,6 +4288,7 @@
                               "code": "nl",
                               "parts": [
                                 {
+                                  "dtype": "",
                                   "str": "Nee, ik wil niet benaderd worden."
                                 }
                               ]
@@ -4302,16 +4307,18 @@
                 },
                 {
                   "role": "subtitle",
+                  "key": "",
                   "content": [
                     {
                       "code": "nl",
                       "parts": [
                         {
-                          "str": ""
+                          "dtype": ""
                         }
                       ]
                     }
-                  ]
+                  ],
+                  "description": null
                 }
               ],
               "order": {
@@ -4743,6 +4750,7 @@
                       "code": "nl",
                       "parts": [
                         {
+                          "dtype": "",
                           "str": "Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waarvoor je naar een ziekenhuis komt. Klik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek, of misschien ook ander aanvullend onderzoek."
                         }
                       ]
@@ -6085,7 +6093,8 @@
                     "name": "sequential"
                   },
                   "description": null
-                }
+                },
+                "confidentialMode": "replace"
               }
             ],
             "selectionMethod": {
@@ -6767,6 +6776,7 @@
                       "code": "nl",
                       "parts": [
                         {
+                          "dtype": "",
                           "str": "## Ander aanvullend onderzoek\n\nMensen die meedoen aan Tekenradaronderzoek kunnen ook in aanmerking komen voor ander aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen."
                         }
                       ]
@@ -7494,6 +7504,7 @@
                       "code": "nl",
                       "parts": [
                         {
+                          "dtype": "",
                           "str": "Mogen we je benaderen voor de bovengenoemde onderzoeken?"
                         }
                       ]
@@ -7519,6 +7530,7 @@
                               "code": "nl",
                               "parts": [
                                 {
+                                  "dtype": "",
                                   "str": "Ja, ik vul de vragenlijsten in en ik vind het ook goed om benaderd te worden voor het onderzoek via de ziekenhuizen. Ik geef daarom hieronder twee keer toestemming."
                                 }
                               ]
@@ -7534,6 +7546,7 @@
                               "code": "nl",
                               "parts": [
                                 {
+                                  "dtype": "",
                                   "str": "Nee, ik wil niet benaderd worden."
                                 }
                               ]
@@ -7965,6 +7978,7 @@
                       "code": "nl",
                       "parts": [
                         {
+                          "dtype": "",
                           "str": "Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waarvoor je naar een ziekenhuis komt.\nKlik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek, of misschien ook ander aanvullend onderzoek."
                         }
                       ]
@@ -9307,7 +9321,8 @@
                     "name": "sequential"
                   },
                   "description": null
-                }
+                },
+                "confidentialMode": "replace"
               }
             ],
             "selectionMethod": {
@@ -9989,6 +10004,7 @@
                       "code": "nl",
                       "parts": [
                         {
+                          "dtype": "",
                           "str": "## Ander aanvullend onderzoek\n\nMensen die meedoen aan Tekenradaronderzoek kunnen ook in aanmerking komen voor ander aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen."
                         }
                       ]
@@ -11769,5 +11785,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-02-2"
+  "versionId": "26-02-3"
 }
