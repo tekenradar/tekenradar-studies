@@ -979,8 +979,8 @@ const mergeRules: Expression[] = [
             ),
             takeOverFlagIfExist(ParticipantFlags.weeklyTBreporter.key),
           ),
-          takeOverSurveyIfAssigned(WeeklyTB_key),
-          takeOverSurveyIfAssigned(QuitWeeklyTB_key),
+          takeOverSurveyIfAssigned(WeeklyTB_key, 'normal'),
+          takeOverSurveyIfAssigned(QuitWeeklyTB_key, 'optional'),
           // upgrade to EMflow
           StudyEngine.ifThen(
             StudyEngine.participantState.incomingParticipantState.hasParticipantFlagKeyAndValue(
@@ -1080,8 +1080,8 @@ const mergeRules: Expression[] = [
       takeOverSurveyIfAssigned(LBflow_Kids_key),
       takeOverSurveyIfAssigned(Chronicflow_Adults_key),
       takeOverSurveyIfAssigned(Chronicflow_Kids_key),
-      takeOverSurveyIfAssigned(WeeklyTB_key),
-      takeOverSurveyIfAssigned(QuitWeeklyTB_key),
+      takeOverSurveyIfAssigned(WeeklyTB_key, 'normal'),
+      takeOverSurveyIfAssigned(QuitWeeklyTB_key, 'optional'),
     )
   )
 ]

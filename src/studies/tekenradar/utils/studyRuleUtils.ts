@@ -718,8 +718,8 @@ export const takeOverFlagIfExist = (key: string) => StudyEngine.if(
     key, StudyEngine.participantState.incomingParticipantState.getParticipantFlagValue(key),
   ),
 )
-export const takeOverSurveyIfAssigned = (key: string) => StudyEngine.ifThen(
+export const takeOverSurveyIfAssigned = (key: string, priority: 'immediate' | 'normal' | 'optional' = 'immediate') => StudyEngine.ifThen(
   StudyEngine.participantState.incomingParticipantState.hasSurveyKeyAssigned(key),
   StudyEngine.participantActions.assignedSurveys.remove(key, 'all'),
-  StudyEngine.participantActions.assignedSurveys.add(key, 'immediate'),
+  StudyEngine.participantActions.assignedSurveys.add(key, priority),
 )
