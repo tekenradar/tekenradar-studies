@@ -972,6 +972,15 @@ const mergeRules: Expression[] = [
         ),
         // then:
         StudyEngine.do(
+          // take over weekly reporter state when creating new participant with follow-up flow
+          StudyEngine.if(
+            StudyEngine.participantState.hasParticipantFlagKeyAndValue(
+              ParticipantFlags.weeklyTBreporter.key, ParticipantFlags.weeklyTBreporter.values.false,
+            ),
+            takeOverFlagIfExist(ParticipantFlags.weeklyTBreporter.key),
+          ),
+          takeOverSurveyIfAssigned(WeeklyTB_key),
+          takeOverSurveyIfAssigned(QuitWeeklyTB_key),
           // upgrade to EMflow
           StudyEngine.ifThen(
             StudyEngine.participantState.incomingParticipantState.hasParticipantFlagKeyAndValue(
@@ -1071,6 +1080,8 @@ const mergeRules: Expression[] = [
       takeOverSurveyIfAssigned(LBflow_Kids_key),
       takeOverSurveyIfAssigned(Chronicflow_Adults_key),
       takeOverSurveyIfAssigned(Chronicflow_Kids_key),
+      takeOverSurveyIfAssigned(WeeklyTB_key),
+      takeOverSurveyIfAssigned(QuitWeeklyTB_key),
     )
   )
 ]
