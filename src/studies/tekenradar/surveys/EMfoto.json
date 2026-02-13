@@ -1,5 +1,5 @@
 {
-  "id": "69526ca4f48bfcff08f1ca01",
+  "id": "697cbe82778d49b28a9981db",
   "surveyKey": "EMfoto",
   "props": {
     "name": [
@@ -36,7 +36,7 @@
       }
     ]
   },
-  "published": 1767009444,
+  "published": 1769782914,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "EMfoto",
@@ -117,43 +117,42 @@
               "description": null
             },
             {
-              "key": "lqoh5o",
               "role": "error",
+              "key": "lqoh5o",
               "content": [
                 {
                   "code": "nl",
                   "parts": [
                     {
-                      "str": "Upload een geldige afbeelding voordat u verdergaat."
+                      "dtype": "",
+                      "str": "Upload een geldige afbeelding voordat u verder gaat."
                     }
                   ]
                 }
               ],
-              "style": []
+              "description": null
+            },
+            {
+              "role": "subtitle",
+              "key": "",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": ""
+                    }
+                  ]
+                }
+              ],
+              "description": null
             }
           ],
           "order": {
             "name": "sequential"
           },
           "description": null
-        },
-        "validations": [
-          {
-            "key": "valid",
-            "type": "hard",
-            "rule": {
-              "name": "hasResponse",
-              "data": [
-                {
-                  "str": "EMfoto.PhotoEM"
-                },
-                {
-                  "str": "rg"
-                }
-              ]
-            }
-          }
-        ]
+        }
       },
       {
         "id": "000000000000000000000000",
@@ -264,5 +263,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "25-12-1"
+  "versionId": "26-01-4"
 }

@@ -1,5 +1,5 @@
 {
-  "id": "696a2916e626ca1e04c20556",
+  "id": "697cafa6778d49b28a9981d0",
   "surveyKey": "T3_Kids",
   "props": {
     "name": [
@@ -36,7 +36,7 @@
       }
     ]
   },
-  "published": 1768565014,
+  "published": 1769779110,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "T3_Kids",
@@ -3527,7 +3527,7 @@
                       "parts": [
                         {
                           "dtype": "",
-                          "str": "medicijnen gebruikt?  (De anti conceptie pil niet meerekenen.) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "
+                          "str": "medicijnen gebruikt?  (Bij pubers: gebruik van de anticonceptiepil hoeft niet meegerekend te worden.) Wil je ook aanvinken of de medicijnen gegeven werden voor behandeling tegen de ziekte van Lyme, inclusief erythema migrans of om een andere reden, en of je ze tijdens een ziekenhuisopname hebt gebruikt? "
                         }
                       ]
                     }
@@ -3642,6 +3642,21 @@
                     "name": "sequential"
                   },
                   "description": null
+                }
+              ],
+              "description": null
+            },
+            {
+              "role": "subtitle",
+              "key": "",
+              "content": [
+                {
+                  "code": "nl",
+                  "parts": [
+                    {
+                      "dtype": ""
+                    }
+                  ]
                 }
               ],
               "description": null
@@ -8796,7 +8811,7 @@
                   "parts": [
                     {
                       "dtype": "",
-                      "str": "Hoeveel last heb je van je lichamelijke of psychische klachten die volgens jou met je tekenbeet, erythema migrans of andere vormen van lymeziekte te maken hebben?"
+                      "str": "In hoeverre hebben je lichamelijke of psychische klachten volgens jou met je tekenbeet, erythema migrans of andere lymeziekte te maken?"
                     }
                   ]
                 }
@@ -35362,5 +35377,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-01-1"
+  "versionId": "26-01-3"
 }

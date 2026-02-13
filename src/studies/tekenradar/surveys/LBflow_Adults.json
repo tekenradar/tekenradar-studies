@@ -1,5 +1,5 @@
 {
-  "id": "696b6599e626ca1e04c205a0",
+  "id": "697c810e778d49b28a9981b7",
   "surveyKey": "LBflow_Adults",
   "props": {
     "name": [
@@ -57,7 +57,7 @@
   ],
   "availableFor": "temporary_participants",
   "requireLoginBeforeSubmission": true,
-  "published": 1768646041,
+  "published": 1769767182,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "LBflow_Adults",
@@ -79,7 +79,7 @@
                   "parts": [
                     {
                       "dtype": "",
-                      "str": "\n### Melding\n  "
+                      "str": "\n## Melding\n  "
                     }
                   ]
                 }
@@ -8570,7 +8570,7 @@
               "content": null,
               "items": [
                 {
-                  "role": "singleChoiceGroup",
+                  "role": "multipleChoiceGroup",
                   "key": "mcg",
                   "content": null,
                   "items": [
@@ -12381,5 +12381,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-01-2"
+  "versionId": "26-01-3"
 }
