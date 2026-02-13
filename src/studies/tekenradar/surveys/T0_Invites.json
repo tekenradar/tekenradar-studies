@@ -1,5 +1,5 @@
 {
-  "id": "697c8bd6778d49b28a9981bc",
+  "id": "698eebf5d7b2d6e8991b68f9",
   "surveyKey": "T0_Invites",
   "props": {
     "name": [
@@ -37,7 +37,7 @@
     ]
   },
   "availableFor": "public",
-  "published": 1769769942,
+  "published": 1770974197,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "T0_Invites",
@@ -817,6 +817,11 @@
                 }
               }
             ]
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.STD.PB_2B8i",
+            "type": "pageBreak"
           },
           {
             "id": "000000000000000000000000",
@@ -2834,6 +2839,11 @@
                 }
               }
             ]
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.kEM.PB_0wbz",
+            "type": "pageBreak"
           },
           {
             "id": "000000000000000000000000",
@@ -6634,7 +6644,7 @@
                               "parts": [
                                 {
                                   "dtype": "",
-                                  "str": "\n**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nVia Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nDoor onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik ermee in dat mijn huisarts of medisch specialist en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.\n\nOok:\n- Heb ik de informatie op de website van het Tekenradaronderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.\n- Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.\n- Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n- Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n- Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).\n- Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.\n- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).\n        "
+                                  "str": "**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nVia Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nDoor onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken.&#x20;\n\nOok:\n\n* Heb ik de informatie op de website van het Tekenradaronderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.\n* Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.\n* Weet ik dat ik hiervoor mails kan ontvangen vanaf [noreply@tekenradar.nl](mailto:noreply@tekenradar.nl).\n* Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n* Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).\n* Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.\n* Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek)."
                                 }
                               ]
                             }
@@ -7004,7 +7014,7 @@
                               "parts": [
                                 {
                                   "dtype": "",
-                                  "str": "\n**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nDoor hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.\nMeer informatie over onder andere het doel van Tekenradaronderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nOok:\n\n- Weet ik dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n- Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n- Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.\n- Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners verwerkt te worden.\n- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).\n        "
+                                  "str": "**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nDoor hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.\nMeer informatie over onder andere het doel van Tekenradaronderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nOok:\n\n* Weet ik dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n* Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n* Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.\n* Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners verwerkt te worden.\n* Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek)."
                                 }
                               ]
                             }
@@ -7077,7 +7087,12 @@
           },
           {
             "id": "000000000000000000000000",
-            "key": "T0_Invites.aEM.Contactgegevens_copy_JUK",
+            "key": "T0_Invites.aEM.PB_tdCp",
+            "type": "pageBreak"
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.aEM.Contactgegevens_AO_TR",
             "condition": {
               "name": "responseHasKeysAny",
               "data": [
@@ -7103,7 +7118,7 @@
             "items": [
               {
                 "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.ContactGroupPretext",
+                "key": "T0_Invites.aEM.Contactgegevens_AO_TR.ContactGroupPretext",
                 "components": {
                   "role": "root",
                   "key": "",
@@ -7140,7 +7155,7 @@
               },
               {
                 "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.Naam",
+                "key": "T0_Invites.aEM.Contactgegevens_AO_TR.Naam",
                 "components": {
                   "role": "root",
                   "key": "",
@@ -7263,7 +7278,7 @@
                       "data": [
                         {
                           "dtype": "str",
-                          "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.Naam"
+                          "str": "T0_Invites.aEM.Contactgegevens_AO_TR.Naam"
                         },
                         {
                           "dtype": "str",
@@ -7285,7 +7300,7 @@
                             "data": [
                               {
                                 "dtype": "str",
-                                "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.Naam"
+                                "str": "T0_Invites.aEM.Contactgegevens_AO_TR.Naam"
                               },
                               {
                                 "dtype": "str",
@@ -7301,7 +7316,7 @@
                             "data": [
                               {
                                 "dtype": "str",
-                                "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.Naam"
+                                "str": "T0_Invites.aEM.Contactgegevens_AO_TR.Naam"
                               },
                               {
                                 "dtype": "str",
@@ -7318,7 +7333,7 @@
               },
               {
                 "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.Email",
+                "key": "T0_Invites.aEM.Contactgegevens_AO_TR.Email",
                 "components": {
                   "role": "root",
                   "key": "",
@@ -7379,7 +7394,7 @@
                       "data": [
                         {
                           "dtype": "str",
-                          "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.Email"
+                          "str": "T0_Invites.aEM.Contactgegevens_AO_TR.Email"
                         },
                         {
                           "dtype": "str",
@@ -7390,1014 +7405,6 @@
                   }
                 ],
                 "confidentialMode": "replace"
-              },
-              {
-                "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.PC4contact",
-                "condition": {
-                  "name": "or",
-                  "data": [
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "aEM"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "LBother"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                "components": {
-                  "role": "root",
-                  "key": "",
-                  "content": null,
-                  "items": [
-                    {
-                      "role": "title",
-                      "key": "",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": "Wat zijn de 4 cijfers van je postcode?"
-                            }
-                          ]
-                        }
-                      ],
-                      "style": [
-                        {
-                          "key": "className",
-                          "value": "sticky-top"
-                        }
-                      ],
-                      "description": null
-                    },
-                    {
-                      "role": "responseGroup",
-                      "key": "rg",
-                      "content": null,
-                      "items": [
-                        {
-                          "role": "input",
-                          "key": "ic",
-                          "content": null,
-                          "description": null
-                        }
-                      ],
-                      "description": null
-                    },
-                    {
-                      "role": "error",
-                      "key": "",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": "Voer de eerste vier cijfers van je postcode in"
-                            }
-                          ]
-                        }
-                      ],
-                      "displayCondition": {
-                        "name": "not",
-                        "data": [
-                          {
-                            "dtype": "exp",
-                            "exp": {
-                              "name": "getSurveyItemValidation",
-                              "data": [
-                                {
-                                  "dtype": "str",
-                                  "str": "this"
-                                },
-                                {
-                                  "dtype": "str",
-                                  "str": "r2"
-                                }
-                              ]
-                            }
-                          }
-                        ]
-                      },
-                      "description": null
-                    }
-                  ],
-                  "order": {
-                    "name": "sequential"
-                  },
-                  "description": null
-                },
-                "validations": [
-                  {
-                    "key": "r1",
-                    "type": "hard",
-                    "rule": {
-                      "name": "hasResponse",
-                      "data": [
-                        {
-                          "dtype": "str",
-                          "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.PC4contact"
-                        },
-                        {
-                          "dtype": "str",
-                          "str": "rg"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "key": "r2",
-                    "type": "hard",
-                    "rule": {
-                      "name": "or",
-                      "data": [
-                        {
-                          "dtype": "exp",
-                          "exp": {
-                            "name": "not",
-                            "data": [
-                              {
-                                "dtype": "exp",
-                                "exp": {
-                                  "name": "hasResponse",
-                                  "data": [
-                                    {
-                                      "dtype": "str",
-                                      "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.PC4contact"
-                                    },
-                                    {
-                                      "dtype": "str",
-                                      "str": "rg"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "dtype": "exp",
-                          "exp": {
-                            "name": "checkResponseValueWithRegex",
-                            "data": [
-                              {
-                                "dtype": "str",
-                                "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.PC4contact"
-                              },
-                              {
-                                "dtype": "str",
-                                "str": "rg.ic"
-                              },
-                              {
-                                "dtype": "str",
-                                "str": "^[0-9][0-9][0-9][0-9]$"
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.Tel",
-                "condition": {
-                  "name": "or",
-                  "data": [
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "aEM"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "LBother"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                "components": {
-                  "role": "root",
-                  "key": "",
-                  "content": null,
-                  "items": [
-                    {
-                      "role": "title",
-                      "key": "",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": "Mijn telefoonnummer"
-                            }
-                          ]
-                        }
-                      ],
-                      "description": null
-                    },
-                    {
-                      "role": "responseGroup",
-                      "key": "rg",
-                      "content": null,
-                      "items": [
-                        {
-                          "role": "input",
-                          "key": "ic",
-                          "content": null,
-                          "description": [
-                            {
-                              "code": "nl",
-                              "parts": [
-                                {
-                                  "dtype": "",
-                                  "str": "voer je telefoonnummer in"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ],
-                      "description": null
-                    }
-                  ],
-                  "order": {
-                    "name": "sequential"
-                  },
-                  "description": null
-                },
-                "validations": [
-                  {
-                    "key": "r1",
-                    "type": "hard",
-                    "rule": {
-                      "name": "hasResponse",
-                      "data": [
-                        {
-                          "dtype": "str",
-                          "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.Tel"
-                        },
-                        {
-                          "dtype": "str",
-                          "str": "rg"
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "confidentialMode": "replace"
-              },
-              {
-                "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.Birthday",
-                "condition": {
-                  "name": "or",
-                  "data": [
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "aEM"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "LBother"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                "components": {
-                  "role": "root",
-                  "key": "",
-                  "content": null,
-                  "items": [
-                    {
-                      "role": "title",
-                      "key": "",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": "Mijn geboortedatum:"
-                            }
-                          ]
-                        }
-                      ],
-                      "description": null
-                    },
-                    {
-                      "role": "responseGroup",
-                      "key": "rg",
-                      "content": null,
-                      "items": [
-                        {
-                          "role": "dateInput",
-                          "key": "date",
-                          "content": null,
-                          "properties": {
-                            "max": {
-                              "dtype": "exp",
-                              "exp": {
-                                "name": "timestampWithOffset",
-                                "data": [
-                                  {
-                                    "dtype": "num"
-                                  }
-                                ]
-                              }
-                            },
-                            "dateInputMode": {
-                              "dtype": "",
-                              "str": "YMD"
-                            }
-                          },
-                          "description": null
-                        }
-                      ],
-                      "description": null
-                    }
-                  ],
-                  "order": {
-                    "name": "sequential"
-                  },
-                  "description": null
-                },
-                "validations": [
-                  {
-                    "key": "r1",
-                    "type": "hard",
-                    "rule": {
-                      "name": "hasResponse",
-                      "data": [
-                        {
-                          "dtype": "str",
-                          "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.Birthday"
-                        },
-                        {
-                          "dtype": "str",
-                          "str": "rg"
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "confidentialMode": "replace"
-              },
-              {
-                "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.GENDER",
-                "condition": {
-                  "name": "or",
-                  "data": [
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "aEM"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "LBother"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                "components": {
-                  "role": "root",
-                  "key": "",
-                  "content": null,
-                  "items": [
-                    {
-                      "role": "title",
-                      "key": "",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": "Wat is je geslacht?"
-                            }
-                          ]
-                        }
-                      ],
-                      "description": null
-                    },
-                    {
-                      "role": "responseGroup",
-                      "key": "rg",
-                      "content": null,
-                      "items": [
-                        {
-                          "role": "singleChoiceGroup",
-                          "key": "scg",
-                          "content": null,
-                          "items": [
-                            {
-                              "role": "option",
-                              "key": "a",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Man"
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "option",
-                              "key": "b",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Vrouw"
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "option",
-                              "key": "c",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Geen van bovenstaande"
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "option",
-                              "key": "d",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Wil ik niet zeggen"
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            }
-                          ],
-                          "order": {
-                            "name": "sequential"
-                          },
-                          "description": null
-                        }
-                      ],
-                      "description": null
-                    }
-                  ],
-                  "order": {
-                    "name": "sequential"
-                  },
-                  "description": null
-                },
-                "validations": [
-                  {
-                    "key": "r1",
-                    "type": "hard",
-                    "rule": {
-                      "name": "hasResponse",
-                      "data": [
-                        {
-                          "dtype": "str",
-                          "str": "T0_Invites.aEM.Contactgegevens_copy_JUK.GENDER"
-                        },
-                        {
-                          "dtype": "str",
-                          "str": "rg"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
-                "id": "000000000000000000000000",
-                "key": "T0_Invites.aEM.Contactgegevens_copy_JUK.GP",
-                "condition": {
-                  "name": "or",
-                  "data": [
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "aEM"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "dtype": "exp",
-                      "exp": {
-                        "name": "hasParticipantFlagKeyAndValue",
-                        "data": [
-                          {
-                            "dtype": "str",
-                            "str": "LBother"
-                          },
-                          {
-                            "dtype": "str",
-                            "str": "likely"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                "components": {
-                  "role": "root",
-                  "key": "",
-                  "content": null,
-                  "items": [
-                    {
-                      "role": "title",
-                      "key": "",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": "De gegevens van mijn huisarts:"
-                            }
-                          ]
-                        }
-                      ],
-                      "description": null
-                    },
-                    {
-                      "role": "markdown",
-                      "key": "J9p",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": "\n*De gegevens van je huisarts worden alleen gebruikt om eventueel medische informatie op te vragen die relevant kan zijn voor het onderzoek, zoals een melding van de ziekte van Lyme of andere melding in deze Tekenradar vragenlijst. Als je dat niet wilt, vul dan hieronder niks in.*\n    "
-                            }
-                          ]
-                        }
-                      ],
-                      "style": [
-                        {
-                          "key": "className",
-                          "value": "mb-2"
-                        }
-                      ],
-                      "description": null
-                    },
-                    {
-                      "role": "responseGroup",
-                      "key": "rg",
-                      "content": null,
-                      "items": [
-                        {
-                          "role": "cloze",
-                          "key": "cloze",
-                          "content": null,
-                          "items": [
-                            {
-                              "role": "text",
-                              "key": "t1",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Praktijknaam: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "input",
-                              "key": "pn",
-                              "content": null,
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": "w-100"
-                                },
-                                {
-                                  "key": "alignInputText",
-                                  "value": "start"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "lineBreak",
-                              "key": "n5Xp3",
-                              "content": null,
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "t2",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Naam huisarts: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "input",
-                              "key": "nh",
-                              "content": null,
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": "w-100"
-                                },
-                                {
-                                  "key": "alignInputText",
-                                  "value": "start"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "lineBreak",
-                              "key": "Hwhzv",
-                              "content": null,
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "taddr",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Adres: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": "fw-bold mt-2"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "lineBreak",
-                              "key": "bA8Gv",
-                              "content": null,
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "t3",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Straatnaam: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "input",
-                              "key": "str",
-                              "content": null,
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": "flex-grow-1"
-                                },
-                                {
-                                  "key": "alignInputText",
-                                  "value": "start"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "t4",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Huisnummer: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "input",
-                              "key": "hnr",
-                              "content": null,
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": ""
-                                },
-                                {
-                                  "key": "alignInputText",
-                                  "value": "start"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "lineBreak",
-                              "key": "RP5tq",
-                              "content": null,
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "t5",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Postcode: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "input",
-                              "key": "pc",
-                              "content": null,
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": ""
-                                },
-                                {
-                                  "key": "alignInputText",
-                                  "value": "start"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "t6",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Plaats: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "input",
-                              "key": "plaats",
-                              "content": null,
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": "flex-grow-1"
-                                },
-                                {
-                                  "key": "alignInputText",
-                                  "value": "start"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "lineBreak",
-                              "key": "XWdyH",
-                              "content": null,
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "tcont",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Contact: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": "fw-bold mt-2"
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "lineBreak",
-                              "key": "tuh7Q",
-                              "content": null,
-                              "description": null
-                            },
-                            {
-                              "role": "text",
-                              "key": "t7",
-                              "content": [
-                                {
-                                  "code": "nl",
-                                  "parts": [
-                                    {
-                                      "dtype": "",
-                                      "str": "Telefoonnummer praktijk: "
-                                    }
-                                  ]
-                                }
-                              ],
-                              "description": null
-                            },
-                            {
-                              "role": "input",
-                              "key": "tel",
-                              "content": null,
-                              "style": [
-                                {
-                                  "key": "className",
-                                  "value": "w-100"
-                                },
-                                {
-                                  "key": "alignInputText",
-                                  "value": "start"
-                                }
-                              ],
-                              "description": null
-                            }
-                          ],
-                          "description": null
-                        }
-                      ],
-                      "description": null
-                    }
-                  ],
-                  "order": {
-                    "name": "sequential"
-                  },
-                  "description": null
-                }
               }
             ],
             "selectionMethod": {
@@ -8954,7 +7961,7 @@
                       "parts": [
                         {
                           "dtype": "",
-                          "str": "\nJe hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waar misschien ook bloed voor wordt afgenomen.\nKlik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek.\n"
+                          "str": "Je hebt hierboven aangegeven **niet** te willen worden benaderd voor verder onderzoek waarvoor je naar een ziekenhuis komt.\nKlik hieronder op **Volgende** om aan te geven of je misschien wel mee wilt doen met alleen het Tekenradar-vragenlijstonderzoek."
                         }
                       ]
                     }
@@ -10864,7 +9871,7 @@
                               "parts": [
                                 {
                                   "dtype": "",
-                                  "str": "\n**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nVia Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nDoor onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken. Ook stem ik ermee in dat mijn huisarts of medisch specialist en/of ikzelf eventueel benaderd worden voor medische informatie over de melding die ik heb gedaan op Tekenradar en ga ik ermee akkoord dat het RIVM en/of samenwerkingspartners daarvoor mijn contactgegevens zullen verwerken.\n\nOok:\n- Heb ik de informatie op de website van het Tekenradaronderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.\n- Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.\n- Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n- Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n- Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).\n- Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.\n- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).\n        "
+                                  "str": "**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nVia Tekenradar.nl wordt onderzocht hoe vaak mensen na een tekenbeet een erythema migrans (rode ring of vlek op de huid) of een andere vorm van de ziekte van Lyme krijgen, en hoe vaak dit leidt tot (ernstige) gezondheidsklachten. Meer informatie over onder andere het doel van het onderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nDoor onderaan de knop “Ja, ik geef toestemming” aan te klikken stem ik in met deelname aan het vragenlijst onderzoek “Tekenradar” en ga ik akkoord dat het RIVM en/of samenwerkingspartners mijn gegevens voor dit onderzoek zullen verwerken.&#x20;\n\nOok:\n\n* Heb ik de informatie op de website van het Tekenradaronderzoek over het basisonderzoek en de privacyverklaring over de verwerking van de persoonsgegevens door het RIVM goed gelezen en begrepen.\n* Heb ik goed over mijn deelname aan het onderzoek kunnen nadenken.\n* Weet ik dat ik hiervoor mails kan ontvangen vanaf [noreply@tekenradar.nl](mailto:noreply@tekenradar.nl).\n* Weet ik dat meedoen aan het onderzoek vrijwillig is. Ik weet ook dat ik op ieder moment, zonder opgaaf van een reden, kan stoppen met deelname aan het onderzoek en dat ik mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n* Weet ik dat mijn accountgegevens 10 jaar na de laatste inlog op de website van Tekenradar en mijn onderzoeksgegevens 15 jaar worden bewaard (zie voor meer informatie de privacyverklaring).\n* Weet ik dat voor het onderzoek mijn accountgegevens (e-mailadres en wachtwoord) en onderzoeksgegevens (de ingevulde vragenlijsten; met daarin mijn geboortejaar en maand en gegevens over mijn gezondheid) worden verwerkt.\n* Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek)."
                                 }
                               ]
                             }
@@ -10939,6 +9946,697 @@
             "id": "000000000000000000000000",
             "key": "T0_Invites.LBother.PB_k9Mb",
             "type": "pageBreak"
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.LBother.AOPreText",
+            "condition": {
+              "name": "responseHasKeysAny",
+              "data": [
+                {
+                  "str": "T0_Invites.LBother.UitnTR",
+                  "dtype": "str"
+                },
+                {
+                  "str": "rg.scg",
+                  "dtype": "str"
+                },
+                {
+                  "str": "a",
+                  "dtype": "str"
+                }
+              ],
+              "metadata": {
+                "slotTypes": [
+                  "item-key-slot-key-options-generic"
+                ]
+              }
+            },
+            "components": {
+              "role": "root",
+              "key": "",
+              "content": null,
+              "items": [
+                {
+                  "role": "markdown",
+                  "key": "DbL",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": "",
+                          "str": "\n## Aanvullend onderzoek\n\nMensen die meedoen aan Tekenradaronderzoek kunnen in aanmerking komen voor aanvullend wetenschappelijk onderzoek, waarbij soms ook (vrijwillig) bloed wordt afgenomen. Mogen we jou eventueel benaderen om meer informatie te kunnen geven over dat soort onderzoek? Daarna kun je dan beslissen of je mee wilt doen. Het kan ook zijn dat je niet in aanmerking komt, en dat we je dus niet benaderen.\n"
+                        }
+                      ]
+                    }
+                  ],
+                  "style": [
+                    {
+                      "key": "className",
+                      "value": ""
+                    }
+                  ],
+                  "description": null
+                }
+              ],
+              "order": {
+                "name": "sequential"
+              },
+              "description": null
+            }
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.LBother.UitnAO",
+            "condition": {
+              "name": "responseHasKeysAny",
+              "data": [
+                {
+                  "str": "T0_Invites.LBother.UitnTR",
+                  "dtype": "str"
+                },
+                {
+                  "str": "rg.scg",
+                  "dtype": "str"
+                },
+                {
+                  "str": "a",
+                  "dtype": "str"
+                }
+              ],
+              "metadata": {
+                "slotTypes": [
+                  "item-key-slot-key-options-generic"
+                ]
+              }
+            },
+            "components": {
+              "role": "root",
+              "key": "",
+              "content": null,
+              "items": [
+                {
+                  "role": "title",
+                  "key": "",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": "",
+                          "str": "Mogen we je benaderen voor aanvullend wetenschappelijk onderzoek?"
+                        }
+                      ]
+                    }
+                  ],
+                  "description": null
+                },
+                {
+                  "role": "responseGroup",
+                  "key": "rg",
+                  "content": null,
+                  "items": [
+                    {
+                      "role": "singleChoiceGroup",
+                      "key": "scg",
+                      "content": null,
+                      "items": [
+                        {
+                          "role": "option",
+                          "key": "a",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Ja, ik wil benaderd worden voor aanvullend onderzoek."
+                                }
+                              ]
+                            }
+                          ],
+                          "description": null
+                        },
+                        {
+                          "role": "option",
+                          "key": "b",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Nee, ik wil niet benaderd worden voor aanvullend onderzoek."
+                                }
+                              ]
+                            }
+                          ],
+                          "description": null
+                        }
+                      ],
+                      "order": {
+                        "name": "sequential"
+                      },
+                      "description": null
+                    }
+                  ],
+                  "description": null
+                }
+              ],
+              "order": {
+                "name": "sequential"
+              },
+              "description": null
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "T0_Invites.LBother.UitnAO"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.LBother.UitnAO_Consent",
+            "condition": {
+              "name": "responseHasKeysAny",
+              "data": [
+                {
+                  "str": "T0_Invites.LBother.UitnAO",
+                  "dtype": "str"
+                },
+                {
+                  "str": "rg.scg",
+                  "dtype": "str"
+                },
+                {
+                  "str": "a",
+                  "dtype": "str"
+                }
+              ],
+              "metadata": {
+                "slotTypes": [
+                  "item-key-slot-key-options-generic"
+                ]
+              }
+            },
+            "components": {
+              "role": "root",
+              "key": "",
+              "content": null,
+              "items": [
+                {
+                  "role": "title",
+                  "key": "",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": ""
+                        }
+                      ]
+                    }
+                  ],
+                  "description": null
+                },
+                {
+                  "role": "markdown",
+                  "key": "lXd",
+                  "content": [
+                    {
+                      "code": "nl",
+                      "parts": [
+                        {
+                          "dtype": "",
+                          "str": "\nOm je te benaderen voor aanvullend onderzoek hebben we ook je toestemming nodig. Vink hieronder \"Toestemmingsformulier\" aan om de toestemmingsverklaring te kunnen lezen.\n        "
+                        }
+                      ]
+                    }
+                  ],
+                  "description": null
+                },
+                {
+                  "role": "responseGroup",
+                  "key": "rg",
+                  "content": null,
+                  "items": [
+                    {
+                      "role": "consent",
+                      "key": "con",
+                      "content": null,
+                      "items": [
+                        {
+                          "role": "label",
+                          "key": "label",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Toestemming geven"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": null
+                        },
+                        {
+                          "role": "title",
+                          "key": "title",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Toestemmingsformulier"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": null
+                        },
+                        {
+                          "role": "content",
+                          "key": "content",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nDoor hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.\nMeer informatie over onder andere het doel van Tekenradaronderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nOok:\n\n* Weet ik dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n* Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n* Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.\n* Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners verwerkt te worden.\n* Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek)."
+                                }
+                              ]
+                            }
+                          ],
+                          "description": null
+                        },
+                        {
+                          "role": "acceptBtn",
+                          "key": "acceptBtn",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Ja, ik geef toestemming"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": null
+                        },
+                        {
+                          "role": "rejectBtn",
+                          "key": "rejectBtn",
+                          "content": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "Ik wil toch niet benaderd worden"
+                                }
+                              ]
+                            }
+                          ],
+                          "description": null
+                        }
+                      ],
+                      "description": null
+                    }
+                  ],
+                  "description": null
+                }
+              ],
+              "order": {
+                "name": "sequential"
+              },
+              "description": null
+            },
+            "validations": [
+              {
+                "key": "r1",
+                "type": "hard",
+                "rule": {
+                  "name": "hasResponse",
+                  "data": [
+                    {
+                      "dtype": "str",
+                      "str": "T0_Invites.LBother.UitnAO_Consent"
+                    },
+                    {
+                      "dtype": "str",
+                      "str": "rg"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.LBother.PB_s3xH",
+            "type": "pageBreak"
+          },
+          {
+            "id": "000000000000000000000000",
+            "key": "T0_Invites.LBother.Contactgegevens_AO_TR",
+            "condition": {
+              "name": "responseHasKeysAny",
+              "data": [
+                {
+                  "str": "T0_Invites.LBother.UitnAO",
+                  "dtype": "str"
+                },
+                {
+                  "str": "rg.scg",
+                  "dtype": "str"
+                },
+                {
+                  "str": "a",
+                  "dtype": "str"
+                }
+              ],
+              "metadata": {
+                "slotTypes": [
+                  "item-key-slot-key-options-generic"
+                ]
+              }
+            },
+            "items": [
+              {
+                "id": "000000000000000000000000",
+                "key": "T0_Invites.LBother.Contactgegevens_AO_TR.ContactGroupPretext",
+                "components": {
+                  "role": "root",
+                  "key": "",
+                  "content": null,
+                  "items": [
+                    {
+                      "role": "markdown",
+                      "key": "20k",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "\n**Vul hieronder je contactgegevens in.**\n\nWe vragen hieronder opnieuw om je e-mailadres en verderop soms ook andere gegevens omdat we de eerder en verderop ingevulde gegevens vanwege privacyregelgeving niet zomaar mogen inzien. Je kunt als je dat wilt wel hetzelfde e-mailadres invullen.\nJe contactgegevens worden alleen gebruikt voor het Tekenradaronderzoek en/of om informatie te geven over aanvullende onderzoeken naar tekenbeten, lymeziekte, of andere (tekenoverdraagbare) infectieziekten.\n"
+                            }
+                          ]
+                        }
+                      ],
+                      "style": [
+                        {
+                          "key": "className",
+                          "value": ""
+                        }
+                      ],
+                      "description": null
+                    }
+                  ],
+                  "order": {
+                    "name": "sequential"
+                  },
+                  "description": null
+                }
+              },
+              {
+                "id": "000000000000000000000000",
+                "key": "T0_Invites.LBother.Contactgegevens_AO_TR.Naam",
+                "components": {
+                  "role": "root",
+                  "key": "",
+                  "content": null,
+                  "items": [
+                    {
+                      "role": "title",
+                      "key": "",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Naam"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "responseGroup",
+                      "key": "rg",
+                      "content": null,
+                      "items": [
+                        {
+                          "role": "cloze",
+                          "key": "cloze",
+                          "content": null,
+                          "items": [
+                            {
+                              "role": "text",
+                              "key": "t1",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": "",
+                                      "str": "Voornaam: "
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            },
+                            {
+                              "role": "input",
+                              "key": "vn",
+                              "content": null,
+                              "style": [
+                                {
+                                  "key": "className",
+                                  "value": "flex-grow-1"
+                                },
+                                {
+                                  "key": "alignInputText",
+                                  "value": "start"
+                                }
+                              ],
+                              "description": null
+                            },
+                            {
+                              "role": "lineBreak",
+                              "key": "WL034",
+                              "content": null,
+                              "description": null
+                            },
+                            {
+                              "role": "text",
+                              "key": "t2",
+                              "content": [
+                                {
+                                  "code": "nl",
+                                  "parts": [
+                                    {
+                                      "dtype": "",
+                                      "str": "Achternaam: "
+                                    }
+                                  ]
+                                }
+                              ],
+                              "description": null
+                            },
+                            {
+                              "role": "input",
+                              "key": "an",
+                              "content": null,
+                              "style": [
+                                {
+                                  "key": "className",
+                                  "value": "flex-grow-1"
+                                },
+                                {
+                                  "key": "alignInputText",
+                                  "value": "start"
+                                }
+                              ],
+                              "description": null
+                            }
+                          ],
+                          "description": null
+                        }
+                      ],
+                      "description": null
+                    }
+                  ],
+                  "order": {
+                    "name": "sequential"
+                  },
+                  "description": null
+                },
+                "validations": [
+                  {
+                    "key": "r1",
+                    "type": "hard",
+                    "rule": {
+                      "name": "hasResponse",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "T0_Invites.LBother.Contactgegevens_AO_TR.Naam"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "rg"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "key": "Name",
+                    "type": "hard",
+                    "rule": {
+                      "name": "and",
+                      "data": [
+                        {
+                          "dtype": "exp",
+                          "exp": {
+                            "name": "hasResponse",
+                            "data": [
+                              {
+                                "dtype": "str",
+                                "str": "T0_Invites.LBother.Contactgegevens_AO_TR.Naam"
+                              },
+                              {
+                                "dtype": "str",
+                                "str": "rg.cloze.vn"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "dtype": "exp",
+                          "exp": {
+                            "name": "hasResponse",
+                            "data": [
+                              {
+                                "dtype": "str",
+                                "str": "T0_Invites.LBother.Contactgegevens_AO_TR.Naam"
+                              },
+                              {
+                                "dtype": "str",
+                                "str": "rg.cloze.an"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "confidentialMode": "replace"
+              },
+              {
+                "id": "000000000000000000000000",
+                "key": "T0_Invites.LBother.Contactgegevens_AO_TR.Email",
+                "components": {
+                  "role": "root",
+                  "key": "",
+                  "content": null,
+                  "items": [
+                    {
+                      "role": "title",
+                      "key": "",
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": "Email"
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    },
+                    {
+                      "role": "responseGroup",
+                      "key": "rg",
+                      "content": null,
+                      "items": [
+                        {
+                          "role": "input",
+                          "key": "ic",
+                          "content": null,
+                          "description": [
+                            {
+                              "code": "nl",
+                              "parts": [
+                                {
+                                  "dtype": "",
+                                  "str": "voer je e-mailadres in"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "description": null
+                    }
+                  ],
+                  "order": {
+                    "name": "sequential"
+                  },
+                  "description": null
+                },
+                "validations": [
+                  {
+                    "key": "r1",
+                    "type": "hard",
+                    "rule": {
+                      "name": "hasResponse",
+                      "data": [
+                        {
+                          "dtype": "str",
+                          "str": "T0_Invites.LBother.Contactgegevens_AO_TR.Email"
+                        },
+                        {
+                          "dtype": "str",
+                          "str": "rg"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "confidentialMode": "replace"
+              }
+            ],
+            "selectionMethod": {
+              "name": "sequential"
+            }
           }
         ],
         "selectionMethod": {
@@ -11206,8 +10904,7 @@
                               "code": "nl",
                               "parts": [
                                 {
-                                  "dtype": "",
-                                  "str": "\n**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nDoor hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.\nMeer informatie over onder andere het doel van Tekenradaronderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nOok:\n\n- Weet ik dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n- Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n- Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.\n- Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners verwerkt te worden.\n- Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek).\n        "
+                                  "str": "**Scroll naar beneden om de hele tekst te lezen, geef onderaan wel of geen toestemming.**\n\nDoor hieronder de knop “Ja, ik geef toestemming” aan te klikken stem ik in om eventueel benaderd te worden voor aanvullend (deel)onderzoek via Tekenradar en ga ik akkoord dat het RIVM en/of samenwerkingspartners indien nodig mijn contactgegevens zullen verwerken.\nMeer informatie over onder andere het doel van Tekenradaronderzoek en je rechten kun je vinden in de [privacyverklaring van Tekenradar](/privacy) en de [RIVM privacyverklaring](https://www.rivm.nl/sites/default/files/2018-11/RIVM%20%20Privacyverklaring%20mei%202018%20definitief%20Nederlands.pdf).\n\nOok:\n\n* Weet ik dat ik op ieder moment, zonder opgaaf van een reden, mijn toestemming voor de verwerking van mijn persoonsgegevens kan intrekken. Ik begrijp dat het intrekken van mijn toestemming geen gevolgen heeft voor de verwerking van mijn persoonsgegevens in de periode voorafgaand aan het intrekken van mijn toestemming.\n* Weet ik dat ik hiervoor mails kan ontvangen vanaf noreply@tekenradar.nl.\n* Weet ik dat als mijn contactgegevens niet (meer) gebruikt worden deze na 12 weken worden verwijderd.\n* Weet ik dat ik daarna nog wel benaderd kan worden voor aanvullend onderzoek via het e-mailadres dat verbonden is aan mijn account. Hiervoor hoeven mijn contactgegevens niet door het RIVM en/of samenwerkingspartners verwerkt te worden.\n* Verklaar ik dat ik 16 jaar of ouder ben, of dat ik de ouder/voogd ben van een kind minder dan 16 jaar oud waarover deze melding gaat (als er twee ouders/voogden zijn moeten zij beiden met deelname instemmen, en bij een kind van 12 t/m 15 jaar moet ook het kind zelf instemmen met deelname aan het onderzoek)."
                                 }
                               ]
                             }
@@ -12068,5 +11765,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-01-6"
+  "versionId": "26-02-1"
 }
