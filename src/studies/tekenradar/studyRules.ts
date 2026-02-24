@@ -509,7 +509,9 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
   StudyEngine.if(
     StudyEngine.or(
       StudyEngine.consent.accepted(`${T0_Invites_key}.STD.UitnAO_Consent`),
+      StudyEngine.consent.accepted(`${T0_Invites_key}.aEM.aEMUitnTR_AO_Consent`),
       StudyEngine.consent.accepted(`${T0_Invites_key}.aEM.UitnAO_Consent`),
+      StudyEngine.consent.accepted(`${T0_Invites_key}.LBother.LBotherUitnTR_AO_Consent`),
       StudyEngine.consent.accepted(`${T0_Invites_key}.LBother.UitnAO_Consent`),
       //StudyEngine.consent.accepted(T0_Invites.kEMInviteGroup.kEMUitnodigingOnderzoekConsent.key), //LT uitgezet per 11-07-2025
       StudyEngine.consent.accepted(`${T0_Invites_key}.LPplusBB.UitnBiobankAO_Consent`)
