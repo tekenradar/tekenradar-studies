@@ -1,5 +1,5 @@
 {
-  "id": "6968b60e44beffd891561b7b",
+  "id": "698efe16d7b2d6e8991b68ff",
   "surveyKey": "EMflow_Adults",
   "props": {
     "name": [
@@ -57,7 +57,7 @@
   ],
   "availableFor": "temporary_participants",
   "requireLoginBeforeSubmission": true,
-  "published": 1768470030,
+  "published": 1770978838,
   "surveyDefinition": {
     "id": "000000000000000000000000",
     "key": "EMflow_Adults",
@@ -8107,6 +8107,10 @@
                         "dateInputMode": {
                           "dtype": "",
                           "str": "YMD"
+                        },
+                        "min": {
+                          "num": -946771200,
+                          "dtype": "num"
                         }
                       },
                       "description": null
@@ -8539,19 +8543,41 @@
                       "description": null
                     },
                     {
-                      "role": "text",
+                      "role": "dateInput",
                       "key": "2",
-                      "content": [
-                        {
-                          "code": "nl",
-                          "parts": [
-                            {
-                              "dtype": "",
-                              "str": " en"
-                            }
-                          ]
+                      "content": null,
+                      "properties": {
+                        "max": {
+                          "dtype": "exp",
+                          "exp": {
+                            "name": "timestampWithOffset",
+                            "data": [
+                              {
+                                "dtype": "num"
+                              },
+                              {
+                                "dtype": "exp",
+                                "exp": {
+                                  "name": "timestampWithOffset",
+                                  "data": [
+                                    {
+                                      "dtype": "num"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "dateInputMode": {
+                          "dtype": "",
+                          "str": "YMD"
+                        },
+                        "min": {
+                          "num": -946771200,
+                          "dtype": "num"
                         }
-                      ],
+                      },
                       "description": null
                     },
                     {
@@ -10122,5 +10148,5 @@
       "name": "sequential"
     }
   },
-  "versionId": "26-01-1"
+  "versionId": "26-02-1"
 }
