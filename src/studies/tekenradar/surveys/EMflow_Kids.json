@@ -8137,10 +8137,6 @@
                         "dateInputMode": {
                           "dtype": "",
                           "str": "YMD"
-                        },
-                        "min": {
-                          "num": -946771200,
-                          "dtype": "num"
                         }
                       },
                       "description": null
@@ -8573,41 +8569,19 @@
                       "description": null
                     },
                     {
-                      "role": "dateInput",
+                      "role": "text",
                       "key": "2",
-                      "content": null,
-                      "properties": {
-                        "max": {
-                          "dtype": "exp",
-                          "exp": {
-                            "name": "timestampWithOffset",
-                            "data": [
-                              {
-                                "dtype": "num"
-                              },
-                              {
-                                "dtype": "exp",
-                                "exp": {
-                                  "name": "timestampWithOffset",
-                                  "data": [
-                                    {
-                                      "dtype": "num"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        "dateInputMode": {
-                          "dtype": "",
-                          "str": "YMD"
-                        },
-                        "min": {
-                          "num": -946771200,
-                          "dtype": "num"
+                      "content": [
+                        {
+                          "code": "nl",
+                          "parts": [
+                            {
+                              "dtype": "",
+                              "str": " en"
+                            }
+                          ]
                         }
-                      },
+                      ],
                       "description": null
                     },
                     {
