@@ -55,10 +55,7 @@ const reports = {
 }
 
 const contentServiceName = 'content-service';
-const lppSubmissionHandler = 'lpp-submission-handler';
-const researcherBackendNames = {
-  T0_Invites: 'researcher-backend-t0-invites'
-};
+
 
 export const emailKeys = {
   FlowReminder: 'Flow_reminder',
@@ -564,8 +561,6 @@ const handleSubmit_T0_Invites = StudyEngine.ifThen(
     StudyEngine.consent.accepted(`${T0_Invites_key}.LPplusBB.UitnBiobankAO_Consent`),
     StudyEngine.participantActions.updateFlag(ParticipantFlags.BioB.key, ParticipantFlags.BioB.values.true),
   ),
-  StudyEngine.participantActions.externalEventHandler(researcherBackendNames.T0_Invites),
-  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
   reAssignWeeklyToTheEndOfList(),
 )
 
@@ -810,32 +805,6 @@ const handleSubmit_DeleteContactData = StudyEngine.ifThen(
   )
 )
 
-const handleSubmit_LPPlus_part1 = StudyEngine.ifThen(
-  StudyEngine.checkSurveyResponseKey(LPplus_part1_key),
-  // Then:
-  StudyEngine.participantActions.updateFlag('LPplus', 'likely'),
-  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
-  PHQ_15_noneflagLogic(),
-  updateGenderFlag(`${LPplus_part1_key}.Je gegevens.GENDER`),
-  StudyEngine.participantActions.updateFlag(
-    ParticipantFlags.ageFromPDiff.key,
-    StudyEngine.getSelectedKeys(`${LPplus_part1_key}.Je gegevens.BirthYear`, 'rg.ddg'),
-  ),
-)
-
-const handleSubmit_LPPlus_part2 = StudyEngine.ifThen(
-  StudyEngine.checkSurveyResponseKey('LPplus_part2'),
-  // Then:
-  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
-)
-
-const handleSubmit_LPPlus_part3 = StudyEngine.ifThen(
-  StudyEngine.checkSurveyResponseKey('LPplus_part3'),
-  // Then:
-  StudyEngine.participantActions.externalEventHandler(lppSubmissionHandler),
-)
-
-
 // -----------------------------------------------
 const handleExpired_T0_Invites = StudyEngine.ifThen(
   isSurveyExpired(T0_Invites_key),
@@ -927,10 +896,6 @@ const submitRules: Expression[] = [
   handleSubmit_QuitFollowUp,
   handleSubmit_QuitWeeklyTB,
   handleSubmit_DeleteContactData,
-  // LPplus:
-  handleSubmit_LPPlus_part1,
-  handleSubmit_LPPlus_part2,
-  handleSubmit_LPPlus_part3,
 ]
 
 
