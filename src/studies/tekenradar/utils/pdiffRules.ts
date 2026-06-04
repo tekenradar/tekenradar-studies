@@ -92,7 +92,7 @@ export const hasLBflowCondition = () => StudyEngine.or(
         StudyEngine.singleChoice.any(`${PDiff_key}.D6`, D6_optionKeys.yes),
         StudyEngine.gte(
           getQ6DateValue(),
-          StudyEngine.timestampWithOffset({ days: -4 }),
+          StudyEngine.timestampWithOffset({ days: -62 }),
         ),
       ),
       StudyEngine.singleChoice.any(`${PDiff_key}.D6`, D6_optionKeys.startSoon)
@@ -107,7 +107,7 @@ export const hasLBflowCondition = () => StudyEngine.or(
         StudyEngine.singleChoice.any(`${PDiff_key}.D6`, D6_optionKeys.yes),
         StudyEngine.gte(
           getQ6DateValue(),
-          StudyEngine.timestampWithOffset({ days: -4 }),
+          StudyEngine.timestampWithOffset({ days: -62 }),
         ),
       ),
       StudyEngine.singleChoice.any(`${PDiff_key}.D6`, D6_optionKeys.startSoon, D6_optionKeys.no)
@@ -121,7 +121,7 @@ export const hasChronicflowCondition = () => {
     StudyEngine.or(
       StudyEngine.lt(
         getQ6DateValue(),
-        StudyEngine.timestampWithOffset({ days: -4 }),
+        StudyEngine.timestampWithOffset({ days: -62 }),
       ),
       // Not defined, aka 0
       StudyEngine.not(
